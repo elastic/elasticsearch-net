@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class PutSearchApplicationResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

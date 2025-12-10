@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class XPackCategoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XPackCategory>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBuild = System.Text.Json.JsonEncodedText.Encode("build");
-	private static readonly System.Text.Json.JsonEncodedText MemberFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-	private static readonly System.Text.Json.JsonEncodedText MemberLicense = System.Text.Json.JsonEncodedText.Encode("license");
+	private static readonly System.Text.Json.JsonEncodedText MemberBuild = System.Text.Json.JsonEncodedText.Encode("build"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFeatures = System.Text.Json.JsonEncodedText.Encode("features"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLicense = System.Text.Json.JsonEncodedText.Encode("license"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.XPackCategory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

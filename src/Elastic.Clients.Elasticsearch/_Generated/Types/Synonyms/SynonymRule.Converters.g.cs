@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Synonyms.Json;
 
 public sealed partial class SynonymRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms"u8);
 
 	public override Elastic.Clients.Elasticsearch.Synonyms.SynonymRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

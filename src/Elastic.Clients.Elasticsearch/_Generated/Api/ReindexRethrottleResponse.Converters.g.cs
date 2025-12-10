@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ReindexRethrottleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRethrottleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
 
 	public override Elastic.Clients.Elasticsearch.ReindexRethrottleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

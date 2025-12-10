@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ReloadResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropReloadDetails = System.Text.Json.JsonEncodedText.Encode("reload_details");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropReloadDetails = System.Text.Json.JsonEncodedText.Encode("reload_details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class IndicatorsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreamLifecycle = System.Text.Json.JsonEncodedText.Encode("data_stream_lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk");
-	private static readonly System.Text.Json.JsonEncodedText PropFileSettings = System.Text.Json.JsonEncodedText.Encode("file_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
-	private static readonly System.Text.Json.JsonEncodedText PropMasterIsStable = System.Text.Json.JsonEncodedText.Encode("master_is_stable");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryIntegrity = System.Text.Json.JsonEncodedText.Encode("repository_integrity");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsAvailability = System.Text.Json.JsonEncodedText.Encode("shards_availability");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsCapacity = System.Text.Json.JsonEncodedText.Encode("shards_capacity");
-	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamLifecycle = System.Text.Json.JsonEncodedText.Encode("data_stream_lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFileSettings = System.Text.Json.JsonEncodedText.Encode("file_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMasterIsStable = System.Text.Json.JsonEncodedText.Encode("master_is_stable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryIntegrity = System.Text.Json.JsonEncodedText.Encode("repository_integrity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAvailability = System.Text.Json.JsonEncodedText.Encode("shards_availability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsCapacity = System.Text.Json.JsonEncodedText.Encode("shards_capacity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

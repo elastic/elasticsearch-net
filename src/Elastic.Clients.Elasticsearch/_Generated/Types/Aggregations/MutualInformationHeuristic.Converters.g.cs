@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MutualInformationHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeNegatives = System.Text.Json.JsonEncodedText.Encode("include_negatives");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeNegatives = System.Text.Json.JsonEncodedText.Encode("include_negatives"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

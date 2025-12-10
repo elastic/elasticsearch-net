@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RemoveIndicesBlockStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndicesBlockStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropUnblocked = System.Text.Json.JsonEncodedText.Encode("unblocked");
+	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnblocked = System.Text.Json.JsonEncodedText.Encode("unblocked"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RemoveIndicesBlockStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

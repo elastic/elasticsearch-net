@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class StringRareTermsBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsBucket>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

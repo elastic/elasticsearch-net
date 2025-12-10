@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RefreshConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Refresh>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
-	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
-	private static readonly System.Text.Json.JsonEncodedText MemberWaitFor = System.Text.Json.JsonEncodedText.Encode("wait_for");
+	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWaitFor = System.Text.Json.JsonEncodedText.Encode("wait_for"u8);
 
 	public override Elastic.Clients.Elasticsearch.Refresh Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

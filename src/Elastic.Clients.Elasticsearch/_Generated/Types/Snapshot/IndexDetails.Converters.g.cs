@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class IndexDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.IndexDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSegmentsPerShard = System.Text.Json.JsonEncodedText.Encode("max_segments_per_shard");
-	private static readonly System.Text.Json.JsonEncodedText PropShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSegmentsPerShard = System.Text.Json.JsonEncodedText.Encode("max_segments_per_shard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.IndexDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

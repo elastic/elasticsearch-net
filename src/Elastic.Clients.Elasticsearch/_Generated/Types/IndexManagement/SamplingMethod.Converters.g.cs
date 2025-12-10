@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SamplingMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAggregate = System.Text.Json.JsonEncodedText.Encode("aggregate");
-	private static readonly System.Text.Json.JsonEncodedText MemberLastValue = System.Text.Json.JsonEncodedText.Encode("last_value");
+	private static readonly System.Text.Json.JsonEncodedText MemberAggregate = System.Text.Json.JsonEncodedText.Encode("aggregate"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLastValue = System.Text.Json.JsonEncodedText.Encode("last_value"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

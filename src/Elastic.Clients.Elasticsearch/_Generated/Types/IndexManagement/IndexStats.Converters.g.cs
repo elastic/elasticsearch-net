@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk");
-	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
-	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
-	private static readonly System.Text.Json.JsonEncodedText PropFlush = System.Text.Json.JsonEncodedText.Encode("flush");
-	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache");
-	private static readonly System.Text.Json.JsonEncodedText PropRecovery = System.Text.Json.JsonEncodedText.Encode("recovery");
-	private static readonly System.Text.Json.JsonEncodedText PropRefresh = System.Text.Json.JsonEncodedText.Encode("refresh");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
-	private static readonly System.Text.Json.JsonEncodedText PropShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog");
-	private static readonly System.Text.Json.JsonEncodedText PropWarmer = System.Text.Json.JsonEncodedText.Encode("warmer");
+	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFlush = System.Text.Json.JsonEncodedText.Encode("flush"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexing = System.Text.Json.JsonEncodedText.Encode("indexing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecovery = System.Text.Json.JsonEncodedText.Encode("recovery"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRefresh = System.Text.Json.JsonEncodedText.Encode("refresh"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWarmer = System.Text.Json.JsonEncodedText.Encode("warmer"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

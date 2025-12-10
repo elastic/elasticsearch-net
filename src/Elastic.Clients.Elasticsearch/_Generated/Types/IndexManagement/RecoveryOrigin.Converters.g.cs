@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RecoveryOriginConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBootstrapNewHistoryUuid = System.Text.Json.JsonEncodedText.Encode("bootstrap_new_history_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
-	private static readonly System.Text.Json.JsonEncodedText PropHostname = System.Text.Json.JsonEncodedText.Encode("hostname");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText PropRestoreUuid = System.Text.Json.JsonEncodedText.Encode("restoreUUID");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropBootstrapNewHistoryUuid = System.Text.Json.JsonEncodedText.Encode("bootstrap_new_history_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHostname = System.Text.Json.JsonEncodedText.Encode("hostname"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRestoreUuid = System.Text.Json.JsonEncodedText.Encode("restoreUUID"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

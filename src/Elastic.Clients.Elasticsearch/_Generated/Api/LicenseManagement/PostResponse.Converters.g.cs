@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class PostResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge");
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropLicenseStatus = System.Text.Json.JsonEncodedText.Encode("license_status");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLicenseStatus = System.Text.Json.JsonEncodedText.Encode("license_status"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

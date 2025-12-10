@@ -27,21 +27,21 @@ public sealed partial class PutClusterSettingsRequestParameters : Elastic.Transp
 {
 	/// <summary>
 	/// <para>
-	/// Return settings in flat format (default: false)
+	/// Return settings in flat format
 	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -104,21 +104,21 @@ public sealed partial class PutClusterSettingsRequest : Elastic.Clients.Elastics
 
 	/// <summary>
 	/// <para>
-	/// Return settings in flat format (default: false)
+	/// Return settings in flat format
 	/// </para>
 	/// </summary>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -186,7 +186,7 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Return settings in flat format (default: false)
+	/// Return settings in flat format
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor FlatSettings(bool? value = true)
@@ -197,7 +197,7 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -208,7 +208,7 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)

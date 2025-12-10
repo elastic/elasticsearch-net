@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Retriever>
 {
+	private static readonly System.Text.Json.JsonEncodedText VariantDiversify = System.Text.Json.JsonEncodedText.Encode("diversify");
 	private static readonly System.Text.Json.JsonEncodedText VariantKnn = System.Text.Json.JsonEncodedText.Encode("knn");
 	private static readonly System.Text.Json.JsonEncodedText VariantLinear = System.Text.Json.JsonEncodedText.Encode("linear");
 	private static readonly System.Text.Json.JsonEncodedText VariantPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
@@ -41,6 +42,14 @@ public sealed partial class RetrieverConverter : System.Text.Json.Serialization.
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (reader.ValueTextEquals(VariantDiversify))
+			{
+				variantType = VariantDiversify.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.DiversifyRetriever>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantKnn))
 			{
 				variantType = VariantKnn.Value;
@@ -128,6 +137,9 @@ public sealed partial class RetrieverConverter : System.Text.Json.Serialization.
 		switch (value.VariantType)
 		{
 			case null:
+				break;
+			case "diversify":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.DiversifyRetriever)value.Variant, null, null);
 				break;
 			case "knn":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever)value.Variant, null, null);

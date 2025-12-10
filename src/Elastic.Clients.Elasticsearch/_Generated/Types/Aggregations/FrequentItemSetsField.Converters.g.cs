@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class FrequentItemSetsFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

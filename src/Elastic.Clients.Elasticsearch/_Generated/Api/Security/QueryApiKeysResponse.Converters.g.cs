@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class QueryApiKeysResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropApiKeys = System.Text.Json.JsonEncodedText.Encode("api_keys");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropApiKeys = System.Text.Json.JsonEncodedText.Encode("api_keys"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

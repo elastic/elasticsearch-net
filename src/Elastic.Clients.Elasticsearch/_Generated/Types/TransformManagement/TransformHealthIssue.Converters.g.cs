@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TransformHealthIssueConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurenceString = System.Text.Json.JsonEncodedText.Encode("first_occurence_string");
-	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurrence = System.Text.Json.JsonEncodedText.Encode("first_occurrence");
-	private static readonly System.Text.Json.JsonEncodedText PropIssue = System.Text.Json.JsonEncodedText.Encode("issue");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurenceString = System.Text.Json.JsonEncodedText.Encode("first_occurence_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurrence = System.Text.Json.JsonEncodedText.Encode("first_occurrence"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIssue = System.Text.Json.JsonEncodedText.Encode("issue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

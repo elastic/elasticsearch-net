@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ClusterStateQueueConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed");
-	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ClusterStateQueue Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.Json;
 
 public sealed partial class ListDanglingIndicesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDanglingIndices = System.Text.Json.JsonEncodedText.Encode("dangling_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropDanglingIndices = System.Text.Json.JsonEncodedText.Encode("dangling_indices"u8);
 
 	public override Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

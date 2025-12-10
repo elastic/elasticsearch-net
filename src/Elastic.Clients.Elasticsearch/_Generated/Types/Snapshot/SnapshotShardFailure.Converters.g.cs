@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SnapshotShardFailureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

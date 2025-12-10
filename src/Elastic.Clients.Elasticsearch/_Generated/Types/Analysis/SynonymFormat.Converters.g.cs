@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class SynonymFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SynonymFormat>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSolr = System.Text.Json.JsonEncodedText.Encode("solr");
-	private static readonly System.Text.Json.JsonEncodedText MemberWordnet = System.Text.Json.JsonEncodedText.Encode("wordnet");
+	private static readonly System.Text.Json.JsonEncodedText MemberSolr = System.Text.Json.JsonEncodedText.Encode("solr"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWordnet = System.Text.Json.JsonEncodedText.Encode("wordnet"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.SynonymFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

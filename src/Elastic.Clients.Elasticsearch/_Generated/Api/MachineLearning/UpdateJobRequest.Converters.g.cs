@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpdateJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyOpen = System.Text.Json.JsonEncodedText.Encode("allow_lazy_open");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits");
-	private static readonly System.Text.Json.JsonEncodedText PropBackgroundPersistInterval = System.Text.Json.JsonEncodedText.Encode("background_persist_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropCustomSettings = System.Text.Json.JsonEncodedText.Encode("custom_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
-	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config");
-	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
-	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
-	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsRetentionDays = System.Text.Json.JsonEncodedText.Encode("results_retention_days");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyOpen = System.Text.Json.JsonEncodedText.Encode("allow_lazy_open"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundPersistInterval = System.Text.Json.JsonEncodedText.Encode("background_persist_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCustomSettings = System.Text.Json.JsonEncodedText.Encode("custom_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultsRetentionDays = System.Text.Json.JsonEncodedText.Encode("results_retention_days"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

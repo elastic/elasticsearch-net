@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalMetricPrecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnlabeled = System.Text.Json.JsonEncodedText.Encode("ignore_unlabeled");
-	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
-	private static readonly System.Text.Json.JsonEncodedText PropRelevantRatingThreshold = System.Text.Json.JsonEncodedText.Encode("relevant_rating_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnlabeled = System.Text.Json.JsonEncodedText.Encode("ignore_unlabeled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelevantRatingThreshold = System.Text.Json.JsonEncodedText.Encode("relevant_rating_threshold"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

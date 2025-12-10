@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlDataFrameAnalyticsJobsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisCounts = System.Text.Json.JsonEncodedText.Encode("analysis_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryUsage = System.Text.Json.JsonEncodedText.Encode("memory_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisCounts = System.Text.Json.JsonEncodedText.Encode("analysis_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryUsage = System.Text.Json.JsonEncodedText.Encode("memory_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

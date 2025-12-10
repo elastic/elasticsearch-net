@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class NodeDiskUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLeastAvailable = System.Text.Json.JsonEncodedText.Encode("least_available");
-	private static readonly System.Text.Json.JsonEncodedText PropMostAvailable = System.Text.Json.JsonEncodedText.Encode("most_available");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name");
+	private static readonly System.Text.Json.JsonEncodedText PropLeastAvailable = System.Text.Json.JsonEncodedText.Encode("least_available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMostAvailable = System.Text.Json.JsonEncodedText.Encode("most_available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

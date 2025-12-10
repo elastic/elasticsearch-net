@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class UnassignedInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationStatus = System.Text.Json.JsonEncodedText.Encode("allocation_status");
-	private static readonly System.Text.Json.JsonEncodedText PropAt = System.Text.Json.JsonEncodedText.Encode("at");
-	private static readonly System.Text.Json.JsonEncodedText PropDelayed = System.Text.Json.JsonEncodedText.Encode("delayed");
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropFailedAllocationAttempts = System.Text.Json.JsonEncodedText.Encode("failed_allocation_attempts");
-	private static readonly System.Text.Json.JsonEncodedText PropLastAllocationStatus = System.Text.Json.JsonEncodedText.Encode("last_allocation_status");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationStatus = System.Text.Json.JsonEncodedText.Encode("allocation_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAt = System.Text.Json.JsonEncodedText.Encode("at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelayed = System.Text.Json.JsonEncodedText.Encode("delayed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailedAllocationAttempts = System.Text.Json.JsonEncodedText.Encode("failed_allocation_attempts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastAllocationStatus = System.Text.Json.JsonEncodedText.Encode("last_allocation_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

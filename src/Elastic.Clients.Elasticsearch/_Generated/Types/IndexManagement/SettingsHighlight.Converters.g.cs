@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsHighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

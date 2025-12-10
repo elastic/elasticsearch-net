@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class RuntimeFieldTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean");
-	private static readonly System.Text.Json.JsonEncodedText MemberComposite = System.Text.Json.JsonEncodedText.Encode("composite");
-	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date");
-	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoPoint = System.Text.Json.JsonEncodedText.Encode("geo_point");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape");
-	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip");
-	private static readonly System.Text.Json.JsonEncodedText MemberKeyword = System.Text.Json.JsonEncodedText.Encode("keyword");
-	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
-	private static readonly System.Text.Json.JsonEncodedText MemberLookup = System.Text.Json.JsonEncodedText.Encode("lookup");
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolean = System.Text.Json.JsonEncodedText.Encode("boolean"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberComposite = System.Text.Json.JsonEncodedText.Encode("composite"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoPoint = System.Text.Json.JsonEncodedText.Encode("geo_point"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoShape = System.Text.Json.JsonEncodedText.Encode("geo_shape"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIp = System.Text.Json.JsonEncodedText.Encode("ip"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKeyword = System.Text.Json.JsonEncodedText.Encode("keyword"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLookup = System.Text.Json.JsonEncodedText.Encode("lookup"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

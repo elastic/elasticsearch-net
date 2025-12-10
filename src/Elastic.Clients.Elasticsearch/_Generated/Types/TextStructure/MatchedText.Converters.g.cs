@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class MatchedTextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.MatchedText>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.MatchedText Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CgroupCpuStatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfElapsedPeriods = System.Text.Json.JsonEncodedText.Encode("number_of_elapsed_periods");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfTimesThrottled = System.Text.Json.JsonEncodedText.Encode("number_of_times_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeThrottledNanos = System.Text.Json.JsonEncodedText.Encode("time_throttled_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfElapsedPeriods = System.Text.Json.JsonEncodedText.Encode("number_of_elapsed_periods"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfTimesThrottled = System.Text.Json.JsonEncodedText.Encode("number_of_times_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeThrottledNanos = System.Text.Json.JsonEncodedText.Encode("time_throttled_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

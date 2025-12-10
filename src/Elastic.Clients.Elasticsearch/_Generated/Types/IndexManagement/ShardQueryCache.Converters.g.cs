@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardQueryCacheConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheCount = System.Text.Json.JsonEncodedText.Encode("cache_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size");
-	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropHitCount = System.Text.Json.JsonEncodedText.Encode("hit_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMissCount = System.Text.Json.JsonEncodedText.Encode("miss_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheCount = System.Text.Json.JsonEncodedText.Encode("cache_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHitCount = System.Text.Json.JsonEncodedText.Encode("hit_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissCount = System.Text.Json.JsonEncodedText.Encode("miss_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

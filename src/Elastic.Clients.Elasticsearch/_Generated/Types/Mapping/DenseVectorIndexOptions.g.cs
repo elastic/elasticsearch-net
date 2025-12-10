@@ -93,7 +93,7 @@ public sealed partial class DenseVectorIndexOptions
 	/// <c>true</c> if vector rescoring should be done on-disk
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>bbq_hnsw</c>
+	/// Only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>
 	/// </para>
 	/// </summary>
 	public bool? OnDiskRescore { get; set; }
@@ -193,7 +193,7 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	/// <c>true</c> if vector rescoring should be done on-disk
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>bbq_hnsw</c>
+	/// Only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor OnDiskRescore(bool? value = true)

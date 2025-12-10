@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class HuggingFaceServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

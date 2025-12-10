@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

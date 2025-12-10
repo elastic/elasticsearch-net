@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TransformAuthorizationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropServiceAccount = System.Text.Json.JsonEncodedText.Encode("service_account");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccount = System.Text.Json.JsonEncodedText.Encode("service_account"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

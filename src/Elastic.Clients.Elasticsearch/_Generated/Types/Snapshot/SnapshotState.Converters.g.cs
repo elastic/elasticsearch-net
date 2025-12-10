@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SnapshotStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberInProgress = System.Text.Json.JsonEncodedText.Encode("IN_PROGRESS");
-	private static readonly System.Text.Json.JsonEncodedText MemberIncompatible = System.Text.Json.JsonEncodedText.Encode("INCOMPATIBLE");
-	private static readonly System.Text.Json.JsonEncodedText MemberPartial = System.Text.Json.JsonEncodedText.Encode("PARTIAL");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("SUCCESS");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInProgress = System.Text.Json.JsonEncodedText.Encode("IN_PROGRESS"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIncompatible = System.Text.Json.JsonEncodedText.Encode("INCOMPATIBLE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPartial = System.Text.Json.JsonEncodedText.Encode("PARTIAL"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("SUCCESS"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

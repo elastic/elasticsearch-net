@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class FeaturesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Features>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregateMetric = System.Text.Json.JsonEncodedText.Encode("aggregate_metric");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalytics = System.Text.Json.JsonEncodedText.Encode("analytics");
-	private static readonly System.Text.Json.JsonEncodedText PropArchive = System.Text.Json.JsonEncodedText.Encode("archive");
-	private static readonly System.Text.Json.JsonEncodedText PropCcr = System.Text.Json.JsonEncodedText.Encode("ccr");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
-	private static readonly System.Text.Json.JsonEncodedText PropDataTiers = System.Text.Json.JsonEncodedText.Encode("data_tiers");
-	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich");
-	private static readonly System.Text.Json.JsonEncodedText PropEnterpriseSearch = System.Text.Json.JsonEncodedText.Encode("enterprise_search");
-	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql");
-	private static readonly System.Text.Json.JsonEncodedText PropEsql = System.Text.Json.JsonEncodedText.Encode("esql");
-	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph");
-	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
-	private static readonly System.Text.Json.JsonEncodedText PropLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb");
-	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash");
-	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring");
-	private static readonly System.Text.Json.JsonEncodedText PropRollup = System.Text.Json.JsonEncodedText.Encode("rollup");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFields = System.Text.Json.JsonEncodedText.Encode("runtime_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshots = System.Text.Json.JsonEncodedText.Encode("searchable_snapshots");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
-	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm");
-	private static readonly System.Text.Json.JsonEncodedText PropSpatial = System.Text.Json.JsonEncodedText.Encode("spatial");
-	private static readonly System.Text.Json.JsonEncodedText PropSql = System.Text.Json.JsonEncodedText.Encode("sql");
-	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform");
-	private static readonly System.Text.Json.JsonEncodedText PropUniversalProfiling = System.Text.Json.JsonEncodedText.Encode("universal_profiling");
-	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only");
-	private static readonly System.Text.Json.JsonEncodedText PropWatcher = System.Text.Json.JsonEncodedText.Encode("watcher");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregateMetric = System.Text.Json.JsonEncodedText.Encode("aggregate_metric"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalytics = System.Text.Json.JsonEncodedText.Encode("analytics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropArchive = System.Text.Json.JsonEncodedText.Encode("archive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCcr = System.Text.Json.JsonEncodedText.Encode("ccr"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataTiers = System.Text.Json.JsonEncodedText.Encode("data_tiers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnterpriseSearch = System.Text.Json.JsonEncodedText.Encode("enterprise_search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEsql = System.Text.Json.JsonEncodedText.Encode("esql"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogstash = System.Text.Json.JsonEncodedText.Encode("logstash"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMonitoring = System.Text.Json.JsonEncodedText.Encode("monitoring"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollup = System.Text.Json.JsonEncodedText.Encode("rollup"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFields = System.Text.Json.JsonEncodedText.Encode("runtime_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshots = System.Text.Json.JsonEncodedText.Encode("searchable_snapshots"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlm = System.Text.Json.JsonEncodedText.Encode("slm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSpatial = System.Text.Json.JsonEncodedText.Encode("spatial"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSql = System.Text.Json.JsonEncodedText.Encode("sql"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUniversalProfiling = System.Text.Json.JsonEncodedText.Encode("universal_profiling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWatcher = System.Text.Json.JsonEncodedText.Encode("watcher"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Features Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

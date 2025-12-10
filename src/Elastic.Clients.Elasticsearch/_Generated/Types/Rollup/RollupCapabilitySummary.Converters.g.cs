@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupCapabilitySummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

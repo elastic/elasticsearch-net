@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultValue = System.Text.Json.JsonEncodedText.Encode("default_value");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetMap = System.Text.Json.JsonEncodedText.Encode("target_map");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultValue = System.Text.Json.JsonEncodedText.Encode("default_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetMap = System.Text.Json.JsonEncodedText.Encode("target_map"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorTargetMeanEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

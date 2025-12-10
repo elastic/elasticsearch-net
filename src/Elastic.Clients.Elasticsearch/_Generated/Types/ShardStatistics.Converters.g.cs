@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ShardStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ShardStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.ShardStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationOutlierDetectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedProbabilityField = System.Text.Json.JsonEncodedText.Encode("predicted_probability_field");
+	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedProbabilityField = System.Text.Json.JsonEncodedText.Encode("predicted_probability_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

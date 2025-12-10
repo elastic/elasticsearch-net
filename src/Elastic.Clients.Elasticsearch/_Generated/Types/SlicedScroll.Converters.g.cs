@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SlicedScrollConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SlicedScroll>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
 
 	public override Elastic.Clients.Elasticsearch.SlicedScroll Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

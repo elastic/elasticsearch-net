@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DownsampleConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplingMethod = System.Text.Json.JsonEncodedText.Encode("sampling_method");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplingMethod = System.Text.Json.JsonEncodedText.Encode("sampling_method"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class SignificantLongTermsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count");
-	private static readonly System.Text.Json.JsonEncodedText PropBuckets = System.Text.Json.JsonEncodedText.Encode("buckets");
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuckets = System.Text.Json.JsonEncodedText.Encode("buckets"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

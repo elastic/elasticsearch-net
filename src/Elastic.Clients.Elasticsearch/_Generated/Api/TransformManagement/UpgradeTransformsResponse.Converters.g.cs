@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class UpgradeTransformsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNeedsUpdate = System.Text.Json.JsonEncodedText.Encode("needs_update");
-	private static readonly System.Text.Json.JsonEncodedText PropNoAction = System.Text.Json.JsonEncodedText.Encode("no_action");
-	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+	private static readonly System.Text.Json.JsonEncodedText PropNeedsUpdate = System.Text.Json.JsonEncodedText.Encode("needs_update"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoAction = System.Text.Json.JsonEncodedText.Encode("no_action"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

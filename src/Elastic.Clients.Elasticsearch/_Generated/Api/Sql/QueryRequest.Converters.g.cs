@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Sql.Json;
 
 public sealed partial class QueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.QueryRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
-	private static readonly System.Text.Json.JsonEncodedText PropCatalog = System.Text.Json.JsonEncodedText.Encode("catalog");
-	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
-	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
-	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldMultiValueLeniency = System.Text.Json.JsonEncodedText.Encode("field_multi_value_leniency");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexUsingFrozen = System.Text.Json.JsonEncodedText.Encode("index_using_frozen");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
-	private static readonly System.Text.Json.JsonEncodedText PropPageTimeout = System.Text.Json.JsonEncodedText.Encode("page_timeout");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestTimeout = System.Text.Json.JsonEncodedText.Encode("request_timeout");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
-	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCatalog = System.Text.Json.JsonEncodedText.Encode("catalog"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldMultiValueLeniency = System.Text.Json.JsonEncodedText.Encode("field_multi_value_leniency"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUsingFrozen = System.Text.Json.JsonEncodedText.Encode("index_using_frozen"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPageTimeout = System.Text.Json.JsonEncodedText.Encode("page_timeout"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestTimeout = System.Text.Json.JsonEncodedText.Encode("request_timeout"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.Sql.QueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

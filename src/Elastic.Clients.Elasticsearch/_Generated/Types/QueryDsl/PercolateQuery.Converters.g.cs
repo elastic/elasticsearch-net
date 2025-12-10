@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class PercolateQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document");
-	private static readonly System.Text.Json.JsonEncodedText PropDocuments = System.Text.Json.JsonEncodedText.Encode("documents");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocuments = System.Text.Json.JsonEncodedText.Encode("documents"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

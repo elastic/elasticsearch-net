@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RenderSearchTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropTemplateOutput = System.Text.Json.JsonEncodedText.Encode("template_output");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplateOutput = System.Text.Json.JsonEncodedText.Encode("template_output"u8);
 
 	public override Elastic.Clients.Elasticsearch.RenderSearchTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

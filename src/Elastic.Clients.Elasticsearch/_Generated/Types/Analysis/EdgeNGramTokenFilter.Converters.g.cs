@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class EdgeNGramTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxGram = System.Text.Json.JsonEncodedText.Encode("max_gram");
-	private static readonly System.Text.Json.JsonEncodedText PropMinGram = System.Text.Json.JsonEncodedText.Encode("min_gram");
-	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
-	private static readonly System.Text.Json.JsonEncodedText PropSide = System.Text.Json.JsonEncodedText.Encode("side");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGram = System.Text.Json.JsonEncodedText.Encode("max_gram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinGram = System.Text.Json.JsonEncodedText.Encode("min_gram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSide = System.Text.Json.JsonEncodedText.Encode("side"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

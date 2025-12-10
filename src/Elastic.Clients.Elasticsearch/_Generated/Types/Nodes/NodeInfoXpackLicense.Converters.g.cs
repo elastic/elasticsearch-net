@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackLicenseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSelfGenerated = System.Text.Json.JsonEncodedText.Encode("self_generated");
+	private static readonly System.Text.Json.JsonEncodedText PropSelfGenerated = System.Text.Json.JsonEncodedText.Encode("self_generated"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

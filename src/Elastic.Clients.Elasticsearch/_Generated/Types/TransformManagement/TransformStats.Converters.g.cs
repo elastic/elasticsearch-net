@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TransformStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCheckpointing = System.Text.Json.JsonEncodedText.Encode("checkpointing");
-	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpointing = System.Text.Json.JsonEncodedText.Encode("checkpointing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

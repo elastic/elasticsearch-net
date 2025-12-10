@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class GetIndexTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplates = System.Text.Json.JsonEncodedText.Encode("index_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplates = System.Text.Json.JsonEncodedText.Encode("index_templates"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

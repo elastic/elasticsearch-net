@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Script>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang");
-	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
 
 	public override Elastic.Clients.Elasticsearch.Script Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

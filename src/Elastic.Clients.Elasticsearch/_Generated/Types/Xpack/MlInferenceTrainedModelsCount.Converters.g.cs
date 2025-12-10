@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlInferenceTrainedModelsCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
-	private static readonly System.Text.Json.JsonEncodedText PropNer = System.Text.Json.JsonEncodedText.Encode("ner");
-	private static readonly System.Text.Json.JsonEncodedText PropOther = System.Text.Json.JsonEncodedText.Encode("other");
-	private static readonly System.Text.Json.JsonEncodedText PropPassThrough = System.Text.Json.JsonEncodedText.Encode("pass_through");
-	private static readonly System.Text.Json.JsonEncodedText PropPrepackaged = System.Text.Json.JsonEncodedText.Encode("prepackaged");
-	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
-	private static readonly System.Text.Json.JsonEncodedText PropTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNer = System.Text.Json.JsonEncodedText.Encode("ner"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOther = System.Text.Json.JsonEncodedText.Encode("other"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPassThrough = System.Text.Json.JsonEncodedText.Encode("pass_through"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrepackaged = System.Text.Json.JsonEncodedText.Encode("prepackaged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

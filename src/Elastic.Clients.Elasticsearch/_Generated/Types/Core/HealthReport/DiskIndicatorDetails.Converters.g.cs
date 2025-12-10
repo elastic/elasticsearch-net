@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class DiskIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesWithReadonlyBlock = System.Text.Json.JsonEncodedText.Encode("indices_with_readonly_block");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesOverFloodStageWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_flood_stage_watermark");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesOverHighWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_high_watermark");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesWithEnoughDiskSpace = System.Text.Json.JsonEncodedText.Encode("nodes_with_enough_disk_space");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesWithUnknownDiskStatus = System.Text.Json.JsonEncodedText.Encode("nodes_with_unknown_disk_status");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesWithReadonlyBlock = System.Text.Json.JsonEncodedText.Encode("indices_with_readonly_block"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesOverFloodStageWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_flood_stage_watermark"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesOverHighWatermark = System.Text.Json.JsonEncodedText.Encode("nodes_over_high_watermark"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesWithEnoughDiskSpace = System.Text.Json.JsonEncodedText.Encode("nodes_with_enough_disk_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesWithUnknownDiskStatus = System.Text.Json.JsonEncodedText.Encode("nodes_with_unknown_disk_status"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

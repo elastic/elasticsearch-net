@@ -25,27 +25,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisRegressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha");
-	private static readonly System.Text.Json.JsonEncodedText PropDependentVariable = System.Text.Json.JsonEncodedText.Encode("dependent_variable");
-	private static readonly System.Text.Json.JsonEncodedText PropDownsampleFactor = System.Text.Json.JsonEncodedText.Encode("downsample_factor");
-	private static readonly System.Text.Json.JsonEncodedText PropEarlyStoppingEnabled = System.Text.Json.JsonEncodedText.Encode("early_stopping_enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropEta = System.Text.Json.JsonEncodedText.Encode("eta");
-	private static readonly System.Text.Json.JsonEncodedText PropEtaGrowthRatePerTree = System.Text.Json.JsonEncodedText.Encode("eta_growth_rate_per_tree");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureBagFraction = System.Text.Json.JsonEncodedText.Encode("feature_bag_fraction");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureProcessors = System.Text.Json.JsonEncodedText.Encode("feature_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropGamma = System.Text.Json.JsonEncodedText.Encode("gamma");
-	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropLossFunction = System.Text.Json.JsonEncodedText.Encode("loss_function");
-	private static readonly System.Text.Json.JsonEncodedText PropLossFunctionParameter = System.Text.Json.JsonEncodedText.Encode("loss_function_parameter");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxOptimizationRoundsPerHyperparameter = System.Text.Json.JsonEncodedText.Encode("max_optimization_rounds_per_hyperparameter");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees = System.Text.Json.JsonEncodedText.Encode("max_trees");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees1 = System.Text.Json.JsonEncodedText.Encode("maximum_number_trees");
-	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldName = System.Text.Json.JsonEncodedText.Encode("prediction_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRandomizeSeed = System.Text.Json.JsonEncodedText.Encode("randomize_seed");
-	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthLimit = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthTolerance = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_tolerance");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainingPercent = System.Text.Json.JsonEncodedText.Encode("training_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDependentVariable = System.Text.Json.JsonEncodedText.Encode("dependent_variable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampleFactor = System.Text.Json.JsonEncodedText.Encode("downsample_factor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEarlyStoppingEnabled = System.Text.Json.JsonEncodedText.Encode("early_stopping_enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEta = System.Text.Json.JsonEncodedText.Encode("eta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEtaGrowthRatePerTree = System.Text.Json.JsonEncodedText.Encode("eta_growth_rate_per_tree"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureBagFraction = System.Text.Json.JsonEncodedText.Encode("feature_bag_fraction"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureProcessors = System.Text.Json.JsonEncodedText.Encode("feature_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGamma = System.Text.Json.JsonEncodedText.Encode("gamma"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLossFunction = System.Text.Json.JsonEncodedText.Encode("loss_function"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLossFunctionParameter = System.Text.Json.JsonEncodedText.Encode("loss_function_parameter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOptimizationRoundsPerHyperparameter = System.Text.Json.JsonEncodedText.Encode("max_optimization_rounds_per_hyperparameter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees = System.Text.Json.JsonEncodedText.Encode("max_trees"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTrees1 = System.Text.Json.JsonEncodedText.Encode("maximum_number_trees"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldName = System.Text.Json.JsonEncodedText.Encode("prediction_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRandomizeSeed = System.Text.Json.JsonEncodedText.Encode("randomize_seed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthLimit = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSoftTreeDepthTolerance = System.Text.Json.JsonEncodedText.Encode("soft_tree_depth_tolerance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrainingPercent = System.Text.Json.JsonEncodedText.Encode("training_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class DenseVectorStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOffHeap = System.Text.Json.JsonEncodedText.Encode("off_heap");
-	private static readonly System.Text.Json.JsonEncodedText PropValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
+	private static readonly System.Text.Json.JsonEncodedText PropOffHeap = System.Text.Json.JsonEncodedText.Encode("off_heap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValueCount = System.Text.Json.JsonEncodedText.Encode("value_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

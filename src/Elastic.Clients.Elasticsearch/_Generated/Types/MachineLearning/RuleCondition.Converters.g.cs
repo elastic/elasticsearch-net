@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class RuleConditionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAppliesTo = System.Text.Json.JsonEncodedText.Encode("applies_to");
-	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+	private static readonly System.Text.Json.JsonEncodedText PropAppliesTo = System.Text.Json.JsonEncodedText.Encode("applies_to"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

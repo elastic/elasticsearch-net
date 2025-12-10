@@ -59,10 +59,18 @@ public sealed partial class DataStreamLifecycleWithRollover
 
 	/// <summary>
 	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
+	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? DownsamplingMethod { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -122,10 +130,10 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? value)
 	{
 		Instance.Downsampling = value;
 		return this;
@@ -133,12 +141,41 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
-		Instance.Downsampling = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.Build(action);
+		Instance.Downsampling = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The list of downsampling rounds to execute as part of this downsampling configuration
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor.Build(action));
+		}
+
+		Instance.Downsampling = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
+	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor DownsamplingMethod(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? value)
+	{
+		Instance.DownsamplingMethod = value;
 		return this;
 	}
 

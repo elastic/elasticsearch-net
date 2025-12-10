@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class ScoreModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.ScoreMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg");
-	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply");
-	private static readonly System.Text.Json.JsonEncodedText MemberTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText MemberAvg = System.Text.Json.JsonEncodedText.Encode("avg"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMultiply = System.Text.Json.JsonEncodedText.Encode("multiply"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.ScoreMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

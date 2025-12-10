@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SemanticTextPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchInferenceId = System.Text.Json.JsonEncodedText.Encode("search_inference_id");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchInferenceId = System.Text.Json.JsonEncodedText.Encode("search_inference_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

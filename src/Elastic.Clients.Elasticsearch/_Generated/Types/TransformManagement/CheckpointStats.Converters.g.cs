@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class CheckpointStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCheckpoint = System.Text.Json.JsonEncodedText.Encode("checkpoint");
-	private static readonly System.Text.Json.JsonEncodedText PropCheckpointProgress = System.Text.Json.JsonEncodedText.Encode("checkpoint_progress");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestampMillis = System.Text.Json.JsonEncodedText.Encode("timestamp_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBound = System.Text.Json.JsonEncodedText.Encode("time_upper_bound");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBoundMillis = System.Text.Json.JsonEncodedText.Encode("time_upper_bound_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpoint = System.Text.Json.JsonEncodedText.Encode("checkpoint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCheckpointProgress = System.Text.Json.JsonEncodedText.Encode("checkpoint_progress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampMillis = System.Text.Json.JsonEncodedText.Encode("timestamp_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBound = System.Text.Json.JsonEncodedText.Encode("time_upper_bound"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeUpperBoundMillis = System.Text.Json.JsonEncodedText.Encode("time_upper_bound_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class BucketCorrelationFunctionCountCorrelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndicator = System.Text.Json.JsonEncodedText.Encode("indicator");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicator = System.Text.Json.JsonEncodedText.Encode("indicator"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

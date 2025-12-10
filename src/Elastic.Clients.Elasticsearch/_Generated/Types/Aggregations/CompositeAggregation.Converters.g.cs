@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CompositeAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSources = System.Text.Json.JsonEncodedText.Encode("sources");
+	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSources = System.Text.Json.JsonEncodedText.Encode("sources"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

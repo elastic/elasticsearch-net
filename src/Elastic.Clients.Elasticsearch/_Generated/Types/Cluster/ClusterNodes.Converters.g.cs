@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterNodesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNodes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDiscoveryTypes = System.Text.Json.JsonEncodedText.Encode("discovery_types");
-	private static readonly System.Text.Json.JsonEncodedText PropFs = System.Text.Json.JsonEncodedText.Encode("fs");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure");
-	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
-	private static readonly System.Text.Json.JsonEncodedText PropNetworkTypes = System.Text.Json.JsonEncodedText.Encode("network_types");
-	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os");
-	private static readonly System.Text.Json.JsonEncodedText PropPackagingTypes = System.Text.Json.JsonEncodedText.Encode("packaging_types");
-	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins");
-	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
-	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscoveryTypes = System.Text.Json.JsonEncodedText.Encode("discovery_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFs = System.Text.Json.JsonEncodedText.Encode("fs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNetworkTypes = System.Text.Json.JsonEncodedText.Encode("network_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPackagingTypes = System.Text.Json.JsonEncodedText.Encode("packaging_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

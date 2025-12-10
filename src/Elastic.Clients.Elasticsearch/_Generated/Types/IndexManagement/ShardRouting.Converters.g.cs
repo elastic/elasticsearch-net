@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardRoutingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

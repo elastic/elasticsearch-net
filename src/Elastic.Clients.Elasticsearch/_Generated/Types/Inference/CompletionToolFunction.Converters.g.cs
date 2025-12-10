@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CompletionToolFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropParameters = System.Text.Json.JsonEncodedText.Encode("parameters");
-	private static readonly System.Text.Json.JsonEncodedText PropStrict = System.Text.Json.JsonEncodedText.Encode("strict");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParameters = System.Text.Json.JsonEncodedText.Encode("parameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStrict = System.Text.Json.JsonEncodedText.Encode("strict"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

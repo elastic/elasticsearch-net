@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class CompletionSuggestOptionConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
-	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
-	private static readonly System.Text.Json.JsonEncodedText PropScore0 = System.Text.Json.JsonEncodedText.Encode("_score");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore0 = System.Text.Json.JsonEncodedText.Encode("_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggestOption<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

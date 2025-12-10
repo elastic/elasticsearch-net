@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class CjkBigramIgnoredScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberHan = System.Text.Json.JsonEncodedText.Encode("han");
-	private static readonly System.Text.Json.JsonEncodedText MemberHangul = System.Text.Json.JsonEncodedText.Encode("hangul");
-	private static readonly System.Text.Json.JsonEncodedText MemberHiragana = System.Text.Json.JsonEncodedText.Encode("hiragana");
-	private static readonly System.Text.Json.JsonEncodedText MemberKatakana = System.Text.Json.JsonEncodedText.Encode("katakana");
+	private static readonly System.Text.Json.JsonEncodedText MemberHan = System.Text.Json.JsonEncodedText.Encode("han"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHangul = System.Text.Json.JsonEncodedText.Encode("hangul"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHiragana = System.Text.Json.JsonEncodedText.Encode("hiragana"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKatakana = System.Text.Json.JsonEncodedText.Encode("katakana"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

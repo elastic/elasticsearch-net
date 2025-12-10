@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldSecurity = System.Text.Json.JsonEncodedText.Encode("field_security");
-	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
-	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldSecurity = System.Text.Json.JsonEncodedText.Encode("field_security"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.UserIndicesPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

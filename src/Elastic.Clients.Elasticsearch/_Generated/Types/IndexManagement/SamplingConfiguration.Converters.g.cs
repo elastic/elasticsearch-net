@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SamplingConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCreationTime = System.Text.Json.JsonEncodedText.Encode("creation_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCreationTimeInMillis = System.Text.Json.JsonEncodedText.Encode("creation_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSamples = System.Text.Json.JsonEncodedText.Encode("max_samples");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSize = System.Text.Json.JsonEncodedText.Encode("max_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("max_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRate = System.Text.Json.JsonEncodedText.Encode("rate");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeToLive = System.Text.Json.JsonEncodedText.Encode("time_to_live");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeToLiveInMillis = System.Text.Json.JsonEncodedText.Encode("time_to_live_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCreationTime = System.Text.Json.JsonEncodedText.Encode("creation_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreationTimeInMillis = System.Text.Json.JsonEncodedText.Encode("creation_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSamples = System.Text.Json.JsonEncodedText.Encode("max_samples"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSize = System.Text.Json.JsonEncodedText.Encode("max_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("max_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRate = System.Text.Json.JsonEncodedText.Encode("rate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeToLive = System.Text.Json.JsonEncodedText.Encode("time_to_live"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeToLiveInMillis = System.Text.Json.JsonEncodedText.Encode("time_to_live_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

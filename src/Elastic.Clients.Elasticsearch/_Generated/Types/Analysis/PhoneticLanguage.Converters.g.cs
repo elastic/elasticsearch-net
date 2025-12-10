@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PhoneticLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAny = System.Text.Json.JsonEncodedText.Encode("any");
-	private static readonly System.Text.Json.JsonEncodedText MemberCommon = System.Text.Json.JsonEncodedText.Encode("common");
-	private static readonly System.Text.Json.JsonEncodedText MemberCyrillic = System.Text.Json.JsonEncodedText.Encode("cyrillic");
-	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("english");
-	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("french");
-	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("german");
-	private static readonly System.Text.Json.JsonEncodedText MemberHebrew = System.Text.Json.JsonEncodedText.Encode("hebrew");
-	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("hungarian");
-	private static readonly System.Text.Json.JsonEncodedText MemberPolish = System.Text.Json.JsonEncodedText.Encode("polish");
-	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("romanian");
-	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("russian");
-	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("spanish");
+	private static readonly System.Text.Json.JsonEncodedText MemberAny = System.Text.Json.JsonEncodedText.Encode("any"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCommon = System.Text.Json.JsonEncodedText.Encode("common"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCyrillic = System.Text.Json.JsonEncodedText.Encode("cyrillic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("english"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("french"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("german"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHebrew = System.Text.Json.JsonEncodedText.Encode("hebrew"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("hungarian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPolish = System.Text.Json.JsonEncodedText.Encode("polish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("romanian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("russian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("spanish"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

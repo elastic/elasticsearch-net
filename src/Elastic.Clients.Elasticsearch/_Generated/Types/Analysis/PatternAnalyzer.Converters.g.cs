@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PatternAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
-	private static readonly System.Text.Json.JsonEncodedText PropLowercase = System.Text.Json.JsonEncodedText.Encode("lowercase");
-	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
-	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowercase = System.Text.Json.JsonEncodedText.Encode("lowercase"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

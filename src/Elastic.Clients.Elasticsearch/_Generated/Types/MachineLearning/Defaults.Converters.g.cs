@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DefaultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Defaults>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Defaults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackMlConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropUseAutoMachineMemoryPercent = System.Text.Json.JsonEncodedText.Encode("use_auto_machine_memory_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropUseAutoMachineMemoryPercent = System.Text.Json.JsonEncodedText.Encode("use_auto_machine_memory_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

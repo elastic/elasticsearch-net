@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ExcludeFrequentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberBy = System.Text.Json.JsonEncodedText.Encode("by");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberOver = System.Text.Json.JsonEncodedText.Encode("over");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBy = System.Text.Json.JsonEncodedText.Encode("by"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOver = System.Text.Json.JsonEncodedText.Encode("over"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

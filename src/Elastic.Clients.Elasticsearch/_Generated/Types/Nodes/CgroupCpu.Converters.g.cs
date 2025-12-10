@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CgroupCpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupCpu>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCfsPeriodMicros = System.Text.Json.JsonEncodedText.Encode("cfs_period_micros");
-	private static readonly System.Text.Json.JsonEncodedText PropCfsQuotaMicros = System.Text.Json.JsonEncodedText.Encode("cfs_quota_micros");
-	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
-	private static readonly System.Text.Json.JsonEncodedText PropStat = System.Text.Json.JsonEncodedText.Encode("stat");
+	private static readonly System.Text.Json.JsonEncodedText PropCfsPeriodMicros = System.Text.Json.JsonEncodedText.Encode("cfs_period_micros"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCfsQuotaMicros = System.Text.Json.JsonEncodedText.Encode("cfs_quota_micros"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStat = System.Text.Json.JsonEncodedText.Encode("stat"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.CgroupCpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

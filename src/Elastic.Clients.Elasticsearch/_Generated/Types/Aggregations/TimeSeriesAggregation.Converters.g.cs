@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TimeSeriesAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

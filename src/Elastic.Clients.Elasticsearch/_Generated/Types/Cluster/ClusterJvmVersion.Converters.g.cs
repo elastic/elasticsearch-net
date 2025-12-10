@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterJvmVersionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBundledJdk = System.Text.Json.JsonEncodedText.Encode("bundled_jdk");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name");
-	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor");
-	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version");
+	private static readonly System.Text.Json.JsonEncodedText PropBundledJdk = System.Text.Json.JsonEncodedText.Encode("bundled_jdk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

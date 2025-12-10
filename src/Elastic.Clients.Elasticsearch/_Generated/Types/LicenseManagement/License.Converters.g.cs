@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class LicenseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.License>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpiryDateInMillis = System.Text.Json.JsonEncodedText.Encode("expiry_date_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropIssueDateInMillis = System.Text.Json.JsonEncodedText.Encode("issue_date_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropIssuedTo = System.Text.Json.JsonEncodedText.Encode("issued_to");
-	private static readonly System.Text.Json.JsonEncodedText PropIssuer = System.Text.Json.JsonEncodedText.Encode("issuer");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNodes = System.Text.Json.JsonEncodedText.Encode("max_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxResourceUnits = System.Text.Json.JsonEncodedText.Encode("max_resource_units");
-	private static readonly System.Text.Json.JsonEncodedText PropSignature = System.Text.Json.JsonEncodedText.Encode("signature");
-	private static readonly System.Text.Json.JsonEncodedText PropStartDateInMillis = System.Text.Json.JsonEncodedText.Encode("start_date_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiryDateInMillis = System.Text.Json.JsonEncodedText.Encode("expiry_date_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIssueDateInMillis = System.Text.Json.JsonEncodedText.Encode("issue_date_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIssuedTo = System.Text.Json.JsonEncodedText.Encode("issued_to"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIssuer = System.Text.Json.JsonEncodedText.Encode("issuer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNodes = System.Text.Json.JsonEncodedText.Encode("max_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxResourceUnits = System.Text.Json.JsonEncodedText.Encode("max_resource_units"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSignature = System.Text.Json.JsonEncodedText.Encode("signature"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartDateInMillis = System.Text.Json.JsonEncodedText.Encode("start_date_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.License Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

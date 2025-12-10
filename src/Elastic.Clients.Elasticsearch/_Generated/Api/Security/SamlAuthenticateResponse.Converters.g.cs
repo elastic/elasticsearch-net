@@ -25,17 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SamlAuthenticateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInResponseTo = System.Text.Json.JsonEncodedText.Encode("in_response_to"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propAccessToken = default;
 		LocalJsonValue<int> propExpiresIn = default;
+		LocalJsonValue<string?> propInResponseTo = default;
 		LocalJsonValue<string> propRealm = default;
 		LocalJsonValue<string> propRefreshToken = default;
 		LocalJsonValue<string> propUsername = default;
@@ -47,6 +49,11 @@ public sealed partial class SamlAuthenticateResponseConverter : System.Text.Json
 			}
 
 			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
+			{
+				continue;
+			}
+
+			if (propInResponseTo.TryReadProperty(ref reader, options, PropInResponseTo, null))
 			{
 				continue;
 			}
@@ -80,6 +87,7 @@ public sealed partial class SamlAuthenticateResponseConverter : System.Text.Json
 		{
 			AccessToken = propAccessToken.Value,
 			ExpiresIn = propExpiresIn.Value,
+			InResponseTo = propInResponseTo.Value,
 			Realm = propRealm.Value,
 			RefreshToken = propRefreshToken.Value,
 			Username = propUsername.Value
@@ -91,6 +99,7 @@ public sealed partial class SamlAuthenticateResponseConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
 		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
+		writer.WriteProperty(options, PropInResponseTo, value.InResponseTo, null, null);
 		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
 		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
 		writer.WriteProperty(options, PropUsername, value.Username, null, null);

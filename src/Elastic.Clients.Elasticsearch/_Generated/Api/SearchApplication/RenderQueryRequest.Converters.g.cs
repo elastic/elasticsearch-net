@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class RenderQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

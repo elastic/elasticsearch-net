@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ChunkRescorerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ChunkRescorer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.ChunkRescorer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

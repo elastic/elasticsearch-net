@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelAssignmentRoutingStateAndReasonConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

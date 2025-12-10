@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class RegexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.RegexOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states");
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.RegexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

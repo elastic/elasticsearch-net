@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SpecifiedDocumentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SpecifiedDocument>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 
 	public override Elastic.Clients.Elasticsearch.SpecifiedDocument Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

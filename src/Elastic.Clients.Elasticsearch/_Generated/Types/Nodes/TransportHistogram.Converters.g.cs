@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class TransportHistogramConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropGeMillis = System.Text.Json.JsonEncodedText.Encode("ge_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropLtMillis = System.Text.Json.JsonEncodedText.Encode("lt_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGeMillis = System.Text.Json.JsonEncodedText.Encode("ge_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLtMillis = System.Text.Json.JsonEncodedText.Encode("lt_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.TransportHistogram Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

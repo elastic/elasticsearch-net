@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SecurityRolesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRoles>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDls = System.Text.Json.JsonEncodedText.Encode("dls");
-	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file");
-	private static readonly System.Text.Json.JsonEncodedText PropNative = System.Text.Json.JsonEncodedText.Encode("native");
+	private static readonly System.Text.Json.JsonEncodedText PropDls = System.Text.Json.JsonEncodedText.Encode("dls"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNative = System.Text.Json.JsonEncodedText.Encode("native"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRoles Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

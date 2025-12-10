@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JobBlockedReasonConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete");
-	private static readonly System.Text.Json.JsonEncodedText MemberReset = System.Text.Json.JsonEncodedText.Encode("reset");
-	private static readonly System.Text.Json.JsonEncodedText MemberRevert = System.Text.Json.JsonEncodedText.Encode("revert");
+	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReset = System.Text.Json.JsonEncodedText.Encode("reset"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRevert = System.Text.Json.JsonEncodedText.Encode("revert"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

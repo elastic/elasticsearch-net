@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PathHierarchyTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size");
-	private static readonly System.Text.Json.JsonEncodedText PropDelimiter = System.Text.Json.JsonEncodedText.Encode("delimiter");
-	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
-	private static readonly System.Text.Json.JsonEncodedText PropReverse = System.Text.Json.JsonEncodedText.Encode("reverse");
-	private static readonly System.Text.Json.JsonEncodedText PropSkip = System.Text.Json.JsonEncodedText.Encode("skip");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelimiter = System.Text.Json.JsonEncodedText.Encode("delimiter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReverse = System.Text.Json.JsonEncodedText.Encode("reverse"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkip = System.Text.Json.JsonEncodedText.Encode("skip"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

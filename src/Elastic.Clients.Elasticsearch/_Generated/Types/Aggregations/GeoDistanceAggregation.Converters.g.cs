@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class GeoDistanceAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
-	private static readonly System.Text.Json.JsonEncodedText PropRanges = System.Text.Json.JsonEncodedText.Encode("ranges");
-	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit");
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRanges = System.Text.Json.JsonEncodedText.Encode("ranges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

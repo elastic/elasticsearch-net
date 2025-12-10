@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class HealthStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.HealthStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
-	private static readonly System.Text.Json.JsonEncodedText MemberGreen1 = System.Text.Json.JsonEncodedText.Encode("GREEN");
-	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
-	private static readonly System.Text.Json.JsonEncodedText MemberRed1 = System.Text.Json.JsonEncodedText.Encode("RED");
-	private static readonly System.Text.Json.JsonEncodedText MemberUnavailable = System.Text.Json.JsonEncodedText.Encode("unavailable");
-	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
-	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
-	private static readonly System.Text.Json.JsonEncodedText MemberYellow1 = System.Text.Json.JsonEncodedText.Encode("YELLOW");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen1 = System.Text.Json.JsonEncodedText.Encode("GREEN"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRed1 = System.Text.Json.JsonEncodedText.Encode("RED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUnavailable = System.Text.Json.JsonEncodedText.Encode("unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow1 = System.Text.Json.JsonEncodedText.Encode("YELLOW"u8);
 
 	public override Elastic.Clients.Elasticsearch.HealthStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

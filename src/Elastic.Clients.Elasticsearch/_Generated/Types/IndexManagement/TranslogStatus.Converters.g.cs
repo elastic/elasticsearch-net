@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class TranslogStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
-	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalOnStart = System.Text.Json.JsonEncodedText.Encode("total_on_start");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOnStart = System.Text.Json.JsonEncodedText.Encode("total_on_start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexRoutingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocation = System.Text.Json.JsonEncodedText.Encode("allocation");
-	private static readonly System.Text.Json.JsonEncodedText PropRebalance = System.Text.Json.JsonEncodedText.Encode("rebalance");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocation = System.Text.Json.JsonEncodedText.Encode("allocation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRebalance = System.Text.Json.JsonEncodedText.Encode("rebalance"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

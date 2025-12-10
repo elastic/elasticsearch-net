@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class FieldSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FieldSort>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
-	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
-	private static readonly System.Text.Json.JsonEncodedText PropNumericType = System.Text.Json.JsonEncodedText.Encode("numeric_type");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropUnmappedType = System.Text.Json.JsonEncodedText.Encode("unmapped_type");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumericType = System.Text.Json.JsonEncodedText.Encode("numeric_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnmappedType = System.Text.Json.JsonEncodedText.Encode("unmapped_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.FieldSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

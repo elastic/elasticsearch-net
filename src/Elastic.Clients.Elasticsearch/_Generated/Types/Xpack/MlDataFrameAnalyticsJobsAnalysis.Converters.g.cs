@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlDataFrameAnalyticsJobsAnalysisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
-	private static readonly System.Text.Json.JsonEncodedText PropOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

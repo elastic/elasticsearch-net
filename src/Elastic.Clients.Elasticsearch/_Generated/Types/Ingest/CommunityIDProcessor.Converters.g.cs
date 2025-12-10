@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class CommunityIDProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropDestinationIp = System.Text.Json.JsonEncodedText.Encode("destination_ip");
-	private static readonly System.Text.Json.JsonEncodedText PropDestinationPort = System.Text.Json.JsonEncodedText.Encode("destination_port");
-	private static readonly System.Text.Json.JsonEncodedText PropIanaNumber = System.Text.Json.JsonEncodedText.Encode("iana_number");
-	private static readonly System.Text.Json.JsonEncodedText PropIcmpCode = System.Text.Json.JsonEncodedText.Encode("icmp_code");
-	private static readonly System.Text.Json.JsonEncodedText PropIcmpType = System.Text.Json.JsonEncodedText.Encode("icmp_type");
-	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
-	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
-	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceIp = System.Text.Json.JsonEncodedText.Encode("source_ip");
-	private static readonly System.Text.Json.JsonEncodedText PropSourcePort = System.Text.Json.JsonEncodedText.Encode("source_port");
-	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDestinationIp = System.Text.Json.JsonEncodedText.Encode("destination_ip"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDestinationPort = System.Text.Json.JsonEncodedText.Encode("destination_port"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIanaNumber = System.Text.Json.JsonEncodedText.Encode("iana_number"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIcmpCode = System.Text.Json.JsonEncodedText.Encode("icmp_code"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIcmpType = System.Text.Json.JsonEncodedText.Encode("icmp_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceIp = System.Text.Json.JsonEncodedText.Encode("source_ip"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourcePort = System.Text.Json.JsonEncodedText.Encode("source_port"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

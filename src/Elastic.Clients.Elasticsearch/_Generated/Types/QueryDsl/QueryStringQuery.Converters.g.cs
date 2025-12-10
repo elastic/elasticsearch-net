@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class QueryStringQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowLeadingWildcard = System.Text.Json.JsonEncodedText.Encode("allow_leading_wildcard");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzeWildcard = System.Text.Json.JsonEncodedText.Encode("analyze_wildcard");
-	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultField = System.Text.Json.JsonEncodedText.Encode("default_field");
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultOperator = System.Text.Json.JsonEncodedText.Encode("default_operator");
-	private static readonly System.Text.Json.JsonEncodedText PropEnablePositionIncrements = System.Text.Json.JsonEncodedText.Encode("enable_position_increments");
-	private static readonly System.Text.Json.JsonEncodedText PropEscape = System.Text.Json.JsonEncodedText.Encode("escape");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyMaxExpansions = System.Text.Json.JsonEncodedText.Encode("fuzzy_max_expansions");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyPrefixLength = System.Text.Json.JsonEncodedText.Encode("fuzzy_prefix_length");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
-	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropPhraseSlop = System.Text.Json.JsonEncodedText.Encode("phrase_slop");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("quote_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropQuoteFieldSuffix = System.Text.Json.JsonEncodedText.Encode("quote_field_suffix");
-	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropTieBreaker = System.Text.Json.JsonEncodedText.Encode("tie_breaker");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLeadingWildcard = System.Text.Json.JsonEncodedText.Encode("allow_leading_wildcard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzeWildcard = System.Text.Json.JsonEncodedText.Encode("analyze_wildcard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultField = System.Text.Json.JsonEncodedText.Encode("default_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultOperator = System.Text.Json.JsonEncodedText.Encode("default_operator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnablePositionIncrements = System.Text.Json.JsonEncodedText.Encode("enable_position_increments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEscape = System.Text.Json.JsonEncodedText.Encode("escape"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyMaxExpansions = System.Text.Json.JsonEncodedText.Encode("fuzzy_max_expansions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyPrefixLength = System.Text.Json.JsonEncodedText.Encode("fuzzy_prefix_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDeterminizedStates = System.Text.Json.JsonEncodedText.Encode("max_determinized_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPhraseSlop = System.Text.Json.JsonEncodedText.Encode("phrase_slop"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("quote_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuoteFieldSuffix = System.Text.Json.JsonEncodedText.Encode("quote_field_suffix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTieBreaker = System.Text.Json.JsonEncodedText.Encode("tie_breaker"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

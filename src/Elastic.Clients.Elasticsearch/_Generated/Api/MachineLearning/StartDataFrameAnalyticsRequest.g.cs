@@ -25,13 +25,6 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class StartDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// starts.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -74,7 +67,7 @@ public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Ela
 
 	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.start_data_frame_analytics";
 
@@ -97,7 +90,7 @@ public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Ela
 	/// starts.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>

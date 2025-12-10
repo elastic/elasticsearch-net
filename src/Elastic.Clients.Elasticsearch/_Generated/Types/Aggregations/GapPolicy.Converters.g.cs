@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class GapPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInsertZeros = System.Text.Json.JsonEncodedText.Encode("insert_zeros");
-	private static readonly System.Text.Json.JsonEncodedText MemberKeepValues = System.Text.Json.JsonEncodedText.Encode("keep_values");
-	private static readonly System.Text.Json.JsonEncodedText MemberSkip = System.Text.Json.JsonEncodedText.Encode("skip");
+	private static readonly System.Text.Json.JsonEncodedText MemberInsertZeros = System.Text.Json.JsonEncodedText.Encode("insert_zeros"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKeepValues = System.Text.Json.JsonEncodedText.Encode("keep_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSkip = System.Text.Json.JsonEncodedText.Encode("skip"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.GapPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

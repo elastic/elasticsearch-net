@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexTemplateSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreamOptions = System.Text.Json.JsonEncodedText.Encode("data_stream_options");
-	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamOptions = System.Text.Json.JsonEncodedText.Encode("data_stream_options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate?> propDataStreamOptions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions?> propDataStreamOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;

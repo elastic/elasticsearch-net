@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ProcessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Process>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxFileDescriptors = System.Text.Json.JsonEncodedText.Encode("max_file_descriptors");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFileDescriptors = System.Text.Json.JsonEncodedText.Encode("max_file_descriptors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Process Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

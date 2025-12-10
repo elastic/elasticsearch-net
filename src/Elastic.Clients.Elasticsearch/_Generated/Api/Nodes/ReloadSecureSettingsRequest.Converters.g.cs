@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ReloadSecureSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSecureSettingsPassword = System.Text.Json.JsonEncodedText.Encode("secure_settings_password");
+	private static readonly System.Text.Json.JsonEncodedText PropSecureSettingsPassword = System.Text.Json.JsonEncodedText.Encode("secure_settings_password"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

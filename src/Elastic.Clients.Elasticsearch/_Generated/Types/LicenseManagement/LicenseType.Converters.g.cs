@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class LicenseTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBasic = System.Text.Json.JsonEncodedText.Encode("basic");
-	private static readonly System.Text.Json.JsonEncodedText MemberDev = System.Text.Json.JsonEncodedText.Encode("dev");
-	private static readonly System.Text.Json.JsonEncodedText MemberEnterprise = System.Text.Json.JsonEncodedText.Encode("enterprise");
-	private static readonly System.Text.Json.JsonEncodedText MemberGold = System.Text.Json.JsonEncodedText.Encode("gold");
-	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText MemberPlatinum = System.Text.Json.JsonEncodedText.Encode("platinum");
-	private static readonly System.Text.Json.JsonEncodedText MemberSilver = System.Text.Json.JsonEncodedText.Encode("silver");
-	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard");
-	private static readonly System.Text.Json.JsonEncodedText MemberTrial = System.Text.Json.JsonEncodedText.Encode("trial");
+	private static readonly System.Text.Json.JsonEncodedText MemberBasic = System.Text.Json.JsonEncodedText.Encode("basic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDev = System.Text.Json.JsonEncodedText.Encode("dev"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberEnterprise = System.Text.Json.JsonEncodedText.Encode("enterprise"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGold = System.Text.Json.JsonEncodedText.Encode("gold"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPlatinum = System.Text.Json.JsonEncodedText.Encode("platinum"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSilver = System.Text.Json.JsonEncodedText.Encode("silver"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTrial = System.Text.Json.JsonEncodedText.Encode("trial"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

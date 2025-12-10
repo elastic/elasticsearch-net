@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class SparseEmbeddingResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+	private static readonly System.Text.Json.JsonEncodedText PropSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

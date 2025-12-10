@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class FieldTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorCount = System.Text.Json.JsonEncodedText.Encode("indexed_vector_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMax = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_max");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMin = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_min");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropScriptCount = System.Text.Json.JsonEncodedText.Encode("script_count");
-	private static readonly System.Text.Json.JsonEncodedText PropVectorElementTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_element_type_count");
-	private static readonly System.Text.Json.JsonEncodedText PropVectorIndexTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_index_type_count");
-	private static readonly System.Text.Json.JsonEncodedText PropVectorSimilarityTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_similarity_type_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorCount = System.Text.Json.JsonEncodedText.Encode("indexed_vector_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMax = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMin = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_min"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScriptCount = System.Text.Json.JsonEncodedText.Encode("script_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVectorElementTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_element_type_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVectorIndexTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_index_type_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVectorSimilarityTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_similarity_type_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.FieldTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

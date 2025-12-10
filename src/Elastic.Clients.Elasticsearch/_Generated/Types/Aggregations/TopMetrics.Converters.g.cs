@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TopMetricsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TopMetrics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

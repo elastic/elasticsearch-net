@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class TermSuggestOptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
-	private static readonly System.Text.Json.JsonEncodedText PropFreq = System.Text.Json.JsonEncodedText.Encode("freq");
-	private static readonly System.Text.Json.JsonEncodedText PropHighlighted = System.Text.Json.JsonEncodedText.Encode("highlighted");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreq = System.Text.Json.JsonEncodedText.Encode("freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighlighted = System.Text.Json.JsonEncodedText.Encode("highlighted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

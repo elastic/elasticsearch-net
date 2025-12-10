@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexSamplingConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSamplingConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfiguration = System.Text.Json.JsonEncodedText.Encode("configuration");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropConfiguration = System.Text.Json.JsonEncodedText.Encode("configuration"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSamplingConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

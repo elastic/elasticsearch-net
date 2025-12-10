@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class TermSuggestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length");
-	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
-	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.TermSuggest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

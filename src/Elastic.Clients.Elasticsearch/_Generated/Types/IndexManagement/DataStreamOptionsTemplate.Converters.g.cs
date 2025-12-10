@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamOptionsTemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

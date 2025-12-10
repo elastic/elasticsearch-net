@@ -25,26 +25,26 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropBoostTerms = System.Text.Json.JsonEncodedText.Encode("boost_terms");
-	private static readonly System.Text.Json.JsonEncodedText PropFailOnUnsupportedField = System.Text.Json.JsonEncodedText.Encode("fail_on_unsupported_field");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropLike = System.Text.Json.JsonEncodedText.Encode("like");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocFreq = System.Text.Json.JsonEncodedText.Encode("max_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxQueryTerms = System.Text.Json.JsonEncodedText.Encode("max_query_terms");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWordLength = System.Text.Json.JsonEncodedText.Encode("max_word_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropMinTermFreq = System.Text.Json.JsonEncodedText.Encode("min_term_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropStopWords = System.Text.Json.JsonEncodedText.Encode("stop_words");
-	private static readonly System.Text.Json.JsonEncodedText PropUnlike = System.Text.Json.JsonEncodedText.Encode("unlike");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoostTerms = System.Text.Json.JsonEncodedText.Encode("boost_terms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailOnUnsupportedField = System.Text.Json.JsonEncodedText.Encode("fail_on_unsupported_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLike = System.Text.Json.JsonEncodedText.Encode("like"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocFreq = System.Text.Json.JsonEncodedText.Encode("max_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxQueryTerms = System.Text.Json.JsonEncodedText.Encode("max_query_terms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWordLength = System.Text.Json.JsonEncodedText.Encode("max_word_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinTermFreq = System.Text.Json.JsonEncodedText.Encode("min_term_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStopWords = System.Text.Json.JsonEncodedText.Encode("stop_words"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnlike = System.Text.Json.JsonEncodedText.Encode("unlike"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

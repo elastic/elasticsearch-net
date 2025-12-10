@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class StoreStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.StoreStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropReserved = System.Text.Json.JsonEncodedText.Encode("reserved");
-	private static readonly System.Text.Json.JsonEncodedText PropReservedInBytes = System.Text.Json.JsonEncodedText.Encode("reserved_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSize = System.Text.Json.JsonEncodedText.Encode("total_data_set_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_data_set_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropReserved = System.Text.Json.JsonEncodedText.Encode("reserved"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReservedInBytes = System.Text.Json.JsonEncodedText.Encode("reserved_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSize = System.Text.Json.JsonEncodedText.Encode("total_data_set_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDataSetSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_data_set_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.StoreStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

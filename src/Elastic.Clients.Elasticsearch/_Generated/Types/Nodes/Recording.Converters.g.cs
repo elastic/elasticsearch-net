@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class RecordingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Recording>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionCount = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTime = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTimeMillis = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionCount = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTime = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTimeMillis = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Recording Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

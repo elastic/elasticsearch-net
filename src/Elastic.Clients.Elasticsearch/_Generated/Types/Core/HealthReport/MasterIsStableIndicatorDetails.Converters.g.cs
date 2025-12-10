@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class MasterIsStableIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterFormation = System.Text.Json.JsonEncodedText.Encode("cluster_formation");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentMaster = System.Text.Json.JsonEncodedText.Encode("current_master");
-	private static readonly System.Text.Json.JsonEncodedText PropExceptionFetchingHistory = System.Text.Json.JsonEncodedText.Encode("exception_fetching_history");
-	private static readonly System.Text.Json.JsonEncodedText PropRecentMasters = System.Text.Json.JsonEncodedText.Encode("recent_masters");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterFormation = System.Text.Json.JsonEncodedText.Encode("cluster_formation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentMaster = System.Text.Json.JsonEncodedText.Encode("current_master"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExceptionFetchingHistory = System.Text.Json.JsonEncodedText.Encode("exception_fetching_history"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecentMasters = System.Text.Json.JsonEncodedText.Encode("recent_masters"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

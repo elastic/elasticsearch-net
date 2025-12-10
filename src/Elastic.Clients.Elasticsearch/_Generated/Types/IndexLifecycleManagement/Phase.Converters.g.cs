@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class PhaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
-	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age");
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

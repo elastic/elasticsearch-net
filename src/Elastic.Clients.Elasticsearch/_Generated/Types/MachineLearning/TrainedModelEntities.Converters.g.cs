@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelEntitiesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
-	private static readonly System.Text.Json.JsonEncodedText PropClassProbability = System.Text.Json.JsonEncodedText.Encode("class_probability");
-	private static readonly System.Text.Json.JsonEncodedText PropEndPos = System.Text.Json.JsonEncodedText.Encode("end_pos");
-	private static readonly System.Text.Json.JsonEncodedText PropEntity = System.Text.Json.JsonEncodedText.Encode("entity");
-	private static readonly System.Text.Json.JsonEncodedText PropStartPos = System.Text.Json.JsonEncodedText.Encode("start_pos");
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClassProbability = System.Text.Json.JsonEncodedText.Encode("class_probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEndPos = System.Text.Json.JsonEncodedText.Encode("end_pos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEntity = System.Text.Json.JsonEncodedText.Encode("entity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartPos = System.Text.Json.JsonEncodedText.Encode("start_pos"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

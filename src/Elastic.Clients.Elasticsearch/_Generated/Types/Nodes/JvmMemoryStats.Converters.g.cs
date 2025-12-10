@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class JvmMemoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHeapCommittedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_committed_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedPercent = System.Text.Json.JsonEncodedText.Encode("heap_used_percent");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapCommittedInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_committed_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_used_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPools = System.Text.Json.JsonEncodedText.Encode("pools");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapCommittedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_committed_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedPercent = System.Text.Json.JsonEncodedText.Encode("heap_used_percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapCommittedInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_committed_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPools = System.Text.Json.JsonEncodedText.Encode("pools"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

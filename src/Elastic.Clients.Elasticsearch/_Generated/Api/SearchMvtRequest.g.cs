@@ -205,7 +205,14 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Field containing geospatial data to return
+	/// A field that contains the geospatial data to return.
+	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
+	/// The field must have doc values enabled. It cannot be a nested field.
+	/// </para>
+	/// <para>
+	/// NOTE: Vector tiles do not natively support geometry collections.
+	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
+	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
 	public
@@ -216,7 +223,10 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, or aliases to search
+	/// A list of indices, data streams, or aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
 	/// </para>
 	/// </summary>
 	public
@@ -227,7 +237,7 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// X coordinate for the vector tile to search
+	/// The X coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public
@@ -238,7 +248,7 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Y coordinate for the vector tile to search
+	/// The Y coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public
@@ -249,7 +259,7 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Zoom level for the vector tile to search
+	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
 	/// </para>
 	/// </summary>
 	public
@@ -646,7 +656,14 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing geospatial data to return
+	/// A field that contains the geospatial data to return.
+	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
+	/// The field must have doc values enabled. It cannot be a nested field.
+	/// </para>
+	/// <para>
+	/// NOTE: Vector tiles do not natively support geometry collections.
+	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
+	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
@@ -657,7 +674,14 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing geospatial data to return
+	/// A field that contains the geospatial data to return.
+	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
+	/// The field must have doc values enabled. It cannot be a nested field.
+	/// </para>
+	/// <para>
+	/// NOTE: Vector tiles do not natively support geometry collections.
+	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
+	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
@@ -668,7 +692,10 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, or aliases to search
+	/// A list of indices, data streams, or aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -679,7 +706,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// X coordinate for the vector tile to search
+	/// The X coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor X(int value)
@@ -690,7 +717,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Y coordinate for the vector tile to search
+	/// The Y coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Y(int value)
@@ -701,7 +728,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Zoom level for the vector tile to search
+	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Zoom(int value)
@@ -1640,7 +1667,14 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing geospatial data to return
+	/// A field that contains the geospatial data to return.
+	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
+	/// The field must have doc values enabled. It cannot be a nested field.
+	/// </para>
+	/// <para>
+	/// NOTE: Vector tiles do not natively support geometry collections.
+	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
+	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
@@ -1651,7 +1685,14 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing geospatial data to return
+	/// A field that contains the geospatial data to return.
+	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
+	/// The field must have doc values enabled. It cannot be a nested field.
+	/// </para>
+	/// <para>
+	/// NOTE: Vector tiles do not natively support geometry collections.
+	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
+	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
@@ -1662,7 +1703,10 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, or aliases to search
+	/// A list of indices, data streams, or aliases to search.
+	/// It supports wildcards (<c>*</c>).
+	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -1673,7 +1717,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// X coordinate for the vector tile to search
+	/// The X coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> X(int value)
@@ -1684,7 +1728,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Y coordinate for the vector tile to search
+	/// The Y coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Y(int value)
@@ -1695,7 +1739,7 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Zoom level for the vector tile to search
+	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Zoom(int value)

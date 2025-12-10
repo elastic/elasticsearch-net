@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ClusterStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ClusterStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
-	private static readonly System.Text.Json.JsonEncodedText PropRunning = System.Text.Json.JsonEncodedText.Encode("running");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunning = System.Text.Json.JsonEncodedText.Encode("running"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessful = System.Text.Json.JsonEncodedText.Encode("successful"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.ClusterStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

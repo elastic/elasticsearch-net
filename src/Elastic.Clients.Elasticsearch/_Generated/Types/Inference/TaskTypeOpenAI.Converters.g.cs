@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class TaskTypeOpenAIConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
-	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
-	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

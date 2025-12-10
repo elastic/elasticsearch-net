@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GlobalOrdinalsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GlobalOrdinalsStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTime = System.Text.Json.JsonEncodedText.Encode("build_time");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTimeInMillis = System.Text.Json.JsonEncodedText.Encode("build_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildTime = System.Text.Json.JsonEncodedText.Encode("build_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildTimeInMillis = System.Text.Json.JsonEncodedText.Encode("build_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
 
 	public override Elastic.Clients.Elasticsearch.GlobalOrdinalsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

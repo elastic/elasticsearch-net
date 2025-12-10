@@ -43,7 +43,7 @@ public sealed partial class ComponentTemplateSummary
 	}
 
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? DataStreamOptions { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? DataStreamOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
@@ -127,7 +127,7 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? value)
 	{
 		Instance.DataStreamOptions = value;
 		return this;
@@ -135,13 +135,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions()
 	{
-		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor>? action)
 	{
-		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor.Build(action);
 		return this;
 	}
 
@@ -372,7 +372,7 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? value)
 	{
 		Instance.DataStreamOptions = value;
 		return this;
@@ -380,13 +380,13 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions()
 	{
-		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor>? action)
 	{
-		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor.Build(action);
 		return this;
 	}
 

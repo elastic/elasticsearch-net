@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class EqlFeaturesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeatures>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEvent = System.Text.Json.JsonEncodedText.Encode("event");
-	private static readonly System.Text.Json.JsonEncodedText PropJoin = System.Text.Json.JsonEncodedText.Encode("join");
-	private static readonly System.Text.Json.JsonEncodedText PropJoins = System.Text.Json.JsonEncodedText.Encode("joins");
-	private static readonly System.Text.Json.JsonEncodedText PropKeys = System.Text.Json.JsonEncodedText.Encode("keys");
-	private static readonly System.Text.Json.JsonEncodedText PropPipes = System.Text.Json.JsonEncodedText.Encode("pipes");
-	private static readonly System.Text.Json.JsonEncodedText PropSequence = System.Text.Json.JsonEncodedText.Encode("sequence");
-	private static readonly System.Text.Json.JsonEncodedText PropSequences = System.Text.Json.JsonEncodedText.Encode("sequences");
+	private static readonly System.Text.Json.JsonEncodedText PropEvent = System.Text.Json.JsonEncodedText.Encode("event"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoin = System.Text.Json.JsonEncodedText.Encode("join"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoins = System.Text.Json.JsonEncodedText.Encode("joins"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeys = System.Text.Json.JsonEncodedText.Encode("keys"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipes = System.Text.Json.JsonEncodedText.Encode("pipes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSequence = System.Text.Json.JsonEncodedText.Encode("sequence"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSequences = System.Text.Json.JsonEncodedText.Encode("sequences"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeatures Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

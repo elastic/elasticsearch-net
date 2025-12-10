@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAttr = System.Text.Json.JsonEncodedText.Encode("attr");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxLocalStorageNodes = System.Text.Json.JsonEncodedText.Encode("max_local_storage_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropAttr = System.Text.Json.JsonEncodedText.Encode("attr"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxLocalStorageNodes = System.Text.Json.JsonEncodedText.Encode("max_local_storage_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id");
-	private static readonly System.Text.Json.JsonEncodedText PropLongDocumentStrategy = System.Text.Json.JsonEncodedText.Encode("long_document_strategy");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxChunksPerDoc = System.Text.Json.JsonEncodedText.Encode("max_chunks_per_doc");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLongDocumentStrategy = System.Text.Json.JsonEncodedText.Encode("long_document_strategy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChunksPerDoc = System.Text.Json.JsonEncodedText.Encode("max_chunks_per_doc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

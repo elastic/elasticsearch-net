@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Simulate.Json;
 
 public sealed partial class MergeTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.MergeType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText MemberTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTemplate = System.Text.Json.JsonEncodedText.Encode("template"u8);
 
 	public override Elastic.Clients.Elasticsearch.Simulate.MergeType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

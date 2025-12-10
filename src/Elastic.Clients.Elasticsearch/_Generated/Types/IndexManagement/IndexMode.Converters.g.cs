@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb");
-	private static readonly System.Text.Json.JsonEncodedText MemberLookup = System.Text.Json.JsonEncodedText.Encode("lookup");
-	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard");
-	private static readonly System.Text.Json.JsonEncodedText MemberTimeSeries = System.Text.Json.JsonEncodedText.Encode("time_series");
+	private static readonly System.Text.Json.JsonEncodedText MemberLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLookup = System.Text.Json.JsonEncodedText.Encode("lookup"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStandard = System.Text.Json.JsonEncodedText.Encode("standard"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTimeSeries = System.Text.Json.JsonEncodedText.Encode("time_series"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

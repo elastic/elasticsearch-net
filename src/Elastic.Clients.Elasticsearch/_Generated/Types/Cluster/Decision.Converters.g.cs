@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class DecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.Decision>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAllocationDelayed = System.Text.Json.JsonEncodedText.Encode("allocation_delayed");
-	private static readonly System.Text.Json.JsonEncodedText MemberAwaitingInfo = System.Text.Json.JsonEncodedText.Encode("awaiting_info");
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
-	private static readonly System.Text.Json.JsonEncodedText MemberNoAttempt = System.Text.Json.JsonEncodedText.Encode("no_attempt");
-	private static readonly System.Text.Json.JsonEncodedText MemberNoValidShardCopy = System.Text.Json.JsonEncodedText.Encode("no_valid_shard_copy");
-	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
-	private static readonly System.Text.Json.JsonEncodedText MemberWorseBalance = System.Text.Json.JsonEncodedText.Encode("worse_balance");
-	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationDelayed = System.Text.Json.JsonEncodedText.Encode("allocation_delayed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAwaitingInfo = System.Text.Json.JsonEncodedText.Encode("awaiting_info"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNoAttempt = System.Text.Json.JsonEncodedText.Encode("no_attempt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNoValidShardCopy = System.Text.Json.JsonEncodedText.Encode("no_valid_shard_copy"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottled = System.Text.Json.JsonEncodedText.Encode("throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWorseBalance = System.Text.Json.JsonEncodedText.Encode("worse_balance"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.Decision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

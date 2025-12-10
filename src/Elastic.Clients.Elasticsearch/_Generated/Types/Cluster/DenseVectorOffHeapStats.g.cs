@@ -27,8 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class DenseVectorOffHeapStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DenseVectorOffHeapStats(long totalSizeBytes, long totalVebSizeBytes, long totalVecSizeBytes, long totalVeqSizeBytes, long totalVexSizeBytes)
+	public DenseVectorOffHeapStats(long totalCenifSizeBytes, long totalClivfSizeBytes, long totalSizeBytes, long totalVebSizeBytes, long totalVecSizeBytes, long totalVeqSizeBytes, long totalVexSizeBytes)
 	{
+		TotalCenifSizeBytes = totalCenifSizeBytes;
+		TotalClivfSizeBytes = totalClivfSizeBytes;
 		TotalSizeBytes = totalSizeBytes;
 		TotalVebSizeBytes = totalVebSizeBytes;
 		TotalVecSizeBytes = totalVecSizeBytes;
@@ -53,6 +55,18 @@ public sealed partial class DenseVectorOffHeapStats
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? Fielddata { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalCenifSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalCenifSizeBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalClivfSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalClivfSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
 	public
 #if NET7_0_OR_GREATER

@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class RequestCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RequestCounts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGetBlob = System.Text.Json.JsonEncodedText.Encode("GetBlob");
-	private static readonly System.Text.Json.JsonEncodedText PropGetBlobProperties = System.Text.Json.JsonEncodedText.Encode("GetBlobProperties");
-	private static readonly System.Text.Json.JsonEncodedText PropGetObject = System.Text.Json.JsonEncodedText.Encode("GetObject");
-	private static readonly System.Text.Json.JsonEncodedText PropInsertObject = System.Text.Json.JsonEncodedText.Encode("InsertObject");
-	private static readonly System.Text.Json.JsonEncodedText PropListBlobs = System.Text.Json.JsonEncodedText.Encode("ListBlobs");
-	private static readonly System.Text.Json.JsonEncodedText PropListObjects = System.Text.Json.JsonEncodedText.Encode("ListObjects");
-	private static readonly System.Text.Json.JsonEncodedText PropPutBlob = System.Text.Json.JsonEncodedText.Encode("PutBlob");
-	private static readonly System.Text.Json.JsonEncodedText PropPutBlock = System.Text.Json.JsonEncodedText.Encode("PutBlock");
-	private static readonly System.Text.Json.JsonEncodedText PropPutBlockList = System.Text.Json.JsonEncodedText.Encode("PutBlockList");
-	private static readonly System.Text.Json.JsonEncodedText PropPutMultipartObject = System.Text.Json.JsonEncodedText.Encode("PutMultipartObject");
-	private static readonly System.Text.Json.JsonEncodedText PropPutObject = System.Text.Json.JsonEncodedText.Encode("PutObject");
+	private static readonly System.Text.Json.JsonEncodedText PropGetBlob = System.Text.Json.JsonEncodedText.Encode("GetBlob"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGetBlobProperties = System.Text.Json.JsonEncodedText.Encode("GetBlobProperties"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGetObject = System.Text.Json.JsonEncodedText.Encode("GetObject"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInsertObject = System.Text.Json.JsonEncodedText.Encode("InsertObject"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropListBlobs = System.Text.Json.JsonEncodedText.Encode("ListBlobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropListObjects = System.Text.Json.JsonEncodedText.Encode("ListObjects"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlob = System.Text.Json.JsonEncodedText.Encode("PutBlob"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlock = System.Text.Json.JsonEncodedText.Encode("PutBlock"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPutBlockList = System.Text.Json.JsonEncodedText.Encode("PutBlockList"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPutMultipartObject = System.Text.Json.JsonEncodedText.Encode("PutMultipartObject"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPutObject = System.Text.Json.JsonEncodedText.Encode("PutObject"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.RequestCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

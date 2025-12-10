@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class ProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Profile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.Profile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

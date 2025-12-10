@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class SamplerAggregationExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBytesHash = System.Text.Json.JsonEncodedText.Encode("bytes_hash");
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
-	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map");
+	private static readonly System.Text.Json.JsonEncodedText MemberBytesHash = System.Text.Json.JsonEncodedText.Encode("bytes_hash"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

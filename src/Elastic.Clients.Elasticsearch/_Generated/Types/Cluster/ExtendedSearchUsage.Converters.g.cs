@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ExtendedSearchUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
+	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

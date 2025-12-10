@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class IndexingJobStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.IndexingJobState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAborting = System.Text.Json.JsonEncodedText.Encode("aborting");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping");
+	private static readonly System.Text.Json.JsonEncodedText MemberAborting = System.Text.Json.JsonEncodedText.Encode("aborting"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStopping = System.Text.Json.JsonEncodedText.Encode("stopping"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.IndexingJobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

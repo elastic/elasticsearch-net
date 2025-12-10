@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class TemplateFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.TemplateFormat>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json");
-	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
+	private static readonly System.Text.Json.JsonEncodedText MemberJson = System.Text.Json.JsonEncodedText.Encode("json"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.TemplateFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

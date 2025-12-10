@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
-	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
-	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

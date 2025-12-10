@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class KuromojiReadingFormTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUseRomaji = System.Text.Json.JsonEncodedText.Encode("use_romaji");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUseRomaji = System.Text.Json.JsonEncodedText.Encode("use_romaji"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

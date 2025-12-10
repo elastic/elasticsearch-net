@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class HitsMetadataConverter<T> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<T>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxScore = System.Text.Json.JsonEncodedText.Encode("max_score");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxScore = System.Text.Json.JsonEncodedText.Encode("max_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<T> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

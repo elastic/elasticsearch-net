@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuCollationCaseFirstConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLower = System.Text.Json.JsonEncodedText.Encode("lower");
-	private static readonly System.Text.Json.JsonEncodedText MemberUpper = System.Text.Json.JsonEncodedText.Encode("upper");
+	private static readonly System.Text.Json.JsonEncodedText MemberLower = System.Text.Json.JsonEncodedText.Encode("lower"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUpper = System.Text.Json.JsonEncodedText.Encode("upper"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

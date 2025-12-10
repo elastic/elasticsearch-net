@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Sql.Json;
 
 public sealed partial class QueryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.QueryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropColumns = System.Text.Json.JsonEncodedText.Encode("columns");
-	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
-	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
-	private static readonly System.Text.Json.JsonEncodedText PropRows = System.Text.Json.JsonEncodedText.Encode("rows");
+	private static readonly System.Text.Json.JsonEncodedText PropColumns = System.Text.Json.JsonEncodedText.Encode("columns"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRows = System.Text.Json.JsonEncodedText.Encode("rows"u8);
 
 	public override Elastic.Clients.Elasticsearch.Sql.QueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

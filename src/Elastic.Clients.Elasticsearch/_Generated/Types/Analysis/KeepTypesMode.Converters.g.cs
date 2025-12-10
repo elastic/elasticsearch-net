@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class KeepTypesModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class VerifyIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTime = System.Text.Json.JsonEncodedText.Encode("check_index_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("check_index_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTime = System.Text.Json.JsonEncodedText.Encode("check_index_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCheckIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("check_index_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

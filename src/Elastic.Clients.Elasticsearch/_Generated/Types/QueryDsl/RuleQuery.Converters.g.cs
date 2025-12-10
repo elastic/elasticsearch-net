@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class RuleQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
-	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRulesetIds = System.Text.Json.JsonEncodedText.Encode("ruleset_ids");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetIds = System.Text.Json.JsonEncodedText.Encode("ruleset_ids"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class CategorizationStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok");
-	private static readonly System.Text.Json.JsonEncodedText MemberWarn = System.Text.Json.JsonEncodedText.Encode("warn");
+	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWarn = System.Text.Json.JsonEncodedText.Encode("warn"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class FunctionScoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantExp = System.Text.Json.JsonEncodedText.Encode("exp");
 	private static readonly System.Text.Json.JsonEncodedText VariantFieldValueFactor = System.Text.Json.JsonEncodedText.Encode("field_value_factor");
 	private static readonly System.Text.Json.JsonEncodedText VariantGauss = System.Text.Json.JsonEncodedText.Encode("gauss");

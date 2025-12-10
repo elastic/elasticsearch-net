@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCore = System.Text.Json.JsonEncodedText.Encode("core");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropQueueSize = System.Text.Json.JsonEncodedText.Encode("queue_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCore = System.Text.Json.JsonEncodedText.Encode("core"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueueSize = System.Text.Json.JsonEncodedText.Encode("queue_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

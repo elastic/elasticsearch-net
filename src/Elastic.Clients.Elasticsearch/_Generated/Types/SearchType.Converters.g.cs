@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SearchTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDfsQueryThenFetch = System.Text.Json.JsonEncodedText.Encode("dfs_query_then_fetch");
-	private static readonly System.Text.Json.JsonEncodedText MemberQueryThenFetch = System.Text.Json.JsonEncodedText.Encode("query_then_fetch");
+	private static readonly System.Text.Json.JsonEncodedText MemberDfsQueryThenFetch = System.Text.Json.JsonEncodedText.Encode("dfs_query_then_fetch"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQueryThenFetch = System.Text.Json.JsonEncodedText.Encode("query_then_fetch"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuNormalizationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNfc = System.Text.Json.JsonEncodedText.Encode("nfc");
-	private static readonly System.Text.Json.JsonEncodedText MemberNfkc = System.Text.Json.JsonEncodedText.Encode("nfkc");
-	private static readonly System.Text.Json.JsonEncodedText MemberNfkcCf = System.Text.Json.JsonEncodedText.Encode("nfkc_cf");
+	private static readonly System.Text.Json.JsonEncodedText MemberNfc = System.Text.Json.JsonEncodedText.Encode("nfc"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkc = System.Text.Json.JsonEncodedText.Encode("nfkc"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNfkcCf = System.Text.Json.JsonEncodedText.Encode("nfkc_cf"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

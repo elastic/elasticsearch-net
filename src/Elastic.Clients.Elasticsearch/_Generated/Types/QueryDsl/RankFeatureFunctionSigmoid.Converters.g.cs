@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class RankFeatureFunctionSigmoidConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
-	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
+	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class UsageStatsShardsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsShards>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
-	private static readonly System.Text.Json.JsonEncodedText PropTrackingId = System.Text.Json.JsonEncodedText.Encode("tracking_id");
-	private static readonly System.Text.Json.JsonEncodedText PropTrackingStartedAtMillis = System.Text.Json.JsonEncodedText.Encode("tracking_started_at_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrackingId = System.Text.Json.JsonEncodedText.Encode("tracking_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrackingStartedAtMillis = System.Text.Json.JsonEncodedText.Encode("tracking_started_at_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsShards Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class AllocationStoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationStore>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id");
-	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
-	private static readonly System.Text.Json.JsonEncodedText PropInSync = System.Text.Json.JsonEncodedText.Encode("in_sync");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("matching_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchingSyncId = System.Text.Json.JsonEncodedText.Encode("matching_sync_id");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreException = System.Text.Json.JsonEncodedText.Encode("store_exception");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInSync = System.Text.Json.JsonEncodedText.Encode("in_sync"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("matching_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchingSyncId = System.Text.Json.JsonEncodedText.Encode("matching_sync_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreException = System.Text.Json.JsonEncodedText.Encode("store_exception"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.AllocationStore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

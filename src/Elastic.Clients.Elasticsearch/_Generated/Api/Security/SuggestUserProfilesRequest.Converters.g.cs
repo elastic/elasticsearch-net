@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SuggestUserProfilesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText PropHint = System.Text.Json.JsonEncodedText.Encode("hint");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHint = System.Text.Json.JsonEncodedText.Encode("hint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

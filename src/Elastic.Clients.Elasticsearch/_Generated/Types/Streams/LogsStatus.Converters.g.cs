@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Streams.Json;
 
 public sealed partial class LogsStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Streams.LogsStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.Streams.LogsStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,28 +25,28 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ModelSizeStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAssignmentMemoryBasis = System.Text.Json.JsonEncodedText.Encode("assignment_memory_basis");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketAllocationFailuresCount = System.Text.Json.JsonEncodedText.Encode("bucket_allocation_failures_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationStatus = System.Text.Json.JsonEncodedText.Encode("categorization_status");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizedDocCount = System.Text.Json.JsonEncodedText.Encode("categorized_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDeadCategoryCount = System.Text.Json.JsonEncodedText.Encode("dead_category_count");
-	private static readonly System.Text.Json.JsonEncodedText PropFailedCategoryCount = System.Text.Json.JsonEncodedText.Encode("failed_category_count");
-	private static readonly System.Text.Json.JsonEncodedText PropFrequentCategoryCount = System.Text.Json.JsonEncodedText.Encode("frequent_category_count");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropLogTime = System.Text.Json.JsonEncodedText.Encode("log_time");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryStatus = System.Text.Json.JsonEncodedText.Encode("memory_status");
-	private static readonly System.Text.Json.JsonEncodedText PropModelBytes = System.Text.Json.JsonEncodedText.Encode("model_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropModelBytesExceeded = System.Text.Json.JsonEncodedText.Encode("model_bytes_exceeded");
-	private static readonly System.Text.Json.JsonEncodedText PropModelBytesMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_bytes_memory_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropOutputMemoryAllocatorBytes = System.Text.Json.JsonEncodedText.Encode("output_memory_allocator_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakModelBytes = System.Text.Json.JsonEncodedText.Encode("peak_model_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRareCategoryCount = System.Text.Json.JsonEncodedText.Encode("rare_category_count");
-	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalByFieldCount = System.Text.Json.JsonEncodedText.Encode("total_by_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCategoryCount = System.Text.Json.JsonEncodedText.Encode("total_category_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalOverFieldCount = System.Text.Json.JsonEncodedText.Encode("total_over_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalPartitionFieldCount = System.Text.Json.JsonEncodedText.Encode("total_partition_field_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentMemoryBasis = System.Text.Json.JsonEncodedText.Encode("assignment_memory_basis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketAllocationFailuresCount = System.Text.Json.JsonEncodedText.Encode("bucket_allocation_failures_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationStatus = System.Text.Json.JsonEncodedText.Encode("categorization_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizedDocCount = System.Text.Json.JsonEncodedText.Encode("categorized_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeadCategoryCount = System.Text.Json.JsonEncodedText.Encode("dead_category_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailedCategoryCount = System.Text.Json.JsonEncodedText.Encode("failed_category_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrequentCategoryCount = System.Text.Json.JsonEncodedText.Encode("frequent_category_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogTime = System.Text.Json.JsonEncodedText.Encode("log_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryStatus = System.Text.Json.JsonEncodedText.Encode("memory_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelBytes = System.Text.Json.JsonEncodedText.Encode("model_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelBytesExceeded = System.Text.Json.JsonEncodedText.Encode("model_bytes_exceeded"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelBytesMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_bytes_memory_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutputMemoryAllocatorBytes = System.Text.Json.JsonEncodedText.Encode("output_memory_allocator_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakModelBytes = System.Text.Json.JsonEncodedText.Encode("peak_model_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRareCategoryCount = System.Text.Json.JsonEncodedText.Encode("rare_category_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalByFieldCount = System.Text.Json.JsonEncodedText.Encode("total_by_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCategoryCount = System.Text.Json.JsonEncodedText.Encode("total_category_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOverFieldCount = System.Text.Json.JsonEncodedText.Encode("total_over_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalPartitionFieldCount = System.Text.Json.JsonEncodedText.Encode("total_partition_field_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

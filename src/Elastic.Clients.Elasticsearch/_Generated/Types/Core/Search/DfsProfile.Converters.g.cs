@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class DfsProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsProfile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn");
-	private static readonly System.Text.Json.JsonEncodedText PropStatistics = System.Text.Json.JsonEncodedText.Encode("statistics");
+	private static readonly System.Text.Json.JsonEncodedText PropKnn = System.Text.Json.JsonEncodedText.Encode("knn"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatistics = System.Text.Json.JsonEncodedText.Encode("statistics"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.DfsProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

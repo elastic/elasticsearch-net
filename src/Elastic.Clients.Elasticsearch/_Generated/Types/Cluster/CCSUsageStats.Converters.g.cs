@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class CCSUsageStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClients = System.Text.Json.JsonEncodedText.Encode("clients");
-	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("clusters");
-	private static readonly System.Text.Json.JsonEncodedText PropFailureReasons = System.Text.Json.JsonEncodedText.Encode("failure_reasons");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-	private static readonly System.Text.Json.JsonEncodedText PropRemotesPerSearchAvg = System.Text.Json.JsonEncodedText.Encode("remotes_per_search_avg");
-	private static readonly System.Text.Json.JsonEncodedText PropRemotesPerSearchMax = System.Text.Json.JsonEncodedText.Encode("remotes_per_search_max");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccess = System.Text.Json.JsonEncodedText.Encode("success");
-	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
-	private static readonly System.Text.Json.JsonEncodedText PropTookMrtFalse = System.Text.Json.JsonEncodedText.Encode("took_mrt_false");
-	private static readonly System.Text.Json.JsonEncodedText PropTookMrtTrue = System.Text.Json.JsonEncodedText.Encode("took_mrt_true");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropClients = System.Text.Json.JsonEncodedText.Encode("clients"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("clusters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailureReasons = System.Text.Json.JsonEncodedText.Encode("failure_reasons"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemotesPerSearchAvg = System.Text.Json.JsonEncodedText.Encode("remotes_per_search_avg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemotesPerSearchMax = System.Text.Json.JsonEncodedText.Encode("remotes_per_search_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipped = System.Text.Json.JsonEncodedText.Encode("skipped"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuccess = System.Text.Json.JsonEncodedText.Encode("success"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTookMrtFalse = System.Text.Json.JsonEncodedText.Encode("took_mrt_false"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTookMrtTrue = System.Text.Json.JsonEncodedText.Encode("took_mrt_true"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

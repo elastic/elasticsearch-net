@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class LinearRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LinearRetriever>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers"u8);
 
 	public override Elastic.Clients.Elasticsearch.LinearRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

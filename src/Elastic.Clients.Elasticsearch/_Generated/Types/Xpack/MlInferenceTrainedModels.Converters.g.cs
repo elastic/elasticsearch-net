@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlInferenceTrainedModelsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropEstimatedHeapMemoryUsageBytes = System.Text.Json.JsonEncodedText.Encode("estimated_heap_memory_usage_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropEstimatedOperations = System.Text.Json.JsonEncodedText.Encode("estimated_operations");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedHeapMemoryUsageBytes = System.Text.Json.JsonEncodedText.Encode("estimated_heap_memory_usage_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedOperations = System.Text.Json.JsonEncodedText.Encode("estimated_operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

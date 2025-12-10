@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SlowlogTresholdsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFetch = System.Text.Json.JsonEncodedText.Encode("fetch");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropFetch = System.Text.Json.JsonEncodedText.Encode("fetch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

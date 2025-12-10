@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class OperatingSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.OperatingSystem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCgroup = System.Text.Json.JsonEncodedText.Encode("cgroup");
-	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropCgroup = System.Text.Json.JsonEncodedText.Encode("cgroup"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.OperatingSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

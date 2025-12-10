@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class ShardProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropDfs = System.Text.Json.JsonEncodedText.Encode("dfs");
-	private static readonly System.Text.Json.JsonEncodedText PropFetch = System.Text.Json.JsonEncodedText.Encode("fetch");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
-	private static readonly System.Text.Json.JsonEncodedText PropSearches = System.Text.Json.JsonEncodedText.Encode("searches");
-	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDfs = System.Text.Json.JsonEncodedText.Encode("dfs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetch = System.Text.Json.JsonEncodedText.Encode("fetch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearches = System.Text.Json.JsonEncodedText.Encode("searches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.ShardProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

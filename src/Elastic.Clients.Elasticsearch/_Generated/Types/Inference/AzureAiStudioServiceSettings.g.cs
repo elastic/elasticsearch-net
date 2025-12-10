@@ -91,7 +91,7 @@ public sealed partial class AzureAiStudioServiceSettings
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c> and <c>completion</c> task types
+	/// <c>cohere</c> - available for <c>text_embedding</c>, <c>rerank</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
@@ -207,7 +207,7 @@ public readonly partial struct AzureAiStudioServiceSettingsDescriptor
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c> and <c>completion</c> task types
+	/// <c>cohere</c> - available for <c>text_embedding</c>, <c>rerank</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>

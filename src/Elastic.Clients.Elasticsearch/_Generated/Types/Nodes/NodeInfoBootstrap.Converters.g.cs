@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoBootstrapConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryLock = System.Text.Json.JsonEncodedText.Encode("memory_lock");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryLock = System.Text.Json.JsonEncodedText.Encode("memory_lock"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

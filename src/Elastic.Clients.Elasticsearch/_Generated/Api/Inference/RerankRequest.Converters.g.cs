@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class RerankRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.RerankRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.RerankRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

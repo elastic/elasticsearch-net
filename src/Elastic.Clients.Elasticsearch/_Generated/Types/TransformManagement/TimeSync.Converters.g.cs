@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TimeSyncConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TimeSync Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

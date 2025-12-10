@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class LlamaSimilarityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine");
-	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product");
-	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
+	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

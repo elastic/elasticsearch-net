@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Graph.Json;
 
 public sealed partial class ExploreRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.ExploreRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConnections = System.Text.Json.JsonEncodedText.Encode("connections");
-	private static readonly System.Text.Json.JsonEncodedText PropControls = System.Text.Json.JsonEncodedText.Encode("controls");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropVertices = System.Text.Json.JsonEncodedText.Encode("vertices");
+	private static readonly System.Text.Json.JsonEncodedText PropConnections = System.Text.Json.JsonEncodedText.Encode("connections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropControls = System.Text.Json.JsonEncodedText.Encode("controls"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVertices = System.Text.Json.JsonEncodedText.Encode("vertices"u8);
 
 	public override Elastic.Clients.Elasticsearch.Graph.ExploreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

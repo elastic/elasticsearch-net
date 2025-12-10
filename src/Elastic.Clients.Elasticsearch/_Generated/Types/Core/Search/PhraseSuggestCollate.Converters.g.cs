@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class PhraseSuggestCollateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

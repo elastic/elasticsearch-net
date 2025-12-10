@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class BucketSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyScore = System.Text.Json.JsonEncodedText.Encode("anomaly_score");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketInfluencers = System.Text.Json.JsonEncodedText.Encode("bucket_influencers");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
-	private static readonly System.Text.Json.JsonEncodedText PropEventCount = System.Text.Json.JsonEncodedText.Encode("event_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialAnomalyScore = System.Text.Json.JsonEncodedText.Encode("initial_anomaly_score");
-	private static readonly System.Text.Json.JsonEncodedText PropIsInterim = System.Text.Json.JsonEncodedText.Encode("is_interim");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestampString = System.Text.Json.JsonEncodedText.Encode("timestamp_string");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyScore = System.Text.Json.JsonEncodedText.Encode("anomaly_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketInfluencers = System.Text.Json.JsonEncodedText.Encode("bucket_influencers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEventCount = System.Text.Json.JsonEncodedText.Encode("event_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitialAnomalyScore = System.Text.Json.JsonEncodedText.Encode("initial_anomaly_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsInterim = System.Text.Json.JsonEncodedText.Encode("is_interim"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampString = System.Text.Json.JsonEncodedText.Encode("timestamp_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.BucketSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

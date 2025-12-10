@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class PValueHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizeAbove = System.Text.Json.JsonEncodedText.Encode("normalize_above");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundIsSuperset = System.Text.Json.JsonEncodedText.Encode("background_is_superset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizeAbove = System.Text.Json.JsonEncodedText.Encode("normalize_above"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

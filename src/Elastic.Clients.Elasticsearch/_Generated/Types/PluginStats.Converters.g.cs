@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class PluginStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.PluginStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassname = System.Text.Json.JsonEncodedText.Encode("classname");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropElasticsearchVersion = System.Text.Json.JsonEncodedText.Encode("elasticsearch_version");
-	private static readonly System.Text.Json.JsonEncodedText PropExtendedPlugins = System.Text.Json.JsonEncodedText.Encode("extended_plugins");
-	private static readonly System.Text.Json.JsonEncodedText PropHasNativeController = System.Text.Json.JsonEncodedText.Encode("has_native_controller");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaVersion = System.Text.Json.JsonEncodedText.Encode("java_version");
-	private static readonly System.Text.Json.JsonEncodedText PropLicensed = System.Text.Json.JsonEncodedText.Encode("licensed");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropClassname = System.Text.Json.JsonEncodedText.Encode("classname"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropElasticsearchVersion = System.Text.Json.JsonEncodedText.Encode("elasticsearch_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExtendedPlugins = System.Text.Json.JsonEncodedText.Encode("extended_plugins"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasNativeController = System.Text.Json.JsonEncodedText.Encode("has_native_controller"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaVersion = System.Text.Json.JsonEncodedText.Encode("java_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLicensed = System.Text.Json.JsonEncodedText.Encode("licensed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.PluginStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Eql.Json;
 
 public sealed partial class ResultPositionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.ResultPosition>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberHead = System.Text.Json.JsonEncodedText.Encode("head");
-	private static readonly System.Text.Json.JsonEncodedText MemberTail = System.Text.Json.JsonEncodedText.Encode("tail");
+	private static readonly System.Text.Json.JsonEncodedText MemberHead = System.Text.Json.JsonEncodedText.Encode("head"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTail = System.Text.Json.JsonEncodedText.Encode("tail"u8);
 
 	public override Elastic.Clients.Elasticsearch.Eql.ResultPosition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

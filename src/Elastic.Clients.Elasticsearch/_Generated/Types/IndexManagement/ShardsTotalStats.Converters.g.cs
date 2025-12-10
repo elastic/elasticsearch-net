@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardsTotalStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

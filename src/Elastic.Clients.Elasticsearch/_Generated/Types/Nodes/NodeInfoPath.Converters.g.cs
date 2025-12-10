@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoPathConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText PropHome = System.Text.Json.JsonEncodedText.Encode("home");
-	private static readonly System.Text.Json.JsonEncodedText PropLogs = System.Text.Json.JsonEncodedText.Encode("logs");
-	private static readonly System.Text.Json.JsonEncodedText PropRepo = System.Text.Json.JsonEncodedText.Encode("repo");
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHome = System.Text.Json.JsonEncodedText.Encode("home"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogs = System.Text.Json.JsonEncodedText.Encode("logs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepo = System.Text.Json.JsonEncodedText.Encode("repo"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

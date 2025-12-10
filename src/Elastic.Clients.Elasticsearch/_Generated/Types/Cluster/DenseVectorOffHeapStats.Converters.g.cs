@@ -25,22 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSize = System.Text.Json.JsonEncodedText.Encode("total_veb_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veb_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSize = System.Text.Json.JsonEncodedText.Encode("total_vec_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vec_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSize = System.Text.Json.JsonEncodedText.Encode("total_veq_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veq_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSize = System.Text.Json.JsonEncodedText.Encode("total_vex_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vex_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCenifSize = System.Text.Json.JsonEncodedText.Encode("total_cenif_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCenifSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_cenif_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalClivfSize = System.Text.Json.JsonEncodedText.Encode("total_clivf_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalClivfSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_clivf_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSize = System.Text.Json.JsonEncodedText.Encode("total_veb_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veb_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSize = System.Text.Json.JsonEncodedText.Encode("total_vec_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vec_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSize = System.Text.Json.JsonEncodedText.Encode("total_veq_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veq_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSize = System.Text.Json.JsonEncodedText.Encode("total_vex_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vex_size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>?> propFielddata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalCenifSize = default;
+		LocalJsonValue<long> propTotalCenifSizeBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalClivfSize = default;
+		LocalJsonValue<long> propTotalClivfSizeBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
 		LocalJsonValue<long> propTotalSizeBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalVebSize = default;
@@ -54,6 +62,26 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, null, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!)))
+			{
+				continue;
+			}
+
+			if (propTotalCenifSize.TryReadProperty(ref reader, options, PropTotalCenifSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalCenifSizeBytes.TryReadProperty(ref reader, options, PropTotalCenifSizeBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalClivfSize.TryReadProperty(ref reader, options, PropTotalClivfSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalClivfSizeBytes.TryReadProperty(ref reader, options, PropTotalClivfSizeBytes, null))
 			{
 				continue;
 			}
@@ -121,6 +149,10 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 		return new Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Fielddata = propFielddata.Value,
+			TotalCenifSize = propTotalCenifSize.Value,
+			TotalCenifSizeBytes = propTotalCenifSizeBytes.Value,
+			TotalClivfSize = propTotalClivfSize.Value,
+			TotalClivfSizeBytes = propTotalClivfSizeBytes.Value,
 			TotalSize = propTotalSize.Value,
 			TotalSizeBytes = propTotalSizeBytes.Value,
 			TotalVebSize = propTotalVebSize.Value,
@@ -138,6 +170,10 @@ public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null)));
+		writer.WriteProperty(options, PropTotalCenifSize, value.TotalCenifSize, null, null);
+		writer.WriteProperty(options, PropTotalCenifSizeBytes, value.TotalCenifSizeBytes, null, null);
+		writer.WriteProperty(options, PropTotalClivfSize, value.TotalClivfSize, null, null);
+		writer.WriteProperty(options, PropTotalClivfSizeBytes, value.TotalClivfSizeBytes, null, null);
 		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
 		writer.WriteProperty(options, PropTotalSizeBytes, value.TotalSizeBytes, null, null);
 		writer.WriteProperty(options, PropTotalVebSize, value.TotalVebSize, null, null);

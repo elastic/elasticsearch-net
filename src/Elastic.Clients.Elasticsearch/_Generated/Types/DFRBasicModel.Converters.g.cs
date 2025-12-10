@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DFRBasicModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DFRBasicModel>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBe = System.Text.Json.JsonEncodedText.Encode("be");
-	private static readonly System.Text.Json.JsonEncodedText MemberD = System.Text.Json.JsonEncodedText.Encode("d");
-	private static readonly System.Text.Json.JsonEncodedText MemberG = System.Text.Json.JsonEncodedText.Encode("g");
-	private static readonly System.Text.Json.JsonEncodedText MemberIf = System.Text.Json.JsonEncodedText.Encode("if");
-	private static readonly System.Text.Json.JsonEncodedText MemberIn = System.Text.Json.JsonEncodedText.Encode("in");
-	private static readonly System.Text.Json.JsonEncodedText MemberIne = System.Text.Json.JsonEncodedText.Encode("ine");
-	private static readonly System.Text.Json.JsonEncodedText MemberP = System.Text.Json.JsonEncodedText.Encode("p");
+	private static readonly System.Text.Json.JsonEncodedText MemberBe = System.Text.Json.JsonEncodedText.Encode("be"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberD = System.Text.Json.JsonEncodedText.Encode("d"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberG = System.Text.Json.JsonEncodedText.Encode("g"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIf = System.Text.Json.JsonEncodedText.Encode("if"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIn = System.Text.Json.JsonEncodedText.Encode("in"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIne = System.Text.Json.JsonEncodedText.Encode("ine"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberP = System.Text.Json.JsonEncodedText.Encode("p"u8);
 
 	public override Elastic.Clients.Elasticsearch.DFRBasicModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

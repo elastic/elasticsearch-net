@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class CacheStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.CacheStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
-	private static readonly System.Text.Json.JsonEncodedText PropHitsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("hits_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropMisses = System.Text.Json.JsonEncodedText.Encode("misses");
-	private static readonly System.Text.Json.JsonEncodedText PropMissesTimeInMillis = System.Text.Json.JsonEncodedText.Encode("misses_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHitsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("hits_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMisses = System.Text.Json.JsonEncodedText.Encode("misses"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissesTimeInMillis = System.Text.Json.JsonEncodedText.Encode("misses_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.CacheStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

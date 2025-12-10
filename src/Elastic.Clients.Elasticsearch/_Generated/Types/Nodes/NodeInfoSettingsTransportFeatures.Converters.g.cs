@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsTransportFeaturesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropXPack = System.Text.Json.JsonEncodedText.Encode("x-pack");
+	private static readonly System.Text.Json.JsonEncodedText PropXPack = System.Text.Json.JsonEncodedText.Encode("x-pack"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

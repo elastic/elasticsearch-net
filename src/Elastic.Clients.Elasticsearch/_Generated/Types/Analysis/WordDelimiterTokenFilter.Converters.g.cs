@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class WordDelimiterTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCatenateAll = System.Text.Json.JsonEncodedText.Encode("catenate_all");
-	private static readonly System.Text.Json.JsonEncodedText PropCatenateNumbers = System.Text.Json.JsonEncodedText.Encode("catenate_numbers");
-	private static readonly System.Text.Json.JsonEncodedText PropCatenateWords = System.Text.Json.JsonEncodedText.Encode("catenate_words");
-	private static readonly System.Text.Json.JsonEncodedText PropGenerateNumberParts = System.Text.Json.JsonEncodedText.Encode("generate_number_parts");
-	private static readonly System.Text.Json.JsonEncodedText PropGenerateWordParts = System.Text.Json.JsonEncodedText.Encode("generate_word_parts");
-	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
-	private static readonly System.Text.Json.JsonEncodedText PropProtectedWords = System.Text.Json.JsonEncodedText.Encode("protected_words");
-	private static readonly System.Text.Json.JsonEncodedText PropProtectedWordsPath = System.Text.Json.JsonEncodedText.Encode("protected_words_path");
-	private static readonly System.Text.Json.JsonEncodedText PropSplitOnCaseChange = System.Text.Json.JsonEncodedText.Encode("split_on_case_change");
-	private static readonly System.Text.Json.JsonEncodedText PropSplitOnNumerics = System.Text.Json.JsonEncodedText.Encode("split_on_numerics");
-	private static readonly System.Text.Json.JsonEncodedText PropStemEnglishPossessive = System.Text.Json.JsonEncodedText.Encode("stem_english_possessive");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropTypeTable = System.Text.Json.JsonEncodedText.Encode("type_table");
-	private static readonly System.Text.Json.JsonEncodedText PropTypeTablePath = System.Text.Json.JsonEncodedText.Encode("type_table_path");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateAll = System.Text.Json.JsonEncodedText.Encode("catenate_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateNumbers = System.Text.Json.JsonEncodedText.Encode("catenate_numbers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCatenateWords = System.Text.Json.JsonEncodedText.Encode("catenate_words"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGenerateNumberParts = System.Text.Json.JsonEncodedText.Encode("generate_number_parts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGenerateWordParts = System.Text.Json.JsonEncodedText.Encode("generate_word_parts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProtectedWords = System.Text.Json.JsonEncodedText.Encode("protected_words"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProtectedWordsPath = System.Text.Json.JsonEncodedText.Encode("protected_words_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSplitOnCaseChange = System.Text.Json.JsonEncodedText.Encode("split_on_case_change"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSplitOnNumerics = System.Text.Json.JsonEncodedText.Encode("split_on_numerics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStemEnglishPossessive = System.Text.Json.JsonEncodedText.Encode("stem_english_possessive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypeTable = System.Text.Json.JsonEncodedText.Encode("type_table"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypeTablePath = System.Text.Json.JsonEncodedText.Encode("type_table_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

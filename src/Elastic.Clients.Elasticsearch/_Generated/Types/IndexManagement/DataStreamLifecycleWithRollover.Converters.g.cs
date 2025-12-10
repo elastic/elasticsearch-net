@@ -25,16 +25,18 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamLifecycleWithRolloverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
-	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover");
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsamplingMethod = System.Text.Json.JsonEncodedText.Encode("downsampling_method"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>?> propDownsampling = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod?> propDownsamplingMethod = default;
 		LocalJsonValue<bool?> propEnabled = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions?> propRollover = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -44,7 +46,12 @@ public sealed partial class DataStreamLifecycleWithRolloverConverter : System.Te
 				continue;
 			}
 
-			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, null)))
+			{
+				continue;
+			}
+
+			if (propDownsamplingMethod.TryReadProperty(ref reader, options, PropDownsamplingMethod, static Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod>(o)))
 			{
 				continue;
 			}
@@ -73,6 +80,7 @@ public sealed partial class DataStreamLifecycleWithRolloverConverter : System.Te
 		{
 			DataRetention = propDataRetention.Value,
 			Downsampling = propDownsampling.Value,
+			DownsamplingMethod = propDownsamplingMethod.Value,
 			Enabled = propEnabled.Value,
 			Rollover = propRollover.Value
 		};
@@ -82,7 +90,8 @@ public sealed partial class DataStreamLifecycleWithRolloverConverter : System.Te
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
-		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, v, null));
+		writer.WriteProperty(options, PropDownsamplingMethod, value.DownsamplingMethod, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod>(o, v));
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRollover, value.Rollover, null, null);
 		writer.WriteEndObject();

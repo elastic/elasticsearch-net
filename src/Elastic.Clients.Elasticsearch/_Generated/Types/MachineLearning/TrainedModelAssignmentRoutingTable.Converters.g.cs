@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelAssignmentRoutingTableConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentAllocations = System.Text.Json.JsonEncodedText.Encode("current_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetAllocations = System.Text.Json.JsonEncodedText.Encode("target_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentAllocations = System.Text.Json.JsonEncodedText.Encode("current_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetAllocations = System.Text.Json.JsonEncodedText.Encode("target_allocations"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class DataStreamsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.DataStreams>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreams2 = System.Text.Json.JsonEncodedText.Encode("data_streams");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams2 = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.DataStreams Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

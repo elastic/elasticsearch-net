@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlDataFrameAnalyticsJobsMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

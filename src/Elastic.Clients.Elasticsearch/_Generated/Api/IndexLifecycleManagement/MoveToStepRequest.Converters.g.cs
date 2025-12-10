@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class MoveToStepRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentStep = System.Text.Json.JsonEncodedText.Encode("current_step");
-	private static readonly System.Text.Json.JsonEncodedText PropNextStep = System.Text.Json.JsonEncodedText.Encode("next_step");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentStep = System.Text.Json.JsonEncodedText.Encode("current_step"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextStep = System.Text.Json.JsonEncodedText.Encode("next_step"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

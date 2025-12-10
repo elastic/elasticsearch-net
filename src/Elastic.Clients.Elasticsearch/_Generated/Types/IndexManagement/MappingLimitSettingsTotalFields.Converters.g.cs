@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MappingLimitSettingsTotalFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreDynamicBeyondLimit = System.Text.Json.JsonEncodedText.Encode("ignore_dynamic_beyond_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreDynamicBeyondLimit = System.Text.Json.JsonEncodedText.Encode("ignore_dynamic_beyond_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

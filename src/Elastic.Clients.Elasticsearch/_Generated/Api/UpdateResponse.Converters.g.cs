@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
-	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
-	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
-	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
-	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version"u8);
 
 	public override Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

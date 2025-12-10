@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class AdaptiveSelectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvgQueueSize = System.Text.Json.JsonEncodedText.Encode("avg_queue_size");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTime = System.Text.Json.JsonEncodedText.Encode("avg_response_time");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_response_time_ns");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTime = System.Text.Json.JsonEncodedText.Encode("avg_service_time");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_service_time_ns");
-	private static readonly System.Text.Json.JsonEncodedText PropOutgoingSearches = System.Text.Json.JsonEncodedText.Encode("outgoing_searches");
-	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("rank");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgQueueSize = System.Text.Json.JsonEncodedText.Encode("avg_queue_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTime = System.Text.Json.JsonEncodedText.Encode("avg_response_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgResponseTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_response_time_ns"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTime = System.Text.Json.JsonEncodedText.Encode("avg_service_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgServiceTimeNs = System.Text.Json.JsonEncodedText.Encode("avg_service_time_ns"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutgoingSearches = System.Text.Json.JsonEncodedText.Encode("outgoing_searches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("rank"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

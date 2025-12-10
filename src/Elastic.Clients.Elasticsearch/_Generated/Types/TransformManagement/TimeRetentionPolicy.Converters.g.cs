@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TimeRetentionPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAge = System.Text.Json.JsonEncodedText.Encode("max_age");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAge = System.Text.Json.JsonEncodedText.Encode("max_age"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

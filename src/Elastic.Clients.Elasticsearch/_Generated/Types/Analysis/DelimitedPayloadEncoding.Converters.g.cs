@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class DelimitedPayloadEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
-	private static readonly System.Text.Json.JsonEncodedText MemberIdentity = System.Text.Json.JsonEncodedText.Encode("identity");
-	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentity = System.Text.Json.JsonEncodedText.Encode("identity"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInteger = System.Text.Json.JsonEncodedText.Encode("int"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

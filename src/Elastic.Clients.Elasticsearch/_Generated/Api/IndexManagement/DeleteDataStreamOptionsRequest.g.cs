@@ -27,21 +27,21 @@ public sealed partial class DeleteDataStreamOptionsRequestParameters : Elastic.T
 {
 	/// <summary>
 	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// Whether wildcard expressions should get expanded to open or closed indices
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -83,7 +83,8 @@ public sealed partial class DeleteDataStreamOptionsRequest : Elastic.Clients.Ela
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of data streams of which the data stream options will be deleted; use <c>*</c> to get all data streams
+	/// A comma-separated list of data streams of which the data stream options will be deleted.
+	/// Use <c>*</c> to get all data streams
 	/// </para>
 	/// </summary>
 	public
@@ -94,21 +95,21 @@ public sealed partial class DeleteDataStreamOptionsRequest : Elastic.Clients.Ela
 
 	/// <summary>
 	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// Whether wildcard expressions should get expanded to open or closed indices
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -148,7 +149,8 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of data streams of which the data stream options will be deleted; use <c>*</c> to get all data streams
+	/// A comma-separated list of data streams of which the data stream options will be deleted.
+	/// Use <c>*</c> to get all data streams
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
@@ -159,7 +161,7 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// Whether wildcard expressions should get expanded to open or closed indices
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -170,7 +172,7 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether wildcard expressions should get expanded to open or closed indices (default: open)
+	/// Whether wildcard expressions should get expanded to open or closed indices
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -181,7 +183,7 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -192,7 +194,7 @@ public readonly partial struct DeleteDataStreamOptionsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)

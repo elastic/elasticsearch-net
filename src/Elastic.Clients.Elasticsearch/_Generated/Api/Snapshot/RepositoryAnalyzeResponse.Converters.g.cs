@@ -25,26 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class RepositoryAnalyzeResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBlobCount = System.Text.Json.JsonEncodedText.Encode("blob_count");
-	private static readonly System.Text.Json.JsonEncodedText PropBlobPath = System.Text.Json.JsonEncodedText.Encode("blob_path");
-	private static readonly System.Text.Json.JsonEncodedText PropConcurrency = System.Text.Json.JsonEncodedText.Encode("concurrency");
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsed = System.Text.Json.JsonEncodedText.Encode("delete_elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("delete_elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropEarlyReadNodeCount = System.Text.Json.JsonEncodedText.Encode("early_read_node_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIssuesDetected = System.Text.Json.JsonEncodedText.Encode("issues_detected");
-	private static readonly System.Text.Json.JsonEncodedText PropListingElapsed = System.Text.Json.JsonEncodedText.Encode("listing_elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropListingElapsedNanos = System.Text.Json.JsonEncodedText.Encode("listing_elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSize = System.Text.Json.JsonEncodedText.Encode("max_blob_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_blob_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSize = System.Text.Json.JsonEncodedText.Encode("max_total_data_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_total_data_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRareActionProbability = System.Text.Json.JsonEncodedText.Encode("rare_action_probability");
-	private static readonly System.Text.Json.JsonEncodedText PropReadNodeCount = System.Text.Json.JsonEncodedText.Encode("read_node_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
-	private static readonly System.Text.Json.JsonEncodedText PropSummary = System.Text.Json.JsonEncodedText.Encode("summary");
+	private static readonly System.Text.Json.JsonEncodedText PropBlobCount = System.Text.Json.JsonEncodedText.Encode("blob_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBlobPath = System.Text.Json.JsonEncodedText.Encode("blob_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConcurrency = System.Text.Json.JsonEncodedText.Encode("concurrency"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsed = System.Text.Json.JsonEncodedText.Encode("delete_elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("delete_elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEarlyReadNodeCount = System.Text.Json.JsonEncodedText.Encode("early_read_node_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIssuesDetected = System.Text.Json.JsonEncodedText.Encode("issues_detected"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropListingElapsed = System.Text.Json.JsonEncodedText.Encode("listing_elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropListingElapsedNanos = System.Text.Json.JsonEncodedText.Encode("listing_elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSize = System.Text.Json.JsonEncodedText.Encode("max_blob_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBlobSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_blob_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSize = System.Text.Json.JsonEncodedText.Encode("max_total_data_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTotalDataSizeBytes = System.Text.Json.JsonEncodedText.Encode("max_total_data_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRareActionProbability = System.Text.Json.JsonEncodedText.Encode("rare_action_probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadNodeCount = System.Text.Json.JsonEncodedText.Encode("read_node_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSummary = System.Text.Json.JsonEncodedText.Encode("summary"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

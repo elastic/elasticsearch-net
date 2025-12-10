@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PhoneticRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberApprox = System.Text.Json.JsonEncodedText.Encode("approx");
-	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
+	private static readonly System.Text.Json.JsonEncodedText MemberApprox = System.Text.Json.JsonEncodedText.Encode("approx"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class CustomAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropPositionIncrementGap = System.Text.Json.JsonEncodedText.Encode("position_increment_gap");
-	private static readonly System.Text.Json.JsonEncodedText PropPositionOffsetGap = System.Text.Json.JsonEncodedText.Encode("position_offset_gap");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilter = System.Text.Json.JsonEncodedText.Encode("char_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositionIncrementGap = System.Text.Json.JsonEncodedText.Encode("position_increment_gap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositionOffsetGap = System.Text.Json.JsonEncodedText.Encode("position_offset_gap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.CustomAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

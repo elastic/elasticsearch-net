@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelConfigMetadataConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline");
-	private static readonly System.Text.Json.JsonEncodedText PropHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters");
-	private static readonly System.Text.Json.JsonEncodedText PropModelAliases = System.Text.Json.JsonEncodedText.Encode("model_aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelAliases = System.Text.Json.JsonEncodedText.Encode("model_aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

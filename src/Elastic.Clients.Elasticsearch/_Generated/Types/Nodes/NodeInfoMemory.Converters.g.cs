@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class SuggestSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
-	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrequency = System.Text.Json.JsonEncodedText.Encode("frequency"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.SuggestSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

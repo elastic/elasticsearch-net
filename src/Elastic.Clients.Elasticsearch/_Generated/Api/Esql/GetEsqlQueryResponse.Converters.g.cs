@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Esql.Json;
 
 public sealed partial class GetEsqlQueryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node");
-	private static readonly System.Text.Json.JsonEncodedText PropDataNodes = System.Text.Json.JsonEncodedText.Encode("data_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeNanos = System.Text.Json.JsonEncodedText.Encode("running_time_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataNodes = System.Text.Json.JsonEncodedText.Encode("data_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeNanos = System.Text.Json.JsonEncodedText.Encode("running_time_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

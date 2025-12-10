@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MergeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Merge>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropScheduler = System.Text.Json.JsonEncodedText.Encode("scheduler");
+	private static readonly System.Text.Json.JsonEncodedText PropScheduler = System.Text.Json.JsonEncodedText.Encode("scheduler"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Merge Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

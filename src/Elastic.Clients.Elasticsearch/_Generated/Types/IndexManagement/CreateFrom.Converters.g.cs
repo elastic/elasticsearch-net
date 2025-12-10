@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class CreateFromConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMappingsOverride = System.Text.Json.JsonEncodedText.Encode("mappings_override");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoveIndexBlocks = System.Text.Json.JsonEncodedText.Encode("remove_index_blocks");
-	private static readonly System.Text.Json.JsonEncodedText PropSettingsOverride = System.Text.Json.JsonEncodedText.Encode("settings_override");
+	private static readonly System.Text.Json.JsonEncodedText PropMappingsOverride = System.Text.Json.JsonEncodedText.Encode("mappings_override"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoveIndexBlocks = System.Text.Json.JsonEncodedText.Encode("remove_index_blocks"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettingsOverride = System.Text.Json.JsonEncodedText.Encode("settings_override"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

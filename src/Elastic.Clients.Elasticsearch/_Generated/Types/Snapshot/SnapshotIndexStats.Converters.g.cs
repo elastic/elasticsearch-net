@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SnapshotIndexStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsStats = System.Text.Json.JsonEncodedText.Encode("shards_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsStats = System.Text.Json.JsonEncodedText.Encode("shards_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

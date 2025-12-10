@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class InvocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotName = System.Text.Json.JsonEncodedText.Encode("snapshot_name");
-	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotName = System.Text.Json.JsonEncodedText.Encode("snapshot_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

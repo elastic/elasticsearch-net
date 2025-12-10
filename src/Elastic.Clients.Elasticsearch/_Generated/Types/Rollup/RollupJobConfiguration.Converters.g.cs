@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupJobConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron");
-	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPageSize = System.Text.Json.JsonEncodedText.Encode("page_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPageSize = System.Text.Json.JsonEncodedText.Encode("page_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

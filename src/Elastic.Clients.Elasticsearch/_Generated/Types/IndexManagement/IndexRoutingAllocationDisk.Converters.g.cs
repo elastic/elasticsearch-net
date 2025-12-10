@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexRoutingAllocationDiskConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropThresholdEnabled = System.Text.Json.JsonEncodedText.Encode("threshold_enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropThresholdEnabled = System.Text.Json.JsonEncodedText.Encode("threshold_enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

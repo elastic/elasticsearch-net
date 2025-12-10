@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class PutTrainedModelRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompressedDefinition = System.Text.Json.JsonEncodedText.Encode("compressed_definition");
-	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
-	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings");
-	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags");
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedDefinition = System.Text.Json.JsonEncodedText.Encode("compressed_definition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

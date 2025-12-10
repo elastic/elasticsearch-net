@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterProcessCpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

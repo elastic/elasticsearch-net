@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class ShingleTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFillerToken = System.Text.Json.JsonEncodedText.Encode("filler_token");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxShingleSize = System.Text.Json.JsonEncodedText.Encode("max_shingle_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMinShingleSize = System.Text.Json.JsonEncodedText.Encode("min_shingle_size");
-	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigrams = System.Text.Json.JsonEncodedText.Encode("output_unigrams");
-	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigramsIfNoShingles = System.Text.Json.JsonEncodedText.Encode("output_unigrams_if_no_shingles");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenSeparator = System.Text.Json.JsonEncodedText.Encode("token_separator");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropFillerToken = System.Text.Json.JsonEncodedText.Encode("filler_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShingleSize = System.Text.Json.JsonEncodedText.Encode("max_shingle_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinShingleSize = System.Text.Json.JsonEncodedText.Encode("min_shingle_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigrams = System.Text.Json.JsonEncodedText.Encode("output_unigrams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigramsIfNoShingles = System.Text.Json.JsonEncodedText.Encode("output_unigrams_if_no_shingles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenSeparator = System.Text.Json.JsonEncodedText.Encode("token_separator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

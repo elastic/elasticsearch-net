@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisFeatureProcessorMultiEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

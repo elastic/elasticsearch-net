@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.DanglingIndices.Json;
 
 public sealed partial class DanglingIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("creation_date_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeIds = System.Text.Json.JsonEncodedText.Encode("node_ids");
+	private static readonly System.Text.Json.JsonEncodedText PropCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("creation_date_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeIds = System.Text.Json.JsonEncodedText.Encode("node_ids"u8);
 
 	public override Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

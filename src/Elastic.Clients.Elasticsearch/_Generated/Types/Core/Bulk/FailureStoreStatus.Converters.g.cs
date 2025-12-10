@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk.Json;
 
 public sealed partial class FailureStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText MemberNotApplicableOrUnknown = System.Text.Json.JsonEncodedText.Encode("not_applicable_or_unknown");
-	private static readonly System.Text.Json.JsonEncodedText MemberNotEnabled = System.Text.Json.JsonEncodedText.Encode("not_enabled");
-	private static readonly System.Text.Json.JsonEncodedText MemberUsed = System.Text.Json.JsonEncodedText.Encode("used");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNotApplicableOrUnknown = System.Text.Json.JsonEncodedText.Encode("not_applicable_or_unknown"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNotEnabled = System.Text.Json.JsonEncodedText.Encode("not_enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUsed = System.Text.Json.JsonEncodedText.Encode("used"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

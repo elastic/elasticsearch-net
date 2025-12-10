@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class RoutingFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RoutingField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRequired = System.Text.Json.JsonEncodedText.Encode("required");
+	private static readonly System.Text.Json.JsonEncodedText PropRequired = System.Text.Json.JsonEncodedText.Encode("required"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.RoutingField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

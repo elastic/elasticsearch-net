@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApplicationPrivilegesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
-	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
-	private static readonly System.Text.Json.JsonEncodedText PropResources = System.Text.Json.JsonEncodedText.Encode("resources");
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResources = System.Text.Json.JsonEncodedText.Encode("resources"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

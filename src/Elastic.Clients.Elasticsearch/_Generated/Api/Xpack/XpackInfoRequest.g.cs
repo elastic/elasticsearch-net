@@ -27,7 +27,7 @@ public sealed partial class XpackInfoRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
-	/// If this param is used it must be set to true
+	/// If used, this otherwise ignored parameter must be set to true
 	/// </para>
 	/// </summary>
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
@@ -96,7 +96,7 @@ public sealed partial class XpackInfoRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// If this param is used it must be set to true
+	/// If used, this otherwise ignored parameter must be set to true
 	/// </para>
 	/// </summary>
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
@@ -157,7 +157,7 @@ public readonly partial struct XpackInfoRequestDescriptor
 	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	/// <summary>
 	/// <para>
-	/// If this param is used it must be set to true
+	/// If used, this otherwise ignored parameter must be set to true
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor AcceptEnterprise(bool? value = true)

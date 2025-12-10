@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MappingLimitSettingsFieldNameLengthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

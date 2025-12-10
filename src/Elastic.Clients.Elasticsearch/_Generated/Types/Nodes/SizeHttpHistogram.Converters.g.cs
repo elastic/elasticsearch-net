@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class SizeHttpHistogramConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropGeBytes = System.Text.Json.JsonEncodedText.Encode("ge_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropLtBytes = System.Text.Json.JsonEncodedText.Encode("lt_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGeBytes = System.Text.Json.JsonEncodedText.Encode("ge_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLtBytes = System.Text.Json.JsonEncodedText.Encode("lt_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

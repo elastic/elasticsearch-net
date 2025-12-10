@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class ExtendedStatsBucketAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropSigma = System.Text.Json.JsonEncodedText.Encode("sigma");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSigma = System.Text.Json.JsonEncodedText.Encode("sigma"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

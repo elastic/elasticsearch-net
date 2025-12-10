@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class PinnedQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantDocs = System.Text.Json.JsonEncodedText.Encode("docs");
 	private static readonly System.Text.Json.JsonEncodedText VariantIds = System.Text.Json.JsonEncodedText.Encode("ids");
 

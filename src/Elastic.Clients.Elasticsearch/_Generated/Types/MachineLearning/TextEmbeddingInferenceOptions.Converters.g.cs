@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TextEmbeddingInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingSize = System.Text.Json.JsonEncodedText.Encode("embedding_size");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
-	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
+	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingSize = System.Text.Json.JsonEncodedText.Encode("embedding_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DatafeedRunningStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRealTimeConfigured = System.Text.Json.JsonEncodedText.Encode("real_time_configured");
-	private static readonly System.Text.Json.JsonEncodedText PropRealTimeRunning = System.Text.Json.JsonEncodedText.Encode("real_time_running");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchInterval = System.Text.Json.JsonEncodedText.Encode("search_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropRealTimeConfigured = System.Text.Json.JsonEncodedText.Encode("real_time_configured"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealTimeRunning = System.Text.Json.JsonEncodedText.Encode("real_time_running"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchInterval = System.Text.Json.JsonEncodedText.Encode("search_interval"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedRunningState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

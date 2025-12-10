@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoRepositoriesUrlConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositoriesUrl>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowedUrls = System.Text.Json.JsonEncodedText.Encode("allowed_urls");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowedUrls = System.Text.Json.JsonEncodedText.Encode("allowed_urls"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositoriesUrl Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

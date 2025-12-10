@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class BuildInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.BuildInformation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDate = System.Text.Json.JsonEncodedText.Encode("date");
-	private static readonly System.Text.Json.JsonEncodedText PropHash = System.Text.Json.JsonEncodedText.Encode("hash");
+	private static readonly System.Text.Json.JsonEncodedText PropDate = System.Text.Json.JsonEncodedText.Encode("date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHash = System.Text.Json.JsonEncodedText.Encode("hash"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.BuildInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

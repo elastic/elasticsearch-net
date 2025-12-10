@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class NestedQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
-	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

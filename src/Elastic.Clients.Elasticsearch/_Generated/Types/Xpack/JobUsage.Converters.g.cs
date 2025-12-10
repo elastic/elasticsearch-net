@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class JobUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.JobUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropCreatedBy = System.Text.Json.JsonEncodedText.Encode("created_by");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropForecasts = System.Text.Json.JsonEncodedText.Encode("forecasts");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSize = System.Text.Json.JsonEncodedText.Encode("model_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedBy = System.Text.Json.JsonEncodedText.Encode("created_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForecasts = System.Text.Json.JsonEncodedText.Encode("forecasts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSize = System.Text.Json.JsonEncodedText.Encode("model_size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.JobUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

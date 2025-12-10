@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class CoordsGeoBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CoordsGeoBounds>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBottom = System.Text.Json.JsonEncodedText.Encode("bottom");
-	private static readonly System.Text.Json.JsonEncodedText PropLeft = System.Text.Json.JsonEncodedText.Encode("left");
-	private static readonly System.Text.Json.JsonEncodedText PropRight = System.Text.Json.JsonEncodedText.Encode("right");
-	private static readonly System.Text.Json.JsonEncodedText PropTop = System.Text.Json.JsonEncodedText.Encode("top");
+	private static readonly System.Text.Json.JsonEncodedText PropBottom = System.Text.Json.JsonEncodedText.Encode("bottom"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeft = System.Text.Json.JsonEncodedText.Encode("left"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRight = System.Text.Json.JsonEncodedText.Encode("right"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTop = System.Text.Json.JsonEncodedText.Encode("top"u8);
 
 	public override Elastic.Clients.Elasticsearch.CoordsGeoBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

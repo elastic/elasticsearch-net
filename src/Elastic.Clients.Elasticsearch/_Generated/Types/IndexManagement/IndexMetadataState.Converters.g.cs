@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexMetadataStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClose = System.Text.Json.JsonEncodedText.Encode("close");
-	private static readonly System.Text.Json.JsonEncodedText MemberOpen = System.Text.Json.JsonEncodedText.Encode("open");
+	private static readonly System.Text.Json.JsonEncodedText MemberClose = System.Text.Json.JsonEncodedText.Encode("close"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOpen = System.Text.Json.JsonEncodedText.Encode("open"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

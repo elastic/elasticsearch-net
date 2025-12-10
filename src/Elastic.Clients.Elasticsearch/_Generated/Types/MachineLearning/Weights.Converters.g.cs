@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class WeightsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Weights>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropWeightsValue = System.Text.Json.JsonEncodedText.Encode("weights");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightsValue = System.Text.Json.JsonEncodedText.Encode("weights"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Weights Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

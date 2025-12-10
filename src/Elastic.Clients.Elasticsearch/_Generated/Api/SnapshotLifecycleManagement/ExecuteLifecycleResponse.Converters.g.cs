@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class ExecuteLifecycleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotName = System.Text.Json.JsonEncodedText.Encode("snapshot_name");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotName = System.Text.Json.JsonEncodedText.Encode("snapshot_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

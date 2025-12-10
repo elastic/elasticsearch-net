@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class UpdatedDataStreamSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.UpdatedDataStreamSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAppliedToDataStream = System.Text.Json.JsonEncodedText.Encode("applied_to_data_stream");
-	private static readonly System.Text.Json.JsonEncodedText PropEffectiveSettings = System.Text.Json.JsonEncodedText.Encode("effective_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexSettingsResults = System.Text.Json.JsonEncodedText.Encode("index_settings_results");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropAppliedToDataStream = System.Text.Json.JsonEncodedText.Encode("applied_to_data_stream"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEffectiveSettings = System.Text.Json.JsonEncodedText.Encode("effective_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexSettingsResults = System.Text.Json.JsonEncodedText.Encode("index_settings_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.UpdatedDataStreamSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

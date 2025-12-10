@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpdateTrainedModelDeploymentRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

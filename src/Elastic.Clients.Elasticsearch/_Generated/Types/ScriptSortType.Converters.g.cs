@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ScriptSortTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScriptSortType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNumber = System.Text.Json.JsonEncodedText.Encode("number");
-	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string");
-	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText MemberNumber = System.Text.Json.JsonEncodedText.Encode("number"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberString = System.Text.Json.JsonEncodedText.Encode("string"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.ScriptSortType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class IntervalsMatchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps");
-	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class LevelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Level>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText MemberShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText MemberCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Level Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

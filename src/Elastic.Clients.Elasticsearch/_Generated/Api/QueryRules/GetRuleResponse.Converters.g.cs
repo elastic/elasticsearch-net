@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class GetRuleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
-	private static readonly System.Text.Json.JsonEncodedText PropCriteria = System.Text.Json.JsonEncodedText.Encode("criteria");
-	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
-	private static readonly System.Text.Json.JsonEncodedText PropRuleId = System.Text.Json.JsonEncodedText.Encode("rule_id");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCriteria = System.Text.Json.JsonEncodedText.Encode("criteria"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuleId = System.Text.Json.JsonEncodedText.Encode("rule_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.GetRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

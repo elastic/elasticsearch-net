@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelAssignmentTaskParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size");
-	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelBytes = System.Text.Json.JsonEncodedText.Encode("model_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropPerAllocationMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_allocation_memory_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPerDeploymentMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_deployment_memory_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
-	private static readonly System.Text.Json.JsonEncodedText PropQueueCapacity = System.Text.Json.JsonEncodedText.Encode("queue_capacity");
-	private static readonly System.Text.Json.JsonEncodedText PropThreadsPerAllocation = System.Text.Json.JsonEncodedText.Encode("threads_per_allocation");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelBytes = System.Text.Json.JsonEncodedText.Encode("model_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPerAllocationMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_allocation_memory_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPerDeploymentMemoryBytes = System.Text.Json.JsonEncodedText.Encode("per_deployment_memory_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueueCapacity = System.Text.Json.JsonEncodedText.Encode("queue_capacity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreadsPerAllocation = System.Text.Json.JsonEncodedText.Encode("threads_per_allocation"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

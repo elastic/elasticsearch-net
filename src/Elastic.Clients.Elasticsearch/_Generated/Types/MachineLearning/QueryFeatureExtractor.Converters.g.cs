@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class QueryFeatureExtractorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultScore = System.Text.Json.JsonEncodedText.Encode("default_score");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultScore = System.Text.Json.JsonEncodedText.Encode("default_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
