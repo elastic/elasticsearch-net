@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class CloseIndexResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClosed = System.Text.Json.JsonEncodedText.Encode("closed");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropClosed = System.Text.Json.JsonEncodedText.Encode("closed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

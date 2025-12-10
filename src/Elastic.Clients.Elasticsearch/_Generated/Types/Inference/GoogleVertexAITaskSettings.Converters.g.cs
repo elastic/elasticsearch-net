@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleVertexAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAutoTruncate = System.Text.Json.JsonEncodedText.Encode("auto_truncate");
-	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoTruncate = System.Text.Json.JsonEncodedText.Encode("auto_truncate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

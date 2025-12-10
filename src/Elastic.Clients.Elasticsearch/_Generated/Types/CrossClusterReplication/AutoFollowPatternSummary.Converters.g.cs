@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class AutoFollowPatternSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPatternSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexPattern = System.Text.Json.JsonEncodedText.Encode("follow_index_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexExclusionPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_exclusion_patterns");
-	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_patterns");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexPattern = System.Text.Json.JsonEncodedText.Encode("follow_index_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexExclusionPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_exclusion_patterns"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_patterns"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPatternSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

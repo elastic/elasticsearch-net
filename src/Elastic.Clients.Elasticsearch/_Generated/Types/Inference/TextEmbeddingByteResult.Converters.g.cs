@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class TextEmbeddingByteResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding");
+	private static readonly System.Text.Json.JsonEncodedText PropEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

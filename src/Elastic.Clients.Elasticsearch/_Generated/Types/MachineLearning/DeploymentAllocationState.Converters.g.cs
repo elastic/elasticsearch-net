@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DeploymentAllocationStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFullyAllocated = System.Text.Json.JsonEncodedText.Encode("fully_allocated");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting");
+	private static readonly System.Text.Json.JsonEncodedText MemberFullyAllocated = System.Text.Json.JsonEncodedText.Encode("fully_allocated"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("started"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStarting = System.Text.Json.JsonEncodedText.Encode("starting"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

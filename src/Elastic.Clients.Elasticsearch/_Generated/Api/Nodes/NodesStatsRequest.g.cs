@@ -151,7 +151,7 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
@@ -290,7 +290,7 @@ public readonly partial struct NodesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
@@ -572,7 +572,7 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class StatusInProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropReindexedDocCount = System.Text.Json.JsonEncodedText.Encode("reindexed_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDocCount = System.Text.Json.JsonEncodedText.Encode("total_doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReindexedDocCount = System.Text.Json.JsonEncodedText.Encode("reindexed_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDocCount = System.Text.Json.JsonEncodedText.Encode("total_doc_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

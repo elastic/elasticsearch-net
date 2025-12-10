@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class MemStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MemStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total");
-	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.MemStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

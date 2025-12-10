@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SlowlogTresholdLevelsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug");
-	private static readonly System.Text.Json.JsonEncodedText PropInfo = System.Text.Json.JsonEncodedText.Encode("info");
-	private static readonly System.Text.Json.JsonEncodedText PropTrace = System.Text.Json.JsonEncodedText.Encode("trace");
-	private static readonly System.Text.Json.JsonEncodedText PropWarn = System.Text.Json.JsonEncodedText.Encode("warn");
+	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfo = System.Text.Json.JsonEncodedText.Encode("info"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrace = System.Text.Json.JsonEncodedText.Encode("trace"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWarn = System.Text.Json.JsonEncodedText.Encode("warn"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

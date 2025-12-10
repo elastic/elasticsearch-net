@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class CartesianPointConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CartesianPoint>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropX = System.Text.Json.JsonEncodedText.Encode("x");
-	private static readonly System.Text.Json.JsonEncodedText PropY = System.Text.Json.JsonEncodedText.Encode("y");
+	private static readonly System.Text.Json.JsonEncodedText PropX = System.Text.Json.JsonEncodedText.Encode("x"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropY = System.Text.Json.JsonEncodedText.Encode("y"u8);
 
 	public override Elastic.Clients.Elasticsearch.CartesianPoint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

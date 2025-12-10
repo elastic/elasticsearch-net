@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class PostStartTrialResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message");
-	private static readonly System.Text.Json.JsonEncodedText PropTrialWasStarted = System.Text.Json.JsonEncodedText.Encode("trial_was_started");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrialWasStarted = System.Text.Json.JsonEncodedText.Encode("trial_was_started"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

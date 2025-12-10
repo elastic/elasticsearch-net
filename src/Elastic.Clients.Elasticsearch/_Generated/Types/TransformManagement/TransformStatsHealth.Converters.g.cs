@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TransformStatsHealthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIssues = System.Text.Json.JsonEncodedText.Encode("issues");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropIssues = System.Text.Json.JsonEncodedText.Encode("issues"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

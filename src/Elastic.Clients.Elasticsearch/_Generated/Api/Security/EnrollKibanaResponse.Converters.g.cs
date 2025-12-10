@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class EnrollKibanaResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHttpCa = System.Text.Json.JsonEncodedText.Encode("http_ca");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCa = System.Text.Json.JsonEncodedText.Encode("http_ca"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

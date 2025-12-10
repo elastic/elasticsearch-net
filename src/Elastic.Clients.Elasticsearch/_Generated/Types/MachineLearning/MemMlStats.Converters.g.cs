@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class MemMlStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectorsInBytes = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalytics = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics");
-	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsInBytes = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverhead = System.Text.Json.JsonEncodedText.Encode("native_code_overhead");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("native_code_overhead_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeInference = System.Text.Json.JsonEncodedText.Encode("native_inference");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeInferenceInBytes = System.Text.Json.JsonEncodedText.Encode("native_inference_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectorsInBytes = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalytics = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsInBytes = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverhead = System.Text.Json.JsonEncodedText.Encode("native_code_overhead"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCodeOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("native_code_overhead_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeInference = System.Text.Json.JsonEncodedText.Encode("native_inference"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeInferenceInBytes = System.Text.Json.JsonEncodedText.Encode("native_inference_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

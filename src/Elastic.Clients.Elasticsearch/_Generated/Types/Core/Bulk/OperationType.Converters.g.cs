@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk.Json;
 
 public sealed partial class OperationTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.OperationType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
-	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText MemberUpdate = System.Text.Json.JsonEncodedText.Encode("update");
+	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDelete = System.Text.Json.JsonEncodedText.Encode("delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUpdate = System.Text.Json.JsonEncodedText.Encode("update"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Bulk.OperationType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

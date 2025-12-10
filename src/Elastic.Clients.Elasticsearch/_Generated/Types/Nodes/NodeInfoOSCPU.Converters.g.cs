@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoOSCPUConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size");
-	private static readonly System.Text.Json.JsonEncodedText PropCacheSizeInBytes = System.Text.Json.JsonEncodedText.Encode("cache_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCoresPerSocket = System.Text.Json.JsonEncodedText.Encode("cores_per_socket");
-	private static readonly System.Text.Json.JsonEncodedText PropMhz = System.Text.Json.JsonEncodedText.Encode("mhz");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCores = System.Text.Json.JsonEncodedText.Encode("total_cores");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSockets = System.Text.Json.JsonEncodedText.Encode("total_sockets");
-	private static readonly System.Text.Json.JsonEncodedText PropVendor = System.Text.Json.JsonEncodedText.Encode("vendor");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSize = System.Text.Json.JsonEncodedText.Encode("cache_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCacheSizeInBytes = System.Text.Json.JsonEncodedText.Encode("cache_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoresPerSocket = System.Text.Json.JsonEncodedText.Encode("cores_per_socket"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMhz = System.Text.Json.JsonEncodedText.Encode("mhz"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCores = System.Text.Json.JsonEncodedText.Encode("total_cores"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSockets = System.Text.Json.JsonEncodedText.Encode("total_sockets"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVendor = System.Text.Json.JsonEncodedText.Encode("vendor"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ScoreNormalizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScoreNormalizer>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
-	private static readonly System.Text.Json.JsonEncodedText MemberMinmax = System.Text.Json.JsonEncodedText.Encode("minmax");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMinmax = System.Text.Json.JsonEncodedText.Encode("minmax"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
 
 	public override Elastic.Clients.Elasticsearch.ScoreNormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

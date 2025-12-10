@@ -79,7 +79,7 @@ public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// the name of the leader index for which specified follower retention leases should be removed
+	/// Name of the leader index for which specified follower retention leases should be removed
 	/// </para>
 	/// </summary>
 	public
@@ -144,7 +144,7 @@ public readonly partial struct ForgetFollowerRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// the name of the leader index for which specified follower retention leases should be removed
+	/// Name of the leader index for which specified follower retention leases should be removed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
@@ -282,7 +282,7 @@ public readonly partial struct ForgetFollowerRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// the name of the leader index for which specified follower retention leases should be removed
+	/// Name of the leader index for which specified follower retention leases should be removed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)

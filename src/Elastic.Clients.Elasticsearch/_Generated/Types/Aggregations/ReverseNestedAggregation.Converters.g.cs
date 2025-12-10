@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class ReverseNestedAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

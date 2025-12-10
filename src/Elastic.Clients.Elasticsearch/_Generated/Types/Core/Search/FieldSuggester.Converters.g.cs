@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class FieldSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
-	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText VariantPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
 	private static readonly System.Text.Json.JsonEncodedText VariantTerm = System.Text.Json.JsonEncodedText.Encode("term");

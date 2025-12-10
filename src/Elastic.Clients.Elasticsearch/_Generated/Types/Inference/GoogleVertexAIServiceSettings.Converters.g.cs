@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropProjectId = System.Text.Json.JsonEncodedText.Encode("project_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropServiceAccountJson = System.Text.Json.JsonEncodedText.Encode("service_account_json");
+	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectId = System.Text.Json.JsonEncodedText.Encode("project_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccountJson = System.Text.Json.JsonEncodedText.Encode("service_account_json"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

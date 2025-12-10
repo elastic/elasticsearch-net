@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Json;
 
 public sealed partial class SharedConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBytesReadInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_read_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropBytesWrittenInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_written_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropNumRegions = System.Text.Json.JsonEncodedText.Encode("num_regions");
-	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads");
-	private static readonly System.Text.Json.JsonEncodedText PropRegionSizeInBytes = System.Text.Json.JsonEncodedText.Encode("region_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropWrites = System.Text.Json.JsonEncodedText.Encode("writes");
+	private static readonly System.Text.Json.JsonEncodedText PropBytesReadInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_read_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBytesWrittenInBytes = System.Text.Json.JsonEncodedText.Encode("bytes_written_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumRegions = System.Text.Json.JsonEncodedText.Encode("num_regions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegionSizeInBytes = System.Text.Json.JsonEncodedText.Encode("region_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWrites = System.Text.Json.JsonEncodedText.Encode("writes"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.Shared Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

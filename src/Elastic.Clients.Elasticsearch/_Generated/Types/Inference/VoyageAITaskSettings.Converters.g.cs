@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class VoyageAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type");
-	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents");
-	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k");
-	private static readonly System.Text.Json.JsonEncodedText PropTruncation = System.Text.Json.JsonEncodedText.Encode("truncation");
+	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTruncation = System.Text.Json.JsonEncodedText.Encode("truncation"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.VoyageAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

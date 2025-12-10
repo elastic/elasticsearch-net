@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SummaryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read");
-	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write");
+	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

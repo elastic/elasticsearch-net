@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ShardStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ShardState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAborted = System.Text.Json.JsonEncodedText.Encode("ABORTED");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT");
-	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("MISSING");
-	private static readonly System.Text.Json.JsonEncodedText MemberPausedForNodeRemoval = System.Text.Json.JsonEncodedText.Encode("PAUSED_FOR_NODE_REMOVAL");
-	private static readonly System.Text.Json.JsonEncodedText MemberQueued = System.Text.Json.JsonEncodedText.Encode("QUEUED");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("SUCCESS");
-	private static readonly System.Text.Json.JsonEncodedText MemberWaiting = System.Text.Json.JsonEncodedText.Encode("WAITING");
+	private static readonly System.Text.Json.JsonEncodedText MemberAborted = System.Text.Json.JsonEncodedText.Encode("ABORTED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMissing = System.Text.Json.JsonEncodedText.Encode("MISSING"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPausedForNodeRemoval = System.Text.Json.JsonEncodedText.Encode("PAUSED_FOR_NODE_REMOVAL"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQueued = System.Text.Json.JsonEncodedText.Encode("QUEUED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("SUCCESS"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWaiting = System.Text.Json.JsonEncodedText.Encode("WAITING"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ShardState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexTemplateDataStreamConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

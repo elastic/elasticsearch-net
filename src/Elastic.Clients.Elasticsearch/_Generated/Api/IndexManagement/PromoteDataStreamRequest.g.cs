@@ -78,7 +78,7 @@ public sealed partial class PromoteDataStreamRequest : Elastic.Clients.Elasticse
 
 	/// <summary>
 	/// <para>
-	/// The name of the data stream
+	/// The name of the data stream to promote
 	/// </para>
 	/// </summary>
 	public
@@ -138,7 +138,7 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the data stream
+	/// The name of the data stream to promote
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName value)
@@ -251,7 +251,7 @@ public readonly partial struct PromoteDataStreamRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the data stream
+	/// The name of the data stream to promote
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName value)

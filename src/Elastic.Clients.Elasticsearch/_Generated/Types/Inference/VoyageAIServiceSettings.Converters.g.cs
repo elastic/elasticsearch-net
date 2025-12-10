@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class VoyageAIServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions");
-	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingType = System.Text.Json.JsonEncodedText.Encode("embedding_type");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingType = System.Text.Json.JsonEncodedText.Encode("embedding_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

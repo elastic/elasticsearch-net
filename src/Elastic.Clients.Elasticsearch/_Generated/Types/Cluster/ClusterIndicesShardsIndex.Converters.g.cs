@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterIndicesShardsIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

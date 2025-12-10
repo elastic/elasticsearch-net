@@ -27,7 +27,7 @@ public sealed partial class DeleteServiceTokenRequestParameters : Elastic.Transp
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> (the default) then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -102,7 +102,7 @@ public sealed partial class DeleteServiceTokenRequest : Elastic.Clients.Elastics
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> (the default) then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
@@ -175,7 +175,7 @@ public readonly partial struct DeleteServiceTokenRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> (the default) then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)

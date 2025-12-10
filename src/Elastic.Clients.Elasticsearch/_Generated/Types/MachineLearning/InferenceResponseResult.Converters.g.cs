@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class InferenceResponseResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEntities = System.Text.Json.JsonEncodedText.Encode("entities");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportance = System.Text.Json.JsonEncodedText.Encode("feature_importance");
-	private static readonly System.Text.Json.JsonEncodedText PropIsTruncated = System.Text.Json.JsonEncodedText.Encode("is_truncated");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedValue = System.Text.Json.JsonEncodedText.Encode("predicted_value");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedValueSequence = System.Text.Json.JsonEncodedText.Encode("predicted_value_sequence");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictionProbability = System.Text.Json.JsonEncodedText.Encode("prediction_probability");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictionScore = System.Text.Json.JsonEncodedText.Encode("prediction_score");
-	private static readonly System.Text.Json.JsonEncodedText PropTopClasses = System.Text.Json.JsonEncodedText.Encode("top_classes");
-	private static readonly System.Text.Json.JsonEncodedText PropWarning = System.Text.Json.JsonEncodedText.Encode("warning");
+	private static readonly System.Text.Json.JsonEncodedText PropEntities = System.Text.Json.JsonEncodedText.Encode("entities"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportance = System.Text.Json.JsonEncodedText.Encode("feature_importance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsTruncated = System.Text.Json.JsonEncodedText.Encode("is_truncated"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedValue = System.Text.Json.JsonEncodedText.Encode("predicted_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedValueSequence = System.Text.Json.JsonEncodedText.Encode("predicted_value_sequence"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionProbability = System.Text.Json.JsonEncodedText.Encode("prediction_probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionScore = System.Text.Json.JsonEncodedText.Encode("prediction_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopClasses = System.Text.Json.JsonEncodedText.Encode("top_classes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWarning = System.Text.Json.JsonEncodedText.Encode("warning"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.InferenceResponseResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class InferenceAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportance = System.Text.Json.JsonEncodedText.Encode("feature_importance");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropTopClasses = System.Text.Json.JsonEncodedText.Encode("top_classes");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
-	private static readonly System.Text.Json.JsonEncodedText PropWarning = System.Text.Json.JsonEncodedText.Encode("warning");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportance = System.Text.Json.JsonEncodedText.Encode("feature_importance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopClasses = System.Text.Json.JsonEncodedText.Encode("top_classes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWarning = System.Text.Json.JsonEncodedText.Encode("warning"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

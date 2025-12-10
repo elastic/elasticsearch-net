@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class RuntimeFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFetchFields = System.Text.Json.JsonEncodedText.Encode("fetch_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetIndex = System.Text.Json.JsonEncodedText.Encode("target_index");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchFields = System.Text.Json.JsonEncodedText.Encode("fetch_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetIndex = System.Text.Json.JsonEncodedText.Encode("target_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.RuntimeField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

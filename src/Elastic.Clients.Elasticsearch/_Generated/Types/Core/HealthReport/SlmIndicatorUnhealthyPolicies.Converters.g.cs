@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class SlmIndicatorUnhealthyPoliciesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropInvocationsSinceLastSuccess = System.Text.Json.JsonEncodedText.Encode("invocations_since_last_success");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvocationsSinceLastSuccess = System.Text.Json.JsonEncodedText.Encode("invocations_since_last_success"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class GetModelSnapshotsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDesc = System.Text.Json.JsonEncodedText.Encode("desc");
-	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
-	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
-	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+	private static readonly System.Text.Json.JsonEncodedText PropDesc = System.Text.Json.JsonEncodedText.Encode("desc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

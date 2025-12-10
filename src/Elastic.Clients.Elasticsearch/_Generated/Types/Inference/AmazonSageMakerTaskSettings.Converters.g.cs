@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AmazonSageMakerTaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCustomAttributes = System.Text.Json.JsonEncodedText.Encode("custom_attributes");
-	private static readonly System.Text.Json.JsonEncodedText PropEnableExplanations = System.Text.Json.JsonEncodedText.Encode("enable_explanations");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
-	private static readonly System.Text.Json.JsonEncodedText PropSessionId = System.Text.Json.JsonEncodedText.Encode("session_id");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetVariant = System.Text.Json.JsonEncodedText.Encode("target_variant");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomAttributes = System.Text.Json.JsonEncodedText.Encode("custom_attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnableExplanations = System.Text.Json.JsonEncodedText.Encode("enable_explanations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSessionId = System.Text.Json.JsonEncodedText.Encode("session_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetVariant = System.Text.Json.JsonEncodedText.Encode("target_variant"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

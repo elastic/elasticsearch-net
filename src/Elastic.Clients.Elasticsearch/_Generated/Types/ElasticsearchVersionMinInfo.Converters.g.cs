@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ElasticsearchVersionMinInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number"u8);
 
 	public override Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

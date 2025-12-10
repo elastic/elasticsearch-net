@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterIndicesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
-	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
-	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
-	private static readonly System.Text.Json.JsonEncodedText PropSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector");
-	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

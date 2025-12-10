@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class JvmClassesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.JvmClasses>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentLoadedCount = System.Text.Json.JsonEncodedText.Encode("current_loaded_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalLoadedCount = System.Text.Json.JsonEncodedText.Encode("total_loaded_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalUnloadedCount = System.Text.Json.JsonEncodedText.Encode("total_unloaded_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentLoadedCount = System.Text.Json.JsonEncodedText.Encode("current_loaded_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalLoadedCount = System.Text.Json.JsonEncodedText.Encode("total_loaded_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalUnloadedCount = System.Text.Json.JsonEncodedText.Encode("total_unloaded_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.JvmClasses Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

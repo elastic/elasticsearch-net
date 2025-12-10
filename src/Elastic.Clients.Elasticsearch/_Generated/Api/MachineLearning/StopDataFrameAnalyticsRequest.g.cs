@@ -25,51 +25,6 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class StopDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no data frame analytics
-	/// jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty data_frame_analytics
-	/// array when there are no matches and the subset of results when there are
-	/// partial matches. If this parameter is false, the request returns a 404
-	/// status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
-	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
-
-	/// <summary>
-	/// <para>
-	/// If true, the data frame analytics job is stopped forcefully.
-	/// </para>
-	/// </summary>
-	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
-
-	/// <summary>
-	/// <para>
-	/// Controls the amount of time to wait until the data frame analytics job
-	/// stops. Defaults to 20 seconds.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -101,7 +56,7 @@ public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elas
 
 	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.stop_data_frame_analytics";
 
@@ -147,14 +102,14 @@ public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elas
 	/// status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+	public bool? AllowNoMatch { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, the data frame analytics job is stopped forcefully.
 	/// </para>
 	/// </summary>
-	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+	public bool? Force { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -162,7 +117,7 @@ public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elas
 	/// stops. Defaults to 20 seconds.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
 /// <summary>

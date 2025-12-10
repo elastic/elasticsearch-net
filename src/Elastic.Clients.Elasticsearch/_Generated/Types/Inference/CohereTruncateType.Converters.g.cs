@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CohereTruncateTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberEnd = System.Text.Json.JsonEncodedText.Encode("END");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("NONE");
-	private static readonly System.Text.Json.JsonEncodedText MemberStart = System.Text.Json.JsonEncodedText.Encode("START");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnd = System.Text.Json.JsonEncodedText.Encode("END"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("NONE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStart = System.Text.Json.JsonEncodedText.Encode("START"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CohereTruncateType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

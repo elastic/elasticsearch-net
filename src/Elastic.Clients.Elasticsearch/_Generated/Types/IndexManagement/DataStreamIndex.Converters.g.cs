@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropManagedBy = System.Text.Json.JsonEncodedText.Encode("managed_by");
-	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
+	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropManagedBy = System.Text.Json.JsonEncodedText.Encode("managed_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

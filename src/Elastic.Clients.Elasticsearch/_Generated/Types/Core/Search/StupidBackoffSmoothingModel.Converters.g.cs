@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class StupidBackoffSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDiscount = System.Text.Json.JsonEncodedText.Encode("discount");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscount = System.Text.Json.JsonEncodedText.Encode("discount"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.StupidBackoffSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

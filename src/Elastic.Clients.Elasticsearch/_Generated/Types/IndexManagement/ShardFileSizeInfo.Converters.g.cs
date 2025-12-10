@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardFileSizeInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAverageSizeInBytes = System.Text.Json.JsonEncodedText.Encode("average_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("max_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMinSizeInBytes = System.Text.Json.JsonEncodedText.Encode("min_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropAverageSizeInBytes = System.Text.Json.JsonEncodedText.Encode("average_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("max_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinSizeInBytes = System.Text.Json.JsonEncodedText.Encode("min_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

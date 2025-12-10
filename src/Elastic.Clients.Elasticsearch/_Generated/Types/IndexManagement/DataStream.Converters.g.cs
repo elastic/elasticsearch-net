@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStream>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
-	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation");
-	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
-	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropNextGenerationManagedBy = System.Text.Json.JsonEncodedText.Encode("next_generation_managed_by");
-	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
-	private static readonly System.Text.Json.JsonEncodedText PropReplicated = System.Text.Json.JsonEncodedText.Encode("replicated");
-	private static readonly System.Text.Json.JsonEncodedText PropRolloverOnWrite = System.Text.Json.JsonEncodedText.Encode("rollover_on_write");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropSystem = System.Text.Json.JsonEncodedText.Encode("system");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextGenerationManagedBy = System.Text.Json.JsonEncodedText.Encode("next_generation_managed_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplicated = System.Text.Json.JsonEncodedText.Encode("replicated"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRolloverOnWrite = System.Text.Json.JsonEncodedText.Encode("rollover_on_write"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSystem = System.Text.Json.JsonEncodedText.Encode("system"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStream Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

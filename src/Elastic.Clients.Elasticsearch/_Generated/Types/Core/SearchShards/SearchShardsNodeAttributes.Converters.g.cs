@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchShards.Json;
 
 public sealed partial class SearchShardsNodeAttributesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
-	private static readonly System.Text.Json.JsonEncodedText PropEphemeralId = System.Text.Json.JsonEncodedText.Encode("ephemeral_id");
-	private static readonly System.Text.Json.JsonEncodedText PropExternalId = System.Text.Json.JsonEncodedText.Encode("external_id");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxIndexVersion = System.Text.Json.JsonEncodedText.Encode("max_index_version");
-	private static readonly System.Text.Json.JsonEncodedText PropMinIndexVersion = System.Text.Json.JsonEncodedText.Encode("min_index_version");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEphemeralId = System.Text.Json.JsonEncodedText.Encode("ephemeral_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExternalId = System.Text.Json.JsonEncodedText.Encode("external_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxIndexVersion = System.Text.Json.JsonEncodedText.Encode("max_index_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinIndexVersion = System.Text.Json.JsonEncodedText.Encode("min_index_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

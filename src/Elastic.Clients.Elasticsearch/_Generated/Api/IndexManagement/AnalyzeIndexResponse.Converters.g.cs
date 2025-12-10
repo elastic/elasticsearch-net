@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class AnalyzeIndexResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDetail = System.Text.Json.JsonEncodedText.Encode("detail");
-	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropDetail = System.Text.Json.JsonEncodedText.Encode("detail"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class LaplaceSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha");
+	private static readonly System.Text.Json.JsonEncodedText PropAlpha = System.Text.Json.JsonEncodedText.Encode("alpha"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.LaplaceSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

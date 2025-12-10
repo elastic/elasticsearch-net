@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class OidcLogoutResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect");
+	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

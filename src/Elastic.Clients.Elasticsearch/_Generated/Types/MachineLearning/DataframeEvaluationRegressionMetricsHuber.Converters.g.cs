@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationRegressionMetricsHuberConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDelta = System.Text.Json.JsonEncodedText.Encode("delta");
+	private static readonly System.Text.Json.JsonEncodedText PropDelta = System.Text.Json.JsonEncodedText.Encode("delta"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

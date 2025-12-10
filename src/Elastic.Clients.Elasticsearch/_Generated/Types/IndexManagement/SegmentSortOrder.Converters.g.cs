@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SegmentSortOrderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAsc = System.Text.Json.JsonEncodedText.Encode("asc");
-	private static readonly System.Text.Json.JsonEncodedText MemberAsc1 = System.Text.Json.JsonEncodedText.Encode("ASC");
-	private static readonly System.Text.Json.JsonEncodedText MemberDesc = System.Text.Json.JsonEncodedText.Encode("desc");
-	private static readonly System.Text.Json.JsonEncodedText MemberDesc1 = System.Text.Json.JsonEncodedText.Encode("DESC");
+	private static readonly System.Text.Json.JsonEncodedText MemberAsc = System.Text.Json.JsonEncodedText.Encode("asc"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAsc1 = System.Text.Json.JsonEncodedText.Encode("ASC"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDesc = System.Text.Json.JsonEncodedText.Encode("desc"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDesc1 = System.Text.Json.JsonEncodedText.Encode("DESC"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

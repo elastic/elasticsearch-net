@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class InputConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InputConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field");
-	private static readonly System.Text.Json.JsonEncodedText PropOutputField = System.Text.Json.JsonEncodedText.Encode("output_field");
+	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutputField = System.Text.Json.JsonEncodedText.Encode("output_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.InputConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

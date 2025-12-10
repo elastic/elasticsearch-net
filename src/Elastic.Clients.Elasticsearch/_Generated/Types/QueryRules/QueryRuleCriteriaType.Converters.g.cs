@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always");
-	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
-	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact");
-	private static readonly System.Text.Json.JsonEncodedText MemberExactFuzzy = System.Text.Json.JsonEncodedText.Encode("exact_fuzzy");
-	private static readonly System.Text.Json.JsonEncodedText MemberFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global");
-	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt");
-	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
-	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
-	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuffix = System.Text.Json.JsonEncodedText.Encode("suffix");
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExactFuzzy = System.Text.Json.JsonEncodedText.Encode("exact_fuzzy"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPrefix = System.Text.Json.JsonEncodedText.Encode("prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSuffix = System.Text.Json.JsonEncodedText.Encode("suffix"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

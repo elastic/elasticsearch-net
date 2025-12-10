@@ -51,6 +51,7 @@ public sealed partial class IndexTemplateSummary
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? DataStreamOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 
 	/// <summary>
@@ -182,6 +183,24 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 	{
 		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
 		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	{
+		Instance.DataStreamOptions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> DataStreamOptions()
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
 		return this;
 	}
 
@@ -420,6 +439,24 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 	{
 		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
 		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	{
+		Instance.DataStreamOptions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor DataStreamOptions()
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
 		return this;
 	}
 

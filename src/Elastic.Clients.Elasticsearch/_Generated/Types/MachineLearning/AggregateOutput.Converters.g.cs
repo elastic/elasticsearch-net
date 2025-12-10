@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AggregateOutputConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
-	private static readonly System.Text.Json.JsonEncodedText PropLogisticRegression = System.Text.Json.JsonEncodedText.Encode("logistic_regression");
-	private static readonly System.Text.Json.JsonEncodedText PropWeightedMode = System.Text.Json.JsonEncodedText.Encode("weighted_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropWeightedSum = System.Text.Json.JsonEncodedText.Encode("weighted_sum");
+	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogisticRegression = System.Text.Json.JsonEncodedText.Encode("logistic_regression"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeightedMode = System.Text.Json.JsonEncodedText.Encode("weighted_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeightedSum = System.Text.Json.JsonEncodedText.Encode("weighted_sum"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

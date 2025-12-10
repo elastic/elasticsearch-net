@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryReestimateBytes = System.Text.Json.JsonEncodedText.Encode("memory_reestimate_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryReestimateBytes = System.Text.Json.JsonEncodedText.Encode("memory_reestimate_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

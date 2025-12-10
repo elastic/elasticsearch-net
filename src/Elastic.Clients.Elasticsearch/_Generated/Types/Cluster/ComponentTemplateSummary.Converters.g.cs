@@ -25,17 +25,19 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ComponentTemplateSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamOptions = System.Text.Json.JsonEncodedText.Encode("data_stream_options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate?> propDataStreamOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
@@ -44,6 +46,11 @@ public sealed partial class ComponentTemplateSummaryConverter : System.Text.Json
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDataStreamOptions.TryReadProperty(ref reader, options, PropDataStreamOptions, null))
 			{
 				continue;
 			}
@@ -86,6 +93,7 @@ public sealed partial class ComponentTemplateSummaryConverter : System.Text.Json
 		return new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Aliases = propAliases.Value,
+			DataStreamOptions = propDataStreamOptions.Value,
 			Lifecycle = propLifecycle.Value,
 			Mappings = propMappings.Value,
 			Meta = propMeta.Value,
@@ -98,6 +106,7 @@ public sealed partial class ComponentTemplateSummaryConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>(o, v, null, null));
+		writer.WriteProperty(options, PropDataStreamOptions, value.DataStreamOptions, null, null);
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));

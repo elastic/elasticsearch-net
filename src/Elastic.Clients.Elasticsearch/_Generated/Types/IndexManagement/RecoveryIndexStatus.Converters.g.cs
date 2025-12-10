@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RecoveryIndexStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBytes = System.Text.Json.JsonEncodedText.Encode("bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFiles = System.Text.Json.JsonEncodedText.Encode("files");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceThrottleTime = System.Text.Json.JsonEncodedText.Encode("source_throttle_time");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("source_throttle_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetThrottleTime = System.Text.Json.JsonEncodedText.Encode("target_throttle_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("target_throttle_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropBytes = System.Text.Json.JsonEncodedText.Encode("bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFiles = System.Text.Json.JsonEncodedText.Encode("files"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceThrottleTime = System.Text.Json.JsonEncodedText.Encode("source_throttle_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("source_throttle_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetThrottleTime = System.Text.Json.JsonEncodedText.Encode("target_throttle_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("target_throttle_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

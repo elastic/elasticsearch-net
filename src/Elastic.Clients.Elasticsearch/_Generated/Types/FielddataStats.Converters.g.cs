@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class FielddataStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FielddataStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
-	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.FielddataStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

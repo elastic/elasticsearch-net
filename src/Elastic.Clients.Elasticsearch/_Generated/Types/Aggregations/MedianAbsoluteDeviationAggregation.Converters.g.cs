@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MedianAbsoluteDeviationAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
-	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

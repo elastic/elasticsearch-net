@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class OidcPrepareAuthenticationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIss = System.Text.Json.JsonEncodedText.Encode("iss");
-	private static readonly System.Text.Json.JsonEncodedText PropLoginHint = System.Text.Json.JsonEncodedText.Encode("login_hint");
-	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropIss = System.Text.Json.JsonEncodedText.Encode("iss"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLoginHint = System.Text.Json.JsonEncodedText.Encode("login_hint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

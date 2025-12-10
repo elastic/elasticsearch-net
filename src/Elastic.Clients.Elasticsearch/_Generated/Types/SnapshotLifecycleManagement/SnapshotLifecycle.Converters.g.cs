@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class SnapshotLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress");
-	private static readonly System.Text.Json.JsonEncodedText PropLastFailure = System.Text.Json.JsonEncodedText.Encode("last_failure");
-	private static readonly System.Text.Json.JsonEncodedText PropLastSuccess = System.Text.Json.JsonEncodedText.Encode("last_success");
-	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
-	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropNextExecution = System.Text.Json.JsonEncodedText.Encode("next_execution");
-	private static readonly System.Text.Json.JsonEncodedText PropNextExecutionMillis = System.Text.Json.JsonEncodedText.Encode("next_execution_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
-	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastFailure = System.Text.Json.JsonEncodedText.Encode("last_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastSuccess = System.Text.Json.JsonEncodedText.Encode("last_success"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextExecution = System.Text.Json.JsonEncodedText.Encode("next_execution"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextExecutionMillis = System.Text.Json.JsonEncodedText.Encode("next_execution_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

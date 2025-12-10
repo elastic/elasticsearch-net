@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ReloadDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropReloadedAnalyzers = System.Text.Json.JsonEncodedText.Encode("reloaded_analyzers");
-	private static readonly System.Text.Json.JsonEncodedText PropReloadedNodeIds = System.Text.Json.JsonEncodedText.Encode("reloaded_node_ids");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReloadedAnalyzers = System.Text.Json.JsonEncodedText.Encode("reloaded_analyzers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReloadedNodeIds = System.Text.Json.JsonEncodedText.Encode("reloaded_node_ids"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ReloadDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

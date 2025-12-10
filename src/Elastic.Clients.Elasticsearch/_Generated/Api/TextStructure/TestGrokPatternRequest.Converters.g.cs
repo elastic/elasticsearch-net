@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class TestGrokPatternRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

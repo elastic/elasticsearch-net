@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GeoHashLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoHashLocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
+	private static readonly System.Text.Json.JsonEncodedText PropGeohash = System.Text.Json.JsonEncodedText.Encode("geohash"u8);
 
 	public override Elastic.Clients.Elasticsearch.GeoHashLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

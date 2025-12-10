@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupCapabilitiesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRollupJobs = System.Text.Json.JsonEncodedText.Encode("rollup_jobs");
+	private static readonly System.Text.Json.JsonEncodedText PropRollupJobs = System.Text.Json.JsonEncodedText.Encode("rollup_jobs"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

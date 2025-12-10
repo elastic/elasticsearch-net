@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class InfluencerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Influencer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
-	private static readonly System.Text.Json.JsonEncodedText PropFoo = System.Text.Json.JsonEncodedText.Encode("foo");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldName = System.Text.Json.JsonEncodedText.Encode("influencer_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldValue = System.Text.Json.JsonEncodedText.Encode("influencer_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencerScore = System.Text.Json.JsonEncodedText.Encode("influencer_score");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialInfluencerScore = System.Text.Json.JsonEncodedText.Encode("initial_influencer_score");
-	private static readonly System.Text.Json.JsonEncodedText PropIsInterim = System.Text.Json.JsonEncodedText.Encode("is_interim");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability");
-	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFoo = System.Text.Json.JsonEncodedText.Encode("foo"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldName = System.Text.Json.JsonEncodedText.Encode("influencer_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldValue = System.Text.Json.JsonEncodedText.Encode("influencer_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencerScore = System.Text.Json.JsonEncodedText.Encode("influencer_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitialInfluencerScore = System.Text.Json.JsonEncodedText.Encode("initial_influencer_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsInterim = System.Text.Json.JsonEncodedText.Encode("is_interim"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Influencer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

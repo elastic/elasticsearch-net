@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CpuConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Cpu>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLoadAverage = System.Text.Json.JsonEncodedText.Encode("load_average");
-	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
-	private static readonly System.Text.Json.JsonEncodedText PropSys = System.Text.Json.JsonEncodedText.Encode("sys");
-	private static readonly System.Text.Json.JsonEncodedText PropSysInMillis = System.Text.Json.JsonEncodedText.Encode("sys_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInMillis = System.Text.Json.JsonEncodedText.Encode("total_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
-	private static readonly System.Text.Json.JsonEncodedText PropUserInMillis = System.Text.Json.JsonEncodedText.Encode("user_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropLoadAverage = System.Text.Json.JsonEncodedText.Encode("load_average"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSys = System.Text.Json.JsonEncodedText.Encode("sys"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSysInMillis = System.Text.Json.JsonEncodedText.Encode("sys_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInMillis = System.Text.Json.JsonEncodedText.Encode("total_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserInMillis = System.Text.Json.JsonEncodedText.Encode("user_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Cpu Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

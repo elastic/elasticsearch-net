@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalHitItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHit = System.Text.Json.JsonEncodedText.Encode("hit");
-	private static readonly System.Text.Json.JsonEncodedText PropRating = System.Text.Json.JsonEncodedText.Encode("rating");
+	private static readonly System.Text.Json.JsonEncodedText PropHit = System.Text.Json.JsonEncodedText.Encode("hit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRating = System.Text.Json.JsonEncodedText.Encode("rating"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

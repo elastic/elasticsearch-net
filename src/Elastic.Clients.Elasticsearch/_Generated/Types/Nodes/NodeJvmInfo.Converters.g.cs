@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeJvmInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGcCollectors = System.Text.Json.JsonEncodedText.Encode("gc_collectors");
-	private static readonly System.Text.Json.JsonEncodedText PropInputArguments = System.Text.Json.JsonEncodedText.Encode("input_arguments");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryPools = System.Text.Json.JsonEncodedText.Encode("memory_pools");
-	private static readonly System.Text.Json.JsonEncodedText PropPid = System.Text.Json.JsonEncodedText.Encode("pid");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk");
-	private static readonly System.Text.Json.JsonEncodedText PropUsingCompressedOrdinaryObjectPointers = System.Text.Json.JsonEncodedText.Encode("using_compressed_ordinary_object_pointers");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name");
-	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor");
-	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version");
+	private static readonly System.Text.Json.JsonEncodedText PropGcCollectors = System.Text.Json.JsonEncodedText.Encode("gc_collectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputArguments = System.Text.Json.JsonEncodedText.Encode("input_arguments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryPools = System.Text.Json.JsonEncodedText.Encode("memory_pools"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPid = System.Text.Json.JsonEncodedText.Encode("pid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsingCompressedOrdinaryObjectPointers = System.Text.Json.JsonEncodedText.Encode("using_compressed_ordinary_object_pointers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmVendor = System.Text.Json.JsonEncodedText.Encode("vm_vendor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVmVersion = System.Text.Json.JsonEncodedText.Encode("vm_version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

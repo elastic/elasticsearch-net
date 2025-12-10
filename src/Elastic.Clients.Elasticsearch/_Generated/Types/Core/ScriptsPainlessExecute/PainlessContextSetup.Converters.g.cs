@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.Json;
 
 public sealed partial class PainlessContextSetupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class PreviewDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureValues = System.Text.Json.JsonEncodedText.Encode("feature_values");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureValues = System.Text.Json.JsonEncodedText.Encode("feature_values"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.PreviewDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

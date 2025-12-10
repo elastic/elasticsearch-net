@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class HistogramBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.HistogramBucket>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-	private static readonly System.Text.Json.JsonEncodedText PropKeyAsString = System.Text.Json.JsonEncodedText.Encode("key_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeyAsString = System.Text.Json.JsonEncodedText.Encode("key_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.HistogramBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

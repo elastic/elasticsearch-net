@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TTestTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TTestType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberHeteroscedastic = System.Text.Json.JsonEncodedText.Encode("heteroscedastic");
-	private static readonly System.Text.Json.JsonEncodedText MemberHomoscedastic = System.Text.Json.JsonEncodedText.Encode("homoscedastic");
-	private static readonly System.Text.Json.JsonEncodedText MemberPaired = System.Text.Json.JsonEncodedText.Encode("paired");
+	private static readonly System.Text.Json.JsonEncodedText MemberHeteroscedastic = System.Text.Json.JsonEncodedText.Encode("heteroscedastic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHomoscedastic = System.Text.Json.JsonEncodedText.Encode("homoscedastic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPaired = System.Text.Json.JsonEncodedText.Encode("paired"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TTestType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

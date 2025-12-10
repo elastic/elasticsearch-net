@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JvmStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JvmStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaInference = System.Text.Json.JsonEncodedText.Encode("java_inference");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceInBytes = System.Text.Json.JsonEncodedText.Encode("java_inference_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceMax = System.Text.Json.JsonEncodedText.Encode("java_inference_max");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceMaxInBytes = System.Text.Json.JsonEncodedText.Encode("java_inference_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaInference = System.Text.Json.JsonEncodedText.Encode("java_inference"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceInBytes = System.Text.Json.JsonEncodedText.Encode("java_inference_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceMax = System.Text.Json.JsonEncodedText.Encode("java_inference_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaInferenceMaxInBytes = System.Text.Json.JsonEncodedText.Encode("java_inference_max_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JvmStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

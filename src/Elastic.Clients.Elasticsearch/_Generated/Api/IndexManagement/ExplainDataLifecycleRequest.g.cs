@@ -27,14 +27,14 @@ public sealed partial class ExplainDataLifecycleRequestParameters : Elastic.Tran
 {
 	/// <summary>
 	/// <para>
-	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// Indicates if the API should return the default values the system uses for the index's lifecycle
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -74,7 +74,7 @@ public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public
@@ -85,14 +85,14 @@ public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
-	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// Indicates if the API should return the default values the system uses for the index's lifecycle
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -130,7 +130,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -141,7 +141,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// Indicates if the API should return the default values the system uses for the index's lifecycle
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor IncludeDefaults(bool? value = true)
@@ -152,7 +152,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -243,7 +243,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -254,7 +254,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// indicates if the API should return the default values the system uses for the index's lifecycle
+	/// Indicates if the API should return the default values the system uses for the index's lifecycle
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
@@ -265,7 +265,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)

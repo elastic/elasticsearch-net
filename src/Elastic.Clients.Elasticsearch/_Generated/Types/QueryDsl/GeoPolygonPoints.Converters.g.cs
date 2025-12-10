@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class GeoPolygonPointsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPoints = System.Text.Json.JsonEncodedText.Encode("points");
+	private static readonly System.Text.Json.JsonEncodedText PropPoints = System.Text.Json.JsonEncodedText.Encode("points"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

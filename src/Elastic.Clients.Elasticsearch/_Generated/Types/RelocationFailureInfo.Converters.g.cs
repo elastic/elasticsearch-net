@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RelocationFailureInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RelocationFailureInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailedAttempts = System.Text.Json.JsonEncodedText.Encode("failed_attempts");
+	private static readonly System.Text.Json.JsonEncodedText PropFailedAttempts = System.Text.Json.JsonEncodedText.Encode("failed_attempts"u8);
 
 	public override Elastic.Clients.Elasticsearch.RelocationFailureInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

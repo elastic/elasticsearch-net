@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class LatLonGeoLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LatLonGeoLocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLat = System.Text.Json.JsonEncodedText.Encode("lat");
-	private static readonly System.Text.Json.JsonEncodedText PropLon = System.Text.Json.JsonEncodedText.Encode("lon");
+	private static readonly System.Text.Json.JsonEncodedText PropLat = System.Text.Json.JsonEncodedText.Encode("lat"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLon = System.Text.Json.JsonEncodedText.Encode("lon"u8);
 
 	public override Elastic.Clients.Elasticsearch.LatLonGeoLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

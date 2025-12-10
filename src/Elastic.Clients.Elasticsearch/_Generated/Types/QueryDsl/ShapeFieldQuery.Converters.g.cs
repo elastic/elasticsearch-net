@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class ShapeFieldQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndexedShape = System.Text.Json.JsonEncodedText.Encode("indexed_shape");
-	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
-	private static readonly System.Text.Json.JsonEncodedText PropShape = System.Text.Json.JsonEncodedText.Encode("shape");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexedShape = System.Text.Json.JsonEncodedText.Encode("indexed_shape"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShape = System.Text.Json.JsonEncodedText.Encode("shape"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

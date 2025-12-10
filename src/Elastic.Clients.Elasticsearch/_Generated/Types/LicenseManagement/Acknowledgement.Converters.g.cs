@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class AcknowledgementConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
-	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message");
+	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

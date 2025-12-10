@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AdaptiveAllocationsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("max_number_of_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropMinNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("min_number_of_allocations");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("max_number_of_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("min_number_of_allocations"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

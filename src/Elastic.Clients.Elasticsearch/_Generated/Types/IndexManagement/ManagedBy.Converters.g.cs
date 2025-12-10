@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDatastream = System.Text.Json.JsonEncodedText.Encode("Data stream lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText MemberIlm = System.Text.Json.JsonEncodedText.Encode("Index Lifecycle Management");
-	private static readonly System.Text.Json.JsonEncodedText MemberUnmanaged = System.Text.Json.JsonEncodedText.Encode("Unmanaged");
+	private static readonly System.Text.Json.JsonEncodedText MemberDatastream = System.Text.Json.JsonEncodedText.Encode("Data stream lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIlm = System.Text.Json.JsonEncodedText.Encode("Index Lifecycle Management"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUnmanaged = System.Text.Json.JsonEncodedText.Encode("Unmanaged"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

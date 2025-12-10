@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class GetSlmStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOperationMode = System.Text.Json.JsonEncodedText.Encode("operation_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropOperationMode = System.Text.Json.JsonEncodedText.Encode("operation_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CartesianBoundsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

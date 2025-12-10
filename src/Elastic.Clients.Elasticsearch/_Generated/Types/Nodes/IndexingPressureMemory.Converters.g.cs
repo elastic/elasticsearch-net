@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class IndexingPressureMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
-	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
-	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

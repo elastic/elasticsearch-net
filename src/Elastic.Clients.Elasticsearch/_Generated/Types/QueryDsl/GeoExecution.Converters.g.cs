@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class GeoExecutionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexed = System.Text.Json.JsonEncodedText.Encode("indexed");
-	private static readonly System.Text.Json.JsonEncodedText MemberMemory = System.Text.Json.JsonEncodedText.Encode("memory");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexed = System.Text.Json.JsonEncodedText.Encode("indexed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMemory = System.Text.Json.JsonEncodedText.Encode("memory"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

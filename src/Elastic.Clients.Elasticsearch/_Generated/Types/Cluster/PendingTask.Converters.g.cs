@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class PendingTaskConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.PendingTask>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExecuting = System.Text.Json.JsonEncodedText.Encode("executing");
-	private static readonly System.Text.Json.JsonEncodedText PropInsertOrder = System.Text.Json.JsonEncodedText.Encode("insert_order");
-	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInQueue = System.Text.Json.JsonEncodedText.Encode("time_in_queue");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInQueueMillis = System.Text.Json.JsonEncodedText.Encode("time_in_queue_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropExecuting = System.Text.Json.JsonEncodedText.Encode("executing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInsertOrder = System.Text.Json.JsonEncodedText.Encode("insert_order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInQueue = System.Text.Json.JsonEncodedText.Encode("time_in_queue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInQueueMillis = System.Text.Json.JsonEncodedText.Encode("time_in_queue_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.PendingTask Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

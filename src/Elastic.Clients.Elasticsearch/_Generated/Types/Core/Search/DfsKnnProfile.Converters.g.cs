@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class DfsKnnProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollector = System.Text.Json.JsonEncodedText.Encode("collector");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRewriteTime = System.Text.Json.JsonEncodedText.Encode("rewrite_time");
-	private static readonly System.Text.Json.JsonEncodedText PropVectorOperationsCount = System.Text.Json.JsonEncodedText.Encode("vector_operations_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCollector = System.Text.Json.JsonEncodedText.Encode("collector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRewriteTime = System.Text.Json.JsonEncodedText.Encode("rewrite_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVectorOperationsCount = System.Text.Json.JsonEncodedText.Encode("vector_operations_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

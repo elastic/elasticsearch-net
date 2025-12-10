@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ElasticsearchVersionInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBuildDate = System.Text.Json.JsonEncodedText.Encode("build_date");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildHash = System.Text.Json.JsonEncodedText.Encode("build_hash");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildSnapshot = System.Text.Json.JsonEncodedText.Encode("build_snapshot");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildType = System.Text.Json.JsonEncodedText.Encode("build_type");
-	private static readonly System.Text.Json.JsonEncodedText PropLuceneVersion = System.Text.Json.JsonEncodedText.Encode("lucene_version");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildDate = System.Text.Json.JsonEncodedText.Encode("build_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildHash = System.Text.Json.JsonEncodedText.Encode("build_hash"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildSnapshot = System.Text.Json.JsonEncodedText.Encode("build_snapshot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildType = System.Text.Json.JsonEncodedText.Encode("build_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLuceneVersion = System.Text.Json.JsonEncodedText.Encode("lucene_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number"u8);
 
 	public override Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

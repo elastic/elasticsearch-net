@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ThreadTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ThreadType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBlock = System.Text.Json.JsonEncodedText.Encode("block");
-	private static readonly System.Text.Json.JsonEncodedText MemberCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText MemberGpu = System.Text.Json.JsonEncodedText.Encode("gpu");
-	private static readonly System.Text.Json.JsonEncodedText MemberMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText MemberWait = System.Text.Json.JsonEncodedText.Encode("wait");
+	private static readonly System.Text.Json.JsonEncodedText MemberBlock = System.Text.Json.JsonEncodedText.Encode("block"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCpu = System.Text.Json.JsonEncodedText.Encode("cpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGpu = System.Text.Json.JsonEncodedText.Encode("gpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWait = System.Text.Json.JsonEncodedText.Encode("wait"u8);
 
 	public override Elastic.Clients.Elasticsearch.ThreadType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

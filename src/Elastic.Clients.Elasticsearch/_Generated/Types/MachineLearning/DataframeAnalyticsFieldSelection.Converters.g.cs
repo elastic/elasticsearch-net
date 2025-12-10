@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsFieldSelectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureType = System.Text.Json.JsonEncodedText.Encode("feature_type");
-	private static readonly System.Text.Json.JsonEncodedText PropIsIncluded = System.Text.Json.JsonEncodedText.Encode("is_included");
-	private static readonly System.Text.Json.JsonEncodedText PropIsRequired = System.Text.Json.JsonEncodedText.Encode("is_required");
-	private static readonly System.Text.Json.JsonEncodedText PropMappingTypes = System.Text.Json.JsonEncodedText.Encode("mapping_types");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureType = System.Text.Json.JsonEncodedText.Encode("feature_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsIncluded = System.Text.Json.JsonEncodedText.Encode("is_included"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsRequired = System.Text.Json.JsonEncodedText.Encode("is_required"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappingTypes = System.Text.Json.JsonEncodedText.Encode("mapping_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

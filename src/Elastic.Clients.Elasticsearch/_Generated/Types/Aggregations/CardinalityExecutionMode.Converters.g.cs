@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CardinalityExecutionModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDirect = System.Text.Json.JsonEncodedText.Encode("direct");
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
-	private static readonly System.Text.Json.JsonEncodedText MemberSaveMemoryHeuristic = System.Text.Json.JsonEncodedText.Encode("save_memory_heuristic");
-	private static readonly System.Text.Json.JsonEncodedText MemberSaveTimeHeuristic = System.Text.Json.JsonEncodedText.Encode("save_time_heuristic");
-	private static readonly System.Text.Json.JsonEncodedText MemberSegmentOrdinals = System.Text.Json.JsonEncodedText.Encode("segment_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText MemberDirect = System.Text.Json.JsonEncodedText.Encode("direct"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSaveMemoryHeuristic = System.Text.Json.JsonEncodedText.Encode("save_memory_heuristic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSaveTimeHeuristic = System.Text.Json.JsonEncodedText.Encode("save_time_heuristic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSegmentOrdinals = System.Text.Json.JsonEncodedText.Encode("segment_ordinals"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

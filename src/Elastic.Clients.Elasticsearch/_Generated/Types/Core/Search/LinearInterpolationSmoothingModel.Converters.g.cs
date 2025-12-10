@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class LinearInterpolationSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBigramLambda = System.Text.Json.JsonEncodedText.Encode("bigram_lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropTrigramLambda = System.Text.Json.JsonEncodedText.Encode("trigram_lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropUnigramLambda = System.Text.Json.JsonEncodedText.Encode("unigram_lambda");
+	private static readonly System.Text.Json.JsonEncodedText PropBigramLambda = System.Text.Json.JsonEncodedText.Encode("bigram_lambda"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrigramLambda = System.Text.Json.JsonEncodedText.Encode("trigram_lambda"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnigramLambda = System.Text.Json.JsonEncodedText.Encode("unigram_lambda"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

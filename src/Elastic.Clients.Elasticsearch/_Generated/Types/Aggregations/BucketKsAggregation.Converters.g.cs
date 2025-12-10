@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class BucketKsAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlternative = System.Text.Json.JsonEncodedText.Encode("alternative");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
-	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplingMethod = System.Text.Json.JsonEncodedText.Encode("sampling_method");
+	private static readonly System.Text.Json.JsonEncodedText PropAlternative = System.Text.Json.JsonEncodedText.Encode("alternative"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplingMethod = System.Text.Json.JsonEncodedText.Encode("sampling_method"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

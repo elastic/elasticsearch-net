@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SimulateTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOverlapping = System.Text.Json.JsonEncodedText.Encode("overlapping");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropOverlapping = System.Text.Json.JsonEncodedText.Encode("overlapping"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

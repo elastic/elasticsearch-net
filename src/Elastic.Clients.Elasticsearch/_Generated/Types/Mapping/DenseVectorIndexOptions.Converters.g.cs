@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction");
-	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

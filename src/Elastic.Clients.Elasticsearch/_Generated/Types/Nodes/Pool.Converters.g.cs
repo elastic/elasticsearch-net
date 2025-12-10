@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class PoolConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Pool>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakMaxInBytes = System.Text.Json.JsonEncodedText.Encode("peak_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakUsedInBytes = System.Text.Json.JsonEncodedText.Encode("peak_used_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInBytes = System.Text.Json.JsonEncodedText.Encode("max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakMaxInBytes = System.Text.Json.JsonEncodedText.Encode("peak_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakUsedInBytes = System.Text.Json.JsonEncodedText.Encode("peak_used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Pool Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

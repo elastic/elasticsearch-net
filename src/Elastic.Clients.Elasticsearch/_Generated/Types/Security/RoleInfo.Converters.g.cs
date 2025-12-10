@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class RoleInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications");
-	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropRoleTemplates = System.Text.Json.JsonEncodedText.Encode("role_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
-	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropApplications = System.Text.Json.JsonEncodedText.Encode("applications"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGlobal = System.Text.Json.JsonEncodedText.Encode("global"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteIndices = System.Text.Json.JsonEncodedText.Encode("remote_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoleTemplates = System.Text.Json.JsonEncodedText.Encode("role_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransientMetadata = System.Text.Json.JsonEncodedText.Encode("transient_metadata"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.RoleInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

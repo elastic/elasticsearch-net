@@ -27,7 +27,8 @@ public sealed partial class EqlSearchRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -96,7 +97,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public
@@ -107,7 +108,8 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -262,7 +264,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -273,7 +275,8 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowNoIndices(bool? value = true)
@@ -759,7 +762,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -770,7 +773,8 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)

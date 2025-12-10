@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

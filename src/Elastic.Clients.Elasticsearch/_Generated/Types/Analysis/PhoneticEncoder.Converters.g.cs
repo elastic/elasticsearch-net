@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PhoneticEncoderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse");
-	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone1 = System.Text.Json.JsonEncodedText.Encode("caverphone1");
-	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone2 = System.Text.Json.JsonEncodedText.Encode("caverphone2");
-	private static readonly System.Text.Json.JsonEncodedText MemberCologne = System.Text.Json.JsonEncodedText.Encode("cologne");
-	private static readonly System.Text.Json.JsonEncodedText MemberDaitchMokotoff = System.Text.Json.JsonEncodedText.Encode("daitch_mokotoff");
-	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone");
-	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik");
-	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik");
-	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone");
-	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis");
-	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex");
-	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex");
+	private static readonly System.Text.Json.JsonEncodedText MemberBeiderMorse = System.Text.Json.JsonEncodedText.Encode("beider_morse"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone1 = System.Text.Json.JsonEncodedText.Encode("caverphone1"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCaverphone2 = System.Text.Json.JsonEncodedText.Encode("caverphone2"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCologne = System.Text.Json.JsonEncodedText.Encode("cologne"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDaitchMokotoff = System.Text.Json.JsonEncodedText.Encode("daitch_mokotoff"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleMetaphone = System.Text.Json.JsonEncodedText.Encode("double_metaphone"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHaasephonetik = System.Text.Json.JsonEncodedText.Encode("haasephonetik"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKoelnerphonetik = System.Text.Json.JsonEncodedText.Encode("koelnerphonetik"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMetaphone = System.Text.Json.JsonEncodedText.Encode("metaphone"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNysiis = System.Text.Json.JsonEncodedText.Encode("nysiis"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRefinedSoundex = System.Text.Json.JsonEncodedText.Encode("refined_soundex"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSoundex = System.Text.Json.JsonEncodedText.Encode("soundex"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -1156,6 +1156,52 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
@@ -2686,6 +2732,52 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest request)
 	{
 		request.BeforeRequest();
@@ -3996,6 +4088,52 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest request)

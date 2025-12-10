@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterJvmMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsed = System.Text.Json.JsonEncodedText.Encode("heap_used");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapUsed = System.Text.Json.JsonEncodedText.Encode("heap_used"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

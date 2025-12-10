@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class DeleteActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("delete_searchable_snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("delete_searchable_snapshot"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

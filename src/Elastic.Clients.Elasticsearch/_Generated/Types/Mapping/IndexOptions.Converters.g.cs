@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class IndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.IndexOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText MemberFreqs = System.Text.Json.JsonEncodedText.Encode("freqs");
-	private static readonly System.Text.Json.JsonEncodedText MemberOffsets = System.Text.Json.JsonEncodedText.Encode("offsets");
-	private static readonly System.Text.Json.JsonEncodedText MemberPositions = System.Text.Json.JsonEncodedText.Encode("positions");
+	private static readonly System.Text.Json.JsonEncodedText MemberDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFreqs = System.Text.Json.JsonEncodedText.Encode("freqs"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOffsets = System.Text.Json.JsonEncodedText.Encode("offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPositions = System.Text.Json.JsonEncodedText.Encode("positions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.IndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

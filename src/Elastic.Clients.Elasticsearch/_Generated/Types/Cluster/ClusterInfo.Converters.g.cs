@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropReservedSizes = System.Text.Json.JsonEncodedText.Encode("reserved_sizes");
-	private static readonly System.Text.Json.JsonEncodedText PropShardDataSetSizes = System.Text.Json.JsonEncodedText.Encode("shard_data_set_sizes");
-	private static readonly System.Text.Json.JsonEncodedText PropShardPaths = System.Text.Json.JsonEncodedText.Encode("shard_paths");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSizes = System.Text.Json.JsonEncodedText.Encode("shard_sizes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReservedSizes = System.Text.Json.JsonEncodedText.Encode("reserved_sizes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardDataSetSizes = System.Text.Json.JsonEncodedText.Encode("shard_data_set_sizes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardPaths = System.Text.Json.JsonEncodedText.Encode("shard_paths"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSizes = System.Text.Json.JsonEncodedText.Encode("shard_sizes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

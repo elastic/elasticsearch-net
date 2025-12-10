@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SearchableSnapshotsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFullCopyIndicesCount = System.Text.Json.JsonEncodedText.Encode("full_copy_indices_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSharedCacheIndicesCount = System.Text.Json.JsonEncodedText.Encode("shared_cache_indices_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFullCopyIndicesCount = System.Text.Json.JsonEncodedText.Encode("full_copy_indices_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSharedCacheIndicesCount = System.Text.Json.JsonEncodedText.Encode("shared_cache_indices_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationSummaryAucRocCurveItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRocCurveItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFpr = System.Text.Json.JsonEncodedText.Encode("fpr");
-	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold");
-	private static readonly System.Text.Json.JsonEncodedText PropTpr = System.Text.Json.JsonEncodedText.Encode("tpr");
+	private static readonly System.Text.Json.JsonEncodedText PropFpr = System.Text.Json.JsonEncodedText.Encode("fpr"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTpr = System.Text.Json.JsonEncodedText.Encode("tpr"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRocCurveItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

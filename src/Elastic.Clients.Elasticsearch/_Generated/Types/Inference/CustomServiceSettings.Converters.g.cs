@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size");
-	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
-	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryParameters = System.Text.Json.JsonEncodedText.Encode("query_parameters");
-	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request");
-	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response");
-	private static readonly System.Text.Json.JsonEncodedText PropSecretParameters = System.Text.Json.JsonEncodedText.Encode("secret_parameters");
-	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url");
+	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryParameters = System.Text.Json.JsonEncodedText.Encode("query_parameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecretParameters = System.Text.Json.JsonEncodedText.Encode("secret_parameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class EnrichPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropElasticsearchVersion = System.Text.Json.JsonEncodedText.Encode("elasticsearch_version");
-	private static readonly System.Text.Json.JsonEncodedText PropEnrichFields = System.Text.Json.JsonEncodedText.Encode("enrich_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchField = System.Text.Json.JsonEncodedText.Encode("match_field");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropElasticsearchVersion = System.Text.Json.JsonEncodedText.Encode("elasticsearch_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnrichFields = System.Text.Json.JsonEncodedText.Encode("enrich_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchField = System.Text.Json.JsonEncodedText.Encode("match_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

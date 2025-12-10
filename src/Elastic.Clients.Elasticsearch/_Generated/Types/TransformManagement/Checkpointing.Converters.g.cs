@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class CheckpointingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChangesLastDetectedAt = System.Text.Json.JsonEncodedText.Encode("changes_last_detected_at");
-	private static readonly System.Text.Json.JsonEncodedText PropChangesLastDetectedAtString = System.Text.Json.JsonEncodedText.Encode("changes_last_detected_at_string");
-	private static readonly System.Text.Json.JsonEncodedText PropLast = System.Text.Json.JsonEncodedText.Encode("last");
-	private static readonly System.Text.Json.JsonEncodedText PropLastSearchTime = System.Text.Json.JsonEncodedText.Encode("last_search_time");
-	private static readonly System.Text.Json.JsonEncodedText PropLastSearchTimeString = System.Text.Json.JsonEncodedText.Encode("last_search_time_string");
-	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next");
-	private static readonly System.Text.Json.JsonEncodedText PropOperationsBehind = System.Text.Json.JsonEncodedText.Encode("operations_behind");
+	private static readonly System.Text.Json.JsonEncodedText PropChangesLastDetectedAt = System.Text.Json.JsonEncodedText.Encode("changes_last_detected_at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChangesLastDetectedAtString = System.Text.Json.JsonEncodedText.Encode("changes_last_detected_at_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLast = System.Text.Json.JsonEncodedText.Encode("last"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastSearchTime = System.Text.Json.JsonEncodedText.Encode("last_search_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastSearchTimeString = System.Text.Json.JsonEncodedText.Encode("last_search_time_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperationsBehind = System.Text.Json.JsonEncodedText.Encode("operations_behind"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

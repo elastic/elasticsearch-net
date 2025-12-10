@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class PutDataLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
-	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

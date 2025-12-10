@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ClusterSearchStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ClusterSearchStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText MemberPartial = System.Text.Json.JsonEncodedText.Encode("partial");
-	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("running");
-	private static readonly System.Text.Json.JsonEncodedText MemberSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuccessful = System.Text.Json.JsonEncodedText.Encode("successful");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPartial = System.Text.Json.JsonEncodedText.Encode("partial"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("running"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipped = System.Text.Json.JsonEncodedText.Encode("skipped"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccessful = System.Text.Json.JsonEncodedText.Encode("successful"u8);
 
 	public override Elastic.Clients.Elasticsearch.ClusterSearchStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

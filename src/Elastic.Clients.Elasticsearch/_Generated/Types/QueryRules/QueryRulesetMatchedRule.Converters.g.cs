@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class QueryRulesetMatchedRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRuleId = System.Text.Json.JsonEncodedText.Encode("rule_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleId = System.Text.Json.JsonEncodedText.Encode("rule_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

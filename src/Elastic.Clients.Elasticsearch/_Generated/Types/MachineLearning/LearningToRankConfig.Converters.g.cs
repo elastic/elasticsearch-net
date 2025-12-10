@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class LearningToRankConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultParams = System.Text.Json.JsonEncodedText.Encode("default_params");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureExtractors = System.Text.Json.JsonEncodedText.Encode("feature_extractors");
-	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultParams = System.Text.Json.JsonEncodedText.Encode("default_params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureExtractors = System.Text.Json.JsonEncodedText.Encode("feature_extractors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

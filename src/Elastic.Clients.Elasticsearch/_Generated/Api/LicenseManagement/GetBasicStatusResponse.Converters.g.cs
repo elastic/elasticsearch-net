@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class GetBasicStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEligibleToStartBasic = System.Text.Json.JsonEncodedText.Encode("eligible_to_start_basic");
+	private static readonly System.Text.Json.JsonEncodedText PropEligibleToStartBasic = System.Text.Json.JsonEncodedText.Encode("eligible_to_start_basic"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

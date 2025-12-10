@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TDigestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TDigest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
-	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
+	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TDigest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

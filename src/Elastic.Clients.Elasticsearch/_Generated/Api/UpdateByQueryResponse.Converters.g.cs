@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateByQueryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBatches = System.Text.Json.JsonEncodedText.Encode("batches");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures");
-	private static readonly System.Text.Json.JsonEncodedText PropNoops = System.Text.Json.JsonEncodedText.Encode("noops");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second");
-	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries");
-	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledMillis = System.Text.Json.JsonEncodedText.Encode("throttled_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntil = System.Text.Json.JsonEncodedText.Encode("throttled_until");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntilMillis = System.Text.Json.JsonEncodedText.Encode("throttled_until_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
-	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionConflicts = System.Text.Json.JsonEncodedText.Encode("version_conflicts");
+	private static readonly System.Text.Json.JsonEncodedText PropBatches = System.Text.Json.JsonEncodedText.Encode("batches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailures = System.Text.Json.JsonEncodedText.Encode("failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoops = System.Text.Json.JsonEncodedText.Encode("noops"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledMillis = System.Text.Json.JsonEncodedText.Encode("throttled_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntil = System.Text.Json.JsonEncodedText.Encode("throttled_until"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntilMillis = System.Text.Json.JsonEncodedText.Encode("throttled_until_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdated = System.Text.Json.JsonEncodedText.Encode("updated"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersionConflicts = System.Text.Json.JsonEncodedText.Encode("version_conflicts"u8);
 
 	public override Elastic.Clients.Elasticsearch.UpdateByQueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

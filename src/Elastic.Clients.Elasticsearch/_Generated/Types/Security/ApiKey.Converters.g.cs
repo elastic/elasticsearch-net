@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKey>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccess = System.Text.Json.JsonEncodedText.Encode("access");
-	private static readonly System.Text.Json.JsonEncodedText PropCreation = System.Text.Json.JsonEncodedText.Encode("creation");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropInvalidated = System.Text.Json.JsonEncodedText.Encode("invalidated");
-	private static readonly System.Text.Json.JsonEncodedText PropInvalidation = System.Text.Json.JsonEncodedText.Encode("invalidation");
-	private static readonly System.Text.Json.JsonEncodedText PropLimitedBy = System.Text.Json.JsonEncodedText.Encode("limited_by");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropProfileUid = System.Text.Json.JsonEncodedText.Encode("profile_uid");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRealmType = System.Text.Json.JsonEncodedText.Encode("realm_type");
-	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors");
-	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("_sort");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropAccess = System.Text.Json.JsonEncodedText.Encode("access"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreation = System.Text.Json.JsonEncodedText.Encode("creation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidated = System.Text.Json.JsonEncodedText.Encode("invalidated"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidation = System.Text.Json.JsonEncodedText.Encode("invalidation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimitedBy = System.Text.Json.JsonEncodedText.Encode("limited_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProfileUid = System.Text.Json.JsonEncodedText.Encode("profile_uid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealmType = System.Text.Json.JsonEncodedText.Encode("realm_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("_sort"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKey Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

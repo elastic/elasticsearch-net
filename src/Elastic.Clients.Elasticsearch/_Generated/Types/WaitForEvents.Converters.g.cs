@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class WaitForEventsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.WaitForEvents>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberHigh = System.Text.Json.JsonEncodedText.Encode("high");
-	private static readonly System.Text.Json.JsonEncodedText MemberImmediate = System.Text.Json.JsonEncodedText.Encode("immediate");
-	private static readonly System.Text.Json.JsonEncodedText MemberLanguid = System.Text.Json.JsonEncodedText.Encode("languid");
-	private static readonly System.Text.Json.JsonEncodedText MemberLow = System.Text.Json.JsonEncodedText.Encode("low");
-	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal");
-	private static readonly System.Text.Json.JsonEncodedText MemberUrgent = System.Text.Json.JsonEncodedText.Encode("urgent");
+	private static readonly System.Text.Json.JsonEncodedText MemberHigh = System.Text.Json.JsonEncodedText.Encode("high"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberImmediate = System.Text.Json.JsonEncodedText.Encode("immediate"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLanguid = System.Text.Json.JsonEncodedText.Encode("languid"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLow = System.Text.Json.JsonEncodedText.Encode("low"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNormal = System.Text.Json.JsonEncodedText.Encode("normal"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUrgent = System.Text.Json.JsonEncodedText.Encode("urgent"u8);
 
 	public override Elastic.Clients.Elasticsearch.WaitForEvents Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

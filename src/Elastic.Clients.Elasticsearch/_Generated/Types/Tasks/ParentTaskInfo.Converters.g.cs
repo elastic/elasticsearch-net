@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Tasks.Json;
 
 public sealed partial class ParentTaskInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
-	private static readonly System.Text.Json.JsonEncodedText PropCancellable = System.Text.Json.JsonEncodedText.Encode("cancellable");
-	private static readonly System.Text.Json.JsonEncodedText PropCancelled = System.Text.Json.JsonEncodedText.Encode("cancelled");
-	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropParentTaskId = System.Text.Json.JsonEncodedText.Encode("parent_task_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRunningTime = System.Text.Json.JsonEncodedText.Encode("running_time");
-	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeInNanos = System.Text.Json.JsonEncodedText.Encode("running_time_in_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCancellable = System.Text.Json.JsonEncodedText.Encode("cancellable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCancelled = System.Text.Json.JsonEncodedText.Encode("cancelled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParentTaskId = System.Text.Json.JsonEncodedText.Encode("parent_task_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTime = System.Text.Json.JsonEncodedText.Encode("running_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeInNanos = System.Text.Json.JsonEncodedText.Encode("running_time_in_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

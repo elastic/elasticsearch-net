@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeClassificationSummaryRecallConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvgRecall = System.Text.Json.JsonEncodedText.Encode("avg_recall");
-	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgRecall = System.Text.Json.JsonEncodedText.Encode("avg_recall"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryRecall Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalMetricDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
-	private static readonly System.Text.Json.JsonEncodedText PropMetricDetails = System.Text.Json.JsonEncodedText.Encode("metric_details");
-	private static readonly System.Text.Json.JsonEncodedText PropMetricScore = System.Text.Json.JsonEncodedText.Encode("metric_score");
-	private static readonly System.Text.Json.JsonEncodedText PropUnratedDocs = System.Text.Json.JsonEncodedText.Encode("unrated_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetricDetails = System.Text.Json.JsonEncodedText.Encode("metric_details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetricScore = System.Text.Json.JsonEncodedText.Encode("metric_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnratedDocs = System.Text.Json.JsonEncodedText.Encode("unrated_docs"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

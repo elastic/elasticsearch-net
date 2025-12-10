@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class IntervalsAllOfConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps");
-	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

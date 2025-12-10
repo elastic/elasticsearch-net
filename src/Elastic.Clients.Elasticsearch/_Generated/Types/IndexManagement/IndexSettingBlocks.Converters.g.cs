@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexSettingBlocksConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read");
-	private static readonly System.Text.Json.JsonEncodedText PropReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only");
-	private static readonly System.Text.Json.JsonEncodedText PropReadOnlyAllowDelete = System.Text.Json.JsonEncodedText.Encode("read_only_allow_delete");
-	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadOnlyAllowDelete = System.Text.Json.JsonEncodedText.Encode("read_only_allow_delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

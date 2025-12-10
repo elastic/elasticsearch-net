@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBinary = System.Text.Json.JsonEncodedText.Encode("binary");
-	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit");
-	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
-	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
-	private static readonly System.Text.Json.JsonEncodedText MemberInt8 = System.Text.Json.JsonEncodedText.Encode("int8");
+	private static readonly System.Text.Json.JsonEncodedText MemberBinary = System.Text.Json.JsonEncodedText.Encode("binary"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInt8 = System.Text.Json.JsonEncodedText.Encode("int8"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

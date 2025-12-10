@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class HttpConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Http>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClients = System.Text.Json.JsonEncodedText.Encode("clients");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentOpen = System.Text.Json.JsonEncodedText.Encode("current_open");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutes = System.Text.Json.JsonEncodedText.Encode("routes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalOpened = System.Text.Json.JsonEncodedText.Encode("total_opened");
+	private static readonly System.Text.Json.JsonEncodedText PropClients = System.Text.Json.JsonEncodedText.Encode("clients"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentOpen = System.Text.Json.JsonEncodedText.Encode("current_open"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoutes = System.Text.Json.JsonEncodedText.Encode("routes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOpened = System.Text.Json.JsonEncodedText.Encode("total_opened"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Http Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

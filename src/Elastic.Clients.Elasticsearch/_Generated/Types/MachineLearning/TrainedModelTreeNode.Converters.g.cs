@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelTreeNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDecisionType = System.Text.Json.JsonEncodedText.Encode("decision_type");
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultLeft = System.Text.Json.JsonEncodedText.Encode("default_left");
-	private static readonly System.Text.Json.JsonEncodedText PropLeafValue = System.Text.Json.JsonEncodedText.Encode("leaf_value");
-	private static readonly System.Text.Json.JsonEncodedText PropLeftChild = System.Text.Json.JsonEncodedText.Encode("left_child");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeIndex = System.Text.Json.JsonEncodedText.Encode("node_index");
-	private static readonly System.Text.Json.JsonEncodedText PropRightChild = System.Text.Json.JsonEncodedText.Encode("right_child");
-	private static readonly System.Text.Json.JsonEncodedText PropSplitFeature = System.Text.Json.JsonEncodedText.Encode("split_feature");
-	private static readonly System.Text.Json.JsonEncodedText PropSplitGain = System.Text.Json.JsonEncodedText.Encode("split_gain");
-	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropDecisionType = System.Text.Json.JsonEncodedText.Encode("decision_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDefaultLeft = System.Text.Json.JsonEncodedText.Encode("default_left"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeafValue = System.Text.Json.JsonEncodedText.Encode("leaf_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeftChild = System.Text.Json.JsonEncodedText.Encode("left_child"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeIndex = System.Text.Json.JsonEncodedText.Encode("node_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRightChild = System.Text.Json.JsonEncodedText.Encode("right_child"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSplitFeature = System.Text.Json.JsonEncodedText.Encode("split_feature"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSplitGain = System.Text.Json.JsonEncodedText.Encode("split_gain"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

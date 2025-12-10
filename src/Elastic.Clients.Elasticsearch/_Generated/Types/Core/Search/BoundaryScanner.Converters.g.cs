@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class BoundaryScannerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberChars = System.Text.Json.JsonEncodedText.Encode("chars");
-	private static readonly System.Text.Json.JsonEncodedText MemberSentence = System.Text.Json.JsonEncodedText.Encode("sentence");
-	private static readonly System.Text.Json.JsonEncodedText MemberWord = System.Text.Json.JsonEncodedText.Encode("word");
+	private static readonly System.Text.Json.JsonEncodedText MemberChars = System.Text.Json.JsonEncodedText.Encode("chars"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSentence = System.Text.Json.JsonEncodedText.Encode("sentence"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWord = System.Text.Json.JsonEncodedText.Encode("word"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

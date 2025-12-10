@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class AggregationProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBreakdown = System.Text.Json.JsonEncodedText.Encode("breakdown");
-	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children");
-	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInNanos = System.Text.Json.JsonEncodedText.Encode("time_in_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropBreakdown = System.Text.Json.JsonEncodedText.Encode("breakdown"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDebug = System.Text.Json.JsonEncodedText.Encode("debug"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInNanos = System.Text.Json.JsonEncodedText.Encode("time_in_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

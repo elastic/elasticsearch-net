@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SecurityRolesDlsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBitSetCache = System.Text.Json.JsonEncodedText.Encode("bit_set_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropBitSetCache = System.Text.Json.JsonEncodedText.Encode("bit_set_cache"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

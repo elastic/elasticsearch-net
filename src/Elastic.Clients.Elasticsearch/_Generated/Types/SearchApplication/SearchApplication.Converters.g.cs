@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class SearchApplicationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
-	private static readonly System.Text.Json.JsonEncodedText PropUpdatedAtMillis = System.Text.Json.JsonEncodedText.Encode("updated_at_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdatedAtMillis = System.Text.Json.JsonEncodedText.Encode("updated_at_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class IlmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Ilm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyCount = System.Text.Json.JsonEncodedText.Encode("policy_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyCount = System.Text.Json.JsonEncodedText.Encode("policy_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Ilm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -49,7 +49,7 @@ public sealed partial class HotThreadsRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// The sort order for 'cpu' type (default: total)
+	/// The sort order for 'cpu' type
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
@@ -145,7 +145,7 @@ public sealed partial class HotThreadsRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The sort order for 'cpu' type (default: total)
+	/// The sort order for 'cpu' type
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ThreadType? Sort { get => Q<Elastic.Clients.Elasticsearch.ThreadType?>("sort"); set => Q("sort", value); }
@@ -250,7 +250,7 @@ public readonly partial struct HotThreadsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The sort order for 'cpu' type (default: total)
+	/// The sort order for 'cpu' type
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadType? value)

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class GetIlmStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOperationMode = System.Text.Json.JsonEncodedText.Encode("operation_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropOperationMode = System.Text.Json.JsonEncodedText.Encode("operation_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

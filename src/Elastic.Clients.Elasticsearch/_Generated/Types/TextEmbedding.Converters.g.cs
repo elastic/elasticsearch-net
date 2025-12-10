@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TextEmbeddingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextEmbedding>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelText = System.Text.Json.JsonEncodedText.Encode("model_text");
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelText = System.Text.Json.JsonEncodedText.Encode("model_text"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextEmbedding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

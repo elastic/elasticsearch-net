@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class PhraseSuggestHighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPostTag = System.Text.Json.JsonEncodedText.Encode("post_tag");
-	private static readonly System.Text.Json.JsonEncodedText PropPreTag = System.Text.Json.JsonEncodedText.Encode("pre_tag");
+	private static readonly System.Text.Json.JsonEncodedText PropPostTag = System.Text.Json.JsonEncodedText.Encode("post_tag"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreTag = System.Text.Json.JsonEncodedText.Encode("pre_tag"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

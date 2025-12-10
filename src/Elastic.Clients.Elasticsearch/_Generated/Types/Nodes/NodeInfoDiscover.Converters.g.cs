@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSeedHosts = System.Text.Json.JsonEncodedText.Encode("seed_hosts");
-	private static readonly System.Text.Json.JsonEncodedText PropSeedProviders = System.Text.Json.JsonEncodedText.Encode("seed_providers");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropSeedHosts = System.Text.Json.JsonEncodedText.Encode("seed_hosts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeedProviders = System.Text.Json.JsonEncodedText.Encode("seed_providers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

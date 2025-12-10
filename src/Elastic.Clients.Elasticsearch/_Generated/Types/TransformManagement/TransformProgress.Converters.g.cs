@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TransformProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocsIndexed = System.Text.Json.JsonEncodedText.Encode("docs_indexed");
-	private static readonly System.Text.Json.JsonEncodedText PropDocsProcessed = System.Text.Json.JsonEncodedText.Encode("docs_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropDocsRemaining = System.Text.Json.JsonEncodedText.Encode("docs_remaining");
-	private static readonly System.Text.Json.JsonEncodedText PropPercentComplete = System.Text.Json.JsonEncodedText.Encode("percent_complete");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropDocsIndexed = System.Text.Json.JsonEncodedText.Encode("docs_indexed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocsProcessed = System.Text.Json.JsonEncodedText.Encode("docs_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocsRemaining = System.Text.Json.JsonEncodedText.Encode("docs_remaining"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPercentComplete = System.Text.Json.JsonEncodedText.Encode("percent_complete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

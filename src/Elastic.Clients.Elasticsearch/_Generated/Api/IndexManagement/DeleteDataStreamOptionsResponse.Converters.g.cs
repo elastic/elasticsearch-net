@@ -23,17 +23,17 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
-public sealed partial class DataStreamLifecycleDownsamplingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling>
+public sealed partial class DeleteDataStreamOptionsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRounds = System.Text.Json.JsonEncodedText.Encode("rounds");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
 
-	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>> propRounds = default;
+		LocalJsonValue<bool> propAcknowledged = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRounds.TryReadProperty(ref reader, options, PropRounds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, null)!))
+			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
 			{
 				continue;
 			}
@@ -48,16 +48,16 @@ public sealed partial class DataStreamLifecycleDownsamplingConverter : System.Te
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Rounds = propRounds.Value
+			Acknowledged = propAcknowledged.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRounds, value.Rounds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, v, null));
+		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
 		writer.WriteEndObject();
 	}
 }

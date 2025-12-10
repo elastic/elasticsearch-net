@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class MaxmindConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Maxmind>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccountId = System.Text.Json.JsonEncodedText.Encode("account_id");
+	private static readonly System.Text.Json.JsonEncodedText PropAccountId = System.Text.Json.JsonEncodedText.Encode("account_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.Maxmind Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

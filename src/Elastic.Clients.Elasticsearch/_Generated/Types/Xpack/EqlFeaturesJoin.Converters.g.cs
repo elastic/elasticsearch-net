@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class EqlFeaturesJoinConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFiveOrMore = System.Text.Json.JsonEncodedText.Encode("join_queries_five_or_more");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFour = System.Text.Json.JsonEncodedText.Encode("join_queries_four");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesThree = System.Text.Json.JsonEncodedText.Encode("join_queries_three");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesTwo = System.Text.Json.JsonEncodedText.Encode("join_queries_two");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinUntil = System.Text.Json.JsonEncodedText.Encode("join_until");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFiveOrMore = System.Text.Json.JsonEncodedText.Encode("join_queries_five_or_more"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesFour = System.Text.Json.JsonEncodedText.Encode("join_queries_four"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesThree = System.Text.Json.JsonEncodedText.Encode("join_queries_three"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinQueriesTwo = System.Text.Json.JsonEncodedText.Encode("join_queries_two"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinUntil = System.Text.Json.JsonEncodedText.Encode("join_until"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationOutlierDetectionMetricsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAucRoc = System.Text.Json.JsonEncodedText.Encode("auc_roc");
-	private static readonly System.Text.Json.JsonEncodedText PropConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("confusion_matrix");
-	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
-	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+	private static readonly System.Text.Json.JsonEncodedText PropAucRoc = System.Text.Json.JsonEncodedText.Encode("auc_roc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("confusion_matrix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

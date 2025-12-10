@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TopLeftBottomRightGeoBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBottomRight = System.Text.Json.JsonEncodedText.Encode("bottom_right");
-	private static readonly System.Text.Json.JsonEncodedText PropTopLeft = System.Text.Json.JsonEncodedText.Encode("top_left");
+	private static readonly System.Text.Json.JsonEncodedText PropBottomRight = System.Text.Json.JsonEncodedText.Encode("bottom_right"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopLeft = System.Text.Json.JsonEncodedText.Encode("top_left"u8);
 
 	public override Elastic.Clients.Elasticsearch.TopLeftBottomRightGeoBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class HunspellTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDedup = System.Text.Json.JsonEncodedText.Encode("dedup");
-	private static readonly System.Text.Json.JsonEncodedText PropDictionary = System.Text.Json.JsonEncodedText.Encode("dictionary");
-	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
-	private static readonly System.Text.Json.JsonEncodedText PropLocale1 = System.Text.Json.JsonEncodedText.Encode("lang");
-	private static readonly System.Text.Json.JsonEncodedText PropLocale2 = System.Text.Json.JsonEncodedText.Encode("language");
-	private static readonly System.Text.Json.JsonEncodedText PropLongestOnly = System.Text.Json.JsonEncodedText.Encode("longest_only");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropDedup = System.Text.Json.JsonEncodedText.Encode("dedup"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDictionary = System.Text.Json.JsonEncodedText.Encode("dictionary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocale1 = System.Text.Json.JsonEncodedText.Encode("lang"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocale2 = System.Text.Json.JsonEncodedText.Encode("language"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLongestOnly = System.Text.Json.JsonEncodedText.Encode("longest_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

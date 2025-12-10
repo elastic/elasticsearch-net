@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Sql.Json;
 
 public sealed partial class ClearCursorResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded");
+	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded"u8);
 
 	public override Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

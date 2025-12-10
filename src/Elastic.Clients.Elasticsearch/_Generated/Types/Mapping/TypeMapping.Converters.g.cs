@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class TypeMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TypeMapping>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllField = System.Text.Json.JsonEncodedText.Encode("all_field");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreamTimestamp = System.Text.Json.JsonEncodedText.Encode("_data_stream_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexField = System.Text.Json.JsonEncodedText.Encode("index_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
-	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
-	private static readonly System.Text.Json.JsonEncodedText PropSubobjects = System.Text.Json.JsonEncodedText.Encode("subobjects");
+	private static readonly System.Text.Json.JsonEncodedText PropAllField = System.Text.Json.JsonEncodedText.Encode("all_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamTimestamp = System.Text.Json.JsonEncodedText.Encode("_data_stream_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexField = System.Text.Json.JsonEncodedText.Encode("index_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSubobjects = System.Text.Json.JsonEncodedText.Encode("subobjects"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.TypeMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

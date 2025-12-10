@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDoSample = System.Text.Json.JsonEncodedText.Encode("do_sample");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNewTokens = System.Text.Json.JsonEncodedText.Encode("max_new_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature");
-	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p");
-	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+	private static readonly System.Text.Json.JsonEncodedText PropDoSample = System.Text.Json.JsonEncodedText.Encode("do_sample"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNewTokens = System.Text.Json.JsonEncodedText.Encode("max_new_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

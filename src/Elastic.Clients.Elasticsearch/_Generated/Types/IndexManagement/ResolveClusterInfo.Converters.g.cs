@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ResolveClusterInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConnected = System.Text.Json.JsonEncodedText.Encode("connected");
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchingIndices = System.Text.Json.JsonEncodedText.Encode("matching_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropConnected = System.Text.Json.JsonEncodedText.Encode("connected"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchingIndices = System.Text.Json.JsonEncodedText.Encode("matching_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class QueryRuleCriteriaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropValues = System.Text.Json.JsonEncodedText.Encode("values");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValues = System.Text.Json.JsonEncodedText.Encode("values"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

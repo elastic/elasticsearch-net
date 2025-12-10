@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class ImpactConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.Impact>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropImpactAreas = System.Text.Json.JsonEncodedText.Encode("impact_areas");
-	private static readonly System.Text.Json.JsonEncodedText PropSeverity = System.Text.Json.JsonEncodedText.Encode("severity");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropImpactAreas = System.Text.Json.JsonEncodedText.Encode("impact_areas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeverity = System.Text.Json.JsonEncodedText.Encode("severity"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.Impact Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

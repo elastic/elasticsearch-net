@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class FieldCollapseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentGroupSearches = System.Text.Json.JsonEncodedText.Encode("max_concurrent_group_searches");
+	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentGroupSearches = System.Text.Json.JsonEncodedText.Encode("max_concurrent_group_searches"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

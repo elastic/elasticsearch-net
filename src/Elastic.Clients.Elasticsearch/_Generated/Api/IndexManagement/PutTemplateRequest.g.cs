@@ -27,7 +27,7 @@ public sealed partial class PutTemplateRequestParameters : Elastic.Transport.Req
 {
 	/// <summary>
 	/// <para>
-	/// User defined reason for creating/updating the index template
+	/// User defined reason for creating or updating the index template
 	/// </para>
 	/// </summary>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
@@ -118,7 +118,7 @@ public sealed partial class PutTemplateRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
-	/// User defined reason for creating/updating the index template
+	/// User defined reason for creating or updating the index template
 	/// </para>
 	/// </summary>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
@@ -257,7 +257,7 @@ public readonly partial struct PutTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// User defined reason for creating/updating the index template
+	/// User defined reason for creating or updating the index template
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor Cause(string? value)
@@ -649,7 +649,7 @@ public readonly partial struct PutTemplateRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// User defined reason for creating/updating the index template
+	/// User defined reason for creating or updating the index template
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument> Cause(string? value)

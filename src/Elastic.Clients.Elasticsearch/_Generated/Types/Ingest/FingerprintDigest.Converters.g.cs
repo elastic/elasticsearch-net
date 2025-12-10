@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class FingerprintDigestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMd5 = System.Text.Json.JsonEncodedText.Encode("MD5");
-	private static readonly System.Text.Json.JsonEncodedText MemberMurmurHash3 = System.Text.Json.JsonEncodedText.Encode("MurmurHash3");
-	private static readonly System.Text.Json.JsonEncodedText MemberSha1 = System.Text.Json.JsonEncodedText.Encode("SHA-1");
-	private static readonly System.Text.Json.JsonEncodedText MemberSha256 = System.Text.Json.JsonEncodedText.Encode("SHA-256");
-	private static readonly System.Text.Json.JsonEncodedText MemberSha512 = System.Text.Json.JsonEncodedText.Encode("SHA-512");
+	private static readonly System.Text.Json.JsonEncodedText MemberMd5 = System.Text.Json.JsonEncodedText.Encode("MD5"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMurmurHash3 = System.Text.Json.JsonEncodedText.Encode("MurmurHash3"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSha1 = System.Text.Json.JsonEncodedText.Encode("SHA-1"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSha256 = System.Text.Json.JsonEncodedText.Encode("SHA-256"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSha512 = System.Text.Json.JsonEncodedText.Encode("SHA-512"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

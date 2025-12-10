@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class StatsBucketAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgAsString = System.Text.Json.JsonEncodedText.Encode("avg_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum");
-	private static readonly System.Text.Json.JsonEncodedText PropSumAsString = System.Text.Json.JsonEncodedText.Encode("sum_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgAsString = System.Text.Json.JsonEncodedText.Encode("avg_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumAsString = System.Text.Json.JsonEncodedText.Encode("sum_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

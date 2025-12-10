@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class ShardsCapacityIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
