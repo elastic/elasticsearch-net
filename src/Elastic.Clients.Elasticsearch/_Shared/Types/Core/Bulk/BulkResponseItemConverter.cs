@@ -12,17 +12,17 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk.Json;
 
 public sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 {
-	private static readonly JsonEncodedText PropError = JsonEncodedText.Encode("error");
-	private static readonly JsonEncodedText PropForcedRefresh = JsonEncodedText.Encode("forced_refresh");
-	private static readonly JsonEncodedText PropGet = JsonEncodedText.Encode("get");
-	private static readonly JsonEncodedText PropId = JsonEncodedText.Encode("_id");
-	private static readonly JsonEncodedText PropIndex = JsonEncodedText.Encode("_index");
-	private static readonly JsonEncodedText PropPrimaryTerm = JsonEncodedText.Encode("_primary_term");
-	private static readonly JsonEncodedText PropResult = JsonEncodedText.Encode("result");
-	private static readonly JsonEncodedText PropSeqNo = JsonEncodedText.Encode("_seq_no");
-	private static readonly JsonEncodedText PropShards = JsonEncodedText.Encode("_shards");
-	private static readonly JsonEncodedText PropStatus = JsonEncodedText.Encode("status");
-	private static readonly JsonEncodedText PropVersion = JsonEncodedText.Encode("_version");
+	private static readonly JsonEncodedText PropError = JsonEncodedText.Encode("error"u8);
+	private static readonly JsonEncodedText PropForcedRefresh = JsonEncodedText.Encode("forced_refresh"u8);
+	private static readonly JsonEncodedText PropGet = JsonEncodedText.Encode("get"u8);
+	private static readonly JsonEncodedText PropId = JsonEncodedText.Encode("_id"u8);
+	private static readonly JsonEncodedText PropIndex = JsonEncodedText.Encode("_index"u8);
+	private static readonly JsonEncodedText PropPrimaryTerm = JsonEncodedText.Encode("_primary_term"u8);
+	private static readonly JsonEncodedText PropResult = JsonEncodedText.Encode("result"u8);
+	private static readonly JsonEncodedText PropSeqNo = JsonEncodedText.Encode("_seq_no"u8);
+	private static readonly JsonEncodedText PropShards = JsonEncodedText.Encode("_shards"u8);
+	private static readonly JsonEncodedText PropStatus = JsonEncodedText.Encode("status"u8);
+	private static readonly JsonEncodedText PropVersion = JsonEncodedText.Encode("_version"u8);
 
 	public override ResponseItem Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{

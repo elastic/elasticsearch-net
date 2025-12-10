@@ -15,12 +15,12 @@ public sealed class GeoLocationConverter :
 {
 	// LatitudeLongitude.
 
-	private static readonly JsonEncodedText PropLat = JsonEncodedText.Encode("lat");
-	private static readonly JsonEncodedText PropLon = JsonEncodedText.Encode("lon");
+	private static readonly JsonEncodedText PropLat = JsonEncodedText.Encode("lat"u8);
+	private static readonly JsonEncodedText PropLon = JsonEncodedText.Encode("lon"u8);
 
 	// GeoHash.
 
-	private static readonly JsonEncodedText PropGeoHash = JsonEncodedText.Encode("geohash");
+	private static readonly JsonEncodedText PropGeoHash = JsonEncodedText.Encode("geohash"u8);
 
 	public override GeoLocation? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
