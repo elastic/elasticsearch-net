@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Eql.Json;
 
 public sealed partial class EqlSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
-	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSequenceResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_sequence_results");
-	private static readonly System.Text.Json.JsonEncodedText PropCaseSensitive = System.Text.Json.JsonEncodedText.Encode("case_sensitive");
-	private static readonly System.Text.Json.JsonEncodedText PropEventCategoryField = System.Text.Json.JsonEncodedText.Encode("event_category_field");
-	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSamplesPerKey = System.Text.Json.JsonEncodedText.Encode("max_samples_per_key");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropResultPosition = System.Text.Json.JsonEncodedText.Encode("result_position");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropTiebreakerField = System.Text.Json.JsonEncodedText.Encode("tiebreaker_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
-	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSequenceResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_sequence_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCaseSensitive = System.Text.Json.JsonEncodedText.Encode("case_sensitive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEventCategoryField = System.Text.Json.JsonEncodedText.Encode("event_category_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSamplesPerKey = System.Text.Json.JsonEncodedText.Encode("max_samples_per_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultPosition = System.Text.Json.JsonEncodedText.Encode("result_position"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTiebreakerField = System.Text.Json.JsonEncodedText.Encode("tiebreaker_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

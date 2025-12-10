@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackSecurityAuthcConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRealms = System.Text.Json.JsonEncodedText.Encode("realms");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+	private static readonly System.Text.Json.JsonEncodedText PropRealms = System.Text.Json.JsonEncodedText.Encode("realms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthc Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

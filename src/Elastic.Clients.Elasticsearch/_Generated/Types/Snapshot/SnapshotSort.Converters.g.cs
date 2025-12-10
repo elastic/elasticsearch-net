@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SnapshotSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDuration = System.Text.Json.JsonEncodedText.Encode("duration");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailedShardCount = System.Text.Json.JsonEncodedText.Encode("failed_shard_count");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
-	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText MemberRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText MemberShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count");
-	private static readonly System.Text.Json.JsonEncodedText MemberStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText MemberDuration = System.Text.Json.JsonEncodedText.Encode("duration"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFailedShardCount = System.Text.Json.JsonEncodedText.Encode("failed_shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRepository = System.Text.Json.JsonEncodedText.Encode("repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberShardCount = System.Text.Json.JsonEncodedText.Encode("shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStartTime = System.Text.Json.JsonEncodedText.Encode("start_time"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

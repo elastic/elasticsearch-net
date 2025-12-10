@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class ElserServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads");
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

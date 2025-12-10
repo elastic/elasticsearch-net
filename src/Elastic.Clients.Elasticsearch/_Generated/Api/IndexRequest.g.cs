@@ -295,13 +295,15 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 ///     "id": "elkbee"
 ///   }
 /// }
-/// 
+/// </code>
+/// <para>
 /// In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1.
 /// If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).
-/// 
+/// </para>
+/// <para>
 /// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 /// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
-/// </code>
+/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndexRequestConverterFactory))]
 public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexRequestParameters>
@@ -639,13 +641,15 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 ///     "id": "elkbee"
 ///   }
 /// }
-/// 
+/// </code>
+/// <para>
 /// In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1.
 /// If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).
-/// 
+/// </para>
+/// <para>
 /// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 /// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
-/// </code>
+/// </para>
 /// </summary>
 public readonly partial struct IndexRequestDescriptor<TDocument>
 {

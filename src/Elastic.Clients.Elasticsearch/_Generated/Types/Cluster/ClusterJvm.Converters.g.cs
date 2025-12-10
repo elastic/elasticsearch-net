@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterJvmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxUptime = System.Text.Json.JsonEncodedText.Encode("max_uptime");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("max_uptime_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
-	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUptime = System.Text.Json.JsonEncodedText.Encode("max_uptime"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("max_uptime_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersions = System.Text.Json.JsonEncodedText.Encode("versions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

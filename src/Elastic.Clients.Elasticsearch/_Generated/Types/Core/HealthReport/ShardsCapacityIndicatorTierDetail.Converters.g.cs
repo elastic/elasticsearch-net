@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class ShardsCapacityIndicatorTierDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentUsedShards = System.Text.Json.JsonEncodedText.Encode("current_used_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxShardsInCluster = System.Text.Json.JsonEncodedText.Encode("max_shards_in_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentUsedShards = System.Text.Json.JsonEncodedText.Encode("current_used_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShardsInCluster = System.Text.Json.JsonEncodedText.Encode("max_shards_in_cluster"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

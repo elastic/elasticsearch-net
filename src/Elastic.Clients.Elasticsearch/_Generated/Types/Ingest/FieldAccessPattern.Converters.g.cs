@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class FieldAccessPatternConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClassic = System.Text.Json.JsonEncodedText.Encode("classic");
-	private static readonly System.Text.Json.JsonEncodedText MemberFlexible = System.Text.Json.JsonEncodedText.Encode("flexible");
+	private static readonly System.Text.Json.JsonEncodedText MemberClassic = System.Text.Json.JsonEncodedText.Encode("classic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFlexible = System.Text.Json.JsonEncodedText.Encode("flexible"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class PostBehavioralAnalyticsEventResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted");
-	private static readonly System.Text.Json.JsonEncodedText PropEvent = System.Text.Json.JsonEncodedText.Encode("event");
+	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEvent = System.Text.Json.JsonEncodedText.Encode("event"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

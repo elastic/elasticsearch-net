@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndicesBlockOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText MemberRead = System.Text.Json.JsonEncodedText.Encode("read");
-	private static readonly System.Text.Json.JsonEncodedText MemberReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only");
-	private static readonly System.Text.Json.JsonEncodedText MemberWrite = System.Text.Json.JsonEncodedText.Encode("write");
+	private static readonly System.Text.Json.JsonEncodedText MemberMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRead = System.Text.Json.JsonEncodedText.Encode("read"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWrite = System.Text.Json.JsonEncodedText.Encode("write"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

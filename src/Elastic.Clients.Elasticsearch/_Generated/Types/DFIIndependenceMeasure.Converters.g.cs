@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DFIIndependenceMeasureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DFIIndependenceMeasure>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberChisquared = System.Text.Json.JsonEncodedText.Encode("chisquared");
-	private static readonly System.Text.Json.JsonEncodedText MemberSaturated = System.Text.Json.JsonEncodedText.Encode("saturated");
-	private static readonly System.Text.Json.JsonEncodedText MemberStandardized = System.Text.Json.JsonEncodedText.Encode("standardized");
+	private static readonly System.Text.Json.JsonEncodedText MemberChisquared = System.Text.Json.JsonEncodedText.Encode("chisquared"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSaturated = System.Text.Json.JsonEncodedText.Encode("saturated"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStandardized = System.Text.Json.JsonEncodedText.Encode("standardized"u8);
 
 	public override Elastic.Clients.Elasticsearch.DFIIndependenceMeasure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

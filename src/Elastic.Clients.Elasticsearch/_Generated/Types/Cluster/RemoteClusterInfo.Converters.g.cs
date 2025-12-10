@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class RemoteClusterInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesTotalSize = System.Text.Json.JsonEncodedText.Encode("indices_total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("indices_total_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxHeap = System.Text.Json.JsonEncodedText.Encode("max_heap");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxHeapInBytes = System.Text.Json.JsonEncodedText.Encode("max_heap_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMemTotal = System.Text.Json.JsonEncodedText.Encode("mem_total");
-	private static readonly System.Text.Json.JsonEncodedText PropMemTotalInBytes = System.Text.Json.JsonEncodedText.Encode("mem_total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesCount = System.Text.Json.JsonEncodedText.Encode("nodes_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsCount = System.Text.Json.JsonEncodedText.Encode("shards_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportCompress = System.Text.Json.JsonEncodedText.Encode("transport.compress");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesTotalSize = System.Text.Json.JsonEncodedText.Encode("indices_total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("indices_total_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxHeap = System.Text.Json.JsonEncodedText.Encode("max_heap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxHeapInBytes = System.Text.Json.JsonEncodedText.Encode("max_heap_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemTotal = System.Text.Json.JsonEncodedText.Encode("mem_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemTotalInBytes = System.Text.Json.JsonEncodedText.Encode("mem_total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesCount = System.Text.Json.JsonEncodedText.Encode("nodes_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsCount = System.Text.Json.JsonEncodedText.Encode("shards_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCompress = System.Text.Json.JsonEncodedText.Encode("transport.compress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class AzureRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path");
-	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
-	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
-	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
-	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size");
-	private static readonly System.Text.Json.JsonEncodedText PropLocationMode = System.Text.Json.JsonEncodedText.Encode("location_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentBatchDeletes = System.Text.Json.JsonEncodedText.Encode("max_concurrent_batch_deletes");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
+	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocationMode = System.Text.Json.JsonEncodedText.Encode("location_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentBatchDeletes = System.Text.Json.JsonEncodedText.Encode("max_concurrent_batch_deletes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

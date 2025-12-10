@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class PostStartBasicResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge");
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropBasicWasStarted = System.Text.Json.JsonEncodedText.Encode("basic_was_started");
-	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledge = System.Text.Json.JsonEncodedText.Encode("acknowledge"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBasicWasStarted = System.Text.Json.JsonEncodedText.Encode("basic_was_started"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrorMessage = System.Text.Json.JsonEncodedText.Encode("error_message"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

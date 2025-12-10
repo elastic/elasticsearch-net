@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ChunkingModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
-	private static readonly System.Text.Json.JsonEncodedText MemberManual = System.Text.Json.JsonEncodedText.Encode("manual");
-	private static readonly System.Text.Json.JsonEncodedText MemberOff = System.Text.Json.JsonEncodedText.Encode("off");
+	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberManual = System.Text.Json.JsonEncodedText.Encode("manual"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOff = System.Text.Json.JsonEncodedText.Encode("off"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

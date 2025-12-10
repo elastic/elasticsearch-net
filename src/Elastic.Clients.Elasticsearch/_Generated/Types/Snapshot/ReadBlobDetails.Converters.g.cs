@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class ReadBlobDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBeforeWriteComplete = System.Text.Json.JsonEncodedText.Encode("before_write_complete");
-	private static readonly System.Text.Json.JsonEncodedText PropElapsed = System.Text.Json.JsonEncodedText.Encode("elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropElapsedNanos = System.Text.Json.JsonEncodedText.Encode("elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTime = System.Text.Json.JsonEncodedText.Encode("first_byte_time");
-	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTimeNanos = System.Text.Json.JsonEncodedText.Encode("first_byte_time_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledNanos = System.Text.Json.JsonEncodedText.Encode("throttled_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropBeforeWriteComplete = System.Text.Json.JsonEncodedText.Encode("before_write_complete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropElapsed = System.Text.Json.JsonEncodedText.Encode("elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropElapsedNanos = System.Text.Json.JsonEncodedText.Encode("elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTime = System.Text.Json.JsonEncodedText.Encode("first_byte_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFirstByteTimeNanos = System.Text.Json.JsonEncodedText.Encode("first_byte_time_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledNanos = System.Text.Json.JsonEncodedText.Encode("throttled_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SlicesCalculationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SlicesCalculation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto");
+	private static readonly System.Text.Json.JsonEncodedText MemberAuto = System.Text.Json.JsonEncodedText.Encode("auto"u8);
 
 	public override Elastic.Clients.Elasticsearch.SlicesCalculation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

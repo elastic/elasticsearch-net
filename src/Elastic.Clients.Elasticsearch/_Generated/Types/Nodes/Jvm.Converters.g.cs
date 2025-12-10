@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class JvmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Jvm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBufferPools = System.Text.Json.JsonEncodedText.Encode("buffer_pools");
-	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes");
-	private static readonly System.Text.Json.JsonEncodedText PropGc = System.Text.Json.JsonEncodedText.Encode("gc");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropUptime = System.Text.Json.JsonEncodedText.Encode("uptime");
-	private static readonly System.Text.Json.JsonEncodedText PropUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("uptime_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropBufferPools = System.Text.Json.JsonEncodedText.Encode("buffer_pools"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGc = System.Text.Json.JsonEncodedText.Encode("gc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUptime = System.Text.Json.JsonEncodedText.Encode("uptime"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("uptime_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Jvm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

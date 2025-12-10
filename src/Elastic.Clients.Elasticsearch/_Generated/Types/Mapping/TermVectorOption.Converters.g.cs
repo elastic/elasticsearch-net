@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class TermVectorOptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithOffsets = System.Text.Json.JsonEncodedText.Encode("with_offsets");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithPositions = System.Text.Json.JsonEncodedText.Encode("with_positions");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsets = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsetsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets_payloads");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_payloads");
-	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes");
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithOffsets = System.Text.Json.JsonEncodedText.Encode("with_offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithPositions = System.Text.Json.JsonEncodedText.Encode("with_positions"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsets = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsOffsetsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_offsets_payloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithPositionsPayloads = System.Text.Json.JsonEncodedText.Encode("with_positions_payloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("yes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.TermVectorOption Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

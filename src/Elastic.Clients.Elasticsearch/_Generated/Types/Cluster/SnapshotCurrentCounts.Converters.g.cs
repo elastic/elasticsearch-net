@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class SnapshotCurrentCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.SnapshotCurrentCounts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCleanups = System.Text.Json.JsonEncodedText.Encode("cleanups");
-	private static readonly System.Text.Json.JsonEncodedText PropConcurrentOperations = System.Text.Json.JsonEncodedText.Encode("concurrent_operations");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSnapshots = System.Text.Json.JsonEncodedText.Encode("shard_snapshots");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletions = System.Text.Json.JsonEncodedText.Encode("snapshot_deletions");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropCleanups = System.Text.Json.JsonEncodedText.Encode("cleanups"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConcurrentOperations = System.Text.Json.JsonEncodedText.Encode("concurrent_operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSnapshots = System.Text.Json.JsonEncodedText.Encode("shard_snapshots"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletions = System.Text.Json.JsonEncodedText.Encode("snapshot_deletions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.SnapshotCurrentCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

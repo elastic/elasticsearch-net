@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path");
-	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size");
-	private static readonly System.Text.Json.JsonEncodedText PropCannedAcl = System.Text.Json.JsonEncodedText.Encode("canned_acl");
-	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
-	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
-	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size");
-	private static readonly System.Text.Json.JsonEncodedText PropGetRegisterRetryDelay = System.Text.Json.JsonEncodedText.Encode("get_register_retry_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartParts = System.Text.Json.JsonEncodedText.Encode("max_multipart_parts");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartUploadCleanupSize = System.Text.Json.JsonEncodedText.Encode("max_multipart_upload_cleanup_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
-	private static readonly System.Text.Json.JsonEncodedText PropServerSideEncryption = System.Text.Json.JsonEncodedText.Encode("server_side_encryption");
-	private static readonly System.Text.Json.JsonEncodedText PropStorageClass = System.Text.Json.JsonEncodedText.Encode("storage_class");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryDelayIncrement = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.delay_increment");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumDelay = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumNumberOfRetries = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_number_of_retries");
+	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBufferSize = System.Text.Json.JsonEncodedText.Encode("buffer_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCannedAcl = System.Text.Json.JsonEncodedText.Encode("canned_acl"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGetRegisterRetryDelay = System.Text.Json.JsonEncodedText.Encode("get_register_retry_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartParts = System.Text.Json.JsonEncodedText.Encode("max_multipart_parts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartUploadCleanupSize = System.Text.Json.JsonEncodedText.Encode("max_multipart_upload_cleanup_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServerSideEncryption = System.Text.Json.JsonEncodedText.Encode("server_side_encryption"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStorageClass = System.Text.Json.JsonEncodedText.Encode("storage_class"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryDelayIncrement = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.delay_increment"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumDelay = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumNumberOfRetries = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_number_of_retries"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

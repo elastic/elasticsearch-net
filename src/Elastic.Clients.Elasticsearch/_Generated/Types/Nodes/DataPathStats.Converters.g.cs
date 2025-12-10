@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class DataPathStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskQueue = System.Text.Json.JsonEncodedText.Encode("disk_queue");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskReads = System.Text.Json.JsonEncodedText.Encode("disk_reads");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSize = System.Text.Json.JsonEncodedText.Encode("disk_read_size");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_read_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskWrites = System.Text.Json.JsonEncodedText.Encode("disk_writes");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSize = System.Text.Json.JsonEncodedText.Encode("disk_write_size");
-	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_write_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskQueue = System.Text.Json.JsonEncodedText.Encode("disk_queue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReads = System.Text.Json.JsonEncodedText.Encode("disk_reads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSize = System.Text.Json.JsonEncodedText.Encode("disk_read_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskReadSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_read_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWrites = System.Text.Json.JsonEncodedText.Encode("disk_writes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSize = System.Text.Json.JsonEncodedText.Encode("disk_write_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiskWriteSizeInBytes = System.Text.Json.JsonEncodedText.Encode("disk_write_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.DataPathStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

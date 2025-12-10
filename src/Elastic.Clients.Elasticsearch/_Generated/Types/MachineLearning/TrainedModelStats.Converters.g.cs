@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeploymentStats = System.Text.Json.JsonEncodedText.Encode("deployment_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceStats = System.Text.Json.JsonEncodedText.Encode("inference_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelineCount = System.Text.Json.JsonEncodedText.Encode("pipeline_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDeploymentStats = System.Text.Json.JsonEncodedText.Encode("deployment_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceStats = System.Text.Json.JsonEncodedText.Encode("inference_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipelineCount = System.Text.Json.JsonEncodedText.Encode("pipeline_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

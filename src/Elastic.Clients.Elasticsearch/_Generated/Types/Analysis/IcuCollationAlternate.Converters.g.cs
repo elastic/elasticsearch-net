@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuCollationAlternateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNonIgnorable = System.Text.Json.JsonEncodedText.Encode("non-ignorable");
-	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted");
+	private static readonly System.Text.Json.JsonEncodedText MemberNonIgnorable = System.Text.Json.JsonEncodedText.Encode("non-ignorable"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberShifted = System.Text.Json.JsonEncodedText.Encode("shifted"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class DiskUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DiskUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFreeBytes = System.Text.Json.JsonEncodedText.Encode("free_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeDiskPercent = System.Text.Json.JsonEncodedText.Encode("free_disk_percent");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalBytes = System.Text.Json.JsonEncodedText.Encode("total_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedBytes = System.Text.Json.JsonEncodedText.Encode("used_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedDiskPercent = System.Text.Json.JsonEncodedText.Encode("used_disk_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeBytes = System.Text.Json.JsonEncodedText.Encode("free_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeDiskPercent = System.Text.Json.JsonEncodedText.Encode("free_disk_percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBytes = System.Text.Json.JsonEncodedText.Encode("total_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedBytes = System.Text.Json.JsonEncodedText.Encode("used_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedDiskPercent = System.Text.Json.JsonEncodedText.Encode("used_disk_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.DiskUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

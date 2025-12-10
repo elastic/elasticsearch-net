@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class PreviewTransformResponseConverter<TTransform> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGeneratedDestIndex = System.Text.Json.JsonEncodedText.Encode("generated_dest_index");
-	private static readonly System.Text.Json.JsonEncodedText PropPreview = System.Text.Json.JsonEncodedText.Encode("preview");
+	private static readonly System.Text.Json.JsonEncodedText PropGeneratedDestIndex = System.Text.Json.JsonEncodedText.Encode("generated_dest_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreview = System.Text.Json.JsonEncodedText.Encode("preview"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse<TTransform> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

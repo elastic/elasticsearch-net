@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class QuestionAnsweringInferenceUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAnswerLength = System.Text.Json.JsonEncodedText.Encode("max_answer_length");
-	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
-	private static readonly System.Text.Json.JsonEncodedText PropQuestion = System.Text.Json.JsonEncodedText.Encode("question");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnswerLength = System.Text.Json.JsonEncodedText.Encode("max_answer_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuestion = System.Text.Json.JsonEncodedText.Encode("question"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

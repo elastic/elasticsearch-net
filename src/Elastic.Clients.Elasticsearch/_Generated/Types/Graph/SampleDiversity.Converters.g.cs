@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Graph.Json;
 
 public sealed partial class SampleDiversityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.SampleDiversity>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocsPerValue = System.Text.Json.JsonEncodedText.Encode("max_docs_per_value");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocsPerValue = System.Text.Json.JsonEncodedText.Encode("max_docs_per_value"u8);
 
 	public override Elastic.Clients.Elasticsearch.Graph.SampleDiversity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

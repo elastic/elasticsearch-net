@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class EnrichSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.EnrichSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

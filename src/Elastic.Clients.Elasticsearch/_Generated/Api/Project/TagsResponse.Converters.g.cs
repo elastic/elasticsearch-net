@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Project.Json;
 
 public sealed partial class TagsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Project.TagsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLinkedProjects = System.Text.Json.JsonEncodedText.Encode("linked_projects");
-	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
+	private static readonly System.Text.Json.JsonEncodedText PropLinkedProjects = System.Text.Json.JsonEncodedText.Encode("linked_projects"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin"u8);
 
 	public override Elastic.Clients.Elasticsearch.Project.TagsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

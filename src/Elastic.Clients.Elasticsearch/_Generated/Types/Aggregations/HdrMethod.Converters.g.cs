@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class HdrMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.HdrMethod>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSignificantValueDigits = System.Text.Json.JsonEncodedText.Encode("number_of_significant_value_digits");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSignificantValueDigits = System.Text.Json.JsonEncodedText.Encode("number_of_significant_value_digits"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.HdrMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

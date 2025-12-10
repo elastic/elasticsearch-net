@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CustomResponseParamsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CustomResponseParams>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropJsonParser = System.Text.Json.JsonEncodedText.Encode("json_parser");
+	private static readonly System.Text.Json.JsonEncodedText PropJsonParser = System.Text.Json.JsonEncodedText.Encode("json_parser"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CustomResponseParams Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

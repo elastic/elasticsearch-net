@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class StringStatsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvgLength = System.Text.Json.JsonEncodedText.Encode("avg_length");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgLengthAsString = System.Text.Json.JsonEncodedText.Encode("avg_length_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution");
-	private static readonly System.Text.Json.JsonEncodedText PropEntropy = System.Text.Json.JsonEncodedText.Encode("entropy");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxLength = System.Text.Json.JsonEncodedText.Encode("max_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxLengthAsString = System.Text.Json.JsonEncodedText.Encode("max_length_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropMinLength = System.Text.Json.JsonEncodedText.Encode("min_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMinLengthAsString = System.Text.Json.JsonEncodedText.Encode("min_length_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgLength = System.Text.Json.JsonEncodedText.Encode("avg_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgLengthAsString = System.Text.Json.JsonEncodedText.Encode("avg_length_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEntropy = System.Text.Json.JsonEncodedText.Encode("entropy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxLength = System.Text.Json.JsonEncodedText.Encode("max_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxLengthAsString = System.Text.Json.JsonEncodedText.Encode("max_length_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinLength = System.Text.Json.JsonEncodedText.Encode("min_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinLengthAsString = System.Text.Json.JsonEncodedText.Encode("min_length_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

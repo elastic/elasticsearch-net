@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class GarbageCollectorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.GarbageCollector>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollectors = System.Text.Json.JsonEncodedText.Encode("collectors");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectors = System.Text.Json.JsonEncodedText.Encode("collectors"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.GarbageCollector Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

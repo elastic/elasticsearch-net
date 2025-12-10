@@ -35,7 +35,7 @@ public sealed partial class GetPipelineRequestParameters : Elastic.Transport.Req
 
 	/// <summary>
 	/// <para>
-	/// Return pipelines without their definitions (default: false)
+	/// Return pipelines without their definitions
 	/// </para>
 	/// </summary>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
@@ -99,7 +99,7 @@ public sealed partial class GetPipelineRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
-	/// Return pipelines without their definitions (default: false)
+	/// Return pipelines without their definitions
 	/// </para>
 	/// </summary>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
@@ -164,7 +164,7 @@ public readonly partial struct GetPipelineRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Return pipelines without their definitions (default: false)
+	/// Return pipelines without their definitions
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor Summary(bool? value = true)

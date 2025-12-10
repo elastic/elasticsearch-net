@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class GetDataLifecycleStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreamCount = System.Text.Json.JsonEncodedText.Encode("data_stream_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
-	private static readonly System.Text.Json.JsonEncodedText PropLastRunDurationInMillis = System.Text.Json.JsonEncodedText.Encode("last_run_duration_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeBetweenStartsInMillis = System.Text.Json.JsonEncodedText.Encode("time_between_starts_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamCount = System.Text.Json.JsonEncodedText.Encode("data_stream_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastRunDurationInMillis = System.Text.Json.JsonEncodedText.Encode("last_run_duration_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeBetweenStartsInMillis = System.Text.Json.JsonEncodedText.Encode("time_between_starts_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

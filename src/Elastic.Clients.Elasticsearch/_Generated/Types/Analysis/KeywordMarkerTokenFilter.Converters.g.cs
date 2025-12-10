@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case");
-	private static readonly System.Text.Json.JsonEncodedText PropKeywords = System.Text.Json.JsonEncodedText.Encode("keywords");
-	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPath = System.Text.Json.JsonEncodedText.Encode("keywords_path");
-	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPattern = System.Text.Json.JsonEncodedText.Encode("keywords_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeywords = System.Text.Json.JsonEncodedText.Encode("keywords"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPath = System.Text.Json.JsonEncodedText.Encode("keywords_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeywordsPattern = System.Text.Json.JsonEncodedText.Encode("keywords_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

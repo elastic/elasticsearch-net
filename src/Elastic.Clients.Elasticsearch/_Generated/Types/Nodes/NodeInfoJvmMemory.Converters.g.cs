@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoJvmMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDirectMax = System.Text.Json.JsonEncodedText.Encode("direct_max");
-	private static readonly System.Text.Json.JsonEncodedText PropDirectMaxInBytes = System.Text.Json.JsonEncodedText.Encode("direct_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapInit = System.Text.Json.JsonEncodedText.Encode("heap_init");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("heap_init_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInit = System.Text.Json.JsonEncodedText.Encode("non_heap_init");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_init_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMax = System.Text.Json.JsonEncodedText.Encode("non_heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_max_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDirectMax = System.Text.Json.JsonEncodedText.Encode("direct_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDirectMaxInBytes = System.Text.Json.JsonEncodedText.Encode("direct_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapInit = System.Text.Json.JsonEncodedText.Encode("heap_init"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("heap_init_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInit = System.Text.Json.JsonEncodedText.Encode("non_heap_init"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapInitInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_init_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMax = System.Text.Json.JsonEncodedText.Encode("non_heap_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("non_heap_max_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

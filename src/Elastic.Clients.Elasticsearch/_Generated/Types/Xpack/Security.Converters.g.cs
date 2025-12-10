@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SecurityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Security>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnonymous = System.Text.Json.JsonEncodedText.Encode("anonymous");
-	private static readonly System.Text.Json.JsonEncodedText PropApiKeyService = System.Text.Json.JsonEncodedText.Encode("api_key_service");
-	private static readonly System.Text.Json.JsonEncodedText PropAudit = System.Text.Json.JsonEncodedText.Encode("audit");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFips140 = System.Text.Json.JsonEncodedText.Encode("fips_140");
-	private static readonly System.Text.Json.JsonEncodedText PropIpfilter = System.Text.Json.JsonEncodedText.Encode("ipfilter");
-	private static readonly System.Text.Json.JsonEncodedText PropOperatorPrivileges = System.Text.Json.JsonEncodedText.Encode("operator_privileges");
-	private static readonly System.Text.Json.JsonEncodedText PropRealms = System.Text.Json.JsonEncodedText.Encode("realms");
-	private static readonly System.Text.Json.JsonEncodedText PropRoleMapping = System.Text.Json.JsonEncodedText.Encode("role_mapping");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropSsl = System.Text.Json.JsonEncodedText.Encode("ssl");
-	private static readonly System.Text.Json.JsonEncodedText PropSystemKey = System.Text.Json.JsonEncodedText.Encode("system_key");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenService = System.Text.Json.JsonEncodedText.Encode("token_service");
+	private static readonly System.Text.Json.JsonEncodedText PropAnonymous = System.Text.Json.JsonEncodedText.Encode("anonymous"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropApiKeyService = System.Text.Json.JsonEncodedText.Encode("api_key_service"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAudit = System.Text.Json.JsonEncodedText.Encode("audit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFips140 = System.Text.Json.JsonEncodedText.Encode("fips_140"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIpfilter = System.Text.Json.JsonEncodedText.Encode("ipfilter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperatorPrivileges = System.Text.Json.JsonEncodedText.Encode("operator_privileges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealms = System.Text.Json.JsonEncodedText.Encode("realms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoleMapping = System.Text.Json.JsonEncodedText.Encode("role_mapping"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSsl = System.Text.Json.JsonEncodedText.Encode("ssl"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSystemKey = System.Text.Json.JsonEncodedText.Encode("system_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenService = System.Text.Json.JsonEncodedText.Encode("token_service"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Security Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MergeSchedulerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxMergeCount = System.Text.Json.JsonEncodedText.Encode("max_merge_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxThreadCount = System.Text.Json.JsonEncodedText.Encode("max_thread_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMergeCount = System.Text.Json.JsonEncodedText.Encode("max_merge_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxThreadCount = System.Text.Json.JsonEncodedText.Encode("max_thread_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

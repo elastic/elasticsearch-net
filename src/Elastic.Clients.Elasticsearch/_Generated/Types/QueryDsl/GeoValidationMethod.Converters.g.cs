@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class GeoValidationMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
-	private static readonly System.Text.Json.JsonEncodedText MemberIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
-	private static readonly System.Text.Json.JsonEncodedText MemberStrict = System.Text.Json.JsonEncodedText.Encode("strict");
+	private static readonly System.Text.Json.JsonEncodedText MemberCoerce = System.Text.Json.JsonEncodedText.Encode("coerce"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStrict = System.Text.Json.JsonEncodedText.Encode("strict"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

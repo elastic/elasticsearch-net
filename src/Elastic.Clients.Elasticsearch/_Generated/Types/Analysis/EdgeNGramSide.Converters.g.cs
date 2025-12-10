@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class EdgeNGramSideConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBack = System.Text.Json.JsonEncodedText.Encode("back");
-	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front");
+	private static readonly System.Text.Json.JsonEncodedText MemberBack = System.Text.Json.JsonEncodedText.Encode("back"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFront = System.Text.Json.JsonEncodedText.Encode("front"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

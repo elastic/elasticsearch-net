@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class DenseVectorOffHeapStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSize = System.Text.Json.JsonEncodedText.Encode("total_veb_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veb_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSize = System.Text.Json.JsonEncodedText.Encode("total_vec_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vec_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSize = System.Text.Json.JsonEncodedText.Encode("total_veq_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veq_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSize = System.Text.Json.JsonEncodedText.Encode("total_vex_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vex_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSize = System.Text.Json.JsonEncodedText.Encode("total_veb_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVebSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veb_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSize = System.Text.Json.JsonEncodedText.Encode("total_vec_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVecSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vec_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSize = System.Text.Json.JsonEncodedText.Encode("total_veq_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVeqSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_veq_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSize = System.Text.Json.JsonEncodedText.Encode("total_vex_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVexSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_vex_size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

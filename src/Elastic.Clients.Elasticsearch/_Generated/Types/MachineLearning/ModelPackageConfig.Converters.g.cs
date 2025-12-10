@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ModelPackageConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumVersion = System.Text.Json.JsonEncodedText.Encode("minimum_version");
-	private static readonly System.Text.Json.JsonEncodedText PropModelRepository = System.Text.Json.JsonEncodedText.Encode("model_repository");
-	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPackagedModelId = System.Text.Json.JsonEncodedText.Encode("packaged_model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings");
-	private static readonly System.Text.Json.JsonEncodedText PropSha256 = System.Text.Json.JsonEncodedText.Encode("sha256");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags");
-	private static readonly System.Text.Json.JsonEncodedText PropVocabularyFile = System.Text.Json.JsonEncodedText.Encode("vocabulary_file");
+	private static readonly System.Text.Json.JsonEncodedText PropCreateTime = System.Text.Json.JsonEncodedText.Encode("create_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumVersion = System.Text.Json.JsonEncodedText.Encode("minimum_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelRepository = System.Text.Json.JsonEncodedText.Encode("model_repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelType = System.Text.Json.JsonEncodedText.Encode("model_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPackagedModelId = System.Text.Json.JsonEncodedText.Encode("packaged_model_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPlatformArchitecture = System.Text.Json.JsonEncodedText.Encode("platform_architecture"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixStrings = System.Text.Json.JsonEncodedText.Encode("prefix_strings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSha256 = System.Text.Json.JsonEncodedText.Encode("sha256"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTags = System.Text.Json.JsonEncodedText.Encode("tags"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVocabularyFile = System.Text.Json.JsonEncodedText.Encode("vocabulary_file"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

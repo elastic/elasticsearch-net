@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class StopJobResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.StopJobResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText PropStopped = System.Text.Json.JsonEncodedText.Encode("stopped"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.StopJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

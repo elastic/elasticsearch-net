@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class RankFeatureFunctionLogarithmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropScalingFactor = System.Text.Json.JsonEncodedText.Encode("scaling_factor");
+	private static readonly System.Text.Json.JsonEncodedText PropScalingFactor = System.Text.Json.JsonEncodedText.Encode("scaling_factor"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

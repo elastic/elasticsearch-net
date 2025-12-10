@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class DerivativeAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizedValue = System.Text.Json.JsonEncodedText.Encode("normalized_value");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizedValueAsString = System.Text.Json.JsonEncodedText.Encode("normalized_value_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
-	private static readonly System.Text.Json.JsonEncodedText PropValueAsString = System.Text.Json.JsonEncodedText.Encode("value_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizedValue = System.Text.Json.JsonEncodedText.Encode("normalized_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizedValueAsString = System.Text.Json.JsonEncodedText.Encode("normalized_value_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValueAsString = System.Text.Json.JsonEncodedText.Encode("value_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

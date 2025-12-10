@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class GetComponentTemplateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplates = System.Text.Json.JsonEncodedText.Encode("component_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplates = System.Text.Json.JsonEncodedText.Encode("component_templates"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

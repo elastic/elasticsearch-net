@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class BlobDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.BlobDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropOverwritten = System.Text.Json.JsonEncodedText.Encode("overwritten");
-	private static readonly System.Text.Json.JsonEncodedText PropReadEarly = System.Text.Json.JsonEncodedText.Encode("read_early");
-	private static readonly System.Text.Json.JsonEncodedText PropReadEnd = System.Text.Json.JsonEncodedText.Encode("read_end");
-	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads");
-	private static readonly System.Text.Json.JsonEncodedText PropReadStart = System.Text.Json.JsonEncodedText.Encode("read_start");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeBytes = System.Text.Json.JsonEncodedText.Encode("size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverwritten = System.Text.Json.JsonEncodedText.Encode("overwritten"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadEarly = System.Text.Json.JsonEncodedText.Encode("read_early"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadEnd = System.Text.Json.JsonEncodedText.Encode("read_end"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReads = System.Text.Json.JsonEncodedText.Encode("reads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadStart = System.Text.Json.JsonEncodedText.Encode("read_start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeBytes = System.Text.Json.JsonEncodedText.Encode("size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.BlobDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

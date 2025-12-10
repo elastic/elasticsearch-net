@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RecoveryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RecoveryStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsSource = System.Text.Json.JsonEncodedText.Encode("current_as_source");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsTarget = System.Text.Json.JsonEncodedText.Encode("current_as_target");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsSource = System.Text.Json.JsonEncodedText.Encode("current_as_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentAsTarget = System.Text.Json.JsonEncodedText.Encode("current_as_target"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.RecoveryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

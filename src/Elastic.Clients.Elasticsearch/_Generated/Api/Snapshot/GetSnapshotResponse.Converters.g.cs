@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class GetSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next");
-	private static readonly System.Text.Json.JsonEncodedText PropRemaining = System.Text.Json.JsonEncodedText.Encode("remaining");
-	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemaining = System.Text.Json.JsonEncodedText.Encode("remaining"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

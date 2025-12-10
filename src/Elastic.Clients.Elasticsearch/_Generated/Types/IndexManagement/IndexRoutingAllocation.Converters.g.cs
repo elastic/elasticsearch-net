@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexRoutingAllocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk");
-	private static readonly System.Text.Json.JsonEncodedText PropEnable = System.Text.Json.JsonEncodedText.Encode("enable");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialRecovery = System.Text.Json.JsonEncodedText.Encode("initial_recovery");
+	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnable = System.Text.Json.JsonEncodedText.Encode("enable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitialRecovery = System.Text.Json.JsonEncodedText.Encode("initial_recovery"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

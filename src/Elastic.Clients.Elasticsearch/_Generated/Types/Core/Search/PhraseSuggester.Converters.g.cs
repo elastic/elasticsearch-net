@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropCollate = System.Text.Json.JsonEncodedText.Encode("collate");
-	private static readonly System.Text.Json.JsonEncodedText PropConfidence = System.Text.Json.JsonEncodedText.Encode("confidence");
-	private static readonly System.Text.Json.JsonEncodedText PropDirectGenerator = System.Text.Json.JsonEncodedText.Encode("direct_generator");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropForceUnigrams = System.Text.Json.JsonEncodedText.Encode("force_unigrams");
-	private static readonly System.Text.Json.JsonEncodedText PropGramSize = System.Text.Json.JsonEncodedText.Encode("gram_size");
-	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxErrors = System.Text.Json.JsonEncodedText.Encode("max_errors");
-	private static readonly System.Text.Json.JsonEncodedText PropRealWordErrorLikelihood = System.Text.Json.JsonEncodedText.Encode("real_word_error_likelihood");
-	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSmoothing = System.Text.Json.JsonEncodedText.Encode("smoothing");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenLimit = System.Text.Json.JsonEncodedText.Encode("token_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollate = System.Text.Json.JsonEncodedText.Encode("collate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConfidence = System.Text.Json.JsonEncodedText.Encode("confidence"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDirectGenerator = System.Text.Json.JsonEncodedText.Encode("direct_generator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForceUnigrams = System.Text.Json.JsonEncodedText.Encode("force_unigrams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGramSize = System.Text.Json.JsonEncodedText.Encode("gram_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighlight = System.Text.Json.JsonEncodedText.Encode("highlight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxErrors = System.Text.Json.JsonEncodedText.Encode("max_errors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealWordErrorLikelihood = System.Text.Json.JsonEncodedText.Encode("real_word_error_likelihood"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSmoothing = System.Text.Json.JsonEncodedText.Encode("smoothing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenLimit = System.Text.Json.JsonEncodedText.Encode("token_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

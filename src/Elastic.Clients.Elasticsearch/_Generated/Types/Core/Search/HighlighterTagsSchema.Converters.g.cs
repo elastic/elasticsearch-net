@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class HighlighterTagsSchemaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberStyled = System.Text.Json.JsonEncodedText.Encode("styled");
+	private static readonly System.Text.Json.JsonEncodedText MemberStyled = System.Text.Json.JsonEncodedText.Encode("styled"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

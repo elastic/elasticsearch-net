@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class TokenCharConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.TokenChar>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom");
-	private static readonly System.Text.Json.JsonEncodedText MemberDigit = System.Text.Json.JsonEncodedText.Encode("digit");
-	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter");
-	private static readonly System.Text.Json.JsonEncodedText MemberPunctuation = System.Text.Json.JsonEncodedText.Encode("punctuation");
-	private static readonly System.Text.Json.JsonEncodedText MemberSymbol = System.Text.Json.JsonEncodedText.Encode("symbol");
-	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace");
+	private static readonly System.Text.Json.JsonEncodedText MemberCustom = System.Text.Json.JsonEncodedText.Encode("custom"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDigit = System.Text.Json.JsonEncodedText.Encode("digit"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLetter = System.Text.Json.JsonEncodedText.Encode("letter"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPunctuation = System.Text.Json.JsonEncodedText.Encode("punctuation"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSymbol = System.Text.Json.JsonEncodedText.Encode("symbol"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWhitespace = System.Text.Json.JsonEncodedText.Encode("whitespace"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.TokenChar Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

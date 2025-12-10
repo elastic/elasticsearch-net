@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RecoveryBytesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
-	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered");
-	private static readonly System.Text.Json.JsonEncodedText PropRecoveredFromSnapshot = System.Text.Json.JsonEncodedText.Encode("recovered_from_snapshot");
-	private static readonly System.Text.Json.JsonEncodedText PropRecoveredFromSnapshotInBytes = System.Text.Json.JsonEncodedText.Encode("recovered_from_snapshot_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRecoveredInBytes = System.Text.Json.JsonEncodedText.Encode("recovered_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropReused = System.Text.Json.JsonEncodedText.Encode("reused");
-	private static readonly System.Text.Json.JsonEncodedText PropReusedInBytes = System.Text.Json.JsonEncodedText.Encode("reused_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecoveredFromSnapshot = System.Text.Json.JsonEncodedText.Encode("recovered_from_snapshot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecoveredFromSnapshotInBytes = System.Text.Json.JsonEncodedText.Encode("recovered_from_snapshot_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecoveredInBytes = System.Text.Json.JsonEncodedText.Encode("recovered_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReused = System.Text.Json.JsonEncodedText.Encode("reused"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReusedInBytes = System.Text.Json.JsonEncodedText.Encode("reused_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

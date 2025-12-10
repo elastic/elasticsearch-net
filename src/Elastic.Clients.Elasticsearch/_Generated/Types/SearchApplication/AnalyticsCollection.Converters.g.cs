@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class AnalyticsCollectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEventDataStream = System.Text.Json.JsonEncodedText.Encode("event_data_stream");
+	private static readonly System.Text.Json.JsonEncodedText PropEventDataStream = System.Text.Json.JsonEncodedText.Encode("event_data_stream"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

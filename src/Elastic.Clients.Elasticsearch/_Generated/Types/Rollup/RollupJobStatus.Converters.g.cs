@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupJobStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentPosition = System.Text.Json.JsonEncodedText.Encode("current_position");
-	private static readonly System.Text.Json.JsonEncodedText PropJobState = System.Text.Json.JsonEncodedText.Encode("job_state");
-	private static readonly System.Text.Json.JsonEncodedText PropUpgradedDocId = System.Text.Json.JsonEncodedText.Encode("upgraded_doc_id");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentPosition = System.Text.Json.JsonEncodedText.Encode("current_position"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobState = System.Text.Json.JsonEncodedText.Encode("job_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpgradedDocId = System.Text.Json.JsonEncodedText.Encode("upgraded_doc_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

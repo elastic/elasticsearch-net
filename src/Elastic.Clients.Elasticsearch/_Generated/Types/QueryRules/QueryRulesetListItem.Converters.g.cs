@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class QueryRulesetListItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRuleCriteriaTypesCounts = System.Text.Json.JsonEncodedText.Encode("rule_criteria_types_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRuleTotalCount = System.Text.Json.JsonEncodedText.Encode("rule_total_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRuleTypeCounts = System.Text.Json.JsonEncodedText.Encode("rule_type_counts");
+	private static readonly System.Text.Json.JsonEncodedText PropRuleCriteriaTypesCounts = System.Text.Json.JsonEncodedText.Encode("rule_criteria_types_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuleTotalCount = System.Text.Json.JsonEncodedText.Encode("rule_total_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuleTypeCounts = System.Text.Json.JsonEncodedText.Encode("rule_type_counts"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetListItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

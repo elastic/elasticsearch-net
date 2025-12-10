@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class EnrollNodeResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHttpCaCert = System.Text.Json.JsonEncodedText.Encode("http_ca_cert");
-	private static readonly System.Text.Json.JsonEncodedText PropHttpCaKey = System.Text.Json.JsonEncodedText.Encode("http_ca_key");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesAddresses = System.Text.Json.JsonEncodedText.Encode("nodes_addresses");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportCaCert = System.Text.Json.JsonEncodedText.Encode("transport_ca_cert");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportCert = System.Text.Json.JsonEncodedText.Encode("transport_cert");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportKey = System.Text.Json.JsonEncodedText.Encode("transport_key");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaCert = System.Text.Json.JsonEncodedText.Encode("http_ca_cert"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCaKey = System.Text.Json.JsonEncodedText.Encode("http_ca_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesAddresses = System.Text.Json.JsonEncodedText.Encode("nodes_addresses"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCaCert = System.Text.Json.JsonEncodedText.Encode("transport_ca_cert"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCert = System.Text.Json.JsonEncodedText.Encode("transport_cert"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportKey = System.Text.Json.JsonEncodedText.Encode("transport_key"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

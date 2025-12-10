@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class StagnatingBackingIndicesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurrenceTimestamp = System.Text.Json.JsonEncodedText.Encode("first_occurrence_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRetryCount = System.Text.Json.JsonEncodedText.Encode("retry_count");
+	private static readonly System.Text.Json.JsonEncodedText PropFirstOccurrenceTimestamp = System.Text.Json.JsonEncodedText.Encode("first_occurrence_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexName = System.Text.Json.JsonEncodedText.Encode("index_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetryCount = System.Text.Json.JsonEncodedText.Encode("retry_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

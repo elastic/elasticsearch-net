@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TDigestExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
-	private static readonly System.Text.Json.JsonEncodedText MemberHighAccuracy = System.Text.Json.JsonEncodedText.Encode("high_accuracy");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHighAccuracy = System.Text.Json.JsonEncodedText.Encode("high_accuracy"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class PhasesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCold = System.Text.Json.JsonEncodedText.Encode("cold");
-	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
-	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen");
-	private static readonly System.Text.Json.JsonEncodedText PropHot = System.Text.Json.JsonEncodedText.Encode("hot");
-	private static readonly System.Text.Json.JsonEncodedText PropWarm = System.Text.Json.JsonEncodedText.Encode("warm");
+	private static readonly System.Text.Json.JsonEncodedText PropCold = System.Text.Json.JsonEncodedText.Encode("cold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozen = System.Text.Json.JsonEncodedText.Encode("frozen"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHot = System.Text.Json.JsonEncodedText.Encode("hot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWarm = System.Text.Json.JsonEncodedText.Encode("warm"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalRequestItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropRatings = System.Text.Json.JsonEncodedText.Encode("ratings");
-	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplateId = System.Text.Json.JsonEncodedText.Encode("template_id");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRatings = System.Text.Json.JsonEncodedText.Encode("ratings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplateId = System.Text.Json.JsonEncodedText.Encode("template_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

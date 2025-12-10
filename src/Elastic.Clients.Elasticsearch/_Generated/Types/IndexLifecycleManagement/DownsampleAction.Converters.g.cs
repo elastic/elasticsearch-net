@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class DownsampleActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropWaitTimeout = System.Text.Json.JsonEncodedText.Encode("wait_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWaitTimeout = System.Text.Json.JsonEncodedText.Encode("wait_timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

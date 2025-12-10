@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class DiagnosisAffectedResourcesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropSlmPolicies = System.Text.Json.JsonEncodedText.Encode("slm_policies");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepositories = System.Text.Json.JsonEncodedText.Encode("snapshot_repositories");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlmPolicies = System.Text.Json.JsonEncodedText.Encode("slm_policies"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepositories = System.Text.Json.JsonEncodedText.Encode("snapshot_repositories"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

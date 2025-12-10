@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class FollowerIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexValue = System.Text.Json.JsonEncodedText.Encode("follower_index");
-	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndex = System.Text.Json.JsonEncodedText.Encode("leader_index");
-	private static readonly System.Text.Json.JsonEncodedText PropParameters = System.Text.Json.JsonEncodedText.Encode("parameters");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexValue = System.Text.Json.JsonEncodedText.Encode("follower_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndex = System.Text.Json.JsonEncodedText.Encode("leader_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParameters = System.Text.Json.JsonEncodedText.Encode("parameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

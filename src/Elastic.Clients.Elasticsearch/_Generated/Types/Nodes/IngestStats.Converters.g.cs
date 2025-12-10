@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class IngestStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IngestStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
-	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText PropIngestedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("ingested_as_first_pipeline_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
-	private static readonly System.Text.Json.JsonEncodedText PropProducedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("produced_as_first_pipeline_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngestedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("ingested_as_first_pipeline_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProducedAsFirstPipelineInBytes = System.Text.Json.JsonEncodedText.Encode("produced_as_first_pipeline_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.IngestStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

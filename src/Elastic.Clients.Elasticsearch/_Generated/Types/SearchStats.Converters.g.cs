@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SearchStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFetchCurrent = System.Text.Json.JsonEncodedText.Encode("fetch_current");
-	private static readonly System.Text.Json.JsonEncodedText PropFetchTime = System.Text.Json.JsonEncodedText.Encode("fetch_time");
-	private static readonly System.Text.Json.JsonEncodedText PropFetchTimeInMillis = System.Text.Json.JsonEncodedText.Encode("fetch_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropFetchTotal = System.Text.Json.JsonEncodedText.Encode("fetch_total");
-	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenContexts = System.Text.Json.JsonEncodedText.Encode("open_contexts");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryCurrent = System.Text.Json.JsonEncodedText.Encode("query_current");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryTime = System.Text.Json.JsonEncodedText.Encode("query_time");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryTimeInMillis = System.Text.Json.JsonEncodedText.Encode("query_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryTotal = System.Text.Json.JsonEncodedText.Encode("query_total");
-	private static readonly System.Text.Json.JsonEncodedText PropRecentSearchLoad = System.Text.Json.JsonEncodedText.Encode("recent_search_load");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollCurrent = System.Text.Json.JsonEncodedText.Encode("scroll_current");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollTime = System.Text.Json.JsonEncodedText.Encode("scroll_time");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollTimeInMillis = System.Text.Json.JsonEncodedText.Encode("scroll_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollTotal = System.Text.Json.JsonEncodedText.Encode("scroll_total");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggestCurrent = System.Text.Json.JsonEncodedText.Encode("suggest_current");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggestTime = System.Text.Json.JsonEncodedText.Encode("suggest_time");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggestTimeInMillis = System.Text.Json.JsonEncodedText.Encode("suggest_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggestTotal = System.Text.Json.JsonEncodedText.Encode("suggest_total");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchCurrent = System.Text.Json.JsonEncodedText.Encode("fetch_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTime = System.Text.Json.JsonEncodedText.Encode("fetch_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTimeInMillis = System.Text.Json.JsonEncodedText.Encode("fetch_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFetchTotal = System.Text.Json.JsonEncodedText.Encode("fetch_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenContexts = System.Text.Json.JsonEncodedText.Encode("open_contexts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCurrent = System.Text.Json.JsonEncodedText.Encode("query_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTime = System.Text.Json.JsonEncodedText.Encode("query_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTimeInMillis = System.Text.Json.JsonEncodedText.Encode("query_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryTotal = System.Text.Json.JsonEncodedText.Encode("query_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecentSearchLoad = System.Text.Json.JsonEncodedText.Encode("recent_search_load"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollCurrent = System.Text.Json.JsonEncodedText.Encode("scroll_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTime = System.Text.Json.JsonEncodedText.Encode("scroll_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTimeInMillis = System.Text.Json.JsonEncodedText.Encode("scroll_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollTotal = System.Text.Json.JsonEncodedText.Encode("scroll_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestCurrent = System.Text.Json.JsonEncodedText.Encode("suggest_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTime = System.Text.Json.JsonEncodedText.Encode("suggest_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTimeInMillis = System.Text.Json.JsonEncodedText.Encode("suggest_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestTotal = System.Text.Json.JsonEncodedText.Encode("suggest_total"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class TextQueryTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBestFields = System.Text.Json.JsonEncodedText.Encode("best_fields");
-	private static readonly System.Text.Json.JsonEncodedText MemberBoolPrefix = System.Text.Json.JsonEncodedText.Encode("bool_prefix");
-	private static readonly System.Text.Json.JsonEncodedText MemberCrossFields = System.Text.Json.JsonEncodedText.Encode("cross_fields");
-	private static readonly System.Text.Json.JsonEncodedText MemberMostFields = System.Text.Json.JsonEncodedText.Encode("most_fields");
-	private static readonly System.Text.Json.JsonEncodedText MemberPhrase = System.Text.Json.JsonEncodedText.Encode("phrase");
-	private static readonly System.Text.Json.JsonEncodedText MemberPhrasePrefix = System.Text.Json.JsonEncodedText.Encode("phrase_prefix");
+	private static readonly System.Text.Json.JsonEncodedText MemberBestFields = System.Text.Json.JsonEncodedText.Encode("best_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBoolPrefix = System.Text.Json.JsonEncodedText.Encode("bool_prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCrossFields = System.Text.Json.JsonEncodedText.Encode("cross_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMostFields = System.Text.Json.JsonEncodedText.Encode("most_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPhrase = System.Text.Json.JsonEncodedText.Encode("phrase"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPhrasePrefix = System.Text.Json.JsonEncodedText.Encode("phrase_prefix"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class FindFieldStructureResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCharset = System.Text.Json.JsonEncodedText.Encode("charset");
-	private static readonly System.Text.Json.JsonEncodedText PropEcsCompatibility = System.Text.Json.JsonEncodedText.Encode("ecs_compatibility");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldStats = System.Text.Json.JsonEncodedText.Encode("field_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropIngestPipeline = System.Text.Json.JsonEncodedText.Encode("ingest_pipeline");
-	private static readonly System.Text.Json.JsonEncodedText PropJavaTimestampFormats = System.Text.Json.JsonEncodedText.Encode("java_timestamp_formats");
-	private static readonly System.Text.Json.JsonEncodedText PropJodaTimestampFormats = System.Text.Json.JsonEncodedText.Encode("joda_timestamp_formats");
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropMultilineStartPattern = System.Text.Json.JsonEncodedText.Encode("multiline_start_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropNeedClientTimezone = System.Text.Json.JsonEncodedText.Encode("need_client_timezone");
-	private static readonly System.Text.Json.JsonEncodedText PropNumLinesAnalyzed = System.Text.Json.JsonEncodedText.Encode("num_lines_analyzed");
-	private static readonly System.Text.Json.JsonEncodedText PropNumMessagesAnalyzed = System.Text.Json.JsonEncodedText.Encode("num_messages_analyzed");
-	private static readonly System.Text.Json.JsonEncodedText PropSampleStart = System.Text.Json.JsonEncodedText.Encode("sample_start");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
+	private static readonly System.Text.Json.JsonEncodedText PropCharset = System.Text.Json.JsonEncodedText.Encode("charset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEcsCompatibility = System.Text.Json.JsonEncodedText.Encode("ecs_compatibility"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldStats = System.Text.Json.JsonEncodedText.Encode("field_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngestPipeline = System.Text.Json.JsonEncodedText.Encode("ingest_pipeline"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJavaTimestampFormats = System.Text.Json.JsonEncodedText.Encode("java_timestamp_formats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJodaTimestampFormats = System.Text.Json.JsonEncodedText.Encode("joda_timestamp_formats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMultilineStartPattern = System.Text.Json.JsonEncodedText.Encode("multiline_start_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNeedClientTimezone = System.Text.Json.JsonEncodedText.Encode("need_client_timezone"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumLinesAnalyzed = System.Text.Json.JsonEncodedText.Encode("num_lines_analyzed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumMessagesAnalyzed = System.Text.Json.JsonEncodedText.Encode("num_messages_analyzed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSampleStart = System.Text.Json.JsonEncodedText.Encode("sample_start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

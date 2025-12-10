@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CgroupMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CgroupMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
-	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsageInBytes = System.Text.Json.JsonEncodedText.Encode("usage_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimitInBytes = System.Text.Json.JsonEncodedText.Encode("limit_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsageInBytes = System.Text.Json.JsonEncodedText.Encode("usage_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.CgroupMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

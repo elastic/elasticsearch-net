@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class SettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Settings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlignCheckpoints = System.Text.Json.JsonEncodedText.Encode("align_checkpoints");
-	private static readonly System.Text.Json.JsonEncodedText PropDatesAsEpochMillis = System.Text.Json.JsonEncodedText.Encode("dates_as_epoch_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size");
-	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended");
-	private static readonly System.Text.Json.JsonEncodedText PropUsePointInTime = System.Text.Json.JsonEncodedText.Encode("use_point_in_time");
+	private static readonly System.Text.Json.JsonEncodedText PropAlignCheckpoints = System.Text.Json.JsonEncodedText.Encode("align_checkpoints"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDatesAsEpochMillis = System.Text.Json.JsonEncodedText.Encode("dates_as_epoch_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsePointInTime = System.Text.Json.JsonEncodedText.Encode("use_point_in_time"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.Settings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

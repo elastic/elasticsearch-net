@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class GroupingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.Groupings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText PropDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHistogram = System.Text.Json.JsonEncodedText.Encode("histogram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.Groupings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

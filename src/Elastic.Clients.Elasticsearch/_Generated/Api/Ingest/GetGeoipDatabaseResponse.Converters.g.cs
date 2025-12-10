@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class GetGeoipDatabaseResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDatabases = System.Text.Json.JsonEncodedText.Encode("databases");
+	private static readonly System.Text.Json.JsonEncodedText PropDatabases = System.Text.Json.JsonEncodedText.Encode("databases"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

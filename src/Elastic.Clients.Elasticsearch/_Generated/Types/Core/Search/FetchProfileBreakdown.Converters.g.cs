@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class FetchProfileBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FetchProfileBreakdown>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLoadSource = System.Text.Json.JsonEncodedText.Encode("load_source");
-	private static readonly System.Text.Json.JsonEncodedText PropLoadSourceCount = System.Text.Json.JsonEncodedText.Encode("load_source_count");
-	private static readonly System.Text.Json.JsonEncodedText PropLoadStoredFields = System.Text.Json.JsonEncodedText.Encode("load_stored_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropLoadStoredFieldsCount = System.Text.Json.JsonEncodedText.Encode("load_stored_fields_count");
-	private static readonly System.Text.Json.JsonEncodedText PropNextReader = System.Text.Json.JsonEncodedText.Encode("next_reader");
-	private static readonly System.Text.Json.JsonEncodedText PropNextReaderCount = System.Text.Json.JsonEncodedText.Encode("next_reader_count");
-	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessCount = System.Text.Json.JsonEncodedText.Encode("process_count");
+	private static readonly System.Text.Json.JsonEncodedText PropLoadSource = System.Text.Json.JsonEncodedText.Encode("load_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLoadSourceCount = System.Text.Json.JsonEncodedText.Encode("load_source_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLoadStoredFields = System.Text.Json.JsonEncodedText.Encode("load_stored_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLoadStoredFieldsCount = System.Text.Json.JsonEncodedText.Encode("load_stored_fields_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextReader = System.Text.Json.JsonEncodedText.Encode("next_reader"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextReaderCount = System.Text.Json.JsonEncodedText.Encode("next_reader_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessCount = System.Text.Json.JsonEncodedText.Encode("process_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.FetchProfileBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

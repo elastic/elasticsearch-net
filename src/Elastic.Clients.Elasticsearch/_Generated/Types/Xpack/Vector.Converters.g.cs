@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class VectorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Vector>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropDenseVectorDimsAvgCount = System.Text.Json.JsonEncodedText.Encode("dense_vector_dims_avg_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDenseVectorFieldsCount = System.Text.Json.JsonEncodedText.Encode("dense_vector_fields_count");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropSparseVectorFieldsCount = System.Text.Json.JsonEncodedText.Encode("sparse_vector_fields_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDenseVectorDimsAvgCount = System.Text.Json.JsonEncodedText.Encode("dense_vector_dims_avg_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDenseVectorFieldsCount = System.Text.Json.JsonEncodedText.Encode("dense_vector_fields_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSparseVectorFieldsCount = System.Text.Json.JsonEncodedText.Encode("sparse_vector_fields_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Vector Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

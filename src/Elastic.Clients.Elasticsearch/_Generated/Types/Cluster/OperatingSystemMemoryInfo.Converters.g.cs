@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class OperatingSystemMemoryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total");
-	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFreePercent = System.Text.Json.JsonEncodedText.Encode("free_percent");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedPercent = System.Text.Json.JsonEncodedText.Encode("used_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreePercent = System.Text.Json.JsonEncodedText.Encode("free_percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedPercent = System.Text.Json.JsonEncodedText.Encode("used_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

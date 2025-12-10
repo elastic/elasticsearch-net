@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TTestAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropA = System.Text.Json.JsonEncodedText.Encode("a");
-	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropA = System.Text.Json.JsonEncodedText.Encode("a"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

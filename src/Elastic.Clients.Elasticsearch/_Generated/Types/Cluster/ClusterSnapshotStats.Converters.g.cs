@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterSnapshotStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

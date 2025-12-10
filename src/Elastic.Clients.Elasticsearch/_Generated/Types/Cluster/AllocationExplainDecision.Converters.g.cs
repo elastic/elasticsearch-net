@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class AllocationExplainDecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("ALWAYS");
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("NO");
-	private static readonly System.Text.Json.JsonEncodedText MemberThrottle = System.Text.Json.JsonEncodedText.Encode("THROTTLE");
-	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("YES");
+	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("ALWAYS"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("NO"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberThrottle = System.Text.Json.JsonEncodedText.Encode("THROTTLE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYes = System.Text.Json.JsonEncodedText.Encode("YES"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

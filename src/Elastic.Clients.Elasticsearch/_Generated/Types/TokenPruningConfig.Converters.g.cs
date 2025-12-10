@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TokenPruningConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TokenPruningConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOnlyScorePrunedTokens = System.Text.Json.JsonEncodedText.Encode("only_score_pruned_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTokensFreqRatioThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_freq_ratio_threshold");
-	private static readonly System.Text.Json.JsonEncodedText PropTokensWeightThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_weight_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropOnlyScorePrunedTokens = System.Text.Json.JsonEncodedText.Encode("only_score_pruned_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokensFreqRatioThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_freq_ratio_threshold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokensWeightThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_weight_threshold"u8);
 
 	public override Elastic.Clients.Elasticsearch.TokenPruningConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

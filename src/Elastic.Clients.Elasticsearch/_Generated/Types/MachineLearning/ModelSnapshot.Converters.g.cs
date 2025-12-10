@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ModelSnapshotConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestRecordTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_record_time_stamp");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestResultTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_result_time_stamp");
-	private static readonly System.Text.Json.JsonEncodedText PropMinVersion = System.Text.Json.JsonEncodedText.Encode("min_version");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropRetain = System.Text.Json.JsonEncodedText.Encode("retain");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDocCount = System.Text.Json.JsonEncodedText.Encode("snapshot_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotId = System.Text.Json.JsonEncodedText.Encode("snapshot_id");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestRecordTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_record_time_stamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestResultTimeStamp = System.Text.Json.JsonEncodedText.Encode("latest_result_time_stamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinVersion = System.Text.Json.JsonEncodedText.Encode("min_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetain = System.Text.Json.JsonEncodedText.Encode("retain"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDocCount = System.Text.Json.JsonEncodedText.Encode("snapshot_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotId = System.Text.Json.JsonEncodedText.Encode("snapshot_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

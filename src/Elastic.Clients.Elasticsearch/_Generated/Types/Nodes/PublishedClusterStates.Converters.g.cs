@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class PublishedClusterStatesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("compatible_diffs");
-	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIncompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("incompatible_diffs");
+	private static readonly System.Text.Json.JsonEncodedText PropCompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("compatible_diffs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("incompatible_diffs"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

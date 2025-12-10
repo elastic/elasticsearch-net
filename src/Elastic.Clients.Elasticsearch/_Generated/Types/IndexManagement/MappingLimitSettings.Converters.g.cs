@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MappingLimitSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
-	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
-	private static readonly System.Text.Json.JsonEncodedText PropDimensionFields = System.Text.Json.JsonEncodedText.Encode("dimension_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldNameLength = System.Text.Json.JsonEncodedText.Encode("field_name_length");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
-	private static readonly System.Text.Json.JsonEncodedText PropNestedFields = System.Text.Json.JsonEncodedText.Encode("nested_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropNestedObjects = System.Text.Json.JsonEncodedText.Encode("nested_objects");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalFields = System.Text.Json.JsonEncodedText.Encode("total_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDimensionFields = System.Text.Json.JsonEncodedText.Encode("dimension_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNameLength = System.Text.Json.JsonEncodedText.Encode("field_name_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNestedFields = System.Text.Json.JsonEncodedText.Encode("nested_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNestedObjects = System.Text.Json.JsonEncodedText.Encode("nested_objects"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalFields = System.Text.Json.JsonEncodedText.Encode("total_fields"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

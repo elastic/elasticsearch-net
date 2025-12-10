@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ExtendedMemoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFreePercent = System.Text.Json.JsonEncodedText.Encode("free_percent");
-	private static readonly System.Text.Json.JsonEncodedText PropResident = System.Text.Json.JsonEncodedText.Encode("resident");
-	private static readonly System.Text.Json.JsonEncodedText PropResidentInBytes = System.Text.Json.JsonEncodedText.Encode("resident_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropShare = System.Text.Json.JsonEncodedText.Encode("share");
-	private static readonly System.Text.Json.JsonEncodedText PropShareInBytes = System.Text.Json.JsonEncodedText.Encode("share_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtual = System.Text.Json.JsonEncodedText.Encode("total_virtual");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtualInBytes = System.Text.Json.JsonEncodedText.Encode("total_virtual_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedPercent = System.Text.Json.JsonEncodedText.Encode("used_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreePercent = System.Text.Json.JsonEncodedText.Encode("free_percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResident = System.Text.Json.JsonEncodedText.Encode("resident"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResidentInBytes = System.Text.Json.JsonEncodedText.Encode("resident_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShare = System.Text.Json.JsonEncodedText.Encode("share"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShareInBytes = System.Text.Json.JsonEncodedText.Encode("share_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtual = System.Text.Json.JsonEncodedText.Encode("total_virtual"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtualInBytes = System.Text.Json.JsonEncodedText.Encode("total_virtual_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedPercent = System.Text.Json.JsonEncodedText.Encode("used_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ExtendedMemoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

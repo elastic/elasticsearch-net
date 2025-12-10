@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsStatsDataCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSkippedDocsCount = System.Text.Json.JsonEncodedText.Encode("skipped_docs_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTestDocsCount = System.Text.Json.JsonEncodedText.Encode("test_docs_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainingDocsCount = System.Text.Json.JsonEncodedText.Encode("training_docs_count");
+	private static readonly System.Text.Json.JsonEncodedText PropSkippedDocsCount = System.Text.Json.JsonEncodedText.Encode("skipped_docs_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTestDocsCount = System.Text.Json.JsonEncodedText.Encode("test_docs_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrainingDocsCount = System.Text.Json.JsonEncodedText.Encode("training_docs_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

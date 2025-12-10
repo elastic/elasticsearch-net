@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RetentionLeaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPeriod = System.Text.Json.JsonEncodedText.Encode("period");
+	private static readonly System.Text.Json.JsonEncodedText PropPeriod = System.Text.Json.JsonEncodedText.Encode("period"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class TotalHitsRelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberEq = System.Text.Json.JsonEncodedText.Encode("eq");
-	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText MemberEq = System.Text.Json.JsonEncodedText.Encode("eq"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

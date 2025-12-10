@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterIngestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIngest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPipelines = System.Text.Json.JsonEncodedText.Encode("number_of_pipelines");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessorStats = System.Text.Json.JsonEncodedText.Encode("processor_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPipelines = System.Text.Json.JsonEncodedText.Encode("number_of_pipelines"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessorStats = System.Text.Json.JsonEncodedText.Encode("processor_stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

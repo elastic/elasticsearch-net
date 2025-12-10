@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class EventTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.EventType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPageView = System.Text.Json.JsonEncodedText.Encode("page_view");
-	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText MemberSearchClick = System.Text.Json.JsonEncodedText.Encode("search_click");
+	private static readonly System.Text.Json.JsonEncodedText MemberPageView = System.Text.Json.JsonEncodedText.Encode("page_view"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSearchClick = System.Text.Json.JsonEncodedText.Encode("search_click"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.EventType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JobForecastStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobForecastStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropForecastedJobs = System.Text.Json.JsonEncodedText.Encode("forecasted_jobs");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryBytes = System.Text.Json.JsonEncodedText.Encode("memory_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropRecords = System.Text.Json.JsonEncodedText.Encode("records");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropForecastedJobs = System.Text.Json.JsonEncodedText.Encode("forecasted_jobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryBytes = System.Text.Json.JsonEncodedText.Encode("memory_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecords = System.Text.Json.JsonEncodedText.Encode("records"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobForecastStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

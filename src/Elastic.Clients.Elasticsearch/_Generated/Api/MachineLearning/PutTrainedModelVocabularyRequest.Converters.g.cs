@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class PutTrainedModelVocabularyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges");
-	private static readonly System.Text.Json.JsonEncodedText PropScores = System.Text.Json.JsonEncodedText.Encode("scores");
-	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
+	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScores = System.Text.Json.JsonEncodedText.Encode("scores"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

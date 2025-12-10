@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class UpdateSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurityProfile = System.Text.Json.JsonEncodedText.Encode("security-profile");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurityTokens = System.Text.Json.JsonEncodedText.Encode("security-tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecurityProfile = System.Text.Json.JsonEncodedText.Encode("security-profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecurityTokens = System.Text.Json.JsonEncodedText.Encode("security-tokens"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

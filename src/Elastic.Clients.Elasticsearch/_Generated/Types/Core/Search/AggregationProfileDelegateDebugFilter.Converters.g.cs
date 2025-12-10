@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class AggregationProfileDelegateDebugFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsFromMetadata = System.Text.Json.JsonEncodedText.Encode("results_from_metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropSegmentsCountedInConstantTime = System.Text.Json.JsonEncodedText.Encode("segments_counted_in_constant_time");
-	private static readonly System.Text.Json.JsonEncodedText PropSpecializedFor = System.Text.Json.JsonEncodedText.Encode("specialized_for");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultsFromMetadata = System.Text.Json.JsonEncodedText.Encode("results_from_metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSegmentsCountedInConstantTime = System.Text.Json.JsonEncodedText.Encode("segments_counted_in_constant_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSpecializedFor = System.Text.Json.JsonEncodedText.Encode("specialized_for"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

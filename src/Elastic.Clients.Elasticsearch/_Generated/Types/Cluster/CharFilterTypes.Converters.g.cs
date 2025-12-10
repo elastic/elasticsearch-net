@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class CharFilterTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzerTypes = System.Text.Json.JsonEncodedText.Encode("analyzer_types");
-	private static readonly System.Text.Json.JsonEncodedText PropBuiltInAnalyzers = System.Text.Json.JsonEncodedText.Encode("built_in_analyzers");
-	private static readonly System.Text.Json.JsonEncodedText PropBuiltInCharFilters = System.Text.Json.JsonEncodedText.Encode("built_in_char_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropBuiltInFilters = System.Text.Json.JsonEncodedText.Encode("built_in_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropBuiltInTokenizers = System.Text.Json.JsonEncodedText.Encode("built_in_tokenizers");
-	private static readonly System.Text.Json.JsonEncodedText PropCharFilterTypes2 = System.Text.Json.JsonEncodedText.Encode("char_filter_types");
-	private static readonly System.Text.Json.JsonEncodedText PropFilterTypes = System.Text.Json.JsonEncodedText.Encode("filter_types");
-	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenizerTypes = System.Text.Json.JsonEncodedText.Encode("tokenizer_types");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzerTypes = System.Text.Json.JsonEncodedText.Encode("analyzer_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInAnalyzers = System.Text.Json.JsonEncodedText.Encode("built_in_analyzers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInCharFilters = System.Text.Json.JsonEncodedText.Encode("built_in_char_filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInFilters = System.Text.Json.JsonEncodedText.Encode("built_in_filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuiltInTokenizers = System.Text.Json.JsonEncodedText.Encode("built_in_tokenizers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCharFilterTypes2 = System.Text.Json.JsonEncodedText.Encode("char_filter_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilterTypes = System.Text.Json.JsonEncodedText.Encode("filter_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizerTypes = System.Text.Json.JsonEncodedText.Encode("tokenizer_types"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

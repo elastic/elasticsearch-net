@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TranslogStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TranslogStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEarliestLastModifiedAge = System.Text.Json.JsonEncodedText.Encode("earliest_last_modified_age");
-	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUncommittedOperations = System.Text.Json.JsonEncodedText.Encode("uncommitted_operations");
-	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSize = System.Text.Json.JsonEncodedText.Encode("uncommitted_size");
-	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncommitted_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropEarliestLastModifiedAge = System.Text.Json.JsonEncodedText.Encode("earliest_last_modified_age"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedOperations = System.Text.Json.JsonEncodedText.Encode("uncommitted_operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSize = System.Text.Json.JsonEncodedText.Encode("uncommitted_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUncommittedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncommitted_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.TranslogStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
