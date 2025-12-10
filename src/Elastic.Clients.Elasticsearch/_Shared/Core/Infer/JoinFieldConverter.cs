@@ -12,8 +12,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed class JoinFieldConverter : JsonConverter<JoinField>
 {
-	private static readonly JsonEncodedText PropName = JsonEncodedText.Encode("name");
-	private static readonly JsonEncodedText PropParent = JsonEncodedText.Encode("parent");
+	private static readonly JsonEncodedText PropName = JsonEncodedText.Encode("name"u8);
+	private static readonly JsonEncodedText PropParent = JsonEncodedText.Encode("parent"u8);
 
 	public override JoinField? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
