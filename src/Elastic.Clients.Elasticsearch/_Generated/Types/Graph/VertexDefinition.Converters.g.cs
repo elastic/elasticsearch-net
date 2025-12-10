@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Graph.Json;
 
 public sealed partial class VertexDefinitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Graph.VertexDefinition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

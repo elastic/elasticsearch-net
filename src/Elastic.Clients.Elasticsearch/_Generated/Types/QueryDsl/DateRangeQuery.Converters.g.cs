@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class DateRangeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
-	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
-	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
-	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

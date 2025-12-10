@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsSimilarityIbConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution");
-	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalization = System.Text.Json.JsonEncodedText.Encode("normalization");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalization = System.Text.Json.JsonEncodedText.Encode("normalization"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

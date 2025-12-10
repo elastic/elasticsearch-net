@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JobStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropDataCounts = System.Text.Json.JsonEncodedText.Encode("data_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleting = System.Text.Json.JsonEncodedText.Encode("deleting");
-	private static readonly System.Text.Json.JsonEncodedText PropForecastsStats = System.Text.Json.JsonEncodedText.Encode("forecasts_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenTime = System.Text.Json.JsonEncodedText.Encode("open_time");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-	private static readonly System.Text.Json.JsonEncodedText PropTimingStats = System.Text.Json.JsonEncodedText.Encode("timing_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataCounts = System.Text.Json.JsonEncodedText.Encode("data_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleting = System.Text.Json.JsonEncodedText.Encode("deleting"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForecastsStats = System.Text.Json.JsonEncodedText.Encode("forecasts_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeStats = System.Text.Json.JsonEncodedText.Encode("model_size_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenTime = System.Text.Json.JsonEncodedText.Encode("open_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimingStats = System.Text.Json.JsonEncodedText.Encode("timing_stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

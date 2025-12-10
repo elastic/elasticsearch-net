@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataDescriptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFieldDelimiter = System.Text.Json.JsonEncodedText.Encode("field_delimiter");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeField = System.Text.Json.JsonEncodedText.Encode("time_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeFormat = System.Text.Json.JsonEncodedText.Encode("time_format");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldDelimiter = System.Text.Json.JsonEncodedText.Encode("field_delimiter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeField = System.Text.Json.JsonEncodedText.Encode("time_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeFormat = System.Text.Json.JsonEncodedText.Encode("time_format"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataDescription Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

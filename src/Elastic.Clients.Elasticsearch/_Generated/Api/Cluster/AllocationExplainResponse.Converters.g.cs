@@ -25,31 +25,31 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class AllocationExplainResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocateExplanation = System.Text.Json.JsonEncodedText.Encode("allocate_explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationDelay = System.Text.Json.JsonEncodedText.Encode("allocation_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationDelayInMillis = System.Text.Json.JsonEncodedText.Encode("allocation_delay_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropCanAllocate = System.Text.Json.JsonEncodedText.Encode("can_allocate");
-	private static readonly System.Text.Json.JsonEncodedText PropCanMoveToOtherNode = System.Text.Json.JsonEncodedText.Encode("can_move_to_other_node");
-	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceCluster = System.Text.Json.JsonEncodedText.Encode("can_rebalance_cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceClusterDecisions = System.Text.Json.JsonEncodedText.Encode("can_rebalance_cluster_decisions");
-	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceToOtherNode = System.Text.Json.JsonEncodedText.Encode("can_rebalance_to_other_node");
-	private static readonly System.Text.Json.JsonEncodedText PropCanRemainDecisions = System.Text.Json.JsonEncodedText.Encode("can_remain_decisions");
-	private static readonly System.Text.Json.JsonEncodedText PropCanRemainOnCurrentNode = System.Text.Json.JsonEncodedText.Encode("can_remain_on_current_node");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterInfo = System.Text.Json.JsonEncodedText.Encode("cluster_info");
-	private static readonly System.Text.Json.JsonEncodedText PropConfiguredDelay = System.Text.Json.JsonEncodedText.Encode("configured_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropConfiguredDelayInMillis = System.Text.Json.JsonEncodedText.Encode("configured_delay_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentState = System.Text.Json.JsonEncodedText.Encode("current_state");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropMoveExplanation = System.Text.Json.JsonEncodedText.Encode("move_explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeAllocationDecisions = System.Text.Json.JsonEncodedText.Encode("node_allocation_decisions");
-	private static readonly System.Text.Json.JsonEncodedText PropNote = System.Text.Json.JsonEncodedText.Encode("note");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropRebalanceExplanation = System.Text.Json.JsonEncodedText.Encode("rebalance_explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropRemainingDelay = System.Text.Json.JsonEncodedText.Encode("remaining_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropRemainingDelayInMillis = System.Text.Json.JsonEncodedText.Encode("remaining_delay_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedInfo = System.Text.Json.JsonEncodedText.Encode("unassigned_info");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocateExplanation = System.Text.Json.JsonEncodedText.Encode("allocate_explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationDelay = System.Text.Json.JsonEncodedText.Encode("allocation_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationDelayInMillis = System.Text.Json.JsonEncodedText.Encode("allocation_delay_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanAllocate = System.Text.Json.JsonEncodedText.Encode("can_allocate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanMoveToOtherNode = System.Text.Json.JsonEncodedText.Encode("can_move_to_other_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceCluster = System.Text.Json.JsonEncodedText.Encode("can_rebalance_cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceClusterDecisions = System.Text.Json.JsonEncodedText.Encode("can_rebalance_cluster_decisions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanRebalanceToOtherNode = System.Text.Json.JsonEncodedText.Encode("can_rebalance_to_other_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanRemainDecisions = System.Text.Json.JsonEncodedText.Encode("can_remain_decisions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCanRemainOnCurrentNode = System.Text.Json.JsonEncodedText.Encode("can_remain_on_current_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterInfo = System.Text.Json.JsonEncodedText.Encode("cluster_info"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConfiguredDelay = System.Text.Json.JsonEncodedText.Encode("configured_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConfiguredDelayInMillis = System.Text.Json.JsonEncodedText.Encode("configured_delay_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentState = System.Text.Json.JsonEncodedText.Encode("current_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMoveExplanation = System.Text.Json.JsonEncodedText.Encode("move_explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeAllocationDecisions = System.Text.Json.JsonEncodedText.Encode("node_allocation_decisions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNote = System.Text.Json.JsonEncodedText.Encode("note"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRebalanceExplanation = System.Text.Json.JsonEncodedText.Encode("rebalance_explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemainingDelay = System.Text.Json.JsonEncodedText.Encode("remaining_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemainingDelayInMillis = System.Text.Json.JsonEncodedText.Encode("remaining_delay_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedInfo = System.Text.Json.JsonEncodedText.Encode("unassigned_info"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

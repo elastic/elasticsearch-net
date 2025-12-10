@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ForecastResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropForecastId = System.Text.Json.JsonEncodedText.Encode("forecast_id");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForecastId = System.Text.Json.JsonEncodedText.Encode("forecast_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ForecastResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

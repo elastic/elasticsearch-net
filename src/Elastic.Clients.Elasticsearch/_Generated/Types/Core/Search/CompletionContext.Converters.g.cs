@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class CompletionContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
-	private static readonly System.Text.Json.JsonEncodedText PropNeighbours = System.Text.Json.JsonEncodedText.Encode("neighbours");
-	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNeighbours = System.Text.Json.JsonEncodedText.Encode("neighbours"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

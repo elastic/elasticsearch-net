@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class FetchProfileDebugConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.FetchProfileDebug>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFastPath = System.Text.Json.JsonEncodedText.Encode("fast_path");
-	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFastPath = System.Text.Json.JsonEncodedText.Encode("fast_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.FetchProfileDebug Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

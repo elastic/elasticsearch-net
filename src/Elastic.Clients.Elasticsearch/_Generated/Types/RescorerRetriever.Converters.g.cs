@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RescorerRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RescorerRetriever>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore");
-	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever"u8);
 
 	public override Elastic.Clients.Elasticsearch.RescorerRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

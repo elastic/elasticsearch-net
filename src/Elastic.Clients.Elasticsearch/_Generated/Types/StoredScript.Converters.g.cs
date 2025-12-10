@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class StoredScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.StoredScript>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("lang");
-	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("lang"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
 
 	public override Elastic.Clients.Elasticsearch.StoredScript Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

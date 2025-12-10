@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SamlPrepareAuthenticationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRelayState = System.Text.Json.JsonEncodedText.Encode("relay_state");
+	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelayState = System.Text.Json.JsonEncodedText.Encode("relay_state"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

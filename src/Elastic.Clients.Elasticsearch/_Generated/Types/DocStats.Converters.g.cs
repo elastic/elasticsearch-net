@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DocStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DocStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.DocStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlJobForecastsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropForecastedJobs = System.Text.Json.JsonEncodedText.Encode("forecasted_jobs");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropForecastedJobs = System.Text.Json.JsonEncodedText.Encode("forecasted_jobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

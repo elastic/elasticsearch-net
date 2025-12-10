@@ -61,6 +61,13 @@ public sealed partial class SamlAuthenticateResponse : Elastic.Transport.Product
 
 	/// <summary>
 	/// <para>
+	/// The id of the request that initiated the authentication process.
+	/// </para>
+	/// </summary>
+	public string? InResponseTo { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The name of the realm where the user was authenticated.
 	/// </para>
 	/// </summary>

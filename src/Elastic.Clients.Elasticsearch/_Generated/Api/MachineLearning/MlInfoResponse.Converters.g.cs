@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class MlInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
-	private static readonly System.Text.Json.JsonEncodedText PropLimits = System.Text.Json.JsonEncodedText.Encode("limits");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeCode = System.Text.Json.JsonEncodedText.Encode("native_code");
-	private static readonly System.Text.Json.JsonEncodedText PropUpgradeMode = System.Text.Json.JsonEncodedText.Encode("upgrade_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimits = System.Text.Json.JsonEncodedText.Encode("limits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNativeCode = System.Text.Json.JsonEncodedText.Encode("native_code"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpgradeMode = System.Text.Json.JsonEncodedText.Encode("upgrade_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

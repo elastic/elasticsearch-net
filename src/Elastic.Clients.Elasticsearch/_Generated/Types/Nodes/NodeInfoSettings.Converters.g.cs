@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
-	private static readonly System.Text.Json.JsonEncodedText PropBootstrap = System.Text.Json.JsonEncodedText.Encode("bootstrap");
-	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
-	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery");
-	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText PropNetwork = System.Text.Json.JsonEncodedText.Encode("network");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
-	private static readonly System.Text.Json.JsonEncodedText PropXpack = System.Text.Json.JsonEncodedText.Encode("xpack");
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBootstrap = System.Text.Json.JsonEncodedText.Encode("bootstrap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNetwork = System.Text.Json.JsonEncodedText.Encode("network"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropXpack = System.Text.Json.JsonEncodedText.Encode("xpack"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

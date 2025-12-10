@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class EqlFeaturesPipesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesPipes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPipeHead = System.Text.Json.JsonEncodedText.Encode("pipe_head");
-	private static readonly System.Text.Json.JsonEncodedText PropPipeTail = System.Text.Json.JsonEncodedText.Encode("pipe_tail");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeHead = System.Text.Json.JsonEncodedText.Encode("pipe_head"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipeTail = System.Text.Json.JsonEncodedText.Encode("pipe_tail"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesPipes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

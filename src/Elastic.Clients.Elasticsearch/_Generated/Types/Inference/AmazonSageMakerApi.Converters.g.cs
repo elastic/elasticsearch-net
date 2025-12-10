@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AmazonSageMakerApiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberElastic = System.Text.Json.JsonEncodedText.Encode("elastic");
-	private static readonly System.Text.Json.JsonEncodedText MemberOpenai = System.Text.Json.JsonEncodedText.Encode("openai");
+	private static readonly System.Text.Json.JsonEncodedText MemberElastic = System.Text.Json.JsonEncodedText.Encode("elastic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOpenai = System.Text.Json.JsonEncodedText.Encode("openai"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

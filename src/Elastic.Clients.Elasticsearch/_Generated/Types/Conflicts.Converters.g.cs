@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ConflictsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Conflicts>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAbort = System.Text.Json.JsonEncodedText.Encode("abort");
-	private static readonly System.Text.Json.JsonEncodedText MemberProceed = System.Text.Json.JsonEncodedText.Encode("proceed");
+	private static readonly System.Text.Json.JsonEncodedText MemberAbort = System.Text.Json.JsonEncodedText.Encode("abort"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberProceed = System.Text.Json.JsonEncodedText.Encode("proceed"u8);
 
 	public override Elastic.Clients.Elasticsearch.Conflicts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

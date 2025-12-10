@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TopClassEntryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
-	private static readonly System.Text.Json.JsonEncodedText PropClassProbability = System.Text.Json.JsonEncodedText.Encode("class_probability");
-	private static readonly System.Text.Json.JsonEncodedText PropClassScore = System.Text.Json.JsonEncodedText.Encode("class_score");
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClassProbability = System.Text.Json.JsonEncodedText.Encode("class_probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClassScore = System.Text.Json.JsonEncodedText.Encode("class_score"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,24 +25,24 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelDeploymentNodesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMs = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsExcludingCacheHits = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_excluding_cache_hits");
-	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsLastMinute = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_last_minute");
-	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceCacheHitCount = System.Text.Json.JsonEncodedText.Encode("inference_cache_hit_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceCacheHitCountLastMinute = System.Text.Json.JsonEncodedText.Encode("inference_cache_hit_count_last_minute");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceCount = System.Text.Json.JsonEncodedText.Encode("inference_count");
-	private static readonly System.Text.Json.JsonEncodedText PropLastAccess = System.Text.Json.JsonEncodedText.Encode("last_access");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPendingRequests = System.Text.Json.JsonEncodedText.Encode("number_of_pending_requests");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakThroughputPerMinute = System.Text.Json.JsonEncodedText.Encode("peak_throughput_per_minute");
-	private static readonly System.Text.Json.JsonEncodedText PropRejectedExecutionCount = System.Text.Json.JsonEncodedText.Encode("rejected_execution_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropThreadsPerAllocation = System.Text.Json.JsonEncodedText.Encode("threads_per_allocation");
-	private static readonly System.Text.Json.JsonEncodedText PropThroughputLastMinute = System.Text.Json.JsonEncodedText.Encode("throughput_last_minute");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeoutCount = System.Text.Json.JsonEncodedText.Encode("timeout_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMs = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsExcludingCacheHits = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_excluding_cache_hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAverageInferenceTimeMsLastMinute = System.Text.Json.JsonEncodedText.Encode("average_inference_time_ms_last_minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCacheHitCount = System.Text.Json.JsonEncodedText.Encode("inference_cache_hit_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCacheHitCountLastMinute = System.Text.Json.JsonEncodedText.Encode("inference_cache_hit_count_last_minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCount = System.Text.Json.JsonEncodedText.Encode("inference_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastAccess = System.Text.Json.JsonEncodedText.Encode("last_access"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfAllocations = System.Text.Json.JsonEncodedText.Encode("number_of_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPendingRequests = System.Text.Json.JsonEncodedText.Encode("number_of_pending_requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakThroughputPerMinute = System.Text.Json.JsonEncodedText.Encode("peak_throughput_per_minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRejectedExecutionCount = System.Text.Json.JsonEncodedText.Encode("rejected_execution_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreadsPerAllocation = System.Text.Json.JsonEncodedText.Encode("threads_per_allocation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThroughputLastMinute = System.Text.Json.JsonEncodedText.Encode("throughput_last_minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeoutCount = System.Text.Json.JsonEncodedText.Encode("timeout_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

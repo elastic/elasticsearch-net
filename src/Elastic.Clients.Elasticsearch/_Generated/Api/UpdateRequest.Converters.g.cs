@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class UpdateRequestConverter<TDocument, TPartialDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDetectNoop = System.Text.Json.JsonEncodedText.Encode("detect_noop");
-	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
-	private static readonly System.Text.Json.JsonEncodedText PropDocAsUpsert = System.Text.Json.JsonEncodedText.Encode("doc_as_upsert");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropScriptedUpsert = System.Text.Json.JsonEncodedText.Encode("scripted_upsert");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
-	private static readonly System.Text.Json.JsonEncodedText PropUpsert = System.Text.Json.JsonEncodedText.Encode("upsert");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectNoop = System.Text.Json.JsonEncodedText.Encode("detect_noop"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocAsUpsert = System.Text.Json.JsonEncodedText.Encode("doc_as_upsert"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScriptedUpsert = System.Text.Json.JsonEncodedText.Encode("scripted_upsert"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpsert = System.Text.Json.JsonEncodedText.Encode("upsert"u8);
 
 	public override Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

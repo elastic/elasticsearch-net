@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class FileSettingsIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailureStreak = System.Text.Json.JsonEncodedText.Encode("failure_streak");
-	private static readonly System.Text.Json.JsonEncodedText PropMostRecentFailure = System.Text.Json.JsonEncodedText.Encode("most_recent_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStreak = System.Text.Json.JsonEncodedText.Encode("failure_streak"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMostRecentFailure = System.Text.Json.JsonEncodedText.Encode("most_recent_failure"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

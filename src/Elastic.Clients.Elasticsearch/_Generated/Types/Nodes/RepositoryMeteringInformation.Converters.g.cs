@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class RepositoryMeteringInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropArchived = System.Text.Json.JsonEncodedText.Encode("archived");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterVersion = System.Text.Json.JsonEncodedText.Encode("cluster_version");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryEphemeralId = System.Text.Json.JsonEncodedText.Encode("repository_ephemeral_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryLocation = System.Text.Json.JsonEncodedText.Encode("repository_location");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryName = System.Text.Json.JsonEncodedText.Encode("repository_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStartedAt = System.Text.Json.JsonEncodedText.Encode("repository_started_at");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStoppedAt = System.Text.Json.JsonEncodedText.Encode("repository_stopped_at");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositoryType = System.Text.Json.JsonEncodedText.Encode("repository_type");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestCounts = System.Text.Json.JsonEncodedText.Encode("request_counts");
+	private static readonly System.Text.Json.JsonEncodedText PropArchived = System.Text.Json.JsonEncodedText.Encode("archived"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterVersion = System.Text.Json.JsonEncodedText.Encode("cluster_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryEphemeralId = System.Text.Json.JsonEncodedText.Encode("repository_ephemeral_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryLocation = System.Text.Json.JsonEncodedText.Encode("repository_location"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryName = System.Text.Json.JsonEncodedText.Encode("repository_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStartedAt = System.Text.Json.JsonEncodedText.Encode("repository_started_at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryStoppedAt = System.Text.Json.JsonEncodedText.Encode("repository_stopped_at"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepositoryType = System.Text.Json.JsonEncodedText.Encode("repository_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCounts = System.Text.Json.JsonEncodedText.Encode("request_counts"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

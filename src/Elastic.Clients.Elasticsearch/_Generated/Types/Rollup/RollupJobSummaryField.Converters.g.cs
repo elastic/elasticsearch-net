@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupJobSummaryFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAgg = System.Text.Json.JsonEncodedText.Encode("agg");
-	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropAgg = System.Text.Json.JsonEncodedText.Encode("agg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobSummaryField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

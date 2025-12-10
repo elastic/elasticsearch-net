@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class SlmConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

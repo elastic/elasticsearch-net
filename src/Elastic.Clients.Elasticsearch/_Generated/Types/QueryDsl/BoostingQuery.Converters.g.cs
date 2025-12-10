@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class BoostingQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropNegative = System.Text.Json.JsonEncodedText.Encode("negative");
-	private static readonly System.Text.Json.JsonEncodedText PropNegativeBoost = System.Text.Json.JsonEncodedText.Encode("negative_boost");
-	private static readonly System.Text.Json.JsonEncodedText PropPositive = System.Text.Json.JsonEncodedText.Encode("positive");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNegative = System.Text.Json.JsonEncodedText.Encode("negative"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNegativeBoost = System.Text.Json.JsonEncodedText.Encode("negative_boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositive = System.Text.Json.JsonEncodedText.Encode("positive"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

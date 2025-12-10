@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class DatabaseConfigurationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantIpinfo = System.Text.Json.JsonEncodedText.Encode("ipinfo");
 	private static readonly System.Text.Json.JsonEncodedText VariantMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind");
 

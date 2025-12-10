@@ -25,28 +25,28 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class CommonStatsFlagConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CommonStatsFlag>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText MemberBulk = System.Text.Json.JsonEncodedText.Encode("bulk");
-	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
-	private static readonly System.Text.Json.JsonEncodedText MemberDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
-	private static readonly System.Text.Json.JsonEncodedText MemberDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText MemberFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
-	private static readonly System.Text.Json.JsonEncodedText MemberFlush = System.Text.Json.JsonEncodedText.Encode("flush");
-	private static readonly System.Text.Json.JsonEncodedText MemberGet = System.Text.Json.JsonEncodedText.Encode("get");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
-	private static readonly System.Text.Json.JsonEncodedText MemberMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText MemberMerge = System.Text.Json.JsonEncodedText.Encode("merge");
-	private static readonly System.Text.Json.JsonEncodedText MemberQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache");
-	private static readonly System.Text.Json.JsonEncodedText MemberRecovery = System.Text.Json.JsonEncodedText.Encode("recovery");
-	private static readonly System.Text.Json.JsonEncodedText MemberRefresh = System.Text.Json.JsonEncodedText.Encode("refresh");
-	private static readonly System.Text.Json.JsonEncodedText MemberRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache");
-	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText MemberSegments = System.Text.Json.JsonEncodedText.Encode("segments");
-	private static readonly System.Text.Json.JsonEncodedText MemberShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats");
-	private static readonly System.Text.Json.JsonEncodedText MemberSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector");
-	private static readonly System.Text.Json.JsonEncodedText MemberStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText MemberTranslog = System.Text.Json.JsonEncodedText.Encode("translog");
-	private static readonly System.Text.Json.JsonEncodedText MemberWarmer = System.Text.Json.JsonEncodedText.Encode("warmer");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBulk = System.Text.Json.JsonEncodedText.Encode("bulk"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFlush = System.Text.Json.JsonEncodedText.Encode("flush"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGet = System.Text.Json.JsonEncodedText.Encode("get"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexing = System.Text.Json.JsonEncodedText.Encode("indexing"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMerge = System.Text.Json.JsonEncodedText.Encode("merge"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRecovery = System.Text.Json.JsonEncodedText.Encode("recovery"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRefresh = System.Text.Json.JsonEncodedText.Encode("refresh"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSegments = System.Text.Json.JsonEncodedText.Encode("segments"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTranslog = System.Text.Json.JsonEncodedText.Encode("translog"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWarmer = System.Text.Json.JsonEncodedText.Encode("warmer"u8);
 
 	public override Elastic.Clients.Elasticsearch.CommonStatsFlag Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

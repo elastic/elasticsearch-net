@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class DataStreamLifecycleDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndicesCount = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalBackingIndicesInError = System.Text.Json.JsonEncodedText.Encode("total_backing_indices_in_error");
+	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStagnatingBackingIndicesCount = System.Text.Json.JsonEncodedText.Encode("stagnating_backing_indices_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBackingIndicesInError = System.Text.Json.JsonEncodedText.Encode("total_backing_indices_in_error"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

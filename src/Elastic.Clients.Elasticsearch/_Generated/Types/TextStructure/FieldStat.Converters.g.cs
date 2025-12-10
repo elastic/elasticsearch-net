@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class FieldStatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FieldStat>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCardinality = System.Text.Json.JsonEncodedText.Encode("cardinality");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropEarliest = System.Text.Json.JsonEncodedText.Encode("earliest");
-	private static readonly System.Text.Json.JsonEncodedText PropLatest = System.Text.Json.JsonEncodedText.Encode("latest");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxValue = System.Text.Json.JsonEncodedText.Encode("max_value");
-	private static readonly System.Text.Json.JsonEncodedText PropMeanValue = System.Text.Json.JsonEncodedText.Encode("mean_value");
-	private static readonly System.Text.Json.JsonEncodedText PropMedianValue = System.Text.Json.JsonEncodedText.Encode("median_value");
-	private static readonly System.Text.Json.JsonEncodedText PropMinValue = System.Text.Json.JsonEncodedText.Encode("min_value");
-	private static readonly System.Text.Json.JsonEncodedText PropTopHits = System.Text.Json.JsonEncodedText.Encode("top_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropCardinality = System.Text.Json.JsonEncodedText.Encode("cardinality"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEarliest = System.Text.Json.JsonEncodedText.Encode("earliest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatest = System.Text.Json.JsonEncodedText.Encode("latest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxValue = System.Text.Json.JsonEncodedText.Encode("max_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeanValue = System.Text.Json.JsonEncodedText.Encode("mean_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMedianValue = System.Text.Json.JsonEncodedText.Encode("median_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinValue = System.Text.Json.JsonEncodedText.Encode("min_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopHits = System.Text.Json.JsonEncodedText.Encode("top_hits"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.FieldStat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class WatcherWatchTriggerScheduleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

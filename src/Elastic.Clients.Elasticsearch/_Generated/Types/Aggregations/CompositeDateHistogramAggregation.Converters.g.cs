@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CompositeDateHistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingBucket = System.Text.Json.JsonEncodedText.Encode("missing_bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingOrder = System.Text.Json.JsonEncodedText.Encode("missing_order");
-	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
-	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingBucket = System.Text.Json.JsonEncodedText.Encode("missing_bucket"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingOrder = System.Text.Json.JsonEncodedText.Encode("missing_order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

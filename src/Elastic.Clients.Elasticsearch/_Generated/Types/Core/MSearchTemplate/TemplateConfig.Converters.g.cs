@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate.Json;
 
 public sealed partial class TemplateConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

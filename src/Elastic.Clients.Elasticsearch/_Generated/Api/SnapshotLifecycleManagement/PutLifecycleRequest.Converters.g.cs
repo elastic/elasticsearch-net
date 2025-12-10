@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class PutLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
-	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
+	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DeleteByQueryRethrottleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNodeFailures = System.Text.Json.JsonEncodedText.Encode("node_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskFailures = System.Text.Json.JsonEncodedText.Encode("task_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropTasks = System.Text.Json.JsonEncodedText.Encode("tasks");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeFailures = System.Text.Json.JsonEncodedText.Encode("node_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskFailures = System.Text.Json.JsonEncodedText.Encode("task_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTasks = System.Text.Json.JsonEncodedText.Encode("tasks"u8);
 
 	public override Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

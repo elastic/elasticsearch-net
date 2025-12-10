@@ -224,6 +224,52 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities(Elastic.Clients.Elasticsearch.CapabilitiesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities(System.Action<Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(Elastic.Clients.Elasticsearch.CapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CapabilitiesResponse> CapabilitiesAsync(System.Action<Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CapabilitiesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CapabilitiesRequest, Elastic.Clients.Elasticsearch.CapabilitiesResponse, Elastic.Clients.Elasticsearch.CapabilitiesRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.ClearScrollResponse ClearScroll(Elastic.Clients.Elasticsearch.ClearScrollRequest request)
 	{
 		request.BeforeRequest();

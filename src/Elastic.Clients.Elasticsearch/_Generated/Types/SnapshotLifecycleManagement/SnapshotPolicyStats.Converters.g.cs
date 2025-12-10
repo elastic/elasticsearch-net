@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class SnapshotPolicyStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletionFailures = System.Text.Json.JsonEncodedText.Encode("snapshot_deletion_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsDeleted = System.Text.Json.JsonEncodedText.Encode("snapshots_deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsFailed = System.Text.Json.JsonEncodedText.Encode("snapshots_failed");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsTaken = System.Text.Json.JsonEncodedText.Encode("snapshots_taken");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletionFailures = System.Text.Json.JsonEncodedText.Encode("snapshot_deletion_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsDeleted = System.Text.Json.JsonEncodedText.Encode("snapshots_deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsFailed = System.Text.Json.JsonEncodedText.Encode("snapshots_failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotsTaken = System.Text.Json.JsonEncodedText.Encode("snapshots_taken"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class KnnCollectorResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInNanos = System.Text.Json.JsonEncodedText.Encode("time_in_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropChildren = System.Text.Json.JsonEncodedText.Encode("children"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInNanos = System.Text.Json.JsonEncodedText.Encode("time_in_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class NormalizeMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMean = System.Text.Json.JsonEncodedText.Encode("mean");
-	private static readonly System.Text.Json.JsonEncodedText MemberPercentOfSum = System.Text.Json.JsonEncodedText.Encode("percent_of_sum");
-	private static readonly System.Text.Json.JsonEncodedText MemberRescale01 = System.Text.Json.JsonEncodedText.Encode("rescale_0_1");
-	private static readonly System.Text.Json.JsonEncodedText MemberRescale0100 = System.Text.Json.JsonEncodedText.Encode("rescale_0_100");
-	private static readonly System.Text.Json.JsonEncodedText MemberSoftmax = System.Text.Json.JsonEncodedText.Encode("softmax");
-	private static readonly System.Text.Json.JsonEncodedText MemberZScore = System.Text.Json.JsonEncodedText.Encode("z-score");
+	private static readonly System.Text.Json.JsonEncodedText MemberMean = System.Text.Json.JsonEncodedText.Encode("mean"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPercentOfSum = System.Text.Json.JsonEncodedText.Encode("percent_of_sum"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRescale01 = System.Text.Json.JsonEncodedText.Encode("rescale_0_1"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRescale0100 = System.Text.Json.JsonEncodedText.Encode("rescale_0_100"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSoftmax = System.Text.Json.JsonEncodedText.Encode("softmax"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberZScore = System.Text.Json.JsonEncodedText.Encode("z-score"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class FlushJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdvanceTime = System.Text.Json.JsonEncodedText.Encode("advance_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCalcInterim = System.Text.Json.JsonEncodedText.Encode("calc_interim");
-	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipTime = System.Text.Json.JsonEncodedText.Encode("skip_time");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+	private static readonly System.Text.Json.JsonEncodedText PropAdvanceTime = System.Text.Json.JsonEncodedText.Encode("advance_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCalcInterim = System.Text.Json.JsonEncodedText.Encode("calc_interim"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipTime = System.Text.Json.JsonEncodedText.Encode("skip_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

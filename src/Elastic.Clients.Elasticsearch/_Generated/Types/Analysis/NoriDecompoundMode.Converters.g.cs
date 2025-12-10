@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class NoriDecompoundModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDiscard = System.Text.Json.JsonEncodedText.Encode("discard");
-	private static readonly System.Text.Json.JsonEncodedText MemberMixed = System.Text.Json.JsonEncodedText.Encode("mixed");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberDiscard = System.Text.Json.JsonEncodedText.Encode("discard"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMixed = System.Text.Json.JsonEncodedText.Encode("mixed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

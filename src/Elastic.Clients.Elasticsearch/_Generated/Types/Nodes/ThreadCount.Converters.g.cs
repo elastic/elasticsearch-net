@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ThreadCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ThreadCount>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
-	private static readonly System.Text.Json.JsonEncodedText PropLargest = System.Text.Json.JsonEncodedText.Encode("largest");
-	private static readonly System.Text.Json.JsonEncodedText PropQueue = System.Text.Json.JsonEncodedText.Encode("queue");
-	private static readonly System.Text.Json.JsonEncodedText PropRejected = System.Text.Json.JsonEncodedText.Encode("rejected");
-	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
+	private static readonly System.Text.Json.JsonEncodedText PropActive = System.Text.Json.JsonEncodedText.Encode("active"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLargest = System.Text.Json.JsonEncodedText.Encode("largest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueue = System.Text.Json.JsonEncodedText.Encode("queue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRejected = System.Text.Json.JsonEncodedText.Encode("rejected"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ThreadCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

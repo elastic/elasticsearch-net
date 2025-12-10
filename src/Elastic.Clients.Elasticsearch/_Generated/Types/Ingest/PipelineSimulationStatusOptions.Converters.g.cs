@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class PipelineSimulationStatusOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDropped = System.Text.Json.JsonEncodedText.Encode("dropped");
-	private static readonly System.Text.Json.JsonEncodedText MemberError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText MemberErrorIgnored = System.Text.Json.JsonEncodedText.Encode("error_ignored");
-	private static readonly System.Text.Json.JsonEncodedText MemberSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
-	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
+	private static readonly System.Text.Json.JsonEncodedText MemberDropped = System.Text.Json.JsonEncodedText.Encode("dropped"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberErrorIgnored = System.Text.Json.JsonEncodedText.Encode("error_ignored"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipped = System.Text.Json.JsonEncodedText.Encode("skipped"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class PerRepositoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTime = System.Text.Json.JsonEncodedText.Encode("oldest_start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("oldest_start_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTime = System.Text.Json.JsonEncodedText.Encode("oldest_start_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("oldest_start_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

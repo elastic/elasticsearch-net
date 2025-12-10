@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class PutUserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PutUserRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEmail = System.Text.Json.JsonEncodedText.Encode("email");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropEmail = System.Text.Json.JsonEncodedText.Encode("email"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.PutUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

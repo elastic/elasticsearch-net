@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class TranslogDurabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAsync = System.Text.Json.JsonEncodedText.Encode("async");
-	private static readonly System.Text.Json.JsonEncodedText MemberAsync1 = System.Text.Json.JsonEncodedText.Encode("ASYNC");
-	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request");
-	private static readonly System.Text.Json.JsonEncodedText MemberRequest1 = System.Text.Json.JsonEncodedText.Encode("REQUEST");
+	private static readonly System.Text.Json.JsonEncodedText MemberAsync = System.Text.Json.JsonEncodedText.Encode("async"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAsync1 = System.Text.Json.JsonEncodedText.Encode("ASYNC"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest1 = System.Text.Json.JsonEncodedText.Encode("REQUEST"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

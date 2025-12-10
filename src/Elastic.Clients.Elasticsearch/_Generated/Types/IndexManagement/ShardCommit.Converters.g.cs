@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardCommitConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropNumDocs = System.Text.Json.JsonEncodedText.Encode("num_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropUserData = System.Text.Json.JsonEncodedText.Encode("user_data");
+	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumDocs = System.Text.Json.JsonEncodedText.Encode("num_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserData = System.Text.Json.JsonEncodedText.Encode("user_data"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

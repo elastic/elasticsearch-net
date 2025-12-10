@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class ShrinkActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowWriteAfterShrink = System.Text.Json.JsonEncodedText.Encode("allow_write_after_shrink");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowWriteAfterShrink = System.Text.Json.JsonEncodedText.Encode("allow_write_after_shrink"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

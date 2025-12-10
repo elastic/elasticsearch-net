@@ -46,6 +46,13 @@ public sealed partial class Retriever
 
 	/// <summary>
 	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DiversifyRetriever? Diversify { get => GetVariant<Elastic.Clients.Elasticsearch.DiversifyRetriever>("diversify"); set => SetVariant("diversify", value); }
+
+	/// <summary>
+	/// <para>
 	/// A retriever that replaces the functionality  of a knn search.
 	/// </para>
 	/// </summary>
@@ -101,6 +108,7 @@ public sealed partial class Retriever
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityReranker? TextSimilarityReranker { get => GetVariant<Elastic.Clients.Elasticsearch.TextSimilarityReranker>("text_similarity_reranker"); set => SetVariant("text_similarity_reranker", value); }
 
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.DiversifyRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Diversify = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.KnnRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Knn = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.LinearRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Linear = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.PinnedRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Pinned = value };
@@ -147,6 +155,28 @@ public readonly partial struct RetrieverDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Diversify(Elastic.Clients.Elasticsearch.DiversifyRetriever? value)
+	{
+		Instance.Diversify = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Diversify(System.Action<Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Diversify = Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -375,6 +405,39 @@ public readonly partial struct RetrieverDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Diversify(Elastic.Clients.Elasticsearch.DiversifyRetriever? value)
+	{
+		Instance.Diversify = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Diversify(System.Action<Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor> action)
+	{
+		Instance.Diversify = Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that diversifies the results from its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Diversify<T>(System.Action<Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<T>> action)
+	{
+		Instance.Diversify = Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

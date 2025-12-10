@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MovingPercentilesAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
-	private static readonly System.Text.Json.JsonEncodedText PropShift = System.Text.Json.JsonEncodedText.Encode("shift");
-	private static readonly System.Text.Json.JsonEncodedText PropWindow = System.Text.Json.JsonEncodedText.Encode("window");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShift = System.Text.Json.JsonEncodedText.Encode("shift"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWindow = System.Text.Json.JsonEncodedText.Encode("window"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MovingPercentilesAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

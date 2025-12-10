@@ -25,23 +25,6 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class StopTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;
-	/// contains the  <c>_all</c> string or no identifiers and there are no matches; or contains wildcard expressions and
-	/// there are only partial matches. By default, it returns an empty array when there are no matches and the subset of results when there are partial matches.
-	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
-	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
-
-	/// <summary>
-	/// <para>
-	/// Forcefully stops the deployment, even if it is used by ingest pipelines. You can't use these pipelines until you
-	/// restart the model deployment.
-	/// </para>
-	/// </summary>
-	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 }
 
 /// <summary>
@@ -71,7 +54,7 @@ public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.
 
 	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.stop_trained_model_deployment";
 
@@ -94,7 +77,7 @@ public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.
 	/// If <c>false</c>, the request returns a 404 status code when there are no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
+	public bool? AllowNoMatch { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -102,7 +85,14 @@ public sealed partial class StopTrainedModelDeploymentRequest : Elastic.Clients.
 	/// restart the model deployment.
 	/// </para>
 	/// </summary>
-	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+	public bool? Force { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If provided, must be the same identifier as in the path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 }
 
 /// <summary>
@@ -168,6 +158,17 @@ public readonly partial struct StopTrainedModelDeploymentRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If provided, must be the same identifier as in the path.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.Id = value;
 		return this;
 	}
 

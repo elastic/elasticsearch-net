@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class IngestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Ingest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
-	private static readonly System.Text.Json.JsonEncodedText PropRedact = System.Text.Json.JsonEncodedText.Encode("_redact");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRedact = System.Text.Json.JsonEncodedText.Encode("_redact"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.Ingest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

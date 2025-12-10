@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalMetricExpectedReciprocalRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
-	private static readonly System.Text.Json.JsonEncodedText PropMaximumRelevance = System.Text.Json.JsonEncodedText.Encode("maximum_relevance");
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaximumRelevance = System.Text.Json.JsonEncodedText.Encode("maximum_relevance"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

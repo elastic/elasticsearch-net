@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class TermsSetQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatchField = System.Text.Json.JsonEncodedText.Encode("minimum_should_match_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatchScript = System.Text.Json.JsonEncodedText.Encode("minimum_should_match_script");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatchField = System.Text.Json.JsonEncodedText.Encode("minimum_should_match_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatchScript = System.Text.Json.JsonEncodedText.Encode("minimum_should_match_script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

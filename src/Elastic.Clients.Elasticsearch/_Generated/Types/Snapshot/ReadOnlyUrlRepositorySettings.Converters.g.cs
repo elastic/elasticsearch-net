@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class ReadOnlyUrlRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
-	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
-	private static readonly System.Text.Json.JsonEncodedText PropHttpMaxRetries = System.Text.Json.JsonEncodedText.Encode("http_max_retries");
-	private static readonly System.Text.Json.JsonEncodedText PropHttpSocketTimeout = System.Text.Json.JsonEncodedText.Encode("http_socket_timeout");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfSnapshots = System.Text.Json.JsonEncodedText.Encode("max_number_of_snapshots");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
-	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttpMaxRetries = System.Text.Json.JsonEncodedText.Encode("http_max_retries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttpSocketTimeout = System.Text.Json.JsonEncodedText.Encode("http_socket_timeout"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfSnapshots = System.Text.Json.JsonEncodedText.Encode("max_number_of_snapshots"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

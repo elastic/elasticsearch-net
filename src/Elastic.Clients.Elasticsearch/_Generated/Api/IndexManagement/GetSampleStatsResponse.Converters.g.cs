@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class GetSampleStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLastException = System.Text.Json.JsonEncodedText.Encode("last_exception");
-	private static readonly System.Text.Json.JsonEncodedText PropPotentialSamples = System.Text.Json.JsonEncodedText.Encode("potential_samples");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesAccepted = System.Text.Json.JsonEncodedText.Encode("samples_accepted");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForCondition = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_condition");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForException = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_exception");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForMaxSamplesExceeded = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_max_samples_exceeded");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForRate = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_rate");
-	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForSize = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeCompilingCondition = System.Text.Json.JsonEncodedText.Encode("time_compiling_condition");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeCompilingConditionMillis = System.Text.Json.JsonEncodedText.Encode("time_compiling_condition_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeEvaluatingCondition = System.Text.Json.JsonEncodedText.Encode("time_evaluating_condition");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeEvaluatingConditionMillis = System.Text.Json.JsonEncodedText.Encode("time_evaluating_condition_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSampling = System.Text.Json.JsonEncodedText.Encode("time_sampling");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSamplingMillis = System.Text.Json.JsonEncodedText.Encode("time_sampling_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropLastException = System.Text.Json.JsonEncodedText.Encode("last_exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPotentialSamples = System.Text.Json.JsonEncodedText.Encode("potential_samples"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesAccepted = System.Text.Json.JsonEncodedText.Encode("samples_accepted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForCondition = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_condition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForException = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForMaxSamplesExceeded = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_max_samples_exceeded"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForRate = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_rate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSamplesRejectedForSize = System.Text.Json.JsonEncodedText.Encode("samples_rejected_for_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeCompilingCondition = System.Text.Json.JsonEncodedText.Encode("time_compiling_condition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeCompilingConditionMillis = System.Text.Json.JsonEncodedText.Encode("time_compiling_condition_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeEvaluatingCondition = System.Text.Json.JsonEncodedText.Encode("time_evaluating_condition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeEvaluatingConditionMillis = System.Text.Json.JsonEncodedText.Encode("time_evaluating_condition_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSampling = System.Text.Json.JsonEncodedText.Encode("time_sampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSamplingMillis = System.Text.Json.JsonEncodedText.Encode("time_sampling_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

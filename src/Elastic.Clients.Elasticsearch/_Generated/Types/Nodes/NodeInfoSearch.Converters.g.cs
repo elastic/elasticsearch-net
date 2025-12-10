@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSearchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRemote = System.Text.Json.JsonEncodedText.Encode("remote");
+	private static readonly System.Text.Json.JsonEncodedText PropRemote = System.Text.Json.JsonEncodedText.Encode("remote"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

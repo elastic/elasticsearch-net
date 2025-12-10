@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class SparseVectorStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
+	private static readonly System.Text.Json.JsonEncodedText PropValueCount = System.Text.Json.JsonEncodedText.Encode("value_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

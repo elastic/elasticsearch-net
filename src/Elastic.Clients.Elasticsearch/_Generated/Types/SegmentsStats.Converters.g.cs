@@ -25,29 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SegmentsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SegmentsStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemory = System.Text.Json.JsonEncodedText.Encode("doc_values_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("doc_values_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFileSizes = System.Text.Json.JsonEncodedText.Encode("file_sizes");
-	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSet = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set");
-	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSetMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemory = System.Text.Json.JsonEncodedText.Encode("index_writer_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxUnsafeAutoIdTimestamp = System.Text.Json.JsonEncodedText.Encode("max_unsafe_auto_id_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropNormsMemory = System.Text.Json.JsonEncodedText.Encode("norms_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropNormsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("norms_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPointsMemory = System.Text.Json.JsonEncodedText.Encode("points_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropPointsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("points_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemory = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTermsMemory = System.Text.Json.JsonEncodedText.Encode("terms_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropTermsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("terms_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemory = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemory = System.Text.Json.JsonEncodedText.Encode("version_map_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("version_map_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemory = System.Text.Json.JsonEncodedText.Encode("doc_values_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocValuesMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("doc_values_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFileSizes = System.Text.Json.JsonEncodedText.Encode("file_sizes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSet = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSetMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemory = System.Text.Json.JsonEncodedText.Encode("index_writer_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUnsafeAutoIdTimestamp = System.Text.Json.JsonEncodedText.Encode("max_unsafe_auto_id_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormsMemory = System.Text.Json.JsonEncodedText.Encode("norms_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("norms_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPointsMemory = System.Text.Json.JsonEncodedText.Encode("points_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPointsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("points_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemory = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermsMemory = System.Text.Json.JsonEncodedText.Encode("terms_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("terms_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemory = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemory = System.Text.Json.JsonEncodedText.Encode("version_map_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("version_map_memory_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.SegmentsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

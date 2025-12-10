@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Tasks.Json;
 
 public sealed partial class GetTasksResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response");
-	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task");
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResponse = System.Text.Json.JsonEncodedText.Encode("response"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task"u8);
 
 	public override Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

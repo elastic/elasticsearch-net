@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class EstimateModelMemoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxBucketCardinality = System.Text.Json.JsonEncodedText.Encode("max_bucket_cardinality");
-	private static readonly System.Text.Json.JsonEncodedText PropOverallCardinality = System.Text.Json.JsonEncodedText.Encode("overall_cardinality");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBucketCardinality = System.Text.Json.JsonEncodedText.Encode("max_bucket_cardinality"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverallCardinality = System.Text.Json.JsonEncodedText.Encode("overall_cardinality"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

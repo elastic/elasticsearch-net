@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class GetAllSampleConfigurationResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetAllSampleConfigurationResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfigurations = System.Text.Json.JsonEncodedText.Encode("configurations");
+	private static readonly System.Text.Json.JsonEncodedText PropConfigurations = System.Text.Json.JsonEncodedText.Encode("configurations"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetAllSampleConfigurationResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

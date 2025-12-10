@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class GrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText MemberAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

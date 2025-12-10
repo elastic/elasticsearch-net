@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TermVectorsRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldStatistics = System.Text.Json.JsonEncodedText.Encode("field_statistics");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets");
-	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads");
-	private static readonly System.Text.Json.JsonEncodedText PropPerFieldAnalyzer = System.Text.Json.JsonEncodedText.Encode("per_field_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldStatistics = System.Text.Json.JsonEncodedText.Encode("field_statistics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPerFieldAnalyzer = System.Text.Json.JsonEncodedText.Encode("per_field_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

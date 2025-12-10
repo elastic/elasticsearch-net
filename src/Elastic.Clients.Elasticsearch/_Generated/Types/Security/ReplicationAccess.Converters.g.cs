@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ReplicationAccessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowRestrictedIndices = System.Text.Json.JsonEncodedText.Encode("allow_restricted_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ReplicationAccess Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

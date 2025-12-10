@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBbqDisk = System.Text.Json.JsonEncodedText.Encode("bbq_disk");
-	private static readonly System.Text.Json.JsonEncodedText MemberBbqFlat = System.Text.Json.JsonEncodedText.Encode("bbq_flat");
-	private static readonly System.Text.Json.JsonEncodedText MemberBbqHnsw = System.Text.Json.JsonEncodedText.Encode("bbq_hnsw");
-	private static readonly System.Text.Json.JsonEncodedText MemberFlat = System.Text.Json.JsonEncodedText.Encode("flat");
-	private static readonly System.Text.Json.JsonEncodedText MemberHnsw = System.Text.Json.JsonEncodedText.Encode("hnsw");
-	private static readonly System.Text.Json.JsonEncodedText MemberInt4Flat = System.Text.Json.JsonEncodedText.Encode("int4_flat");
-	private static readonly System.Text.Json.JsonEncodedText MemberInt4Hnsw = System.Text.Json.JsonEncodedText.Encode("int4_hnsw");
-	private static readonly System.Text.Json.JsonEncodedText MemberInt8Flat = System.Text.Json.JsonEncodedText.Encode("int8_flat");
-	private static readonly System.Text.Json.JsonEncodedText MemberInt8Hnsw = System.Text.Json.JsonEncodedText.Encode("int8_hnsw");
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqDisk = System.Text.Json.JsonEncodedText.Encode("bbq_disk"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqFlat = System.Text.Json.JsonEncodedText.Encode("bbq_flat"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqHnsw = System.Text.Json.JsonEncodedText.Encode("bbq_hnsw"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFlat = System.Text.Json.JsonEncodedText.Encode("flat"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHnsw = System.Text.Json.JsonEncodedText.Encode("hnsw"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInt4Flat = System.Text.Json.JsonEncodedText.Encode("int4_flat"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInt4Hnsw = System.Text.Json.JsonEncodedText.Encode("int4_hnsw"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInt8Flat = System.Text.Json.JsonEncodedText.Encode("int8_flat"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInt8Hnsw = System.Text.Json.JsonEncodedText.Encode("int8_hnsw"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -55,3 +55,75 @@ public sealed partial class DataStreamOptions
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStore? FailureStore { get; set; }
 }
+
+/// <summary>
+/// <para>
+/// Data stream options contain the configuration of data stream level features for a given data stream, for example,
+/// the failure store configuration.
+/// </para>
+/// </summary>
+public readonly partial struct DataStreamOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamOptionsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataStreamOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If defined, it specifies configuration for the failure store of this data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor FailureStore(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStore? value)
+	{
+		Instance.FailureStore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it specifies configuration for the failure store of this data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor FailureStore()
+	{
+		Instance.FailureStore = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it specifies configuration for the failure store of this data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor FailureStore(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor>? action)
+	{
+		Instance.FailureStore = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class EnrichStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheStats = System.Text.Json.JsonEncodedText.Encode("cache_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatorStats = System.Text.Json.JsonEncodedText.Encode("coordinator_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropExecutingPolicies = System.Text.Json.JsonEncodedText.Encode("executing_policies");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheStats = System.Text.Json.JsonEncodedText.Encode("cache_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatorStats = System.Text.Json.JsonEncodedText.Encode("coordinator_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExecutingPolicies = System.Text.Json.JsonEncodedText.Encode("executing_policies"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

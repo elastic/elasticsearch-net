@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCustom = System.Text.Json.JsonEncodedText.Encode("custom");
-	private static readonly System.Text.Json.JsonEncodedText PropFeaturePrefix = System.Text.Json.JsonEncodedText.Encode("feature_prefix");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length");
-	private static readonly System.Text.Json.JsonEncodedText PropNGrams = System.Text.Json.JsonEncodedText.Encode("n_grams");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+	private static readonly System.Text.Json.JsonEncodedText PropCustom = System.Text.Json.JsonEncodedText.Encode("custom"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeaturePrefix = System.Text.Json.JsonEncodedText.Encode("feature_prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNGrams = System.Text.Json.JsonEncodedText.Encode("n_grams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

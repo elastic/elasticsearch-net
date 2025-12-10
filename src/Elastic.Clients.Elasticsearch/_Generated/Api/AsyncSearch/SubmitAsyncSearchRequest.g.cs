@@ -27,7 +27,8 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -48,7 +49,7 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 
 	/// <summary>
 	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// Specify whether wildcard and prefix queries should be analyzed
 	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -84,7 +85,7 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -127,14 +128,15 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 
 	/// <summary>
 	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// The number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
 	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify the node or shard the operation should be performed on (default: random)
+	/// Specify the node or shard the operation should be performed on
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -286,7 +288,8 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -307,7 +310,7 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// Specify whether wildcard and prefix queries should be analyzed
 	/// </para>
 	/// </summary>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
@@ -343,7 +346,7 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -386,14 +389,15 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// The number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
 	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specify the node or shard the operation should be performed on (default: random)
+	/// Specify the node or shard the operation should be performed on
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
@@ -729,7 +733,8 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AllowNoIndices(bool? value = true)
@@ -762,7 +767,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// Specify whether wildcard and prefix queries should be analyzed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor AnalyzeWildcard(bool? value = true)
@@ -818,7 +823,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -829,7 +834,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -896,7 +901,8 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// The number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
@@ -907,7 +913,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify the node or shard the operation should be performed on (default: random)
+	/// Specify the node or shard the operation should be performed on
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor Preference(string? value)
@@ -2108,7 +2114,8 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -2141,7 +2148,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Specify whether wildcard and prefix queries should be analyzed (default: false)
+	/// Specify whether wildcard and prefix queries should be analyzed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
@@ -2197,7 +2204,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -2208,7 +2215,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -2275,7 +2282,8 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
+	/// The number of concurrent shard requests per node this search executes concurrently.
+	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
@@ -2286,7 +2294,7 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Specify the node or shard the operation should be performed on (default: random)
+	/// Specify the node or shard the operation should be performed on
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> Preference(string? value)

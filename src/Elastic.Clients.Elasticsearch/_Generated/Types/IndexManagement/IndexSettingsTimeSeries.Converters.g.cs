@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexSettingsTimeSeriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEndTime = System.Text.Json.JsonEncodedText.Encode("end_time");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
+	private static readonly System.Text.Json.JsonEncodedText PropEndTime = System.Text.Json.JsonEncodedText.Encode("end_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsTimeSeries Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Json;
 
 public sealed partial class StatsLevelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText MemberShards = System.Text.Json.JsonEncodedText.Encode("shards");
+	private static readonly System.Text.Json.JsonEncodedText MemberCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

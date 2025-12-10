@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class FieldValueFactorScoreFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFactor = System.Text.Json.JsonEncodedText.Encode("factor");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText PropModifier = System.Text.Json.JsonEncodedText.Encode("modifier");
+	private static readonly System.Text.Json.JsonEncodedText PropFactor = System.Text.Json.JsonEncodedText.Encode("factor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModifier = System.Text.Json.JsonEncodedText.Encode("modifier"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

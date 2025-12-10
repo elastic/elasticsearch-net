@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Simulate.Json;
 
 public sealed partial class SimulateIngestDocumentResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.SimulateIngestDocumentResult>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc"u8);
 
 	public override Elastic.Clients.Elasticsearch.Simulate.SimulateIngestDocumentResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

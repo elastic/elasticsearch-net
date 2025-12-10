@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors.Json;
 
 public sealed partial class FilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.Filter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocFreq = System.Text.Json.JsonEncodedText.Encode("max_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumTerms = System.Text.Json.JsonEncodedText.Encode("max_num_terms");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWordLength = System.Text.Json.JsonEncodedText.Encode("max_word_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinTermFreq = System.Text.Json.JsonEncodedText.Encode("min_term_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocFreq = System.Text.Json.JsonEncodedText.Encode("max_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumTerms = System.Text.Json.JsonEncodedText.Encode("max_num_terms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWordLength = System.Text.Json.JsonEncodedText.Encode("max_word_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinTermFreq = System.Text.Json.JsonEncodedText.Encode("min_term_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.TermVectors.Filter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

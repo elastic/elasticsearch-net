@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class HighlighterEncoderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
-	private static readonly System.Text.Json.JsonEncodedText MemberHtml = System.Text.Json.JsonEncodedText.Encode("html");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHtml = System.Text.Json.JsonEncodedText.Encode("html"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

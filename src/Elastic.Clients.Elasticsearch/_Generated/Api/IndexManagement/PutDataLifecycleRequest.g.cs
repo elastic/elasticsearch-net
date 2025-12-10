@@ -141,6 +141,14 @@ public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
+	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
+	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? DownsamplingMethod { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
 	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
 	/// </para>
@@ -291,6 +299,18 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 		}
 
 		Instance.Downsampling = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The method used to downsample the data. There are two options <c>aggregate</c> and <c>last_value</c>. It requires
+	/// <c>downsampling</c> to be defined. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor DownsamplingMethod(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? value)
+	{
+		Instance.DownsamplingMethod = value;
 		return this;
 	}
 

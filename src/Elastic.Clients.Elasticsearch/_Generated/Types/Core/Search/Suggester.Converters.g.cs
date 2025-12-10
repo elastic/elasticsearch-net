@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class SuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Suggester>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
+	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.Suggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

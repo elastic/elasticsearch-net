@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeProcessInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropMlockall = System.Text.Json.JsonEncodedText.Encode("mlockall");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMlockall = System.Text.Json.JsonEncodedText.Encode("mlockall"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

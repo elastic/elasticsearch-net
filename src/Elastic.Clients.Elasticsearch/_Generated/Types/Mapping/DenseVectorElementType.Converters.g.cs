@@ -25,12 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorElementTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit");
-	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
-	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberBfloat16 = System.Text.Json.JsonEncodedText.Encode("bfloat16"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberBfloat16))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bfloat16;
+		}
+
 		if (reader.ValueTextEquals(MemberBit))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bit;
@@ -47,6 +53,11 @@ public sealed partial class DenseVectorElementTypeConverter : System.Text.Json.S
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBfloat16.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bfloat16;
+		}
+
 		if (string.Equals(value, MemberBit.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bit;
@@ -69,6 +80,9 @@ public sealed partial class DenseVectorElementTypeConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bfloat16:
+				writer.WriteStringValue(MemberBfloat16);
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType.Bit:
 				writer.WriteStringValue(MemberBit);
 				break;

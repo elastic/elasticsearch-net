@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackSecurityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAuthc = System.Text.Json.JsonEncodedText.Encode("authc");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText PropAuthc = System.Text.Json.JsonEncodedText.Encode("authc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

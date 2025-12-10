@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class CloseJobResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClosed = System.Text.Json.JsonEncodedText.Encode("closed");
+	private static readonly System.Text.Json.JsonEncodedText PropClosed = System.Text.Json.JsonEncodedText.Encode("closed"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.CloseJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

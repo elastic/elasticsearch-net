@@ -28,6 +28,13 @@ public enum DenseVectorElementType
 {
 	/// <summary>
 	/// <para>
+	/// Indexes a 2-byte floating-point value per dimension.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "bfloat16")]
+	Bfloat16,
+	/// <summary>
+	/// <para>
 	/// Indexes a single bit per dimension. Useful for very high-dimensional vectors or models that specifically support
 	/// bit vectors.
 	/// </para>

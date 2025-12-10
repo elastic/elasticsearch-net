@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ExplainResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ExplainResponse<TDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
-	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched");
+	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched"u8);
 
 	public override Elastic.Clients.Elasticsearch.ExplainResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardRoutingStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberInitializing = System.Text.Json.JsonEncodedText.Encode("INITIALIZING");
-	private static readonly System.Text.Json.JsonEncodedText MemberRelocating = System.Text.Json.JsonEncodedText.Encode("RELOCATING");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
-	private static readonly System.Text.Json.JsonEncodedText MemberUnassigned = System.Text.Json.JsonEncodedText.Encode("UNASSIGNED");
+	private static readonly System.Text.Json.JsonEncodedText MemberInitializing = System.Text.Json.JsonEncodedText.Encode("INITIALIZING"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRelocating = System.Text.Json.JsonEncodedText.Encode("RELOCATING"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUnassigned = System.Text.Json.JsonEncodedText.Encode("UNASSIGNED"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

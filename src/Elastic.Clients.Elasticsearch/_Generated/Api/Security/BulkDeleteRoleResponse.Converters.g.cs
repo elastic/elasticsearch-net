@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class BulkDeleteRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
-	private static readonly System.Text.Json.JsonEncodedText PropNotFound = System.Text.Json.JsonEncodedText.Encode("not_found");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNotFound = System.Text.Json.JsonEncodedText.Encode("not_found"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class LowercaseTokenFilterLanguagesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGreek = System.Text.Json.JsonEncodedText.Encode("greek");
-	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("irish");
-	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("turkish");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreek = System.Text.Json.JsonEncodedText.Encode("greek"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("irish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("turkish"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

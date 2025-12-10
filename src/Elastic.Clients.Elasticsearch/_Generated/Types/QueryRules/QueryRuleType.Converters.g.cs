@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class QueryRuleTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText MemberPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
+	private static readonly System.Text.Json.JsonEncodedText MemberExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPinned = System.Text.Json.JsonEncodedText.Encode("pinned"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

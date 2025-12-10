@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorIndexOptionsRescoreVectorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOversample = System.Text.Json.JsonEncodedText.Encode("oversample");
+	private static readonly System.Text.Json.JsonEncodedText PropOversample = System.Text.Json.JsonEncodedText.Encode("oversample"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

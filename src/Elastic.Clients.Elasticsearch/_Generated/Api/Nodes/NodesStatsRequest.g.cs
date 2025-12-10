@@ -153,7 +153,7 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>?>("metric"); set => PO("metric", value); }
@@ -305,7 +305,7 @@ public readonly partial struct NodesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
@@ -316,7 +316,7 @@ public readonly partial struct NodesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)
@@ -611,7 +611,7 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
@@ -622,7 +622,7 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned to the specified metrics
+	/// Limits the information returned to the specific metrics.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)

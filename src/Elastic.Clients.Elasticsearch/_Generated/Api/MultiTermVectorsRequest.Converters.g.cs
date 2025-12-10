@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class MultiTermVectorsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiTermVectorsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids"u8);
 
 	public override Elastic.Clients.Elasticsearch.MultiTermVectorsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

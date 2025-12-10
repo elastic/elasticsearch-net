@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class UnassignedInformationReasonConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAllocationFailed = System.Text.Json.JsonEncodedText.Encode("ALLOCATION_FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberClusterRecovered = System.Text.Json.JsonEncodedText.Encode("CLUSTER_RECOVERED");
-	private static readonly System.Text.Json.JsonEncodedText MemberDanglingIndexImported = System.Text.Json.JsonEncodedText.Encode("DANGLING_INDEX_IMPORTED");
-	private static readonly System.Text.Json.JsonEncodedText MemberExistingIndexRestored = System.Text.Json.JsonEncodedText.Encode("EXISTING_INDEX_RESTORED");
-	private static readonly System.Text.Json.JsonEncodedText MemberForcedEmptyPrimary = System.Text.Json.JsonEncodedText.Encode("FORCED_EMPTY_PRIMARY");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexCreated = System.Text.Json.JsonEncodedText.Encode("INDEX_CREATED");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexReopened = System.Text.Json.JsonEncodedText.Encode("INDEX_REOPENED");
-	private static readonly System.Text.Json.JsonEncodedText MemberManualAllocation = System.Text.Json.JsonEncodedText.Encode("MANUAL_ALLOCATION");
-	private static readonly System.Text.Json.JsonEncodedText MemberNewIndexRestored = System.Text.Json.JsonEncodedText.Encode("NEW_INDEX_RESTORED");
-	private static readonly System.Text.Json.JsonEncodedText MemberNodeLeft = System.Text.Json.JsonEncodedText.Encode("NODE_LEFT");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrimaryFailed = System.Text.Json.JsonEncodedText.Encode("PRIMARY_FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberReallocatedReplica = System.Text.Json.JsonEncodedText.Encode("REALLOCATED_REPLICA");
-	private static readonly System.Text.Json.JsonEncodedText MemberReinitialized = System.Text.Json.JsonEncodedText.Encode("REINITIALIZED");
-	private static readonly System.Text.Json.JsonEncodedText MemberReplicaAdded = System.Text.Json.JsonEncodedText.Encode("REPLICA_ADDED");
-	private static readonly System.Text.Json.JsonEncodedText MemberRerouteCancelled = System.Text.Json.JsonEncodedText.Encode("REROUTE_CANCELLED");
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocationFailed = System.Text.Json.JsonEncodedText.Encode("ALLOCATION_FAILED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberClusterRecovered = System.Text.Json.JsonEncodedText.Encode("CLUSTER_RECOVERED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDanglingIndexImported = System.Text.Json.JsonEncodedText.Encode("DANGLING_INDEX_IMPORTED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExistingIndexRestored = System.Text.Json.JsonEncodedText.Encode("EXISTING_INDEX_RESTORED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberForcedEmptyPrimary = System.Text.Json.JsonEncodedText.Encode("FORCED_EMPTY_PRIMARY"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexCreated = System.Text.Json.JsonEncodedText.Encode("INDEX_CREATED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexReopened = System.Text.Json.JsonEncodedText.Encode("INDEX_REOPENED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberManualAllocation = System.Text.Json.JsonEncodedText.Encode("MANUAL_ALLOCATION"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNewIndexRestored = System.Text.Json.JsonEncodedText.Encode("NEW_INDEX_RESTORED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNodeLeft = System.Text.Json.JsonEncodedText.Encode("NODE_LEFT"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaryFailed = System.Text.Json.JsonEncodedText.Encode("PRIMARY_FAILED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReallocatedReplica = System.Text.Json.JsonEncodedText.Encode("REALLOCATED_REPLICA"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReinitialized = System.Text.Json.JsonEncodedText.Encode("REINITIALIZED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReplicaAdded = System.Text.Json.JsonEncodedText.Encode("REPLICA_ADDED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRerouteCancelled = System.Text.Json.JsonEncodedText.Encode("REROUTE_CANCELLED"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

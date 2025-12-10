@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RrfRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RrfRank>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant");
-	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size"u8);
 
 	public override Elastic.Clients.Elasticsearch.RrfRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpgradeJobSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropCompleted = System.Text.Json.JsonEncodedText.Encode("completed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpgradeJobSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

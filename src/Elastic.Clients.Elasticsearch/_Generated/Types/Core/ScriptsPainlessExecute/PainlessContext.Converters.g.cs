@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.Json;
 
 public sealed partial class PainlessContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBooleanField = System.Text.Json.JsonEncodedText.Encode("boolean_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberCompositeField = System.Text.Json.JsonEncodedText.Encode("composite_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberDateField = System.Text.Json.JsonEncodedText.Encode("date_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberDoubleField = System.Text.Json.JsonEncodedText.Encode("double_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoPointField = System.Text.Json.JsonEncodedText.Encode("geo_point_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberIpField = System.Text.Json.JsonEncodedText.Encode("ip_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberKeywordField = System.Text.Json.JsonEncodedText.Encode("keyword_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberLongField = System.Text.Json.JsonEncodedText.Encode("long_field");
-	private static readonly System.Text.Json.JsonEncodedText MemberPainlessTest = System.Text.Json.JsonEncodedText.Encode("painless_test");
-	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText MemberBooleanField = System.Text.Json.JsonEncodedText.Encode("boolean_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCompositeField = System.Text.Json.JsonEncodedText.Encode("composite_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDateField = System.Text.Json.JsonEncodedText.Encode("date_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDoubleField = System.Text.Json.JsonEncodedText.Encode("double_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoPointField = System.Text.Json.JsonEncodedText.Encode("geo_point_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIpField = System.Text.Json.JsonEncodedText.Encode("ip_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKeywordField = System.Text.Json.JsonEncodedText.Encode("keyword_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLongField = System.Text.Json.JsonEncodedText.Encode("long_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPainlessTest = System.Text.Json.JsonEncodedText.Encode("painless_test"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DistanceUnitConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DistanceUnit>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCentimeters = System.Text.Json.JsonEncodedText.Encode("cm");
-	private static readonly System.Text.Json.JsonEncodedText MemberFeet = System.Text.Json.JsonEncodedText.Encode("ft");
-	private static readonly System.Text.Json.JsonEncodedText MemberInches = System.Text.Json.JsonEncodedText.Encode("in");
-	private static readonly System.Text.Json.JsonEncodedText MemberKilometers = System.Text.Json.JsonEncodedText.Encode("km");
-	private static readonly System.Text.Json.JsonEncodedText MemberMeters = System.Text.Json.JsonEncodedText.Encode("m");
-	private static readonly System.Text.Json.JsonEncodedText MemberMiles = System.Text.Json.JsonEncodedText.Encode("mi");
-	private static readonly System.Text.Json.JsonEncodedText MemberMillimeters = System.Text.Json.JsonEncodedText.Encode("mm");
-	private static readonly System.Text.Json.JsonEncodedText MemberNauticMiles = System.Text.Json.JsonEncodedText.Encode("nmi");
-	private static readonly System.Text.Json.JsonEncodedText MemberYards = System.Text.Json.JsonEncodedText.Encode("yd");
+	private static readonly System.Text.Json.JsonEncodedText MemberCentimeters = System.Text.Json.JsonEncodedText.Encode("cm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFeet = System.Text.Json.JsonEncodedText.Encode("ft"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInches = System.Text.Json.JsonEncodedText.Encode("in"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKilometers = System.Text.Json.JsonEncodedText.Encode("km"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMeters = System.Text.Json.JsonEncodedText.Encode("m"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMiles = System.Text.Json.JsonEncodedText.Encode("mi"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMillimeters = System.Text.Json.JsonEncodedText.Encode("mm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNauticMiles = System.Text.Json.JsonEncodedText.Encode("nmi"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYards = System.Text.Json.JsonEncodedText.Encode("yd"u8);
 
 	public override Elastic.Clients.Elasticsearch.DistanceUnit Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

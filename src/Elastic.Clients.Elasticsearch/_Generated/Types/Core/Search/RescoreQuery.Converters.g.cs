@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class RescoreQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("rescore_query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryWeight = System.Text.Json.JsonEncodedText.Encode("query_weight");
-	private static readonly System.Text.Json.JsonEncodedText PropRescoreQueryWeight = System.Text.Json.JsonEncodedText.Encode("rescore_query_weight");
-	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("rescore_query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryWeight = System.Text.Json.JsonEncodedText.Encode("query_weight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRescoreQueryWeight = System.Text.Json.JsonEncodedText.Encode("rescore_query_weight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

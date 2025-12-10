@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelInferenceStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheMissCount = System.Text.Json.JsonEncodedText.Encode("cache_miss_count");
-	private static readonly System.Text.Json.JsonEncodedText PropFailureCount = System.Text.Json.JsonEncodedText.Encode("failure_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceCount = System.Text.Json.JsonEncodedText.Encode("inference_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingAllFieldsCount = System.Text.Json.JsonEncodedText.Encode("missing_all_fields_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheMissCount = System.Text.Json.JsonEncodedText.Encode("cache_miss_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailureCount = System.Text.Json.JsonEncodedText.Encode("failure_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCount = System.Text.Json.JsonEncodedText.Encode("inference_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingAllFieldsCount = System.Text.Json.JsonEncodedText.Encode("missing_all_fields_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

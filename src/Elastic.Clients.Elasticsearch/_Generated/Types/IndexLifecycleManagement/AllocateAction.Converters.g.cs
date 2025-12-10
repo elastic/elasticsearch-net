@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class AllocateActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfReplicas = System.Text.Json.JsonEncodedText.Encode("number_of_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropRequire = System.Text.Json.JsonEncodedText.Encode("require");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalShardsPerNode = System.Text.Json.JsonEncodedText.Encode("total_shards_per_node");
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfReplicas = System.Text.Json.JsonEncodedText.Encode("number_of_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequire = System.Text.Json.JsonEncodedText.Encode("require"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalShardsPerNode = System.Text.Json.JsonEncodedText.Encode("total_shards_per_node"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

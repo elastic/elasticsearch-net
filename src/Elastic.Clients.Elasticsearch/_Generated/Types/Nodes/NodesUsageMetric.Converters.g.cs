@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodesUsageMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText MemberAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText MemberRestActions = System.Text.Json.JsonEncodedText.Encode("rest_actions");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRestActions = System.Text.Json.JsonEncodedText.Encode("rest_actions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

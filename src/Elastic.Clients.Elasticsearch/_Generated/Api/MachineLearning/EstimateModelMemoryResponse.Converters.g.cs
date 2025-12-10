@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class EstimateModelMemoryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryEstimate = System.Text.Json.JsonEncodedText.Encode("model_memory_estimate");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryEstimate = System.Text.Json.JsonEncodedText.Encode("model_memory_estimate"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

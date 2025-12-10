@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MachineLearningConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MachineLearning>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
-	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsJobs = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_jobs");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropInference = System.Text.Json.JsonEncodedText.Encode("inference");
-	private static readonly System.Text.Json.JsonEncodedText PropJobs = System.Text.Json.JsonEncodedText.Encode("jobs");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrameAnalyticsJobs = System.Text.Json.JsonEncodedText.Encode("data_frame_analytics_jobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInference = System.Text.Json.JsonEncodedText.Encode("inference"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobs = System.Text.Json.JsonEncodedText.Encode("jobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MachineLearning Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

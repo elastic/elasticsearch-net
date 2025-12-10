@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class AllocationDecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDecider = System.Text.Json.JsonEncodedText.Encode("decider");
-	private static readonly System.Text.Json.JsonEncodedText PropDecision = System.Text.Json.JsonEncodedText.Encode("decision");
-	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation");
+	private static readonly System.Text.Json.JsonEncodedText PropDecider = System.Text.Json.JsonEncodedText.Encode("decider"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDecision = System.Text.Json.JsonEncodedText.Encode("decision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.AllocationDecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

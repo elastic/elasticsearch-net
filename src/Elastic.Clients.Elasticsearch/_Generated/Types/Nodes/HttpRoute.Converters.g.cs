@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class HttpRouteConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.HttpRoute>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests");
-	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
+	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.HttpRoute Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

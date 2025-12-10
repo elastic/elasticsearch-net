@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Synonyms.Json;
 
 public sealed partial class PutSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set"u8);
 
 	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

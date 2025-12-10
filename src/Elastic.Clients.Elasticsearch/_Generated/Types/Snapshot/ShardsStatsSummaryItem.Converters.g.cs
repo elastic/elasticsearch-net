@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class ShardsStatsSummaryItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFileCount = System.Text.Json.JsonEncodedText.Encode("file_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFileCount = System.Text.Json.JsonEncodedText.Encode("file_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

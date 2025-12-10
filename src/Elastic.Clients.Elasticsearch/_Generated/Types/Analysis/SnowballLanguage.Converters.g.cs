@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class SnowballLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberArabic = System.Text.Json.JsonEncodedText.Encode("Arabic");
-	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian");
-	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque");
-	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan");
-	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish");
-	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch");
-	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English");
-	private static readonly System.Text.Json.JsonEncodedText MemberEstonian = System.Text.Json.JsonEncodedText.Encode("Estonian");
-	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish");
-	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French");
-	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German");
-	private static readonly System.Text.Json.JsonEncodedText MemberGerman2 = System.Text.Json.JsonEncodedText.Encode("German2");
-	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian");
-	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("Irish");
-	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian");
-	private static readonly System.Text.Json.JsonEncodedText MemberKp = System.Text.Json.JsonEncodedText.Encode("Kp");
-	private static readonly System.Text.Json.JsonEncodedText MemberLithuanian = System.Text.Json.JsonEncodedText.Encode("Lithuanian");
-	private static readonly System.Text.Json.JsonEncodedText MemberLovins = System.Text.Json.JsonEncodedText.Encode("Lovins");
-	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian");
-	private static readonly System.Text.Json.JsonEncodedText MemberPorter = System.Text.Json.JsonEncodedText.Encode("Porter");
-	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese");
-	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian");
-	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian");
-	private static readonly System.Text.Json.JsonEncodedText MemberSerbian = System.Text.Json.JsonEncodedText.Encode("Serbian");
-	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish");
-	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish");
-	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish");
+	private static readonly System.Text.Json.JsonEncodedText MemberArabic = System.Text.Json.JsonEncodedText.Encode("Arabic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberEstonian = System.Text.Json.JsonEncodedText.Encode("Estonian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman2 = System.Text.Json.JsonEncodedText.Encode("German2"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("Irish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberKp = System.Text.Json.JsonEncodedText.Encode("Kp"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLithuanian = System.Text.Json.JsonEncodedText.Encode("Lithuanian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLovins = System.Text.Json.JsonEncodedText.Encode("Lovins"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPorter = System.Text.Json.JsonEncodedText.Encode("Porter"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSerbian = System.Text.Json.JsonEncodedText.Encode("Serbian"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpdateModelSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

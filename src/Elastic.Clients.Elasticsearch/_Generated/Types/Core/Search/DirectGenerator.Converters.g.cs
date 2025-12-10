@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class DirectGeneratorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxEdits = System.Text.Json.JsonEncodedText.Encode("max_edits");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxInspections = System.Text.Json.JsonEncodedText.Encode("max_inspections");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length");
-	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropPreFilter = System.Text.Json.JsonEncodedText.Encode("pre_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggestMode = System.Text.Json.JsonEncodedText.Encode("suggest_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxEdits = System.Text.Json.JsonEncodedText.Encode("max_edits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxInspections = System.Text.Json.JsonEncodedText.Encode("max_inspections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTermFreq = System.Text.Json.JsonEncodedText.Encode("max_term_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocFreq = System.Text.Json.JsonEncodedText.Encode("min_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordLength = System.Text.Json.JsonEncodedText.Encode("min_word_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreFilter = System.Text.Json.JsonEncodedText.Encode("pre_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggestMode = System.Text.Json.JsonEncodedText.Encode("suggest_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

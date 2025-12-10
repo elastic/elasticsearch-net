@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class PutGeoipDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxmind = System.Text.Json.JsonEncodedText.Encode("maxmind"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

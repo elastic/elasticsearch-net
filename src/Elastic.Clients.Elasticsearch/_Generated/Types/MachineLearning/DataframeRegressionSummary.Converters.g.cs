@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeRegressionSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHuber = System.Text.Json.JsonEncodedText.Encode("huber");
-	private static readonly System.Text.Json.JsonEncodedText PropMse = System.Text.Json.JsonEncodedText.Encode("mse");
-	private static readonly System.Text.Json.JsonEncodedText PropMsle = System.Text.Json.JsonEncodedText.Encode("msle");
-	private static readonly System.Text.Json.JsonEncodedText PropRSquared = System.Text.Json.JsonEncodedText.Encode("r_squared");
+	private static readonly System.Text.Json.JsonEncodedText PropHuber = System.Text.Json.JsonEncodedText.Encode("huber"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMse = System.Text.Json.JsonEncodedText.Encode("mse"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMsle = System.Text.Json.JsonEncodedText.Encode("msle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRSquared = System.Text.Json.JsonEncodedText.Encode("r_squared"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

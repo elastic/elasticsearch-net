@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class FollowResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexCreated = System.Text.Json.JsonEncodedText.Encode("follow_index_created");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexShardsAcked = System.Text.Json.JsonEncodedText.Encode("follow_index_shards_acked");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexFollowingStarted = System.Text.Json.JsonEncodedText.Encode("index_following_started");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexCreated = System.Text.Json.JsonEncodedText.Encode("follow_index_created"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexShardsAcked = System.Text.Json.JsonEncodedText.Encode("follow_index_shards_acked"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFollowingStarted = System.Text.Json.JsonEncodedText.Encode("index_following_started"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

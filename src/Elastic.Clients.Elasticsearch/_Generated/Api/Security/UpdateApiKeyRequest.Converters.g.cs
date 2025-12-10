@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class UpdateApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

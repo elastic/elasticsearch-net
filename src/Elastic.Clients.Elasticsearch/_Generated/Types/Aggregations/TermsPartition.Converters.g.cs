@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TermsPartitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsPartition>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumPartitions = System.Text.Json.JsonEncodedText.Encode("num_partitions");
-	private static readonly System.Text.Json.JsonEncodedText PropPartition = System.Text.Json.JsonEncodedText.Encode("partition");
+	private static readonly System.Text.Json.JsonEncodedText PropNumPartitions = System.Text.Json.JsonEncodedText.Encode("num_partitions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartition = System.Text.Json.JsonEncodedText.Encode("partition"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TermsPartition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

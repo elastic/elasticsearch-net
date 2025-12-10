@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AmazonBedrockTaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNewTokens = System.Text.Json.JsonEncodedText.Encode("max_new_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature");
-	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k");
-	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNewTokens = System.Text.Json.JsonEncodedText.Encode("max_new_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

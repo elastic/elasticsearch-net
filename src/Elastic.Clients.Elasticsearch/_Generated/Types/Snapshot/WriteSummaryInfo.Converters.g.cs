@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class WriteSummaryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsed = System.Text.Json.JsonEncodedText.Encode("total_elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsedNanos = System.Text.Json.JsonEncodedText.Encode("total_elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottled = System.Text.Json.JsonEncodedText.Encode("total_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledNanos = System.Text.Json.JsonEncodedText.Encode("total_throttled_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsed = System.Text.Json.JsonEncodedText.Encode("total_elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalElapsedNanos = System.Text.Json.JsonEncodedText.Encode("total_elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottled = System.Text.Json.JsonEncodedText.Encode("total_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledNanos = System.Text.Json.JsonEncodedText.Encode("total_throttled_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

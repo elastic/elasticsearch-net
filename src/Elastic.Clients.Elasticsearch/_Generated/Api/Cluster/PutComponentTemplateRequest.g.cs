@@ -90,7 +90,7 @@ public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasti
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name, Elastic.Clients.Elasticsearch.IndexManagement.IndexState template) : base(r => r.Required("name", name))
+	public PutComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name name, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping template) : base(r => r.Required("name", name))
 	{
 		Template = template;
 	}
@@ -177,7 +177,7 @@ public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasti
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexState Template { get; set; }
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping Template { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -362,7 +362,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState value)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping value)
 	{
 		Instance.Template = value;
 		return this;
@@ -375,7 +375,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template()
 	{
-		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.Build(null);
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(null);
 		return this;
 	}
 
@@ -384,9 +384,9 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor>? action)
 	{
-		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor.Build(action);
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor.Build(action);
 		return this;
 	}
 
@@ -395,9 +395,9 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>>? action)
 	{
-		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<T>.Build(action);
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<T>.Build(action);
 		return this;
 	}
 
@@ -638,7 +638,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexState value)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping value)
 	{
 		Instance.Template = value;
 		return this;
@@ -651,7 +651,7 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template()
 	{
-		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>.Build(null);
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
@@ -660,9 +660,9 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	/// The template to be applied which includes mappings, settings, or aliases configuration.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>>? action)
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>>? action)
 	{
-		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexStateDescriptor<TDocument>.Build(action);
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMappingDescriptor<TDocument>.Build(action);
 		return this;
 	}
 

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ClearTrainedModelDeploymentCacheResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCleared = System.Text.Json.JsonEncodedText.Encode("cleared");
+	private static readonly System.Text.Json.JsonEncodedText PropCleared = System.Text.Json.JsonEncodedText.Encode("cleared"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

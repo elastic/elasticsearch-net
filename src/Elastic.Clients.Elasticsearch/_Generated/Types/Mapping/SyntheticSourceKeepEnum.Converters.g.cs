@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SyntheticSourceKeepEnumConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberArrays = System.Text.Json.JsonEncodedText.Encode("arrays");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberArrays = System.Text.Json.JsonEncodedText.Encode("arrays"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

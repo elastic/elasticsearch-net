@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEncoder = System.Text.Json.JsonEncodedText.Encode("encoder");
-	private static readonly System.Text.Json.JsonEncodedText PropLanguageset = System.Text.Json.JsonEncodedText.Encode("languageset");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxCodeLen = System.Text.Json.JsonEncodedText.Encode("max_code_len");
-	private static readonly System.Text.Json.JsonEncodedText PropNameType = System.Text.Json.JsonEncodedText.Encode("name_type");
-	private static readonly System.Text.Json.JsonEncodedText PropReplace = System.Text.Json.JsonEncodedText.Encode("replace");
-	private static readonly System.Text.Json.JsonEncodedText PropRuleType = System.Text.Json.JsonEncodedText.Encode("rule_type");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropEncoder = System.Text.Json.JsonEncodedText.Encode("encoder"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLanguageset = System.Text.Json.JsonEncodedText.Encode("languageset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxCodeLen = System.Text.Json.JsonEncodedText.Encode("max_code_len"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNameType = System.Text.Json.JsonEncodedText.Encode("name_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplace = System.Text.Json.JsonEncodedText.Encode("replace"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuleType = System.Text.Json.JsonEncodedText.Encode("rule_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

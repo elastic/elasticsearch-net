@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GeoDistanceSortConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoDistanceSort>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped");
-	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
-	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit");
+	private static readonly System.Text.Json.JsonEncodedText PropDistanceType = System.Text.Json.JsonEncodedText.Encode("distance_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnmapped = System.Text.Json.JsonEncodedText.Encode("ignore_unmapped"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnit = System.Text.Json.JsonEncodedText.Encode("unit"u8);
 
 	public override Elastic.Clients.Elasticsearch.GeoDistanceSort Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

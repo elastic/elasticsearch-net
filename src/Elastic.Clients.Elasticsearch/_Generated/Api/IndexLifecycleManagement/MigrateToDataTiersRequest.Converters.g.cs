@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class MigrateToDataTiersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLegacyTemplateToDelete = System.Text.Json.JsonEncodedText.Encode("legacy_template_to_delete");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeAttribute = System.Text.Json.JsonEncodedText.Encode("node_attribute");
+	private static readonly System.Text.Json.JsonEncodedText PropLegacyTemplateToDelete = System.Text.Json.JsonEncodedText.Encode("legacy_template_to_delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeAttribute = System.Text.Json.JsonEncodedText.Encode("node_attribute"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

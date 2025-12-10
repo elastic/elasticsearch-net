@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class SignificantStringTermsBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsBucket>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
+	private static readonly System.Text.Json.JsonEncodedText PropBgCount = System.Text.Json.JsonEncodedText.Encode("bg_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

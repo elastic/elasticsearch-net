@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class NumericFielddataFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberArray = System.Text.Json.JsonEncodedText.Encode("array");
-	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
+	private static readonly System.Text.Json.JsonEncodedText MemberArray = System.Text.Json.JsonEncodedText.Encode("array"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

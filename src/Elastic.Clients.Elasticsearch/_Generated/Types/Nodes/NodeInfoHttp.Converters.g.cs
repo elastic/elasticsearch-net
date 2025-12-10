@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoHttpConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoundAddress = System.Text.Json.JsonEncodedText.Encode("bound_address");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLength = System.Text.Json.JsonEncodedText.Encode("max_content_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLengthInBytes = System.Text.Json.JsonEncodedText.Encode("max_content_length_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPublishAddress = System.Text.Json.JsonEncodedText.Encode("publish_address");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundAddress = System.Text.Json.JsonEncodedText.Encode("bound_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLength = System.Text.Json.JsonEncodedText.Encode("max_content_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLengthInBytes = System.Text.Json.JsonEncodedText.Encode("max_content_length_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPublishAddress = System.Text.Json.JsonEncodedText.Encode("publish_address"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

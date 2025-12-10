@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterOperatingSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocatedProcessors = System.Text.Json.JsonEncodedText.Encode("allocated_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropArchitectures = System.Text.Json.JsonEncodedText.Encode("architectures");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names");
-	private static readonly System.Text.Json.JsonEncodedText PropPrettyNames = System.Text.Json.JsonEncodedText.Encode("pretty_names");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocatedProcessors = System.Text.Json.JsonEncodedText.Encode("allocated_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropArchitectures = System.Text.Json.JsonEncodedText.Encode("architectures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNames = System.Text.Json.JsonEncodedText.Encode("names"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrettyNames = System.Text.Json.JsonEncodedText.Encode("pretty_names"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

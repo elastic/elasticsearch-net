@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class NodesCredentialsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.NodesCredentials>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFileTokens = System.Text.Json.JsonEncodedText.Encode("file_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropFileTokens = System.Text.Json.JsonEncodedText.Encode("file_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("_nodes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.NodesCredentials Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

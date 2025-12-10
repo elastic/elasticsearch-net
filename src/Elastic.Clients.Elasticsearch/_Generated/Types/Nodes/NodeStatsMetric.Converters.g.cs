@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeStatsMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("_none");
-	private static readonly System.Text.Json.JsonEncodedText MemberAdaptiveSelection = System.Text.Json.JsonEncodedText.Encode("adaptive_selection");
-	private static readonly System.Text.Json.JsonEncodedText MemberAllocations = System.Text.Json.JsonEncodedText.Encode("allocations");
-	private static readonly System.Text.Json.JsonEncodedText MemberBreaker = System.Text.Json.JsonEncodedText.Encode("breaker");
-	private static readonly System.Text.Json.JsonEncodedText MemberDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery");
-	private static readonly System.Text.Json.JsonEncodedText MemberFs = System.Text.Json.JsonEncodedText.Encode("fs");
-	private static readonly System.Text.Json.JsonEncodedText MemberHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText MemberJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
-	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
-	private static readonly System.Text.Json.JsonEncodedText MemberProcess = System.Text.Json.JsonEncodedText.Encode("process");
-	private static readonly System.Text.Json.JsonEncodedText MemberRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
-	private static readonly System.Text.Json.JsonEncodedText MemberScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText MemberScriptCache = System.Text.Json.JsonEncodedText.Encode("script_cache");
-	private static readonly System.Text.Json.JsonEncodedText MemberThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
-	private static readonly System.Text.Json.JsonEncodedText MemberTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("_none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAdaptiveSelection = System.Text.Json.JsonEncodedText.Encode("adaptive_selection"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAllocations = System.Text.Json.JsonEncodedText.Encode("allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberBreaker = System.Text.Json.JsonEncodedText.Encode("breaker"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDiscovery = System.Text.Json.JsonEncodedText.Encode("discovery"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFs = System.Text.Json.JsonEncodedText.Encode("fs"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndexingPressure = System.Text.Json.JsonEncodedText.Encode("indexing_pressure"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberJvm = System.Text.Json.JsonEncodedText.Encode("jvm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRepositories = System.Text.Json.JsonEncodedText.Encode("repositories"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberScriptCache = System.Text.Json.JsonEncodedText.Encode("script_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

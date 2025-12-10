@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class DeleteGeoipDatabaseResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

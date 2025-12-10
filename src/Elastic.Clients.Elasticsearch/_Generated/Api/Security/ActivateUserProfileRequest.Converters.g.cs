@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ActivateUserProfileRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

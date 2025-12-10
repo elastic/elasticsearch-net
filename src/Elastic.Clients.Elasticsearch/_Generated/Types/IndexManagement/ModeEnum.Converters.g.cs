@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ModeEnumConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberUpgrade = System.Text.Json.JsonEncodedText.Encode("upgrade");
+	private static readonly System.Text.Json.JsonEncodedText MemberUpgrade = System.Text.Json.JsonEncodedText.Encode("upgrade"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

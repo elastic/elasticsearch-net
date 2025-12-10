@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class RunningStateSearchIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
-	private static readonly System.Text.Json.JsonEncodedText PropEndMs = System.Text.Json.JsonEncodedText.Encode("end_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
-	private static readonly System.Text.Json.JsonEncodedText PropStartMs = System.Text.Json.JsonEncodedText.Encode("start_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEndMs = System.Text.Json.JsonEncodedText.Encode("end_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartMs = System.Text.Json.JsonEncodedText.Encode("start_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.RunningStateSearchInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

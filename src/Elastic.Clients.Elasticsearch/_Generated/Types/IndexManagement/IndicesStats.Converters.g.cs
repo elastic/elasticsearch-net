@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndicesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropHealth = System.Text.Json.JsonEncodedText.Encode("health"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

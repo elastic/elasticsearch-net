@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframePreviewConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
-	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysis = System.Text.Json.JsonEncodedText.Encode("analysis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzedFields = System.Text.Json.JsonEncodedText.Encode("analyzed_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodesInfoMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("_none");
-	private static readonly System.Text.Json.JsonEncodedText MemberAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText MemberHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText MemberJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
-	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
-	private static readonly System.Text.Json.JsonEncodedText MemberPlugins = System.Text.Json.JsonEncodedText.Encode("plugins");
-	private static readonly System.Text.Json.JsonEncodedText MemberProcess = System.Text.Json.JsonEncodedText.Encode("process");
-	private static readonly System.Text.Json.JsonEncodedText MemberRemoteClusterServer = System.Text.Json.JsonEncodedText.Encode("remote_cluster_server");
-	private static readonly System.Text.Json.JsonEncodedText MemberSettings = System.Text.Json.JsonEncodedText.Encode("settings");
-	private static readonly System.Text.Json.JsonEncodedText MemberThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
-	private static readonly System.Text.Json.JsonEncodedText MemberTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("_none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberJvm = System.Text.Json.JsonEncodedText.Encode("jvm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPlugins = System.Text.Json.JsonEncodedText.Encode("plugins"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRemoteClusterServer = System.Text.Json.JsonEncodedText.Encode("remote_cluster_server"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

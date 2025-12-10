@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuCollationTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate");
-	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("caseFirst");
-	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("caseLevel");
-	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country");
-	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition");
-	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiraganaQuaternaryMode");
-	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
-	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric");
-	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
-	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variableTop");
-	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("caseFirst"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("caseLevel"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiraganaQuaternaryMode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variableTop"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

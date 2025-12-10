@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AnalysisConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFieldName = System.Text.Json.JsonEncodedText.Encode("categorization_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers");
-	private static readonly System.Text.Json.JsonEncodedText PropLatency = System.Text.Json.JsonEncodedText.Encode("latency");
-	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
-	private static readonly System.Text.Json.JsonEncodedText PropMultivariateByFields = System.Text.Json.JsonEncodedText.Encode("multivariate_by_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
-	private static readonly System.Text.Json.JsonEncodedText PropSummaryCountFieldName = System.Text.Json.JsonEncodedText.Encode("summary_count_field_name");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFieldName = System.Text.Json.JsonEncodedText.Encode("categorization_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatency = System.Text.Json.JsonEncodedText.Encode("latency"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMultivariateByFields = System.Text.Json.JsonEncodedText.Encode("multivariate_by_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSummaryCountFieldName = System.Text.Json.JsonEncodedText.Encode("summary_count_field_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

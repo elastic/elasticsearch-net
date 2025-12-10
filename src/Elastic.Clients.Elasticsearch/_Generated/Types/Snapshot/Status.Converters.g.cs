@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class StatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.Status>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsStats = System.Text.Json.JsonEncodedText.Encode("shards_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
-	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsStats = System.Text.Json.JsonEncodedText.Encode("shards_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUuid = System.Text.Json.JsonEncodedText.Encode("uuid"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.Status Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

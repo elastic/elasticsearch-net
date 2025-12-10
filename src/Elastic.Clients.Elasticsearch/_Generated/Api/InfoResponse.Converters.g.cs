@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class InfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.InfoResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.InfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

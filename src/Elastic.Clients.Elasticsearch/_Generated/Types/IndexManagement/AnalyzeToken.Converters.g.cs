@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class AnalyzeTokenConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEndOffset = System.Text.Json.JsonEncodedText.Encode("end_offset");
-	private static readonly System.Text.Json.JsonEncodedText PropPosition = System.Text.Json.JsonEncodedText.Encode("position");
-	private static readonly System.Text.Json.JsonEncodedText PropPositionLength = System.Text.Json.JsonEncodedText.Encode("positionLength");
-	private static readonly System.Text.Json.JsonEncodedText PropStartOffset = System.Text.Json.JsonEncodedText.Encode("start_offset");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropEndOffset = System.Text.Json.JsonEncodedText.Encode("end_offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPosition = System.Text.Json.JsonEncodedText.Encode("position"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositionLength = System.Text.Json.JsonEncodedText.Encode("positionLength"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartOffset = System.Text.Json.JsonEncodedText.Encode("start_offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeToken Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

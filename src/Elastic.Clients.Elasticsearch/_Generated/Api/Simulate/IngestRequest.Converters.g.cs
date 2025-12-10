@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Simulate.Json;
 
 public sealed partial class IngestRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.IngestRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("component_template_substitutions");
-	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("index_template_substitutions");
-	private static readonly System.Text.Json.JsonEncodedText PropMappingAddition = System.Text.Json.JsonEncodedText.Encode("mapping_addition");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelineSubstitutions = System.Text.Json.JsonEncodedText.Encode("pipeline_substitutions");
+	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("component_template_substitutions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("index_template_substitutions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappingAddition = System.Text.Json.JsonEncodedText.Encode("mapping_addition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipelineSubstitutions = System.Text.Json.JsonEncodedText.Encode("pipeline_substitutions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Simulate.IngestRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

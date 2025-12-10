@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors.Json;
 
 public sealed partial class TermVectorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFieldStatistics = System.Text.Json.JsonEncodedText.Encode("field_statistics");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldStatistics = System.Text.Json.JsonEncodedText.Encode("field_statistics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

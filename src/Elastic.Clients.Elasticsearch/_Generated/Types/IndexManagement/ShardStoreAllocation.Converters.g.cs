@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardStoreAllocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText MemberReplica = System.Text.Json.JsonEncodedText.Encode("replica");
-	private static readonly System.Text.Json.JsonEncodedText MemberUnused = System.Text.Json.JsonEncodedText.Encode("unused");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReplica = System.Text.Json.JsonEncodedText.Encode("replica"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUnused = System.Text.Json.JsonEncodedText.Encode("unused"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

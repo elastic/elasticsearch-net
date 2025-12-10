@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GeoDistanceTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoDistanceType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberArc = System.Text.Json.JsonEncodedText.Encode("arc");
-	private static readonly System.Text.Json.JsonEncodedText MemberPlane = System.Text.Json.JsonEncodedText.Encode("plane");
+	private static readonly System.Text.Json.JsonEncodedText MemberArc = System.Text.Json.JsonEncodedText.Encode("arc"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPlane = System.Text.Json.JsonEncodedText.Encode("plane"u8);
 
 	public override Elastic.Clients.Elasticsearch.GeoDistanceType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

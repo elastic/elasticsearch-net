@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ExtendedTextSimilarityRetrieverUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ExtendedTextSimilarityRetrieverUsage>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChunkRescorer = System.Text.Json.JsonEncodedText.Encode("chunk_rescorer");
+	private static readonly System.Text.Json.JsonEncodedText PropChunkRescorer = System.Text.Json.JsonEncodedText.Encode("chunk_rescorer"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ExtendedTextSimilarityRetrieverUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

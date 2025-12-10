@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class IndicesOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndicesOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowNoIndices = System.Text.Json.JsonEncodedText.Encode("allow_no_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropExpandWildcards = System.Text.Json.JsonEncodedText.Encode("expand_wildcards");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreThrottled = System.Text.Json.JsonEncodedText.Encode("ignore_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoIndices = System.Text.Json.JsonEncodedText.Encode("allow_no_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpandWildcards = System.Text.Json.JsonEncodedText.Encode("expand_wildcards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreThrottled = System.Text.Json.JsonEncodedText.Encode("ignore_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndicesOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

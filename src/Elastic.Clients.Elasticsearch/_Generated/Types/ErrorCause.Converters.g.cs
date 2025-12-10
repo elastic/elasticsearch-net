@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ErrorCauseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ErrorCause>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCausedBy = System.Text.Json.JsonEncodedText.Encode("caused_by");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropRootCause = System.Text.Json.JsonEncodedText.Encode("root_cause");
-	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace");
-	private static readonly System.Text.Json.JsonEncodedText PropSuppressed = System.Text.Json.JsonEncodedText.Encode("suppressed");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCausedBy = System.Text.Json.JsonEncodedText.Encode("caused_by"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRootCause = System.Text.Json.JsonEncodedText.Encode("root_cause"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuppressed = System.Text.Json.JsonEncodedText.Encode("suppressed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.ErrorCause Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

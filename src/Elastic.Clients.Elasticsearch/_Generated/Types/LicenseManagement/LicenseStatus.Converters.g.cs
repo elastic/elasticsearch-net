@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class LicenseStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText MemberExpired = System.Text.Json.JsonEncodedText.Encode("expired");
-	private static readonly System.Text.Json.JsonEncodedText MemberInvalid = System.Text.Json.JsonEncodedText.Encode("invalid");
-	private static readonly System.Text.Json.JsonEncodedText MemberValid = System.Text.Json.JsonEncodedText.Encode("valid");
+	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExpired = System.Text.Json.JsonEncodedText.Encode("expired"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInvalid = System.Text.Json.JsonEncodedText.Encode("invalid"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberValid = System.Text.Json.JsonEncodedText.Encode("valid"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

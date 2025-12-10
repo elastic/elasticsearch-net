@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class OpenShiftAiTaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents");
-	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
+	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

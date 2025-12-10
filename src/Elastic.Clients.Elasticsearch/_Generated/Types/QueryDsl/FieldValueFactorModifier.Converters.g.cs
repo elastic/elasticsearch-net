@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class FieldValueFactorModifierConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLn = System.Text.Json.JsonEncodedText.Encode("ln");
-	private static readonly System.Text.Json.JsonEncodedText MemberLn1p = System.Text.Json.JsonEncodedText.Encode("ln1p");
-	private static readonly System.Text.Json.JsonEncodedText MemberLn2p = System.Text.Json.JsonEncodedText.Encode("ln2p");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog = System.Text.Json.JsonEncodedText.Encode("log");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog1p = System.Text.Json.JsonEncodedText.Encode("log1p");
-	private static readonly System.Text.Json.JsonEncodedText MemberLog2p = System.Text.Json.JsonEncodedText.Encode("log2p");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberReciprocal = System.Text.Json.JsonEncodedText.Encode("reciprocal");
-	private static readonly System.Text.Json.JsonEncodedText MemberSqrt = System.Text.Json.JsonEncodedText.Encode("sqrt");
-	private static readonly System.Text.Json.JsonEncodedText MemberSquare = System.Text.Json.JsonEncodedText.Encode("square");
+	private static readonly System.Text.Json.JsonEncodedText MemberLn = System.Text.Json.JsonEncodedText.Encode("ln"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLn1p = System.Text.Json.JsonEncodedText.Encode("ln1p"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLn2p = System.Text.Json.JsonEncodedText.Encode("ln2p"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLog = System.Text.Json.JsonEncodedText.Encode("log"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLog1p = System.Text.Json.JsonEncodedText.Encode("log1p"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLog2p = System.Text.Json.JsonEncodedText.Encode("log2p"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReciprocal = System.Text.Json.JsonEncodedText.Encode("reciprocal"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSqrt = System.Text.Json.JsonEncodedText.Encode("sqrt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSquare = System.Text.Json.JsonEncodedText.Encode("square"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

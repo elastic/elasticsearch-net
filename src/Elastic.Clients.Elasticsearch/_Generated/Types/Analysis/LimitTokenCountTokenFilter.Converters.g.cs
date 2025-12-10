@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class LimitTokenCountTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConsumeAllTokens = System.Text.Json.JsonEncodedText.Encode("consume_all_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenCount = System.Text.Json.JsonEncodedText.Encode("max_token_count");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropConsumeAllTokens = System.Text.Json.JsonEncodedText.Encode("consume_all_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenCount = System.Text.Json.JsonEncodedText.Encode("max_token_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

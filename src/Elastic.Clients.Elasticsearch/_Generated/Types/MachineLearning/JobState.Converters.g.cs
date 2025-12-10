@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JobStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClosed = System.Text.Json.JsonEncodedText.Encode("closed");
-	private static readonly System.Text.Json.JsonEncodedText MemberClosing = System.Text.Json.JsonEncodedText.Encode("closing");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText MemberOpened = System.Text.Json.JsonEncodedText.Encode("opened");
-	private static readonly System.Text.Json.JsonEncodedText MemberOpening = System.Text.Json.JsonEncodedText.Encode("opening");
+	private static readonly System.Text.Json.JsonEncodedText MemberClosed = System.Text.Json.JsonEncodedText.Encode("closed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberClosing = System.Text.Json.JsonEncodedText.Encode("closing"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOpened = System.Text.Json.JsonEncodedText.Encode("opened"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOpening = System.Text.Json.JsonEncodedText.Encode("opening"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
-	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key");
+	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsHttpConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
-	private static readonly System.Text.Json.JsonEncodedText PropPort = System.Text.Json.JsonEncodedText.Encode("port");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropTypeDefault = System.Text.Json.JsonEncodedText.Encode("type.default");
+	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPort = System.Text.Json.JsonEncodedText.Encode("port"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypeDefault = System.Text.Json.JsonEncodedText.Encode("type.default"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class InferenceClassImportanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
-	private static readonly System.Text.Json.JsonEncodedText PropImportance = System.Text.Json.JsonEncodedText.Encode("importance");
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropImportance = System.Text.Json.JsonEncodedText.Encode("importance"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

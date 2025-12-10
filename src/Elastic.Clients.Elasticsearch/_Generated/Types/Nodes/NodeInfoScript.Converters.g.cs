@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowedTypes = System.Text.Json.JsonEncodedText.Encode("allowed_types");
-	private static readonly System.Text.Json.JsonEncodedText PropDisableMaxCompilationsRate = System.Text.Json.JsonEncodedText.Encode("disable_max_compilations_rate");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowedTypes = System.Text.Json.JsonEncodedText.Encode("allowed_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDisableMaxCompilationsRate = System.Text.Json.JsonEncodedText.Encode("disable_max_compilations_rate"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

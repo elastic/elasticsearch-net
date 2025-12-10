@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class HealthReportResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.HealthReportResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicators = System.Text.Json.JsonEncodedText.Encode("indicators");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndicators = System.Text.Json.JsonEncodedText.Encode("indicators"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
 
 	public override Elastic.Clients.Elasticsearch.HealthReportResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

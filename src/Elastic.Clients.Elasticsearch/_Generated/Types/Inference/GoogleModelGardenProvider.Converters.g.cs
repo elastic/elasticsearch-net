@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleModelGardenProviderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAi21 = System.Text.Json.JsonEncodedText.Encode("ai21");
-	private static readonly System.Text.Json.JsonEncodedText MemberAnthropic = System.Text.Json.JsonEncodedText.Encode("anthropic");
-	private static readonly System.Text.Json.JsonEncodedText MemberGoogle = System.Text.Json.JsonEncodedText.Encode("google");
-	private static readonly System.Text.Json.JsonEncodedText MemberHuggingFace = System.Text.Json.JsonEncodedText.Encode("hugging_face");
-	private static readonly System.Text.Json.JsonEncodedText MemberMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText MemberMistral = System.Text.Json.JsonEncodedText.Encode("mistral");
+	private static readonly System.Text.Json.JsonEncodedText MemberAi21 = System.Text.Json.JsonEncodedText.Encode("ai21"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAnthropic = System.Text.Json.JsonEncodedText.Encode("anthropic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGoogle = System.Text.Json.JsonEncodedText.Encode("google"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHuggingFace = System.Text.Json.JsonEncodedText.Encode("hugging_face"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMistral = System.Text.Json.JsonEncodedText.Encode("mistral"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

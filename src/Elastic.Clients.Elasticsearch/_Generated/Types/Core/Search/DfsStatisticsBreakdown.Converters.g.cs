@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class DfsStatisticsBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatistics = System.Text.Json.JsonEncodedText.Encode("collection_statistics");
-	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatisticsCount = System.Text.Json.JsonEncodedText.Encode("collection_statistics_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight");
-	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropRewriteCount = System.Text.Json.JsonEncodedText.Encode("rewrite_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics");
-	private static readonly System.Text.Json.JsonEncodedText PropTermStatisticsCount = System.Text.Json.JsonEncodedText.Encode("term_statistics_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatistics = System.Text.Json.JsonEncodedText.Encode("collection_statistics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionStatisticsCount = System.Text.Json.JsonEncodedText.Encode("collection_statistics_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRewrite = System.Text.Json.JsonEncodedText.Encode("rewrite"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRewriteCount = System.Text.Json.JsonEncodedText.Encode("rewrite_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatistics = System.Text.Json.JsonEncodedText.Encode("term_statistics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermStatisticsCount = System.Text.Json.JsonEncodedText.Encode("term_statistics_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.DfsStatisticsBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

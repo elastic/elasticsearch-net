@@ -25,30 +25,30 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class ExtendedStatsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgAsString = System.Text.Json.JsonEncodedText.Encode("avg_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviation = System.Text.Json.JsonEncodedText.Encode("std_deviation");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBounds = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBoundsAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationPopulation = System.Text.Json.JsonEncodedText.Encode("std_deviation_population");
-	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationSampling = System.Text.Json.JsonEncodedText.Encode("std_deviation_sampling");
-	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum");
-	private static readonly System.Text.Json.JsonEncodedText PropSumAsString = System.Text.Json.JsonEncodedText.Encode("sum_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquares = System.Text.Json.JsonEncodedText.Encode("sum_of_squares");
-	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquaresAsString = System.Text.Json.JsonEncodedText.Encode("sum_of_squares_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance");
-	private static readonly System.Text.Json.JsonEncodedText PropVarianceAsString = System.Text.Json.JsonEncodedText.Encode("variance_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulation = System.Text.Json.JsonEncodedText.Encode("variance_population");
-	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulationAsString = System.Text.Json.JsonEncodedText.Encode("variance_population_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropVarianceSampling = System.Text.Json.JsonEncodedText.Encode("variance_sampling");
-	private static readonly System.Text.Json.JsonEncodedText PropVarianceSamplingAsString = System.Text.Json.JsonEncodedText.Encode("variance_sampling_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropAvg = System.Text.Json.JsonEncodedText.Encode("avg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgAsString = System.Text.Json.JsonEncodedText.Encode("avg_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviation = System.Text.Json.JsonEncodedText.Encode("std_deviation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBounds = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationBoundsAsString = System.Text.Json.JsonEncodedText.Encode("std_deviation_bounds_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationPopulation = System.Text.Json.JsonEncodedText.Encode("std_deviation_population"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStdDeviationSampling = System.Text.Json.JsonEncodedText.Encode("std_deviation_sampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumAsString = System.Text.Json.JsonEncodedText.Encode("sum_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquares = System.Text.Json.JsonEncodedText.Encode("sum_of_squares"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumOfSquaresAsString = System.Text.Json.JsonEncodedText.Encode("sum_of_squares_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceAsString = System.Text.Json.JsonEncodedText.Encode("variance_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulation = System.Text.Json.JsonEncodedText.Encode("variance_population"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariancePopulationAsString = System.Text.Json.JsonEncodedText.Encode("variance_population_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceSampling = System.Text.Json.JsonEncodedText.Encode("variance_sampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVarianceSamplingAsString = System.Text.Json.JsonEncodedText.Encode("variance_sampling_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

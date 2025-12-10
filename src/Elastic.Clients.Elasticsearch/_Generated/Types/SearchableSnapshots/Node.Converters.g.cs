@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Json;
 
 public sealed partial class NodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.Node>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSharedCache = System.Text.Json.JsonEncodedText.Encode("shared_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropSharedCache = System.Text.Json.JsonEncodedText.Encode("shared_cache"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.Node Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

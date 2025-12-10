@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class FieldSortNumericTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.FieldSortNumericType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date");
-	private static readonly System.Text.Json.JsonEncodedText MemberDateNanos = System.Text.Json.JsonEncodedText.Encode("date_nanos");
-	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double");
-	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long");
+	private static readonly System.Text.Json.JsonEncodedText MemberDate = System.Text.Json.JsonEncodedText.Encode("date"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDateNanos = System.Text.Json.JsonEncodedText.Encode("date_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDouble = System.Text.Json.JsonEncodedText.Encode("double"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLong = System.Text.Json.JsonEncodedText.Encode("long"u8);
 
 	public override Elastic.Clients.Elasticsearch.FieldSortNumericType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

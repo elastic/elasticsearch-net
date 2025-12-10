@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class AccessTokenGrantTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberKerberos = System.Text.Json.JsonEncodedText.Encode("_kerberos");
-	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials");
-	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText MemberRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText MemberKerberos = System.Text.Json.JsonEncodedText.Encode("_kerberos"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberClientCredentials = System.Text.Json.JsonEncodedText.Encode("client_credentials"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

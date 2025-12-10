@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class DelegatePkiRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropX509CertificateChain = System.Text.Json.JsonEncodedText.Encode("x509_certificate_chain");
+	private static readonly System.Text.Json.JsonEncodedText PropX509CertificateChain = System.Text.Json.JsonEncodedText.Encode("x509_certificate_chain"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

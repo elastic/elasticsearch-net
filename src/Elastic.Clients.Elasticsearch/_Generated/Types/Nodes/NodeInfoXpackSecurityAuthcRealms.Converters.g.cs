@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackSecurityAuthcRealmsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file");
-	private static readonly System.Text.Json.JsonEncodedText PropNative = System.Text.Json.JsonEncodedText.Encode("native");
-	private static readonly System.Text.Json.JsonEncodedText PropPki = System.Text.Json.JsonEncodedText.Encode("pki");
+	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNative = System.Text.Json.JsonEncodedText.Encode("native"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPki = System.Text.Json.JsonEncodedText.Encode("pki"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurityAuthcRealms Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

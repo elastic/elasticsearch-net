@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class LifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

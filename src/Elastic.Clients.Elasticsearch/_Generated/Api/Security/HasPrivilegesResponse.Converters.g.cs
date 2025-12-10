@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class HasPrivilegesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
-	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropHasAllRequested = System.Text.Json.JsonEncodedText.Encode("has_all_requested");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCluster = System.Text.Json.JsonEncodedText.Encode("cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasAllRequested = System.Text.Json.JsonEncodedText.Encode("has_all_requested"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

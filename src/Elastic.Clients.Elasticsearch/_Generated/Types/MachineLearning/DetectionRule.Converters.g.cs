@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DetectionRuleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions");
-	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions");
-	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope");
+	private static readonly System.Text.Json.JsonEncodedText PropActions = System.Text.Json.JsonEncodedText.Encode("actions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

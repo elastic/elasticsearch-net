@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Esql.Json;
 
 public sealed partial class ListQueriesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.ListQueriesResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
+	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries"u8);
 
 	public override Elastic.Clients.Elasticsearch.Esql.ListQueriesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

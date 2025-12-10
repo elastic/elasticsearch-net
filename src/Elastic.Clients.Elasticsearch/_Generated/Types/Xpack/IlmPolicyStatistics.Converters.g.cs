@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class IlmPolicyStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.IlmPolicyStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesManaged = System.Text.Json.JsonEncodedText.Encode("indices_managed");
-	private static readonly System.Text.Json.JsonEncodedText PropPhases = System.Text.Json.JsonEncodedText.Encode("phases");
+	private static readonly System.Text.Json.JsonEncodedText PropIndicesManaged = System.Text.Json.JsonEncodedText.Encode("indices_managed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPhases = System.Text.Json.JsonEncodedText.Encode("phases"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.IlmPolicyStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

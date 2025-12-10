@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Json;
 
 public sealed partial class MountRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropRenamedIndex = System.Text.Json.JsonEncodedText.Encode("renamed_index");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenamedIndex = System.Text.Json.JsonEncodedText.Encode("renamed_index"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

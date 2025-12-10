@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class HyphenationDecompounderTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHyphenationPatternsPath = System.Text.Json.JsonEncodedText.Encode("hyphenation_patterns_path");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSubwordSize = System.Text.Json.JsonEncodedText.Encode("max_subword_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMinSubwordSize = System.Text.Json.JsonEncodedText.Encode("min_subword_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMinWordSize = System.Text.Json.JsonEncodedText.Encode("min_word_size");
-	private static readonly System.Text.Json.JsonEncodedText PropNoOverlappingMatches = System.Text.Json.JsonEncodedText.Encode("no_overlapping_matches");
-	private static readonly System.Text.Json.JsonEncodedText PropNoSubMatches = System.Text.Json.JsonEncodedText.Encode("no_sub_matches");
-	private static readonly System.Text.Json.JsonEncodedText PropOnlyLongestMatch = System.Text.Json.JsonEncodedText.Encode("only_longest_match");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropWordList = System.Text.Json.JsonEncodedText.Encode("word_list");
-	private static readonly System.Text.Json.JsonEncodedText PropWordListPath = System.Text.Json.JsonEncodedText.Encode("word_list_path");
+	private static readonly System.Text.Json.JsonEncodedText PropHyphenationPatternsPath = System.Text.Json.JsonEncodedText.Encode("hyphenation_patterns_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSubwordSize = System.Text.Json.JsonEncodedText.Encode("max_subword_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinSubwordSize = System.Text.Json.JsonEncodedText.Encode("min_subword_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinWordSize = System.Text.Json.JsonEncodedText.Encode("min_word_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoOverlappingMatches = System.Text.Json.JsonEncodedText.Encode("no_overlapping_matches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoSubMatches = System.Text.Json.JsonEncodedText.Encode("no_sub_matches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOnlyLongestMatch = System.Text.Json.JsonEncodedText.Encode("only_longest_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWordList = System.Text.Json.JsonEncodedText.Encode("word_list"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWordListPath = System.Text.Json.JsonEncodedText.Encode("word_list_path"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

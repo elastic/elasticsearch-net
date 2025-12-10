@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ClusterStateUpdateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCommitTime = System.Text.Json.JsonEncodedText.Encode("commit_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCommitTimeMillis = System.Text.Json.JsonEncodedText.Encode("commit_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropComputationTime = System.Text.Json.JsonEncodedText.Encode("computation_time");
-	private static readonly System.Text.Json.JsonEncodedText PropComputationTimeMillis = System.Text.Json.JsonEncodedText.Encode("computation_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTime = System.Text.Json.JsonEncodedText.Encode("context_construction_time");
-	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTimeMillis = System.Text.Json.JsonEncodedText.Encode("context_construction_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTime = System.Text.Json.JsonEncodedText.Encode("master_apply_time");
-	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTimeMillis = System.Text.Json.JsonEncodedText.Encode("master_apply_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropNotificationTime = System.Text.Json.JsonEncodedText.Encode("notification_time");
-	private static readonly System.Text.Json.JsonEncodedText PropNotificationTimeMillis = System.Text.Json.JsonEncodedText.Encode("notification_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropPublicationTime = System.Text.Json.JsonEncodedText.Encode("publication_time");
-	private static readonly System.Text.Json.JsonEncodedText PropPublicationTimeMillis = System.Text.Json.JsonEncodedText.Encode("publication_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCommitTime = System.Text.Json.JsonEncodedText.Encode("commit_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCommitTimeMillis = System.Text.Json.JsonEncodedText.Encode("commit_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropComputationTime = System.Text.Json.JsonEncodedText.Encode("computation_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropComputationTimeMillis = System.Text.Json.JsonEncodedText.Encode("computation_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTime = System.Text.Json.JsonEncodedText.Encode("context_construction_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContextConstructionTimeMillis = System.Text.Json.JsonEncodedText.Encode("context_construction_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTime = System.Text.Json.JsonEncodedText.Encode("master_apply_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMasterApplyTimeMillis = System.Text.Json.JsonEncodedText.Encode("master_apply_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNotificationTime = System.Text.Json.JsonEncodedText.Encode("notification_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNotificationTimeMillis = System.Text.Json.JsonEncodedText.Encode("notification_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPublicationTime = System.Text.Json.JsonEncodedText.Encode("publication_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPublicationTimeMillis = System.Text.Json.JsonEncodedText.Encode("publication_time_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ClusterStateUpdate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

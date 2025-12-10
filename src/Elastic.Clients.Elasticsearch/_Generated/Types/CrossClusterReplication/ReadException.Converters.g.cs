@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class ReadExceptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
-	private static readonly System.Text.Json.JsonEncodedText PropFromSeqNo = System.Text.Json.JsonEncodedText.Encode("from_seq_no");
-	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries");
+	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFromSeqNo = System.Text.Json.JsonEncodedText.Encode("from_seq_no"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

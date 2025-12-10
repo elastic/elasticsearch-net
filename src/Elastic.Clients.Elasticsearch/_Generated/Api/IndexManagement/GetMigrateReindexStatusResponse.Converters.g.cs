@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class GetMigrateReindexStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropComplete = System.Text.Json.JsonEncodedText.Encode("complete");
-	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
-	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
-	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress");
-	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccesses = System.Text.Json.JsonEncodedText.Encode("successes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesInDataStream = System.Text.Json.JsonEncodedText.Encode("total_indices_in_data_stream");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesRequiringUpgrade = System.Text.Json.JsonEncodedText.Encode("total_indices_requiring_upgrade");
+	private static readonly System.Text.Json.JsonEncodedText PropComplete = System.Text.Json.JsonEncodedText.Encode("complete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuccesses = System.Text.Json.JsonEncodedText.Encode("successes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesInDataStream = System.Text.Json.JsonEncodedText.Encode("total_indices_in_data_stream"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesRequiringUpgrade = System.Text.Json.JsonEncodedText.Encode("total_indices_requiring_upgrade"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

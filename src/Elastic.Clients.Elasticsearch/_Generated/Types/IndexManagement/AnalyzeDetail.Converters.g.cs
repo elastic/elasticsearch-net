@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class AnalyzeDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropCharfilters = System.Text.Json.JsonEncodedText.Encode("charfilters");
-	private static readonly System.Text.Json.JsonEncodedText PropCustomAnalyzer = System.Text.Json.JsonEncodedText.Encode("custom_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenfilters = System.Text.Json.JsonEncodedText.Encode("tokenfilters");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCharfilters = System.Text.Json.JsonEncodedText.Encode("charfilters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCustomAnalyzer = System.Text.Json.JsonEncodedText.Encode("custom_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenfilters = System.Text.Json.JsonEncodedText.Encode("tokenfilters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

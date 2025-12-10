@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class TotalUserProfilesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.TotalUserProfiles>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

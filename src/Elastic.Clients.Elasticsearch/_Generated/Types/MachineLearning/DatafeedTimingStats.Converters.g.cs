@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DatafeedTimingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAverageSearchTimePerBucketMs = System.Text.Json.JsonEncodedText.Encode("average_search_time_per_bucket_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageCalculationContext = System.Text.Json.JsonEncodedText.Encode("exponential_average_calculation_context");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageSearchTimePerHourMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_search_time_per_hour_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchCount = System.Text.Json.JsonEncodedText.Encode("search_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSearchTimeMs = System.Text.Json.JsonEncodedText.Encode("total_search_time_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropAverageSearchTimePerBucketMs = System.Text.Json.JsonEncodedText.Encode("average_search_time_per_bucket_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageCalculationContext = System.Text.Json.JsonEncodedText.Encode("exponential_average_calculation_context"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageSearchTimePerHourMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_search_time_per_hour_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchCount = System.Text.Json.JsonEncodedText.Encode("search_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSearchTimeMs = System.Text.Json.JsonEncodedText.Encode("total_search_time_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

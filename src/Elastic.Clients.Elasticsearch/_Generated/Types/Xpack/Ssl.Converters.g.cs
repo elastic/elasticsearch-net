@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SslConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Ssl>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Ssl Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

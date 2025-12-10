@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ClientConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Client>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAgent = System.Text.Json.JsonEncodedText.Encode("agent");
-	private static readonly System.Text.Json.JsonEncodedText PropClosedTimeMillis = System.Text.Json.JsonEncodedText.Encode("closed_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropLastRequestTimeMillis = System.Text.Json.JsonEncodedText.Encode("last_request_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropLastUri = System.Text.Json.JsonEncodedText.Encode("last_uri");
-	private static readonly System.Text.Json.JsonEncodedText PropLocalAddress = System.Text.Json.JsonEncodedText.Encode("local_address");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenedTimeMillis = System.Text.Json.JsonEncodedText.Encode("opened_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteAddress = System.Text.Json.JsonEncodedText.Encode("remote_address");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestCount = System.Text.Json.JsonEncodedText.Encode("request_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestSizeBytes = System.Text.Json.JsonEncodedText.Encode("request_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropXOpaqueId = System.Text.Json.JsonEncodedText.Encode("x_opaque_id");
+	private static readonly System.Text.Json.JsonEncodedText PropAgent = System.Text.Json.JsonEncodedText.Encode("agent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClosedTimeMillis = System.Text.Json.JsonEncodedText.Encode("closed_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastRequestTimeMillis = System.Text.Json.JsonEncodedText.Encode("last_request_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastUri = System.Text.Json.JsonEncodedText.Encode("last_uri"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocalAddress = System.Text.Json.JsonEncodedText.Encode("local_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenedTimeMillis = System.Text.Json.JsonEncodedText.Encode("opened_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteAddress = System.Text.Json.JsonEncodedText.Encode("remote_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCount = System.Text.Json.JsonEncodedText.Encode("request_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestSizeBytes = System.Text.Json.JsonEncodedText.Encode("request_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropXOpaqueId = System.Text.Json.JsonEncodedText.Encode("x_opaque_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Client Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

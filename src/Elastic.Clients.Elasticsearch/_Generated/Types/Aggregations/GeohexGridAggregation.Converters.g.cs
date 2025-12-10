@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class GeohexGridAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropBounds = System.Text.Json.JsonEncodedText.Encode("bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

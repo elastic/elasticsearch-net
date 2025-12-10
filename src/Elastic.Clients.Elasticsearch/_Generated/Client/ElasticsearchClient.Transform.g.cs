@@ -84,6 +84,52 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats(Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse GetNodeStats(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse> GetNodeStatsAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsResponse, Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest request)
 	{
 		request.BeforeRequest();

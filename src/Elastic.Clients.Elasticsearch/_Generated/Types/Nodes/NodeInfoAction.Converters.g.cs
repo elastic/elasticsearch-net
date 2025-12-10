@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDestructiveRequiresName = System.Text.Json.JsonEncodedText.Encode("destructive_requires_name");
+	private static readonly System.Text.Json.JsonEncodedText PropDestructiveRequiresName = System.Text.Json.JsonEncodedText.Encode("destructive_requires_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

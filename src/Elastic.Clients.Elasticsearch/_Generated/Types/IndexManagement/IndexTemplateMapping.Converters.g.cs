@@ -25,21 +25,28 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexTemplateMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamOptions = System.Text.Json.JsonEncodedText.Encode("data_stream_options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate?> propDataStreamOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDataStreamOptions.TryReadProperty(ref reader, options, PropDataStreamOptions, null))
 			{
 				continue;
 			}
@@ -72,6 +79,7 @@ public sealed partial class IndexTemplateMappingConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Aliases = propAliases.Value,
+			DataStreamOptions = propDataStreamOptions.Value,
 			Lifecycle = propLifecycle.Value,
 			Mappings = propMappings.Value,
 			Settings = propSettings.Value
@@ -82,6 +90,7 @@ public sealed partial class IndexTemplateMappingConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropDataStreamOptions, value.DataStreamOptions, null, null);
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
 		writer.WriteProperty(options, PropSettings, value.Settings, null, null);

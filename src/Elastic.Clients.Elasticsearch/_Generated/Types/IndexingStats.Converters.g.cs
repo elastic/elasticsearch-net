@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class IndexingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexingStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteCurrent = System.Text.Json.JsonEncodedText.Encode("delete_current");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteTime = System.Text.Json.JsonEncodedText.Encode("delete_time");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteTimeInMillis = System.Text.Json.JsonEncodedText.Encode("delete_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteTotal = System.Text.Json.JsonEncodedText.Encode("delete_total");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCurrent = System.Text.Json.JsonEncodedText.Encode("index_current");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexFailed = System.Text.Json.JsonEncodedText.Encode("index_failed");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTime = System.Text.Json.JsonEncodedText.Encode("index_time");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("index_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total");
-	private static readonly System.Text.Json.JsonEncodedText PropIsThrottled = System.Text.Json.JsonEncodedText.Encode("is_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropNoopUpdateTotal = System.Text.Json.JsonEncodedText.Encode("noop_update_total");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakWriteLoad = System.Text.Json.JsonEncodedText.Encode("peak_write_load");
-	private static readonly System.Text.Json.JsonEncodedText PropRecentWriteLoad = System.Text.Json.JsonEncodedText.Encode("recent_write_load");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time");
-	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteLoad = System.Text.Json.JsonEncodedText.Encode("write_load");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteCurrent = System.Text.Json.JsonEncodedText.Encode("delete_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTime = System.Text.Json.JsonEncodedText.Encode("delete_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTimeInMillis = System.Text.Json.JsonEncodedText.Encode("delete_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTotal = System.Text.Json.JsonEncodedText.Encode("delete_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCurrent = System.Text.Json.JsonEncodedText.Encode("index_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFailed = System.Text.Json.JsonEncodedText.Encode("index_failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTime = System.Text.Json.JsonEncodedText.Encode("index_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMillis = System.Text.Json.JsonEncodedText.Encode("index_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsThrottled = System.Text.Json.JsonEncodedText.Encode("is_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoopUpdateTotal = System.Text.Json.JsonEncodedText.Encode("noop_update_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPeakWriteLoad = System.Text.Json.JsonEncodedText.Encode("peak_write_load"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecentWriteLoad = System.Text.Json.JsonEncodedText.Encode("recent_write_load"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteLoad = System.Text.Json.JsonEncodedText.Encode("write_load"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

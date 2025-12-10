@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AnomalyExplanationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyCharacteristicsImpact = System.Text.Json.JsonEncodedText.Encode("anomaly_characteristics_impact");
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyLength = System.Text.Json.JsonEncodedText.Encode("anomaly_length");
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyType = System.Text.Json.JsonEncodedText.Encode("anomaly_type");
-	private static readonly System.Text.Json.JsonEncodedText PropHighVariancePenalty = System.Text.Json.JsonEncodedText.Encode("high_variance_penalty");
-	private static readonly System.Text.Json.JsonEncodedText PropIncompleteBucketPenalty = System.Text.Json.JsonEncodedText.Encode("incomplete_bucket_penalty");
-	private static readonly System.Text.Json.JsonEncodedText PropLowerConfidenceBound = System.Text.Json.JsonEncodedText.Encode("lower_confidence_bound");
-	private static readonly System.Text.Json.JsonEncodedText PropMultiBucketImpact = System.Text.Json.JsonEncodedText.Encode("multi_bucket_impact");
-	private static readonly System.Text.Json.JsonEncodedText PropSingleBucketImpact = System.Text.Json.JsonEncodedText.Encode("single_bucket_impact");
-	private static readonly System.Text.Json.JsonEncodedText PropTypicalValue = System.Text.Json.JsonEncodedText.Encode("typical_value");
-	private static readonly System.Text.Json.JsonEncodedText PropUpperConfidenceBound = System.Text.Json.JsonEncodedText.Encode("upper_confidence_bound");
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyCharacteristicsImpact = System.Text.Json.JsonEncodedText.Encode("anomaly_characteristics_impact"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyLength = System.Text.Json.JsonEncodedText.Encode("anomaly_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAnomalyType = System.Text.Json.JsonEncodedText.Encode("anomaly_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighVariancePenalty = System.Text.Json.JsonEncodedText.Encode("high_variance_penalty"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncompleteBucketPenalty = System.Text.Json.JsonEncodedText.Encode("incomplete_bucket_penalty"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowerConfidenceBound = System.Text.Json.JsonEncodedText.Encode("lower_confidence_bound"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMultiBucketImpact = System.Text.Json.JsonEncodedText.Encode("multi_bucket_impact"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSingleBucketImpact = System.Text.Json.JsonEncodedText.Encode("single_bucket_impact"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypicalValue = System.Text.Json.JsonEncodedText.Encode("typical_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpperConfidenceBound = System.Text.Json.JsonEncodedText.Encode("upper_confidence_bound"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

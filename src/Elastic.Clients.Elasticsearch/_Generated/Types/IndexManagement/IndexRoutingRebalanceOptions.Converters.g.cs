@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexRoutingRebalanceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
-	private static readonly System.Text.Json.JsonEncodedText MemberReplicas = System.Text.Json.JsonEncodedText.Encode("replicas");
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReplicas = System.Text.Json.JsonEncodedText.Encode("replicas"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

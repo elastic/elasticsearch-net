@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlInferenceDeploymentsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeployments>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceCounts = System.Text.Json.JsonEncodedText.Encode("inference_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizesBytes = System.Text.Json.JsonEncodedText.Encode("model_sizes_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeMs = System.Text.Json.JsonEncodedText.Encode("time_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceCounts = System.Text.Json.JsonEncodedText.Encode("inference_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizesBytes = System.Text.Json.JsonEncodedText.Encode("model_sizes_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeMs = System.Text.Json.JsonEncodedText.Encode("time_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeployments Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

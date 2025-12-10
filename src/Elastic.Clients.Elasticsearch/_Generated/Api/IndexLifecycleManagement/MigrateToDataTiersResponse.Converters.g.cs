@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class MigrateToDataTiersResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run");
-	private static readonly System.Text.Json.JsonEncodedText PropMigratedComponentTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_component_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropMigratedComposableTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_composable_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropMigratedIlmPolicies = System.Text.Json.JsonEncodedText.Encode("migrated_ilm_policies");
-	private static readonly System.Text.Json.JsonEncodedText PropMigratedIndices = System.Text.Json.JsonEncodedText.Encode("migrated_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMigratedLegacyTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_legacy_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropRemovedLegacyTemplate = System.Text.Json.JsonEncodedText.Encode("removed_legacy_template");
+	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedComponentTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_component_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedComposableTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_composable_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedIlmPolicies = System.Text.Json.JsonEncodedText.Encode("migrated_ilm_policies"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedIndices = System.Text.Json.JsonEncodedText.Encode("migrated_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigratedLegacyTemplates = System.Text.Json.JsonEncodedText.Encode("migrated_legacy_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemovedLegacyTemplate = System.Text.Json.JsonEncodedText.Encode("removed_legacy_template"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

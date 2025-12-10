@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MissingOrderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
-	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first");
-	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("last");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("first"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("last"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MissingOrder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

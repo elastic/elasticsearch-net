@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class MatchQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query");
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropCutoffFrequency = System.Text.Json.JsonEncodedText.Encode("cutoff_frequency");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions");
-	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match");
-	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAutoGenerateSynonymsPhraseQuery = System.Text.Json.JsonEncodedText.Encode("auto_generate_synonyms_phrase_query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCutoffFrequency = System.Text.Json.JsonEncodedText.Encode("cutoff_frequency"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzziness = System.Text.Json.JsonEncodedText.Encode("fuzziness"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyRewrite = System.Text.Json.JsonEncodedText.Encode("fuzzy_rewrite"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzyTranspositions = System.Text.Json.JsonEncodedText.Encode("fuzzy_transpositions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxExpansions = System.Text.Json.JsonEncodedText.Encode("max_expansions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumShouldMatch = System.Text.Json.JsonEncodedText.Encode("minimum_should_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropZeroTermsQuery = System.Text.Json.JsonEncodedText.Encode("zero_terms_query"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

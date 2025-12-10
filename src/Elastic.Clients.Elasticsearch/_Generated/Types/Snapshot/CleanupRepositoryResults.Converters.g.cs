@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class CleanupRepositoryResultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeletedBlobs = System.Text.Json.JsonEncodedText.Encode("deleted_blobs");
-	private static readonly System.Text.Json.JsonEncodedText PropDeletedBytes = System.Text.Json.JsonEncodedText.Encode("deleted_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDeletedBlobs = System.Text.Json.JsonEncodedText.Encode("deleted_blobs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeletedBytes = System.Text.Json.JsonEncodedText.Encode("deleted_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

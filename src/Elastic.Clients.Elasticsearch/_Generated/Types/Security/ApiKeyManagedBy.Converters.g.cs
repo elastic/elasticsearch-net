@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCloud = System.Text.Json.JsonEncodedText.Encode("cloud");
-	private static readonly System.Text.Json.JsonEncodedText MemberElasticsearch = System.Text.Json.JsonEncodedText.Encode("elasticsearch");
+	private static readonly System.Text.Json.JsonEncodedText MemberCloud = System.Text.Json.JsonEncodedText.Encode("cloud"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberElasticsearch = System.Text.Json.JsonEncodedText.Encode("elasticsearch"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

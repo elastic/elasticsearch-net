@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class PutTrainedModelDefinitionPartRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDefinitionLength = System.Text.Json.JsonEncodedText.Encode("total_definition_length");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalParts = System.Text.Json.JsonEncodedText.Encode("total_parts");
+	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDefinitionLength = System.Text.Json.JsonEncodedText.Encode("total_definition_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalParts = System.Text.Json.JsonEncodedText.Encode("total_parts"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

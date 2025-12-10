@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardStoreWrapperConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropStores = System.Text.Json.JsonEncodedText.Encode("stores");
+	private static readonly System.Text.Json.JsonEncodedText PropStores = System.Text.Json.JsonEncodedText.Encode("stores"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreWrapper Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
