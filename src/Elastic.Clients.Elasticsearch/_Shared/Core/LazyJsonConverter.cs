@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -14,13 +15,13 @@ public sealed class LazyJsonConverter : JsonConverter<LazyJson>
 {
 	private IElasticsearchClientSettings? _settings;
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public override LazyJson Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		InitializeSettings(options);
 
-#pragma warning disable IL2026, IL3050 // The `TypeInfoResolver` for `RequestResponseConverter` knows how to handle `JsonElement`.
 		return new LazyJson(JsonSerializer.Deserialize<JsonElement>(ref reader, options), _settings!);
-#pragma warning restore IL2026, IL3050
 	}
 
 	private void InitializeSettings(JsonSerializerOptions options)
