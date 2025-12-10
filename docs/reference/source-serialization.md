@@ -16,6 +16,9 @@ Source serialization refers to the process of (de)serializing POCO types in cons
   - [Registering custom `System.Text.Json` converters](#registering-custom-converters)
   - [Creating a custom `Serializer`](#creating-custom-serializers)
 - [Native AOT](#native-aot)
+- [Vector data serialization](#vector-data-serialization)
+  - [Opt‑in on document properties](#optin-on-document-properties)
+  - [Configure encodings globally](#configure-encodings-globally)
 
 ## Modeling documents with types [modeling-documents-with-types]
 
@@ -451,3 +454,58 @@ static void ConfigureOptions(JsonSerializerOptions o)
     o.TypeInfoResolver = UserTypeSerializerContext.Default;
 }
 ```
+
+## Vector data serialization [vector-data-serialization]
+
+Efficient ingestion of high-dimensional vectors often benefits from compact encodings rather than verbose JSON arrays. The client provides opt‑in converters for vector properties in your source documents that serialize to either hexadecimal or `base64` strings, depending on the vector type and the Elasticsearch version you target.
+
+- Float vectors can use `base64` starting from Elasticsearch 9.3.0.
+- Byte/bit vectors can use hexadecimal strings starting from Elasticsearch 8.14.0 and `base64` starting from Elasticsearch 9.3.0.
+- The legacy representation (JSON arrays) remains available for backwards compatibility.
+
+Base64 is the preferred format for high‑throughput indexing because it minimizes payload size and reduces JSON parsing overhead.
+
+### Opt‑in on document properties [optin-on-document-properties]
+
+Vector encodings are opt‑in. Apply a `System.Text.Json` `JsonConverter` attribute on the vector property of your POCO. For best performance, model the properties as `ReadOnlyMemory<T>`.
+
+```csharp
+using System;
+using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
+
+public class ImageEmbedding
+{
+    [JsonConverter(typeof(FloatVectorDataConverter))] <1>
+    public ReadOnlyMemory<float> Vector { get; set; }
+}
+
+public class ByteSignature
+{
+    [JsonConverter(typeof(ByteVectorDataConverter))] <2>
+    public ReadOnlyMemory<byte> Signature { get; set; }
+}
+```
+
+1. `FloatVectorDataConverter` enables `base64` encoding for float vectors.
+2. `ByteVectorDataConverter` enables `base64` encoding for byte vectors.
+
+Without these attributes, vectors are serialized using the default source serializer behavior.
+
+### Configure encodings globally [configure-encodings-globally]
+
+When the opt‑in attributes are present, you can control the actual wire encoding globally via `ElasticsearchClient` settings on a per‑type basis:
+
+- `FloatVectorDataEncoding`: controls float vector encoding (legacy arrays or `base64`).
+- `ByteVectorDataEncoding`: controls byte/bit vector encoding (legacy arrays, hexadecimal, or `base64`).
+
+These settings allow a single set of document types to work against mixed clusters. For example, a library using the 8.19.x client can talk to both 8.x and 9.x servers and dynamically opt out of `base64` on older servers without maintaining duplicate POCOs (with/without converter attributes).
+
+::::{note}
+
+Set the encoding based on your effective server version:
+
+- Float vectors: use `base64` for 9.3.0+; otherwise use legacy arrays.
+- Byte/bit vectors: prefer `base64` for 9.3.0+; use hexadecimal for 8.14.0–9.2.x; otherwise use legacy arrays.
+
+::::

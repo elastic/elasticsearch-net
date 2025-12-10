@@ -115,6 +115,8 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	private readonly Serializer _sourceSerializer;
 	private BeforeRequestEvent? _onBeforeRequest;
 	private bool _experimentalEnableSerializeNullInferredValues;
+	private FloatVectorDataEncoding _floatVectorDataEncoding = Serialization.FloatVectorDataEncoding.Base64;
+	private ByteVectorDataEncoding _byteVectorDataEncoding = Serialization.ByteVectorDataEncoding.Base64;
 	private ExperimentalSettings _experimentalSettings = new();
 
 	private bool _defaultDisableAllInference;
@@ -165,6 +167,8 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
 	Serializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
 	BeforeRequestEvent? IElasticsearchClientSettings.OnBeforeRequest => _onBeforeRequest;
+	FloatVectorDataEncoding IElasticsearchClientSettings.FloatVectorDataEncoding => _floatVectorDataEncoding;
+	ByteVectorDataEncoding IElasticsearchClientSettings.ByteVectorDataEncoding => _byteVectorDataEncoding;
 	ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
 
 	bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
@@ -197,6 +201,18 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 	public TConnectionSettings ExperimentalEnableSerializeNullInferredValues(bool enabled = true) =>
 		Assign(enabled, (a, v) => a._experimentalEnableSerializeNullInferredValues = v);
+
+	/// <inheritdoc cref="IElasticsearchClientSettings.FloatVectorDataEncoding"/>
+	/// <param name="encoding">The default vector data encoding to use.</param>
+	/// <returns>This settings instance for chaining.</returns>
+	public TConnectionSettings FloatVectorDataEncoding(FloatVectorDataEncoding encoding) =>
+		Assign(encoding, (a, v) => a._floatVectorDataEncoding = v);
+
+	/// <inheritdoc cref="IElasticsearchClientSettings.ByteVectorDataEncoding"/>
+	/// <param name="encoding">The default vector data encoding to use.</param>
+	/// <returns>This settings instance for chaining.</returns>
+	public TConnectionSettings ByteVectorDataEncoding(ByteVectorDataEncoding encoding) =>
+		Assign(encoding, (a, v) => a._byteVectorDataEncoding = v);
 
 	public TConnectionSettings Experimental(ExperimentalSettings settings) =>
 		Assign(settings, (a, v) => a._experimentalSettings = v);
