@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class FlushJobResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFlushed = System.Text.Json.JsonEncodedText.Encode("flushed");
-	private static readonly System.Text.Json.JsonEncodedText PropLastFinalizedBucketEnd = System.Text.Json.JsonEncodedText.Encode("last_finalized_bucket_end");
+	private static readonly System.Text.Json.JsonEncodedText PropFlushed = System.Text.Json.JsonEncodedText.Encode("flushed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastFinalizedBucketEnd = System.Text.Json.JsonEncodedText.Encode("last_finalized_bucket_end"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

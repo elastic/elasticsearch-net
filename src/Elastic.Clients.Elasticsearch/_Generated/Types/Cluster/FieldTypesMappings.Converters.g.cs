@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class FieldTypesMappingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFieldTypes = System.Text.Json.JsonEncodedText.Encode("field_types");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFieldTypes = System.Text.Json.JsonEncodedText.Encode("runtime_field_types");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceModes = System.Text.Json.JsonEncodedText.Encode("source_modes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedFieldCount = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSize = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalFieldCount = System.Text.Json.JsonEncodedText.Encode("total_field_count");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldTypes = System.Text.Json.JsonEncodedText.Encode("field_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFieldTypes = System.Text.Json.JsonEncodedText.Encode("runtime_field_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceModes = System.Text.Json.JsonEncodedText.Encode("source_modes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedFieldCount = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSize = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalFieldCount = System.Text.Json.JsonEncodedText.Encode("total_field_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

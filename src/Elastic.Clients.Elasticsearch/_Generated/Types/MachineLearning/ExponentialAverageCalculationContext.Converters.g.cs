@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ExponentialAverageCalculationContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIncrementalMetricValueMs = System.Text.Json.JsonEncodedText.Encode("incremental_metric_value_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropPreviousExponentialAverageMs = System.Text.Json.JsonEncodedText.Encode("previous_exponential_average_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropIncrementalMetricValueMs = System.Text.Json.JsonEncodedText.Encode("incremental_metric_value_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreviousExponentialAverageMs = System.Text.Json.JsonEncodedText.Encode("previous_exponential_average_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

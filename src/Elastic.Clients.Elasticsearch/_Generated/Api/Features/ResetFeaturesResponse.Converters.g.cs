@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Features.Json;
 
 public sealed partial class ResetFeaturesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features"u8);
 
 	public override Elastic.Clients.Elasticsearch.Features.ResetFeaturesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class OperatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.Operator>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and");
-	private static readonly System.Text.Json.JsonEncodedText MemberAnd1 = System.Text.Json.JsonEncodedText.Encode("AND");
-	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
-	private static readonly System.Text.Json.JsonEncodedText MemberOr1 = System.Text.Json.JsonEncodedText.Encode("OR");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd1 = System.Text.Json.JsonEncodedText.Encode("AND"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOr1 = System.Text.Json.JsonEncodedText.Encode("OR"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.Operator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

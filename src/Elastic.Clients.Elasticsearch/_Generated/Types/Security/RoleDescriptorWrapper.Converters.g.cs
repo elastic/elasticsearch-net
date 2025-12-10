@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class RoleDescriptorWrapperConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptor = System.Text.Json.JsonEncodedText.Encode("role_descriptor");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptor = System.Text.Json.JsonEncodedText.Encode("role_descriptor"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.RoleDescriptorWrapper Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

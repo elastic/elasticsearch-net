@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ScrollRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScrollRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropScroll = System.Text.Json.JsonEncodedText.Encode("scroll");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("scroll_id");
+	private static readonly System.Text.Json.JsonEncodedText PropScroll = System.Text.Json.JsonEncodedText.Encode("scroll"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("scroll_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.ScrollRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

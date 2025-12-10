@@ -27,14 +27,15 @@ public sealed partial class ClearCacheRequestParameters : Elastic.Transport.Requ
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -95,14 +96,15 @@ public sealed partial class ClearCacheRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -160,7 +162,8 @@ public readonly partial struct ClearCacheRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor AllowNoIndices(bool? value = true)
@@ -171,7 +174,7 @@ public readonly partial struct ClearCacheRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -182,7 +185,7 @@ public readonly partial struct ClearCacheRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -303,7 +306,8 @@ public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -314,7 +318,7 @@ public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -325,7 +329,7 @@ public readonly partial struct ClearCacheRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)

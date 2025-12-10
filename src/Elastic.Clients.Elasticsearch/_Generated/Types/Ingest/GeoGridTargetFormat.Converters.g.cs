@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class GeoGridTargetFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeojson = System.Text.Json.JsonEncodedText.Encode("geojson");
-	private static readonly System.Text.Json.JsonEncodedText MemberWkt = System.Text.Json.JsonEncodedText.Encode("wkt");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeojson = System.Text.Json.JsonEncodedText.Encode("geojson"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWkt = System.Text.Json.JsonEncodedText.Encode("wkt"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GeoGridTargetFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

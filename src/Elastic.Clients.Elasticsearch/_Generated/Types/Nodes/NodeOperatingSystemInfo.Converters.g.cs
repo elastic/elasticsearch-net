@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeOperatingSystemInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocatedProcessors = System.Text.Json.JsonEncodedText.Encode("allocated_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropArch = System.Text.Json.JsonEncodedText.Encode("arch");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropPrettyName = System.Text.Json.JsonEncodedText.Encode("pretty_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocatedProcessors = System.Text.Json.JsonEncodedText.Encode("allocated_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropArch = System.Text.Json.JsonEncodedText.Encode("arch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableProcessors = System.Text.Json.JsonEncodedText.Encode("available_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrettyName = System.Text.Json.JsonEncodedText.Encode("pretty_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshIntervalInMillis = System.Text.Json.JsonEncodedText.Encode("refresh_interval_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSwap = System.Text.Json.JsonEncodedText.Encode("swap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

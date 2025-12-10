@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class DateHistogramGroupingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropCalendarInterval = System.Text.Json.JsonEncodedText.Encode("calendar_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelay = System.Text.Json.JsonEncodedText.Encode("delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class GeoGridTileTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeohash = System.Text.Json.JsonEncodedText.Encode("geohash");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohash = System.Text.Json.JsonEncodedText.Encode("geohash"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeohex = System.Text.Json.JsonEncodedText.Encode("geohex"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeotile = System.Text.Json.JsonEncodedText.Encode("geotile"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

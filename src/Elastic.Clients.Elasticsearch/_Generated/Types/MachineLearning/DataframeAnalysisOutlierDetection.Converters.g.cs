@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisOutlierDetectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropComputeFeatureInfluence = System.Text.Json.JsonEncodedText.Encode("compute_feature_influence");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureInfluenceThreshold = System.Text.Json.JsonEncodedText.Encode("feature_influence_threshold");
-	private static readonly System.Text.Json.JsonEncodedText PropMethod = System.Text.Json.JsonEncodedText.Encode("method");
-	private static readonly System.Text.Json.JsonEncodedText PropNNeighbors = System.Text.Json.JsonEncodedText.Encode("n_neighbors");
-	private static readonly System.Text.Json.JsonEncodedText PropOutlierFraction = System.Text.Json.JsonEncodedText.Encode("outlier_fraction");
-	private static readonly System.Text.Json.JsonEncodedText PropStandardizationEnabled = System.Text.Json.JsonEncodedText.Encode("standardization_enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropComputeFeatureInfluence = System.Text.Json.JsonEncodedText.Encode("compute_feature_influence"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureInfluenceThreshold = System.Text.Json.JsonEncodedText.Encode("feature_influence_threshold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMethod = System.Text.Json.JsonEncodedText.Encode("method"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNNeighbors = System.Text.Json.JsonEncodedText.Encode("n_neighbors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutlierFraction = System.Text.Json.JsonEncodedText.Encode("outlier_fraction"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStandardizationEnabled = System.Text.Json.JsonEncodedText.Encode("standardization_enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

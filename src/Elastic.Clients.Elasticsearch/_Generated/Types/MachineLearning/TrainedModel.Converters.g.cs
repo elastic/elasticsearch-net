@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEnsemble = System.Text.Json.JsonEncodedText.Encode("ensemble");
-	private static readonly System.Text.Json.JsonEncodedText PropTree = System.Text.Json.JsonEncodedText.Encode("tree");
-	private static readonly System.Text.Json.JsonEncodedText PropTreeNode = System.Text.Json.JsonEncodedText.Encode("tree_node");
+	private static readonly System.Text.Json.JsonEncodedText PropEnsemble = System.Text.Json.JsonEncodedText.Encode("ensemble"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTree = System.Text.Json.JsonEncodedText.Encode("tree"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTreeNode = System.Text.Json.JsonEncodedText.Encode("tree_node"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

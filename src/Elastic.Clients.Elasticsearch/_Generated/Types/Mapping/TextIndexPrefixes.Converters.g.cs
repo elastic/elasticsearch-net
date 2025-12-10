@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class TextIndexPrefixesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxChars = System.Text.Json.JsonEncodedText.Encode("max_chars");
-	private static readonly System.Text.Json.JsonEncodedText PropMinChars = System.Text.Json.JsonEncodedText.Encode("min_chars");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChars = System.Text.Json.JsonEncodedText.Encode("max_chars"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinChars = System.Text.Json.JsonEncodedText.Encode("min_chars"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

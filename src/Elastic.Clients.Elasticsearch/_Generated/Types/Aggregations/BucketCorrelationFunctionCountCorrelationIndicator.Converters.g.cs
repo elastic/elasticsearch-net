@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropExpectations = System.Text.Json.JsonEncodedText.Encode("expectations");
-	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpectations = System.Text.Json.JsonEncodedText.Encode("expectations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

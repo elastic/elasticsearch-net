@@ -158,7 +158,7 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics.
+	/// Limit the information returned the specific metrics
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
@@ -295,7 +295,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics.
+	/// Limit the information returned the specific metrics
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
@@ -584,7 +584,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics.
+	/// Limit the information returned the specific metrics
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)

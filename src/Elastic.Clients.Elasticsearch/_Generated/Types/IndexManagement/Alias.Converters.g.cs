@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class AliasConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Alias>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropIsHidden = System.Text.Json.JsonEncodedText.Encode("is_hidden");
-	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsHidden = System.Text.Json.JsonEncodedText.Encode("is_hidden"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Alias Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

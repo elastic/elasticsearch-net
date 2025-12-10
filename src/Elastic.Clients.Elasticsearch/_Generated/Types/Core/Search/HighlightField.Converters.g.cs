@@ -25,29 +25,29 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class HighlightFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlightField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoundaryChars = System.Text.Json.JsonEncodedText.Encode("boundary_chars");
-	private static readonly System.Text.Json.JsonEncodedText PropBoundaryMaxScan = System.Text.Json.JsonEncodedText.Encode("boundary_max_scan");
-	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScanner = System.Text.Json.JsonEncodedText.Encode("boundary_scanner");
-	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale");
-	private static readonly System.Text.Json.JsonEncodedText PropForceSource = System.Text.Json.JsonEncodedText.Encode("force_source");
-	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter");
-	private static readonly System.Text.Json.JsonEncodedText PropFragmentOffset = System.Text.Json.JsonEncodedText.Encode("fragment_offset");
-	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size");
-	private static readonly System.Text.Json.JsonEncodedText PropHighlightFilter = System.Text.Json.JsonEncodedText.Encode("highlight_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropHighlightQuery = System.Text.Json.JsonEncodedText.Encode("highlight_query");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchedFields = System.Text.Json.JsonEncodedText.Encode("matched_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxFragmentLength = System.Text.Json.JsonEncodedText.Encode("max_fragment_length");
-	private static readonly System.Text.Json.JsonEncodedText PropNoMatchSize = System.Text.Json.JsonEncodedText.Encode("no_match_size");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFragments = System.Text.Json.JsonEncodedText.Encode("number_of_fragments");
-	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropPhraseLimit = System.Text.Json.JsonEncodedText.Encode("phrase_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropPostTags = System.Text.Json.JsonEncodedText.Encode("post_tags");
-	private static readonly System.Text.Json.JsonEncodedText PropPreTags = System.Text.Json.JsonEncodedText.Encode("pre_tags");
-	private static readonly System.Text.Json.JsonEncodedText PropRequireFieldMatch = System.Text.Json.JsonEncodedText.Encode("require_field_match");
-	private static readonly System.Text.Json.JsonEncodedText PropTagsSchema = System.Text.Json.JsonEncodedText.Encode("tags_schema");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryChars = System.Text.Json.JsonEncodedText.Encode("boundary_chars"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryMaxScan = System.Text.Json.JsonEncodedText.Encode("boundary_max_scan"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScanner = System.Text.Json.JsonEncodedText.Encode("boundary_scanner"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoundaryScannerLocale = System.Text.Json.JsonEncodedText.Encode("boundary_scanner_locale"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForceSource = System.Text.Json.JsonEncodedText.Encode("force_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFragmenter = System.Text.Json.JsonEncodedText.Encode("fragmenter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFragmentOffset = System.Text.Json.JsonEncodedText.Encode("fragment_offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFragmentSize = System.Text.Json.JsonEncodedText.Encode("fragment_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightFilter = System.Text.Json.JsonEncodedText.Encode("highlight_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighlightQuery = System.Text.Json.JsonEncodedText.Encode("highlight_query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchedFields = System.Text.Json.JsonEncodedText.Encode("matched_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAnalyzedOffset = System.Text.Json.JsonEncodedText.Encode("max_analyzed_offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFragmentLength = System.Text.Json.JsonEncodedText.Encode("max_fragment_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNoMatchSize = System.Text.Json.JsonEncodedText.Encode("no_match_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFragments = System.Text.Json.JsonEncodedText.Encode("number_of_fragments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPhraseLimit = System.Text.Json.JsonEncodedText.Encode("phrase_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPostTags = System.Text.Json.JsonEncodedText.Encode("post_tags"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreTags = System.Text.Json.JsonEncodedText.Encode("pre_tags"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequireFieldMatch = System.Text.Json.JsonEncodedText.Encode("require_field_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTagsSchema = System.Text.Json.JsonEncodedText.Encode("tags_schema"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.HighlightField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

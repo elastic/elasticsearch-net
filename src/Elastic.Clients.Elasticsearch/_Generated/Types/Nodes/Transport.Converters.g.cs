@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class TransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Transport>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("inbound_handling_time_histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropOutboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("outbound_handling_time_histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropRxCount = System.Text.Json.JsonEncodedText.Encode("rx_count");
-	private static readonly System.Text.Json.JsonEncodedText PropRxSize = System.Text.Json.JsonEncodedText.Encode("rx_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("rx_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropServerOpen = System.Text.Json.JsonEncodedText.Encode("server_open");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalOutboundConnections = System.Text.Json.JsonEncodedText.Encode("total_outbound_connections");
-	private static readonly System.Text.Json.JsonEncodedText PropTxCount = System.Text.Json.JsonEncodedText.Encode("tx_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTxSize = System.Text.Json.JsonEncodedText.Encode("tx_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("tx_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropInboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("inbound_handling_time_histogram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutboundHandlingTimeHistogram = System.Text.Json.JsonEncodedText.Encode("outbound_handling_time_histogram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRxCount = System.Text.Json.JsonEncodedText.Encode("rx_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRxSize = System.Text.Json.JsonEncodedText.Encode("rx_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("rx_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServerOpen = System.Text.Json.JsonEncodedText.Encode("server_open"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOutboundConnections = System.Text.Json.JsonEncodedText.Encode("total_outbound_connections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTxCount = System.Text.Json.JsonEncodedText.Encode("tx_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTxSize = System.Text.Json.JsonEncodedText.Encode("tx_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTxSizeInBytes = System.Text.Json.JsonEncodedText.Encode("tx_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Transport Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

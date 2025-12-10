@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuCollationDecompositionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

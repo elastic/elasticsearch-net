@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuCollationStrengthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical");
-	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary");
-	private static readonly System.Text.Json.JsonEncodedText MemberSecondary = System.Text.Json.JsonEncodedText.Encode("secondary");
-	private static readonly System.Text.Json.JsonEncodedText MemberTertiary = System.Text.Json.JsonEncodedText.Encode("tertiary");
+	private static readonly System.Text.Json.JsonEncodedText MemberIdentical = System.Text.Json.JsonEncodedText.Encode("identical"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQuaternary = System.Text.Json.JsonEncodedText.Encode("quaternary"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSecondary = System.Text.Json.JsonEncodedText.Encode("secondary"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTertiary = System.Text.Json.JsonEncodedText.Encode("tertiary"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

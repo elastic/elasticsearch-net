@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class NlpTokenizationUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span");
-	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate");
+	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AmazonSageMakerServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessKey = System.Text.Json.JsonEncodedText.Encode("access_key");
-	private static readonly System.Text.Json.JsonEncodedText PropApi = System.Text.Json.JsonEncodedText.Encode("api");
-	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size");
-	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions");
-	private static readonly System.Text.Json.JsonEncodedText PropEndpointName = System.Text.Json.JsonEncodedText.Encode("endpoint_name");
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceComponentName = System.Text.Json.JsonEncodedText.Encode("inference_component_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRegion = System.Text.Json.JsonEncodedText.Encode("region");
-	private static readonly System.Text.Json.JsonEncodedText PropSecretKey = System.Text.Json.JsonEncodedText.Encode("secret_key");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetContainerHostname = System.Text.Json.JsonEncodedText.Encode("target_container_hostname");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetModel = System.Text.Json.JsonEncodedText.Encode("target_model");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessKey = System.Text.Json.JsonEncodedText.Encode("access_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropApi = System.Text.Json.JsonEncodedText.Encode("api"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEndpointName = System.Text.Json.JsonEncodedText.Encode("endpoint_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceComponentName = System.Text.Json.JsonEncodedText.Encode("inference_component_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegion = System.Text.Json.JsonEncodedText.Encode("region"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecretKey = System.Text.Json.JsonEncodedText.Encode("secret_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetContainerHostname = System.Text.Json.JsonEncodedText.Encode("target_container_hostname"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetModel = System.Text.Json.JsonEncodedText.Encode("target_model"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

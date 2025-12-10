@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class DiscoveryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Discovery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterApplierStats = System.Text.Json.JsonEncodedText.Encode("cluster_applier_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterStateQueue = System.Text.Json.JsonEncodedText.Encode("cluster_state_queue");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterStateUpdate = System.Text.Json.JsonEncodedText.Encode("cluster_state_update");
-	private static readonly System.Text.Json.JsonEncodedText PropPublishedClusterStates = System.Text.Json.JsonEncodedText.Encode("published_cluster_states");
-	private static readonly System.Text.Json.JsonEncodedText PropSerializedClusterStates = System.Text.Json.JsonEncodedText.Encode("serialized_cluster_states");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterApplierStats = System.Text.Json.JsonEncodedText.Encode("cluster_applier_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterStateQueue = System.Text.Json.JsonEncodedText.Encode("cluster_state_queue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterStateUpdate = System.Text.Json.JsonEncodedText.Encode("cluster_state_update"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPublishedClusterStates = System.Text.Json.JsonEncodedText.Encode("published_cluster_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSerializedClusterStates = System.Text.Json.JsonEncodedText.Encode("serialized_cluster_states"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Discovery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

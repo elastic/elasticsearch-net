@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class GetPolicyResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

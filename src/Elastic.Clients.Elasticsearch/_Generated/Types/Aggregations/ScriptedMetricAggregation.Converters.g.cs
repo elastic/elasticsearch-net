@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class ScriptedMetricAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCombineScript = System.Text.Json.JsonEncodedText.Encode("combine_script");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropInitScript = System.Text.Json.JsonEncodedText.Encode("init_script");
-	private static readonly System.Text.Json.JsonEncodedText PropMapScript = System.Text.Json.JsonEncodedText.Encode("map_script");
-	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropReduceScript = System.Text.Json.JsonEncodedText.Encode("reduce_script");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropCombineScript = System.Text.Json.JsonEncodedText.Encode("combine_script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitScript = System.Text.Json.JsonEncodedText.Encode("init_script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMapScript = System.Text.Json.JsonEncodedText.Encode("map_script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReduceScript = System.Text.Json.JsonEncodedText.Encode("reduce_script"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

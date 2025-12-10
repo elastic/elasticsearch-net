@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class NodeAllocationExplanationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeciders = System.Text.Json.JsonEncodedText.Encode("deciders");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeAttributes = System.Text.Json.JsonEncodedText.Encode("node_attributes");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeDecision = System.Text.Json.JsonEncodedText.Encode("node_decision");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
-	private static readonly System.Text.Json.JsonEncodedText PropWeightRanking = System.Text.Json.JsonEncodedText.Encode("weight_ranking");
+	private static readonly System.Text.Json.JsonEncodedText PropDeciders = System.Text.Json.JsonEncodedText.Encode("deciders"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeAttributes = System.Text.Json.JsonEncodedText.Encode("node_attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeDecision = System.Text.Json.JsonEncodedText.Encode("node_decision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeName = System.Text.Json.JsonEncodedText.Encode("node_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeightRanking = System.Text.Json.JsonEncodedText.Encode("weight_ranking"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

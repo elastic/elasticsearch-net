@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class RevertModelSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteInterveningResults = System.Text.Json.JsonEncodedText.Encode("delete_intervening_results");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteInterveningResults = System.Text.Json.JsonEncodedText.Encode("delete_intervening_results"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

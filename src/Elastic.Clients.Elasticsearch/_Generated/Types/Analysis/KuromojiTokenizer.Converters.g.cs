@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class KuromojiTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDiscardCompoundToken = System.Text.Json.JsonEncodedText.Encode("discard_compound_token");
-	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation");
-	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
-	private static readonly System.Text.Json.JsonEncodedText PropNbestCost = System.Text.Json.JsonEncodedText.Encode("nbest_cost");
-	private static readonly System.Text.Json.JsonEncodedText PropNbestExamples = System.Text.Json.JsonEncodedText.Encode("nbest_examples");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
-	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardCompoundToken = System.Text.Json.JsonEncodedText.Encode("discard_compound_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNbestCost = System.Text.Json.JsonEncodedText.Encode("nbest_cost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNbestExamples = System.Text.Json.JsonEncodedText.Encode("nbest_examples"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

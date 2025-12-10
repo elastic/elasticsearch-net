@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class NodeRoleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NodeRole>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClient = System.Text.Json.JsonEncodedText.Encode("client");
-	private static readonly System.Text.Json.JsonEncodedText MemberCoordinatingOnly = System.Text.Json.JsonEncodedText.Encode("coordinating_only");
-	private static readonly System.Text.Json.JsonEncodedText MemberData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText MemberDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold");
-	private static readonly System.Text.Json.JsonEncodedText MemberDataContent = System.Text.Json.JsonEncodedText.Encode("data_content");
-	private static readonly System.Text.Json.JsonEncodedText MemberDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen");
-	private static readonly System.Text.Json.JsonEncodedText MemberDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot");
-	private static readonly System.Text.Json.JsonEncodedText MemberDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm");
-	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText MemberMaster = System.Text.Json.JsonEncodedText.Encode("master");
-	private static readonly System.Text.Json.JsonEncodedText MemberMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText MemberRemoteClusterClient = System.Text.Json.JsonEncodedText.Encode("remote_cluster_client");
-	private static readonly System.Text.Json.JsonEncodedText MemberTransform = System.Text.Json.JsonEncodedText.Encode("transform");
-	private static readonly System.Text.Json.JsonEncodedText MemberVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only");
+	private static readonly System.Text.Json.JsonEncodedText MemberClient = System.Text.Json.JsonEncodedText.Encode("client"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberCoordinatingOnly = System.Text.Json.JsonEncodedText.Encode("coordinating_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDataContent = System.Text.Json.JsonEncodedText.Encode("data_content"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMaster = System.Text.Json.JsonEncodedText.Encode("master"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRemoteClusterClient = System.Text.Json.JsonEncodedText.Encode("remote_cluster_client"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTransform = System.Text.Json.JsonEncodedText.Encode("transform"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only"u8);
 
 	public override Elastic.Clients.Elasticsearch.NodeRole Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

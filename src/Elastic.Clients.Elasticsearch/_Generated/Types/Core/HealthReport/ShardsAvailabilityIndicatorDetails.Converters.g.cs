@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class ShardsAvailabilityIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCreatingPrimaries = System.Text.Json.JsonEncodedText.Encode("creating_primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropCreatingReplicas = System.Text.Json.JsonEncodedText.Encode("creating_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializingPrimaries = System.Text.Json.JsonEncodedText.Encode("initializing_primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializingReplicas = System.Text.Json.JsonEncodedText.Encode("initializing_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropRestartingPrimaries = System.Text.Json.JsonEncodedText.Encode("restarting_primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropRestartingReplicas = System.Text.Json.JsonEncodedText.Encode("restarting_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropStartedPrimaries = System.Text.Json.JsonEncodedText.Encode("started_primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropStartedReplicas = System.Text.Json.JsonEncodedText.Encode("started_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaries = System.Text.Json.JsonEncodedText.Encode("unassigned_primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedReplicas = System.Text.Json.JsonEncodedText.Encode("unassigned_replicas");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatingPrimaries = System.Text.Json.JsonEncodedText.Encode("creating_primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreatingReplicas = System.Text.Json.JsonEncodedText.Encode("creating_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingPrimaries = System.Text.Json.JsonEncodedText.Encode("initializing_primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingReplicas = System.Text.Json.JsonEncodedText.Encode("initializing_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRestartingPrimaries = System.Text.Json.JsonEncodedText.Encode("restarting_primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRestartingReplicas = System.Text.Json.JsonEncodedText.Encode("restarting_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartedPrimaries = System.Text.Json.JsonEncodedText.Encode("started_primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartedReplicas = System.Text.Json.JsonEncodedText.Encode("started_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaries = System.Text.Json.JsonEncodedText.Encode("unassigned_primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedReplicas = System.Text.Json.JsonEncodedText.Encode("unassigned_replicas"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsAvailabilityIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

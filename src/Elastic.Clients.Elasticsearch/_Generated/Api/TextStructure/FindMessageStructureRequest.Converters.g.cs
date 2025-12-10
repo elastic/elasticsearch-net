@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class FindMessageStructureRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages");
+	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

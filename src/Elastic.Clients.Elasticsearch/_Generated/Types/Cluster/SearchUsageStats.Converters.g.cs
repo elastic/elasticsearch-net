@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class SearchUsageStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
-	private static readonly System.Text.Json.JsonEncodedText PropRescorers = System.Text.Json.JsonEncodedText.Encode("rescorers");
-	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
-	private static readonly System.Text.Json.JsonEncodedText PropSections = System.Text.Json.JsonEncodedText.Encode("sections");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRescorers = System.Text.Json.JsonEncodedText.Encode("rescorers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSections = System.Text.Json.JsonEncodedText.Encode("sections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

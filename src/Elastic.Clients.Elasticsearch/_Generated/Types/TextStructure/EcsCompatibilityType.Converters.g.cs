@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class EcsCompatibilityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
-	private static readonly System.Text.Json.JsonEncodedText MemberV1 = System.Text.Json.JsonEncodedText.Encode("v1");
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberV1 = System.Text.Json.JsonEncodedText.Encode("v1"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

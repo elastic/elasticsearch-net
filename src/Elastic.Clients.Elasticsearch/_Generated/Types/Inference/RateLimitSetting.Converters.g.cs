@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class RateLimitSettingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerMinute = System.Text.Json.JsonEncodedText.Encode("requests_per_minute");
+	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerMinute = System.Text.Json.JsonEncodedText.Encode("requests_per_minute"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.RateLimitSetting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

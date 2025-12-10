@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class GeoIpDownloadStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDatabasesCount = System.Text.Json.JsonEncodedText.Encode("databases_count");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiredDatabases = System.Text.Json.JsonEncodedText.Encode("expired_databases");
-	private static readonly System.Text.Json.JsonEncodedText PropFailedDownloads = System.Text.Json.JsonEncodedText.Encode("failed_downloads");
-	private static readonly System.Text.Json.JsonEncodedText PropSkippedUpdates = System.Text.Json.JsonEncodedText.Encode("skipped_updates");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccessfulDownloads = System.Text.Json.JsonEncodedText.Encode("successful_downloads");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDownloadTime = System.Text.Json.JsonEncodedText.Encode("total_download_time");
+	private static readonly System.Text.Json.JsonEncodedText PropDatabasesCount = System.Text.Json.JsonEncodedText.Encode("databases_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpiredDatabases = System.Text.Json.JsonEncodedText.Encode("expired_databases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailedDownloads = System.Text.Json.JsonEncodedText.Encode("failed_downloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkippedUpdates = System.Text.Json.JsonEncodedText.Encode("skipped_updates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuccessfulDownloads = System.Text.Json.JsonEncodedText.Encode("successful_downloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDownloadTime = System.Text.Json.JsonEncodedText.Encode("total_download_time"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

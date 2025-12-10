@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class PhoneticNameTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAshkenazi = System.Text.Json.JsonEncodedText.Encode("ashkenazi");
-	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic");
-	private static readonly System.Text.Json.JsonEncodedText MemberSephardic = System.Text.Json.JsonEncodedText.Encode("sephardic");
+	private static readonly System.Text.Json.JsonEncodedText MemberAshkenazi = System.Text.Json.JsonEncodedText.Encode("ashkenazi"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGeneric = System.Text.Json.JsonEncodedText.Encode("generic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSephardic = System.Text.Json.JsonEncodedText.Encode("sephardic"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

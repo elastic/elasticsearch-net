@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class SlmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Slm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyCount = System.Text.Json.JsonEncodedText.Encode("policy_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyCount = System.Text.Json.JsonEncodedText.Encode("policy_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Slm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

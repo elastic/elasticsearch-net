@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AnomalyCauseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyCause>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActual = System.Text.Json.JsonEncodedText.Encode("actual");
-	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropByFieldValue = System.Text.Json.JsonEncodedText.Encode("by_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropCorrelatedByFieldValue = System.Text.Json.JsonEncodedText.Encode("correlated_by_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
-	private static readonly System.Text.Json.JsonEncodedText PropFunctionDescription = System.Text.Json.JsonEncodedText.Encode("function_description");
-	private static readonly System.Text.Json.JsonEncodedText PropGeoResults = System.Text.Json.JsonEncodedText.Encode("geo_results");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers");
-	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropOverFieldValue = System.Text.Json.JsonEncodedText.Encode("over_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldValue = System.Text.Json.JsonEncodedText.Encode("partition_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability");
-	private static readonly System.Text.Json.JsonEncodedText PropTypical = System.Text.Json.JsonEncodedText.Encode("typical");
+	private static readonly System.Text.Json.JsonEncodedText PropActual = System.Text.Json.JsonEncodedText.Encode("actual"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropByFieldValue = System.Text.Json.JsonEncodedText.Encode("by_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCorrelatedByFieldValue = System.Text.Json.JsonEncodedText.Encode("correlated_by_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFunctionDescription = System.Text.Json.JsonEncodedText.Encode("function_description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGeoResults = System.Text.Json.JsonEncodedText.Encode("geo_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencers = System.Text.Json.JsonEncodedText.Encode("influencers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverFieldValue = System.Text.Json.JsonEncodedText.Encode("over_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldValue = System.Text.Json.JsonEncodedText.Encode("partition_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypical = System.Text.Json.JsonEncodedText.Encode("typical"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AnomalyCause Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

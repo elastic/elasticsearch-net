@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch.Json;
 
 public sealed partial class MultiSearchItemConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("_clusters");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropHitsMetadata = System.Text.Json.JsonEncodedText.Encode("hits");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxScore = System.Text.Json.JsonEncodedText.Encode("max_score");
-	private static readonly System.Text.Json.JsonEncodedText PropNumReducePhases = System.Text.Json.JsonEncodedText.Encode("num_reduce_phases");
-	private static readonly System.Text.Json.JsonEncodedText PropPitId = System.Text.Json.JsonEncodedText.Encode("pit_id");
-	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("_scroll_id");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropSuggest = System.Text.Json.JsonEncodedText.Encode("suggest");
-	private static readonly System.Text.Json.JsonEncodedText PropTerminatedEarly = System.Text.Json.JsonEncodedText.Encode("terminated_early");
-	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
-	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("_clusters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHitsMetadata = System.Text.Json.JsonEncodedText.Encode("hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxScore = System.Text.Json.JsonEncodedText.Encode("max_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumReducePhases = System.Text.Json.JsonEncodedText.Encode("num_reduce_phases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPitId = System.Text.Json.JsonEncodedText.Encode("pit_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("_scroll_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSuggest = System.Text.Json.JsonEncodedText.Encode("suggest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerminatedEarly = System.Text.Json.JsonEncodedText.Encode("terminated_early"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTook = System.Text.Json.JsonEncodedText.Encode("took"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

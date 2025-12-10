@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleModelGardenProviderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAnthropic = System.Text.Json.JsonEncodedText.Encode("anthropic");
-	private static readonly System.Text.Json.JsonEncodedText MemberGoogle = System.Text.Json.JsonEncodedText.Encode("google");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnthropic = System.Text.Json.JsonEncodedText.Encode("anthropic"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGoogle = System.Text.Json.JsonEncodedText.Encode("google"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

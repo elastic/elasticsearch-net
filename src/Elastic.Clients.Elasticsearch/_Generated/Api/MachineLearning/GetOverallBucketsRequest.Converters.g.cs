@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class GetOverallBucketsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span");
-	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
-	private static readonly System.Text.Json.JsonEncodedText PropExcludeInterim = System.Text.Json.JsonEncodedText.Encode("exclude_interim");
-	private static readonly System.Text.Json.JsonEncodedText PropOverallScore = System.Text.Json.JsonEncodedText.Encode("overall_score");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
-	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketSpan = System.Text.Json.JsonEncodedText.Encode("bucket_span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeInterim = System.Text.Json.JsonEncodedText.Encode("exclude_interim"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverallScore = System.Text.Json.JsonEncodedText.Encode("overall_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

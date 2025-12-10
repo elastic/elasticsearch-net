@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class FunctionScoreQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropBoostMode = System.Text.Json.JsonEncodedText.Encode("boost_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropFunctions = System.Text.Json.JsonEncodedText.Encode("functions");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxBoost = System.Text.Json.JsonEncodedText.Encode("max_boost");
-	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
-	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBoostMode = System.Text.Json.JsonEncodedText.Encode("boost_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFunctions = System.Text.Json.JsonEncodedText.Encode("functions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBoost = System.Text.Json.JsonEncodedText.Encode("max_boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScoreMode = System.Text.Json.JsonEncodedText.Encode("score_mode"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

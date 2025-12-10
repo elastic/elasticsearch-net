@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GetInferenceResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEndpoints = System.Text.Json.JsonEncodedText.Encode("endpoints");
+	private static readonly System.Text.Json.JsonEncodedText PropEndpoints = System.Text.Json.JsonEncodedText.Encode("endpoints"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

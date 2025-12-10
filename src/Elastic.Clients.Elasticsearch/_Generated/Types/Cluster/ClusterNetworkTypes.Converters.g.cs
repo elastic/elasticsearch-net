@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterNetworkTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHttpTypes = System.Text.Json.JsonEncodedText.Encode("http_types");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportTypes = System.Text.Json.JsonEncodedText.Encode("transport_types");
+	private static readonly System.Text.Json.JsonEncodedText PropHttpTypes = System.Text.Json.JsonEncodedText.Encode("http_types"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportTypes = System.Text.Json.JsonEncodedText.Encode("transport_types"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

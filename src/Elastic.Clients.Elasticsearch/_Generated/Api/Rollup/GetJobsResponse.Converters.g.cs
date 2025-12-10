@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class GetJobsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropJobs = System.Text.Json.JsonEncodedText.Encode("jobs");
+	private static readonly System.Text.Json.JsonEncodedText PropJobs = System.Text.Json.JsonEncodedText.Encode("jobs"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

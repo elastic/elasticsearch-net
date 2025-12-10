@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuTransformDirectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberForward = System.Text.Json.JsonEncodedText.Encode("forward");
-	private static readonly System.Text.Json.JsonEncodedText MemberReverse = System.Text.Json.JsonEncodedText.Encode("reverse");
+	private static readonly System.Text.Json.JsonEncodedText MemberForward = System.Text.Json.JsonEncodedText.Encode("forward"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberReverse = System.Text.Json.JsonEncodedText.Encode("reverse"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

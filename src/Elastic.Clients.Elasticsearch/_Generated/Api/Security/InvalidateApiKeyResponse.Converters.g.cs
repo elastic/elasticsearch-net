@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class InvalidateApiKeyResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count");
-	private static readonly System.Text.Json.JsonEncodedText PropErrorDetails = System.Text.Json.JsonEncodedText.Encode("error_details");
-	private static readonly System.Text.Json.JsonEncodedText PropInvalidatedApiKeys = System.Text.Json.JsonEncodedText.Encode("invalidated_api_keys");
-	private static readonly System.Text.Json.JsonEncodedText PropPreviouslyInvalidatedApiKeys = System.Text.Json.JsonEncodedText.Encode("previously_invalidated_api_keys");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrorDetails = System.Text.Json.JsonEncodedText.Encode("error_details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidatedApiKeys = System.Text.Json.JsonEncodedText.Encode("invalidated_api_keys"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreviouslyInvalidatedApiKeys = System.Text.Json.JsonEncodedText.Encode("previously_invalidated_api_keys"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

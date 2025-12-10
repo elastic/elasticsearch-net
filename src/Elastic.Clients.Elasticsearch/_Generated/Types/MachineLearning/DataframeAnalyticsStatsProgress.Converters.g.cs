@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsStatsProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
-	private static readonly System.Text.Json.JsonEncodedText PropProgressPercent = System.Text.Json.JsonEncodedText.Encode("progress_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProgressPercent = System.Text.Json.JsonEncodedText.Encode("progress_percent"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

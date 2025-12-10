@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class RemoteClusterPrivilegeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberMonitorEnrich = System.Text.Json.JsonEncodedText.Encode("monitor_enrich");
-	private static readonly System.Text.Json.JsonEncodedText MemberMonitorStats = System.Text.Json.JsonEncodedText.Encode("monitor_stats");
+	private static readonly System.Text.Json.JsonEncodedText MemberMonitorEnrich = System.Text.Json.JsonEncodedText.Encode("monitor_enrich"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMonitorStats = System.Text.Json.JsonEncodedText.Encode("monitor_stats"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

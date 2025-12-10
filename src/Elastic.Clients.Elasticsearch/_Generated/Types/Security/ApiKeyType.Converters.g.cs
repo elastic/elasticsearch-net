@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCrossCluster = System.Text.Json.JsonEncodedText.Encode("cross_cluster");
-	private static readonly System.Text.Json.JsonEncodedText MemberRest = System.Text.Json.JsonEncodedText.Encode("rest");
+	private static readonly System.Text.Json.JsonEncodedText MemberCrossCluster = System.Text.Json.JsonEncodedText.Encode("cross_cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRest = System.Text.Json.JsonEncodedText.Encode("rest"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ApiKeyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class PressureMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.PressureMemory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText PropAllInBytes = System.Text.Json.JsonEncodedText.Encode("all_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCombinedCoordinatingAndPrimary = System.Text.Json.JsonEncodedText.Encode("combined_coordinating_and_primary");
-	private static readonly System.Text.Json.JsonEncodedText PropCombinedCoordinatingAndPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("combined_coordinating_and_primary_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinating = System.Text.Json.JsonEncodedText.Encode("coordinating");
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingInBytes = System.Text.Json.JsonEncodedText.Encode("coordinating_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingRejections = System.Text.Json.JsonEncodedText.Encode("coordinating_rejections");
-	private static readonly System.Text.Json.JsonEncodedText PropLargeOperationRejections = System.Text.Json.JsonEncodedText.Encode("large_operation_rejections");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryDocumentRejections = System.Text.Json.JsonEncodedText.Encode("primary_document_rejections");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("primary_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryRejections = System.Text.Json.JsonEncodedText.Encode("primary_rejections");
-	private static readonly System.Text.Json.JsonEncodedText PropReplica = System.Text.Json.JsonEncodedText.Encode("replica");
-	private static readonly System.Text.Json.JsonEncodedText PropReplicaInBytes = System.Text.Json.JsonEncodedText.Encode("replica_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropReplicaRejections = System.Text.Json.JsonEncodedText.Encode("replica_rejections");
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllInBytes = System.Text.Json.JsonEncodedText.Encode("all_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCombinedCoordinatingAndPrimary = System.Text.Json.JsonEncodedText.Encode("combined_coordinating_and_primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCombinedCoordinatingAndPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("combined_coordinating_and_primary_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinating = System.Text.Json.JsonEncodedText.Encode("coordinating"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingInBytes = System.Text.Json.JsonEncodedText.Encode("coordinating_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingRejections = System.Text.Json.JsonEncodedText.Encode("coordinating_rejections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLargeOperationRejections = System.Text.Json.JsonEncodedText.Encode("large_operation_rejections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryDocumentRejections = System.Text.Json.JsonEncodedText.Encode("primary_document_rejections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("primary_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryRejections = System.Text.Json.JsonEncodedText.Encode("primary_rejections"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplica = System.Text.Json.JsonEncodedText.Encode("replica"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplicaInBytes = System.Text.Json.JsonEncodedText.Encode("replica_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplicaRejections = System.Text.Json.JsonEncodedText.Encode("replica_rejections"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.PressureMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

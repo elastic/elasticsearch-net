@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class AggregationBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregation = System.Text.Json.JsonEncodedText.Encode("build_aggregation");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregationCount = System.Text.Json.JsonEncodedText.Encode("build_aggregation_count");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollector = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollectorCount = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCollect = System.Text.Json.JsonEncodedText.Encode("collect");
-	private static readonly System.Text.Json.JsonEncodedText PropCollectCount = System.Text.Json.JsonEncodedText.Encode("collect_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialize = System.Text.Json.JsonEncodedText.Encode("initialize");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializeCount = System.Text.Json.JsonEncodedText.Encode("initialize_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPostCollection = System.Text.Json.JsonEncodedText.Encode("post_collection");
-	private static readonly System.Text.Json.JsonEncodedText PropPostCollectionCount = System.Text.Json.JsonEncodedText.Encode("post_collection_count");
-	private static readonly System.Text.Json.JsonEncodedText PropReduce = System.Text.Json.JsonEncodedText.Encode("reduce");
-	private static readonly System.Text.Json.JsonEncodedText PropReduceCount = System.Text.Json.JsonEncodedText.Encode("reduce_count");
+	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregation = System.Text.Json.JsonEncodedText.Encode("build_aggregation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildAggregationCount = System.Text.Json.JsonEncodedText.Encode("build_aggregation_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollector = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildLeafCollectorCount = System.Text.Json.JsonEncodedText.Encode("build_leaf_collector_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollect = System.Text.Json.JsonEncodedText.Encode("collect"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollectCount = System.Text.Json.JsonEncodedText.Encode("collect_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitialize = System.Text.Json.JsonEncodedText.Encode("initialize"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializeCount = System.Text.Json.JsonEncodedText.Encode("initialize_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPostCollection = System.Text.Json.JsonEncodedText.Encode("post_collection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPostCollectionCount = System.Text.Json.JsonEncodedText.Encode("post_collection_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReduce = System.Text.Json.JsonEncodedText.Encode("reduce"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReduceCount = System.Text.Json.JsonEncodedText.Encode("reduce_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

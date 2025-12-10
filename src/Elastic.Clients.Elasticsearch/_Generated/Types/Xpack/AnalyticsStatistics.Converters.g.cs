@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class AnalyticsStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoxplotUsage = System.Text.Json.JsonEncodedText.Encode("boxplot_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeCardinalityUsage = System.Text.Json.JsonEncodedText.Encode("cumulative_cardinality_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropMovingPercentilesUsage = System.Text.Json.JsonEncodedText.Encode("moving_percentiles_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropMultiTermsUsage = System.Text.Json.JsonEncodedText.Encode("multi_terms_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizeUsage = System.Text.Json.JsonEncodedText.Encode("normalize_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropRateUsage = System.Text.Json.JsonEncodedText.Encode("rate_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropStringStatsUsage = System.Text.Json.JsonEncodedText.Encode("string_stats_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropTopMetricsUsage = System.Text.Json.JsonEncodedText.Encode("top_metrics_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropTTestUsage = System.Text.Json.JsonEncodedText.Encode("t_test_usage");
+	private static readonly System.Text.Json.JsonEncodedText PropBoxplotUsage = System.Text.Json.JsonEncodedText.Encode("boxplot_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeCardinalityUsage = System.Text.Json.JsonEncodedText.Encode("cumulative_cardinality_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMovingPercentilesUsage = System.Text.Json.JsonEncodedText.Encode("moving_percentiles_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMultiTermsUsage = System.Text.Json.JsonEncodedText.Encode("multi_terms_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizeUsage = System.Text.Json.JsonEncodedText.Encode("normalize_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateUsage = System.Text.Json.JsonEncodedText.Encode("rate_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStringStatsUsage = System.Text.Json.JsonEncodedText.Encode("string_stats_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopMetricsUsage = System.Text.Json.JsonEncodedText.Encode("top_metrics_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTTestUsage = System.Text.Json.JsonEncodedText.Encode("t_test_usage"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.AnalyticsStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

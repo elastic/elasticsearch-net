@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SlowlogSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLevel = System.Text.Json.JsonEncodedText.Encode("level");
-	private static readonly System.Text.Json.JsonEncodedText PropReformat = System.Text.Json.JsonEncodedText.Encode("reformat");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropLevel = System.Text.Json.JsonEncodedText.Encode("level"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReformat = System.Text.Json.JsonEncodedText.Encode("reformat"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreshold = System.Text.Json.JsonEncodedText.Encode("threshold"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

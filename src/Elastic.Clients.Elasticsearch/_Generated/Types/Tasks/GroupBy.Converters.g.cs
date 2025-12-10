@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Tasks.Json;
 
 public sealed partial class GroupByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.GroupBy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
-	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
-	private static readonly System.Text.Json.JsonEncodedText MemberParents = System.Text.Json.JsonEncodedText.Encode("parents");
+	private static readonly System.Text.Json.JsonEncodedText MemberNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberParents = System.Text.Json.JsonEncodedText.Encode("parents"u8);
 
 	public override Elastic.Clients.Elasticsearch.Tasks.GroupBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

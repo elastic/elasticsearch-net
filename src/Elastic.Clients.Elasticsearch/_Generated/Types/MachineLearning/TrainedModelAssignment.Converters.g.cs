@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelAssignmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropAssignmentState = System.Text.Json.JsonEncodedText.Encode("assignment_state");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAssignedAllocations = System.Text.Json.JsonEncodedText.Encode("max_assigned_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutingTable = System.Text.Json.JsonEncodedText.Encode("routing_table");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskParameters = System.Text.Json.JsonEncodedText.Encode("task_parameters");
+	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentState = System.Text.Json.JsonEncodedText.Encode("assignment_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAssignedAllocations = System.Text.Json.JsonEncodedText.Encode("max_assigned_allocations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoutingTable = System.Text.Json.JsonEncodedText.Encode("routing_table"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskParameters = System.Text.Json.JsonEncodedText.Encode("task_parameters"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

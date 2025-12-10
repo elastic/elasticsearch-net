@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class IncludeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Include>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
-	private static readonly System.Text.Json.JsonEncodedText MemberDefinitionStatus = System.Text.Json.JsonEncodedText.Encode("definition_status");
-	private static readonly System.Text.Json.JsonEncodedText MemberFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline");
-	private static readonly System.Text.Json.JsonEncodedText MemberHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters");
-	private static readonly System.Text.Json.JsonEncodedText MemberTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance");
+	private static readonly System.Text.Json.JsonEncodedText MemberDefinition = System.Text.Json.JsonEncodedText.Encode("definition"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDefinitionStatus = System.Text.Json.JsonEncodedText.Encode("definition_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Include Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class PolicyTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.PolicyType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match");
-	private static readonly System.Text.Json.JsonEncodedText MemberMatch = System.Text.Json.JsonEncodedText.Encode("match");
-	private static readonly System.Text.Json.JsonEncodedText MemberRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText MemberGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMatch = System.Text.Json.JsonEncodedText.Encode("match"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRange = System.Text.Json.JsonEncodedText.Encode("range"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.PolicyType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

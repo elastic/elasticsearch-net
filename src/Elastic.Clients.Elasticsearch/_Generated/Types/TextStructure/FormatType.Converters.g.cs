@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.TextStructure.Json;
 
 public sealed partial class FormatTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FormatType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDelimited = System.Text.Json.JsonEncodedText.Encode("delimited");
-	private static readonly System.Text.Json.JsonEncodedText MemberNdjson = System.Text.Json.JsonEncodedText.Encode("ndjson");
-	private static readonly System.Text.Json.JsonEncodedText MemberSemiStructuredText = System.Text.Json.JsonEncodedText.Encode("semi_structured_text");
-	private static readonly System.Text.Json.JsonEncodedText MemberXml = System.Text.Json.JsonEncodedText.Encode("xml");
+	private static readonly System.Text.Json.JsonEncodedText MemberDelimited = System.Text.Json.JsonEncodedText.Encode("delimited"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNdjson = System.Text.Json.JsonEncodedText.Encode("ndjson"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSemiStructuredText = System.Text.Json.JsonEncodedText.Encode("semi_structured_text"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberXml = System.Text.Json.JsonEncodedText.Encode("xml"u8);
 
 	public override Elastic.Clients.Elasticsearch.TextStructure.FormatType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

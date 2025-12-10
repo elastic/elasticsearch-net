@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class SerializedClusterStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDiffs = System.Text.Json.JsonEncodedText.Encode("diffs");
-	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states");
+	private static readonly System.Text.Json.JsonEncodedText PropDiffs = System.Text.Json.JsonEncodedText.Encode("diffs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.SerializedClusterState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class RepositoryIntegrityIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCorrupted = System.Text.Json.JsonEncodedText.Encode("corrupted");
-	private static readonly System.Text.Json.JsonEncodedText PropCorruptedRepositories = System.Text.Json.JsonEncodedText.Encode("corrupted_repositories");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalRepositories = System.Text.Json.JsonEncodedText.Encode("total_repositories");
+	private static readonly System.Text.Json.JsonEncodedText PropCorrupted = System.Text.Json.JsonEncodedText.Encode("corrupted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCorruptedRepositories = System.Text.Json.JsonEncodedText.Encode("corrupted_repositories"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalRepositories = System.Text.Json.JsonEncodedText.Encode("total_repositories"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

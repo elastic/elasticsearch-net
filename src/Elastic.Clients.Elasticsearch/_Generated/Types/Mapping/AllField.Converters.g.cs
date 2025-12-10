@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class AllFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.AllField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropOmitNorms = System.Text.Json.JsonEncodedText.Encode("omit_norms");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
-	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorOffsets = System.Text.Json.JsonEncodedText.Encode("store_term_vector_offsets");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorPayloads = System.Text.Json.JsonEncodedText.Encode("store_term_vector_payloads");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorPositions = System.Text.Json.JsonEncodedText.Encode("store_term_vector_positions");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectors = System.Text.Json.JsonEncodedText.Encode("store_term_vectors");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOmitNorms = System.Text.Json.JsonEncodedText.Encode("omit_norms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorOffsets = System.Text.Json.JsonEncodedText.Encode("store_term_vector_offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorPayloads = System.Text.Json.JsonEncodedText.Encode("store_term_vector_payloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectorPositions = System.Text.Json.JsonEncodedText.Encode("store_term_vector_positions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreTermVectors = System.Text.Json.JsonEncodedText.Encode("store_term_vectors"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.AllField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

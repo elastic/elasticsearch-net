@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class EqlFeaturesKeysConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesKeys>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysFiveOrMore = System.Text.Json.JsonEncodedText.Encode("join_keys_five_or_more");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysFour = System.Text.Json.JsonEncodedText.Encode("join_keys_four");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysOne = System.Text.Json.JsonEncodedText.Encode("join_keys_one");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysThree = System.Text.Json.JsonEncodedText.Encode("join_keys_three");
-	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysTwo = System.Text.Json.JsonEncodedText.Encode("join_keys_two");
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysFiveOrMore = System.Text.Json.JsonEncodedText.Encode("join_keys_five_or_more"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysFour = System.Text.Json.JsonEncodedText.Encode("join_keys_four"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysOne = System.Text.Json.JsonEncodedText.Encode("join_keys_one"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysThree = System.Text.Json.JsonEncodedText.Encode("join_keys_three"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJoinKeysTwo = System.Text.Json.JsonEncodedText.Encode("join_keys_two"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesKeys Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

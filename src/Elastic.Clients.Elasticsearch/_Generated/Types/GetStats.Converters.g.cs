@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GetStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GetStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
-	private static readonly System.Text.Json.JsonEncodedText PropExistsTime = System.Text.Json.JsonEncodedText.Encode("exists_time");
-	private static readonly System.Text.Json.JsonEncodedText PropExistsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("exists_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropExistsTotal = System.Text.Json.JsonEncodedText.Encode("exists_total");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingTime = System.Text.Json.JsonEncodedText.Encode("missing_time");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingTimeInMillis = System.Text.Json.JsonEncodedText.Encode("missing_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingTotal = System.Text.Json.JsonEncodedText.Encode("missing_total");
-	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTime = System.Text.Json.JsonEncodedText.Encode("exists_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("exists_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExistsTotal = System.Text.Json.JsonEncodedText.Encode("exists_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTime = System.Text.Json.JsonEncodedText.Encode("missing_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTimeInMillis = System.Text.Json.JsonEncodedText.Encode("missing_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingTotal = System.Text.Json.JsonEncodedText.Encode("missing_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.GetStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

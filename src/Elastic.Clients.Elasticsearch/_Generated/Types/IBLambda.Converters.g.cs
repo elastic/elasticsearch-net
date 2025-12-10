@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class IBLambdaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IBLambda>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDf = System.Text.Json.JsonEncodedText.Encode("df");
-	private static readonly System.Text.Json.JsonEncodedText MemberTtf = System.Text.Json.JsonEncodedText.Encode("ttf");
+	private static readonly System.Text.Json.JsonEncodedText MemberDf = System.Text.Json.JsonEncodedText.Encode("df"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTtf = System.Text.Json.JsonEncodedText.Encode("ttf"u8);
 
 	public override Elastic.Clients.Elasticsearch.IBLambda Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

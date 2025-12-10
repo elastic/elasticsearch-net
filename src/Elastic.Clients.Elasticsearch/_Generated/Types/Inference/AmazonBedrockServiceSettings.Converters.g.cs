@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AmazonBedrockServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessKey = System.Text.Json.JsonEncodedText.Encode("access_key");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
-	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropRegion = System.Text.Json.JsonEncodedText.Encode("region");
-	private static readonly System.Text.Json.JsonEncodedText PropSecretKey = System.Text.Json.JsonEncodedText.Encode("secret_key");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessKey = System.Text.Json.JsonEncodedText.Encode("access_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegion = System.Text.Json.JsonEncodedText.Encode("region"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecretKey = System.Text.Json.JsonEncodedText.Encode("secret_key"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

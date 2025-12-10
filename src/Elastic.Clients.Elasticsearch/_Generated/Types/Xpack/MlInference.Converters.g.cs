@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlInferenceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInference>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeployments = System.Text.Json.JsonEncodedText.Encode("deployments");
-	private static readonly System.Text.Json.JsonEncodedText PropIngestProcessors = System.Text.Json.JsonEncodedText.Encode("ingest_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainedModels = System.Text.Json.JsonEncodedText.Encode("trained_models");
+	private static readonly System.Text.Json.JsonEncodedText PropDeployments = System.Text.Json.JsonEncodedText.Encode("deployments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngestProcessors = System.Text.Json.JsonEncodedText.Encode("ingest_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrainedModels = System.Text.Json.JsonEncodedText.Encode("trained_models"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlInference Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class SignificantTextAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackgroundFilter = System.Text.Json.JsonEncodedText.Encode("background_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropChiSquare = System.Text.Json.JsonEncodedText.Encode("chi_square");
-	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFilterDuplicateText = System.Text.Json.JsonEncodedText.Encode("filter_duplicate_text");
-	private static readonly System.Text.Json.JsonEncodedText PropGnd = System.Text.Json.JsonEncodedText.Encode("gnd");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropJlh = System.Text.Json.JsonEncodedText.Encode("jlh");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMutualInformation = System.Text.Json.JsonEncodedText.Encode("mutual_information");
-	private static readonly System.Text.Json.JsonEncodedText PropPercentage = System.Text.Json.JsonEncodedText.Encode("percentage");
-	private static readonly System.Text.Json.JsonEncodedText PropScriptHeuristic = System.Text.Json.JsonEncodedText.Encode("script_heuristic");
-	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceFields = System.Text.Json.JsonEncodedText.Encode("source_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundFilter = System.Text.Json.JsonEncodedText.Encode("background_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropChiSquare = System.Text.Json.JsonEncodedText.Encode("chi_square"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExclude = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilterDuplicateText = System.Text.Json.JsonEncodedText.Encode("filter_duplicate_text"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGnd = System.Text.Json.JsonEncodedText.Encode("gnd"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJlh = System.Text.Json.JsonEncodedText.Encode("jlh"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMutualInformation = System.Text.Json.JsonEncodedText.Encode("mutual_information"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPercentage = System.Text.Json.JsonEncodedText.Encode("percentage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScriptHeuristic = System.Text.Json.JsonEncodedText.Encode("script_heuristic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceFields = System.Text.Json.JsonEncodedText.Encode("source_fields"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,19 +25,19 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class ActionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocate = System.Text.Json.JsonEncodedText.Encode("allocate");
-	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete");
-	private static readonly System.Text.Json.JsonEncodedText PropDownsample = System.Text.Json.JsonEncodedText.Encode("downsample");
-	private static readonly System.Text.Json.JsonEncodedText PropForcemerge = System.Text.Json.JsonEncodedText.Encode("forcemerge");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeze = System.Text.Json.JsonEncodedText.Encode("freeze");
-	private static readonly System.Text.Json.JsonEncodedText PropMigrate = System.Text.Json.JsonEncodedText.Encode("migrate");
-	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
-	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("searchable_snapshot");
-	private static readonly System.Text.Json.JsonEncodedText PropSetPriority = System.Text.Json.JsonEncodedText.Encode("set_priority");
-	private static readonly System.Text.Json.JsonEncodedText PropShrink = System.Text.Json.JsonEncodedText.Encode("shrink");
-	private static readonly System.Text.Json.JsonEncodedText PropUnfollow = System.Text.Json.JsonEncodedText.Encode("unfollow");
-	private static readonly System.Text.Json.JsonEncodedText PropWaitForSnapshot = System.Text.Json.JsonEncodedText.Encode("wait_for_snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocate = System.Text.Json.JsonEncodedText.Encode("allocate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelete = System.Text.Json.JsonEncodedText.Encode("delete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsample = System.Text.Json.JsonEncodedText.Encode("downsample"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForcemerge = System.Text.Json.JsonEncodedText.Encode("forcemerge"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeze = System.Text.Json.JsonEncodedText.Encode("freeze"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMigrate = System.Text.Json.JsonEncodedText.Encode("migrate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollover = System.Text.Json.JsonEncodedText.Encode("rollover"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchableSnapshot = System.Text.Json.JsonEncodedText.Encode("searchable_snapshot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSetPriority = System.Text.Json.JsonEncodedText.Encode("set_priority"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShrink = System.Text.Json.JsonEncodedText.Encode("shrink"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnfollow = System.Text.Json.JsonEncodedText.Encode("unfollow"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForSnapshot = System.Text.Json.JsonEncodedText.Encode("wait_for_snapshot"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

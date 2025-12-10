@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardPathConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardPath>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataPath = System.Text.Json.JsonEncodedText.Encode("data_path");
-	private static readonly System.Text.Json.JsonEncodedText PropIsCustomDataPath = System.Text.Json.JsonEncodedText.Encode("is_custom_data_path");
-	private static readonly System.Text.Json.JsonEncodedText PropStatePath = System.Text.Json.JsonEncodedText.Encode("state_path");
+	private static readonly System.Text.Json.JsonEncodedText PropDataPath = System.Text.Json.JsonEncodedText.Encode("data_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsCustomDataPath = System.Text.Json.JsonEncodedText.Encode("is_custom_data_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatePath = System.Text.Json.JsonEncodedText.Encode("state_path"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardPath Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

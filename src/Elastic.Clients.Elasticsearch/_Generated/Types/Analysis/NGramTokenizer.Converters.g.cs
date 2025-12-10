@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class NGramTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCustomTokenChars = System.Text.Json.JsonEncodedText.Encode("custom_token_chars");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxGram = System.Text.Json.JsonEncodedText.Encode("max_gram");
-	private static readonly System.Text.Json.JsonEncodedText PropMinGram = System.Text.Json.JsonEncodedText.Encode("min_gram");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenChars = System.Text.Json.JsonEncodedText.Encode("token_chars");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomTokenChars = System.Text.Json.JsonEncodedText.Encode("custom_token_chars"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxGram = System.Text.Json.JsonEncodedText.Encode("max_gram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinGram = System.Text.Json.JsonEncodedText.Encode("min_gram"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenChars = System.Text.Json.JsonEncodedText.Encode("token_chars"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.NGramTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

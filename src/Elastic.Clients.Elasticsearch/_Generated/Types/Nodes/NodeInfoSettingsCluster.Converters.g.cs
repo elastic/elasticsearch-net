@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsClusterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeprecationIndexing = System.Text.Json.JsonEncodedText.Encode("deprecation_indexing");
-	private static readonly System.Text.Json.JsonEncodedText PropElection = System.Text.Json.JsonEncodedText.Encode("election");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialMasterNodes = System.Text.Json.JsonEncodedText.Encode("initial_master_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecationIndexing = System.Text.Json.JsonEncodedText.Encode("deprecation_indexing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropElection = System.Text.Json.JsonEncodedText.Encode("election"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitialMasterNodes = System.Text.Json.JsonEncodedText.Encode("initial_master_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

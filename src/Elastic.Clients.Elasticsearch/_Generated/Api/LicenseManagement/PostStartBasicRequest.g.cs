@@ -27,7 +27,7 @@ public sealed partial class PostStartBasicRequestParameters : Elastic.Transport.
 {
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -94,7 +94,7 @@ public sealed partial class PostStartBasicRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -152,7 +152,7 @@ public readonly partial struct PostStartBasicRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor Acknowledge(bool? value = true)

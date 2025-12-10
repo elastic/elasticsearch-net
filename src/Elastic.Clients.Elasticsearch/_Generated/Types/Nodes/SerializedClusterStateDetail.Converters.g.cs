@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class SerializedClusterStateDetailConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCompressedSize = System.Text.Json.JsonEncodedText.Encode("compressed_size");
-	private static readonly System.Text.Json.JsonEncodedText PropCompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("compressed_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSize = System.Text.Json.JsonEncodedText.Encode("uncompressed_size");
-	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncompressed_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedSize = System.Text.Json.JsonEncodedText.Encode("compressed_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("compressed_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSize = System.Text.Json.JsonEncodedText.Encode("uncompressed_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUncompressedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("uncompressed_size_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.SerializedClusterStateDetail Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

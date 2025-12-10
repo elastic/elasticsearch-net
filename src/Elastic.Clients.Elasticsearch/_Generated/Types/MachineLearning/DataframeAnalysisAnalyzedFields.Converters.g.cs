@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class DataTierPhaseStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeAvgBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_avg_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMadBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_mad_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMedianBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_median_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimarySizeBytes = System.Text.Json.JsonEncodedText.Encode("primary_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalShardCount = System.Text.Json.JsonEncodedText.Encode("total_shard_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeCount = System.Text.Json.JsonEncodedText.Encode("node_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeAvgBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_avg_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMadBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_mad_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardSizeMedianBytes = System.Text.Json.JsonEncodedText.Encode("primary_shard_size_median_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimarySizeBytes = System.Text.Json.JsonEncodedText.Encode("primary_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalShardCount = System.Text.Json.JsonEncodedText.Encode("total_shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

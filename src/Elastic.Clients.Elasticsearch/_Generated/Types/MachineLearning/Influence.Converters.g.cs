@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class InfluenceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Influence>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldName = System.Text.Json.JsonEncodedText.Encode("influencer_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldValues = System.Text.Json.JsonEncodedText.Encode("influencer_field_values");
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldName = System.Text.Json.JsonEncodedText.Encode("influencer_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInfluencerFieldValues = System.Text.Json.JsonEncodedText.Encode("influencer_field_values"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Influence Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

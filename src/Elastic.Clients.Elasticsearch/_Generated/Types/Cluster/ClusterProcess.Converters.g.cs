@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterProcessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcess>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors");
+	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

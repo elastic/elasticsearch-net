@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class RolloverActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAge = System.Text.Json.JsonEncodedText.Encode("max_age");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardDocs = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSize = System.Text.Json.JsonEncodedText.Encode("max_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocs = System.Text.Json.JsonEncodedText.Encode("min_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropMinPrimaryShardDocs = System.Text.Json.JsonEncodedText.Encode("min_primary_shard_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropMinPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("min_primary_shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMinSize = System.Text.Json.JsonEncodedText.Encode("min_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAge = System.Text.Json.JsonEncodedText.Encode("max_age"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardDocs = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSize = System.Text.Json.JsonEncodedText.Encode("max_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinAge = System.Text.Json.JsonEncodedText.Encode("min_age"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocs = System.Text.Json.JsonEncodedText.Encode("min_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinPrimaryShardDocs = System.Text.Json.JsonEncodedText.Encode("min_primary_shard_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("min_primary_shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinSize = System.Text.Json.JsonEncodedText.Encode("min_size"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

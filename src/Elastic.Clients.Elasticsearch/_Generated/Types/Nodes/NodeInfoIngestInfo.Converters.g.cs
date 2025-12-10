@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoIngestInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDownloader = System.Text.Json.JsonEncodedText.Encode("downloader");
+	private static readonly System.Text.Json.JsonEncodedText PropDownloader = System.Text.Json.JsonEncodedText.Encode("downloader"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

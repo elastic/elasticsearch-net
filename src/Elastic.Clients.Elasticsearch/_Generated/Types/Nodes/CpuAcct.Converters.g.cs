@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class CpuAcctConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.CpuAcct>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group");
-	private static readonly System.Text.Json.JsonEncodedText PropUsageNanos = System.Text.Json.JsonEncodedText.Encode("usage_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropControlGroup = System.Text.Json.JsonEncodedText.Encode("control_group"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsageNanos = System.Text.Json.JsonEncodedText.Encode("usage_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.CpuAcct Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

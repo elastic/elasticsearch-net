@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MinimumIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day");
-	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour");
-	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute");
-	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month");
-	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
-	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year");
+	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

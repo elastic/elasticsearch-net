@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RetriesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Retries>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
 
 	public override Elastic.Clients.Elasticsearch.Retries Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

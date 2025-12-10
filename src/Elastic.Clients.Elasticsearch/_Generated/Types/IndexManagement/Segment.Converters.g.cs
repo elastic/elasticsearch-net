@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SegmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Segment>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
-	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed");
-	private static readonly System.Text.Json.JsonEncodedText PropCompound = System.Text.Json.JsonEncodedText.Encode("compound");
-	private static readonly System.Text.Json.JsonEncodedText PropDeletedDocs = System.Text.Json.JsonEncodedText.Encode("deleted_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation");
-	private static readonly System.Text.Json.JsonEncodedText PropNumDocs = System.Text.Json.JsonEncodedText.Encode("num_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCommitted = System.Text.Json.JsonEncodedText.Encode("committed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompound = System.Text.Json.JsonEncodedText.Encode("compound"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeletedDocs = System.Text.Json.JsonEncodedText.Encode("deleted_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumDocs = System.Text.Json.JsonEncodedText.Encode("num_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSizeInBytes = System.Text.Json.JsonEncodedText.Encode("size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Segment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

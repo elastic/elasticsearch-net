@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class DFRAfterEffectConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DFRAfterEffect>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberB = System.Text.Json.JsonEncodedText.Encode("b");
-	private static readonly System.Text.Json.JsonEncodedText MemberL = System.Text.Json.JsonEncodedText.Encode("l");
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
+	private static readonly System.Text.Json.JsonEncodedText MemberB = System.Text.Json.JsonEncodedText.Encode("b"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberL = System.Text.Json.JsonEncodedText.Encode("l"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no"u8);
 
 	public override Elastic.Clients.Elasticsearch.DFRAfterEffect Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

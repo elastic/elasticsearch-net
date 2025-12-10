@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class ShardsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDone = System.Text.Json.JsonEncodedText.Encode("done");
-	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText PropFinalizing = System.Text.Json.JsonEncodedText.Encode("finalizing");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializing = System.Text.Json.JsonEncodedText.Encode("initializing");
-	private static readonly System.Text.Json.JsonEncodedText PropStarted = System.Text.Json.JsonEncodedText.Encode("started");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropDone = System.Text.Json.JsonEncodedText.Encode("done"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFinalizing = System.Text.Json.JsonEncodedText.Encode("finalizing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializing = System.Text.Json.JsonEncodedText.Encode("initializing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStarted = System.Text.Json.JsonEncodedText.Encode("started"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

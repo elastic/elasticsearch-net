@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class IlmIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIlmStatus = System.Text.Json.JsonEncodedText.Encode("ilm_status");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies");
-	private static readonly System.Text.Json.JsonEncodedText PropStagnatingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropIlmStatus = System.Text.Json.JsonEncodedText.Encode("ilm_status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStagnatingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_indices"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

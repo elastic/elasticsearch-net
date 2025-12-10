@@ -286,6 +286,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NodesStats = new ApiUrls(new[] { "_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}" });
 	internal static ApiUrls NodesUsage = new ApiUrls(new[] { "_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}" });
 	internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "_bulk", "{index}/_bulk" });
+	internal static ApiUrls NoNamespaceCapabilities = new ApiUrls(new[] { "_capabilities" });
 	internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "_search/scroll" });
 	internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "_pit" });
 	internal static ApiUrls NoNamespaceCount = new ApiUrls(new[] { "_count", "{index}/_count" });
@@ -470,6 +471,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls TextStructureFindMessageStructure = new ApiUrls(new[] { "_text_structure/find_message_structure" });
 	internal static ApiUrls TextStructureTestGrokPattern = new ApiUrls(new[] { "_text_structure/test_grok_pattern" });
 	internal static ApiUrls TransformManagementDeleteTransform = new ApiUrls(new[] { "_transform/{transform_id}" });
+	internal static ApiUrls TransformManagementGetNodeStats = new ApiUrls(new[] { "_transform/_node_stats" });
 	internal static ApiUrls TransformManagementGetTransform = new ApiUrls(new[] { "_transform/{transform_id}", "_transform" });
 	internal static ApiUrls TransformManagementGetTransformStats = new ApiUrls(new[] { "_transform/{transform_id}/_stats" });
 	internal static ApiUrls TransformManagementPreviewTransform = new ApiUrls(new[] { "_transform/{transform_id}/_preview", "_transform/_preview" });

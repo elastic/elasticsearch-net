@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class GarbageCollectorTotalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCollectionCount = System.Text.Json.JsonEncodedText.Encode("collection_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCollectionTime = System.Text.Json.JsonEncodedText.Encode("collection_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCollectionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("collection_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionCount = System.Text.Json.JsonEncodedText.Encode("collection_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionTime = System.Text.Json.JsonEncodedText.Encode("collection_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCollectionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("collection_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

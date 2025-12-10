@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class XlmRobertaTokenizationConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDoLowerCase = System.Text.Json.JsonEncodedText.Encode("do_lower_case");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSequenceLength = System.Text.Json.JsonEncodedText.Encode("max_sequence_length");
-	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span");
-	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate");
-	private static readonly System.Text.Json.JsonEncodedText PropWithSpecialTokens = System.Text.Json.JsonEncodedText.Encode("with_special_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropDoLowerCase = System.Text.Json.JsonEncodedText.Encode("do_lower_case"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSequenceLength = System.Text.Json.JsonEncodedText.Encode("max_sequence_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWithSpecialTokens = System.Text.Json.JsonEncodedText.Encode("with_special_tokens"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class InvertedIndexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets");
-	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads");
-	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions");
-	private static readonly System.Text.Json.JsonEncodedText PropPostings = System.Text.Json.JsonEncodedText.Encode("postings");
-	private static readonly System.Text.Json.JsonEncodedText PropProximity = System.Text.Json.JsonEncodedText.Encode("proximity");
-	private static readonly System.Text.Json.JsonEncodedText PropTermFrequencies = System.Text.Json.JsonEncodedText.Encode("term_frequencies");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText PropOffsets = System.Text.Json.JsonEncodedText.Encode("offsets"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPayloads = System.Text.Json.JsonEncodedText.Encode("payloads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPositions = System.Text.Json.JsonEncodedText.Encode("positions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPostings = System.Text.Json.JsonEncodedText.Encode("postings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProximity = System.Text.Json.JsonEncodedText.Encode("proximity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermFrequencies = System.Text.Json.JsonEncodedText.Encode("term_frequencies"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

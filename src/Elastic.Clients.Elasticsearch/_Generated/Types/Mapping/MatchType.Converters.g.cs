@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class MatchTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.MatchType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberRegex = System.Text.Json.JsonEncodedText.Encode("regex");
-	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple");
+	private static readonly System.Text.Json.JsonEncodedText MemberRegex = System.Text.Json.JsonEncodedText.Encode("regex"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.MatchType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

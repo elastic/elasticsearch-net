@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class ThinkingConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ThinkingConfig>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropThinkingBudget = System.Text.Json.JsonEncodedText.Encode("thinking_budget");
+	private static readonly System.Text.Json.JsonEncodedText PropThinkingBudget = System.Text.Json.JsonEncodedText.Encode("thinking_budget"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.ThinkingConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

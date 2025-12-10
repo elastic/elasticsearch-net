@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DetectorReadConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectorDescription = System.Text.Json.JsonEncodedText.Encode("detector_description");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index");
-	private static readonly System.Text.Json.JsonEncodedText PropExcludeFrequent = System.Text.Json.JsonEncodedText.Encode("exclude_frequent");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
-	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropUseNull = System.Text.Json.JsonEncodedText.Encode("use_null");
+	private static readonly System.Text.Json.JsonEncodedText PropByFieldName = System.Text.Json.JsonEncodedText.Encode("by_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorDescription = System.Text.Json.JsonEncodedText.Encode("detector_description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeFrequent = System.Text.Json.JsonEncodedText.Encode("exclude_frequent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldName = System.Text.Json.JsonEncodedText.Encode("field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverFieldName = System.Text.Json.JsonEncodedText.Encode("over_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUseNull = System.Text.Json.JsonEncodedText.Encode("use_null"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

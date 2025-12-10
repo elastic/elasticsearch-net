@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class VerifyRepositoryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

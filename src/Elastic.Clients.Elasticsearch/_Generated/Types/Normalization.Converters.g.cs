@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class NormalizationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Normalization>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberH1 = System.Text.Json.JsonEncodedText.Encode("h1");
-	private static readonly System.Text.Json.JsonEncodedText MemberH2 = System.Text.Json.JsonEncodedText.Encode("h2");
-	private static readonly System.Text.Json.JsonEncodedText MemberH3 = System.Text.Json.JsonEncodedText.Encode("h3");
-	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no");
-	private static readonly System.Text.Json.JsonEncodedText MemberZ = System.Text.Json.JsonEncodedText.Encode("z");
+	private static readonly System.Text.Json.JsonEncodedText MemberH1 = System.Text.Json.JsonEncodedText.Encode("h1"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberH2 = System.Text.Json.JsonEncodedText.Encode("h2"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberH3 = System.Text.Json.JsonEncodedText.Encode("h3"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNo = System.Text.Json.JsonEncodedText.Encode("no"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberZ = System.Text.Json.JsonEncodedText.Encode("z"u8);
 
 	public override Elastic.Clients.Elasticsearch.Normalization Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

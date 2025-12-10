@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexSettingsLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndexingComplete = System.Text.Json.JsonEncodedText.Encode("indexing_complete");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropOriginationDate = System.Text.Json.JsonEncodedText.Encode("origination_date");
-	private static readonly System.Text.Json.JsonEncodedText PropParseOriginationDate = System.Text.Json.JsonEncodedText.Encode("parse_origination_date");
-	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
-	private static readonly System.Text.Json.JsonEncodedText PropRolloverAlias = System.Text.Json.JsonEncodedText.Encode("rollover_alias");
-	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexingComplete = System.Text.Json.JsonEncodedText.Encode("indexing_complete"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOriginationDate = System.Text.Json.JsonEncodedText.Encode("origination_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParseOriginationDate = System.Text.Json.JsonEncodedText.Encode("parse_origination_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRolloverAlias = System.Text.Json.JsonEncodedText.Encode("rollover_alias"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

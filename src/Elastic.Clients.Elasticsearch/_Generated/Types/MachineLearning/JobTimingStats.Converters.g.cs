@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class JobTimingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAverageBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("average_bucket_processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_bucket_processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageBucketProcessingTimePerHourMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_bucket_processing_time_per_hour_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropMaximumBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("maximum_bucket_processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("minimum_bucket_processing_time_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("total_bucket_processing_time_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropAverageBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("average_bucket_processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_bucket_processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageBucketProcessingTimePerHourMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_bucket_processing_time_per_hour_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaximumBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("maximum_bucket_processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinimumBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("minimum_bucket_processing_time_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBucketProcessingTimeMs = System.Text.Json.JsonEncodedText.Encode("total_bucket_processing_time_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

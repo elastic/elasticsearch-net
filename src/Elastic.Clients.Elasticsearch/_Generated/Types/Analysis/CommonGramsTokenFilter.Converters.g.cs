@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class CommonGramsTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCommonWords = System.Text.Json.JsonEncodedText.Encode("common_words");
-	private static readonly System.Text.Json.JsonEncodedText PropCommonWordsPath = System.Text.Json.JsonEncodedText.Encode("common_words_path");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryMode = System.Text.Json.JsonEncodedText.Encode("query_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropCommonWords = System.Text.Json.JsonEncodedText.Encode("common_words"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCommonWordsPath = System.Text.Json.JsonEncodedText.Encode("common_words_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreCase = System.Text.Json.JsonEncodedText.Encode("ignore_case"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryMode = System.Text.Json.JsonEncodedText.Encode("query_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

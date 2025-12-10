@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class SnapshotUpgradeStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed");
-	private static readonly System.Text.Json.JsonEncodedText MemberLoadingOldState = System.Text.Json.JsonEncodedText.Encode("loading_old_state");
-	private static readonly System.Text.Json.JsonEncodedText MemberSavingNewState = System.Text.Json.JsonEncodedText.Encode("saving_new_state");
-	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped");
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLoadingOldState = System.Text.Json.JsonEncodedText.Encode("loading_old_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSavingNewState = System.Text.Json.JsonEncodedText.Encode("saving_new_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStopped = System.Text.Json.JsonEncodedText.Encode("stopped"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

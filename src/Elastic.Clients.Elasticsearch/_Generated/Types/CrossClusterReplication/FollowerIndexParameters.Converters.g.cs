@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class FollowerIndexParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_write_requests");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_read_request_operation_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestSize = System.Text.Json.JsonEncodedText.Encode("max_read_request_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxRetryDelay = System.Text.Json.JsonEncodedText.Encode("max_retry_delay");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferCount = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferSize = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_size");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_write_request_operation_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestSize = System.Text.Json.JsonEncodedText.Encode("max_write_request_size");
-	private static readonly System.Text.Json.JsonEncodedText PropReadPollTimeout = System.Text.Json.JsonEncodedText.Encode("read_poll_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_write_requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_read_request_operation_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestSize = System.Text.Json.JsonEncodedText.Encode("max_read_request_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRetryDelay = System.Text.Json.JsonEncodedText.Encode("max_retry_delay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferCount = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferSize = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_write_request_operation_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestSize = System.Text.Json.JsonEncodedText.Encode("max_write_request_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadPollTimeout = System.Text.Json.JsonEncodedText.Encode("read_poll_timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

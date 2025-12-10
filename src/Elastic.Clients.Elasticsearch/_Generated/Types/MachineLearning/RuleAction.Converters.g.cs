@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class RuleActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RuleAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSkipModelUpdate = System.Text.Json.JsonEncodedText.Encode("skip_model_update");
-	private static readonly System.Text.Json.JsonEncodedText MemberSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result");
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipModelUpdate = System.Text.Json.JsonEncodedText.Encode("skip_model_update"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.RuleAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

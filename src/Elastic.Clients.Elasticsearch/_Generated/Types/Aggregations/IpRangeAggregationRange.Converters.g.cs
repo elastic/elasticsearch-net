@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class IpRangeAggregationRangeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
-	private static readonly System.Text.Json.JsonEncodedText PropMask = System.Text.Json.JsonEncodedText.Encode("mask");
-	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMask = System.Text.Json.JsonEncodedText.Encode("mask"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregationRange Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
-	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>?> propDownsampling = default;
 		LocalJsonValue<bool?> propEnabled = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -42,7 +42,7 @@ public sealed partial class DataStreamLifecycleConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, null)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ public sealed partial class DataStreamLifecycleConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
-		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, v, null));
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}

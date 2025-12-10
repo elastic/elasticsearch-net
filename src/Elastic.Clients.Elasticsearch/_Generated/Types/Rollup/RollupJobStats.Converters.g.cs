@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class RollupJobStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupJobStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("documents_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexFailures = System.Text.Json.JsonEncodedText.Encode("index_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMs = System.Text.Json.JsonEncodedText.Encode("index_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total");
-	private static readonly System.Text.Json.JsonEncodedText PropPagesProcessed = System.Text.Json.JsonEncodedText.Encode("pages_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeInMs = System.Text.Json.JsonEncodedText.Encode("processing_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTotal = System.Text.Json.JsonEncodedText.Encode("processing_total");
-	private static readonly System.Text.Json.JsonEncodedText PropRollupsIndexed = System.Text.Json.JsonEncodedText.Encode("rollups_indexed");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchFailures = System.Text.Json.JsonEncodedText.Encode("search_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchTimeInMs = System.Text.Json.JsonEncodedText.Encode("search_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchTotal = System.Text.Json.JsonEncodedText.Encode("search_total");
-	private static readonly System.Text.Json.JsonEncodedText PropTriggerCount = System.Text.Json.JsonEncodedText.Encode("trigger_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("documents_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFailures = System.Text.Json.JsonEncodedText.Encode("index_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMs = System.Text.Json.JsonEncodedText.Encode("index_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPagesProcessed = System.Text.Json.JsonEncodedText.Encode("pages_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeInMs = System.Text.Json.JsonEncodedText.Encode("processing_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTotal = System.Text.Json.JsonEncodedText.Encode("processing_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRollupsIndexed = System.Text.Json.JsonEncodedText.Encode("rollups_indexed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchFailures = System.Text.Json.JsonEncodedText.Encode("search_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchTimeInMs = System.Text.Json.JsonEncodedText.Encode("search_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchTotal = System.Text.Json.JsonEncodedText.Encode("search_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTriggerCount = System.Text.Json.JsonEncodedText.Encode("trigger_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.RollupJobStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

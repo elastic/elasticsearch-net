@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsSimilarityDfrConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAfterEffect = System.Text.Json.JsonEncodedText.Encode("after_effect");
-	private static readonly System.Text.Json.JsonEncodedText PropBasicModel = System.Text.Json.JsonEncodedText.Encode("basic_model");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalization = System.Text.Json.JsonEncodedText.Encode("normalization");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAfterEffect = System.Text.Json.JsonEncodedText.Encode("after_effect"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBasicModel = System.Text.Json.JsonEncodedText.Encode("basic_model"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNormalization = System.Text.Json.JsonEncodedText.Encode("normalization"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityDfr Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

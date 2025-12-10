@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDecay = System.Text.Json.JsonEncodedText.Encode("decay");
-	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
-	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
-	private static readonly System.Text.Json.JsonEncodedText PropScale = System.Text.Json.JsonEncodedText.Encode("scale");
+	private static readonly System.Text.Json.JsonEncodedText PropDecay = System.Text.Json.JsonEncodedText.Encode("decay"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScale = System.Text.Json.JsonEncodedText.Encode("scale"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

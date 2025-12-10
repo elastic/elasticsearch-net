@@ -87,7 +87,8 @@ public sealed partial class NodesUsageRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of node IDs or names to limit the returned information; use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes
+	/// A comma-separated list of node IDs or names to limit the returned information.
+	/// Use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
@@ -153,7 +154,8 @@ public readonly partial struct NodesUsageRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of node IDs or names to limit the returned information; use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes
+	/// A comma-separated list of node IDs or names to limit the returned information.
+	/// Use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)

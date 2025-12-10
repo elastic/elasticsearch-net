@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class StringDistanceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.StringDistance>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDamerauLevenshtein = System.Text.Json.JsonEncodedText.Encode("damerau_levenshtein");
-	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
-	private static readonly System.Text.Json.JsonEncodedText MemberJaroWinkler = System.Text.Json.JsonEncodedText.Encode("jaro_winkler");
-	private static readonly System.Text.Json.JsonEncodedText MemberLevenshtein = System.Text.Json.JsonEncodedText.Encode("levenshtein");
-	private static readonly System.Text.Json.JsonEncodedText MemberNgram = System.Text.Json.JsonEncodedText.Encode("ngram");
+	private static readonly System.Text.Json.JsonEncodedText MemberDamerauLevenshtein = System.Text.Json.JsonEncodedText.Encode("damerau_levenshtein"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberJaroWinkler = System.Text.Json.JsonEncodedText.Encode("jaro_winkler"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLevenshtein = System.Text.Json.JsonEncodedText.Encode("levenshtein"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNgram = System.Text.Json.JsonEncodedText.Encode("ngram"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.StringDistance Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

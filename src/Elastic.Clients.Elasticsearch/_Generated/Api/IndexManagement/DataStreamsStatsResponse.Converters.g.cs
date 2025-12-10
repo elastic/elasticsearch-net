@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamsStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreamCount = System.Text.Json.JsonEncodedText.Encode("data_stream_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_store_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizes = System.Text.Json.JsonEncodedText.Encode("total_store_sizes");
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamCount = System.Text.Json.JsonEncodedText.Encode("data_stream_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreams = System.Text.Json.JsonEncodedText.Encode("data_streams"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("total_store_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoreSizes = System.Text.Json.JsonEncodedText.Encode("total_store_sizes"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

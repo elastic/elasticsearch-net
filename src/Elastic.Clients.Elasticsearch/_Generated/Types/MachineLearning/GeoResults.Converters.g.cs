@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class GeoResultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GeoResults>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActualPoint = System.Text.Json.JsonEncodedText.Encode("actual_point");
-	private static readonly System.Text.Json.JsonEncodedText PropTypicalPoint = System.Text.Json.JsonEncodedText.Encode("typical_point");
+	private static readonly System.Text.Json.JsonEncodedText PropActualPoint = System.Text.Json.JsonEncodedText.Encode("actual_point"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypicalPoint = System.Text.Json.JsonEncodedText.Encode("typical_point"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.GeoResults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

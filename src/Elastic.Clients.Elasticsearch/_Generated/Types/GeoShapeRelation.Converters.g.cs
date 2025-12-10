@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GeoShapeRelationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoShapeRelation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains");
-	private static readonly System.Text.Json.JsonEncodedText MemberDisjoint = System.Text.Json.JsonEncodedText.Encode("disjoint");
-	private static readonly System.Text.Json.JsonEncodedText MemberIntersects = System.Text.Json.JsonEncodedText.Encode("intersects");
-	private static readonly System.Text.Json.JsonEncodedText MemberWithin = System.Text.Json.JsonEncodedText.Encode("within");
+	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDisjoint = System.Text.Json.JsonEncodedText.Encode("disjoint"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIntersects = System.Text.Json.JsonEncodedText.Encode("intersects"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWithin = System.Text.Json.JsonEncodedText.Encode("within"u8);
 
 	public override Elastic.Clients.Elasticsearch.GeoShapeRelation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

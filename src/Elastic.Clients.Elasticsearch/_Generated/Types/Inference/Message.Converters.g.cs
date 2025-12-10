@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class MessageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.Message>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content");
-	private static readonly System.Text.Json.JsonEncodedText PropRole = System.Text.Json.JsonEncodedText.Encode("role");
-	private static readonly System.Text.Json.JsonEncodedText PropToolCallId = System.Text.Json.JsonEncodedText.Encode("tool_call_id");
-	private static readonly System.Text.Json.JsonEncodedText PropToolCalls = System.Text.Json.JsonEncodedText.Encode("tool_calls");
+	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRole = System.Text.Json.JsonEncodedText.Encode("role"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToolCallId = System.Text.Json.JsonEncodedText.Encode("tool_call_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToolCalls = System.Text.Json.JsonEncodedText.Encode("tool_calls"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.Message Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

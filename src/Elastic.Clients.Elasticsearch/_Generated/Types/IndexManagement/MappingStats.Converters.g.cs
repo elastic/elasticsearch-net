@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class MappingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverhead = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCount = System.Text.Json.JsonEncodedText.Encode("total_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverhead = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalEstimatedOverheadInBytes = System.Text.Json.JsonEncodedText.Encode("total_estimated_overhead_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -27,7 +27,8 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -41,7 +42,7 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// Specify whether the index should be flushed after performing the operation (default: true)
+	/// Specify whether the index should be flushed after performing the operation
 	/// </para>
 	/// </summary>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
@@ -55,7 +56,7 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
+	/// The number of segments the index should be merged into (defayult: dynamic)
 	/// </para>
 	/// </summary>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
@@ -69,7 +70,7 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// Should the request wait until the force merge is completed.
+	/// Should the request wait until the force merge is completed
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -201,7 +202,8 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -215,7 +217,7 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Specify whether the index should be flushed after performing the operation (default: true)
+	/// Specify whether the index should be flushed after performing the operation
 	/// </para>
 	/// </summary>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
@@ -229,7 +231,7 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
+	/// The number of segments the index should be merged into (defayult: dynamic)
 	/// </para>
 	/// </summary>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
@@ -243,7 +245,7 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Should the request wait until the force merge is completed.
+	/// Should the request wait until the force merge is completed
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
@@ -372,7 +374,8 @@ public readonly partial struct ForcemergeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor AllowNoIndices(bool? value = true)
@@ -405,7 +408,7 @@ public readonly partial struct ForcemergeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify whether the index should be flushed after performing the operation (default: true)
+	/// Specify whether the index should be flushed after performing the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor Flush(bool? value = true)
@@ -427,7 +430,7 @@ public readonly partial struct ForcemergeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
+	/// The number of segments the index should be merged into (defayult: dynamic)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor MaxNumSegments(long? value)
@@ -449,7 +452,7 @@ public readonly partial struct ForcemergeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Should the request wait until the force merge is completed.
+	/// Should the request wait until the force merge is completed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor WaitForCompletion(bool? value = true)
@@ -637,7 +640,8 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -670,7 +674,7 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Specify whether the index should be flushed after performing the operation (default: true)
+	/// Specify whether the index should be flushed after performing the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Flush(bool? value = true)
@@ -692,7 +696,7 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
+	/// The number of segments the index should be merged into (defayult: dynamic)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> MaxNumSegments(long? value)
@@ -714,7 +718,7 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Should the request wait until the force merge is completed.
+	/// Should the request wait until the force merge is completed
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)

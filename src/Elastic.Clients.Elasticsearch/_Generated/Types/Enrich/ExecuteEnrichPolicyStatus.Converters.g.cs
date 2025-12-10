@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class ExecuteEnrichPolicyStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
-	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step");
+	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

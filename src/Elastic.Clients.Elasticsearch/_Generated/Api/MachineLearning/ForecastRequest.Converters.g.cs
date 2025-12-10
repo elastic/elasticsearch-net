@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ForecastRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDuration = System.Text.Json.JsonEncodedText.Encode("duration");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemory = System.Text.Json.JsonEncodedText.Encode("max_model_memory");
+	private static readonly System.Text.Json.JsonEncodedText PropDuration = System.Text.Json.JsonEncodedText.Encode("duration"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemory = System.Text.Json.JsonEncodedText.Encode("max_model_memory"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class OnScriptErrorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.OnScriptError>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberContinue = System.Text.Json.JsonEncodedText.Encode("continue");
-	private static readonly System.Text.Json.JsonEncodedText MemberFail = System.Text.Json.JsonEncodedText.Encode("fail");
+	private static readonly System.Text.Json.JsonEncodedText MemberContinue = System.Text.Json.JsonEncodedText.Encode("continue"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFail = System.Text.Json.JsonEncodedText.Encode("fail"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.OnScriptError Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

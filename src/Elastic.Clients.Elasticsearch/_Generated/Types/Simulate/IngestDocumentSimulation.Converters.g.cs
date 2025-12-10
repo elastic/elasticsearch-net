@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Simulate.Json;
 
 public sealed partial class IngestDocumentSimulationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEffectiveMapping = System.Text.Json.JsonEncodedText.Encode("effective_mapping");
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropExecutedPipelines = System.Text.Json.JsonEncodedText.Encode("executed_pipelines");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoredFields = System.Text.Json.JsonEncodedText.Encode("ignored_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+	private static readonly System.Text.Json.JsonEncodedText PropEffectiveMapping = System.Text.Json.JsonEncodedText.Encode("effective_mapping"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExecutedPipelines = System.Text.Json.JsonEncodedText.Encode("executed_pipelines"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoredFields = System.Text.Json.JsonEncodedText.Encode("ignored_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

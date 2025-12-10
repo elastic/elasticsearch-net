@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardsSegmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumCommittedSegments = System.Text.Json.JsonEncodedText.Encode("num_committed_segments");
-	private static readonly System.Text.Json.JsonEncodedText PropNumSearchSegments = System.Text.Json.JsonEncodedText.Encode("num_search_segments");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
+	private static readonly System.Text.Json.JsonEncodedText PropNumCommittedSegments = System.Text.Json.JsonEncodedText.Encode("num_committed_segments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumSearchSegments = System.Text.Json.JsonEncodedText.Encode("num_search_segments"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -82,7 +82,7 @@ public sealed partial class GetLifecycleRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of snapshot lifecycle policies to retrieve
+	/// A comma-separated list of snapshot lifecycle policy identifiers.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Names? PolicyId { get => P<Elastic.Clients.Elasticsearch.Names?>("policy_id"); set => PO("policy_id", value); }
@@ -137,7 +137,7 @@ public readonly partial struct GetLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of snapshot lifecycle policies to retrieve
+	/// A comma-separated list of snapshot lifecycle policy identifiers.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor PolicyId(Elastic.Clients.Elasticsearch.Names? value)

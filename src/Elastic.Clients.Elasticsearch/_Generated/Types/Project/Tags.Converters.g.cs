@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Project.Json;
 
 public sealed partial class TagsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Project.Tags>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("_alias");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
-	private static readonly System.Text.Json.JsonEncodedText PropOrganisation = System.Text.Json.JsonEncodedText.Encode("_organisation");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("_type");
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("_alias"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrganisation = System.Text.Json.JsonEncodedText.Encode("_organisation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Project.Tags Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

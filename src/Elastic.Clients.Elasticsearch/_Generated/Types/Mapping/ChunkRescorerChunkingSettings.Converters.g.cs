@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class ChunkRescorerChunkingSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxChunkSize = System.Text.Json.JsonEncodedText.Encode("max_chunk_size");
-	private static readonly System.Text.Json.JsonEncodedText PropOverlap = System.Text.Json.JsonEncodedText.Encode("overlap");
-	private static readonly System.Text.Json.JsonEncodedText PropSentenceOverlap = System.Text.Json.JsonEncodedText.Encode("sentence_overlap");
-	private static readonly System.Text.Json.JsonEncodedText PropSeparatorGroup = System.Text.Json.JsonEncodedText.Encode("separator_group");
-	private static readonly System.Text.Json.JsonEncodedText PropSeparators = System.Text.Json.JsonEncodedText.Encode("separators");
-	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChunkSize = System.Text.Json.JsonEncodedText.Encode("max_chunk_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverlap = System.Text.Json.JsonEncodedText.Encode("overlap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSentenceOverlap = System.Text.Json.JsonEncodedText.Encode("sentence_overlap"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeparatorGroup = System.Text.Json.JsonEncodedText.Encode("separator_group"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeparators = System.Text.Json.JsonEncodedText.Encode("separators"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.ChunkRescorerChunkingSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

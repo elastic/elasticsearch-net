@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class StandardDeviationBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower");
-	private static readonly System.Text.Json.JsonEncodedText PropLowerPopulation = System.Text.Json.JsonEncodedText.Encode("lower_population");
-	private static readonly System.Text.Json.JsonEncodedText PropLowerSampling = System.Text.Json.JsonEncodedText.Encode("lower_sampling");
-	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper");
-	private static readonly System.Text.Json.JsonEncodedText PropUpperPopulation = System.Text.Json.JsonEncodedText.Encode("upper_population");
-	private static readonly System.Text.Json.JsonEncodedText PropUpperSampling = System.Text.Json.JsonEncodedText.Encode("upper_sampling");
+	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowerPopulation = System.Text.Json.JsonEncodedText.Encode("lower_population"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowerSampling = System.Text.Json.JsonEncodedText.Encode("lower_sampling"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpperPopulation = System.Text.Json.JsonEncodedText.Encode("upper_population"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpperSampling = System.Text.Json.JsonEncodedText.Encode("upper_sampling"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class TransformIndexerStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteTimeInMs = System.Text.Json.JsonEncodedText.Encode("delete_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropDocumentsDeleted = System.Text.Json.JsonEncodedText.Encode("documents_deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropDocumentsIndexed = System.Text.Json.JsonEncodedText.Encode("documents_indexed");
-	private static readonly System.Text.Json.JsonEncodedText PropDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("documents_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgCheckpointDurationMs = System.Text.Json.JsonEncodedText.Encode("exponential_avg_checkpoint_duration_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgDocumentsIndexed = System.Text.Json.JsonEncodedText.Encode("exponential_avg_documents_indexed");
-	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("exponential_avg_documents_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexFailures = System.Text.Json.JsonEncodedText.Encode("index_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMs = System.Text.Json.JsonEncodedText.Encode("index_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total");
-	private static readonly System.Text.Json.JsonEncodedText PropPagesProcessed = System.Text.Json.JsonEncodedText.Encode("pages_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeInMs = System.Text.Json.JsonEncodedText.Encode("processing_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessingTotal = System.Text.Json.JsonEncodedText.Encode("processing_total");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchFailures = System.Text.Json.JsonEncodedText.Encode("search_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchTimeInMs = System.Text.Json.JsonEncodedText.Encode("search_time_in_ms");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchTotal = System.Text.Json.JsonEncodedText.Encode("search_total");
-	private static readonly System.Text.Json.JsonEncodedText PropTriggerCount = System.Text.Json.JsonEncodedText.Encode("trigger_count");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteTimeInMs = System.Text.Json.JsonEncodedText.Encode("delete_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocumentsDeleted = System.Text.Json.JsonEncodedText.Encode("documents_deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocumentsIndexed = System.Text.Json.JsonEncodedText.Encode("documents_indexed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("documents_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgCheckpointDurationMs = System.Text.Json.JsonEncodedText.Encode("exponential_avg_checkpoint_duration_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgDocumentsIndexed = System.Text.Json.JsonEncodedText.Encode("exponential_avg_documents_indexed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAvgDocumentsProcessed = System.Text.Json.JsonEncodedText.Encode("exponential_avg_documents_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexFailures = System.Text.Json.JsonEncodedText.Encode("index_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTimeInMs = System.Text.Json.JsonEncodedText.Encode("index_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPagesProcessed = System.Text.Json.JsonEncodedText.Encode("pages_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTimeInMs = System.Text.Json.JsonEncodedText.Encode("processing_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessingTotal = System.Text.Json.JsonEncodedText.Encode("processing_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchFailures = System.Text.Json.JsonEncodedText.Encode("search_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchTimeInMs = System.Text.Json.JsonEncodedText.Encode("search_time_in_ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchTotal = System.Text.Json.JsonEncodedText.Encode("search_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTriggerCount = System.Text.Json.JsonEncodedText.Encode("trigger_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

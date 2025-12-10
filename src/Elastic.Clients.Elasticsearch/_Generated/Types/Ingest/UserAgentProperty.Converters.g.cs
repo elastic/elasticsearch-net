@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class UserAgentPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDevice = System.Text.Json.JsonEncodedText.Encode("device");
-	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText MemberOriginal = System.Text.Json.JsonEncodedText.Encode("original");
-	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os");
-	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText MemberDevice = System.Text.Json.JsonEncodedText.Encode("device"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOriginal = System.Text.Json.JsonEncodedText.Encode("original"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.UserAgentProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

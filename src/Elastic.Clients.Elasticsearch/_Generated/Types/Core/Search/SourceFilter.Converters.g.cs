@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class SourceFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
-	private static readonly System.Text.Json.JsonEncodedText PropExcludes1 = System.Text.Json.JsonEncodedText.Encode("exclude");
-	private static readonly System.Text.Json.JsonEncodedText PropExcludeVectors = System.Text.Json.JsonEncodedText.Encode("exclude_vectors");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludes1 = System.Text.Json.JsonEncodedText.Encode("include");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExcludes1 = System.Text.Json.JsonEncodedText.Encode("exclude"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeVectors = System.Text.Json.JsonEncodedText.Encode("exclude_vectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludes1 = System.Text.Json.JsonEncodedText.Encode("include"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

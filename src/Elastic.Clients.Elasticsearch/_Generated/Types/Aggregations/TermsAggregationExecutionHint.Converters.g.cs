@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TermsAggregationExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsHash = System.Text.Json.JsonEncodedText.Encode("global_ordinals_hash");
-	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsLowCardinality = System.Text.Json.JsonEncodedText.Encode("global_ordinals_low_cardinality");
-	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map");
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsHash = System.Text.Json.JsonEncodedText.Encode("global_ordinals_hash"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGlobalOrdinalsLowCardinality = System.Text.Json.JsonEncodedText.Encode("global_ordinals_low_cardinality"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMap = System.Text.Json.JsonEncodedText.Encode("map"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class GeoOrientationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoOrientation>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberLeft = System.Text.Json.JsonEncodedText.Encode("left");
-	private static readonly System.Text.Json.JsonEncodedText MemberLeft1 = System.Text.Json.JsonEncodedText.Encode("LEFT");
-	private static readonly System.Text.Json.JsonEncodedText MemberLeft2 = System.Text.Json.JsonEncodedText.Encode("clockwise");
-	private static readonly System.Text.Json.JsonEncodedText MemberLeft3 = System.Text.Json.JsonEncodedText.Encode("cw");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight = System.Text.Json.JsonEncodedText.Encode("right");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight1 = System.Text.Json.JsonEncodedText.Encode("RIGHT");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight2 = System.Text.Json.JsonEncodedText.Encode("counterclockwise");
-	private static readonly System.Text.Json.JsonEncodedText MemberRight3 = System.Text.Json.JsonEncodedText.Encode("ccw");
+	private static readonly System.Text.Json.JsonEncodedText MemberLeft = System.Text.Json.JsonEncodedText.Encode("left"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLeft1 = System.Text.Json.JsonEncodedText.Encode("LEFT"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLeft2 = System.Text.Json.JsonEncodedText.Encode("clockwise"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLeft3 = System.Text.Json.JsonEncodedText.Encode("cw"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRight = System.Text.Json.JsonEncodedText.Encode("right"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRight1 = System.Text.Json.JsonEncodedText.Encode("RIGHT"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRight2 = System.Text.Json.JsonEncodedText.Encode("counterclockwise"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRight3 = System.Text.Json.JsonEncodedText.Encode("ccw"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.GeoOrientation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

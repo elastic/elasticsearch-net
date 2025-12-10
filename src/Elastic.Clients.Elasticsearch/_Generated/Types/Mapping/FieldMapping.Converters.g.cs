@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class FieldMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.FieldMapping>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name");
-	private static readonly System.Text.Json.JsonEncodedText PropMapping = System.Text.Json.JsonEncodedText.Encode("mapping");
+	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMapping = System.Text.Json.JsonEncodedText.Encode("mapping"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.FieldMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

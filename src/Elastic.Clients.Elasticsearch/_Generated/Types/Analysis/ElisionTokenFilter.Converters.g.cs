@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class ElisionTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropArticles = System.Text.Json.JsonEncodedText.Encode("articles");
-	private static readonly System.Text.Json.JsonEncodedText PropArticlesCase = System.Text.Json.JsonEncodedText.Encode("articles_case");
-	private static readonly System.Text.Json.JsonEncodedText PropArticlesPath = System.Text.Json.JsonEncodedText.Encode("articles_path");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropArticles = System.Text.Json.JsonEncodedText.Encode("articles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropArticlesCase = System.Text.Json.JsonEncodedText.Encode("articles_case"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropArticlesPath = System.Text.Json.JsonEncodedText.Encode("articles_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

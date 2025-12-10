@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ClearScrollResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ClearScrollResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumFreed = System.Text.Json.JsonEncodedText.Encode("num_freed");
-	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded");
+	private static readonly System.Text.Json.JsonEncodedText PropNumFreed = System.Text.Json.JsonEncodedText.Encode("num_freed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSucceeded = System.Text.Json.JsonEncodedText.Encode("succeeded"u8);
 
 	public override Elastic.Clients.Elasticsearch.ClearScrollResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

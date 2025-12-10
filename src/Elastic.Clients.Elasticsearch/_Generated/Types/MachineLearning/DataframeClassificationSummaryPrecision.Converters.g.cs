@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeClassificationSummaryPrecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvgPrecision = System.Text.Json.JsonEncodedText.Encode("avg_precision");
-	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgPrecision = System.Text.Json.JsonEncodedText.Encode("avg_precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

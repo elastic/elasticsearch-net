@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class CombinedFieldsOperatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and");
-	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or");
+	private static readonly System.Text.Json.JsonEncodedText MemberAnd = System.Text.Json.JsonEncodedText.Encode("and"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOr = System.Text.Json.JsonEncodedText.Encode("or"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

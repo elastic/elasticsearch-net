@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MatrixStatsFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCorrelation = System.Text.Json.JsonEncodedText.Encode("correlation");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropCovariance = System.Text.Json.JsonEncodedText.Encode("covariance");
-	private static readonly System.Text.Json.JsonEncodedText PropKurtosis = System.Text.Json.JsonEncodedText.Encode("kurtosis");
-	private static readonly System.Text.Json.JsonEncodedText PropMean = System.Text.Json.JsonEncodedText.Encode("mean");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropSkewness = System.Text.Json.JsonEncodedText.Encode("skewness");
-	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance");
+	private static readonly System.Text.Json.JsonEncodedText PropCorrelation = System.Text.Json.JsonEncodedText.Encode("correlation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCovariance = System.Text.Json.JsonEncodedText.Encode("covariance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKurtosis = System.Text.Json.JsonEncodedText.Encode("kurtosis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMean = System.Text.Json.JsonEncodedText.Encode("mean"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkewness = System.Text.Json.JsonEncodedText.Encode("skewness"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariance = System.Text.Json.JsonEncodedText.Encode("variance"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

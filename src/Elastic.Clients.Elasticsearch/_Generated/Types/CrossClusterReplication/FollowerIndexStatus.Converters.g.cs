@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class FollowerIndexStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active");
-	private static readonly System.Text.Json.JsonEncodedText MemberPaused = System.Text.Json.JsonEncodedText.Encode("paused");
+	private static readonly System.Text.Json.JsonEncodedText MemberActive = System.Text.Json.JsonEncodedText.Encode("active"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPaused = System.Text.Json.JsonEncodedText.Encode("paused"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

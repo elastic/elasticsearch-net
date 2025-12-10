@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class RefreshStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RefreshStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExternalTotal = System.Text.Json.JsonEncodedText.Encode("external_total");
-	private static readonly System.Text.Json.JsonEncodedText PropExternalTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("external_total_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropListeners = System.Text.Json.JsonEncodedText.Encode("listeners");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropExternalTotal = System.Text.Json.JsonEncodedText.Encode("external_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExternalTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("external_total_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropListeners = System.Text.Json.JsonEncodedText.Encode("listeners"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.RefreshStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

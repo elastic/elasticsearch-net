@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class RepositoryStatsCurrentCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsCurrentCounts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActiveDeletions = System.Text.Json.JsonEncodedText.Encode("active_deletions");
-	private static readonly System.Text.Json.JsonEncodedText PropClones = System.Text.Json.JsonEncodedText.Encode("clones");
-	private static readonly System.Text.Json.JsonEncodedText PropDeletions = System.Text.Json.JsonEncodedText.Encode("deletions");
-	private static readonly System.Text.Json.JsonEncodedText PropFinalizations = System.Text.Json.JsonEncodedText.Encode("finalizations");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletions = System.Text.Json.JsonEncodedText.Encode("snapshot_deletions");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
+	private static readonly System.Text.Json.JsonEncodedText PropActiveDeletions = System.Text.Json.JsonEncodedText.Encode("active_deletions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClones = System.Text.Json.JsonEncodedText.Encode("clones"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDeletions = System.Text.Json.JsonEncodedText.Encode("deletions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFinalizations = System.Text.Json.JsonEncodedText.Encode("finalizations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotDeletions = System.Text.Json.JsonEncodedText.Encode("snapshot_deletions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsCurrentCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

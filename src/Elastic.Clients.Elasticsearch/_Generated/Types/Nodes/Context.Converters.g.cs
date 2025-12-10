@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Context>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations");
-	private static readonly System.Text.Json.JsonEncodedText PropContext2 = System.Text.Json.JsonEncodedText.Encode("context");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContext2 = System.Text.Json.JsonEncodedText.Encode("context"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

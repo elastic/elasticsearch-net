@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Core.FieldCaps.Json;
 
 public sealed partial class FieldCapabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregatable = System.Text.Json.JsonEncodedText.Encode("aggregatable");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadataField = System.Text.Json.JsonEncodedText.Encode("metadata_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetricConflictsIndices = System.Text.Json.JsonEncodedText.Encode("metric_conflicts_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNonAggregatableIndices = System.Text.Json.JsonEncodedText.Encode("non_aggregatable_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNonDimensionIndices = System.Text.Json.JsonEncodedText.Encode("non_dimension_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNonSearchableIndices = System.Text.Json.JsonEncodedText.Encode("non_searchable_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchable = System.Text.Json.JsonEncodedText.Encode("searchable");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregatable = System.Text.Json.JsonEncodedText.Encode("aggregatable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetadataField = System.Text.Json.JsonEncodedText.Encode("metadata_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetricConflictsIndices = System.Text.Json.JsonEncodedText.Encode("metric_conflicts_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonAggregatableIndices = System.Text.Json.JsonEncodedText.Encode("non_aggregatable_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonDimensionIndices = System.Text.Json.JsonEncodedText.Encode("non_dimension_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNonSearchableIndices = System.Text.Json.JsonEncodedText.Encode("non_searchable_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchable = System.Text.Json.JsonEncodedText.Encode("searchable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimension = System.Text.Json.JsonEncodedText.Encode("time_series_dimension"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

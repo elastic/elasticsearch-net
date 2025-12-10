@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class DataStreamLifecycleIndicatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropDiagnosis = System.Text.Json.JsonEncodedText.Encode("diagnosis");
-	private static readonly System.Text.Json.JsonEncodedText PropImpacts = System.Text.Json.JsonEncodedText.Encode("impacts");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropSymptom = System.Text.Json.JsonEncodedText.Encode("symptom");
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiagnosis = System.Text.Json.JsonEncodedText.Encode("diagnosis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropImpacts = System.Text.Json.JsonEncodedText.Encode("impacts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSymptom = System.Text.Json.JsonEncodedText.Encode("symptom"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
