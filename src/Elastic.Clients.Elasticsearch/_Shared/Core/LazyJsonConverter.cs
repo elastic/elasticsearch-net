@@ -15,13 +15,11 @@ public sealed class LazyJsonConverter : JsonConverter<LazyJson>
 {
 	private IElasticsearchClientSettings? _settings;
 
-	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
-	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public override LazyJson Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		InitializeSettings(options);
 
-		return new LazyJson(JsonSerializer.Deserialize<JsonElement>(ref reader, options), _settings!);
+		return new LazyJson(JsonElement.ParseValue(ref reader), _settings!);
 	}
 
 	private void InitializeSettings(JsonSerializerOptions options)
