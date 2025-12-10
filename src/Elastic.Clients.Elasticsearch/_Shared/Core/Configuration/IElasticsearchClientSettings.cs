@@ -5,7 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -116,13 +119,36 @@ public interface IElasticsearchClientSettings : ITransportConfiguration
 	BeforeRequestEvent? OnBeforeRequest { get; }
 
 	/// <summary>
-	/// This is an advanced setting which controls serialization behaviour for inferred properies such as ID, routing and index name.
-	/// <para>When enabled, it may reduce allocations on serialisation paths where the cost can be more significant, such as in bulk operations.</para>
+	/// This is an advanced setting which controls serialization behaviour for inferred properties such as ID, routing and index name.
+	/// <para>When enabled, it may reduce allocations on serialization paths where the cost can be more significant, such as in bulk operations.</para>
 	/// <para>As a by-product it may cause null values to be included in the serialized data and impact payload size. This will only be a concern should some
-	/// typed not have inferrence mappings defined for the required properties.</para>
+	/// typed not have inference mappings defined for the required properties.</para>
 	/// </summary>
-	/// <remarks>This is marked as experiemental and may be removed or renamed in the future once its impact is evaluated.</remarks>
+	/// <remarks>This is marked as experimental and may be removed or renamed in the future once its impact is evaluated.</remarks>
 	bool ExperimentalEnableSerializeNullInferredValues { get; }
+
+	/// <summary>
+	/// Controls the vector data encoding to use for <see cref="ReadOnlyMemory{T}"/> properties
+	/// in documents during ingestion when the <see cref="FloatVectorDataConverter"/> is used.
+	/// </summary>
+	/// <remarks>
+	///	Setting this value to <see cref="FloatVectorDataEncoding.Legacy"/> provides backwards
+	/// compatibility when talking to Elasticsearch servers with a version older than 9.3.0
+	/// (required for <see cref="ByteVectorDataEncoding.Base64"/>).
+	/// </remarks>
+	FloatVectorDataEncoding FloatVectorDataEncoding { get; }
+
+	/// <summary>
+	/// Controls the vector data encoding to use for <see cref="ReadOnlyMemory{T}"/> properties
+	/// in documents during ingestion when the <see cref="ByteVectorDataConverter"/> is used.
+	/// </summary>
+	/// <remarks>
+	///	Setting this value to <see cref="ByteVectorDataEncoding.Legacy"/> provides backwards
+	/// compatibility when talking to Elasticsearch servers with a version older than 8.14.0
+	/// (required for <see cref="ByteVectorDataEncoding.Hex"/>) or older than 9.3.0 (required
+	/// for <see cref="ByteVectorDataEncoding.Base64"/>).
+	/// </remarks>
+	ByteVectorDataEncoding ByteVectorDataEncoding { get; }
 
 	/// <summary>
 	/// Experimental settings.
