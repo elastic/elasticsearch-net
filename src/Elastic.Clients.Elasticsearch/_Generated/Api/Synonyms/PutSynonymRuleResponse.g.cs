@@ -43,20 +43,12 @@ public sealed partial class PutSynonymRuleResponse : Elastic.Transport.Products.
 	/// This information is the analyzers reloading result.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The update operation result.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Result Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

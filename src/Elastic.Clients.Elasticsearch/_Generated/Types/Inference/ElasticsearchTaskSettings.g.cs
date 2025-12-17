@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ElasticsearchTaskSettingsConverter))]
 public sealed partial class ElasticsearchTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public ElasticsearchTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ElasticsearchTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElasticsearchTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -28,16 +28,11 @@ public sealed partial class RetentionPolicy
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public RetentionPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RetentionPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

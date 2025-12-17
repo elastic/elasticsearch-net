@@ -31,17 +31,11 @@ public sealed partial class SnapshotResponseItem
 	{
 		Repository = repository;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotResponseItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotResponseItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotResponseItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,10 +43,6 @@ public sealed partial class SnapshotResponseItem
 	}
 
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Repository { get; set; }
+	public required string Repository { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; set; }
 }

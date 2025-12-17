@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KeepWordsTokenFilterConverter))]
 public sealed partial class KeepWordsTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
-#if NET7_0_OR_GREATER
 	public KeepWordsTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public KeepWordsTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KeepWordsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

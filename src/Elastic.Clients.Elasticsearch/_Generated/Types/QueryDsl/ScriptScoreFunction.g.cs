@@ -31,17 +31,11 @@ public sealed partial class ScriptScoreFunction
 	{
 		Script = script;
 	}
-#if NET7_0_OR_GREATER
+
 	public ScriptScoreFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ScriptScoreFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class ScriptScoreFunction
 	/// A script that computes a score.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
 public readonly partial struct ScriptScoreFunctionDescriptor

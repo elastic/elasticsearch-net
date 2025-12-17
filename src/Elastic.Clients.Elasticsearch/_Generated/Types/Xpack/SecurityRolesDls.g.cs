@@ -31,26 +31,16 @@ public sealed partial class SecurityRolesDls
 	{
 		BitSetCache = bitSetCache;
 	}
-#if NET7_0_OR_GREATER
+
 	public SecurityRolesDls()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SecurityRolesDls()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SecurityRolesDls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache BitSetCache { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache BitSetCache { get; set; }
 }

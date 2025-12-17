@@ -37,9 +37,5 @@ public sealed partial class ScriptsPainlessExecuteResponse<TResult> : Elastic.Tr
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-TResult Result { get; set; }
+	public required TResult Result { get; set; }
 }

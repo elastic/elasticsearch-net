@@ -31,17 +31,11 @@ public sealed partial class TDigestPercentilesAggregate : Elastic.Clients.Elasti
 	{
 		Values = values;
 	}
-#if NET7_0_OR_GREATER
+
 	public TDigestPercentilesAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TDigestPercentilesAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TDigestPercentilesAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,9 +46,5 @@ public sealed partial class TDigestPercentilesAggregate : Elastic.Clients.Elasti
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "tdigest_percentiles";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> Values { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> Values { get; set; }
 }

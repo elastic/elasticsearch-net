@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.BrazilianStemTokenFilterConverter))]
 public sealed partial class BrazilianStemTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
-#if NET7_0_OR_GREATER
 	public BrazilianStemTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BrazilianStemTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BrazilianStemTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

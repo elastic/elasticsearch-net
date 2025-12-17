@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DoubleNumberPropertyConverter))]
 public sealed partial class DoubleNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-#if NET7_0_OR_GREATER
 	public DoubleNumberProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DoubleNumberProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DoubleNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

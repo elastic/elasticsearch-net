@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CatalanAnalyzerConverter))]
 public sealed partial class CatalanAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public CatalanAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CatalanAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CatalanAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

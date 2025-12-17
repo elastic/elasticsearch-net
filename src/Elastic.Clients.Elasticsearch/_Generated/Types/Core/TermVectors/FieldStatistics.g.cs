@@ -33,36 +33,18 @@ public sealed partial class FieldStatistics
 		SumDocFreq = sumDocFreq;
 		SumTtf = sumTtf;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SumDocFreq { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SumTtf { get; set; }
+	public required int DocCount { get; set; }
+	public required long SumDocFreq { get; set; }
+	public required long SumTtf { get; set; }
 }

@@ -36,17 +36,11 @@ public sealed partial class GeoIpDownloadStatistics
 		SuccessfulDownloads = successfulDownloads;
 		TotalDownloadTime = totalDownloadTime;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoIpDownloadStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoIpDownloadStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoIpDownloadStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,64 +52,40 @@ public sealed partial class GeoIpDownloadStatistics
 	/// Current number of databases available for use.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DatabasesCount { get; set; }
+	public required int DatabasesCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of databases not updated after 30 days
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ExpiredDatabases { get; set; }
+	public required int ExpiredDatabases { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of failed database downloads.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FailedDownloads { get; set; }
+	public required int FailedDownloads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of database updates skipped.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SkippedUpdates { get; set; }
+	public required int SkippedUpdates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of successful database downloads.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SuccessfulDownloads { get; set; }
+	public required int SuccessfulDownloads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total milliseconds spent downloading databases.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalDownloadTime { get; set; }
+	public required System.TimeSpan TotalDownloadTime { get; set; }
 }

@@ -32,17 +32,11 @@ public sealed partial class HuggingFaceServiceSettings
 		ApiKey = apiKey;
 		Url = url;
 	}
-#if NET7_0_OR_GREATER
+
 	public HuggingFaceServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HuggingFaceServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HuggingFaceServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class HuggingFaceServiceSettings
 	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,11 +83,7 @@ public sealed partial class HuggingFaceServiceSettings
 	/// If the model supports the OpenAI Chat Completion schema, a toggle should appear in the interface. Enabling this toggle doesn't change any model behavior, it reveals the full endpoint URL needed (which should include <c>/v1/chat/completions</c>) when configuring the inference endpoint in Elasticsearch. If the model doesn't support this schema, the toggle may not be shown.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Url { get; set; }
+	public required string Url { get; set; }
 }
 
 public readonly partial struct HuggingFaceServiceSettingsDescriptor

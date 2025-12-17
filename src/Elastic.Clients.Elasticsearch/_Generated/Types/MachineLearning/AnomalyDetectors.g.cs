@@ -35,46 +35,20 @@ public sealed partial class AnomalyDetectors
 		ModelMemoryLimit = modelMemoryLimit;
 		ModelSnapshotRetentionDays = modelSnapshotRetentionDays;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnomalyDetectors()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnomalyDetectors()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnomalyDetectors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer CategorizationAnalyzer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CategorizationExamplesLimit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DailyModelSnapshotRetentionAfterDays { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelMemoryLimit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ModelSnapshotRetentionDays { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer CategorizationAnalyzer { get; set; }
+	public required int CategorizationExamplesLimit { get; set; }
+	public required int DailyModelSnapshotRetentionAfterDays { get; set; }
+	public required string ModelMemoryLimit { get; set; }
+	public required int ModelSnapshotRetentionDays { get; set; }
 }

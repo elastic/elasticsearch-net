@@ -34,43 +34,21 @@ public sealed partial class AggregationProfile
 		TimeInNanos = timeInNanos;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public AggregationProfile()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AggregationProfile()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AggregationProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown Breakdown { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.AggregationBreakdown Breakdown { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile>? Children { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug? Debug { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInNanos { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Description { get; set; }
+	public required System.TimeSpan TimeInNanos { get; set; }
+	public required string Type { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InferenceConfigClassificationConverter))]
 public sealed partial class InferenceConfigClassification
 {
-#if NET7_0_OR_GREATER
 	public InferenceConfigClassification()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public InferenceConfigClassification()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceConfigClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

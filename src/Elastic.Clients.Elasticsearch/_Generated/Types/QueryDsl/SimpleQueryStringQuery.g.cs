@@ -31,17 +31,11 @@ public sealed partial class SimpleQueryStringQuery
 	{
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public SimpleQueryStringQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SimpleQueryStringQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SimpleQueryStringQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -143,11 +137,7 @@ public sealed partial class SimpleQueryStringQuery
 	/// Query string in the simple query string syntax you wish to parse and use for search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

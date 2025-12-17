@@ -32,31 +32,17 @@ public sealed partial class Influence
 		InfluencerFieldName = influencerFieldName;
 		InfluencerFieldValues = influencerFieldValues;
 	}
-#if NET7_0_OR_GREATER
+
 	public Influence()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Influence()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Influence(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string InfluencerFieldName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> InfluencerFieldValues { get; set; }
+	public required string InfluencerFieldName { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> InfluencerFieldValues { get; set; }
 }

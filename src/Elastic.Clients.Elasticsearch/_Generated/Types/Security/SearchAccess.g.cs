@@ -31,17 +31,11 @@ public sealed partial class SearchAccess
 	{
 		Names = names;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchAccess()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchAccess()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchAccess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -67,11 +61,7 @@ public sealed partial class SearchAccess
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
 	/// <para>

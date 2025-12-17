@@ -33,36 +33,18 @@ public sealed partial class InferenceTopClassEntry
 		ClassProbability = classProbability;
 		ClassScore = classScore;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceTopClassEntry()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceTopClassEntry()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceTopClassEntry(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.FieldValue ClassName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ClassProbability { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ClassScore { get; set; }
+	public required Elastic.Clients.Elasticsearch.FieldValue ClassName { get; set; }
+	public required double ClassProbability { get; set; }
+	public required double ClassScore { get; set; }
 }

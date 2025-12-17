@@ -35,16 +35,10 @@ public sealed partial class GetBasicStatusRequestParameters : Elastic.Transport.
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.GetBasicStatusRequestConverter))]
 public sealed partial class GetBasicStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public GetBasicStatusRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetBasicStatusRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetBasicStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -102,6 +96,11 @@ public readonly partial struct GetBasicStatusRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

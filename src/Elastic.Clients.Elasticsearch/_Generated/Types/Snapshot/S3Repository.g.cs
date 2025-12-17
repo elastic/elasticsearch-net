@@ -31,17 +31,11 @@ public sealed partial class S3Repository : Elastic.Clients.Elasticsearch.Snapsho
 	{
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public S3Repository()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public S3Repository()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal S3Repository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class S3Repository : Elastic.Clients.Elasticsearch.Snapsho
 	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

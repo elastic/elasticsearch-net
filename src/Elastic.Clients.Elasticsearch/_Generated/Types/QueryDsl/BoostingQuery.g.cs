@@ -33,17 +33,11 @@ public sealed partial class BoostingQuery
 		NegativeBoost = negativeBoost;
 		Positive = positive;
 	}
-#if NET7_0_OR_GREATER
+
 	public BoostingQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BoostingQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BoostingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,33 +59,21 @@ public sealed partial class BoostingQuery
 	/// Query used to decrease the relevance score of matching documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double NegativeBoost { get; set; }
+	public required double NegativeBoost { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Any returned documents must match this query.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 	public string? QueryName { get; set; }
 }
 

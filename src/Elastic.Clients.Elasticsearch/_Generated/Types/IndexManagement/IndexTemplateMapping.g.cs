@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateMappingConverter))]
 public sealed partial class IndexTemplateMapping
 {
-#if NET7_0_OR_GREATER
 	public IndexTemplateMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexTemplateMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexTemplateMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

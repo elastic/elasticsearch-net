@@ -31,17 +31,11 @@ public sealed partial class Document
 	{
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public Document()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Document()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Document(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +62,7 @@ public sealed partial class Document
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Source { get; set; }
+	public required object Source { get; set; }
 }
 
 public readonly partial struct DocumentDescriptor

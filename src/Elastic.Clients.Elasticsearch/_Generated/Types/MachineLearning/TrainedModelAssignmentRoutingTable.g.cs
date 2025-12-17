@@ -33,17 +33,11 @@ public sealed partial class TrainedModelAssignmentRoutingTable
 		RoutingState = routingState;
 		TargetAllocations = targetAllocations;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelAssignmentRoutingTable()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelAssignmentRoutingTable()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelAssignmentRoutingTable(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class TrainedModelAssignmentRoutingTable
 	/// Current number of allocations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CurrentAllocations { get; set; }
+	public required int CurrentAllocations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,20 +64,12 @@ public sealed partial class TrainedModelAssignmentRoutingTable
 	/// The current routing state.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Target number of allocations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TargetAllocations { get; set; }
+	public required int TargetAllocations { get; set; }
 }

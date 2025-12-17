@@ -28,16 +28,11 @@ public sealed partial class DynamicTemplate
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public DynamicTemplate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DynamicTemplate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DynamicTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

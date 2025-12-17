@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CommonGramsTokenFilterConverter))]
 public sealed partial class CommonGramsTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
-#if NET7_0_OR_GREATER
 	public CommonGramsTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CommonGramsTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CommonGramsTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

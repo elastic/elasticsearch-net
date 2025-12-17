@@ -37,39 +37,11 @@ public sealed partial class RolloverResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, bool> Conditions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool DryRun { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string NewIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string OldIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool RolledOver { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool ShardsAcknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, bool> Conditions { get; set; }
+	public required bool DryRun { get; set; }
+	public required string NewIndex { get; set; }
+	public required string OldIndex { get; set; }
+	public required bool RolledOver { get; set; }
+	public required bool ShardsAcknowledged { get; set; }
 }

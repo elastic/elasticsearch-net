@@ -32,17 +32,11 @@ public sealed partial class ConvertProcessor
 		Field = field;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConvertProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConvertProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConvertProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class ConvertProcessor
 	/// The field whose value is to be converted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,11 +107,7 @@ public sealed partial class ConvertProcessor
 	/// The type to convert the existing value to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.ConvertType Type { get; set; }
 }
 
 public readonly partial struct ConvertProcessorDescriptor<TDocument>

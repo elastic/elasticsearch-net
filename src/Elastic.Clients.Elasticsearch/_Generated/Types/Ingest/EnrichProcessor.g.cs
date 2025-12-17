@@ -33,17 +33,11 @@ public sealed partial class EnrichProcessor
 		PolicyName = policyName;
 		TargetField = targetField;
 	}
-#if NET7_0_OR_GREATER
+
 	public EnrichProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EnrichProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EnrichProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class EnrichProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -120,11 +110,7 @@ public sealed partial class EnrichProcessor
 	/// The name of the enrich policy to use.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PolicyName { get; set; }
+	public required string PolicyName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -148,11 +134,7 @@ public sealed partial class EnrichProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 }
 
 public readonly partial struct EnrichProcessorDescriptor<TDocument>

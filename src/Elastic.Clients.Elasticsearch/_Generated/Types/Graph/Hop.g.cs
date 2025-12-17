@@ -32,17 +32,11 @@ public sealed partial class Hop
 		Query = query;
 		Vertices = vertices;
 	}
-#if NET7_0_OR_GREATER
+
 	public Hop()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Hop()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Hop(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,22 +55,14 @@ public sealed partial class Hop
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains the fields you are interested in.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 }
 
 public readonly partial struct HopDescriptor<TDocument>

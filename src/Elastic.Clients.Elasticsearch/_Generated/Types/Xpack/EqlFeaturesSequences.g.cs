@@ -36,51 +36,21 @@ public sealed partial class EqlFeaturesSequences
 		SequenceQueriesTwo = sequenceQueriesTwo;
 		SequenceUntil = sequenceUntil;
 	}
-#if NET7_0_OR_GREATER
+
 	public EqlFeaturesSequences()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EqlFeaturesSequences()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlFeaturesSequences(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceMaxspan { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceQueriesFiveOrMore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceQueriesFour { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceQueriesThree { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceQueriesTwo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SequenceUntil { get; set; }
+	public required int SequenceMaxspan { get; set; }
+	public required int SequenceQueriesFiveOrMore { get; set; }
+	public required int SequenceQueriesFour { get; set; }
+	public required int SequenceQueriesThree { get; set; }
+	public required int SequenceQueriesTwo { get; set; }
+	public required int SequenceUntil { get; set; }
 }

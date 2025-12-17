@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.WildcardPropertyConverter))]
 public sealed partial class WildcardProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-#if NET7_0_OR_GREATER
 	public WildcardProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public WildcardProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WildcardProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

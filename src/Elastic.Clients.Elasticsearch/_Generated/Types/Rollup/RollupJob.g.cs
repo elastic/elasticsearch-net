@@ -33,17 +33,11 @@ public sealed partial class RollupJob
 		Stats = stats;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupJob()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupJob()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupJob(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class RollupJob
 	/// The rollup job configuration.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration Config { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobConfiguration Config { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,20 +58,12 @@ public sealed partial class RollupJob
 	/// If a node is restarted, these stats are reset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.RollupJobStats Stats { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobStats Stats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The current status of the indexer for the rollup job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.RollupJobStatus Status { get; set; }
 }

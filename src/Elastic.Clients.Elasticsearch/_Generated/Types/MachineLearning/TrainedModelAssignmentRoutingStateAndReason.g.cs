@@ -31,17 +31,11 @@ public sealed partial class TrainedModelAssignmentRoutingStateAndReason
 	{
 		RoutingState = routingState;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelAssignmentRoutingStateAndReason()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelAssignmentRoutingStateAndReason()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelAssignmentRoutingStateAndReason(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,9 +55,5 @@ public sealed partial class TrainedModelAssignmentRoutingStateAndReason
 	/// The current routing state.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.RoutingState RoutingState { get; set; }
 }

@@ -76,11 +76,11 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 	{
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public EqlSearchRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -100,11 +100,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -198,11 +194,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
@@ -689,6 +681,11 @@ public readonly partial struct EqlSearchRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1133,6 +1130,11 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

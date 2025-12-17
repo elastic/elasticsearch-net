@@ -31,17 +31,11 @@ public sealed partial class RateAggregate : Elastic.Clients.Elasticsearch.Aggreg
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public RateAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RateAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RateAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,10 +46,6 @@ public sealed partial class RateAggregate : Elastic.Clients.Elasticsearch.Aggreg
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "rate";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Value { get; set; }
+	public required double Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

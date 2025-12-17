@@ -31,28 +31,18 @@ public sealed partial class RollupFieldSummary
 	{
 		Agg = agg;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupFieldSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupFieldSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupFieldSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Agg { get; set; }
+	public required string Agg { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; set; }
 	public string? TimeZone { get; set; }
 }

@@ -34,41 +34,19 @@ public sealed partial class RollupCapabilitySummary
 		JobId = jobId;
 		RollupIndex = rollupIndex;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupCapabilitySummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupCapabilitySummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupCapabilitySummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>> Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexPattern { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RollupIndex { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupFieldSummary>> Fields { get; set; }
+	public required string IndexPattern { get; set; }
+	public required string JobId { get; set; }
+	public required string RollupIndex { get; set; }
 }

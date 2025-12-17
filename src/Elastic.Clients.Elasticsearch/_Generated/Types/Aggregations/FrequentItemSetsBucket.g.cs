@@ -33,17 +33,11 @@ public sealed partial class FrequentItemSetsBucket
 		Key = key;
 		Support = support;
 	}
-#if NET7_0_OR_GREATER
+
 	public FrequentItemSetsBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FrequentItemSetsBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FrequentItemSetsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,19 +50,7 @@ public sealed partial class FrequentItemSetsBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>> Key { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Support { get; set; }
+	public required long DocCount { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>> Key { get; set; }
+	public required double Support { get; set; }
 }

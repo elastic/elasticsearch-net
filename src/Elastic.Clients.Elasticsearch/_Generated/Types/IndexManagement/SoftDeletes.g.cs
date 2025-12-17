@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SoftDeletesConverter))]
 public sealed partial class SoftDeletes
 {
-#if NET7_0_OR_GREATER
 	public SoftDeletes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SoftDeletes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SoftDeletes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

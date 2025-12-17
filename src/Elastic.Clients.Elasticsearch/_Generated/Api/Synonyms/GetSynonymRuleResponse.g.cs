@@ -42,20 +42,12 @@ public sealed partial class GetSynonymRuleResponse : Elastic.Transport.Products.
 	/// Synonym Rule identifier
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Synonyms { get; set; }
+	public required string Synonyms { get; set; }
 }

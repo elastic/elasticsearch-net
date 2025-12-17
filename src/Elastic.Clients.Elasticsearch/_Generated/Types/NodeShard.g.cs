@@ -34,17 +34,11 @@ public sealed partial class NodeShard
 		Shard = shard;
 		State = state;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeShard()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeShard()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeShard(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,29 +46,13 @@ public sealed partial class NodeShard
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? AllocationId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 	public string? Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Primary { get; set; }
+	public required bool Primary { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? RecoverySource { get; set; }
 	public string? RelocatingNode { get; set; }
 	public Elastic.Clients.Elasticsearch.RelocationFailureInfo? RelocationFailureInfo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Shard { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; set; }
+	public required int Shard { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; set; }
 	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; set; }
 }

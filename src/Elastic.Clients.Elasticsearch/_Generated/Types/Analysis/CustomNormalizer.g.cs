@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CustomNormalizerConverter))]
 public sealed partial class CustomNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
 {
-#if NET7_0_OR_GREATER
 	public CustomNormalizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CustomNormalizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

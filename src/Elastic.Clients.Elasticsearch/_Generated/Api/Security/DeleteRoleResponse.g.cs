@@ -43,9 +43,5 @@ public sealed partial class DeleteRoleResponse : Elastic.Transport.Products.Elas
 	/// Otherwise, <c>found</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 }

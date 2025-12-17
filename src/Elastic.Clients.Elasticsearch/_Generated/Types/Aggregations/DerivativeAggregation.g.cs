@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DerivativeAggregationConverter))]
 public sealed partial class DerivativeAggregation
 {
-#if NET7_0_OR_GREATER
 	public DerivativeAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DerivativeAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DerivativeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

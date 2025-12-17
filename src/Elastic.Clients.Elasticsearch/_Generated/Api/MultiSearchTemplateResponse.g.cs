@@ -37,14 +37,6 @@ public partial class MultiSearchTemplateResponse<TDocument> : Elastic.Transport.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Took { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; set; }
+	public required long Took { get; set; }
 }

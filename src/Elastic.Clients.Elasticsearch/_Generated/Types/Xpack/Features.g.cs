@@ -27,18 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 public sealed partial class Features
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Features(Elastic.Clients.Elasticsearch.Xpack.Feature aggregateMetric, Elastic.Clients.Elasticsearch.Xpack.Feature analytics, Elastic.Clients.Elasticsearch.Xpack.Feature archive, Elastic.Clients.Elasticsearch.Xpack.Feature ccr, Elastic.Clients.Elasticsearch.Xpack.Feature dataStreams, Elastic.Clients.Elasticsearch.Xpack.Feature dataTiers, Elastic.Clients.Elasticsearch.Xpack.Feature enrich, Elastic.Clients.Elasticsearch.Xpack.Feature enterpriseSearch, Elastic.Clients.Elasticsearch.Xpack.Feature eql, Elastic.Clients.Elasticsearch.Xpack.Feature esql, Elastic.Clients.Elasticsearch.Xpack.Feature frozenIndices, Elastic.Clients.Elasticsearch.Xpack.Feature graph, Elastic.Clients.Elasticsearch.Xpack.Feature ilm, Elastic.Clients.Elasticsearch.Xpack.Feature logsdb, Elastic.Clients.Elasticsearch.Xpack.Feature logstash, Elastic.Clients.Elasticsearch.Xpack.Feature ml, Elastic.Clients.Elasticsearch.Xpack.Feature monitoring, Elastic.Clients.Elasticsearch.Xpack.Feature rollup, Elastic.Clients.Elasticsearch.Xpack.Feature searchableSnapshots, Elastic.Clients.Elasticsearch.Xpack.Feature security, Elastic.Clients.Elasticsearch.Xpack.Feature slm, Elastic.Clients.Elasticsearch.Xpack.Feature spatial, Elastic.Clients.Elasticsearch.Xpack.Feature sql, Elastic.Clients.Elasticsearch.Xpack.Feature transform, Elastic.Clients.Elasticsearch.Xpack.Feature universalProfiling, Elastic.Clients.Elasticsearch.Xpack.Feature votingOnly, Elastic.Clients.Elasticsearch.Xpack.Feature watcher)
+	public Features(Elastic.Clients.Elasticsearch.Xpack.Feature aggregateMetric, Elastic.Clients.Elasticsearch.Xpack.Feature analytics, Elastic.Clients.Elasticsearch.Xpack.Feature ccr, Elastic.Clients.Elasticsearch.Xpack.Feature dataStreams, Elastic.Clients.Elasticsearch.Xpack.Feature dataTiers, Elastic.Clients.Elasticsearch.Xpack.Feature enrich, Elastic.Clients.Elasticsearch.Xpack.Feature eql, Elastic.Clients.Elasticsearch.Xpack.Feature frozenIndices, Elastic.Clients.Elasticsearch.Xpack.Feature graph, Elastic.Clients.Elasticsearch.Xpack.Feature ilm, Elastic.Clients.Elasticsearch.Xpack.Feature logsdb, Elastic.Clients.Elasticsearch.Xpack.Feature logstash, Elastic.Clients.Elasticsearch.Xpack.Feature ml, Elastic.Clients.Elasticsearch.Xpack.Feature monitoring, Elastic.Clients.Elasticsearch.Xpack.Feature rollup, Elastic.Clients.Elasticsearch.Xpack.Feature searchableSnapshots, Elastic.Clients.Elasticsearch.Xpack.Feature security, Elastic.Clients.Elasticsearch.Xpack.Feature slm, Elastic.Clients.Elasticsearch.Xpack.Feature spatial, Elastic.Clients.Elasticsearch.Xpack.Feature sql, Elastic.Clients.Elasticsearch.Xpack.Feature transform, Elastic.Clients.Elasticsearch.Xpack.Feature votingOnly, Elastic.Clients.Elasticsearch.Xpack.Feature watcher)
 	{
 		AggregateMetric = aggregateMetric;
 		Analytics = analytics;
-		Archive = archive;
 		Ccr = ccr;
 		DataStreams = dataStreams;
 		DataTiers = dataTiers;
 		Enrich = enrich;
-		EnterpriseSearch = enterpriseSearch;
 		Eql = eql;
-		Esql = esql;
 		FrozenIndices = frozenIndices;
 		Graph = graph;
 		Ilm = ilm;
@@ -53,161 +50,46 @@ public sealed partial class Features
 		Spatial = spatial;
 		Sql = sql;
 		Transform = transform;
-		UniversalProfiling = universalProfiling;
 		VotingOnly = votingOnly;
 		Watcher = watcher;
 	}
-#if NET7_0_OR_GREATER
+
 	public Features()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Features()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Features(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature AggregateMetric { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Analytics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Archive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Ccr { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature DataStreams { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature DataTiers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Enrich { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature EnterpriseSearch { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Eql { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Esql { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature FrozenIndices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Logstash { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Ml { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Monitoring { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Rollup { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature AggregateMetric { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Analytics { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? Archive { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ccr { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature DataStreams { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature DataTiers { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Enrich { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? EnterpriseSearch { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Eql { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? Esql { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature FrozenIndices { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logstash { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ml { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Monitoring { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Rollup { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? RuntimeFields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature SearchableSnapshots { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Security { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Slm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Spatial { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Sql { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Transform { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature UniversalProfiling { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature VotingOnly { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Feature Watcher { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature SearchableSnapshots { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Security { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Slm { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Spatial { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Sql { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Transform { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? UniversalProfiling { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature VotingOnly { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Feature Watcher { get; set; }
 }

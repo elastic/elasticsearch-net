@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.HalfFloatNumberPropertyConverter))]
 public sealed partial class HalfFloatNumberProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-#if NET7_0_OR_GREATER
 	public HalfFloatNumberProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HalfFloatNumberProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HalfFloatNumberProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

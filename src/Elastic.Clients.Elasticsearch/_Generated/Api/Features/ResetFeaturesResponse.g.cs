@@ -37,9 +37,5 @@ public sealed partial class ResetFeaturesResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features { get; set; }
 }

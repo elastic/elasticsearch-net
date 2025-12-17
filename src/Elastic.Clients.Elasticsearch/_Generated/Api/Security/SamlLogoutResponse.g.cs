@@ -43,9 +43,5 @@ public sealed partial class SamlLogoutResponse : Elastic.Transport.Products.Elas
 	/// You can use this URL to be redirected back to the SAML IdP and to initiate Single Logout.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Redirect { get; set; }
+	public required string Redirect { get; set; }
 }

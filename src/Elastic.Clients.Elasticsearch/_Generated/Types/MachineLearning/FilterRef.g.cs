@@ -31,17 +31,11 @@ public sealed partial class FilterRef
 	{
 		FilterId = filterId;
 	}
-#if NET7_0_OR_GREATER
+
 	public FilterRef()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FilterRef()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class FilterRef
 	/// The identifier for the filter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id FilterId { get; set; }
 
 	/// <summary>
 	/// <para>

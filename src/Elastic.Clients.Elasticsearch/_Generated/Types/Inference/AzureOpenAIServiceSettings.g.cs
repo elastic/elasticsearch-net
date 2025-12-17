@@ -33,17 +33,11 @@ public sealed partial class AzureOpenAIServiceSettings
 		DeploymentId = deploymentId;
 		ResourceName = resourceName;
 	}
-#if NET7_0_OR_GREATER
+
 	public AzureOpenAIServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AzureOpenAIServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AzureOpenAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,11 +65,7 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// It is recommended to use the latest supported non-preview version.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiVersion { get; set; }
+	public required string ApiVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,11 +73,7 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DeploymentId { get; set; }
+	public required string DeploymentId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,11 +100,7 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// You can find this from the list of resources in the Azure Portal for your subscription.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResourceName { get; set; }
+	public required string ResourceName { get; set; }
 }
 
 public readonly partial struct AzureOpenAiServiceSettingsDescriptor

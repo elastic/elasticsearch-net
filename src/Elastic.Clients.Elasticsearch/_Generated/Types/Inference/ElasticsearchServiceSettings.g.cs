@@ -32,17 +32,11 @@ public sealed partial class ElasticsearchServiceSettings
 		ModelId = modelId;
 		NumThreads = numThreads;
 	}
-#if NET7_0_OR_GREATER
+
 	public ElasticsearchServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ElasticsearchServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElasticsearchServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +68,7 @@ public sealed partial class ElasticsearchServiceSettings
 	/// It can be the ID of a built-in model (for example, <c>.multilingual-e5-small</c> for E5) or a text embedding model that was uploaded by using the Eland client.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,11 +88,7 @@ public sealed partial class ElasticsearchServiceSettings
 	/// The maximum value is 32.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumThreads { get; set; }
+	public required int NumThreads { get; set; }
 }
 
 public readonly partial struct ElasticsearchServiceSettingsDescriptor

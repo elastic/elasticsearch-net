@@ -31,26 +31,16 @@ public sealed partial class NodeInfoRepositoriesUrl
 	{
 		AllowedUrls = allowedUrls;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoRepositoriesUrl()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoRepositoriesUrl()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoRepositoriesUrl(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AllowedUrls { get; set; }
+	public required string AllowedUrls { get; set; }
 }

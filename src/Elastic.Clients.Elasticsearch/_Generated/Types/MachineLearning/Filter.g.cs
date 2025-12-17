@@ -32,17 +32,11 @@ public sealed partial class Filter
 		FilterId = filterId;
 		Items = items;
 	}
-#if NET7_0_OR_GREATER
+
 	public Filter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Filter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Filter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,20 +55,12 @@ public sealed partial class Filter
 	/// A string that uniquely identifies a filter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FilterId { get; set; }
+	public required string FilterId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of strings which is the filter item list.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Items { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Items { get; set; }
 }

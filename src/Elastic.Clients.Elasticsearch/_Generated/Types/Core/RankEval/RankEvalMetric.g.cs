@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricConverter))]
 public sealed partial class RankEvalMetric
 {
-#if NET7_0_OR_GREATER
 	public RankEvalMetric()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RankEvalMetric()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

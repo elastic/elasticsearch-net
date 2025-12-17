@@ -31,27 +31,17 @@ public sealed partial class AuthenticateApiKey
 	{
 		Id = id;
 	}
-#if NET7_0_OR_GREATER
+
 	public AuthenticateApiKey()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AuthenticateApiKey()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AuthenticateApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 	public string? Name { get; set; }
 }

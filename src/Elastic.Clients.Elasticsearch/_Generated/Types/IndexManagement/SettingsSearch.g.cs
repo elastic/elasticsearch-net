@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSearchConverter))]
 public sealed partial class SettingsSearch
 {
-#if NET7_0_OR_GREATER
 	public SettingsSearch()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SettingsSearch()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

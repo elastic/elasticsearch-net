@@ -35,17 +35,11 @@ public sealed partial class DenseVectorOffHeapStats
 		TotalVeqSizeBytes = totalVeqSizeBytes;
 		TotalVexSizeBytes = totalVexSizeBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DenseVectorOffHeapStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DenseVectorOffHeapStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DenseVectorOffHeapStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,33 +48,13 @@ public sealed partial class DenseVectorOffHeapStats
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>? Fielddata { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeBytes { get; set; }
+	public required long TotalSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalVebSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalVebSizeBytes { get; set; }
+	public required long TotalVebSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalVecSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalVecSizeBytes { get; set; }
+	public required long TotalVecSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalVeqSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalVeqSizeBytes { get; set; }
+	public required long TotalVeqSizeBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalVexSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalVexSizeBytes { get; set; }
+	public required long TotalVexSizeBytes { get; set; }
 }

@@ -42,42 +42,26 @@ public sealed partial class OidcAuthenticateResponse : Elastic.Transport.Product
 	/// The Elasticsearch access token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AccessToken { get; set; }
+	public required string AccessToken { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The duration (in seconds) of the tokens.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ExpiresIn { get; set; }
+	public required int ExpiresIn { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The Elasticsearch refresh token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RefreshToken { get; set; }
+	public required string RefreshToken { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GeoResultsConverter))]
 public sealed partial class GeoResults
 {
-#if NET7_0_OR_GREATER
 	public GeoResults()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GeoResults()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

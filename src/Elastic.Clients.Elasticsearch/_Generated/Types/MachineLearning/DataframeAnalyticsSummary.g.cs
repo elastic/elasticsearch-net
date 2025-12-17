@@ -34,17 +34,11 @@ public sealed partial class DataframeAnalyticsSummary
 		Id = id;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,11 +46,7 @@ public sealed partial class DataframeAnalyticsSummary
 	}
 
 	public bool? AllowLazyStart { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
 	/// <summary>
@@ -67,23 +57,11 @@ public sealed partial class DataframeAnalyticsSummary
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization? Authorization { get; set; }
 	public System.DateTimeOffset? CreateTime { get; set; }
 	public string? Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
+	public required string Id { get; set; }
 	public int? MaxNumThreads { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 	public string? ModelMemoryLimit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 	public string? Version { get; set; }
 }

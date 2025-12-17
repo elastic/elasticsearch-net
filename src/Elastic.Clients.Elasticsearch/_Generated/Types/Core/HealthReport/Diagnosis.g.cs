@@ -35,46 +35,20 @@ public sealed partial class Diagnosis
 		HelpUrl = helpUrl;
 		Id = id;
 	}
-#if NET7_0_OR_GREATER
+
 	public Diagnosis()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Diagnosis()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Diagnosis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Action { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources AffectedResources { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Cause { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string HelpUrl { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Action { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.DiagnosisAffectedResources AffectedResources { get; set; }
+	public required string Cause { get; set; }
+	public required string HelpUrl { get; set; }
+	public required string Id { get; set; }
 }

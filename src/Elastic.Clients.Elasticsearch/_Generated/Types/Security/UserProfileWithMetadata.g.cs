@@ -36,52 +36,22 @@ public sealed partial class UserProfileWithMetadata
 		Uid = uid;
 		User = user;
 	}
-#if NET7_0_OR_GREATER
+
 	public UserProfileWithMetadata()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UserProfileWithMetadata()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UserProfileWithMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Data { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata Doc { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Data { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.UserProfileHitMetadata Doc { get; set; }
 	public bool? Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Labels { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LastSynchronized { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uid { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.UserProfileUser User { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Labels { get; set; }
+	public required long LastSynchronized { get; set; }
+	public required string Uid { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.UserProfileUser User { get; set; }
 }

@@ -42,11 +42,7 @@ public sealed partial class PutCalendarJobResponse : Elastic.Transport.Products.
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string CalendarId { get; set; }
+	public required string CalendarId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -60,9 +56,5 @@ public sealed partial class PutCalendarJobResponse : Elastic.Transport.Products.
 	/// A list of anomaly detection job identifiers or group names.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> JobIds { get; set; }
+	public required System.Collections.Generic.ICollection<string> JobIds { get; set; }
 }

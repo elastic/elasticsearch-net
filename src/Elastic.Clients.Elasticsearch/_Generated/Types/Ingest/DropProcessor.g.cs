@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DropProcessorConverter))]
 public sealed partial class DropProcessor
 {
-#if NET7_0_OR_GREATER
 	public DropProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DropProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DropProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

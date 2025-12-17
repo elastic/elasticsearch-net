@@ -32,17 +32,11 @@ public sealed partial class BulkError
 		Count = count;
 		Details = details;
 	}
-#if NET7_0_OR_GREATER
+
 	public BulkError()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BulkError()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BulkError(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class BulkError
 	/// The number of errors
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Details about the errors, keyed by role name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ErrorCause> Details { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ErrorCause> Details { get; set; }
 }

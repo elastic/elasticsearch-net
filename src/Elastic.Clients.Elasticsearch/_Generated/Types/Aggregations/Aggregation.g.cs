@@ -28,16 +28,11 @@ public sealed partial class Aggregation
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Aggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Aggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Aggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

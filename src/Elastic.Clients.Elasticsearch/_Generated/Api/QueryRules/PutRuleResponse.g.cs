@@ -37,9 +37,5 @@ public sealed partial class PutRuleResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Result Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

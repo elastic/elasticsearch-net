@@ -31,17 +31,11 @@ public sealed partial class FailProcessor
 	{
 		Message = message;
 	}
-#if NET7_0_OR_GREATER
+
 	public FailProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FailProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FailProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -76,11 +70,7 @@ public sealed partial class FailProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Message { get; set; }
+	public required string Message { get; set; }
 
 	/// <summary>
 	/// <para>

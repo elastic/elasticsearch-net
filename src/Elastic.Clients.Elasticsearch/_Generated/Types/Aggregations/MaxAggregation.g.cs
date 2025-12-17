@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MaxAggregationConverter))]
 public sealed partial class MaxAggregation
 {
-#if NET7_0_OR_GREATER
 	public MaxAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MaxAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MaxAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

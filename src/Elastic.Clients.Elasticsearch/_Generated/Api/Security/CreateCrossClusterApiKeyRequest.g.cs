@@ -64,17 +64,11 @@ public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.El
 		Access = access;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public CreateCrossClusterApiKeyRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CreateCrossClusterApiKeyRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -100,11 +94,7 @@ public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.El
 	/// The creation process automatically converts the access specification to a role descriptor which has relevant privileges assigned accordingly.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -128,11 +118,7 @@ public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.El
 	/// Specifies the name for this API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 }
 
 /// <summary>
@@ -332,6 +318,11 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -549,6 +540,11 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

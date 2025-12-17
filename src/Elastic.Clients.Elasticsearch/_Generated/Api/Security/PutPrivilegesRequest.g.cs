@@ -102,17 +102,11 @@ public sealed partial class PutPrivilegesRequest : Elastic.Clients.Elasticsearch
 	{
 		Privileges = privileges;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutPrivilegesRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PutPrivilegesRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -133,11 +127,7 @@ public sealed partial class PutPrivilegesRequest : Elastic.Clients.Elasticsearch
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> Privileges { get; set; }
+	public required System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> Privileges { get; set; }
 }
 
 /// <summary>
@@ -283,6 +273,11 @@ public readonly partial struct PutPrivilegesRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

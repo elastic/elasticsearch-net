@@ -87,16 +87,10 @@ public sealed partial class PostVotingConfigExclusionsRequestParameters : Elasti
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PostVotingConfigExclusionsRequestConverter))]
 public sealed partial class PostVotingConfigExclusionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public PostVotingConfigExclusionsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PostVotingConfigExclusionsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -256,6 +250,11 @@ public readonly partial struct PostVotingConfigExclusionsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

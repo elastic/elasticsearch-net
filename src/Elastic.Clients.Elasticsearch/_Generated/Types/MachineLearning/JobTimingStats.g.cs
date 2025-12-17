@@ -34,17 +34,11 @@ public sealed partial class JobTimingStats
 		JobId = jobId;
 		TotalBucketProcessingTimeMs = totalBucketProcessingTimeMs;
 	}
-#if NET7_0_OR_GREATER
+
 	public JobTimingStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JobTimingStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JobTimingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,27 +46,11 @@ public sealed partial class JobTimingStats
 	}
 
 	public System.TimeSpan? AverageBucketProcessingTimeMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BucketCount { get; set; }
+	public required long BucketCount { get; set; }
 	public System.TimeSpan? ExponentialAverageBucketProcessingTimeMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ExponentialAverageBucketProcessingTimePerHourMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required System.TimeSpan ExponentialAverageBucketProcessingTimePerHourMs { get; set; }
+	public required string JobId { get; set; }
 	public System.TimeSpan? MaximumBucketProcessingTimeMs { get; set; }
 	public System.TimeSpan? MinimumBucketProcessingTimeMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalBucketProcessingTimeMs { get; set; }
+	public required System.TimeSpan TotalBucketProcessingTimeMs { get; set; }
 }

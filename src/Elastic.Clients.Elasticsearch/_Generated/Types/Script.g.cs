@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScriptConverter))]
 public sealed partial class Script
 {
-#if NET7_0_OR_GREATER
 	public Script()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Script()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

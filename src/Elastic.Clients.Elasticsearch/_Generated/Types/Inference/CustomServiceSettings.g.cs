@@ -33,17 +33,11 @@ public sealed partial class CustomServiceSettings
 		Response = response;
 		SecretParameters = secretParameters;
 	}
-#if NET7_0_OR_GREATER
+
 	public CustomServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CustomServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -140,22 +134,14 @@ public sealed partial class CustomServiceSettings
 	/// The request configuration object.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.CustomRequestParams Request { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.CustomRequestParams Request { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The response configuration object.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.CustomResponseParams Response { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.CustomResponseParams Response { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -168,11 +154,7 @@ public sealed partial class CustomServiceSettings
 	/// }
 	/// </code>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object SecretParameters { get; set; }
+	public required object SecretParameters { get; set; }
 
 	/// <summary>
 	/// <para>

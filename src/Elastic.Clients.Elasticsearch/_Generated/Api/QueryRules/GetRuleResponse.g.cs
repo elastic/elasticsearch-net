@@ -43,11 +43,7 @@ public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elastic
 	/// The format of this action depends on the rule type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -55,11 +51,7 @@ public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elastic
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
 	/// <summary>
@@ -67,11 +59,7 @@ public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elastic
 	/// A unique identifier for the rule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RuleId { get; set; }
+	public required string RuleId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,9 +68,5 @@ public sealed partial class GetRuleResponse : Elastic.Transport.Products.Elastic
 	/// <c>exclude</c> will exclude specific documents from search results.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }

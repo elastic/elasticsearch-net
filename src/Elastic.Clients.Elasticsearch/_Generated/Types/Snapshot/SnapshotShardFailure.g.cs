@@ -35,47 +35,21 @@ public sealed partial class SnapshotShardFailure
 		ShardId = shardId;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotShardFailure()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotShardFailure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexUuid { get; set; }
+	public required string Index { get; set; }
+	public required string IndexUuid { get; set; }
 	public string? NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Reason { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Status { get; set; }
+	public required string Reason { get; set; }
+	public required int ShardId { get; set; }
+	public required string Status { get; set; }
 }

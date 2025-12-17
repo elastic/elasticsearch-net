@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultisearchBodyConverter))]
 public sealed partial class MultisearchBody
 {
-#if NET7_0_OR_GREATER
 	public MultisearchBody()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MultisearchBody()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultisearchBody(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

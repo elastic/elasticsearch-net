@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.StatisticsConverter))]
 public sealed partial class Statistics
 {
-#if NET7_0_OR_GREATER
 	public Statistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Statistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Statistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

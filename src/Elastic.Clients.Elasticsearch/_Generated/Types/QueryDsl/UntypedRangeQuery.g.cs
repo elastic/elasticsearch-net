@@ -31,11 +31,11 @@ public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.Qu
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public UntypedRangeQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +51,7 @@ public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.Qu
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>

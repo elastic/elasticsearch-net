@@ -48,11 +48,11 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clien
 		TotalDefinitionLength = totalDefinitionLength;
 		TotalParts = totalParts;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutTrainedModelDefinitionPartRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -72,11 +72,7 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clien
 	/// The unique identifier of the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -84,44 +80,28 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clien
 	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Part { get => P<int>("part"); set => PR("part", value); }
+	public required int Part { get => P<int>("part"); set => PR("part", value); }
 
 	/// <summary>
 	/// <para>
 	/// The definition part for the model. Must be a base64 encoded string.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Definition { get; set; }
+	public required string Definition { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total uncompressed definition length in bytes. Not base64 encoded.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalDefinitionLength { get; set; }
+	public required long TotalDefinitionLength { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of parts that will be uploaded. Must be greater than 0.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalParts { get; set; }
+	public required int TotalParts { get; set; }
 }
 
 /// <summary>
@@ -225,6 +205,11 @@ public readonly partial struct PutTrainedModelDefinitionPartRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.FetchProfileDebugConverter))]
 public sealed partial class FetchProfileDebug
 {
-#if NET7_0_OR_GREATER
 	public FetchProfileDebug()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FetchProfileDebug()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FetchProfileDebug(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

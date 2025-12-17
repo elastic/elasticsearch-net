@@ -41,17 +41,11 @@ public sealed partial class ClusterIndices
 		SparseVector = sparseVector;
 		Store = store;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterIndices()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterIndices()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterIndices(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,55 +64,35 @@ public sealed partial class ClusterIndices
 	/// Contains statistics about memory used for completion in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.CompletionStats Completion { get; set; }
+	public required Elastic.Clients.Elasticsearch.CompletionStats Completion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indexed dense vector
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats DenseVector { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats DenseVector { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains counts for documents in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DocStats Docs { get; set; }
+	public required Elastic.Clients.Elasticsearch.DocStats Docs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the field data cache of selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; set; }
+	public required Elastic.Clients.Elasticsearch.FielddataStats Fielddata { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -132,11 +106,7 @@ public sealed partial class ClusterIndices
 	/// Contains statistics about the query cache of selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryCacheStats QueryCache { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -145,55 +115,35 @@ public sealed partial class ClusterIndices
 	/// accumulate stats for the entire cluster and return them as part of the ClusterStatsResponse.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats Search { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats Search { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about segments in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; set; }
+	public required Elastic.Clients.Elasticsearch.SegmentsStats Segments { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indexed sparse vector
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats SparseVector { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats SparseVector { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the size of shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.StoreStats Store { get; set; }
+	public required Elastic.Clients.Elasticsearch.StoreStats Store { get; set; }
 
 	/// <summary>
 	/// <para>

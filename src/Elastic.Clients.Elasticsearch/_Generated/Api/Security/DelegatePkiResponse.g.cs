@@ -42,11 +42,7 @@ public sealed partial class DelegatePkiResponse : Elastic.Transport.Products.Ela
 	/// An access token associated with the subject distinguished name of the client's certificate.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AccessToken { get; set; }
+	public required string AccessToken { get; set; }
 	public Elastic.Clients.Elasticsearch.Security.Authentication? Authentication { get; set; }
 
 	/// <summary>
@@ -54,20 +50,12 @@ public sealed partial class DelegatePkiResponse : Elastic.Transport.Products.Ela
 	/// The amount of time (in seconds) before the token expires.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ExpiresIn { get; set; }
+	public required long ExpiresIn { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

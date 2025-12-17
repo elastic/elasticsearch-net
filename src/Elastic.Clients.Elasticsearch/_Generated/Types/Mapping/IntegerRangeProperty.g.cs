@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.IntegerRangePropertyConverter))]
 public sealed partial class IntegerRangeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-#if NET7_0_OR_GREATER
 	public IntegerRangeProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IntegerRangeProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IntegerRangeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

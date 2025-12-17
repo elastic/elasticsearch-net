@@ -37,17 +37,11 @@ public sealed partial class QueryCacheStats
 		MissCount = missCount;
 		TotalCount = totalCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public QueryCacheStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QueryCacheStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryCacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,44 +54,28 @@ public sealed partial class QueryCacheStats
 	/// This number includes current and evicted entries.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CacheCount { get; set; }
+	public required long CacheCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of entries currently in the query cache across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CacheSize { get; set; }
+	public required long CacheSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of query cache evictions across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Evictions { get; set; }
+	public required long Evictions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total count of query cache hits across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HitCount { get; set; }
+	public required long HitCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,31 +89,19 @@ public sealed partial class QueryCacheStats
 	/// Total amount, in bytes, of memory used for the query cache across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemorySizeInBytes { get; set; }
+	public required long MemorySizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total count of query cache misses across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MissCount { get; set; }
+	public required long MissCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total count of hits and misses in the query cache across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalCount { get; set; }
+	public required long TotalCount { get; set; }
 }

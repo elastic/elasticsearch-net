@@ -32,31 +32,17 @@ public sealed partial class UnratedDocument
 		Id = id;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public UnratedDocument()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UnratedDocument()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UnratedDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
 }

@@ -31,17 +31,11 @@ public sealed partial class BucketCorrelationFunctionCountCorrelation
 	{
 		Indicator = indicator;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketCorrelationFunctionCountCorrelation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketCorrelationFunctionCountCorrelation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketCorrelationFunctionCountCorrelation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class BucketCorrelationFunctionCountCorrelation
 	/// The indicator with which to correlate the configured <c>bucket_path</c> values.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Indicator { get; set; }
 }
 
 public readonly partial struct BucketCorrelationFunctionCountCorrelationDescriptor

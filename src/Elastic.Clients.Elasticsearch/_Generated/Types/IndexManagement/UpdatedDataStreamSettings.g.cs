@@ -35,17 +35,11 @@ public sealed partial class UpdatedDataStreamSettings
 		Name = name;
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public UpdatedDataStreamSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UpdatedDataStreamSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UpdatedDataStreamSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class UpdatedDataStreamSettings
 	/// mode), it is <c>true</c>. If an error occurred, it is <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool AppliedToDataStream { get; set; }
+	public required bool AppliedToDataStream { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -70,11 +60,7 @@ public sealed partial class UpdatedDataStreamSettings
 	/// template and the settings specific to this data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings EffectiveSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings EffectiveSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,31 +74,19 @@ public sealed partial class UpdatedDataStreamSettings
 	/// Information about whether and where each setting was applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingResults IndexSettingsResults { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingResults IndexSettingsResults { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The data stream name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The settings that are specfic to this data stream that will override any settings from the matching index template.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }

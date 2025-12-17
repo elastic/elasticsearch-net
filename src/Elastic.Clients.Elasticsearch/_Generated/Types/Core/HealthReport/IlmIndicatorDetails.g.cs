@@ -33,36 +33,18 @@ public sealed partial class IlmIndicatorDetails
 		Policies = policies;
 		StagnatingIndices = stagnatingIndices;
 	}
-#if NET7_0_OR_GREATER
+
 	public IlmIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IlmIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IlmIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LifecycleOperationMode IlmStatus { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Policies { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int StagnatingIndices { get; set; }
+	public required Elastic.Clients.Elasticsearch.LifecycleOperationMode IlmStatus { get; set; }
+	public required long Policies { get; set; }
+	public required int StagnatingIndices { get; set; }
 }

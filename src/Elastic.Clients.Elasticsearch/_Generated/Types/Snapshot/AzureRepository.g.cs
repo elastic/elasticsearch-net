@@ -31,17 +31,11 @@ public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snap
 	{
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public AzureRepository()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AzureRepository()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snap
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ShapeFieldQueryConverter))]
 public sealed partial class ShapeFieldQuery
 {
-#if NET7_0_OR_GREATER
 	public ShapeFieldQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ShapeFieldQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShapeFieldQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

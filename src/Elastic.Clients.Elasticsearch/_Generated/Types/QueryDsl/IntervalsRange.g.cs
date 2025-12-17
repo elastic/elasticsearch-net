@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsRangeConverter))]
 public sealed partial class IntervalsRange
 {
-#if NET7_0_OR_GREATER
 	public IntervalsRange()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IntervalsRange()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IntervalsRange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

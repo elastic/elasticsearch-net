@@ -55,11 +55,11 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 		Criteria = criteria;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutRuleRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,22 +79,14 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 	/// The unique identifier of the query rule within the specified ruleset to be created or updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier of the query ruleset containing the rule to be created or updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -102,11 +94,7 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 	/// The format of this action depends on the rule type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,11 +102,7 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
 	/// <summary>
@@ -126,11 +110,7 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 	/// The type of rule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
 /// <summary>
@@ -302,6 +282,11 @@ public readonly partial struct PutRuleRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

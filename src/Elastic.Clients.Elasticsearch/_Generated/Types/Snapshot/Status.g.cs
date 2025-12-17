@@ -38,17 +38,11 @@ public sealed partial class Status
 		Stats = stats;
 		Uuid = uuid;
 	}
-#if NET7_0_OR_GREATER
+
 	public Status()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Status()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Status(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,49 +54,29 @@ public sealed partial class Status
 	/// Indicates whether the current cluster state is included in the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IncludeGlobalState { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices { get; set; }
+	public required bool IncludeGlobalState { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the repository that includes the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Repository { get; set; }
+	public required string Repository { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics for the shards in the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Snapshot { get; set; }
+	public required string Snapshot { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -126,31 +100,19 @@ public sealed partial class Status
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string State { get; set; }
+	public required string State { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Details about the number (<c>file_count</c>) and size (<c>size_in_bytes</c>) of files included in the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The universally unique identifier (UUID) for the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uuid { get; set; }
+	public required string Uuid { get; set; }
 }

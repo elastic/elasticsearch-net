@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ElisionTokenFilterConverter))]
 public sealed partial class ElisionTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
-#if NET7_0_OR_GREATER
 	public ElisionTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ElisionTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElisionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

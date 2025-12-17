@@ -55,11 +55,11 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	public PutAliasRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("index", indices).Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public PutAliasRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -81,11 +81,7 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Wildcard patterns that match both data streams and indices return an error.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -94,11 +90,7 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -339,6 +331,11 @@ public readonly partial struct PutAliasRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -544,6 +541,11 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

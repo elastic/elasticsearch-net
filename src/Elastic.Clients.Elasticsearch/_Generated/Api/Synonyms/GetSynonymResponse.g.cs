@@ -42,20 +42,12 @@ public sealed partial class GetSynonymResponse : Elastic.Transport.Products.Elas
 	/// The total number of synonyms rules that the synonyms set contains.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Synonym rule details.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead> SynonymsSet { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead> SynonymsSet { get; set; }
 }

@@ -42,31 +42,19 @@ public sealed partial class QueryUserResponse : Elastic.Transport.Products.Elast
 	/// The number of users returned in the response.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of users found.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of users that match the query.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> Users { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> Users { get; set; }
 }

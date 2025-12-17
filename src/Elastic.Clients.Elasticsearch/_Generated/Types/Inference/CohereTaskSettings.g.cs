@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CohereTaskSettingsConverter))]
 public sealed partial class CohereTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public CohereTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CohereTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CohereTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityLmjConverter))]
 public sealed partial class SettingsSimilarityLmj : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
-#if NET7_0_OR_GREATER
 	public SettingsSimilarityLmj()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SettingsSimilarityLmj()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

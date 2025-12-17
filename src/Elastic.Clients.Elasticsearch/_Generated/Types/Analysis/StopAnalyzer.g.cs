@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StopAnalyzerConverter))]
 public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public StopAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StopAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StopAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -35,46 +35,20 @@ public sealed partial class MinimalLicenseInformation
 		Type = type;
 		Uid = uid;
 	}
-#if NET7_0_OR_GREATER
+
 	public MinimalLicenseInformation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MinimalLicenseInformation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MinimalLicenseInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ExpiryDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Mode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uid { get; set; }
+	public required System.DateTimeOffset ExpiryDateInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+	public required string Uid { get; set; }
 }

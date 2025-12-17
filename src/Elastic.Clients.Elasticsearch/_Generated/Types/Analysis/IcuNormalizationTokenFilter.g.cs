@@ -31,28 +31,18 @@ public sealed partial class IcuNormalizationTokenFilter : Elastic.Clients.Elasti
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public IcuNormalizationTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IcuNormalizationTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IcuNormalizationTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Name { get; set; }
 
 	public string Type => "icu_normalizer";
 

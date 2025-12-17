@@ -35,16 +35,10 @@ public sealed partial class GetTrialStatusRequestParameters : Elastic.Transport.
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.GetTrialStatusRequestConverter))]
 public sealed partial class GetTrialStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public GetTrialStatusRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetTrialStatusRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -102,6 +96,11 @@ public readonly partial struct GetTrialStatusRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

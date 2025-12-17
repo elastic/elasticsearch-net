@@ -31,26 +31,16 @@ public sealed partial class IndexSegment
 	{
 		Shards = shards;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexSegment()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexSegment()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexSegment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>> Shards { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>> Shards { get; set; }
 }

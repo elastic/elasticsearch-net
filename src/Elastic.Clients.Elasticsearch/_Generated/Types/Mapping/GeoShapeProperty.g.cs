@@ -33,16 +33,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.GeoShapePropertyConverter))]
 public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
-#if NET7_0_OR_GREATER
 	public GeoShapeProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GeoShapeProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoShapeProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

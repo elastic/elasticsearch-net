@@ -37,17 +37,11 @@ public sealed partial class ClusterJvmVersion
 		VmVendor = vmVendor;
 		VmVersion = vmVersion;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterJvmVersion()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterJvmVersion()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterJvmVersion(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,66 +53,42 @@ public sealed partial class ClusterJvmVersion
 	/// Always <c>true</c>. All distributions come with a bundled Java Development Kit (JDK).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool BundledJdk { get; set; }
+	public required bool BundledJdk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of selected nodes using JVM.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, a bundled JDK is in use by JVM.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool UsingBundledJdk { get; set; }
+	public required bool UsingBundledJdk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Version of JVM used by one or more selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string Version { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the JVM.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmName { get; set; }
+	public required string VmName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Vendor of the JVM.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmVendor { get; set; }
+	public required string VmVendor { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -126,9 +96,5 @@ public sealed partial class ClusterJvmVersion
 	/// The full version number includes a plus sign (+) followed by the build number.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmVersion { get; set; }
+	public required string VmVersion { get; set; }
 }

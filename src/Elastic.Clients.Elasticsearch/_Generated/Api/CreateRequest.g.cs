@@ -237,11 +237,11 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 	{
 		Document = document;
 	}
-#if NET7_0_OR_GREATER
+
 	public CreateRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -262,11 +262,7 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 	/// To automatically generate a document ID, use the <c>POST /&lt;target>/_doc/</c> request format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -275,11 +271,7 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 	/// If the target doesn't exist and doesn’t match a data stream template, this request creates the index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -365,11 +357,7 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	TDocument Document { get; set; }
+	public required TDocument Document { get; set; }
 }
 
 /// <summary>
@@ -682,6 +670,11 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

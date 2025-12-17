@@ -34,17 +34,11 @@ public sealed partial class QueryRulesetListItem
 		RuleTotalCount = ruleTotalCount;
 		RuleTypeCounts = ruleTypeCounts;
 	}
-#if NET7_0_OR_GREATER
+
 	public QueryRulesetListItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QueryRulesetListItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRulesetListItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,42 +53,26 @@ public sealed partial class QueryRulesetListItem
 	/// NOTE: The counts in <c>rule_criteria_types_counts</c> may be larger than the value of <c>rule_total_count</c> because a rule may have multiple criteria.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RuleCriteriaTypesCounts { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A unique identifier for the ruleset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RulesetId { get; set; }
+	public required string RulesetId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of rules associated with the ruleset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RuleTotalCount { get; set; }
+	public required int RuleTotalCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A map of rule type (for example, <c>pinned</c>) to the number of rules of that type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> RuleTypeCounts { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RuleTypeCounts { get; set; }
 }

@@ -37,15 +37,7 @@ public sealed partial class GetScriptResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Found { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
+	public required bool Found { get; set; }
+	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.StoredScript? Script { get; set; }
 }

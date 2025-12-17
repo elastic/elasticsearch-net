@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.DecayPlacementConverterFactory))]
 public sealed partial class DecayPlacement<TOrigin, TScale>
 {
-#if NET7_0_OR_GREATER
 	public DecayPlacement()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DecayPlacement()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DecayPlacement(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

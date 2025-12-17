@@ -34,41 +34,19 @@ public sealed partial class Impact
 		ImpactAreas = impactAreas;
 		Severity = severity;
 	}
-#if NET7_0_OR_GREATER
+
 	public Impact()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Impact()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Impact(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea> ImpactAreas { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Severity { get; set; }
+	public required string Description { get; set; }
+	public required string Id { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.ImpactArea> ImpactAreas { get; set; }
+	public required int Severity { get; set; }
 }

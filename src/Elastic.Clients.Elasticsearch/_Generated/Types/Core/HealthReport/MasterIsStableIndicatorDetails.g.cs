@@ -32,17 +32,11 @@ public sealed partial class MasterIsStableIndicatorDetails
 		CurrentMaster = currentMaster;
 		RecentMasters = recentMasters;
 	}
-#if NET7_0_OR_GREATER
+
 	public MasterIsStableIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MasterIsStableIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MasterIsStableIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,15 +44,7 @@ public sealed partial class MasterIsStableIndicatorDetails
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorClusterFormationNode>? ClusterFormation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode CurrentMaster { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode CurrentMaster { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory? ExceptionFetchingHistory { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode> RecentMasters { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorNode> RecentMasters { get; set; }
 }

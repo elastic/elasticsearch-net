@@ -32,28 +32,18 @@ public sealed partial class GeoDecayFunction : Elastic.Clients.Elasticsearch.Que
 		Field = field;
 		Placement = placement;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoDecayFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoDecayFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,11 +51,7 @@ public sealed partial class GeoDecayFunction : Elastic.Clients.Elasticsearch.Que
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Placement { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string> Placement { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "geo";
 }

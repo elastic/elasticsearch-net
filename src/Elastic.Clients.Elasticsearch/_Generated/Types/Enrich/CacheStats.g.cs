@@ -38,61 +38,23 @@ public sealed partial class CacheStats
 		NodeId = nodeId;
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public CacheStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CacheStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Evictions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Hits { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan HitsTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Misses { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MissesTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required int Count { get; set; }
+	public required int Evictions { get; set; }
+	public required int Hits { get; set; }
+	public required System.TimeSpan HitsTimeInMillis { get; set; }
+	public required int Misses { get; set; }
+	public required System.TimeSpan MissesTimeInMillis { get; set; }
+	public required string NodeId { get; set; }
+	public required long SizeInBytes { get; set; }
 }

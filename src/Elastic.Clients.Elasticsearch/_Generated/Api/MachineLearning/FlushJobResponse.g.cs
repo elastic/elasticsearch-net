@@ -37,11 +37,7 @@ public sealed partial class FlushJobResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Flushed { get; set; }
+	public required bool Flushed { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterIndicesShardsConverter))]
 public sealed partial class ClusterIndicesShards
 {
-#if NET7_0_OR_GREATER
 	public ClusterIndicesShards()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ClusterIndicesShards()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterIndicesShards(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

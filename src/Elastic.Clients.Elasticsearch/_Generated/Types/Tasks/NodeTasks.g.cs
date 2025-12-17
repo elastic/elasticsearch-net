@@ -31,17 +31,11 @@ public sealed partial class NodeTasks
 	{
 		Tasks = tasks;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeTasks()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeTasks()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeTasks(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,10 +47,6 @@ public sealed partial class NodeTasks
 	public string? Ip { get; set; }
 	public string? Name { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.TaskInfo> Tasks { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Tasks.TaskInfo> Tasks { get; set; }
 	public string? TransportAddress { get; set; }
 }

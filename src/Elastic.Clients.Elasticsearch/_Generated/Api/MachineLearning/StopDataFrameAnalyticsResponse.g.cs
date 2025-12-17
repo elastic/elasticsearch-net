@@ -37,9 +37,5 @@ public sealed partial class StopDataFrameAnalyticsResponse : Elastic.Transport.P
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Stopped { get; set; }
+	public required bool Stopped { get; set; }
 }

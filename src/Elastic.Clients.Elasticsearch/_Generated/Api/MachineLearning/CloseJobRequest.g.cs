@@ -45,11 +45,11 @@ public sealed partial class CloseJobRequest : Elastic.Clients.Elasticsearch.Requ
 	public CloseJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CloseJobRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CloseJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +69,7 @@ public sealed partial class CloseJobRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Identifier for the anomaly detection job. It can be a job identifier, a group name, or a wildcard expression. You can close multiple anomaly detection jobs in a single API request by using a group name, a comma-separated list of jobs, or a wildcard expression. You can close all jobs by using <c>_all</c> or by specifying <c>*</c> as the job identifier.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -190,6 +186,11 @@ public readonly partial struct CloseJobRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.CloseJobRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -32,17 +32,11 @@ public sealed partial class CombinedFieldsQuery
 		Fields = fields;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public CombinedFieldsQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CombinedFieldsQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CombinedFieldsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,11 +65,7 @@ public sealed partial class CombinedFieldsQuery
 	/// List of fields to search. Field wildcard patterns are allowed. Only <c>text</c> fields are supported, and they must all have the same search <c>analyzer</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -97,11 +87,7 @@ public sealed partial class CombinedFieldsQuery
 	/// The <c>combined_fields</c> query analyzes the provided text before performing a search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

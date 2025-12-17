@@ -31,17 +31,11 @@ public sealed partial class DataframeEvaluationSummaryAucRoc
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeEvaluationSummaryAucRoc()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeEvaluationSummaryAucRoc()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationSummaryAucRoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,9 +43,5 @@ public sealed partial class DataframeEvaluationSummaryAucRoc
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRocCurveItem>? Curve { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Value { get; set; }
+	public required double Value { get; set; }
 }

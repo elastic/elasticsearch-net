@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamVisibilityConverter))]
 public sealed partial class DataStreamVisibility
 {
-#if NET7_0_OR_GREATER
 	public DataStreamVisibility()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataStreamVisibility()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamVisibility(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

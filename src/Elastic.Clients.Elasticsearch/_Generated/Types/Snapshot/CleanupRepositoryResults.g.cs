@@ -32,17 +32,11 @@ public sealed partial class CleanupRepositoryResults
 		DeletedBlobs = deletedBlobs;
 		DeletedBytes = deletedBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public CleanupRepositoryResults()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CleanupRepositoryResults()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CleanupRepositoryResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,20 +49,12 @@ public sealed partial class CleanupRepositoryResults
 	/// A non-zero value indicates that unreferenced blobs were found and subsequently cleaned up.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DeletedBlobs { get; set; }
+	public required long DeletedBlobs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of bytes freed by cleanup operations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DeletedBytes { get; set; }
+	public required long DeletedBytes { get; set; }
 }

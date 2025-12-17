@@ -49,22 +49,14 @@ public sealed partial class GetResponse<TDocument> : Elastic.Transport.Products.
 	/// Indicates whether the document exists.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Ignored { get; set; }
 
 	/// <summary>
@@ -72,11 +64,7 @@ public sealed partial class GetResponse<TDocument> : Elastic.Transport.Products.
 	/// The name of the index the document belongs to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>

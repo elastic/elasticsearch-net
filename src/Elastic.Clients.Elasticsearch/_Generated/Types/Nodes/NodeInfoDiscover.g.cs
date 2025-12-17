@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoDiscoverConverter))]
 public sealed partial class NodeInfoDiscover
 {
-#if NET7_0_OR_GREATER
 	public NodeInfoDiscover()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodeInfoDiscover()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoDiscover(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

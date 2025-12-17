@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RateLimitSettingConverter))]
 public sealed partial class RateLimitSetting
 {
-#if NET7_0_OR_GREATER
 	public RateLimitSetting()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RateLimitSetting()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RateLimitSetting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

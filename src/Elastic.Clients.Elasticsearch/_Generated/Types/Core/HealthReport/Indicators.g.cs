@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.IndicatorsConverter))]
 public sealed partial class Indicators
 {
-#if NET7_0_OR_GREATER
 	public Indicators()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Indicators()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Indicators(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

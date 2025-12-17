@@ -37,56 +37,22 @@ public sealed partial class ShardHealthStats
 		UnassignedPrimaryShards = unassignedPrimaryShards;
 		UnassignedShards = unassignedShards;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardHealthStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardHealthStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardHealthStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ActiveShards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int InitializingShards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool PrimaryActive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RelocatingShards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UnassignedPrimaryShards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UnassignedShards { get; set; }
+	public required int ActiveShards { get; set; }
+	public required int InitializingShards { get; set; }
+	public required bool PrimaryActive { get; set; }
+	public required int RelocatingShards { get; set; }
+	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public required int UnassignedPrimaryShards { get; set; }
+	public required int UnassignedShards { get; set; }
 }

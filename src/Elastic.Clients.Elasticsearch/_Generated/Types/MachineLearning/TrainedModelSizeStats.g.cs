@@ -32,17 +32,11 @@ public sealed partial class TrainedModelSizeStats
 		ModelSizeBytes = modelSizeBytes;
 		RequiredNativeMemoryBytes = requiredNativeMemoryBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelSizeStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelSizeStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelSizeStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class TrainedModelSizeStats
 	/// The size of the model in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize ModelSizeBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize ModelSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The amount of memory required to load the model in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize RequiredNativeMemoryBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize RequiredNativeMemoryBytes { get; set; }
 }

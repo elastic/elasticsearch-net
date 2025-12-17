@@ -32,17 +32,11 @@ public sealed partial class RecoveryStartStatus
 		CheckIndexTimeInMillis = checkIndexTimeInMillis;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public RecoveryStartStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RecoveryStartStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RecoveryStartStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,15 +44,7 @@ public sealed partial class RecoveryStartStatus
 	}
 
 	public Elastic.Clients.Elasticsearch.Duration? CheckIndexTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan CheckIndexTimeInMillis { get; set; }
+	public required System.TimeSpan CheckIndexTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

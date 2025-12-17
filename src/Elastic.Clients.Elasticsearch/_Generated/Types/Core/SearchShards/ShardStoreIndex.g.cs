@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.Json.ShardStoreIndexConverter))]
 public sealed partial class ShardStoreIndex
 {
-#if NET7_0_OR_GREATER
 	public ShardStoreIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ShardStoreIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardStoreIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,17 +31,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 	{
 		Processors = processors;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessorMultiEncoding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisFeatureProcessorMultiEncoding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessorMultiEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 	/// The ordered array of custom processors to execute. Must be more than 1.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<int> Processors { get; set; }
+	public required System.Collections.Generic.ICollection<int> Processors { get; set; }
 }
 
 public readonly partial struct DataframeAnalysisFeatureProcessorMultiEncodingDescriptor

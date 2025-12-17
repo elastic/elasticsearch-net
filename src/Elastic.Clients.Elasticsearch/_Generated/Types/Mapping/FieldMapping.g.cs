@@ -32,31 +32,17 @@ public sealed partial class FieldMapping
 		FullName = fullName;
 		Mapping = mapping;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FullName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.IProperty> Mapping { get; set; }
+	public required string FullName { get; set; }
+	public required System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.IProperty> Mapping { get; set; }
 }

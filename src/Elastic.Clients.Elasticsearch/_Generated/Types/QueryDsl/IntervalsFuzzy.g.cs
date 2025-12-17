@@ -31,17 +31,11 @@ public sealed partial class IntervalsFuzzy
 	{
 		Term = term;
 	}
-#if NET7_0_OR_GREATER
+
 	public IntervalsFuzzy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IntervalsFuzzy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IntervalsFuzzy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +68,7 @@ public sealed partial class IntervalsFuzzy
 	/// The term to match.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Term { get; set; }
+	public required string Term { get; set; }
 
 	/// <summary>
 	/// <para>

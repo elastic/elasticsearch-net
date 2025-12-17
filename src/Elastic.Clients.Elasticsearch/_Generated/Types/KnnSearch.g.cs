@@ -31,17 +31,11 @@ public sealed partial class KnnSearch
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public KnnSearch()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KnnSearch()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KnnSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class KnnSearch
 	/// The name of the vector field to search against
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>

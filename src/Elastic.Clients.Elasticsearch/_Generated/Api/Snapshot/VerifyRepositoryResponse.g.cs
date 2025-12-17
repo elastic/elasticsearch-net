@@ -43,9 +43,5 @@ public sealed partial class VerifyRepositoryResponse : Elastic.Transport.Product
 	/// The key is the ID of the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.CompactNodeInfo> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.CompactNodeInfo> Nodes { get; set; }
 }

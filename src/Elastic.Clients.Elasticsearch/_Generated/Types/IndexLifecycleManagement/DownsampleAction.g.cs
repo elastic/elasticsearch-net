@@ -31,28 +31,18 @@ public sealed partial class DownsampleAction
 	{
 		FixedInterval = fixedInterval;
 	}
-#if NET7_0_OR_GREATER
+
 	public DownsampleAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DownsampleAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DownsampleAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FixedInterval { get; set; }
+	public required string FixedInterval { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? WaitTimeout { get; set; }
 }
 

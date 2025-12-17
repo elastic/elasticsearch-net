@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionMetricsHuberConverter))]
 public sealed partial class DataframeEvaluationRegressionMetricsHuber
 {
-#if NET7_0_OR_GREATER
 	public DataframeEvaluationRegressionMetricsHuber()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeEvaluationRegressionMetricsHuber()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

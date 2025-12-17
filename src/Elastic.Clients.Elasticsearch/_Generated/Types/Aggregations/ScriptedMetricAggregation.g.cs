@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ScriptedMetricAggregationConverter))]
 public sealed partial class ScriptedMetricAggregation
 {
-#if NET7_0_OR_GREATER
 	public ScriptedMetricAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ScriptedMetricAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptedMetricAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

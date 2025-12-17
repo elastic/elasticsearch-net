@@ -37,17 +37,11 @@ public sealed partial class RemoteClusterPrivileges
 		Clusters = clusters;
 		Privileges = privileges;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoteClusterPrivileges()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoteClusterPrivileges()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,22 +53,14 @@ public sealed partial class RemoteClusterPrivileges
 	/// A list of cluster aliases to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Clusters { get; set; }
+	public required Elastic.Clients.Elasticsearch.Names Clusters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The cluster level privileges that owners of the role have on the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> Privileges { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> Privileges { get; set; }
 }
 
 /// <summary>

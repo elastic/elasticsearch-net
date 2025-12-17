@@ -31,17 +31,11 @@ public sealed partial class InferenceProcessor
 	{
 		ModelId = modelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -107,11 +101,7 @@ public sealed partial class InferenceProcessor
 	/// The ID or alias for the trained model, or the ID of the deployment.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
 
 	/// <summary>
 	/// <para>

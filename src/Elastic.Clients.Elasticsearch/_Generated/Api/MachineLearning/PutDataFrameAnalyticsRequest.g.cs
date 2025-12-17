@@ -57,11 +57,11 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 		Dest = dest;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutDataFrameAnalyticsRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -83,11 +83,7 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 	/// underscores. It must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -110,11 +106,7 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 	/// detection, or regression.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -162,11 +154,7 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 	/// The destination configuration.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
 	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
 	/// <summary>
@@ -196,11 +184,7 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 	/// The configuration of how to source the analysis data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 	public string? Version { get; set; }
 }
 
@@ -573,6 +557,11 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -944,6 +933,11 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

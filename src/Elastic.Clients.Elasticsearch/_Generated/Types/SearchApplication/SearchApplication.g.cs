@@ -33,17 +33,11 @@ public sealed partial class SearchApplication
 		Name = name;
 		UpdatedAtMillis = updatedAtMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchApplication()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchApplication()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchApplication(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,22 +56,14 @@ public sealed partial class SearchApplication
 	/// Indices that are part of the Search Application.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Search Application name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,9 +77,5 @@ public sealed partial class SearchApplication
 	/// Last time the Search Application was updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset UpdatedAtMillis { get; set; }
+	public required System.DateTimeOffset UpdatedAtMillis { get; set; }
 }

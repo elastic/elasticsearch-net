@@ -41,17 +41,11 @@ public sealed partial class DataStream
 		Template = template;
 		TimestampField = timestampField;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStream()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStream()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStream(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -77,22 +71,14 @@ public sealed partial class DataStream
 	/// Current generation for the data stream. This number acts as a cumulative count of the stream’s rollovers, starting at 1.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Generation { get; set; }
+	public required int Generation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the data stream is hidden.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Hidden { get; set; }
+	public required bool Hidden { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -110,11 +96,7 @@ public sealed partial class DataStream
 	/// The last item in this array contains information about the stream’s current write index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -136,33 +118,21 @@ public sealed partial class DataStream
 	/// Name of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the lifecycle system that'll manage the next generation of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy NextGenerationManagedBy { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy NextGenerationManagedBy { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates if ILM should take precedence over DSL in case both are configured to managed this data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool PreferIlm { get; set; }
+	public required bool PreferIlm { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -176,11 +146,7 @@ public sealed partial class DataStream
 	/// If <c>true</c>, the next write to this data stream will trigger a rollover first and the document will be indexed in the new backing index. If the rollover fails the indexing request will fail too.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool RolloverOnWrite { get; set; }
+	public required bool RolloverOnWrite { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -188,11 +154,7 @@ public sealed partial class DataStream
 	/// template.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -200,11 +162,7 @@ public sealed partial class DataStream
 	/// This health status is based on the state of the primary and replica shards of the stream’s backing indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -219,20 +177,12 @@ public sealed partial class DataStream
 	/// The template’s index pattern must match the name of this data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Template { get; set; }
+	public required string Template { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Information about the <c>@timestamp</c> field in the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField TimestampField { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField TimestampField { get; set; }
 }

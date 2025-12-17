@@ -42,11 +42,7 @@ public sealed partial class CreateCrossClusterApiKeyResponse : Elastic.Transport
 	/// Generated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -55,11 +51,7 @@ public sealed partial class CreateCrossClusterApiKeyResponse : Elastic.Transport
 	/// by a colon (<c>:</c>).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Encoded { get; set; }
+	public required string Encoded { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -73,20 +65,12 @@ public sealed partial class CreateCrossClusterApiKeyResponse : Elastic.Transport
 	/// Unique ID for this API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the name for this API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

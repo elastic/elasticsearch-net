@@ -31,17 +31,11 @@ public sealed partial class SearchApplicationParameters
 	{
 		Indices = indices;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchApplicationParameters()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchApplicationParameters()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchApplicationParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class SearchApplicationParameters
 	/// Indices that are part of the Search Application.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Indices { get; set; }
 
 	/// <summary>
 	/// <para>

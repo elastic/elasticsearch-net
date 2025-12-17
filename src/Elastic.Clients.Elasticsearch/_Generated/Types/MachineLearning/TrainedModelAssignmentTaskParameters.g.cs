@@ -39,17 +39,11 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 		QueueCapacity = queueCapacity;
 		ThreadsPerAllocation = threadsPerAllocation;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelAssignmentTaskParameters()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelAssignmentTaskParameters()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelAssignmentTaskParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,79 +62,43 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 	/// The unique identifier for the trained model deployment.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DeploymentId { get; set; }
+	public required string DeploymentId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the trained model in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of allocations this model is assigned across ML nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfAllocations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
+	public required int NumberOfAllocations { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of inference requests are allowed in the queue at a time.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int QueueCapacity { get; set; }
+	public required int QueueCapacity { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of threads per allocation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ThreadsPerAllocation { get; set; }
+	public required int ThreadsPerAllocation { get; set; }
 }

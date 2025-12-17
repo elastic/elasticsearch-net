@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedConfigConverter))]
 public sealed partial class DatafeedConfig
 {
-#if NET7_0_OR_GREATER
 	public DatafeedConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DatafeedConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatafeedConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

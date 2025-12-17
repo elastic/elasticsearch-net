@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.AdaptiveSelectionConverter))]
 public sealed partial class AdaptiveSelection
 {
-#if NET7_0_OR_GREATER
 	public AdaptiveSelection()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AdaptiveSelection()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AdaptiveSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

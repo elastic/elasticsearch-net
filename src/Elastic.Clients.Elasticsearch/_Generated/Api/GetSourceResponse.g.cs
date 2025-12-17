@@ -37,9 +37,5 @@ public partial class GetSourceResponse<TDocument> : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-TDocument Source { get; set; }
+	public required TDocument Source { get; set; }
 }

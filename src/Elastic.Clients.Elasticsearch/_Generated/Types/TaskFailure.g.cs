@@ -34,41 +34,19 @@ public sealed partial class TaskFailure
 		Status = status;
 		TaskId = taskId;
 	}
-#if NET7_0_OR_GREATER
+
 	public TaskFailure()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TaskFailure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TaskFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TaskId { get; set; }
+	public required string NodeId { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
+	public required string Status { get; set; }
+	public required long TaskId { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RerouteProcessorConverter))]
 public sealed partial class RerouteProcessor
 {
-#if NET7_0_OR_GREATER
 	public RerouteProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RerouteProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RerouteProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

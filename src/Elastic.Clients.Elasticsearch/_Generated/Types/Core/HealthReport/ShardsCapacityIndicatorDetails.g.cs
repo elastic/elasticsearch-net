@@ -32,31 +32,17 @@ public sealed partial class ShardsCapacityIndicatorDetails
 		Data = data;
 		Frozen = frozen;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardsCapacityIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardsCapacityIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardsCapacityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Data { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Frozen { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Data { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail Frozen { get; set; }
 }

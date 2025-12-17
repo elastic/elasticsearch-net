@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoPathConverter))]
 public sealed partial class NodeInfoPath
 {
-#if NET7_0_OR_GREATER
 	public NodeInfoPath()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodeInfoPath()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoPath(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

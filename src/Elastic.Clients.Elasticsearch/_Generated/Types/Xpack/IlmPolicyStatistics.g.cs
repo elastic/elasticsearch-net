@@ -32,31 +32,17 @@ public sealed partial class IlmPolicyStatistics
 		IndicesManaged = indicesManaged;
 		Phases = phases;
 	}
-#if NET7_0_OR_GREATER
+
 	public IlmPolicyStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IlmPolicyStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IlmPolicyStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndicesManaged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Phases Phases { get; set; }
+	public required int IndicesManaged { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Phases Phases { get; set; }
 }

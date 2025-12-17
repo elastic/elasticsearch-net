@@ -36,26 +36,16 @@ public sealed partial class TextEmbeddingByteResult
 	{
 		Embedding = embedding;
 	}
-#if NET7_0_OR_GREATER
+
 	public TextEmbeddingByteResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TextEmbeddingByteResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextEmbeddingByteResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<byte> Embedding { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<byte> Embedding { get; set; }
 }

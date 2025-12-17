@@ -33,36 +33,18 @@ public sealed partial class ShardSequenceNumber
 		LocalCheckpoint = localCheckpoint;
 		MaxSeqNo = maxSeqNo;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardSequenceNumber()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardSequenceNumber()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardSequenceNumber(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long GlobalCheckpoint { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LocalCheckpoint { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxSeqNo { get; set; }
+	public required long GlobalCheckpoint { get; set; }
+	public required long LocalCheckpoint { get; set; }
+	public required long MaxSeqNo { get; set; }
 }

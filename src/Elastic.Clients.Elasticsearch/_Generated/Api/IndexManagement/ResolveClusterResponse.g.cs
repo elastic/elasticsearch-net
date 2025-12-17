@@ -37,9 +37,5 @@ public sealed partial class ResolveClusterResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> Infos { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> Infos { get; set; }
 }

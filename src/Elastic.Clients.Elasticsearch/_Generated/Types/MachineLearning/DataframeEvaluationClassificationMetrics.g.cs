@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationClassificationMetricsConverter))]
 public sealed partial class DataframeEvaluationClassificationMetrics
 {
-#if NET7_0_OR_GREATER
 	public DataframeEvaluationClassificationMetrics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeEvaluationClassificationMetrics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

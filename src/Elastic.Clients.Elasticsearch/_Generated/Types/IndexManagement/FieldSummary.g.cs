@@ -38,61 +38,23 @@ public sealed partial class FieldSummary
 		StoredFields = storedFields;
 		TermVectors = termVectors;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Any { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DocValues { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex InvertedIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int KnnVectors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Norms { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Points { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int StoredFields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TermVectors { get; set; }
+	public required int Any { get; set; }
+	public required int DocValues { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.InvertedIndex InvertedIndex { get; set; }
+	public required int KnnVectors { get; set; }
+	public required int Norms { get; set; }
+	public required int Points { get; set; }
+	public required int StoredFields { get; set; }
+	public required int TermVectors { get; set; }
 }

@@ -31,26 +31,16 @@ public sealed partial class ClusterNode
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterNode()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterNode()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

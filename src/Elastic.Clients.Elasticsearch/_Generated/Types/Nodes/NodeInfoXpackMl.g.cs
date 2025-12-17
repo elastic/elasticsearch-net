@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoXpackMlConverter))]
 public sealed partial class NodeInfoXpackMl
 {
-#if NET7_0_OR_GREATER
 	public NodeInfoXpackMl()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodeInfoXpackMl()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoXpackMl(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

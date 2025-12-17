@@ -37,9 +37,5 @@ public sealed partial class GetBehavioralAnalyticsResponse : Elastic.Transport.P
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> Analytics { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection> Analytics { get; set; }
 }

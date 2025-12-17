@@ -37,20 +37,12 @@ public sealed partial class GetInfluencersResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of influencer objects
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> Influencers { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Influencer> Influencers { get; set; }
 }

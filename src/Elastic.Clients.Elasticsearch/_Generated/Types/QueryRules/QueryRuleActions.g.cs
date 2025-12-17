@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryRules;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.QueryRuleActionsConverter))]
 public sealed partial class QueryRuleActions
 {
-#if NET7_0_OR_GREATER
 	public QueryRuleActions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public QueryRuleActions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRuleActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

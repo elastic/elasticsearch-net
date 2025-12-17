@@ -32,17 +32,11 @@ public sealed partial class UnassignedInformation
 		At = at;
 		Reason = reason;
 	}
-#if NET7_0_OR_GREATER
+
 	public UnassignedInformation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UnassignedInformation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UnassignedInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,18 +44,10 @@ public sealed partial class UnassignedInformation
 	}
 
 	public string? AllocationStatus { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset At { get; set; }
+	public required System.DateTimeOffset At { get; set; }
 	public bool? Delayed { get; set; }
 	public string? Details { get; set; }
 	public int? FailedAllocationAttempts { get; set; }
 	public string? LastAllocationStatus { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason Reason { get; set; }
 }

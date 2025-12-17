@@ -31,17 +31,11 @@ public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch
 	{
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public SourceOnlyRepository()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SourceOnlyRepository()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SourceOnlyRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

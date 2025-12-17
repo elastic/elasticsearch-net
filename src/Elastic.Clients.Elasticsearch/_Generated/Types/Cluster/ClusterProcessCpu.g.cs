@@ -31,17 +31,11 @@ public sealed partial class ClusterProcessCpu
 	{
 		Percent = percent;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterProcessCpu()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterProcessCpu()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterProcessCpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,9 +48,5 @@ public sealed partial class ClusterProcessCpu
 	/// Returns <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Percent { get; set; }
+	public required int Percent { get; set; }
 }

@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PassThroughInferenceOptionsConverter))]
 public sealed partial class PassThroughInferenceOptions
 {
-#if NET7_0_OR_GREATER
 	public PassThroughInferenceOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PassThroughInferenceOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

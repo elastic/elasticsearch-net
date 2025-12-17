@@ -32,33 +32,19 @@ public sealed partial class AutoDateHistogramAggregate : Elastic.Clients.Elastic
 		Buckets = buckets;
 		Interval = interval;
 	}
-#if NET7_0_OR_GREATER
+
 	public AutoDateHistogramAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AutoDateHistogramAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AutoDateHistogramAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket> Buckets { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Interval { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramBucket> Buckets { get; set; }
+	public required string Interval { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "auto_date_histogram";

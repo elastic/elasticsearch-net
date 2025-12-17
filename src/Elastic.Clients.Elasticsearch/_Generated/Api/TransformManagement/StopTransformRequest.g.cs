@@ -87,11 +87,11 @@ public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch
 	public StopTransformRequest(Elastic.Clients.Elasticsearch.Name transformId) : base(r => r.Required("transform_id", transformId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public StopTransformRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StopTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -112,11 +112,7 @@ public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch
 	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name TransformId { get => P<Elastic.Clients.Elasticsearch.Name>("transform_id"); set => PR("transform_id", value); }
+	public required Elastic.Clients.Elasticsearch.Name TransformId { get => P<Elastic.Clients.Elasticsearch.Name>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -291,6 +287,11 @@ public readonly partial struct StopTransformRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

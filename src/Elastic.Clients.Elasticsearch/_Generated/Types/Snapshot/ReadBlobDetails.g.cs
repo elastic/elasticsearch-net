@@ -33,17 +33,11 @@ public sealed partial class ReadBlobDetails
 		Found = found;
 		Node = node;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReadBlobDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReadBlobDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReadBlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -87,11 +81,7 @@ public sealed partial class ReadBlobDetails
 	/// If the blob was not found, this detail is omitted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan FirstByteTimeNanos { get; set; }
+	public required System.TimeSpan FirstByteTimeNanos { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -99,22 +89,14 @@ public sealed partial class ReadBlobDetails
 	/// If the read was started before the write completed or the write was ended before completion, it might be false.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node that performed the read operation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo Node { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo Node { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -28,16 +28,11 @@ public sealed partial class FieldRule
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public FieldRule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FieldRule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

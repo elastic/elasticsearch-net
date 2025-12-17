@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexVersioningConverter))]
 public sealed partial class IndexVersioning
 {
-#if NET7_0_OR_GREATER
 	public IndexVersioning()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexVersioning()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexVersioning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

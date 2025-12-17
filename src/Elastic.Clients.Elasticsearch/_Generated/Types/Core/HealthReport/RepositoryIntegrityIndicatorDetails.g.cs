@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.RepositoryIntegrityIndicatorDetailsConverter))]
 public sealed partial class RepositoryIntegrityIndicatorDetails
 {
-#if NET7_0_OR_GREATER
 	public RepositoryIntegrityIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RepositoryIntegrityIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryIntegrityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

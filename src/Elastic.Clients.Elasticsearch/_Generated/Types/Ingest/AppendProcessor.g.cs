@@ -32,17 +32,11 @@ public sealed partial class AppendProcessor
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public AppendProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AppendProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AppendProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,11 +64,7 @@ public sealed partial class AppendProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -110,11 +100,7 @@ public sealed partial class AppendProcessor
 	/// The value to be appended. Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<object> Value { get; set; }
+	public required System.Collections.Generic.ICollection<object> Value { get; set; }
 }
 
 public readonly partial struct AppendProcessorDescriptor<TDocument>

@@ -37,17 +37,11 @@ public sealed partial class IngestStats
 		ProducedAsFirstPipelineInBytes = producedAsFirstPipelineInBytes;
 		TimeInMillis = timeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public IngestStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IngestStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IngestStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,33 +53,21 @@ public sealed partial class IngestStats
 	/// Total number of documents ingested during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of documents currently being ingested.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
+	public required long Current { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of failed ingest operations during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Failed { get; set; }
+	public required long Failed { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -94,22 +76,14 @@ public sealed partial class IngestStats
 	/// Thus, it is not present on pipelines which only serve as a final pipeline after a default pipeline, a pipeline run after a reroute processor, or pipelines in pipeline processors.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IngestedAsFirstPipelineInBytes { get; set; }
+	public required long IngestedAsFirstPipelineInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of ingest processors.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -119,20 +93,12 @@ public sealed partial class IngestStats
 	/// In situations where there are subsequent pipelines, the value represents the size of the document after all pipelines have run.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ProducedAsFirstPipelineInBytes { get; set; }
+	public required long ProducedAsFirstPipelineInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
 }

@@ -39,16 +39,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketKsAggregationConverter))]
 public sealed partial class BucketKsAggregation
 {
-#if NET7_0_OR_GREATER
 	public BucketKsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BucketKsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketKsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

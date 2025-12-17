@@ -62,16 +62,11 @@ public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Req
 	public NodesInfoRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public NodesInfoRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodesInfoRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodesInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -219,6 +214,11 @@ public readonly partial struct NodesInfoRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -32,17 +32,11 @@ public sealed partial class StoredScript
 		Language = language;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public StoredScript()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StoredScript()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StoredScript(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class StoredScript
 	/// For serach templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; set; }
+	public required Elastic.Clients.Elasticsearch.ScriptLanguage Language { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
 
 	/// <summary>
@@ -68,11 +58,7 @@ public sealed partial class StoredScript
 	/// For search templates, an object containing the search template.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Source { get; set; }
+	public required string Source { get; set; }
 }
 
 public readonly partial struct StoredScriptDescriptor

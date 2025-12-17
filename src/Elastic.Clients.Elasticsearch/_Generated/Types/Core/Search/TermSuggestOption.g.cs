@@ -33,17 +33,11 @@ public sealed partial class TermSuggestOption
 		Score = score;
 		Text = text;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermSuggestOption()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TermSuggestOption()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,20 +45,8 @@ public sealed partial class TermSuggestOption
 	}
 
 	public bool? CollateMatch { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Freq { get; set; }
+	public required long Freq { get; set; }
 	public string? Highlighted { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Score { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Text { get; set; }
+	public required double Score { get; set; }
+	public required string Text { get; set; }
 }

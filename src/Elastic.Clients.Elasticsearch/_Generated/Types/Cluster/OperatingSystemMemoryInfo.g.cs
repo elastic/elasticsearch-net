@@ -35,17 +35,11 @@ public sealed partial class OperatingSystemMemoryInfo
 		UsedInBytes = usedInBytes;
 		UsedPercent = usedPercent;
 	}
-#if NET7_0_OR_GREATER
+
 	public OperatingSystemMemoryInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OperatingSystemMemoryInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OperatingSystemMemoryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -78,22 +72,14 @@ public sealed partial class OperatingSystemMemoryInfo
 	/// Amount, in bytes, of free physical memory across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FreeInBytes { get; set; }
+	public required long FreeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Percentage of free physical memory across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FreePercent { get; set; }
+	public required int FreePercent { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -107,11 +93,7 @@ public sealed partial class OperatingSystemMemoryInfo
 	/// Total amount, in bytes, of physical memory across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalInBytes { get; set; }
+	public required long TotalInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -125,20 +107,12 @@ public sealed partial class OperatingSystemMemoryInfo
 	/// Amount, in bytes, of physical memory in use across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long UsedInBytes { get; set; }
+	public required long UsedInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Percentage of physical memory in use across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UsedPercent { get; set; }
+	public required int UsedPercent { get; set; }
 }

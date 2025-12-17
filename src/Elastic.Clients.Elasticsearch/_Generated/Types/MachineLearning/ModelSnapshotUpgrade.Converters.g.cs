@@ -36,7 +36,7 @@ public sealed partial class ModelSnapshotUpgradeConverter : System.Text.Json.Ser
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propAssignmentExplanation = default;
 		LocalJsonValue<string> propJobId = default;
-		LocalJsonValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>> propNode = default;
+		LocalJsonValue<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>?> propNode = default;
 		LocalJsonValue<string> propSnapshotId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState> propState = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ public sealed partial class ModelSnapshotUpgradeConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propNode.TryReadProperty(ref reader, options, PropNode, static System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, null, null)))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, static System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, null, null)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ public sealed partial class ModelSnapshotUpgradeConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAssignmentExplanation, value.AssignmentExplanation, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, v, null, null));
+		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, v, null, null));
 		writer.WriteProperty(options, PropSnapshotId, value.SnapshotId, null, null);
 		writer.WriteProperty(options, PropState, value.State, null, null);
 		writer.WriteEndObject();

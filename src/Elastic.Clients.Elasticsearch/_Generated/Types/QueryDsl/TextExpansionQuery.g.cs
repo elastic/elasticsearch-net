@@ -39,11 +39,11 @@ public sealed partial class TextExpansionQuery
 		ModelId = modelId;
 		ModelText = modelText;
 	}
-#if NET7_0_OR_GREATER
+
 	public TextExpansionQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextExpansionQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,33 +59,21 @@ public sealed partial class TextExpansionQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The text expansion NLP model to use
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The query text
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelText { get; set; }
+	public required string ModelText { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -62,11 +62,11 @@ public sealed partial class ExistsIndexTemplateRequest : Elastic.Clients.Elastic
 	public ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ExistsIndexTemplateRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExistsIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -86,11 +86,7 @@ public sealed partial class ExistsIndexTemplateRequest : Elastic.Clients.Elastic
 	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -204,6 +200,11 @@ public readonly partial struct ExistsIndexTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

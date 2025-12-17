@@ -34,17 +34,11 @@ public sealed partial class GoogleVertexAIServiceSettings
 		ProjectId = projectId;
 		ServiceAccountJson = serviceAccountJson;
 	}
-#if NET7_0_OR_GREATER
+
 	public GoogleVertexAIServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GoogleVertexAIServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,11 +51,7 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// Refer to the Google documentation for the list of supported locations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Location { get; set; }
+	public required string Location { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,22 +59,14 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// Refer to the Google documentation for the list of supported models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the project to use for the inference task.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ProjectId { get; set; }
+	public required string ProjectId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -99,11 +81,7 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// A valid service account in JSON format for the Google Vertex AI API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ServiceAccountJson { get; set; }
+	public required string ServiceAccountJson { get; set; }
 }
 
 public readonly partial struct GoogleVertexAiServiceSettingsDescriptor

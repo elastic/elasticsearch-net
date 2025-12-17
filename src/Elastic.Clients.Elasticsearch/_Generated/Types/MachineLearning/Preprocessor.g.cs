@@ -28,16 +28,11 @@ public sealed partial class Preprocessor
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Preprocessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Preprocessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Preprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

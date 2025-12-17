@@ -42,55 +42,35 @@ public sealed partial class DataStreamsStatsResponse : Elastic.Transport.Product
 	/// Total number of backing indices for the selected data streams.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int BackingIndices { get; set; }
+	public required int BackingIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of selected data streams.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DataStreamCount { get; set; }
+	public required int DataStreamCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics for the selected data streams.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem> DataStreams { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains information about shards that attempted to execute the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size, in bytes, of all shards for the selected data streams.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalStoreSizeBytes { get; set; }
+	public required long TotalStoreSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>

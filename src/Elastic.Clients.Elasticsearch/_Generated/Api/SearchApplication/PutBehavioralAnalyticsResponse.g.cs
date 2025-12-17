@@ -42,20 +42,12 @@ public sealed partial class PutBehavioralAnalyticsResponse : Elastic.Transport.P
 	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Acknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the analytics collection created or updated
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

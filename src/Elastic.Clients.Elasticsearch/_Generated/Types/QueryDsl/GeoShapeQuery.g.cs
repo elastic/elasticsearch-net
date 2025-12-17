@@ -32,17 +32,11 @@ public sealed partial class GeoShapeQuery
 		Field = field;
 		Shape = shape;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoShapeQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoShapeQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class GeoShapeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,11 +62,7 @@ public sealed partial class GeoShapeQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Shape { get; set; }
 }
 
 public readonly partial struct GeoShapeQueryDescriptor<TDocument>

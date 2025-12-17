@@ -38,11 +38,11 @@ public sealed partial class FuzzyQuery
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public FuzzyQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +58,7 @@ public sealed partial class FuzzyQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,11 +101,7 @@ public sealed partial class FuzzyQuery
 	/// Term you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Value { get; set; }
+	public required object Value { get; set; }
 }
 
 public readonly partial struct FuzzyQueryDescriptor<TDocument>

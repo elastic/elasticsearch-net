@@ -35,17 +35,11 @@ public sealed partial class NodeInfoJvmMemory
 		NonHeapInitInBytes = nonHeapInitInBytes;
 		NonHeapMaxInBytes = nonHeapMaxInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoJvmMemory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoJvmMemory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,33 +47,13 @@ public sealed partial class NodeInfoJvmMemory
 	}
 
 	public Elastic.Clients.Elasticsearch.ByteSize? DirectMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DirectMaxInBytes { get; set; }
+	public required long DirectMaxInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapInit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HeapInitInBytes { get; set; }
+	public required long HeapInitInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HeapMaxInBytes { get; set; }
+	public required long HeapMaxInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapInit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NonHeapInitInBytes { get; set; }
+	public required long NonHeapInitInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? NonHeapMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NonHeapMaxInBytes { get; set; }
+	public required long NonHeapMaxInBytes { get; set; }
 }

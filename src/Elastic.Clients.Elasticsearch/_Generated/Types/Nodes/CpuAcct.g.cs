@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CpuAcctConverter))]
 public sealed partial class CpuAcct
 {
-#if NET7_0_OR_GREATER
 	public CpuAcct()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CpuAcct()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CpuAcct(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

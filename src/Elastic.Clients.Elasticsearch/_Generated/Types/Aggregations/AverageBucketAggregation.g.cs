@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AverageBucketAggregationConverter))]
 public sealed partial class AverageBucketAggregation
 {
-#if NET7_0_OR_GREATER
 	public AverageBucketAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AverageBucketAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AverageBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

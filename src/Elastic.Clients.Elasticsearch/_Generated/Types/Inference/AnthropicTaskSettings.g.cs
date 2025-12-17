@@ -31,17 +31,11 @@ public sealed partial class AnthropicTaskSettings
 	{
 		MaxTokens = maxTokens;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnthropicTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnthropicTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnthropicTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class AnthropicTaskSettings
 	/// For a <c>completion</c> task, it is the maximum number of tokens to generate before stopping.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxTokens { get; set; }
+	public required int MaxTokens { get; set; }
 
 	/// <summary>
 	/// <para>

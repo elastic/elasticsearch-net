@@ -31,17 +31,11 @@ public sealed partial class CustomResponseParams
 	{
 		JsonParser = jsonParser;
 	}
-#if NET7_0_OR_GREATER
+
 	public CustomResponseParams()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CustomResponseParams()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomResponseParams(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -187,11 +181,7 @@ public sealed partial class CustomResponseParams
 	/// }
 	/// </code>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object JsonParser { get; set; }
+	public required object JsonParser { get; set; }
 }
 
 public readonly partial struct CustomResponseParamsDescriptor

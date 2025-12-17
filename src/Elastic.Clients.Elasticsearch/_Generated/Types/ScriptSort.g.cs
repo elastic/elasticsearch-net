@@ -31,17 +31,11 @@ public sealed partial class ScriptSort
 	{
 		Script = script;
 	}
-#if NET7_0_OR_GREATER
+
 	public ScriptSort()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ScriptSort()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +45,7 @@ public sealed partial class ScriptSort
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 	public Elastic.Clients.Elasticsearch.ScriptSortType? Type { get; set; }
 }
 

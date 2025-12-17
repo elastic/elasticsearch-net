@@ -39,17 +39,11 @@ public sealed partial class InferenceEndpointInfo
 		ServiceSettings = serviceSettings;
 		TaskType = taskType;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceEndpointInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceEndpointInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceEndpointInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,33 +62,21 @@ public sealed partial class InferenceEndpointInfo
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string InferenceId { get; set; }
+	public required string InferenceId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The service type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get; set; }
+	public required string Service { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object ServiceSettings { get; set; }
+	public required object ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -108,9 +90,5 @@ public sealed partial class InferenceEndpointInfo
 	/// The task type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; set; }
 }

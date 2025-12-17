@@ -32,17 +32,11 @@ public sealed partial class GeoGridProcessor
 		Field = field;
 		TileType = tileType;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoGridProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoGridProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoGridProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,11 +64,7 @@ public sealed partial class GeoGridProcessor
 	/// The field format is determined by the <c>tile_type</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
+	public required string Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -152,11 +142,7 @@ public sealed partial class GeoGridProcessor
 	/// Three tile formats are understood: geohash, geotile and geohex.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.GeoGridTileType TileType { get; set; }
 }
 
 public readonly partial struct GeoGridProcessorDescriptor<TDocument>

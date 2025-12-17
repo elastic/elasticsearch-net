@@ -47,11 +47,11 @@ public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests
 	{
 		MatchCriteria = matchCriteria;
 	}
-#if NET7_0_OR_GREATER
+
 	public TestRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,11 +71,7 @@ public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests
 	/// The unique identifier of the query ruleset to be created or updated
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -83,11 +79,7 @@ public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests
 	/// Match criteria should match the keys defined in the <c>criteria.metadata</c> field of the rule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, object> MatchCriteria { get; set; }
+	public required System.Collections.Generic.IDictionary<string, object> MatchCriteria { get; set; }
 }
 
 /// <summary>
@@ -190,6 +182,11 @@ public readonly partial struct TestRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.QueryRules.TestRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -32,17 +32,11 @@ public sealed partial class ElserServiceSettings
 		NumAllocations = numAllocations;
 		NumThreads = numThreads;
 	}
-#if NET7_0_OR_GREATER
+
 	public ElserServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ElserServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElserServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -67,11 +61,7 @@ public sealed partial class ElserServiceSettings
 	/// If adaptive allocations is enabled, do not set this value because it's automatically set.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumAllocations { get; set; }
+	public required int NumAllocations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,11 +76,7 @@ public sealed partial class ElserServiceSettings
 	/// If you want to optimize your ELSER endpoint for ingest, set the number of threads to 1. If you want to optimize your ELSER endpoint for search, set the number of threads to greater than 1.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumThreads { get; set; }
+	public required int NumThreads { get; set; }
 }
 
 public readonly partial struct ElserServiceSettingsDescriptor

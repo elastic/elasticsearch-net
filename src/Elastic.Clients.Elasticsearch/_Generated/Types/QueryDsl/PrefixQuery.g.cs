@@ -38,11 +38,11 @@ public sealed partial class PrefixQuery
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public PrefixQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +66,7 @@ public sealed partial class PrefixQuery
 	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -85,11 +81,7 @@ public sealed partial class PrefixQuery
 	/// Beginning characters of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Value { get; set; }
+	public required string Value { get; set; }
 }
 
 public readonly partial struct PrefixQueryDescriptor<TDocument>

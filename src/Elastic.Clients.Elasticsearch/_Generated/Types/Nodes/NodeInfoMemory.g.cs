@@ -32,31 +32,17 @@ public sealed partial class NodeInfoMemory
 		Total = total;
 		TotalInBytes = totalInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoMemory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoMemory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Total { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalInBytes { get; set; }
+	public required string Total { get; set; }
+	public required long TotalInBytes { get; set; }
 }

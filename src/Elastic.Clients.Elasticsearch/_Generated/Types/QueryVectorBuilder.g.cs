@@ -28,16 +28,11 @@ public sealed partial class QueryVectorBuilder
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public QueryVectorBuilder()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public QueryVectorBuilder()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

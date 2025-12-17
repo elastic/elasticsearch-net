@@ -36,17 +36,11 @@ public sealed partial class ModelSnapshot
 		SnapshotId = snapshotId;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public ModelSnapshot()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ModelSnapshot()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ModelSnapshot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +59,7 @@ public sealed partial class ModelSnapshot
 	/// A numerical character string that uniquely identifies the job that the snapshot was created for.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -90,11 +80,7 @@ public sealed partial class ModelSnapshot
 	/// The minimum version required to be able to restore the model snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string MinVersion { get; set; }
+	public required string MinVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -108,42 +94,26 @@ public sealed partial class ModelSnapshot
 	/// If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Retain { get; set; }
+	public required bool Retain { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For internal use only.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SnapshotDocCount { get; set; }
+	public required long SnapshotDocCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A numerical character string that uniquely identifies the model snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SnapshotId { get; set; }
+	public required string SnapshotId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The creation timestamp for the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Timestamp { get; set; }
+	public required long Timestamp { get; set; }
 }

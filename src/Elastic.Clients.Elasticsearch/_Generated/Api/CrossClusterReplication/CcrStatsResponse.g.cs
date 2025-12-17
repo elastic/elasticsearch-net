@@ -42,20 +42,12 @@ public sealed partial class CcrStatsResponse : Elastic.Transport.Products.Elasti
 	/// Statistics for the auto-follow coordinator.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats AutoFollowStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats AutoFollowStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Shard-level statistics for follower indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats FollowStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats FollowStats { get; set; }
 }

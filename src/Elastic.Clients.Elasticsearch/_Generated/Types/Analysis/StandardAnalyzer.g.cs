@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StandardAnalyzerConverter))]
 public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public StandardAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StandardAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StandardAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

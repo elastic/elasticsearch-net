@@ -31,17 +31,11 @@ public sealed partial class ReplicationAccess
 	{
 		Names = names;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReplicationAccess()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReplicationAccess()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReplicationAccess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class ReplicationAccess
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 }
 
 public readonly partial struct ReplicationAccessDescriptor

@@ -32,17 +32,11 @@ public sealed partial class IndexTemplate
 		ComposedOf = composedOf;
 		IndexPatterns = indexPatterns;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexTemplate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexTemplate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,11 +51,7 @@ public sealed partial class IndexTemplate
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> ComposedOf { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> ComposedOf { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,11 +83,7 @@ public sealed partial class IndexTemplate
 	/// Name of the index template.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names IndexPatterns { get; set; }
+	public required Elastic.Clients.Elasticsearch.Names IndexPatterns { get; set; }
 
 	/// <summary>
 	/// <para>

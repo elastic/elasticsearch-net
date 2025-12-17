@@ -33,17 +33,11 @@ public sealed partial class GsubProcessor
 		Pattern = pattern;
 		Replacement = replacement;
 	}
-#if NET7_0_OR_GREATER
+
 	public GsubProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GsubProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GsubProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class GsubProcessor
 	/// The field to apply the replacement to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -102,22 +92,14 @@ public sealed partial class GsubProcessor
 	/// The pattern to be replaced.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Pattern { get; set; }
+	public required string Pattern { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The string to replace the matching patterns with.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Replacement { get; set; }
+	public required string Replacement { get; set; }
 
 	/// <summary>
 	/// <para>

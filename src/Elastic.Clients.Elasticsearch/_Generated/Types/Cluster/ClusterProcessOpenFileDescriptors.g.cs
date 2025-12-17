@@ -33,17 +33,11 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 		Max = max;
 		Min = min;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterProcessOpenFileDescriptors()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterProcessOpenFileDescriptors()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterProcessOpenFileDescriptors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 	/// Returns <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Avg { get; set; }
+	public required long Avg { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,11 +58,7 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 	/// Returns <c>-1</c> if not supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Max { get; set; }
+	public required long Max { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,9 +66,5 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 	/// Returns -1 if not supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Min { get; set; }
+	public required long Min { get; set; }
 }

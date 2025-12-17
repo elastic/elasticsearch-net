@@ -59,14 +59,14 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propAggregateMetric = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propAnalytics = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propArchive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propArchive = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propCcr = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propDataStreams = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propDataTiers = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEnrich = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEnterpriseSearch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propEnterpriseSearch = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEql = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEsql = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propEsql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propFrozenIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propIlm = default;
@@ -82,7 +82,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propSpatial = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propSql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propTransform = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propUniversalProfiling = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propUniversalProfiling = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propVotingOnly = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propWatcher = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)

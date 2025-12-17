@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ChangePointAggregationConverter))]
 public sealed partial class ChangePointAggregation
 {
-#if NET7_0_OR_GREATER
 	public ChangePointAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ChangePointAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChangePointAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

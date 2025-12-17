@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.InferenceAggregateConverter))]
 public sealed partial class InferenceAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
-#if NET7_0_OR_GREATER
 	public InferenceAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public InferenceAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

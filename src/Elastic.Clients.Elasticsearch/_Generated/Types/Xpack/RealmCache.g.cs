@@ -31,26 +31,16 @@ public sealed partial class RealmCache
 	{
 		Size = size;
 	}
-#if NET7_0_OR_GREATER
+
 	public RealmCache()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RealmCache()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RealmCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Size { get; set; }
+	public required long Size { get; set; }
 }

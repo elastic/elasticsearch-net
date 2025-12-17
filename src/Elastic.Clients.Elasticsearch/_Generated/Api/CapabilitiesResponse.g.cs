@@ -37,20 +37,8 @@ public sealed partial class CapabilitiesResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
+	public required string ClusterName { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Capabilities.FailedNodeException>? Failures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool? Supported { get; set; }
+	public required Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
+	public required bool? Supported { get; set; }
 }

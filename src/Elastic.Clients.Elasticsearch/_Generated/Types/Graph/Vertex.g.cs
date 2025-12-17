@@ -34,41 +34,19 @@ public sealed partial class Vertex
 		Term = term;
 		Weight = weight;
 	}
-#if NET7_0_OR_GREATER
+
 	public Vertex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Vertex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Vertex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Depth { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Term { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Weight { get; set; }
+	public required long Depth { get; set; }
+	public required string Field { get; set; }
+	public required string Term { get; set; }
+	public required double Weight { get; set; }
 }

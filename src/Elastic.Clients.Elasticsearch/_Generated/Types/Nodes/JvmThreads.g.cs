@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmThreadsConverter))]
 public sealed partial class JvmThreads
 {
-#if NET7_0_OR_GREATER
 	public JvmThreads()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public JvmThreads()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JvmThreads(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

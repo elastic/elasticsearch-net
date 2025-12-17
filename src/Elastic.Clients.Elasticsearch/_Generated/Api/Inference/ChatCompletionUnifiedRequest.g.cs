@@ -39,13 +39,13 @@ public sealed partial class ChatCompletionUnifiedRequestParameters : Elastic.Tra
 /// </para>
 /// <para>
 /// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
-/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+/// It only works with the <c>chat_completion</c> task type.
 /// </para>
 /// <para>
 /// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
 /// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
 /// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
-/// If you use the <c>openai</c>, <c>hugging_face</c> or the <c>elastic</c> service, use the Chat completion inference API.
+/// To determine whether a given inference service supports this task type, please see the page for that service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ChatCompletionUnifiedRequestConverter))]
@@ -62,11 +62,11 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 	{
 		ChatCompletionRequest = chatCompletionRequest;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChatCompletionUnifiedRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChatCompletionUnifiedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -86,11 +86,7 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -98,11 +94,7 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion ChatCompletionRequest { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion ChatCompletionRequest { get; set; }
 }
 
 /// <summary>
@@ -111,13 +103,13 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 /// </para>
 /// <para>
 /// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
-/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+/// It only works with the <c>chat_completion</c> task type.
 /// </para>
 /// <para>
 /// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
 /// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
 /// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
-/// If you use the <c>openai</c>, <c>hugging_face</c> or the <c>elastic</c> service, use the Chat completion inference API.
+/// To determine whether a given inference service supports this task type, please see the page for that service.
 /// </para>
 /// </summary>
 public readonly partial struct ChatCompletionUnifiedRequestDescriptor
@@ -194,6 +186,11 @@ public readonly partial struct ChatCompletionUnifiedRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

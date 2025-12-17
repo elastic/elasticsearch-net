@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuNormalizationCharFilterConverter))]
 public sealed partial class IcuNormalizationCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
-#if NET7_0_OR_GREATER
 	public IcuNormalizationCharFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IcuNormalizationCharFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IcuNormalizationCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

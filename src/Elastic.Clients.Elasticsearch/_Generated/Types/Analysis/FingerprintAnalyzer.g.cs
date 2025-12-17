@@ -33,38 +33,20 @@ public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.
 		PreserveOriginal = preserveOriginal;
 		Separator = separator;
 	}
-#if NET7_0_OR_GREATER
+
 	public FingerprintAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FingerprintAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxOutputSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool PreserveOriginal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Separator { get; set; }
+	public required int MaxOutputSize { get; set; }
+	public required bool PreserveOriginal { get; set; }
+	public required string Separator { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 	public string? StopwordsPath { get; set; }
 

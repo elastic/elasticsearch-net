@@ -35,17 +35,11 @@ public sealed partial class ClusterOperatingSystem
 		Names = names;
 		PrettyNames = prettyNames;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterOperatingSystem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterOperatingSystem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterOperatingSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,11 +53,7 @@ public sealed partial class ClusterOperatingSystem
 	/// In both cases, this number will never be larger than 32.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AllocatedProcessors { get; set; }
+	public required int AllocatedProcessors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -77,42 +67,26 @@ public sealed partial class ClusterOperatingSystem
 	/// Number of processors available to JVM across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AvailableProcessors { get; set; }
+	public required int AvailableProcessors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about memory used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo Mem { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about operating systems used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemName> Names { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemName> Names { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about operating systems used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemPrettyName> PrettyNames { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemPrettyName> PrettyNames { get; set; }
 }

@@ -32,31 +32,17 @@ public sealed partial class IndexTemplateItem
 		IndexTemplate = indexTemplate;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexTemplateItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexTemplateItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexTemplateItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; set; }
+	public required string Name { get; set; }
 }

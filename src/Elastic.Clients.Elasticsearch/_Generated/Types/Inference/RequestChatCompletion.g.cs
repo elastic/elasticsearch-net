@@ -31,17 +31,11 @@ public sealed partial class RequestChatCompletion
 	{
 		Messages = messages;
 	}
-#if NET7_0_OR_GREATER
+
 	public RequestChatCompletion()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RequestChatCompletion()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RequestChatCompletion(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class RequestChatCompletion
 	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> Messages { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> Messages { get; set; }
 
 	/// <summary>
 	/// <para>

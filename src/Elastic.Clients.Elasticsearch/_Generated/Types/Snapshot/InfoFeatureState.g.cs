@@ -32,31 +32,17 @@ public sealed partial class InfoFeatureState
 		FeatureName = featureName;
 		Indices = indices;
 	}
-#if NET7_0_OR_GREATER
+
 	public InfoFeatureState()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InfoFeatureState()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InfoFeatureState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FeatureName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Indices { get; set; }
+	public required string FeatureName { get; set; }
+	public required System.Collections.Generic.ICollection<string> Indices { get; set; }
 }

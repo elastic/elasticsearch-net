@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GlobalAggregationConverter))]
 public sealed partial class GlobalAggregation
 {
-#if NET7_0_OR_GREATER
 	public GlobalAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GlobalAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GlobalAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

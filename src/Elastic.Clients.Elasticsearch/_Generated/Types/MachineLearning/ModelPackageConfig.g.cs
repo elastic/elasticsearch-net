@@ -31,17 +31,11 @@ public sealed partial class ModelPackageConfig
 	{
 		PackagedModelId = packagedModelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public ModelPackageConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ModelPackageConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ModelPackageConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class ModelPackageConfig
 	public string? MinimumVersion { get; set; }
 	public string? ModelRepository { get; set; }
 	public string? ModelType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PackagedModelId { get; set; }
+	public required string PackagedModelId { get; set; }
 	public string? PlatformArchitecture { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; set; }
 	public string? Sha256 { get; set; }

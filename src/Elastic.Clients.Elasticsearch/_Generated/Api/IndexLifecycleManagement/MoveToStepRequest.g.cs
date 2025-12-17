@@ -63,11 +63,11 @@ public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Re
 		CurrentStep = currentStep;
 		NextStep = nextStep;
 	}
-#if NET7_0_OR_GREATER
+
 	public MoveToStepRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -87,33 +87,21 @@ public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Re
 	/// The name of the index whose lifecycle step is to change
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
 	/// The step that the index is expected to be in.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The step that you want to run.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
 }
 
 /// <summary>
@@ -232,6 +220,11 @@ public readonly partial struct MoveToStepRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -386,6 +379,11 @@ public readonly partial struct MoveToStepRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

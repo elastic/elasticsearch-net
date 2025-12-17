@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoBoundsAggregationConverter))]
 public sealed partial class GeoBoundsAggregation
 {
-#if NET7_0_OR_GREATER
 	public GeoBoundsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GeoBoundsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoBoundsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

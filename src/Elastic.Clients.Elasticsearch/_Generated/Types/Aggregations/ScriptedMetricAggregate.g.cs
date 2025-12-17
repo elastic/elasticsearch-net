@@ -31,17 +31,11 @@ public sealed partial class ScriptedMetricAggregate : Elastic.Clients.Elasticsea
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public ScriptedMetricAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ScriptedMetricAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptedMetricAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,9 +46,5 @@ public sealed partial class ScriptedMetricAggregate : Elastic.Clients.Elasticsea
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "scripted_metric";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Value { get; set; }
+	public required object Value { get; set; }
 }

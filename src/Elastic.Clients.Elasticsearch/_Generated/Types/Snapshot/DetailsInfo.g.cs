@@ -36,17 +36,11 @@ public sealed partial class DetailsInfo
 		WriteThrottled = writeThrottled;
 		WriteThrottledNanos = writeThrottledNanos;
 	}
-#if NET7_0_OR_GREATER
+
 	public DetailsInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DetailsInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DetailsInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class DetailsInfo
 	/// A description of the blob that was written and read.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.BlobDetails Blob { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.BlobDetails Blob { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,53 +75,33 @@ public sealed partial class DetailsInfo
 	/// The elapsed time spent writing the blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration WriteElapsed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration WriteElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The elapsed time spent writing the blob, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan WriteElapsedNanos { get; set; }
+	public required System.TimeSpan WriteElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node which wrote the blob and coordinated the read operations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo WriterNode { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo WriterNode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration WriteThrottled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration WriteThrottled { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan WriteThrottledNanos { get; set; }
+	public required System.TimeSpan WriteThrottledNanos { get; set; }
 }

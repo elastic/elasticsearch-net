@@ -43,17 +43,11 @@ public sealed partial class IngestDocumentSimulation
 		Source = source;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public IngestDocumentSimulation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IngestDocumentSimulation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IngestDocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,22 +68,14 @@ public sealed partial class IngestDocumentSimulation
 	/// A list of the names of the pipelines executed on this document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> ExecutedPipelines { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> ExecutedPipelines { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,11 +91,7 @@ public sealed partial class IngestDocumentSimulation
 	/// Name of the index that the document would be indexed into if this were not a simulation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -123,14 +105,6 @@ public sealed partial class IngestDocumentSimulation
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
+	public required long Version { get; set; }
 }

@@ -36,51 +36,21 @@ public sealed partial class StandardDeviationBoundsAsString
 		UpperPopulation = upperPopulation;
 		UpperSampling = upperSampling;
 	}
-#if NET7_0_OR_GREATER
+
 	public StandardDeviationBoundsAsString()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StandardDeviationBoundsAsString()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StandardDeviationBoundsAsString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Lower { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string LowerPopulation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string LowerSampling { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Upper { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string UpperPopulation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string UpperSampling { get; set; }
+	public required string Lower { get; set; }
+	public required string LowerPopulation { get; set; }
+	public required string LowerSampling { get; set; }
+	public required string Upper { get; set; }
+	public required string UpperPopulation { get; set; }
+	public required string UpperSampling { get; set; }
 }

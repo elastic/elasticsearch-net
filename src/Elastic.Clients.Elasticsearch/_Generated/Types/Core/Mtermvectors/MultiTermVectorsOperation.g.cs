@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Mtermvectors;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Mtermvectors.Json.MultiTermVectorsOperationConverter))]
 public sealed partial class MultiTermVectorsOperation
 {
-#if NET7_0_OR_GREATER
 	public MultiTermVectorsOperation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MultiTermVectorsOperation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiTermVectorsOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

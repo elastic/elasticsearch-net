@@ -32,17 +32,11 @@ public sealed partial class DownsamplingRound
 		After = after;
 		Config = config;
 	}
-#if NET7_0_OR_GREATER
+
 	public DownsamplingRound()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DownsamplingRound()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class DownsamplingRound
 	/// The duration since rollover when this downsampling round should execute
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration After { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration After { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The downsample configuration to execute.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
 }
 
 public readonly partial struct DownsamplingRoundDescriptor
