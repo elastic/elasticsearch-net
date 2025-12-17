@@ -32,17 +32,11 @@ public sealed partial class Retries
 		Bulk = bulk;
 		Search = search;
 	}
-#if NET7_0_OR_GREATER
+
 	public Retries()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Retries()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Retries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class Retries
 	/// The number of bulk actions retried.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Bulk { get; set; }
+	public required long Bulk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of search actions retried.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Search { get; set; }
+	public required long Search { get; set; }
 }

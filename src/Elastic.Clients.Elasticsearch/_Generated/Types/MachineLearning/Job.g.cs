@@ -36,17 +36,11 @@ public sealed partial class Job
 		ModelSnapshotRetentionDays = modelSnapshotRetentionDays;
 		ResultsIndexName = resultsIndexName;
 	}
-#if NET7_0_OR_GREATER
+
 	public Job()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Job()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Job(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,11 +53,7 @@ public sealed partial class Job
 	/// Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool AllowLazyOpen { get; set; }
+	public required bool AllowLazyOpen { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,11 +61,7 @@ public sealed partial class Job
 	/// After you create a job, you cannot change the analysis configuration; all the properties are informational.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -124,11 +110,7 @@ public sealed partial class Job
 	/// Only the results for anomaly detection are retained.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -176,11 +158,7 @@ public sealed partial class Job
 	/// It must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -214,11 +192,7 @@ public sealed partial class Job
 	/// By default, snapshots ten days older than the newest snapshot are deleted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ModelSnapshotRetentionDays { get; set; }
+	public required long ModelSnapshotRetentionDays { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -235,11 +209,7 @@ public sealed partial class Job
 	/// The default value is <c>shared</c>, which generates an index named <c>.ml-anomalies-shared</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultsIndexName { get; set; }
+	public required string ResultsIndexName { get; set; }
 
 	/// <summary>
 	/// <para>

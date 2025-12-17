@@ -35,52 +35,26 @@ public sealed partial class StringStatsAggregate : Elastic.Clients.Elasticsearch
 		MaxLength = maxLength;
 		MinLength = minLength;
 	}
-#if NET7_0_OR_GREATER
+
 	public StringStatsAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StringStatsAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StringStatsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? AvgLength { get; set; }
+	public required double? AvgLength { get; set; }
 	public string? AvgLengthAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, double>? Distribution { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Entropy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int? MaxLength { get; set; }
+	public required double? Entropy { get; set; }
+	public required int? MaxLength { get; set; }
 	public string? MaxLengthAsString { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int? MinLength { get; set; }
+	public required int? MinLength { get; set; }
 	public string? MinLengthAsString { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "string_stats";

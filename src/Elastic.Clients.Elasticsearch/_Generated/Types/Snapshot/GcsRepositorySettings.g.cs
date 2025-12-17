@@ -31,17 +31,11 @@ public sealed partial class GcsRepositorySettings
 	{
 		Bucket = bucket;
 	}
-#if NET7_0_OR_GREATER
+
 	public GcsRepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GcsRepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GcsRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -73,11 +67,7 @@ public sealed partial class GcsRepositorySettings
 	/// The name of the bucket to be used for snapshots.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Bucket { get; set; }
+	public required string Bucket { get; set; }
 
 	/// <summary>
 	/// <para>

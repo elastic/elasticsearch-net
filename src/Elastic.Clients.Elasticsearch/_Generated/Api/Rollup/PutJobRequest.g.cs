@@ -62,11 +62,11 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 		PageSize = pageSize;
 		RollupIndex = rollupIndex;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutJobRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -90,11 +90,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// since that could lead to problems with mismatched job configurations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -105,11 +101,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// cron pattern is defined just like a Watcher cron schedule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Cron { get; set; }
+	public required string Cron { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -120,11 +112,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
 	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
 	/// <summary>
@@ -133,11 +121,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// rollup the entire index or index-pattern.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexPattern { get; set; }
+	public required string IndexPattern { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -155,22 +139,14 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int PageSize { get; set; }
+	public required int PageSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName RollupIndex { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName RollupIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -470,6 +446,11 @@ public readonly partial struct PutJobRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -763,6 +744,11 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

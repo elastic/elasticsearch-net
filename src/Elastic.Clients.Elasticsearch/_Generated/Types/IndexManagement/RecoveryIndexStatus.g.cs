@@ -35,17 +35,11 @@ public sealed partial class RecoveryIndexStatus
 		TargetThrottleTimeInMillis = targetThrottleTimeInMillis;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public RecoveryIndexStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RecoveryIndexStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RecoveryIndexStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,32 +47,12 @@ public sealed partial class RecoveryIndexStatus
 	}
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes? Bytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles Files { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes Size { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles Files { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryBytes Size { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? SourceThrottleTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan SourceThrottleTimeInMillis { get; set; }
+	public required System.TimeSpan SourceThrottleTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TargetThrottleTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TargetThrottleTimeInMillis { get; set; }
+	public required System.TimeSpan TargetThrottleTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

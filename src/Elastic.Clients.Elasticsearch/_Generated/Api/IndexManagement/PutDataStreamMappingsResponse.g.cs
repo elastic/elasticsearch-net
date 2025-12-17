@@ -37,9 +37,5 @@ public sealed partial class PutDataStreamMappingsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.UpdatedDataStreamMappings> DataStreams { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.UpdatedDataStreamMappings> DataStreams { get; set; }
 }

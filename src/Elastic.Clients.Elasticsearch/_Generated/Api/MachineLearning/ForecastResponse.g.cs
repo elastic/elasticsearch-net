@@ -37,14 +37,6 @@ public sealed partial class ForecastResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ForecastId { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required string ForecastId { get; set; }
 }

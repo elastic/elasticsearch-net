@@ -37,9 +37,5 @@ public sealed partial class TextEmbeddingResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult InferenceResult { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult InferenceResult { get; set; }
 }

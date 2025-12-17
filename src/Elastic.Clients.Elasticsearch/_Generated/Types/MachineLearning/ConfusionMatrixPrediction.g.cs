@@ -32,31 +32,17 @@ public sealed partial class ConfusionMatrixPrediction
 		Count = count;
 		PredictedClass = predictedClass;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConfusionMatrixPrediction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConfusionMatrixPrediction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConfusionMatrixPrediction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PredictedClass { get; set; }
+	public required int Count { get; set; }
+	public required string PredictedClass { get; set; }
 }

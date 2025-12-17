@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ProcessConverter))]
 public sealed partial class Process
 {
-#if NET7_0_OR_GREATER
 	public Process()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Process()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Process(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

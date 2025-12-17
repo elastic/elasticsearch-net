@@ -33,17 +33,11 @@ public sealed partial class RuleRetriever
 		Retriever = retriever;
 		RulesetIds = rulesetIds;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuleRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuleRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuleRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class RuleRetriever
 	/// The match criteria that will determine if a rule in the provided rulesets should be applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object MatchCriteria { get; set; }
+	public required object MatchCriteria { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -94,22 +84,14 @@ public sealed partial class RuleRetriever
 	/// The retriever whose results rules should be applied to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ruleset IDs containing the rules this retriever is evaluating against.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
 }
 
 public readonly partial struct RuleRetrieverDescriptor<TDocument>

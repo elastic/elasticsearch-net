@@ -34,17 +34,11 @@ public sealed partial class DataframeAnalyticsFieldSelection
 		MappingTypes = mappingTypes;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsFieldSelection()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsFieldSelection()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsFieldSelection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,44 +57,28 @@ public sealed partial class DataframeAnalyticsFieldSelection
 	/// Whether the field is selected to be included in the analysis.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsIncluded { get; set; }
+	public required bool IsIncluded { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Whether the field is required.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRequired { get; set; }
+	public required bool IsRequired { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The mapping types of the field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> MappingTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> MappingTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -31,17 +31,11 @@ public sealed partial class MoreLikeThisQuery
 	{
 		Like = like;
 	}
-#if NET7_0_OR_GREATER
+
 	public MoreLikeThisQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MoreLikeThisQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MoreLikeThisQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -102,11 +96,7 @@ public sealed partial class MoreLikeThisQuery
 	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
 	/// <summary>
 	/// <para>

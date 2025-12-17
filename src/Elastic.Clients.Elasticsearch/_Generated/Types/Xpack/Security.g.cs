@@ -43,87 +43,29 @@ public sealed partial class Security
 		Ssl = ssl;
 		TokenService = tokenService;
 	}
-#if NET7_0_OR_GREATER
+
 	public Security()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Security()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Security(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Anonymous { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle ApiKeyService { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Audit Audit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Fips140 { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.IpFilter Ipfilter { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Base OperatorPrivileges { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> Realms { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> RoleMapping { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.SecurityRoles Roles { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Ssl Ssl { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Anonymous { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle ApiKeyService { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Audit Audit { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Fips140 { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.IpFilter Ipfilter { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base OperatorPrivileges { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Realm> Realms { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.RoleMapping> RoleMapping { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.SecurityRoles Roles { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Ssl Ssl { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.FeatureToggle? SystemKey { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle TokenService { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle TokenService { get; set; }
 }

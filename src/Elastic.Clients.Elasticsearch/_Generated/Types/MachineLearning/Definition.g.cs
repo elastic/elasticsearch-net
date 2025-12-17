@@ -31,17 +31,11 @@ public sealed partial class Definition
 	{
 		TrainedModel = trainedModel;
 	}
-#if NET7_0_OR_GREATER
+
 	public Definition()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Definition()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Definition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class Definition
 	/// The definition of the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
 }
 
 public readonly partial struct DefinitionDescriptor

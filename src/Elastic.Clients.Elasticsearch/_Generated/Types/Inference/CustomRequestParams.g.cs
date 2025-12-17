@@ -31,17 +31,11 @@ public sealed partial class CustomRequestParams
 	{
 		Content = content;
 	}
-#if NET7_0_OR_GREATER
+
 	public CustomRequestParams()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CustomRequestParams()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomRequestParams(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class CustomRequestParams
 	/// The content string needs to be a single line except when using the Kibana console.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Content { get; set; }
+	public required string Content { get; set; }
 }
 
 public readonly partial struct CustomRequestParamsDescriptor

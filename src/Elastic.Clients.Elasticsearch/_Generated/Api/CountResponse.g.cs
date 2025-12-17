@@ -37,14 +37,6 @@ public sealed partial class CountResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required long Count { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 }

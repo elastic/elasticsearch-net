@@ -35,17 +35,11 @@ public sealed partial class SnapshotLifecycle
 		Stats = stats;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotLifecycle()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotLifecycle()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class SnapshotLifecycle
 	/// </para>
 	/// </summary>
 	public System.DateTimeOffset? ModifiedDate { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ModifiedDateMillis { get; set; }
+	public required System.DateTimeOffset ModifiedDateMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,21 +64,9 @@ public sealed partial class SnapshotLifecycle
 	/// </para>
 	/// </summary>
 	public System.DateTimeOffset? NextExecution { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset NextExecutionMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; set; }
+	public required System.DateTimeOffset NextExecutionMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; set; }
+	public required Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -96,9 +74,5 @@ public sealed partial class SnapshotLifecycle
 	/// Only the latest version is stored and incremented when the policy is updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required long Version { get; set; }
 }

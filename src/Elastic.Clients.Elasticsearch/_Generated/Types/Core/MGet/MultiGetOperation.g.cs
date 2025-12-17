@@ -31,17 +31,11 @@ public sealed partial class MultiGetOperation
 	{
 		Id = id;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiGetOperation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiGetOperation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiGetOperation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class MultiGetOperation
 	/// The unique document ID.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -34,41 +34,19 @@ public sealed partial class UsageStatsShards
 		TrackingId = trackingId;
 		TrackingStartedAtMillis = trackingStartedAtMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public UsageStatsShards()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UsageStatsShards()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UsageStatsShards(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting Routing { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats Stats { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TrackingId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset TrackingStartedAtMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting Routing { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardsStats Stats { get; set; }
+	public required string TrackingId { get; set; }
+	public required System.DateTimeOffset TrackingStartedAtMillis { get; set; }
 }

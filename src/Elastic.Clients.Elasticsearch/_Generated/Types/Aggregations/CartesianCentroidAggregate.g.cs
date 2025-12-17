@@ -31,28 +31,18 @@ public sealed partial class CartesianCentroidAggregate : Elastic.Clients.Elastic
 	{
 		Count = count;
 	}
-#if NET7_0_OR_GREATER
+
 	public CartesianCentroidAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CartesianCentroidAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CartesianCentroidAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 	public Elastic.Clients.Elasticsearch.CartesianPoint? Location { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 

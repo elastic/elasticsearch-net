@@ -38,17 +38,11 @@ public sealed partial class ExplainAnalyzeToken
 		Token = token;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ExplainAnalyzeToken()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ExplainAnalyzeToken()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExplainAnalyzeToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,45 +55,13 @@ public sealed partial class ExplainAnalyzeToken
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Attributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Bytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long EndOffset { get; set; }
+	public required string Bytes { get; set; }
+	public required long EndOffset { get; set; }
 	public bool? Keyword { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Position { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PositionLength { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StartOffset { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TermFrequency { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Token { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required long Position { get; set; }
+	public required long PositionLength { get; set; }
+	public required long StartOffset { get; set; }
+	public required long TermFrequency { get; set; }
+	public required string Token { get; set; }
+	public required string Type { get; set; }
 }

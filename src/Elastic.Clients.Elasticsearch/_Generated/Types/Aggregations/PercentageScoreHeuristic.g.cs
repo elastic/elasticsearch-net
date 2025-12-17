@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PercentageScoreHeuristicConverter))]
 public sealed partial class PercentageScoreHeuristic
 {
-#if NET7_0_OR_GREATER
 	public PercentageScoreHeuristic()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PercentageScoreHeuristic()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PercentageScoreHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

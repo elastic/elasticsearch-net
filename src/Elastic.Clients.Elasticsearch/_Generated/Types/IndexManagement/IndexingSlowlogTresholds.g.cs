@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexingSlowlogTresholdsConverter))]
 public sealed partial class IndexingSlowlogTresholds
 {
-#if NET7_0_OR_GREATER
 	public IndexingSlowlogTresholds()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexingSlowlogTresholds()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

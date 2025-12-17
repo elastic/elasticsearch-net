@@ -31,17 +31,11 @@ public sealed partial class CCSStats
 	{
 		Search = search;
 	}
-#if NET7_0_OR_GREATER
+
 	public CCSStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CCSStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CCSStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,9 +63,5 @@ public sealed partial class CCSStats
 	/// Information about cross-cluster search usage.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats Search { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats Search { get; set; }
 }

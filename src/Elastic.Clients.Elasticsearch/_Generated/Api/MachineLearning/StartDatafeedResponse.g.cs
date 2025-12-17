@@ -43,20 +43,12 @@ public sealed partial class StartDatafeedResponse : Elastic.Transport.Products.E
 	/// If the job is allowed to open lazily and has not yet been assigned to a node, this value is an empty string.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Node { get; set; }
+	public required System.Collections.Generic.ICollection<string> Node { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For a successful response, this value is always <c>true</c>. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Started { get; set; }
+	public required bool Started { get; set; }
 }

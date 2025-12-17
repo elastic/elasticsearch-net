@@ -31,28 +31,18 @@ public sealed partial class WaitForSnapshotAction
 	{
 		Policy = policy;
 	}
-#if NET7_0_OR_GREATER
+
 	public WaitForSnapshotAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WaitForSnapshotAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WaitForSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Policy { get; set; }
+	public required string Policy { get; set; }
 }
 
 public readonly partial struct WaitForSnapshotActionDescriptor

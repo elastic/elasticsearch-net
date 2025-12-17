@@ -37,20 +37,12 @@ public sealed partial class GetDataFrameAnalyticsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of data frame analytics job resources, which are sorted by the id value in ascending order.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary> DataFrameAnalytics { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSummary> DataFrameAnalytics { get; set; }
 }

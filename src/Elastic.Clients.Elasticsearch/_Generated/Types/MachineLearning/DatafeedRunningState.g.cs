@@ -32,17 +32,11 @@ public sealed partial class DatafeedRunningState
 		RealTimeConfigured = realTimeConfigured;
 		RealTimeRunning = realTimeRunning;
 	}
-#if NET7_0_OR_GREATER
+
 	public DatafeedRunningState()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DatafeedRunningState()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatafeedRunningState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class DatafeedRunningState
 	/// Indicates if the datafeed is "real-time"; meaning that the datafeed has no configured <c>end</c> time.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool RealTimeConfigured { get; set; }
+	public required bool RealTimeConfigured { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -66,11 +56,7 @@ public sealed partial class DatafeedRunningState
 	/// For datafeeds without a configured <c>end</c> time, this means that the datafeed is now running on "real-time" data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool RealTimeRunning { get; set; }
+	public required bool RealTimeRunning { get; set; }
 
 	/// <summary>
 	/// <para>

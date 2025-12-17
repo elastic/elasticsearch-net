@@ -38,17 +38,11 @@ public sealed partial class ToolCall
 		Id = id;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ToolCall()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ToolCall()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ToolCall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,33 +54,21 @@ public sealed partial class ToolCall
 	/// The function that the model called.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.ToolCallFunction Function { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.ToolCallFunction Function { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The identifier of the tool call.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of the tool call.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }
 
 /// <summary>

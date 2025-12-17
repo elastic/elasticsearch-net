@@ -40,31 +40,15 @@ public sealed partial class SearchTemplateResponse<TDocument> : Elastic.Transpor
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool TimedOut { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Took { get; set; }
+	public required bool TimedOut { get; set; }
+	public required long Took { get; set; }
 }

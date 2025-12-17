@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.NoriPartOfSpeechTokenFilterConverter))]
 public sealed partial class NoriPartOfSpeechTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
-#if NET7_0_OR_GREATER
 	public NoriPartOfSpeechTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NoriPartOfSpeechTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NoriPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

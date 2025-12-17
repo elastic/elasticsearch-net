@@ -37,9 +37,5 @@ public sealed partial class ClearCursorResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Succeeded { get; set; }
+	public required bool Succeeded { get; set; }
 }

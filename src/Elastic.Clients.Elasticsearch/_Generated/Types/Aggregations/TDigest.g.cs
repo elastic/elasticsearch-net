@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TDigestConverter))]
 public sealed partial class TDigest
 {
-#if NET7_0_OR_GREATER
 	public TDigest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TDigest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TDigest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

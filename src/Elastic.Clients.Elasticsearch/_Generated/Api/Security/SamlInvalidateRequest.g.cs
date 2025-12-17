@@ -53,17 +53,11 @@ public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearc
 	{
 		QueryString = queryString;
 	}
-#if NET7_0_OR_GREATER
+
 	public SamlInvalidateRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SamlInvalidateRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -94,11 +88,7 @@ public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearc
 	/// The client application must not attempt to parse or process the string in any way.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string QueryString { get; set; }
+	public required string QueryString { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -195,6 +185,11 @@ public readonly partial struct SamlInvalidateRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

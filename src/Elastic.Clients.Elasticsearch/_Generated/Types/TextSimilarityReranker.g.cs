@@ -33,17 +33,11 @@ public sealed partial class TextSimilarityReranker
 		InferenceText = inferenceText;
 		Retriever = retriever;
 	}
-#if NET7_0_OR_GREATER
+
 	public TextSimilarityReranker()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TextSimilarityReranker()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class TextSimilarityReranker
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
+	public required string Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -87,11 +77,7 @@ public sealed partial class TextSimilarityReranker
 	/// The text snippet used as the basis for similarity comparison.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string InferenceText { get; set; }
+	public required string InferenceText { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -119,11 +105,7 @@ public sealed partial class TextSimilarityReranker
 	/// The nested retriever which will produce the first-level results, that will later be used for reranking.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
 public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>

@@ -33,17 +33,11 @@ public sealed partial class GetResult<TDocument>
 		Id = id;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public GetResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GetResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,22 +56,14 @@ public sealed partial class GetResult<TDocument>
 	/// Indicates whether the document exists.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Ignored { get; set; }
 
 	/// <summary>
@@ -85,11 +71,7 @@ public sealed partial class GetResult<TDocument>
 	/// The name of the index the document belongs to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>

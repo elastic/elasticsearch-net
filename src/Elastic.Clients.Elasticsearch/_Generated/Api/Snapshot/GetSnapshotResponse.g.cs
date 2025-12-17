@@ -50,11 +50,7 @@ public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Ela
 	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the <c>next</c> field value.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Remaining { get; set; }
+	public required int Remaining { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? Responses { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? Snapshots { get; set; }
 
@@ -63,9 +59,5 @@ public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Ela
 	/// The total number of snapshots that match the request when ignoring the size limit or <c>after</c> query parameter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

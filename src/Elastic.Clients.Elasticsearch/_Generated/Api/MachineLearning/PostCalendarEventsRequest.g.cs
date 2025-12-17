@@ -46,11 +46,11 @@ public sealed partial class PostCalendarEventsRequest : Elastic.Clients.Elastics
 	{
 		Events = events;
 	}
-#if NET7_0_OR_GREATER
+
 	public PostCalendarEventsRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PostCalendarEventsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,22 +70,14 @@ public sealed partial class PostCalendarEventsRequest : Elastic.Clients.Elastics
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// A list of one of more scheduled events. The event’s start and end times can be specified as integer milliseconds since the epoch or as a string in ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> Events { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent> Events { get; set; }
 }
 
 /// <summary>
@@ -183,6 +175,11 @@ public readonly partial struct PostCalendarEventsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

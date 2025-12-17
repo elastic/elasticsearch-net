@@ -31,26 +31,16 @@ public sealed partial class NodeInfoSettingsTransportFeatures
 	{
 		XPack = xPack;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSettingsTransportFeatures()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSettingsTransportFeatures()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettingsTransportFeatures(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string XPack { get; set; }
+	public required string XPack { get; set; }
 }

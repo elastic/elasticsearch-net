@@ -32,17 +32,11 @@ public sealed partial class ClusterJvmMemory
 		HeapMaxInBytes = heapMaxInBytes;
 		HeapUsedInBytes = heapUsedInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterJvmMemory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterJvmMemory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class ClusterJvmMemory
 	/// Maximum amount of memory, in bytes, available for use by the heap across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HeapMaxInBytes { get; set; }
+	public required long HeapMaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,9 +69,5 @@ public sealed partial class ClusterJvmMemory
 	/// Memory, in bytes, currently in use by the heap across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HeapUsedInBytes { get; set; }
+	public required long HeapUsedInBytes { get; set; }
 }

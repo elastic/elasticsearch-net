@@ -32,35 +32,21 @@ public sealed partial class JobForecastStatistics
 		ForecastedJobs = forecastedJobs;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public JobForecastStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JobForecastStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JobForecastStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ForecastedJobs { get; set; }
+	public required int ForecastedJobs { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? MemoryBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? ProcessingTimeMs { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? Records { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, long>? Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Total { get; set; }
 }

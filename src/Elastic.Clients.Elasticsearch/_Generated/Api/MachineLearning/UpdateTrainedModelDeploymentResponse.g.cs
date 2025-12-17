@@ -37,9 +37,5 @@ public sealed partial class UpdateTrainedModelDeploymentResponse : Elastic.Trans
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment Assignment { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignment Assignment { get; set; }
 }

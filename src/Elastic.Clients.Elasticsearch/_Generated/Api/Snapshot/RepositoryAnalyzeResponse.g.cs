@@ -42,88 +42,56 @@ public sealed partial class RepositoryAnalyzeResponse : Elastic.Transport.Produc
 	/// The number of blobs written to the repository during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int BlobCount { get; set; }
+	public required int BlobCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The path in the repository under which all the blobs were written during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BlobPath { get; set; }
+	public required string BlobPath { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of write operations performed concurrently during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Concurrency { get; set; }
+	public required int Concurrency { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node that coordinated the analysis and performed the final cleanup.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo CoordinatingNode { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SnapshotNodeInfo CoordinatingNode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to delete all the blobs in the container.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration DeleteElapsed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration DeleteElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to delete all the blobs in the container, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan DeleteElapsedNanos { get; set; }
+	public required System.TimeSpan DeleteElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of every read and write operation performed during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Details { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Details { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the number of nodes on which early read operations were performed after writing each blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int EarlyReadNodeCount { get; set; }
+	public required int EarlyReadNodeCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -131,130 +99,82 @@ public sealed partial class RepositoryAnalyzeResponse : Elastic.Transport.Produc
 	/// It is included to emphasize that a successful response does not guarantee correct behaviour in future.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> IssuesDetected { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> IssuesDetected { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to retrieve a list of all the blobs in the container.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration ListingElapsed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration ListingElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time it took to retrieve a list of all the blobs in the container, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ListingElapsedNanos { get; set; }
+	public required System.TimeSpan ListingElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the size of a blob written during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize MaxBlobSize { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize MaxBlobSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit, in bytes, on the size of a blob written during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxBlobSizeBytes { get; set; }
+	public required long MaxBlobSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the total size of all blob written during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize MaxTotalDataSize { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize MaxTotalDataSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit, in bytes, on the total size of all blob written during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxTotalDataSizeBytes { get; set; }
+	public required long MaxTotalDataSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The probability of performing rare actions during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RareActionProbability { get; set; }
+	public required double RareActionProbability { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The limit on the number of nodes on which read operations were performed after writing each blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ReadNodeCount { get; set; }
+	public required int ReadNodeCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the repository that was the subject of the analysis.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Repository { get; set; }
+	public required string Repository { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The seed for the pseudo-random number generator used to generate the operations used during the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Seed { get; set; }
+	public required long Seed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of statistics that summarize the results of the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Summary { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Summary { get; set; }
 }

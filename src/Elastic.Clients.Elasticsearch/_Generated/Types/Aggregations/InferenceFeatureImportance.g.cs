@@ -31,17 +31,11 @@ public sealed partial class InferenceFeatureImportance
 	{
 		FeatureName = featureName;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceFeatureImportance()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceFeatureImportance()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceFeatureImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,10 +43,6 @@ public sealed partial class InferenceFeatureImportance
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.InferenceClassImportance>? Classes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FeatureName { get; set; }
+	public required string FeatureName { get; set; }
 	public double? Importance { get; set; }
 }

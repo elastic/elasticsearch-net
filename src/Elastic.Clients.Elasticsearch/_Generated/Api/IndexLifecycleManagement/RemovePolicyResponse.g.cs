@@ -37,14 +37,6 @@ public sealed partial class RemovePolicyResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> FailedIndexes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool HasFailures { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> FailedIndexes { get; set; }
+	public required bool HasFailures { get; set; }
 }

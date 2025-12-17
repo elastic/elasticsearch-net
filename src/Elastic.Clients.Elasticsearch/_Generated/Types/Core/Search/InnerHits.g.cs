@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.InnerHitsConverter))]
 public sealed partial class InnerHits
 {
-#if NET7_0_OR_GREATER
 	public InnerHits()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public InnerHits()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InnerHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

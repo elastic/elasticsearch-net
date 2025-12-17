@@ -37,9 +37,5 @@ public sealed partial class GetPipelineResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> Pipelines { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> Pipelines { get; set; }
 }

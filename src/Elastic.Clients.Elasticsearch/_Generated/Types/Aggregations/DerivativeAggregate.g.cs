@@ -31,17 +31,11 @@ public sealed partial class DerivativeAggregate : Elastic.Clients.Elasticsearch.
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public DerivativeAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DerivativeAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DerivativeAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,10 +54,6 @@ public sealed partial class DerivativeAggregate : Elastic.Clients.Elasticsearch.
 	/// unless specified otherwise.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Value { get; set; }
+	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

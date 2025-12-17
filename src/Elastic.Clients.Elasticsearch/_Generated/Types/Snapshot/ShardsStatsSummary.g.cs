@@ -34,42 +34,20 @@ public sealed partial class ShardsStatsSummary
 		TimeInMillis = timeInMillis;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardsStatsSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardsStatsSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardsStatsSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Incremental { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Incremental { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Total { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsSummaryItem Total { get; set; }
 }

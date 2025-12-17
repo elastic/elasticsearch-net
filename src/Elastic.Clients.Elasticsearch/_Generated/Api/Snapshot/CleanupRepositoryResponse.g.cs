@@ -42,9 +42,5 @@ public sealed partial class CleanupRepositoryResponse : Elastic.Transport.Produc
 	/// Statistics for cleanup operations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Results { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Results { get; set; }
 }

@@ -42,11 +42,7 @@ public sealed partial class InvalidateTokenResponse : Elastic.Transport.Products
 	/// The number of errors that were encountered when invalidating the tokens.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ErrorCount { get; set; }
+	public required long ErrorCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,20 +57,12 @@ public sealed partial class InvalidateTokenResponse : Elastic.Transport.Products
 	/// The number of the tokens that were invalidated as part of this request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InvalidatedTokens { get; set; }
+	public required long InvalidatedTokens { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of tokens that were already invalidated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PreviouslyInvalidatedTokens { get; set; }
+	public required long PreviouslyInvalidatedTokens { get; set; }
 }

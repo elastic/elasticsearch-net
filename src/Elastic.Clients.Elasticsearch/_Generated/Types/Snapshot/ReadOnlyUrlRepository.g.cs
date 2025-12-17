@@ -31,17 +31,11 @@ public sealed partial class ReadOnlyUrlRepository : Elastic.Clients.Elasticsearc
 	{
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReadOnlyUrlRepository()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReadOnlyUrlRepository()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReadOnlyUrlRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class ReadOnlyUrlRepository : Elastic.Clients.Elasticsearc
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

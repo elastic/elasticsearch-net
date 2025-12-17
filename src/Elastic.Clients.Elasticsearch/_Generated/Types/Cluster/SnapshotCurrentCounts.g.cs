@@ -35,17 +35,11 @@ public sealed partial class SnapshotCurrentCounts
 		SnapshotDeletions = snapshotDeletions;
 		Snapshots = snapshots;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotCurrentCounts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotCurrentCounts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotCurrentCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,53 +51,33 @@ public sealed partial class SnapshotCurrentCounts
 	/// Cleanups in progress, not counted in concurrent_operations as they are not concurrent
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Cleanups { get; set; }
+	public required int Cleanups { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Sum of snapshots and snapshot_deletions
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ConcurrentOperations { get; set; }
+	public required int ConcurrentOperations { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Incomplete shard snapshots
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardSnapshots { get; set; }
+	public required int ShardSnapshots { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Snapshots deletions in progress
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SnapshotDeletions { get; set; }
+	public required int SnapshotDeletions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Snapshots currently in progress
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Snapshots { get; set; }
+	public required int Snapshots { get; set; }
 }

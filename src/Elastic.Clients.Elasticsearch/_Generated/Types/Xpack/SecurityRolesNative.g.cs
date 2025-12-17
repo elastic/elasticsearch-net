@@ -33,36 +33,18 @@ public sealed partial class SecurityRolesNative
 		Fls = fls;
 		Size = size;
 	}
-#if NET7_0_OR_GREATER
+
 	public SecurityRolesNative()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SecurityRolesNative()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SecurityRolesNative(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Dls { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Fls { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Size { get; set; }
+	public required bool Dls { get; set; }
+	public required bool Fls { get; set; }
+	public required long Size { get; set; }
 }

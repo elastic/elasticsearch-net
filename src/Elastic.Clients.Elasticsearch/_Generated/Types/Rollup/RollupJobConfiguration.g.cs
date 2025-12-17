@@ -38,61 +38,23 @@ public sealed partial class RollupJobConfiguration
 		RollupIndex = rollupIndex;
 		Timeout = timeout;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupJobConfiguration()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupJobConfiguration()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupJobConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Cron { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexPattern { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric> Metrics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PageSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RollupIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration Timeout { get; set; }
+	public required string Cron { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.Groupings Groups { get; set; }
+	public required string Id { get; set; }
+	public required string IndexPattern { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric> Metrics { get; set; }
+	public required long PageSize { get; set; }
+	public required string RollupIndex { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration Timeout { get; set; }
 }

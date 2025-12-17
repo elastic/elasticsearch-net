@@ -32,17 +32,11 @@ public sealed partial class LatLonGeoLocation
 		Lat = lat;
 		Lon = lon;
 	}
-#if NET7_0_OR_GREATER
+
 	public LatLonGeoLocation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LatLonGeoLocation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class LatLonGeoLocation
 	/// Latitude
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Lat { get; set; }
+	public required double Lat { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Longitude
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Lon { get; set; }
+	public required double Lon { get; set; }
 }
 
 public readonly partial struct LatLonGeoLocationDescriptor

@@ -44,11 +44,11 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients
 	public GetRepositoriesMeteringInfoRequest(Elastic.Clients.Elasticsearch.NodeIds nodeId) : base(r => r.Required("node_id", nodeId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetRepositoriesMeteringInfoRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetRepositoriesMeteringInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +68,7 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients
 	/// Comma-separated list of node IDs or names used to limit returned information.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
+	public required Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
 /// <summary>
@@ -134,6 +130,11 @@ public readonly partial struct GetRepositoriesMeteringInfoRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

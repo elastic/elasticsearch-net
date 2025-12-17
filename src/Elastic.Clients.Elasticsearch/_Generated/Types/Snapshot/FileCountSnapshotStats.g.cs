@@ -32,31 +32,17 @@ public sealed partial class FileCountSnapshotStats
 		FileCount = fileCount;
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public FileCountSnapshotStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FileCountSnapshotStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FileCountSnapshotStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FileCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required int FileCount { get; set; }
+	public required long SizeInBytes { get; set; }
 }

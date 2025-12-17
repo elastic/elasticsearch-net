@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApiKeyFiltersAggregationConverter))]
 public sealed partial class ApiKeyFiltersAggregation
 {
-#if NET7_0_OR_GREATER
 	public ApiKeyFiltersAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ApiKeyFiltersAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

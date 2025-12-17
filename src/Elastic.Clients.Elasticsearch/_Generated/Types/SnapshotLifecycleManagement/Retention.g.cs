@@ -33,17 +33,11 @@ public sealed partial class Retention
 		MaxCount = maxCount;
 		MinCount = minCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public Retention()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Retention()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,33 +49,21 @@ public sealed partial class Retention
 	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxCount { get; set; }
+	public required int MaxCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum number of snapshots to retain, even if the snapshots have expired.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinCount { get; set; }
+	public required int MinCount { get; set; }
 }
 
 public readonly partial struct RetentionDescriptor

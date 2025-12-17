@@ -55,11 +55,11 @@ public sealed partial class PutAi21Request : Elastic.Clients.Elasticsearch.Reque
 	{
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutAi21Request()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutAi21Request(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,22 +79,14 @@ public sealed partial class PutAi21Request : Elastic.Clients.Elasticsearch.Reque
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Ai21InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("ai21_inference_id"); set => PR("ai21_inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Ai21InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("ai21_inference_id"); set => PR("ai21_inference_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.Ai21TaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>("task_type"); set => PR("task_type", value); }
+	public required Elastic.Clients.Elasticsearch.Inference.Ai21TaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>("task_type"); set => PR("task_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -115,11 +107,7 @@ public sealed partial class PutAi21Request : Elastic.Clients.Elasticsearch.Reque
 	/// Settings used to install the inference model. These settings are specific to the <c>ai21</c> service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings ServiceSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.Ai21ServiceSettings ServiceSettings { get; set; }
 }
 
 /// <summary>
@@ -225,6 +213,11 @@ public readonly partial struct PutAi21RequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutAi21RequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

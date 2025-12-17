@@ -71,11 +71,11 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.El
 	{
 		Access = access;
 	}
-#if NET7_0_OR_GREATER
+
 	public UpdateCrossClusterApiKeyRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UpdateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -95,11 +95,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.El
 	/// The ID of the cross-cluster API key to update.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -109,11 +105,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.El
 	/// When specified, the new access assignment fully replaces the previously assigned access.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -332,6 +324,11 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -553,6 +550,11 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor<TDocume
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

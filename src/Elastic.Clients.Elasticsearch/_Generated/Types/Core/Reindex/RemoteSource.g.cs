@@ -31,17 +31,11 @@ public sealed partial class RemoteSource
 	{
 		Host = host;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoteSource()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoteSource()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoteSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +62,7 @@ public sealed partial class RemoteSource
 	/// This information is required when you're indexing from remote.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Host { get; set; }
+	public required string Host { get; set; }
 
 	/// <summary>
 	/// <para>

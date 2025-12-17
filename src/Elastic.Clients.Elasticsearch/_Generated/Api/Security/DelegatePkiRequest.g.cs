@@ -53,17 +53,11 @@ public sealed partial class DelegatePkiRequest : Elastic.Clients.Elasticsearch.R
 	{
 		X509CertificateChain = x509CertificateChain;
 	}
-#if NET7_0_OR_GREATER
+
 	public DelegatePkiRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DelegatePkiRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DelegatePkiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -88,11 +82,7 @@ public sealed partial class DelegatePkiRequest : Elastic.Clients.Elasticsearch.R
 	/// This may be followed by additional certificates; each subsequent certificate is used to certify the previous one.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> X509CertificateChain { get; set; }
+	public required System.Collections.Generic.ICollection<string> X509CertificateChain { get; set; }
 }
 
 /// <summary>
@@ -177,6 +167,11 @@ public readonly partial struct DelegatePkiRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

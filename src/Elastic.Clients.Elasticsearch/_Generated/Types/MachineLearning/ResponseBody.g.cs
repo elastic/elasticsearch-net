@@ -28,16 +28,11 @@ public sealed partial class ResponseBody
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public ResponseBody()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ResponseBody()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ResponseBody(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

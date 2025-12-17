@@ -34,41 +34,19 @@ public sealed partial class NodeUsage
 		Since = since;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Since { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
+	public required System.DateTimeOffset Since { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 }

@@ -34,42 +34,20 @@ public sealed partial class ClusterInfo
 		ShardPaths = shardPaths;
 		ShardSizes = shardSizes;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> ReservedSizes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ReservedSize> ReservedSizes { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? ShardDataSetSizes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> ShardPaths { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> ShardSizes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> ShardPaths { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> ShardSizes { get; set; }
 }

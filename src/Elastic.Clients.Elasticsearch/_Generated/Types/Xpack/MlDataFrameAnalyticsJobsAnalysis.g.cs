@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlDataFrameAnalyticsJobsAnalysisConverter))]
 public sealed partial class MlDataFrameAnalyticsJobsAnalysis
 {
-#if NET7_0_OR_GREATER
 	public MlDataFrameAnalyticsJobsAnalysis()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MlDataFrameAnalyticsJobsAnalysis()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlDataFrameAnalyticsJobsAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,17 +33,11 @@ public sealed partial class HitsEvent<TEvent>
 		Index = index;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public HitsEvent()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HitsEvent()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HitsEvent(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,22 +51,14 @@ public sealed partial class HitsEvent<TEvent>
 	/// Unique identifier for the event. This ID is only unique within the index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the index containing the event.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,9 +72,5 @@ public sealed partial class HitsEvent<TEvent>
 	/// Original JSON body passed for the event at index time.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	TEvent Source { get; set; }
+	public required TEvent Source { get; set; }
 }

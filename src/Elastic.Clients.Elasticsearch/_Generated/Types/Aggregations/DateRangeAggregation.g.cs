@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateRangeAggregationConverter))]
 public sealed partial class DateRangeAggregation
 {
-#if NET7_0_OR_GREATER
 	public DateRangeAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DateRangeAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DateRangeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

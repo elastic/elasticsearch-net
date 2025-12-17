@@ -56,33 +56,21 @@ public sealed partial class GetEqlStatusResponse : Elastic.Transport.Products.El
 	/// Identifier for the search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, the search request is still executing. If false, the search is completed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsPartial { get; set; }
+	public required bool IsPartial { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, the response does not contain complete search results. This could be because either the search is still running (is_running status is false), or because it is already completed (is_running status is true) and results are partial due to failures or timeouts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRunning { get; set; }
+	public required bool IsRunning { get; set; }
 
 	/// <summary>
 	/// <para>

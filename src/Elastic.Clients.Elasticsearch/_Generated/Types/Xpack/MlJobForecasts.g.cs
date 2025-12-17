@@ -32,31 +32,17 @@ public sealed partial class MlJobForecasts
 		ForecastedJobs = forecastedJobs;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlJobForecasts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlJobForecasts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlJobForecasts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ForecastedJobs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long ForecastedJobs { get; set; }
+	public required long Total { get; set; }
 }

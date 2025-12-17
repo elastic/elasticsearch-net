@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchAllQueryConverter))]
 public sealed partial class MatchAllQuery
 {
-#if NET7_0_OR_GREATER
 	public MatchAllQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MatchAllQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatchAllQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

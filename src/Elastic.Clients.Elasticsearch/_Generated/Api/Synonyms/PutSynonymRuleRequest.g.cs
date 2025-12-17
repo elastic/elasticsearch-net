@@ -62,11 +62,11 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 	{
 		Synonyms = synonyms;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutSynonymRuleRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutSynonymRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -86,22 +86,14 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 	/// The ID of the synonym rule to be updated or created.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The ID of the synonym set.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -116,11 +108,7 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 	/// The synonym rule information definition, which must be in Solr format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Synonyms { get; set; }
+	public required string Synonyms { get; set; }
 }
 
 /// <summary>
@@ -222,6 +210,11 @@ public readonly partial struct PutSynonymRuleRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

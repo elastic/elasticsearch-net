@@ -32,17 +32,11 @@ public sealed partial class HistogramBucket
 		DocCount = docCount;
 		Key = key;
 	}
-#if NET7_0_OR_GREATER
+
 	public HistogramBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HistogramBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HistogramBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,15 +49,7 @@ public sealed partial class HistogramBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Key { get; set; }
+	public required long DocCount { get; set; }
+	public required double Key { get; set; }
 	public string? KeyAsString { get; set; }
 }

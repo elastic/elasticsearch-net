@@ -33,37 +33,19 @@ public sealed partial class RecoveryStats
 		CurrentAsTarget = currentAsTarget;
 		ThrottleTimeInMillis = throttleTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public RecoveryStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RecoveryStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RecoveryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CurrentAsSource { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CurrentAsTarget { get; set; }
+	public required long CurrentAsSource { get; set; }
+	public required long CurrentAsTarget { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ThrottleTimeInMillis { get; set; }
+	public required System.TimeSpan ThrottleTimeInMillis { get; set; }
 }

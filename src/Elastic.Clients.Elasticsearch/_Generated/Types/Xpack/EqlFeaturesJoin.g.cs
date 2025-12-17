@@ -35,46 +35,20 @@ public sealed partial class EqlFeaturesJoin
 		JoinQueriesTwo = joinQueriesTwo;
 		JoinUntil = joinUntil;
 	}
-#if NET7_0_OR_GREATER
+
 	public EqlFeaturesJoin()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EqlFeaturesJoin()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlFeaturesJoin(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinQueriesFiveOrMore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinQueriesFour { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinQueriesThree { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinQueriesTwo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinUntil { get; set; }
+	public required int JoinQueriesFiveOrMore { get; set; }
+	public required int JoinQueriesFour { get; set; }
+	public required int JoinQueriesThree { get; set; }
+	public required int JoinQueriesTwo { get; set; }
+	public required int JoinUntil { get; set; }
 }

@@ -33,17 +33,11 @@ public sealed partial class SlmPolicy
 		Repository = repository;
 		Schedule = schedule;
 	}
-#if NET7_0_OR_GREATER
+
 	public SlmPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SlmPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SlmPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,20 +45,8 @@ public sealed partial class SlmPolicy
 	}
 
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration? Config { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Repository { get; set; }
+	public required string Name { get; set; }
+	public required string Repository { get; set; }
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention? Retention { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Schedule { get; set; }
+	public required string Schedule { get; set; }
 }

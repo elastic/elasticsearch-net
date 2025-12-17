@@ -37,9 +37,5 @@ public sealed partial class RevertModelSnapshotResponse : Elastic.Transport.Prod
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Model { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Model { get; set; }
 }

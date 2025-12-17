@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.ScriptProcessorConverter))]
 public sealed partial class ScriptProcessor
 {
-#if NET7_0_OR_GREATER
 	public ScriptProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ScriptProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

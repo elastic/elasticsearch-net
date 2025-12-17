@@ -41,81 +41,31 @@ public sealed partial class ShardRecovery
 		Type = type;
 		VerifyIndex = verifyIndex;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardRecovery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardRecovery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Primary { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Source { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Stage { get; set; }
+	public required long Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
+	public required bool Primary { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Source { get; set; }
+	public required string Stage { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus? Start { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 	public System.DateTimeOffset? StopTime { get; set; }
 	public System.DateTimeOffset? StopTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Target { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Target { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Translog { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex VerifyIndex { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Translog { get; set; }
+	public required string Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex VerifyIndex { get; set; }
 }

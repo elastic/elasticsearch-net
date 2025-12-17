@@ -31,17 +31,11 @@ public sealed partial class TopMetricsAggregate : Elastic.Clients.Elasticsearch.
 	{
 		Top = top;
 	}
-#if NET7_0_OR_GREATER
+
 	public TopMetricsAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TopMetricsAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TopMetricsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class TopMetricsAggregate : Elastic.Clients.Elasticsearch.
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetrics> Top { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "top_metrics";
 }

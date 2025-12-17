@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PipelineProcessorResultConverter))]
 public sealed partial class PipelineProcessorResult
 {
-#if NET7_0_OR_GREATER
 	public PipelineProcessorResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PipelineProcessorResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PipelineProcessorResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

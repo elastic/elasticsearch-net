@@ -31,17 +31,11 @@ public sealed partial class MultiplexerTokenFilter : Elastic.Clients.Elasticsear
 	{
 		Filters = filters;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiplexerTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiplexerTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiplexerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class MultiplexerTokenFilter : Elastic.Clients.Elasticsear
 	/// A list of token filters to apply to incoming tokens.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Filters { get; set; }
+	public required System.Collections.Generic.ICollection<string> Filters { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -37,26 +37,10 @@ public sealed partial class TermVectorsResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Found { get; set; }
+	public required bool Found { get; set; }
 	public string? Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Index { get; set; }
+	public required string Index { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>? TermVectors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Took { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Version { get; set; }
+	public required long Took { get; set; }
+	public required long Version { get; set; }
 }

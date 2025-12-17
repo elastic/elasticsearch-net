@@ -32,33 +32,19 @@ public sealed partial class SampleDiversity
 		Field = field;
 		MaxDocsPerValue = maxDocsPerValue;
 	}
-#if NET7_0_OR_GREATER
+
 	public SampleDiversity()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SampleDiversity()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SampleDiversity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxDocsPerValue { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required int MaxDocsPerValue { get; set; }
 }
 
 public readonly partial struct SampleDiversityDescriptor<TDocument>

@@ -32,17 +32,11 @@ public sealed partial class TotalFeatureImportanceClass
 		ClassName = className;
 		Importance = importance;
 	}
-#if NET7_0_OR_GREATER
+
 	public TotalFeatureImportanceClass()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TotalFeatureImportanceClass()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TotalFeatureImportanceClass(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class TotalFeatureImportanceClass
 	/// The target class value. Could be a string, boolean, or number.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClassName { get; set; }
+	public required string ClassName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of feature importance statistics related to the training data set for this particular feature.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; set; }
 }

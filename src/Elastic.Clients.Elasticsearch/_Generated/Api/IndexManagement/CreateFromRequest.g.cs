@@ -42,11 +42,11 @@ public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Re
 	public CreateFromRequest(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest) : base(r => r.Required("source", source).Required("dest", dest))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CreateFromRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateFromRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,22 +66,14 @@ public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Re
 	/// The destination index or data stream name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Dest { get => P<Elastic.Clients.Elasticsearch.IndexName>("dest"); set => PR("dest", value); }
+	public required Elastic.Clients.Elasticsearch.IndexName Dest { get => P<Elastic.Clients.Elasticsearch.IndexName>("dest"); set => PR("dest", value); }
 
 	/// <summary>
 	/// <para>
 	/// The source index or data stream name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Source { get => P<Elastic.Clients.Elasticsearch.IndexName>("source"); set => PR("source", value); }
+	public required Elastic.Clients.Elasticsearch.IndexName Source { get => P<Elastic.Clients.Elasticsearch.IndexName>("source"); set => PR("source", value); }
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom? CreateFrom { get; set; }
 }
 
@@ -177,6 +169,11 @@ public readonly partial struct CreateFromRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -300,6 +297,11 @@ public readonly partial struct CreateFromRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AlibabaCloudTaskSettingsConverter))]
 public sealed partial class AlibabaCloudTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public AlibabaCloudTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AlibabaCloudTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AlibabaCloudTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

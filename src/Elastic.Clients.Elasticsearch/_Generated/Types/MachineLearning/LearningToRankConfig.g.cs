@@ -31,17 +31,11 @@ public sealed partial class LearningToRankConfig
 	{
 		NumTopFeatureImportanceValues = numTopFeatureImportanceValues;
 	}
-#if NET7_0_OR_GREATER
+
 	public LearningToRankConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LearningToRankConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LearningToRankConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class LearningToRankConfig
 
 	public System.Collections.Generic.IDictionary<string, object>? DefaultParams { get; set; }
 	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>? FeatureExtractors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumTopFeatureImportanceValues { get; set; }
+	public required int NumTopFeatureImportanceValues { get; set; }
 }
 
 public readonly partial struct LearningToRankConfigDescriptor<TDocument>

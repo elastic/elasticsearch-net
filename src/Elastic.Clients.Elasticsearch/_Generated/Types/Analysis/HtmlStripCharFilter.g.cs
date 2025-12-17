@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.HtmlStripCharFilterConverter))]
 public sealed partial class HtmlStripCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
-#if NET7_0_OR_GREATER
 	public HtmlStripCharFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HtmlStripCharFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

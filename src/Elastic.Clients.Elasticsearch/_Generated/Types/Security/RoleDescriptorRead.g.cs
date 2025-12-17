@@ -32,17 +32,11 @@ public sealed partial class RoleDescriptorRead
 		Cluster = cluster;
 		Indices = indices;
 	}
-#if NET7_0_OR_GREATER
+
 	public RoleDescriptorRead()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RoleDescriptorRead()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleDescriptorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class RoleDescriptorRead
 	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,11 +76,7 @@ public sealed partial class RoleDescriptorRead
 	/// A list of indices permissions entries.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; set; }
 
 	/// <summary>
 	/// <para>

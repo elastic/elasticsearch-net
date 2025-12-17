@@ -37,19 +37,7 @@ public sealed partial class CloseIndexResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool ShardsAcknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResult> Indices { get; set; }
+	public required bool ShardsAcknowledged { get; set; }
 }

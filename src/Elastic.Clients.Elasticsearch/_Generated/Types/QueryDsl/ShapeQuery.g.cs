@@ -32,17 +32,11 @@ public sealed partial class ShapeQuery
 		Field = field;
 		Shape = shape;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShapeQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShapeQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShapeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class ShapeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,11 +61,7 @@ public sealed partial class ShapeQuery
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery Shape { get; set; }
 }
 
 public readonly partial struct ShapeQueryDescriptor<TDocument>

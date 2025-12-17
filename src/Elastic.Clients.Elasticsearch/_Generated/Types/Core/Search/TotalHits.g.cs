@@ -32,31 +32,17 @@ public sealed partial class TotalHits
 		Relation = relation;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public TotalHits()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TotalHits()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TotalHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Value { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.TotalHitsRelation Relation { get; set; }
+	public required long Value { get; set; }
 }

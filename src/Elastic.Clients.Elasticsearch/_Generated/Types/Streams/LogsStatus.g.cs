@@ -31,17 +31,11 @@ public sealed partial class LogsStatus
 	{
 		Enabled = enabled;
 	}
-#if NET7_0_OR_GREATER
+
 	public LogsStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LogsStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LogsStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class LogsStatus
 	/// If true, the logs stream feature is enabled.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Enabled { get; set; }
 }

@@ -32,17 +32,11 @@ public sealed partial class GeoPolygonQuery
 		Field = field;
 		Polygon = polygon;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoPolygonQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoPolygonQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoPolygonQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,17 +52,9 @@ public sealed partial class GeoPolygonQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints Polygon { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints Polygon { get; set; }
 	public string? QueryName { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 }

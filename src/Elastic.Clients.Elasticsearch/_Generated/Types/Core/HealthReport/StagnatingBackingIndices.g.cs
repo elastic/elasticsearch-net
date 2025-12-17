@@ -33,36 +33,18 @@ public sealed partial class StagnatingBackingIndices
 		IndexName = indexName;
 		RetryCount = retryCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public StagnatingBackingIndices()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StagnatingBackingIndices()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StagnatingBackingIndices(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FirstOccurrenceTimestamp { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RetryCount { get; set; }
+	public required long FirstOccurrenceTimestamp { get; set; }
+	public required string IndexName { get; set; }
+	public required int RetryCount { get; set; }
 }

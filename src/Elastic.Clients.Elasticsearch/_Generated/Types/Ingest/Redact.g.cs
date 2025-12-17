@@ -31,17 +31,11 @@ public sealed partial class Redact
 	{
 		IsRedacted = isRedacted;
 	}
-#if NET7_0_OR_GREATER
+
 	public Redact()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Redact()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Redact(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class Redact
 	/// indicates if document has been redacted
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRedacted { get; set; }
+	public required bool IsRedacted { get; set; }
 }

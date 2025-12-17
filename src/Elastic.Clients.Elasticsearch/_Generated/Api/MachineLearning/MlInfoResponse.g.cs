@@ -37,24 +37,8 @@ public sealed partial class MlInfoResponse : Elastic.Transport.Products.Elastics
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.Defaults Defaults { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.Limits Limits { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.NativeCode NativeCode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool UpgradeMode { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.Defaults Defaults { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.Limits Limits { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.NativeCode NativeCode { get; set; }
+	public required bool UpgradeMode { get; set; }
 }

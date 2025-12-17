@@ -51,16 +51,11 @@ public sealed partial class GetCalendarsRequest : Elastic.Clients.Elasticsearch.
 	public GetCalendarsRequest(Elastic.Clients.Elasticsearch.Id? calendarId) : base(r => r.Optional("calendar_id", calendarId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetCalendarsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetCalendarsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetCalendarsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -217,6 +212,11 @@ public readonly partial struct GetCalendarsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

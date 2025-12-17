@@ -40,9 +40,5 @@ public sealed partial class ValidateQueryResponse : Elastic.Transport.Products.E
 	public string? Error { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation>? Explanations { get; set; }
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Valid { get; set; }
+	public required bool Valid { get; set; }
 }

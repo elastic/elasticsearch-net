@@ -31,17 +31,11 @@ public sealed partial class BucketCorrelationFunction
 	{
 		CountCorrelation = countCorrelation;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketCorrelationFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketCorrelationFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class BucketCorrelationFunction
 	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
 }
 
 public readonly partial struct BucketCorrelationFunctionDescriptor

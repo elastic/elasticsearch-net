@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoXpackSecurityAuthcRealmsConverter))]
 public sealed partial class NodeInfoXpackSecurityAuthcRealms
 {
-#if NET7_0_OR_GREATER
 	public NodeInfoXpackSecurityAuthcRealms()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodeInfoXpackSecurityAuthcRealms()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoXpackSecurityAuthcRealms(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

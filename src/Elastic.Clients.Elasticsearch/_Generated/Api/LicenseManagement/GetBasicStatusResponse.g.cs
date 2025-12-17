@@ -37,9 +37,5 @@ public sealed partial class GetBasicStatusResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool EligibleToStartBasic { get; set; }
+	public required bool EligibleToStartBasic { get; set; }
 }

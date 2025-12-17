@@ -57,11 +57,11 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 	{
 		Indices = indices;
 	}
-#if NET7_0_OR_GREATER
+
 	public CloneSnapshotRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CloneSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -81,33 +81,21 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 	/// The name of the snapshot repository that both source and target snapshot belong to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>
 	/// The source snapshot name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+	public required Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>
 	/// The target snapshot name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name TargetSnapshot { get => P<Elastic.Clients.Elasticsearch.Name>("target_snapshot"); set => PR("target_snapshot", value); }
+	public required Elastic.Clients.Elasticsearch.Name TargetSnapshot { get => P<Elastic.Clients.Elasticsearch.Name>("target_snapshot"); set => PR("target_snapshot", value); }
 
 	/// <summary>
 	/// <para>
@@ -124,11 +112,7 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 	/// Multi-target syntax is supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Indices { get; set; }
+	public required string Indices { get; set; }
 }
 
 /// <summary>
@@ -237,6 +221,11 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

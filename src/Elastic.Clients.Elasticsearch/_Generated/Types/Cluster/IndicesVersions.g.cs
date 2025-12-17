@@ -34,42 +34,20 @@ public sealed partial class IndicesVersions
 		TotalPrimaryBytes = totalPrimaryBytes;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndicesVersions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndicesVersions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndicesVersions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndexCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int PrimaryShardCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalPrimaryBytes { get; set; }
+	public required int IndexCount { get; set; }
+	public required int PrimaryShardCount { get; set; }
+	public required long TotalPrimaryBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalPrimarySize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string Version { get; set; }
 }

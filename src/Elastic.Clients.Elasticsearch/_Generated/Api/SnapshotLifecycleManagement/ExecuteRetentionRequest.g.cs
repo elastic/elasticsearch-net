@@ -54,16 +54,10 @@ public sealed partial class ExecuteRetentionRequestParameters : Elastic.Transpor
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.ExecuteRetentionRequestConverter))]
 public sealed partial class ExecuteRetentionRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public ExecuteRetentionRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ExecuteRetentionRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExecuteRetentionRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -165,6 +159,11 @@ public readonly partial struct ExecuteRetentionRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

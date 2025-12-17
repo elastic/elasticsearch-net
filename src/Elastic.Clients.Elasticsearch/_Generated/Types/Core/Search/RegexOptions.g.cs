@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.RegexOptionsConverter))]
 public sealed partial class RegexOptions
 {
-#if NET7_0_OR_GREATER
 	public RegexOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RegexOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RegexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

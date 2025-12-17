@@ -33,36 +33,18 @@ public sealed partial class ShardRetentionLeases
 		PrimaryTerm = primaryTerm;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardRetentionLeases()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardRetentionLeases()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardRetentionLeases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardLease> Leases { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryTerm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardLease> Leases { get; set; }
+	public required long PrimaryTerm { get; set; }
+	public required long Version { get; set; }
 }

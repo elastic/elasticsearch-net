@@ -133,11 +133,11 @@ public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requ
 	public RolloverRequest(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex) : base(r => r.Required("alias", alias).Optional("new_index", newIndex))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public RolloverRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RolloverRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -157,11 +157,7 @@ public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Name of the data stream or index alias to roll over.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexAlias Alias { get => P<Elastic.Clients.Elasticsearch.IndexAlias>("alias"); set => PR("alias", value); }
+	public required Elastic.Clients.Elasticsearch.IndexAlias Alias { get => P<Elastic.Clients.Elasticsearch.IndexAlias>("alias"); set => PR("alias", value); }
 
 	/// <summary>
 	/// <para>
@@ -671,6 +667,11 @@ public readonly partial struct RolloverRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1101,6 +1102,11 @@ public readonly partial struct RolloverRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

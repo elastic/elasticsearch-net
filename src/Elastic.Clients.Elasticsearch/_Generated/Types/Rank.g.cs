@@ -28,16 +28,11 @@ public sealed partial class Rank
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Rank()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Rank()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Rank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AdaptiveAllocationsConverter))]
 public sealed partial class AdaptiveAllocations
 {
-#if NET7_0_OR_GREATER
 	public AdaptiveAllocations()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AdaptiveAllocations()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AdaptiveAllocations(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

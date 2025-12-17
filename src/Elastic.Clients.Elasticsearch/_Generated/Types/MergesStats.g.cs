@@ -40,77 +40,31 @@ public sealed partial class MergesStats
 		TotalThrottledTimeInMillis = totalThrottledTimeInMillis;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public MergesStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MergesStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MergesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CurrentDocs { get; set; }
+	public required long Current { get; set; }
+	public required long CurrentDocs { get; set; }
 	public string? CurrentSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CurrentSizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long CurrentSizeInBytes { get; set; }
+	public required long Total { get; set; }
 	public string? TotalAutoThrottle { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalAutoThrottleInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalDocs { get; set; }
+	public required long TotalAutoThrottleInBytes { get; set; }
+	public required long TotalDocs { get; set; }
 	public string? TotalSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeInBytes { get; set; }
+	public required long TotalSizeInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalStoppedTimeInMillis { get; set; }
+	public required System.TimeSpan TotalStoppedTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalThrottledTimeInMillis { get; set; }
+	public required System.TimeSpan TotalThrottledTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

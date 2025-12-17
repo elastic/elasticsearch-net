@@ -37,16 +37,8 @@ public sealed partial class GetTasksResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Completed { get; set; }
+	public required bool Completed { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 	public object? Response { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; set; }
+	public required Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; set; }
 }

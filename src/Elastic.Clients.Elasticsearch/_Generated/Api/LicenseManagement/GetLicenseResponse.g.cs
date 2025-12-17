@@ -37,9 +37,5 @@ public sealed partial class GetLicenseResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation License { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseInformation License { get; set; }
 }

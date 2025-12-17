@@ -32,31 +32,17 @@ public sealed partial class OverallBucketJob
 		JobId = jobId;
 		MaxAnomalyScore = maxAnomalyScore;
 	}
-#if NET7_0_OR_GREATER
+
 	public OverallBucketJob()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OverallBucketJob()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OverallBucketJob(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double MaxAnomalyScore { get; set; }
+	public required string JobId { get; set; }
+	public required double MaxAnomalyScore { get; set; }
 }

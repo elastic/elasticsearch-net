@@ -60,11 +60,11 @@ public sealed partial class EnableUserProfileRequest : Elastic.Clients.Elasticse
 	public EnableUserProfileRequest(string uid) : base(r => r.Required("uid", uid))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public EnableUserProfileRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EnableUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -84,11 +84,7 @@ public sealed partial class EnableUserProfileRequest : Elastic.Clients.Elasticse
 	/// A unique identifier for the user profile.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uid { get => P<string>("uid"); set => PR("uid", value); }
+	public required string Uid { get => P<string>("uid"); set => PR("uid", value); }
 
 	/// <summary>
 	/// <para>
@@ -181,6 +177,11 @@ public readonly partial struct EnableUserProfileRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -43,9 +43,5 @@ public sealed partial class DeleteServiceTokenResponse : Elastic.Transport.Produ
 	/// Otherwise, the response will have status code 404 and <c>found</c> is set to <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 }

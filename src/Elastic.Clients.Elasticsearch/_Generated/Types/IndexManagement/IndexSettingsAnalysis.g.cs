@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsAnalysisConverter))]
 public sealed partial class IndexSettingsAnalysis
 {
-#if NET7_0_OR_GREATER
 	public IndexSettingsAnalysis()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexSettingsAnalysis()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexSettingsAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

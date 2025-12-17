@@ -42,20 +42,12 @@ public sealed partial class GeoIpStatsResponse : Elastic.Transport.Products.Elas
 	/// Downloaded GeoIP2 databases for each node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabases> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Download statistics for all GeoIP2 databases.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.GeoIpDownloadStatistics Stats { get; set; }
 }

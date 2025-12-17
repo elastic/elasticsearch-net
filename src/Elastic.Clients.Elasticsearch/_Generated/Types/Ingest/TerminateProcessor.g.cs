@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.TerminateProcessorConverter))]
 public sealed partial class TerminateProcessor
 {
-#if NET7_0_OR_GREATER
 	public TerminateProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TerminateProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TerminateProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

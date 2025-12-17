@@ -274,11 +274,11 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	public RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("repository", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public RepositoryAnalyzeRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryAnalyzeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -298,11 +298,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// The name of the repository.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>
@@ -767,6 +763,11 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

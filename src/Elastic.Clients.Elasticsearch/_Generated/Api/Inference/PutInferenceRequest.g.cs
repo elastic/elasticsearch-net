@@ -174,11 +174,11 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 	{
 		InferenceConfig = inferenceConfig;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutInferenceRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -198,11 +198,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -217,11 +213,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
 }
 
 /// <summary>
@@ -431,6 +423,11 @@ public readonly partial struct PutInferenceRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

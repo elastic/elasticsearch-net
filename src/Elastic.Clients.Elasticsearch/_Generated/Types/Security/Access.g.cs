@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AccessConverter))]
 public sealed partial class Access
 {
-#if NET7_0_OR_GREATER
 	public Access()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Access()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DetectorConverter))]
 public sealed partial class Detector
 {
-#if NET7_0_OR_GREATER
 	public Detector()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Detector()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Detector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

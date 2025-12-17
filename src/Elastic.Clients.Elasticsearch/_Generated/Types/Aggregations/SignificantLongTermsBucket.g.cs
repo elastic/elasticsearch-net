@@ -34,17 +34,11 @@ public sealed partial class SignificantLongTermsBucket
 		Key = key;
 		Score = score;
 	}
-#if NET7_0_OR_GREATER
+
 	public SignificantLongTermsBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SignificantLongTermsBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SignificantLongTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,25 +51,9 @@ public sealed partial class SignificantLongTermsBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BgCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Key { get; set; }
+	public required long BgCount { get; set; }
+	public required long DocCount { get; set; }
+	public required long Key { get; set; }
 	public string? KeyAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Score { get; set; }
+	public required double Score { get; set; }
 }

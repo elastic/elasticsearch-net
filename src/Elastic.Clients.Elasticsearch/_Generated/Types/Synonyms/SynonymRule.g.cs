@@ -31,17 +31,11 @@ public sealed partial class SynonymRule
 	{
 		Synonyms = synonyms;
 	}
-#if NET7_0_OR_GREATER
+
 	public SynonymRule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SynonymRule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SynonymRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class SynonymRule
 	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Synonyms { get; set; }
+	public required string Synonyms { get; set; }
 }
 
 public readonly partial struct SynonymRuleDescriptor

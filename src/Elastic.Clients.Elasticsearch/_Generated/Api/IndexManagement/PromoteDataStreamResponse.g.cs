@@ -37,9 +37,5 @@ public sealed partial class PromoteDataStreamResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-object Result { get; set; }
+	public required object Result { get; set; }
 }

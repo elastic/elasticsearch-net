@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.InferenceResponseResultConverter))]
 public sealed partial class InferenceResponseResult
 {
-#if NET7_0_OR_GREATER
 	public InferenceResponseResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public InferenceResponseResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceResponseResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

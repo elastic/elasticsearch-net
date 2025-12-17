@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.HuggingFaceTaskSettingsConverter))]
 public sealed partial class HuggingFaceTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public HuggingFaceTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HuggingFaceTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HuggingFaceTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

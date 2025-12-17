@@ -32,17 +32,11 @@ public sealed partial class GeoLineAggregation
 		Point = point;
 		Sort = sort;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoLineAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoLineAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoLineAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class GeoLineAggregation
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -81,11 +71,7 @@ public sealed partial class GeoLineAggregation
 	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -28,16 +28,11 @@ public sealed partial class TextEmbeddingInferenceResult
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public TextEmbeddingInferenceResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TextEmbeddingInferenceResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextEmbeddingInferenceResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

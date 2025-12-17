@@ -31,17 +31,11 @@ public sealed partial class CompletionContext
 	{
 		Context = context;
 	}
-#if NET7_0_OR_GREATER
+
 	public CompletionContext()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CompletionContext()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class CompletionContext
 	/// The value of the category to filter/boost on.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
 
 	/// <summary>
 	/// <para>

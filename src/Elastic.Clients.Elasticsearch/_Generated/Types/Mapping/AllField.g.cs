@@ -40,73 +40,27 @@ public sealed partial class AllField
 		StoreTermVectorPositions = storeTermVectorPositions;
 		StoreTermVectors = storeTermVectors;
 	}
-#if NET7_0_OR_GREATER
+
 	public AllField()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AllField()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AllField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Analyzer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool OmitNorms { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SearchAnalyzer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Similarity { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Store { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool StoreTermVectorOffsets { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool StoreTermVectorPayloads { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool StoreTermVectorPositions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool StoreTermVectors { get; set; }
+	public required string Analyzer { get; set; }
+	public required bool Enabled { get; set; }
+	public required bool OmitNorms { get; set; }
+	public required string SearchAnalyzer { get; set; }
+	public required string Similarity { get; set; }
+	public required bool Store { get; set; }
+	public required bool StoreTermVectorOffsets { get; set; }
+	public required bool StoreTermVectorPayloads { get; set; }
+	public required bool StoreTermVectorPositions { get; set; }
+	public required bool StoreTermVectors { get; set; }
 }
 
 public readonly partial struct AllFieldDescriptor

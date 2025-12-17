@@ -31,28 +31,18 @@ public sealed partial class NumericFielddata
 	{
 		Format = format;
 	}
-#if NET7_0_OR_GREATER
+
 	public NumericFielddata()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NumericFielddata()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NumericFielddata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Format { get; set; }
 }
 
 public readonly partial struct NumericFielddataDescriptor

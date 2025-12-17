@@ -33,36 +33,18 @@ public sealed partial class Explanation
 		Details = details;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public Explanation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Explanation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Explanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail> Details { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Value { get; set; }
+	public required string Description { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail> Details { get; set; }
+	public required float Value { get; set; }
 }

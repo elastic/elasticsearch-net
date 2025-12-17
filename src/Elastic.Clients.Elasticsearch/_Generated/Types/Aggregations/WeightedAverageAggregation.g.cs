@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.WeightedAverageAggregationConverter))]
 public sealed partial class WeightedAverageAggregation
 {
-#if NET7_0_OR_GREATER
 	public WeightedAverageAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public WeightedAverageAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WeightedAverageAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

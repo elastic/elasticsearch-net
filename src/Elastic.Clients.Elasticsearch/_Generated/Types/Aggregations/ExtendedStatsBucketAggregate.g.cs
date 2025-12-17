@@ -42,96 +42,42 @@ public sealed partial class ExtendedStatsBucketAggregate : Elastic.Clients.Elast
 		VariancePopulation = variancePopulation;
 		VarianceSampling = varianceSampling;
 	}
-#if NET7_0_OR_GREATER
+
 	public ExtendedStatsBucketAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ExtendedStatsBucketAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExtendedStatsBucketAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Avg { get; set; }
+	public required double? Avg { get; set; }
 	public string? AvgAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Max { get; set; }
+	public required long Count { get; set; }
+	public required double? Max { get; set; }
 	public string? MaxAsString { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Min { get; set; }
+	public required double? Min { get; set; }
 	public string? MinAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? StdDeviation { get; set; }
+	public required double? StdDeviation { get; set; }
 	public string? StdDeviationAsString { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds? StdDeviationBounds { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBoundsAsString? StdDeviationBoundsAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? StdDeviationPopulation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? StdDeviationSampling { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Sum { get; set; }
+	public required double? StdDeviationPopulation { get; set; }
+	public required double? StdDeviationSampling { get; set; }
+	public required double Sum { get; set; }
 	public string? SumAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? SumOfSquares { get; set; }
+	public required double? SumOfSquares { get; set; }
 	public string? SumOfSquaresAsString { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "extended_stats_bucket";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Variance { get; set; }
+	public required double? Variance { get; set; }
 	public string? VarianceAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? VariancePopulation { get; set; }
+	public required double? VariancePopulation { get; set; }
 	public string? VariancePopulationAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? VarianceSampling { get; set; }
+	public required double? VarianceSampling { get; set; }
 	public string? VarianceSamplingAsString { get; set; }
 }

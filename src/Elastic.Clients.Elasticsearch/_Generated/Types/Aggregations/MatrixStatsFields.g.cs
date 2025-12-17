@@ -38,61 +38,23 @@ public sealed partial class MatrixStatsFields
 		Skewness = skewness;
 		Variance = variance;
 	}
-#if NET7_0_OR_GREATER
+
 	public MatrixStatsFields()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MatrixStatsFields()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatrixStatsFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, double> Correlation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, double> Covariance { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Kurtosis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Mean { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Skewness { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Variance { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, double> Correlation { get; set; }
+	public required long Count { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, double> Covariance { get; set; }
+	public required double Kurtosis { get; set; }
+	public required double Mean { get; set; }
+	public required string Name { get; set; }
+	public required double Skewness { get; set; }
+	public required double Variance { get; set; }
 }

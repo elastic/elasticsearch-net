@@ -36,51 +36,21 @@ public sealed partial class DiskUsage
 		UsedBytes = usedBytes;
 		UsedDiskPercent = usedDiskPercent;
 	}
-#if NET7_0_OR_GREATER
+
 	public DiskUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DiskUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FreeBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double FreeDiskPercent { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Path { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long UsedBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double UsedDiskPercent { get; set; }
+	public required long FreeBytes { get; set; }
+	public required double FreeDiskPercent { get; set; }
+	public required string Path { get; set; }
+	public required long TotalBytes { get; set; }
+	public required long UsedBytes { get; set; }
+	public required double UsedDiskPercent { get; set; }
 }

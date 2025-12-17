@@ -39,17 +39,11 @@ public sealed partial class Authentication
 		Roles = roles;
 		Username = username;
 	}
-#if NET7_0_OR_GREATER
+
 	public Authentication()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Authentication()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Authentication(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,50 +51,14 @@ public sealed partial class Authentication
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? ApiKey { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.AuthenticationRealm AuthenticationRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AuthenticationType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string? Email { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string? FullName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.AuthenticationRealm LookupRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.AuthenticationRealm AuthenticationRealm { get; set; }
+	public required string AuthenticationType { get; set; }
+	public required string? Email { get; set; }
+	public required bool Enabled { get; set; }
+	public required string? FullName { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.AuthenticationRealm LookupRealm { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, string>? Token { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Username { get; set; }
+	public required string Username { get; set; }
 }

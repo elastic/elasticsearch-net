@@ -38,11 +38,11 @@ public sealed partial class TermsSetQuery
 		Field = field;
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermsSetQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermsSetQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +58,7 @@ public sealed partial class TermsSetQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,11 +87,7 @@ public sealed partial class TermsSetQuery
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> Terms { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> Terms { get; set; }
 }
 
 public readonly partial struct TermsSetQueryDescriptor<TDocument>

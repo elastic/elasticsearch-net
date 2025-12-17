@@ -32,31 +32,17 @@ public sealed partial class DataframeClassificationSummaryRecall
 		AvgRecall = avgRecall;
 		Classes = classes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeClassificationSummaryRecall()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeClassificationSummaryRecall()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeClassificationSummaryRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double AvgRecall { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass> Classes { get; set; }
+	public required double AvgRecall { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass> Classes { get; set; }
 }

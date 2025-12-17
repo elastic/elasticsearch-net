@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.TranslogConverter))]
 public sealed partial class Translog
 {
-#if NET7_0_OR_GREATER
 	public Translog()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Translog()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Translog(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

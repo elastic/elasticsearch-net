@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.QueriesConverter))]
 public sealed partial class Queries
 {
-#if NET7_0_OR_GREATER
 	public Queries()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Queries()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Queries(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

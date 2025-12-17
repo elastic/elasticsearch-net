@@ -32,33 +32,19 @@ public sealed partial class TextIndexPrefixes
 		MaxChars = maxChars;
 		MinChars = minChars;
 	}
-#if NET7_0_OR_GREATER
+
 	public TextIndexPrefixes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TextIndexPrefixes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextIndexPrefixes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxChars { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinChars { get; set; }
+	public required int MaxChars { get; set; }
+	public required int MinChars { get; set; }
 }
 
 public readonly partial struct TextIndexPrefixesDescriptor

@@ -28,16 +28,11 @@ public partial class Query
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Query()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Query()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Query(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

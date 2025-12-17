@@ -32,17 +32,11 @@ public sealed partial class NodeInfoSettingsCluster
 		Election = election;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSettingsCluster()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSettingsCluster()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettingsCluster(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,16 +44,8 @@ public sealed partial class NodeInfoSettingsCluster
 	}
 
 	public Elastic.Clients.Elasticsearch.Nodes.DeprecationIndexing? DeprecationIndexing { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection Election { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection Election { get; set; }
 	public System.Collections.Generic.ICollection<string>? InitialMasterNodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting? Routing { get; set; }
 }

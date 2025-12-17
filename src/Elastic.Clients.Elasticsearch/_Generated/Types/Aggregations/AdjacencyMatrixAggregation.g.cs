@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AdjacencyMatrixAggregationConverter))]
 public sealed partial class AdjacencyMatrixAggregation
 {
-#if NET7_0_OR_GREATER
 	public AdjacencyMatrixAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AdjacencyMatrixAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AdjacencyMatrixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ExtendedMemoryStatsConverter))]
 public sealed partial class ExtendedMemoryStats
 {
-#if NET7_0_OR_GREATER
 	public ExtendedMemoryStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ExtendedMemoryStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExtendedMemoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

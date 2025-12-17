@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsHighlightConverter))]
 public sealed partial class SettingsHighlight
 {
-#if NET7_0_OR_GREATER
 	public SettingsHighlight()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SettingsHighlight()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

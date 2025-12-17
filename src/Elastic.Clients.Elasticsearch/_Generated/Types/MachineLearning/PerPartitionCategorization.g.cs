@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PerPartitionCategorizationConverter))]
 public sealed partial class PerPartitionCategorization
 {
-#if NET7_0_OR_GREATER
 	public PerPartitionCategorization()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PerPartitionCategorization()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PerPartitionCategorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

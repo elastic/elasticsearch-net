@@ -31,17 +31,11 @@ public sealed partial class IlmPolicy
 	{
 		Phases = phases;
 	}
-#if NET7_0_OR_GREATER
+
 	public IlmPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IlmPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IlmPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class IlmPolicy
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Phases { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Phases { get; set; }
 }
 
 public readonly partial struct IlmPolicyDescriptor

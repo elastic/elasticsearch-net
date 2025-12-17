@@ -31,17 +31,11 @@ public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients
 	{
 		HyphenationPatternsPath = hyphenationPatternsPath;
 	}
-#if NET7_0_OR_GREATER
+
 	public HyphenationDecompounderTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HyphenationDecompounderTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HyphenationDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients
 	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string HyphenationPatternsPath { get; set; }
+	public required string HyphenationPatternsPath { get; set; }
 
 	/// <summary>
 	/// <para>

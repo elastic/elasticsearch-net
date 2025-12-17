@@ -55,11 +55,11 @@ public sealed partial class PutDeepseekRequest : Elastic.Clients.Elasticsearch.R
 	{
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutDeepseekRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutDeepseekRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,22 +79,14 @@ public sealed partial class PutDeepseekRequest : Elastic.Clients.Elasticsearch.R
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id DeepseekInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("deepseek_inference_id"); set => PR("deepseek_inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id DeepseekInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("deepseek_inference_id"); set => PR("deepseek_inference_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek>("task_type"); set => PR("task_type", value); }
+	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek>("task_type"); set => PR("task_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -116,11 +108,7 @@ public sealed partial class PutDeepseekRequest : Elastic.Clients.Elasticsearch.R
 	/// These settings are specific to the <c>deepseek</c> service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings ServiceSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings ServiceSettings { get; set; }
 }
 
 /// <summary>
@@ -228,6 +216,11 @@ public readonly partial struct PutDeepseekRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

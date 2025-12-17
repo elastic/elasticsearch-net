@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleVertexAITaskSettingsConverter))]
 public sealed partial class GoogleVertexAITaskSettings
 {
-#if NET7_0_OR_GREATER
 	public GoogleVertexAITaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GoogleVertexAITaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GoogleVertexAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

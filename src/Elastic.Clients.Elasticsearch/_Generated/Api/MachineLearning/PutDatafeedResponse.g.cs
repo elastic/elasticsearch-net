@@ -39,45 +39,17 @@ public sealed partial class PutDatafeedResponse : Elastic.Transport.Products.Ela
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization? Authorization { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig ChunkingConfig { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string DatafeedId { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig ChunkingConfig { get; set; }
+	public required string DatafeedId { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig? DelayedDataCheckConfig { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string JobId { get; set; }
+	public required string JobId { get; set; }
 	public int? MaxEmptySearches { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Duration QueryDelay { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration QueryDelay { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int ScrollSize { get; set; }
+	public required int ScrollSize { get; set; }
 }

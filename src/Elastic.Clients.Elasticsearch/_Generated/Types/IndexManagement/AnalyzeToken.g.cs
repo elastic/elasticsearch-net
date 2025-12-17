@@ -35,47 +35,21 @@ public sealed partial class AnalyzeToken
 		Token = token;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalyzeToken()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalyzeToken()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalyzeToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long EndOffset { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Position { get; set; }
+	public required long EndOffset { get; set; }
+	public required long Position { get; set; }
 	public long? PositionLength { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StartOffset { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Token { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required long StartOffset { get; set; }
+	public required string Token { get; set; }
+	public required string Type { get; set; }
 }

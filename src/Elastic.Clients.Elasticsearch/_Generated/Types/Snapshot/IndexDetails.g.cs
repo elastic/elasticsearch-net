@@ -33,37 +33,19 @@ public sealed partial class IndexDetails
 		ShardCount = shardCount;
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxSegmentsPerShard { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardCount { get; set; }
+	public required long MaxSegmentsPerShard { get; set; }
+	public required int ShardCount { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? Size { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required long SizeInBytes { get; set; }
 }
