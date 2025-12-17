@@ -44,91 +44,29 @@ public sealed partial class RuntimeFieldsType
 		SourceMax = sourceMax;
 		SourceTotal = sourceTotal;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuntimeFieldsType()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuntimeFieldsType()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuntimeFieldsType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CharsMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CharsTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LinesMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LinesTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ScriptlessCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ShadowedCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SourceMax { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SourceTotal { get; set; }
+	public required long CharsMax { get; set; }
+	public required long CharsTotal { get; set; }
+	public required long Count { get; set; }
+	public required long DocMax { get; set; }
+	public required long DocTotal { get; set; }
+	public required long IndexCount { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
+	public required long LinesMax { get; set; }
+	public required long LinesTotal { get; set; }
+	public required string Name { get; set; }
+	public required long ScriptlessCount { get; set; }
+	public required long ShadowedCount { get; set; }
+	public required long SourceMax { get; set; }
+	public required long SourceTotal { get; set; }
 }

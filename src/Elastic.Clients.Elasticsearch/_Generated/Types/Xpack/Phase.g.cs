@@ -32,31 +32,17 @@ public sealed partial class Phase
 		Actions = actions;
 		MinAge = minAge;
 	}
-#if NET7_0_OR_GREATER
+
 	public Phase()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Phase()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Actions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MinAge { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Actions { get; set; }
+	public required System.TimeSpan MinAge { get; set; }
 }

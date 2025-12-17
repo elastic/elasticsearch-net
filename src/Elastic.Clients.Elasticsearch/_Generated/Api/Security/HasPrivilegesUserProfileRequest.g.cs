@@ -48,17 +48,11 @@ public sealed partial class HasPrivilegesUserProfileRequest : Elastic.Clients.El
 		Privileges = privileges;
 		Uids = uids;
 	}
-#if NET7_0_OR_GREATER
+
 	public HasPrivilegesUserProfileRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HasPrivilegesUserProfileRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -78,22 +72,14 @@ public sealed partial class HasPrivilegesUserProfileRequest : Elastic.Clients.El
 	/// An object containing all the privileges to be checked.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Uids { get; set; }
+	public required System.Collections.Generic.ICollection<string> Uids { get; set; }
 }
 
 /// <summary>
@@ -195,6 +181,11 @@ public readonly partial struct HasPrivilegesUserProfileRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

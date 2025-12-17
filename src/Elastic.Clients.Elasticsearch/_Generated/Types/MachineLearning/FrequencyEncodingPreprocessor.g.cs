@@ -33,38 +33,20 @@ public sealed partial class FrequencyEncodingPreprocessor
 		Field = field;
 		FrequencyMap = frequencyMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public FrequencyEncodingPreprocessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FrequencyEncodingPreprocessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FrequencyEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FeatureName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
+	public required string FeatureName { get; set; }
+	public required string Field { get; set; }
+	public required System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
 }
 
 public readonly partial struct FrequencyEncodingPreprocessorDescriptor

@@ -31,17 +31,11 @@ public sealed partial class RolesStats
 	{
 		Dls = dls;
 	}
-#if NET7_0_OR_GREATER
+
 	public RolesStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RolesStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RolesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class RolesStats
 	/// Document-level security (DLS) statistics.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls Dls { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDls Dls { get; set; }
 }

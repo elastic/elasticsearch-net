@@ -31,28 +31,18 @@ public sealed partial class Weights
 	{
 		WeightsValue = weightsValue;
 	}
-#if NET7_0_OR_GREATER
+
 	public Weights()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Weights()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Weights(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double WeightsValue { get; set; }
+	public required double WeightsValue { get; set; }
 }
 
 public readonly partial struct WeightsDescriptor

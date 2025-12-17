@@ -42,31 +42,19 @@ public sealed partial class GetSecuritySettingsResponse : Elastic.Transport.Prod
 	/// Settings for the index used for most security configuration, including native realm users and roles configured with the API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.SecuritySettings Security { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.SecuritySettings Security { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings for the index used to store profile information.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.SecuritySettings SecurityProfile { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.SecuritySettings SecurityProfile { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings for the index used to store tokens.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.SecuritySettings SecurityTokens { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.SecuritySettings SecurityTokens { get; set; }
 }

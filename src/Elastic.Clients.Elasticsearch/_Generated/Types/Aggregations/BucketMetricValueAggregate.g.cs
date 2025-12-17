@@ -32,28 +32,18 @@ public sealed partial class BucketMetricValueAggregate : Elastic.Clients.Elastic
 		Keys = keys;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketMetricValueAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketMetricValueAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketMetricValueAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Keys { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Keys { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "bucket_metric_value";
@@ -64,10 +54,6 @@ public sealed partial class BucketMetricValueAggregate : Elastic.Clients.Elastic
 	/// unless specified otherwise.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Value { get; set; }
+	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

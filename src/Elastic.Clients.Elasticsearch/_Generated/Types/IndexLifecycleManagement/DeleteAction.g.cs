@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.DeleteActionConverter))]
 public sealed partial class DeleteAction
 {
-#if NET7_0_OR_GREATER
 	public DeleteAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DeleteAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

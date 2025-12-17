@@ -38,16 +38,10 @@ public sealed partial class GetDataLifecycleStatsRequestParameters : Elastic.Tra
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleStatsRequestConverter))]
 public sealed partial class GetDataLifecycleStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public GetDataLifecycleStatsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetDataLifecycleStatsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetDataLifecycleStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -108,6 +102,11 @@ public readonly partial struct GetDataLifecycleStatsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

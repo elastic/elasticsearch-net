@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsDimensionFieldsConverter))]
 public sealed partial class MappingLimitSettingsDimensionFields
 {
-#if NET7_0_OR_GREATER
 	public MappingLimitSettingsDimensionFields()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MappingLimitSettingsDimensionFields()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

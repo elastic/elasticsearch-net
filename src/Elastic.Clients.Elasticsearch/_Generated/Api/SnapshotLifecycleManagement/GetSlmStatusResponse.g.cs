@@ -37,9 +37,5 @@ public sealed partial class GetSlmStatusResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode { get; set; }
+	public required Elastic.Clients.Elasticsearch.LifecycleOperationMode OperationMode { get; set; }
 }

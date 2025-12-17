@@ -31,17 +31,11 @@ public sealed partial class RRFRetriever
 	{
 		Retrievers = retrievers;
 	}
-#if NET7_0_OR_GREATER
+
 	public RRFRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RRFRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RRFRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -91,11 +85,7 @@ public sealed partial class RRFRetriever
 	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
 }
 
 public readonly partial struct RrfRetrieverDescriptor<TDocument>

@@ -87,9 +87,5 @@ public sealed partial class QueryResponse : Elastic.Transport.Products.Elasticse
 	/// The values for the search results.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.FetchProfileBreakdownConverter))]
 public sealed partial class FetchProfileBreakdown
 {
-#if NET7_0_OR_GREATER
 	public FetchProfileBreakdown()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FetchProfileBreakdown()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FetchProfileBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

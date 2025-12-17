@@ -34,41 +34,19 @@ public sealed partial class ShardCommit
 		NumDocs = numDocs;
 		UserData = userData;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardCommit()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardCommit()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardCommit(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Generation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NumDocs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> UserData { get; set; }
+	public required int Generation { get; set; }
+	public required string Id { get; set; }
+	public required long NumDocs { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> UserData { get; set; }
 }

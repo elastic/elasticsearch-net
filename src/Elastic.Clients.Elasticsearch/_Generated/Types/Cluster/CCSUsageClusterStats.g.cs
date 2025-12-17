@@ -33,17 +33,11 @@ public sealed partial class CCSUsageClusterStats
 		Took = took;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public CCSUsageClusterStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CCSUsageClusterStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CCSUsageClusterStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class CCSUsageClusterStats
 	/// The total number of cross-cluster search requests for which this cluster was skipped.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Skipped { get; set; }
+	public required int Skipped { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about the time taken to execute requests against this cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of successful (not skipped) cross-cluster search requests that were executed against this cluster. This may include requests where partial results were returned, but not requests in which the cluster has been skipped entirely.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

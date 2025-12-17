@@ -33,17 +33,11 @@ public sealed partial class RuleCondition
 		Operator = @operator;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuleCondition()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuleCondition()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,33 +49,21 @@ public sealed partial class RuleCondition
 	/// Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesTo { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo AppliesTo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Operator { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Operator { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The value that is compared against the <c>applies_to</c> field using the operator.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Value { get; set; }
+	public required double Value { get; set; }
 }
 
 public readonly partial struct RuleConditionDescriptor

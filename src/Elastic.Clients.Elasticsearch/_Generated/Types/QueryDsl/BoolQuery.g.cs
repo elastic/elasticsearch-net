@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.BoolQueryConverter))]
 public partial class BoolQuery
 {
-#if NET7_0_OR_GREATER
 	public BoolQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BoolQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BoolQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

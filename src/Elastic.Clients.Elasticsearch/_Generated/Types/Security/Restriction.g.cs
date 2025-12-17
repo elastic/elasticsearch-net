@@ -31,17 +31,11 @@ public sealed partial class Restriction
 	{
 		Workflows = workflows;
 	}
-#if NET7_0_OR_GREATER
+
 	public Restriction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Restriction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Restriction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class Restriction
 	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
 }
 
 public readonly partial struct RestrictionDescriptor

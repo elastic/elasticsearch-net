@@ -38,61 +38,23 @@ public sealed partial class DfsStatisticsBreakdown
 		TermStatistics = termStatistics;
 		TermStatisticsCount = termStatisticsCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public DfsStatisticsBreakdown()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DfsStatisticsBreakdown()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DfsStatisticsBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CollectionStatistics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CollectionStatisticsCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreateWeight { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreateWeightCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Rewrite { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RewriteCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TermStatistics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TermStatisticsCount { get; set; }
+	public required long CollectionStatistics { get; set; }
+	public required long CollectionStatisticsCount { get; set; }
+	public required long CreateWeight { get; set; }
+	public required long CreateWeightCount { get; set; }
+	public required long Rewrite { get; set; }
+	public required long RewriteCount { get; set; }
+	public required long TermStatistics { get; set; }
+	public required long TermStatisticsCount { get; set; }
 }

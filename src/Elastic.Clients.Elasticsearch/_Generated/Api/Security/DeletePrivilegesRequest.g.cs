@@ -60,11 +60,11 @@ public sealed partial class DeletePrivilegesRequest : Elastic.Clients.Elasticsea
 	public DeletePrivilegesRequest(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("application", application).Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeletePrivilegesRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeletePrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -85,22 +85,14 @@ public sealed partial class DeletePrivilegesRequest : Elastic.Clients.Elasticsea
 	/// Application privileges are always associated with exactly one application.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
+	public required Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
 
 	/// <summary>
 	/// <para>
 	/// The name of the privilege.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -202,6 +194,11 @@ public readonly partial struct DeletePrivilegesRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

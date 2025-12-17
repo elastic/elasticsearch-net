@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SearchIdleConverter))]
 public sealed partial class SearchIdle
 {
-#if NET7_0_OR_GREATER
 	public SearchIdle()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SearchIdle()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchIdle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

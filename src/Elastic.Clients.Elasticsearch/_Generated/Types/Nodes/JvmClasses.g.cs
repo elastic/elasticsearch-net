@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmClassesConverter))]
 public sealed partial class JvmClasses
 {
-#if NET7_0_OR_GREATER
 	public JvmClasses()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public JvmClasses()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JvmClasses(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

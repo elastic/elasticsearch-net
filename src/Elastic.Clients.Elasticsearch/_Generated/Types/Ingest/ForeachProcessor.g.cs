@@ -32,17 +32,11 @@ public sealed partial class ForeachProcessor
 		Field = field;
 		Processor = processor;
 	}
-#if NET7_0_OR_GREATER
+
 	public ForeachProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ForeachProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ForeachProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class ForeachProcessor
 	/// Field containing array or object values.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -101,11 +91,7 @@ public sealed partial class ForeachProcessor
 	/// Ingest processor to run on each element.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SamplerAggregationConverter))]
 public sealed partial class SamplerAggregation
 {
-#if NET7_0_OR_GREATER
 	public SamplerAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SamplerAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -32,17 +32,11 @@ public sealed partial class MultiTermsBucket
 		DocCount = docCount;
 		Key = key;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiTermsBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiTermsBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,16 +49,8 @@ public sealed partial class MultiTermsBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
+	public required long DocCount { get; set; }
 	public long? DocCountErrorUpperBound { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> Key { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue> Key { get; set; }
 	public string? KeyAsString { get; set; }
 }

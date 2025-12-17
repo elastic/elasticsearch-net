@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StringStatsAggregationConverter))]
 public sealed partial class StringStatsAggregation
 {
-#if NET7_0_OR_GREATER
 	public StringStatsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StringStatsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StringStatsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

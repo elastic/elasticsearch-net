@@ -31,17 +31,11 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptions
 	{
 		Question = question;
 	}
-#if NET7_0_OR_GREATER
+
 	public QuestionAnsweringInferenceUpdateOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QuestionAnsweringInferenceUpdateOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QuestionAnsweringInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -67,11 +61,7 @@ public sealed partial class QuestionAnsweringInferenceUpdateOptions
 	/// The question to answer given the inference context
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Question { get; set; }
+	public required string Question { get; set; }
 
 	/// <summary>
 	/// <para>

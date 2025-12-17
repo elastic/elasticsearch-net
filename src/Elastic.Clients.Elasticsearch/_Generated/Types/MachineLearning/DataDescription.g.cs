@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataDescriptionConverter))]
 public sealed partial class DataDescription
 {
-#if NET7_0_OR_GREATER
 	public DataDescription()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataDescription()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataDescription(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

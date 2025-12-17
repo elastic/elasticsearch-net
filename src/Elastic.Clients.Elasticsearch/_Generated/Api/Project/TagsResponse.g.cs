@@ -38,9 +38,5 @@ public sealed partial class TagsResponse : Elastic.Transport.Products.Elasticsea
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Project.Tags>? LinkedProjects { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Project.Tags> Origin { get; set; }
+	public required System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Project.Tags> Origin { get; set; }
 }

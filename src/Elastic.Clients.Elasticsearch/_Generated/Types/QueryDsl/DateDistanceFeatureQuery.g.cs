@@ -33,17 +33,11 @@ public sealed partial class DateDistanceFeatureQuery : Elastic.Clients.Elasticse
 		Origin = origin;
 		Pivot = pivot;
 	}
-#if NET7_0_OR_GREATER
+
 	public DateDistanceFeatureQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DateDistanceFeatureQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DateDistanceFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +62,7 @@ public sealed partial class DateDistanceFeatureQuery : Elastic.Clients.Elasticse
 	/// have an <c>doc_values</c> mapping parameter value of <c>true</c>, which is the default.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -82,11 +72,7 @@ public sealed partial class DateDistanceFeatureQuery : Elastic.Clients.Elasticse
 	/// If the field value is a <c>geo_point</c> field, the <c>origin</c> value must be a geopoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DateMath Origin { get; set; }
+	public required Elastic.Clients.Elasticsearch.DateMath Origin { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -94,11 +80,7 @@ public sealed partial class DateDistanceFeatureQuery : Elastic.Clients.Elasticse
 	/// If the <c>field</c> value is a <c>date</c> or <c>date_nanos</c> field, the <c>pivot</c> value must be a time unit, such as <c>1h</c> or <c>10d</c>. If the <c>field</c> value is a <c>geo_point</c> field, the <c>pivot</c> value must be a distance unit, such as <c>1km</c> or <c>12m</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration Pivot { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration Pivot { get; set; }
 	public string? QueryName { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.Type => "date";

@@ -31,17 +31,11 @@ public sealed partial class RoleTemplate
 	{
 		Template = template;
 	}
-#if NET7_0_OR_GREATER
+
 	public RoleTemplate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RoleTemplate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class RoleTemplate
 	}
 
 	public Elastic.Clients.Elasticsearch.Security.TemplateFormat? Format { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Template { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Template { get; set; }
 }
 
 public readonly partial struct RoleTemplateDescriptor

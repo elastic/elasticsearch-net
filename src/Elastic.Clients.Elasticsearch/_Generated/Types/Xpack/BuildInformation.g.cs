@@ -32,31 +32,17 @@ public sealed partial class BuildInformation
 		Date = date;
 		Hash = hash;
 	}
-#if NET7_0_OR_GREATER
+
 	public BuildInformation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BuildInformation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BuildInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Date { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Hash { get; set; }
+	public required System.DateTimeOffset Date { get; set; }
+	public required string Hash { get; set; }
 }

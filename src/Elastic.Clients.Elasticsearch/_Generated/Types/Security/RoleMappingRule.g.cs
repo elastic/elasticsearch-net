@@ -28,16 +28,11 @@ public sealed partial class RoleMappingRule
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public RoleMappingRule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RoleMappingRule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleMappingRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

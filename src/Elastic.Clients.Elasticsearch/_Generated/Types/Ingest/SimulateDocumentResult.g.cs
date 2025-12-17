@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.SimulateDocumentResultConverter))]
 public sealed partial class SimulateDocumentResult
 {
-#if NET7_0_OR_GREATER
 	public SimulateDocumentResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SimulateDocumentResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SimulateDocumentResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

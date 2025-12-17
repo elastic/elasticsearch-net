@@ -37,31 +37,17 @@ public sealed partial class ErrorResponseBase
 		Error = error;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public ErrorResponseBase()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ErrorResponseBase()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ErrorResponseBase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Error { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Error { get; set; }
+	public required int Status { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.OperatingSystemConverter))]
 public sealed partial class OperatingSystem
 {
-#if NET7_0_OR_GREATER
 	public OperatingSystem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public OperatingSystem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OperatingSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

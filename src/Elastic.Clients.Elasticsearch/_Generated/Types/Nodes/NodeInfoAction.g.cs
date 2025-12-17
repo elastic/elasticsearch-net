@@ -31,26 +31,16 @@ public sealed partial class NodeInfoAction
 	{
 		DestructiveRequiresName = destructiveRequiresName;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DestructiveRequiresName { get; set; }
+	public required string DestructiveRequiresName { get; set; }
 }

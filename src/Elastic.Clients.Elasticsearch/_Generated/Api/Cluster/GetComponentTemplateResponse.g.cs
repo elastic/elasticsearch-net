@@ -37,9 +37,5 @@ public sealed partial class GetComponentTemplateResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> ComponentTemplates { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate> ComponentTemplates { get; set; }
 }

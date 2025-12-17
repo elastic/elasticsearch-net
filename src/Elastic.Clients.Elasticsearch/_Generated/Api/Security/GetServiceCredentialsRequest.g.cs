@@ -49,11 +49,11 @@ public sealed partial class GetServiceCredentialsRequest : Elastic.Clients.Elast
 	public GetServiceCredentialsRequest(string @namespace, Elastic.Clients.Elasticsearch.Name service) : base(r => r.Required("namespace", @namespace).Required("service", service))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetServiceCredentialsRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetServiceCredentialsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -73,22 +73,14 @@ public sealed partial class GetServiceCredentialsRequest : Elastic.Clients.Elast
 	/// The name of the namespace.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
 	/// <summary>
 	/// <para>
 	/// The service name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Service { get => P<Elastic.Clients.Elasticsearch.Name>("service"); set => PR("service", value); }
+	public required Elastic.Clients.Elasticsearch.Name Service { get => P<Elastic.Clients.Elasticsearch.Name>("service"); set => PR("service", value); }
 }
 
 /// <summary>
@@ -166,6 +158,11 @@ public readonly partial struct GetServiceCredentialsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -34,17 +34,11 @@ public sealed partial class NodeInfoSettings
 		Node = node;
 		Transport = transport;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,32 +48,16 @@ public sealed partial class NodeInfoSettings
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoAction? Action { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoBootstrap? Bootstrap { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoClient? Client { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsCluster Cluster { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover? Discovery { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Http { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttp Http { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsIngest? Ingest { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNetwork? Network { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Node { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsNode Node { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoPath? Path { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoRepositories? Repositories { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoScript? Script { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearch? Search { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Transport { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Transport { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack? Xpack { get; set; }
 }

@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SettingsConverter))]
 public sealed partial class Settings
 {
-#if NET7_0_OR_GREATER
 	public Settings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Settings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

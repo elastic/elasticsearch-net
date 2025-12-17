@@ -31,17 +31,11 @@ public sealed partial class FieldMemoryUsage
 	{
 		MemorySizeInBytes = memorySizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldMemoryUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldMemoryUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,9 +43,5 @@ public sealed partial class FieldMemoryUsage
 	}
 
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemorySizeInBytes { get; set; }
+	public required long MemorySizeInBytes { get; set; }
 }

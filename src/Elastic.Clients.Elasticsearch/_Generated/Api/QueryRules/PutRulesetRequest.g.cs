@@ -56,11 +56,11 @@ public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Re
 	{
 		Rules = rules;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutRulesetRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutRulesetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -80,16 +80,8 @@ public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Re
 	/// The unique identifier of the query ruleset to be created or updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
 }
 
 /// <summary>
@@ -182,6 +174,11 @@ public readonly partial struct PutRulesetRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRulesetRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

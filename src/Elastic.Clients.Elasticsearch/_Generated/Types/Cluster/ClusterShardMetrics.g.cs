@@ -33,17 +33,11 @@ public sealed partial class ClusterShardMetrics
 		Max = max;
 		Min = min;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterShardMetrics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterShardMetrics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterShardMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class ClusterShardMetrics
 	/// Mean number of shards in an index, counting only shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Avg { get; set; }
+	public required double Avg { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of shards in an index, counting only shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Max { get; set; }
+	public required double Max { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Minimum number of shards in an index, counting only shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Min { get; set; }
+	public required double Min { get; set; }
 }

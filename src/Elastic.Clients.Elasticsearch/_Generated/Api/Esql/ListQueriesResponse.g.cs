@@ -37,9 +37,5 @@ public sealed partial class ListQueriesResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Esql.EsqlQueryInfo> Queries { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.TaskId, Elastic.Clients.Elasticsearch.Esql.EsqlQueryInfo> Queries { get; set; }
 }

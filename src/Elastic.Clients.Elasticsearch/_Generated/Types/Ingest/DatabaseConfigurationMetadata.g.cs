@@ -34,41 +34,19 @@ public sealed partial class DatabaseConfigurationMetadata
 		ModifiedDateMillis = modifiedDateMillis;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public DatabaseConfigurationMetadata()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DatabaseConfigurationMetadata()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatabaseConfigurationMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Database { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ModifiedDateMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Database { get; set; }
+	public required string Id { get; set; }
+	public required System.DateTimeOffset ModifiedDateMillis { get; set; }
+	public required long Version { get; set; }
 }

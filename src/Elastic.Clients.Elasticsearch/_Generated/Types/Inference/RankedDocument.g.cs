@@ -40,32 +40,18 @@ public sealed partial class RankedDocument
 		Index = index;
 		RelevanceScore = relevanceScore;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankedDocument()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankedDocument()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankedDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float RelevanceScore { get; set; }
+	public required int Index { get; set; }
+	public required float RelevanceScore { get; set; }
 	public string? Text { get; set; }
 }

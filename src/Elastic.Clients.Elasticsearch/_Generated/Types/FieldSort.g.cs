@@ -31,22 +31,18 @@ public sealed partial class FieldSort
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldSort()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? Format { get; set; }
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }

@@ -31,26 +31,16 @@ public sealed partial class MlInferenceDeploymentsTimeMs
 	{
 		Avg = avg;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInferenceDeploymentsTimeMs()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInferenceDeploymentsTimeMs()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInferenceDeploymentsTimeMs(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Avg { get; set; }
+	public required double Avg { get; set; }
 }

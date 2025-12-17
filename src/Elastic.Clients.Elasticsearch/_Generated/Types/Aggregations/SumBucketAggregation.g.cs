@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SumBucketAggregationConverter))]
 public sealed partial class SumBucketAggregation
 {
-#if NET7_0_OR_GREATER
 	public SumBucketAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SumBucketAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SumBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

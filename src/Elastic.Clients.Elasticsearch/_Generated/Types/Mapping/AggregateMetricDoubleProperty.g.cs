@@ -32,28 +32,18 @@ public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elas
 		DefaultMetric = defaultMetric;
 		Metrics = metrics;
 	}
-#if NET7_0_OR_GREATER
+
 	public AggregateMetricDoubleProperty()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AggregateMetricDoubleProperty()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AggregateMetricDoubleProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DefaultMetric { get; set; }
+	public required string DefaultMetric { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
@@ -65,11 +55,7 @@ public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elas
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Metrics { get; set; }
+	public required System.Collections.Generic.ICollection<string> Metrics { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }

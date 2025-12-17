@@ -34,43 +34,21 @@ public sealed partial class CoordsGeoBounds
 		Right = right;
 		Top = top;
 	}
-#if NET7_0_OR_GREATER
+
 	public CoordsGeoBounds()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CoordsGeoBounds()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CoordsGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Bottom { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Left { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Right { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Top { get; set; }
+	public required double Bottom { get; set; }
+	public required double Left { get; set; }
+	public required double Right { get; set; }
+	public required double Top { get; set; }
 }
 
 public readonly partial struct CoordsGeoBoundsDescriptor

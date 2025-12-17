@@ -38,11 +38,11 @@ public sealed partial class TermQuery
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +66,7 @@ public sealed partial class TermQuery
 	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -78,11 +74,7 @@ public sealed partial class TermQuery
 	/// Term you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
+	public required Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
 }
 
 public readonly partial struct TermQueryDescriptor<TDocument>

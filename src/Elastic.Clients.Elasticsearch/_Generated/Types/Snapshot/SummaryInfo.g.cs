@@ -32,17 +32,11 @@ public sealed partial class SummaryInfo
 		Read = read;
 		Write = write;
 	}
-#if NET7_0_OR_GREATER
+
 	public SummaryInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SummaryInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class SummaryInfo
 	/// A collection of statistics that summarise the results of the read operations in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of statistics that summarise the results of the write operations in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Write { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Write { get; set; }
 }

@@ -31,17 +31,11 @@ public sealed partial class GlobalOrdinalsStats
 	{
 		BuildTimeInMillis = buildTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public GlobalOrdinalsStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GlobalOrdinalsStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GlobalOrdinalsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,10 +43,6 @@ public sealed partial class GlobalOrdinalsStats
 	}
 
 	public string? BuildTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildTimeInMillis { get; set; }
+	public required long BuildTimeInMillis { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>? Fields { get; set; }
 }

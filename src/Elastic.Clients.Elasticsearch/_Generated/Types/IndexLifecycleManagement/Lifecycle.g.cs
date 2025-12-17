@@ -33,36 +33,18 @@ public sealed partial class Lifecycle
 		Policy = policy;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public Lifecycle()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Lifecycle()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Lifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ModifiedDate { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy Policy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required System.DateTimeOffset ModifiedDate { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy Policy { get; set; }
+	public required long Version { get; set; }
 }

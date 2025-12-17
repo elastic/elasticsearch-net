@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeGeoTileGridAggregationConverter))]
 public sealed partial class CompositeGeoTileGridAggregation
 {
-#if NET7_0_OR_GREATER
 	public CompositeGeoTileGridAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CompositeGeoTileGridAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompositeGeoTileGridAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

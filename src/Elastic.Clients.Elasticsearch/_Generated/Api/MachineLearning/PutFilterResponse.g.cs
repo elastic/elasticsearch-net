@@ -37,19 +37,7 @@ public sealed partial class PutFilterResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string FilterId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> Items { get; set; }
+	public required string Description { get; set; }
+	public required string FilterId { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Items { get; set; }
 }

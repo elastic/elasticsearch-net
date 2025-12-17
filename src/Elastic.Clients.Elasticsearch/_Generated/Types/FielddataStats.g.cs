@@ -32,17 +32,11 @@ public sealed partial class FielddataStats
 		GlobalOrdinals = globalOrdinals;
 		MemorySizeInBytes = memorySizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public FielddataStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FielddataStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FielddataStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,15 +45,7 @@ public sealed partial class FielddataStats
 
 	public long? Evictions { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.GlobalOrdinalsStats GlobalOrdinals { get; set; }
+	public required Elastic.Clients.Elasticsearch.GlobalOrdinalsStats GlobalOrdinals { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemorySizeInBytes { get; set; }
+	public required long MemorySizeInBytes { get; set; }
 }

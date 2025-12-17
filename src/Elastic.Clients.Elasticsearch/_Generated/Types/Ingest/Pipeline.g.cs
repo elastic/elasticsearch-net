@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PipelineConverter))]
 public sealed partial class Pipeline
 {
-#if NET7_0_OR_GREATER
 	public Pipeline()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Pipeline()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

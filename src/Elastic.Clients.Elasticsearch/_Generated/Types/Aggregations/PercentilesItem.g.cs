@@ -32,32 +32,18 @@ public sealed partial class PercentilesItem
 		Key = key;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public PercentilesItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PercentilesItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Key { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Value { get; set; }
+	public required double Key { get; set; }
+	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

@@ -37,17 +37,11 @@ public sealed partial class ToolCallFunction
 		Arguments = arguments;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public ToolCallFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ToolCallFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ToolCallFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,22 +53,14 @@ public sealed partial class ToolCallFunction
 	/// The arguments to call the function with in JSON format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Arguments { get; set; }
+	public required string Arguments { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the function to call.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }
 
 /// <summary>

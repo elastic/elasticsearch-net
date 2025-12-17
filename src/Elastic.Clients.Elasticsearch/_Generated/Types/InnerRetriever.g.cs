@@ -33,38 +33,20 @@ public sealed partial class InnerRetriever
 		Retriever = retriever;
 		Weight = weight;
 	}
-#if NET7_0_OR_GREATER
+
 	public InnerRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InnerRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InnerRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ScoreNormalizer Normalizer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Weight { get; set; }
+	public required Elastic.Clients.Elasticsearch.ScoreNormalizer Normalizer { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public required float Weight { get; set; }
 }
 
 public readonly partial struct InnerRetrieverDescriptor<TDocument>

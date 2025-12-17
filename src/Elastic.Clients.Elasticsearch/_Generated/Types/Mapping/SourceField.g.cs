@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SourceFieldConverter))]
 public sealed partial class SourceField
 {
-#if NET7_0_OR_GREATER
 	public SourceField()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SourceField()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SourceField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

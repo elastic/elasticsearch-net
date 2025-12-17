@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CartesianCentroidAggregationConverter))]
 public sealed partial class CartesianCentroidAggregation
 {
-#if NET7_0_OR_GREATER
 	public CartesianCentroidAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CartesianCentroidAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CartesianCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

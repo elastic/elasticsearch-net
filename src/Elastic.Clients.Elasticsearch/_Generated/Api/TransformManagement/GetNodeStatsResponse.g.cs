@@ -43,9 +43,5 @@ public sealed partial class GetNodeStatsResponse : Elastic.Transport.Products.El
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.TransformNodeStats>? Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.TransformNodeStats Total { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.TransformNodeStats Total { get; set; }
 }

@@ -50,9 +50,5 @@ public sealed partial class PutSynonymResponse : Elastic.Transport.Products.Elas
 	/// The update operation result.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Result Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

@@ -31,17 +31,11 @@ public sealed partial class ChunkRescorerChunkingSettings
 	{
 		MaxChunkSize = maxChunkSize;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChunkRescorerChunkingSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ChunkRescorerChunkingSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChunkRescorerChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class ChunkRescorerChunkingSettings
 	/// This value should not exceed the window size for the associated model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxChunkSize { get; set; }
+	public required int MaxChunkSize { get; set; }
 
 	/// <summary>
 	/// <para>

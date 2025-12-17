@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelConverter))]
 public sealed partial class TrainedModel
 {
-#if NET7_0_OR_GREATER
 	public TrainedModel()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TrainedModel()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

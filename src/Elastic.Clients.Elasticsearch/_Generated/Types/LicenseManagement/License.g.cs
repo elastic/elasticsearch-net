@@ -37,61 +37,27 @@ public sealed partial class License
 		Type = type;
 		Uid = uid;
 	}
-#if NET7_0_OR_GREATER
+
 	public License()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public License()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal License(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ExpiryDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset IssueDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IssuedTo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Issuer { get; set; }
+	public required System.DateTimeOffset ExpiryDateInMillis { get; set; }
+	public required System.DateTimeOffset IssueDateInMillis { get; set; }
+	public required string IssuedTo { get; set; }
+	public required string Issuer { get; set; }
 	public long? MaxNodes { get; set; }
 	public long? MaxResourceUnits { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Signature { get; set; }
+	public required string Signature { get; set; }
 	public System.DateTimeOffset? StartDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uid { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+	public required string Uid { get; set; }
 }
 
 public readonly partial struct LicenseDescriptor

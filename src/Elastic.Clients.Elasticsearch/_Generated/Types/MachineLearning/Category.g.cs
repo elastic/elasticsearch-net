@@ -38,17 +38,11 @@ public sealed partial class Category
 		ResultType = resultType;
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public Category()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Category()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Category(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,22 +54,14 @@ public sealed partial class Category
 	/// A unique identifier for the category. category_id is unique at the job level, even when per-partition categorization is enabled.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CategoryId { get; set; }
+	public required long CategoryId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of examples of actual values that matched the category.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Examples { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Examples { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -89,27 +75,15 @@ public sealed partial class Category
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum length of the fields that matched the category. The value is increased by 10% to enable matching for similar fields that have not been analyzed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxMatchingLength { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Mlcategory { get; set; }
+	public required long MaxMatchingLength { get; set; }
+	public required string Mlcategory { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -145,25 +119,13 @@ public sealed partial class Category
 	/// A regular expression that is used to search for values that match the category.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Regex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required string Regex { get; set; }
+	public required string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A space separated list of the common tokens that are matched in values of the category.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Terms { get; set; }
+	public required string Terms { get; set; }
 }

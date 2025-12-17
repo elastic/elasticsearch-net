@@ -38,9 +38,5 @@ public sealed partial class PutRoleMappingResponse : Elastic.Transport.Products.
 	}
 
 	public bool? Created { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Security.CreatedStatus RoleMapping { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.CreatedStatus RoleMapping { get; set; }
 }

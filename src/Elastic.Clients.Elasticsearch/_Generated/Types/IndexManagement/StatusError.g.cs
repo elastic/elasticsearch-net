@@ -32,31 +32,17 @@ public sealed partial class StatusError
 		Index = index;
 		Message = message;
 	}
-#if NET7_0_OR_GREATER
+
 	public StatusError()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StatusError()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StatusError(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Message { get; set; }
+	public required string Index { get; set; }
+	public required string Message { get; set; }
 }

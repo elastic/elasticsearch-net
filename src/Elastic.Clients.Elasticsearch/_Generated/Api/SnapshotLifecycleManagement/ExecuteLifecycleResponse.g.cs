@@ -37,9 +37,5 @@ public sealed partial class ExecuteLifecycleResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string SnapshotName { get; set; }
+	public required string SnapshotName { get; set; }
 }

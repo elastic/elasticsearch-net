@@ -42,9 +42,5 @@ public sealed partial class SamlServiceProviderMetadataResponse : Elastic.Transp
 	/// An XML string that contains a SAML Service Provider's metadata for the realm.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Metadata { get; set; }
+	public required string Metadata { get; set; }
 }

@@ -32,17 +32,11 @@ public sealed partial class SlicedScroll
 		Id = id;
 		Max = max;
 	}
-#if NET7_0_OR_GREATER
+
 	public SlicedScroll()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SlicedScroll()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SlicedScroll(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,16 +44,8 @@ public sealed partial class SlicedScroll
 	}
 
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Max { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required int Max { get; set; }
 }
 
 public readonly partial struct SlicedScrollDescriptor<TDocument>

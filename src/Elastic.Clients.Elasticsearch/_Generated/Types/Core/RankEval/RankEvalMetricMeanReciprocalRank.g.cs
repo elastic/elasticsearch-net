@@ -32,16 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricMeanReciprocalRankConverter))]
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
-#if NET7_0_OR_GREATER
 	public RankEvalMetricMeanReciprocalRank()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RankEvalMetricMeanReciprocalRank()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalMetricMeanReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

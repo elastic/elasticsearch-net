@@ -42,22 +42,14 @@ public sealed partial class GetRepositoriesMeteringInfoResponse : Elastic.Transp
 	/// Name of the cluster. Based on the <c>cluster.name</c> setting.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterName { get; set; }
+	public required string ClusterName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains repositories metering information for the nodes selected by the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.RepositoryMeteringInformation> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -34,41 +34,19 @@ public sealed partial class Ccr
 		Enabled = enabled;
 		FollowerIndicesCount = followerIndicesCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public Ccr()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Ccr()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ccr(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AutoFollowPatternsCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FollowerIndicesCount { get; set; }
+	public required int AutoFollowPatternsCount { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
+	public required int FollowerIndicesCount { get; set; }
 }

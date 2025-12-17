@@ -32,31 +32,17 @@ public sealed partial class InferenceClassImportance
 		ClassName = className;
 		Importance = importance;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceClassImportance()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceClassImportance()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceClassImportance(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClassName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Importance { get; set; }
+	public required string ClassName { get; set; }
+	public required double Importance { get; set; }
 }

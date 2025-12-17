@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CumulativeCardinalityAggregationConverter))]
 public sealed partial class CumulativeCardinalityAggregation
 {
-#if NET7_0_OR_GREATER
 	public CumulativeCardinalityAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CumulativeCardinalityAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CumulativeCardinalityAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

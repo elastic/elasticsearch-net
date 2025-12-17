@@ -32,17 +32,11 @@ public sealed partial class DeepSeekServiceSettings
 		ApiKey = apiKey;
 		ModelId = modelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public DeepSeekServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DeepSeekServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeepSeekServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class DeepSeekServiceSettings
 	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -75,11 +65,7 @@ public sealed partial class DeepSeekServiceSettings
 	/// For the available <c>completion</c> and <c>chat_completion</c> models, refer to the <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek Models &amp; Pricing docs</a>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>

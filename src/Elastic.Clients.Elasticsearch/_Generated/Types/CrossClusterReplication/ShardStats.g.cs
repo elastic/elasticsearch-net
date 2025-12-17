@@ -58,17 +58,11 @@ public sealed partial class ShardStats
 		WriteBufferOperationCount = writeBufferOperationCount;
 		WriteBufferSizeInBytes = writeBufferSizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -81,33 +75,21 @@ public sealed partial class ShardStats
 	/// This is only an estimate and does not account for compression if enabled.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BytesRead { get; set; }
+	public required long BytesRead { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of failed reads.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FailedReadRequests { get; set; }
+	public required long FailedReadRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of failed bulk write requests on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FailedWriteRequests { get; set; }
+	public required long FailedWriteRequests { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? FatalException { get; set; }
 
 	/// <summary>
@@ -115,11 +97,7 @@ public sealed partial class ShardStats
 	/// The index aliases version the follower is synced up to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FollowerAliasesVersion { get; set; }
+	public required long FollowerAliasesVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -127,198 +105,126 @@ public sealed partial class ShardStats
 	/// The difference between the <c>leader_global_checkpoint</c> and the <c>follower_global_checkpoint</c> is an indication of how much the follower is lagging the leader.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FollowerGlobalCheckpoint { get; set; }
+	public required long FollowerGlobalCheckpoint { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the follower index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FollowerIndex { get; set; }
+	public required string FollowerIndex { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The mapping version the follower is synced up to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FollowerMappingVersion { get; set; }
+	public required long FollowerMappingVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The current maximum sequence number on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FollowerMaxSeqNo { get; set; }
+	public required long FollowerMaxSeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index settings version the follower is synced up to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FollowerSettingsVersion { get; set; }
+	public required long FollowerSettingsVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The starting sequence number of the last batch of operations requested from the leader.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LastRequestedSeqNo { get; set; }
+	public required long LastRequestedSeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The current global checkpoint on the leader known to the follower task.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LeaderGlobalCheckpoint { get; set; }
+	public required long LeaderGlobalCheckpoint { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the index in the leader cluster being followed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string LeaderIndex { get; set; }
+	public required string LeaderIndex { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The current maximum sequence number on the leader known to the follower task.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LeaderMaxSeqNo { get; set; }
+	public required long LeaderMaxSeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of operations read from the leader.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long OperationsRead { get; set; }
+	public required long OperationsRead { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of operations written on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long OperationsWritten { get; set; }
+	public required long OperationsWritten { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of active read requests from the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int OutstandingReadRequests { get; set; }
+	public required int OutstandingReadRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of active bulk write requests on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int OutstandingWriteRequests { get; set; }
+	public required int OutstandingWriteRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of objects representing failed reads.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The remote cluster containing the leader index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RemoteCluster { get; set; }
+	public required string RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The numerical shard ID, with values from 0 to one less than the number of replicas.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardId { get; set; }
+	public required int ShardId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of successful fetches.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SuccessfulReadRequests { get; set; }
+	public required long SuccessfulReadRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of bulk write requests run on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SuccessfulWriteRequests { get; set; }
+	public required long SuccessfulWriteRequests { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; set; }
 
 	/// <summary>
@@ -327,11 +233,7 @@ public sealed partial class ShardStats
 	/// When the follower is caught up to the leader, this number will increase up to the configured <c>read_poll_timeout</c> at which point another read request will be sent to the leader.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeSinceLastReadMillis { get; set; }
+	public required System.TimeSpan TimeSinceLastReadMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; set; }
 
 	/// <summary>
@@ -339,11 +241,7 @@ public sealed partial class ShardStats
 	/// The total time reads spent running on the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalReadRemoteExecTimeMillis { get; set; }
+	public required System.TimeSpan TotalReadRemoteExecTimeMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; set; }
 
 	/// <summary>
@@ -351,11 +249,7 @@ public sealed partial class ShardStats
 	/// The total time reads were outstanding, measured from the time a read was sent to the leader to the time a reply was returned to the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalReadTimeMillis { get; set; }
+	public required System.TimeSpan TotalReadTimeMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; set; }
 
 	/// <summary>
@@ -363,31 +257,19 @@ public sealed partial class ShardStats
 	/// The total time spent writing on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalWriteTimeMillis { get; set; }
+	public required System.TimeSpan TotalWriteTimeMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of write operations queued on the follower.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long WriteBufferOperationCount { get; set; }
+	public required long WriteBufferOperationCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of bytes of operations currently queued for writing.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; set; }
 }

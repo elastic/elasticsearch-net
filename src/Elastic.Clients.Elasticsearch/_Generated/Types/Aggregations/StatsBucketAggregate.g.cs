@@ -35,52 +35,26 @@ public sealed partial class StatsBucketAggregate : Elastic.Clients.Elasticsearch
 		Min = min;
 		Sum = sum;
 	}
-#if NET7_0_OR_GREATER
+
 	public StatsBucketAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StatsBucketAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StatsBucketAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Avg { get; set; }
+	public required double? Avg { get; set; }
 	public string? AvgAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Max { get; set; }
+	public required long Count { get; set; }
+	public required double? Max { get; set; }
 	public string? MaxAsString { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Min { get; set; }
+	public required double? Min { get; set; }
 	public string? MinAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Sum { get; set; }
+	public required double Sum { get; set; }
 	public string? SumAsString { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "stats_bucket";

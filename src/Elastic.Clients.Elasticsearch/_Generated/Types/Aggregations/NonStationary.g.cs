@@ -33,36 +33,18 @@ public sealed partial class NonStationary
 		RValue = rValue;
 		Trend = trend;
 	}
-#if NET7_0_OR_GREATER
+
 	public NonStationary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NonStationary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NonStationary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double PValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Trend { get; set; }
+	public required double PValue { get; set; }
+	public required double RValue { get; set; }
+	public required string Trend { get; set; }
 }

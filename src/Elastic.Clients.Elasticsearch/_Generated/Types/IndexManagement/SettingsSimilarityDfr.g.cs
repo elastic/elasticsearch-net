@@ -33,38 +33,20 @@ public sealed partial class SettingsSimilarityDfr : Elastic.Clients.Elasticsearc
 		BasicModel = basicModel;
 		Normalization = normalization;
 	}
-#if NET7_0_OR_GREATER
+
 	public SettingsSimilarityDfr()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SettingsSimilarityDfr()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsSimilarityDfr(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
+	public required Elastic.Clients.Elasticsearch.DFRAfterEffect AfterEffect { get; set; }
+	public required Elastic.Clients.Elasticsearch.DFRBasicModel BasicModel { get; set; }
+	public required Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
 	public string Type => "DFR";
 }

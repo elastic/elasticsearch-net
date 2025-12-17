@@ -37,9 +37,5 @@ public sealed partial class GetJobsResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJob> Jobs { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupJob> Jobs { get; set; }
 }

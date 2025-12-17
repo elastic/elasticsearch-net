@@ -42,22 +42,14 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 	/// The number of active primary shards.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ActivePrimaryShards { get; set; }
+	public required int ActivePrimaryShards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of active primary and replica shards.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ActiveShards { get; set; }
+	public required int ActiveShards { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,33 +63,21 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 	/// The ratio of active shards in the cluster expressed as a percentage.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ActiveShardsPercentAsNumber { get; set; }
+	public required double ActiveShardsPercentAsNumber { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterName { get; set; }
+	public required string ClusterName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards whose allocation has been delayed by the timeout settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DelayedUnassignedShards { get; set; }
+	public required int DelayedUnassignedShards { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>? Indices { get; set; }
 
 	/// <summary>
@@ -105,71 +85,43 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 	/// The number of shards that are under initialization.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int InitializingShards { get; set; }
+	public required int InitializingShards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of nodes that are dedicated data nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfDataNodes { get; set; }
+	public required int NumberOfDataNodes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of unfinished fetches.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfInFlightFetch { get; set; }
+	public required int NumberOfInFlightFetch { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of nodes within the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfNodes { get; set; }
+	public required int NumberOfNodes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of cluster-level changes that have not yet been executed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfPendingTasks { get; set; }
+	public required int NumberOfPendingTasks { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that are under relocation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RelocatingShards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public required int RelocatingShards { get; set; }
+	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -183,42 +135,26 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 	/// The time expressed in milliseconds since the earliest initiated task is waiting for being performed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TaskMaxWaitingInQueueMillis { get; set; }
+	public required System.TimeSpan TaskMaxWaitingInQueueMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If false the response returned within the period of time that is specified by the timeout parameter (30s by default)
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool TimedOut { get; set; }
+	public required bool TimedOut { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of primary shards that are not allocated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UnassignedPrimaryShards { get; set; }
+	public required int UnassignedPrimaryShards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that are not allocated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UnassignedShards { get; set; }
+	public required int UnassignedShards { get; set; }
 }

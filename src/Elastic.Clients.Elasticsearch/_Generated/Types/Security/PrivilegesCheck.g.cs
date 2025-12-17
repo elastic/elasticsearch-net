@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PrivilegesCheckConverter))]
 public sealed partial class PrivilegesCheck
 {
-#if NET7_0_OR_GREATER
 	public PrivilegesCheck()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PrivilegesCheck()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,17 +31,11 @@ public sealed partial class CustomAnalyzer : Elastic.Clients.Elasticsearch.Analy
 	{
 		Tokenizer = tokenizer;
 	}
-#if NET7_0_OR_GREATER
+
 	public CustomAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CustomAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,11 +46,7 @@ public sealed partial class CustomAnalyzer : Elastic.Clients.Elasticsearch.Analy
 	public System.Collections.Generic.ICollection<string>? Filter { get; set; }
 	public int? PositionIncrementGap { get; set; }
 	public int? PositionOffsetGap { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Tokenizer { get; set; }
+	public required string Tokenizer { get; set; }
 
 	public string Type => "custom";
 }

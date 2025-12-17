@@ -45,17 +45,11 @@ public sealed partial class TransformIndexerStats
 		SearchTotal = searchTotal;
 		TriggerCount = triggerCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public TransformIndexerStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TransformIndexerStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformIndexerStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,79 +58,19 @@ public sealed partial class TransformIndexerStats
 
 	public System.DateTimeOffset? DeleteTimeInMs { get; set; }
 	public long? DocumentsDeleted { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocumentsIndexed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocumentsProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ExponentialAvgCheckpointDurationMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ExponentialAvgDocumentsIndexed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ExponentialAvgDocumentsProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan IndexTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PagesProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ProcessingTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ProcessingTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SearchFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan SearchTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SearchTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TriggerCount { get; set; }
+	public required long DocumentsIndexed { get; set; }
+	public required long DocumentsProcessed { get; set; }
+	public required System.TimeSpan ExponentialAvgCheckpointDurationMs { get; set; }
+	public required double ExponentialAvgDocumentsIndexed { get; set; }
+	public required double ExponentialAvgDocumentsProcessed { get; set; }
+	public required long IndexFailures { get; set; }
+	public required System.TimeSpan IndexTimeInMs { get; set; }
+	public required long IndexTotal { get; set; }
+	public required long PagesProcessed { get; set; }
+	public required System.TimeSpan ProcessingTimeInMs { get; set; }
+	public required long ProcessingTotal { get; set; }
+	public required long SearchFailures { get; set; }
+	public required System.TimeSpan SearchTimeInMs { get; set; }
+	public required long SearchTotal { get; set; }
+	public required long TriggerCount { get; set; }
 }

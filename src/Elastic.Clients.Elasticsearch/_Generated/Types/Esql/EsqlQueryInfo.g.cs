@@ -35,46 +35,20 @@ public sealed partial class EsqlQueryInfo
 		RunningTimeNanos = runningTimeNanos;
 		StartTimeMillis = startTimeMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public EsqlQueryInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EsqlQueryInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EsqlQueryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RunningTimeNanos { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StartTimeMillis { get; set; }
+	public required long Id { get; set; }
+	public required string Node { get; set; }
+	public required string Query { get; set; }
+	public required long RunningTimeNanos { get; set; }
+	public required long StartTimeMillis { get; set; }
 }

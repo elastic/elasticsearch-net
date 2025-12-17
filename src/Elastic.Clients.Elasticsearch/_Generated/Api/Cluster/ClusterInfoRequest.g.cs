@@ -42,11 +42,11 @@ public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.R
 	public ClusterInfoRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target) : base(r => r.Required("target", target))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterInfoRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +66,7 @@ public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.R
 	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> Target { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget>>("target"); set => PR("target", value); }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> Target { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget>>("target"); set => PR("target", value); }
 }
 
 /// <summary>
@@ -141,6 +137,11 @@ public readonly partial struct ClusterInfoRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

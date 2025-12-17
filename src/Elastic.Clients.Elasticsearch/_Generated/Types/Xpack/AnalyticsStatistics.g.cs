@@ -38,62 +38,24 @@ public sealed partial class AnalyticsStatistics
 		TopMetricsUsage = topMetricsUsage;
 		TTestUsage = tTestUsage;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalyticsStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalyticsStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalyticsStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BoxplotUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CumulativeCardinalityUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MovingPercentilesUsage { get; set; }
+	public required long BoxplotUsage { get; set; }
+	public required long CumulativeCardinalityUsage { get; set; }
+	public required long MovingPercentilesUsage { get; set; }
 	public long? MultiTermsUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NormalizeUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RateUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StringStatsUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TopMetricsUsage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TTestUsage { get; set; }
+	public required long NormalizeUsage { get; set; }
+	public required long RateUsage { get; set; }
+	public required long StringStatsUsage { get; set; }
+	public required long TopMetricsUsage { get; set; }
+	public required long TTestUsage { get; set; }
 }

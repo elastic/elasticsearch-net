@@ -41,17 +41,11 @@ public sealed partial class ReindexStatus
 		Updated = updated;
 		VersionConflicts = versionConflicts;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReindexStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReindexStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReindexStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,66 +57,42 @@ public sealed partial class ReindexStatus
 	/// The number of scroll responses pulled back by the reindex.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Batches { get; set; }
+	public required long Batches { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that were successfully created.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Created { get; set; }
+	public required long Created { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that were successfully deleted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Deleted { get; set; }
+	public required long Deleted { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that were ignored because the script used for the reindex returned a <c>noop</c> value for <c>ctx.op</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Noops { get; set; }
+	public required long Noops { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of requests per second effectively executed during the reindex.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float RequestsPerSecond { get; set; }
+	public required float RequestsPerSecond { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of retries attempted by reindex. <c>bulk</c> is the number of bulk actions retried and <c>search</c> is the number of search actions retried.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retries Retries { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retries Retries { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
 	/// <summary>
@@ -130,11 +100,7 @@ public sealed partial class ReindexStatus
 	/// Number of milliseconds the request slept to conform to <c>requests_per_second</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ThrottledMillis { get; set; }
+	public required System.TimeSpan ThrottledMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledUntil { get; set; }
 
 	/// <summary>
@@ -143,42 +109,26 @@ public sealed partial class ReindexStatus
 	/// It only has meaning when using the Task API, where it indicates the next time (in milliseconds since epoch) a throttled request will be executed again in order to conform to <c>requests_per_second</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ThrottledUntilMillis { get; set; }
+	public required System.TimeSpan ThrottledUntilMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that were successfully processed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Total { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that were successfully updated, for example, a document with same ID already existed prior to reindex updating it.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Updated { get; set; }
+	public required long Updated { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of version conflicts that reindex hits.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long VersionConflicts { get; set; }
+	public required long VersionConflicts { get; set; }
 }

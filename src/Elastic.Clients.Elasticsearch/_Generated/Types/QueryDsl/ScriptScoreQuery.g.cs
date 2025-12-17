@@ -32,17 +32,11 @@ public sealed partial class ScriptScoreQuery
 		Query = query;
 		Script = script;
 	}
-#if NET7_0_OR_GREATER
+
 	public ScriptScoreQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ScriptScoreQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptScoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,11 +65,7 @@ public sealed partial class ScriptScoreQuery
 	/// Query used to return documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>
@@ -84,11 +74,7 @@ public sealed partial class ScriptScoreQuery
 	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
 public readonly partial struct ScriptScoreQueryDescriptor<TDocument>

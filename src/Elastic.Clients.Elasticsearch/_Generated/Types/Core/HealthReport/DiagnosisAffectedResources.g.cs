@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.DiagnosisAffectedResourcesConverter))]
 public sealed partial class DiagnosisAffectedResources
 {
-#if NET7_0_OR_GREATER
 	public DiagnosisAffectedResources()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DiagnosisAffectedResources()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiagnosisAffectedResources(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

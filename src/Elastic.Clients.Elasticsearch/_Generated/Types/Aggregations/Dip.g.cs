@@ -32,31 +32,17 @@ public sealed partial class Dip
 		ChangePoint = changePoint;
 		PValue = pValue;
 	}
-#if NET7_0_OR_GREATER
+
 	public Dip()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Dip()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Dip(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ChangePoint { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double PValue { get; set; }
+	public required int ChangePoint { get; set; }
+	public required double PValue { get; set; }
 }

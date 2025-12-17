@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ContextConverter))]
 public sealed partial class Context
 {
-#if NET7_0_OR_GREATER
 	public Context()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Context()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

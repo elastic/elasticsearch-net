@@ -37,17 +37,11 @@ public sealed partial class RepositoryMeteringInformation
 		RepositoryType = repositoryType;
 		RequestCounts = requestCounts;
 	}
-#if NET7_0_OR_GREATER
+
 	public RepositoryMeteringInformation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RepositoryMeteringInformation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryMeteringInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class RepositoryMeteringInformation
 	/// repository metering information of previous repository instantiations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Archived { get; set; }
+	public required bool Archived { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -82,44 +72,28 @@ public sealed partial class RepositoryMeteringInformation
 	/// An identifier that changes every time the repository is updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RepositoryEphemeralId { get; set; }
+	public required string RepositoryEphemeralId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Represents an unique location within the repository.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation RepositoryLocation { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation RepositoryLocation { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Repository name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RepositoryName { get; set; }
+	public required string RepositoryName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Time the repository was created or updated. Recorded in milliseconds since the Unix Epoch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset RepositoryStartedAt { get; set; }
+	public required System.DateTimeOffset RepositoryStartedAt { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -133,20 +107,12 @@ public sealed partial class RepositoryMeteringInformation
 	/// Repository type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RepositoryType { get; set; }
+	public required string RepositoryType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object with the number of request performed against the repository grouped by request type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.RequestCounts RequestCounts { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.RequestCounts RequestCounts { get; set; }
 }

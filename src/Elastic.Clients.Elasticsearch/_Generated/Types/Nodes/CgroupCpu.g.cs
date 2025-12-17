@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CgroupCpuConverter))]
 public sealed partial class CgroupCpu
 {
-#if NET7_0_OR_GREATER
 	public CgroupCpu()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CgroupCpu()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CgroupCpu(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

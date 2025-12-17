@@ -37,9 +37,5 @@ public sealed partial class EstimateModelMemoryResponse : Elastic.Transport.Prod
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ModelMemoryEstimate { get; set; }
+	public required string ModelMemoryEstimate { get; set; }
 }

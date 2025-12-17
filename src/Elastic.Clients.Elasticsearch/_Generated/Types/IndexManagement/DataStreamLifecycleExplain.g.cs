@@ -32,17 +32,11 @@ public sealed partial class DataStreamLifecycleExplain
 		Index = index;
 		ManagedByLifecycle = managedByLifecycle;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamLifecycleExplain()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamLifecycleExplain()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamLifecycleExplain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,18 +45,10 @@ public sealed partial class DataStreamLifecycleExplain
 
 	public string? Error { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? GenerationTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 	public System.DateTimeOffset? IndexCreationDateMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool ManagedByLifecycle { get; set; }
+	public required bool ManagedByLifecycle { get; set; }
 	public System.DateTimeOffset? RolloverDateMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceIndexCreation { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceRollover { get; set; }

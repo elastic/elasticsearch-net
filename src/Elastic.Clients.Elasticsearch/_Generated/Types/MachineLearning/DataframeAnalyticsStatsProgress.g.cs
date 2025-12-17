@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalyticsStatsProgress
 		Phase = phase;
 		ProgressPercent = progressPercent;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsStatsProgress()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsStatsProgress()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsStatsProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class DataframeAnalyticsStatsProgress
 	/// Defines the phase of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Phase { get; set; }
+	public required string Phase { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The progress that the data frame analytics job has made expressed in percentage.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ProgressPercent { get; set; }
+	public required int ProgressPercent { get; set; }
 }

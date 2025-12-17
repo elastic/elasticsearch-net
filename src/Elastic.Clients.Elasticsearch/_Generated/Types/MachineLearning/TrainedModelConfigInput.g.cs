@@ -31,17 +31,11 @@ public sealed partial class TrainedModelConfigInput
 	{
 		FieldNames = fieldNames;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelConfigInput()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelConfigInput()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelConfigInput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class TrainedModelConfigInput
 	/// An array of input field names for the model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields FieldNames { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields FieldNames { get; set; }
 }

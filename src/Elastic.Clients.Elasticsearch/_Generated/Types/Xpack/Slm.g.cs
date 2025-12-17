@@ -32,33 +32,19 @@ public sealed partial class Slm
 		Available = available;
 		Enabled = enabled;
 	}
-#if NET7_0_OR_GREATER
+
 	public Slm()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Slm()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Slm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
 	public int? PolicyCount { get; set; }
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics? PolicyStats { get; set; }
 }

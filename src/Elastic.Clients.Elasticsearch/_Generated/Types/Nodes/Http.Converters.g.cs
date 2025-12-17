@@ -35,7 +35,7 @@ public sealed partial class HttpConverter : System.Text.Json.Serialization.JsonC
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>?> propClients = default;
 		LocalJsonValue<int?> propCurrentOpen = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>> propRoutes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>?> propRoutes = default;
 		LocalJsonValue<long?> propTotalOpened = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -49,7 +49,7 @@ public sealed partial class HttpConverter : System.Text.Json.Serialization.JsonC
 				continue;
 			}
 
-			if (propRoutes.TryReadProperty(ref reader, options, PropRoutes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, null, null)!))
+			if (propRoutes.TryReadProperty(ref reader, options, PropRoutes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, null, null)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ public sealed partial class HttpConverter : System.Text.Json.Serialization.JsonC
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClients, value.Clients, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.Client>(o, v, null));
 		writer.WriteProperty(options, PropCurrentOpen, value.CurrentOpen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropRoutes, value.Routes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, v, null, null));
+		writer.WriteProperty(options, PropRoutes, value.Routes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, v, null, null));
 		writer.WriteProperty(options, PropTotalOpened, value.TotalOpened, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}

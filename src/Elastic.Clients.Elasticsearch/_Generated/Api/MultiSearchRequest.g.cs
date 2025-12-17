@@ -97,6 +97,19 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for a search using project metadata
+	/// tags in a subset Lucene syntax. Allowed Lucene queries: the _alias tag
+	/// and a single value (possible wildcarded). Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
 	/// </para>
 	/// </summary>
@@ -166,17 +179,11 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	{
 		Searches = searches;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiSearchRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiSearchRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -270,6 +277,19 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for a search using project metadata
+	/// tags in a subset Lucene syntax. Allowed Lucene queries: the _alias tag
+	/// and a single value (possible wildcarded). Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
 	/// </para>
 	/// </summary>
@@ -295,11 +315,7 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
 }
 
 /// <summary>
@@ -480,6 +496,23 @@ public readonly partial struct MultiSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for a search using project metadata
+	/// tags in a subset Lucene syntax. Allowed Lucene queries: the _alias tag
+	/// and a single value (possible wildcarded). Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
 	/// </para>
 	/// </summary>
@@ -548,6 +581,11 @@ public readonly partial struct MultiSearchRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -763,6 +801,23 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for a search using project metadata
+	/// tags in a subset Lucene syntax. Allowed Lucene queries: the _alias tag
+	/// and a single value (possible wildcarded). Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
 	/// </para>
 	/// </summary>
@@ -831,6 +886,11 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

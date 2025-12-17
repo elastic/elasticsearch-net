@@ -34,41 +34,19 @@ public sealed partial class MlInferenceDeployments
 		ModelSizesBytes = modelSizesBytes;
 		TimeMs = timeMs;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInferenceDeployments()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInferenceDeployments()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInferenceDeployments(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics InferenceCounts { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSizesBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeploymentsTimeMs TimeMs { get; set; }
+	public required int Count { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics InferenceCounts { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSizesBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeploymentsTimeMs TimeMs { get; set; }
 }

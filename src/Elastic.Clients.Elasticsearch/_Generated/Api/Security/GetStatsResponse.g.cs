@@ -42,9 +42,5 @@ public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasti
 	/// A map of node IDs to security statistics for that node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodeSecurityStats> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodeSecurityStats> Nodes { get; set; }
 }

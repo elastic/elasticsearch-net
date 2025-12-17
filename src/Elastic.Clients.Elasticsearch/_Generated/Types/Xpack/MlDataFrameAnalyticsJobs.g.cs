@@ -31,28 +31,18 @@ public sealed partial class MlDataFrameAnalyticsJobs
 	{
 		All = all;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlDataFrameAnalyticsJobs()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlDataFrameAnalyticsJobs()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlDataFrameAnalyticsJobs(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount All { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount All { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis? AnalysisCounts { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory? MemoryUsage { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsCount? Stopped { get; set; }

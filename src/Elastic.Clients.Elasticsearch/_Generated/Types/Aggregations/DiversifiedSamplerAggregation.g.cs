@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DiversifiedSamplerAggregationConverter))]
 public sealed partial class DiversifiedSamplerAggregation
 {
-#if NET7_0_OR_GREATER
 	public DiversifiedSamplerAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DiversifiedSamplerAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiversifiedSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

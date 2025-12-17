@@ -31,17 +31,11 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 	{
 		Labels = labels;
 	}
-#if NET7_0_OR_GREATER
+
 	public ZeroShotClassificationInferenceUpdateOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ZeroShotClassificationInferenceUpdateOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ZeroShotClassificationInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class ZeroShotClassificationInferenceUpdateOptions
 	/// The labels to predict.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Labels { get; set; }
+	public required System.Collections.Generic.ICollection<string> Labels { get; set; }
 
 	/// <summary>
 	/// <para>

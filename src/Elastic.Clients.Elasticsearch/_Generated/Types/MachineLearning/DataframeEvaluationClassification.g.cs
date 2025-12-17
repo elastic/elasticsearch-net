@@ -31,17 +31,11 @@ public sealed partial class DataframeEvaluationClassification
 	{
 		ActualField = actualField;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeEvaluationClassification()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeEvaluationClassification()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class DataframeEvaluationClassification
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>

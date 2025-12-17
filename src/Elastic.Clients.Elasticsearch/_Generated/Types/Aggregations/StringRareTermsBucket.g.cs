@@ -32,17 +32,11 @@ public sealed partial class StringRareTermsBucket
 		DocCount = docCount;
 		Key = key;
 	}
-#if NET7_0_OR_GREATER
+
 	public StringRareTermsBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StringRareTermsBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StringRareTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,14 +49,6 @@ public sealed partial class StringRareTermsBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Key { get; set; }
+	public required long DocCount { get; set; }
+	public required string Key { get; set; }
 }

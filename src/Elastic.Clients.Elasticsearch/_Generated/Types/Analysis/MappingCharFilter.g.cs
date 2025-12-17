@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.MappingCharFilterConverter))]
 public sealed partial class MappingCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
-#if NET7_0_OR_GREATER
 	public MappingCharFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MappingCharFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MappingCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

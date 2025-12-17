@@ -43,17 +43,11 @@ public sealed partial class NodeInfo
 		TransportVersion = transportVersion;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,54 +55,26 @@ public sealed partial class NodeInfo
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeInfoAggregation>? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildFlavor { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required string BuildFlavor { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Short hash of the last git commit in this release.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildHash { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> ComponentVersions { get; set; }
+	public required string BuildHash { get; set; }
+	public required string BuildType { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> ComponentVersions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The node’s host name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Host { get; set; }
+	public required string Host { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp? Http { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexVersion { get; set; }
+	public required long IndexVersion { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest? Ingest { get; set; }
 
 	/// <summary>
@@ -116,11 +82,7 @@ public sealed partial class NodeInfo
 	/// The node’s IP address.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Ip { get; set; }
+	public required string Ip { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo? Jvm { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Modules { get; set; }
 
@@ -129,20 +91,12 @@ public sealed partial class NodeInfo
 	/// The node's name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo? Os { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Plugins { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo? Process { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.RemoveClusterServer? RemoteClusterServer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings? Settings { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>? ThreadPool { get; set; }
 
@@ -166,25 +120,13 @@ public sealed partial class NodeInfo
 	/// Host and port where transport HTTP connections are accepted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TransportVersion { get; set; }
+	public required string TransportAddress { get; set; }
+	public required long TransportVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Elasticsearch version running on this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string Version { get; set; }
 }

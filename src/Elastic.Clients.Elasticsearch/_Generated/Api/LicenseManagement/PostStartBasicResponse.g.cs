@@ -38,16 +38,8 @@ public sealed partial class PostStartBasicResponse : Elastic.Transport.Products.
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>>? Acknowledge { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool BasicWasStarted { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required bool BasicWasStarted { get; set; }
 	public string? ErrorMessage { get; set; }
 	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; set; }
 }

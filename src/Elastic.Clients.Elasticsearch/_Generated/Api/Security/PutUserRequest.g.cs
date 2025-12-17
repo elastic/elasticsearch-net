@@ -51,11 +51,11 @@ public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Reque
 	public PutUserRequest(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public PutUserRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -80,11 +80,7 @@ public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Reque
 	/// Leading or trailing whitespace is not allowed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
+	public required Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
 	/// <summary>
 	/// <para>
@@ -357,6 +353,11 @@ public readonly partial struct PutUserRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

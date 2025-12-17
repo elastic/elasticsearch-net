@@ -31,17 +31,11 @@ public sealed partial class IcuFoldingTokenFilter : Elastic.Clients.Elasticsearc
 	{
 		UnicodeSetFilter = unicodeSetFilter;
 	}
-#if NET7_0_OR_GREATER
+
 	public IcuFoldingTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IcuFoldingTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IcuFoldingTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class IcuFoldingTokenFilter : Elastic.Clients.Elasticsearc
 
 	public string Type => "icu_folding";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string UnicodeSetFilter { get; set; }
+	public required string UnicodeSetFilter { get; set; }
 	public string? Version { get; set; }
 }
 

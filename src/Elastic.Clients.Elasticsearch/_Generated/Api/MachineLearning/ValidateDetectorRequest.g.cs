@@ -40,17 +40,11 @@ public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsea
 	{
 		Detector = detector;
 	}
-#if NET7_0_OR_GREATER
+
 	public ValidateDetectorRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ValidateDetectorRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +59,7 @@ public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "ml.validate_detector";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.Detector Detector { get; set; }
 }
 
 /// <summary>
@@ -133,6 +123,11 @@ public readonly partial struct ValidateDetectorRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -225,6 +220,11 @@ public readonly partial struct ValidateDetectorRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

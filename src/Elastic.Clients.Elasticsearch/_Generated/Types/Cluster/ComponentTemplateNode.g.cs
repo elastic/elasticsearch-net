@@ -31,17 +31,11 @@ public sealed partial class ComponentTemplateNode
 	{
 		Template = template;
 	}
-#if NET7_0_OR_GREATER
+
 	public ComponentTemplateNode()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ComponentTemplateNode()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -77,11 +71,7 @@ public sealed partial class ComponentTemplateNode
 	/// </para>
 	/// </summary>
 	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; set; }
 	public long? Version { get; set; }
 }
 

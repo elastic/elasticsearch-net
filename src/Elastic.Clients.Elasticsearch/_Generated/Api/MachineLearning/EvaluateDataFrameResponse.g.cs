@@ -37,9 +37,5 @@ public sealed partial class EvaluateDataFrameResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.ResponseBody Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ResponseBody Result { get; set; }
 }

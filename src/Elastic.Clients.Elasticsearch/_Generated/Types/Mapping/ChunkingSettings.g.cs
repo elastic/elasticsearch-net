@@ -32,17 +32,11 @@ public sealed partial class ChunkingSettings
 		MaxChunkSize = maxChunkSize;
 		Strategy = strategy;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChunkingSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ChunkingSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class ChunkingSettings
 	/// This value should not exceed the window size for the associated model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxChunkSize { get; set; }
+	public required int MaxChunkSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -139,11 +129,7 @@ public sealed partial class ChunkingSettings
 	/// Learn more about different chunking strategies in the linked documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Strategy { get; set; }
+	public required string Strategy { get; set; }
 }
 
 public readonly partial struct ChunkingSettingsDescriptor

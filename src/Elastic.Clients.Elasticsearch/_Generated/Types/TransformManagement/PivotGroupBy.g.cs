@@ -28,16 +28,11 @@ public sealed partial class PivotGroupBy
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public PivotGroupBy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PivotGroupBy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PivotGroupBy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

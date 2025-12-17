@@ -31,17 +31,11 @@ public sealed partial class GoogleVertexAIServiceSettings
 	{
 		ServiceAccountJson = serviceAccountJson;
 	}
-#if NET7_0_OR_GREATER
+
 	public GoogleVertexAIServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GoogleVertexAIServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -120,11 +114,7 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// A valid service account in JSON format for the Google Vertex AI API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ServiceAccountJson { get; set; }
+	public required string ServiceAccountJson { get; set; }
 
 	/// <summary>
 	/// <para>

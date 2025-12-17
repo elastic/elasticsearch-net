@@ -37,9 +37,5 @@ public sealed partial class GetLifecycleResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> Lifecycles { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> Lifecycles { get; set; }
 }

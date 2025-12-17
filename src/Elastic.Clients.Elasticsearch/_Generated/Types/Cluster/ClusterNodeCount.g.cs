@@ -31,17 +31,11 @@ public sealed partial class ClusterNodeCount
 	{
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterNodeCount()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterNodeCount()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterNodeCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class ClusterNodeCount
 	public int? Ml { get; set; }
 	public int? RemoteClusterClient { get; set; }
 	public int? Search { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 	public int? Transform { get; set; }
 	public int? VotingOnly { get; set; }
 }

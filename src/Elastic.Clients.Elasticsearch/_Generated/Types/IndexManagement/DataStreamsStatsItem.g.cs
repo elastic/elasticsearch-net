@@ -34,17 +34,11 @@ public sealed partial class DataStreamsStatsItem
 		MaximumTimestamp = maximumTimestamp;
 		StoreSizeBytes = storeSizeBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamsStatsItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamsStatsItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamsStatsItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,22 +50,14 @@ public sealed partial class DataStreamsStatsItem
 	/// Current number of backing indices for the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int BackingIndices { get; set; }
+	public required int BackingIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DataStream { get; set; }
+	public required string DataStream { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -82,11 +68,7 @@ public sealed partial class DataStreamsStatsItem
 	/// Backing indices with a lower generation contain higher <c>@timestamp</c> values.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset MaximumTimestamp { get; set; }
+	public required System.DateTimeOffset MaximumTimestamp { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -101,9 +83,5 @@ public sealed partial class DataStreamsStatsItem
 	/// Total size, in bytes, of all shards for the data stream’s backing indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StoreSizeBytes { get; set; }
+	public required long StoreSizeBytes { get; set; }
 }

@@ -42,20 +42,12 @@ public sealed partial class GetRulesetResponse : Elastic.Transport.Products.Elas
 	/// Rules associated with the query ruleset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A unique identifier for the ruleset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RulesetId { get; set; }
+	public required string RulesetId { get; set; }
 }

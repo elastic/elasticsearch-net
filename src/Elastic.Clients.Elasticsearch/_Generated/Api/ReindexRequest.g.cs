@@ -199,17 +199,11 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 		Dest = dest;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReindexRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReindexRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -310,11 +304,7 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -340,11 +330,7 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
 
 /// <summary>
@@ -714,6 +700,11 @@ public readonly partial struct ReindexRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1107,6 +1098,11 @@ public readonly partial struct ReindexRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

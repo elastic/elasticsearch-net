@@ -33,17 +33,11 @@ public sealed partial class NodePackagingType
 		Flavor = flavor;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodePackagingType()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodePackagingType()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodePackagingType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class NodePackagingType
 	/// Number of selected nodes using the distribution flavor and file type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Type of Elasticsearch distribution. This is always <c>default</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Flavor { get; set; }
+	public required string Flavor { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// File type (such as <c>tar</c> or <c>zip</c>) used for the distribution package.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

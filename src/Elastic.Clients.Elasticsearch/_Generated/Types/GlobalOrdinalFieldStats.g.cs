@@ -32,17 +32,11 @@ public sealed partial class GlobalOrdinalFieldStats
 		BuildTimeInMillis = buildTimeInMillis;
 		ShardMaxValueCount = shardMaxValueCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public GlobalOrdinalFieldStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GlobalOrdinalFieldStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GlobalOrdinalFieldStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,14 +44,6 @@ public sealed partial class GlobalOrdinalFieldStats
 	}
 
 	public string? BuildTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ShardMaxValueCount { get; set; }
+	public required long BuildTimeInMillis { get; set; }
+	public required long ShardMaxValueCount { get; set; }
 }

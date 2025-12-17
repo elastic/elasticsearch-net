@@ -31,17 +31,11 @@ public sealed partial class GrantApiKey
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public GrantApiKey()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GrantApiKey()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GrantApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class GrantApiKey
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
 	/// <summary>
 	/// <para>

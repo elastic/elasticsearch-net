@@ -36,17 +36,11 @@ public sealed partial class TrainedModelDeploymentStats
 		Priority = priority;
 		StartTime = startTime;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelDeploymentStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelDeploymentStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelDeploymentStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +62,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// The unique identifier for the trained model deployment.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DeploymentId { get; set; }
+	public required string DeploymentId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,11 +83,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// The unique identifier for the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,11 +91,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// In serverless, stats are reported for a single unnamed virtual node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,16 +99,8 @@ public sealed partial class TrainedModelDeploymentStats
 	/// </para>
 	/// </summary>
 	public int? NumberOfAllocations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PeakThroughputPerMinute { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
+	public required long PeakThroughputPerMinute { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -158,11 +132,7 @@ public sealed partial class TrainedModelDeploymentStats
 	/// The epoch timestamp when the deployment started.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTime { get; set; }
+	public required System.DateTimeOffset StartTime { get; set; }
 
 	/// <summary>
 	/// <para>

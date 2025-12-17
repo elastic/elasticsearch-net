@@ -40,46 +40,20 @@ public sealed partial class DiscoveryNodeCompact
 		Name = name;
 		TransportAddress = transportAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public DiscoveryNodeCompact()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DiscoveryNodeCompact()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiscoveryNodeCompact(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EphemeralId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required string EphemeralId { get; set; }
+	public required string Id { get; set; }
+	public required string Name { get; set; }
+	public required string TransportAddress { get; set; }
 }

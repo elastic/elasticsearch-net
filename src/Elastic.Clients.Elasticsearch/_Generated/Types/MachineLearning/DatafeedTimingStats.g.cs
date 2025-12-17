@@ -35,17 +35,11 @@ public sealed partial class DatafeedTimingStats
 		SearchCount = searchCount;
 		TotalSearchTimeMs = totalSearchTimeMs;
 	}
-#if NET7_0_OR_GREATER
+
 	public DatafeedTimingStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DatafeedTimingStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatafeedTimingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class DatafeedTimingStats
 	/// The number of buckets processed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BucketCount { get; set; }
+	public required long BucketCount { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext? ExponentialAverageCalculationContext { get; set; }
 
 	/// <summary>
@@ -76,42 +66,26 @@ public sealed partial class DatafeedTimingStats
 	/// The exponential average search time per hour, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ExponentialAverageSearchTimePerHourMs { get; set; }
+	public required System.TimeSpan ExponentialAverageSearchTimePerHourMs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of searches run by the datafeed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SearchCount { get; set; }
+	public required long SearchCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time the datafeed spent searching, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalSearchTimeMs { get; set; }
+	public required System.TimeSpan TotalSearchTimeMs { get; set; }
 }

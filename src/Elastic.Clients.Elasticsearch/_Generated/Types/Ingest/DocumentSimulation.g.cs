@@ -39,17 +39,11 @@ public sealed partial class DocumentSimulation
 		Ingest = ingest;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public DocumentSimulation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DocumentSimulation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DocumentSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,27 +55,15 @@ public sealed partial class DocumentSimulation
 	/// Unique identifier for the document. This ID must be unique within the <c>_index</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the index containing the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; set; }
+	public required string Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.Ingest Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -102,11 +84,7 @@ public sealed partial class DocumentSimulation
 	/// JSON body for the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Source { get; set; }
 	public long? Version { get; set; }
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }

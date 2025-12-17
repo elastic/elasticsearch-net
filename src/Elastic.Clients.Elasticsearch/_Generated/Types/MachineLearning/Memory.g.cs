@@ -37,86 +37,52 @@ public sealed partial class Memory
 		Roles = roles;
 		TransportAddress = transportAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public Memory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Memory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Memory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EphemeralId { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required string EphemeralId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains Java Virtual Machine (JVM) statistics for the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JvmStats Jvm { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JvmStats Jvm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about memory usage for the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.MemStats Mem { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.MemStats Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Human-readable identifier for the node. Based on the Node name setting setting.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Roles assigned to the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The host and port where transport HTTP connections are accepted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
+	public required string TransportAddress { get; set; }
 }

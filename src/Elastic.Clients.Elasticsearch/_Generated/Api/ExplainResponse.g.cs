@@ -39,19 +39,7 @@ public sealed partial class ExplainResponse<TDocument> : Elastic.Transport.Produ
 
 	public Elastic.Clients.Elasticsearch.Core.Explain.ExplanationDetail? Explanation { get; set; }
 	public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Matched { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
+	public required bool Matched { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TokenPruningConfigConverter))]
 public sealed partial class TokenPruningConfig
 {
-#if NET7_0_OR_GREATER
 	public TokenPruningConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TokenPruningConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

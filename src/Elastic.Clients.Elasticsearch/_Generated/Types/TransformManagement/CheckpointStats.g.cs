@@ -31,28 +31,18 @@ public sealed partial class CheckpointStats
 	{
 		Checkpoint = checkpoint;
 	}
-#if NET7_0_OR_GREATER
+
 	public CheckpointStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CheckpointStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CheckpointStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Checkpoint { get; set; }
+	public required long Checkpoint { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.TransformProgress? CheckpointProgress { get; set; }
 	public System.DateTimeOffset? Timestamp { get; set; }
 	public System.DateTimeOffset? TimestampMillis { get; set; }

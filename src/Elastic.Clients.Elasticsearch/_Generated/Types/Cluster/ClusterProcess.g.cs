@@ -32,17 +32,11 @@ public sealed partial class ClusterProcess
 		Cpu = cpu;
 		OpenFileDescriptors = openFileDescriptors;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterProcess()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterProcess()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterProcess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class ClusterProcess
 	/// Contains statistics about CPU used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Cpu { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu Cpu { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about open file descriptors in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors OpenFileDescriptors { get; set; }
 }

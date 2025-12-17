@@ -31,17 +31,11 @@ public sealed partial class ReadOnlyUrlRepositorySettings
 	{
 		Url = url;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReadOnlyUrlRepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReadOnlyUrlRepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -149,11 +143,7 @@ public sealed partial class ReadOnlyUrlRepositorySettings
 	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Url { get; set; }
+	public required string Url { get; set; }
 }
 
 public readonly partial struct ReadOnlyUrlRepositorySettingsDescriptor

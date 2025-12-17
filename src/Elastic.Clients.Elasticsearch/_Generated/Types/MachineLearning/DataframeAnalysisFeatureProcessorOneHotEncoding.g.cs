@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 		Field = field;
 		HotMap = hotMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessorOneHotEncoding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisFeatureProcessorOneHotEncoding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessorOneHotEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class DataframeAnalysisFeatureProcessorOneHotEncoding
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The one hot map mapping the field value with the column name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string HotMap { get; set; }
+	public required string HotMap { get; set; }
 }
 
 public readonly partial struct DataframeAnalysisFeatureProcessorOneHotEncodingDescriptor<TDocument>

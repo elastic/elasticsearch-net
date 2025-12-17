@@ -32,16 +32,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndicesOptionsConverter))]
 public sealed partial class IndicesOptions
 {
-#if NET7_0_OR_GREATER
 	public IndicesOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndicesOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndicesOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

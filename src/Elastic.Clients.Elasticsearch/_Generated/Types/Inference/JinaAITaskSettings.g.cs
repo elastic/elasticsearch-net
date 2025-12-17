@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAITaskSettingsConverter))]
 public sealed partial class JinaAITaskSettings
 {
-#if NET7_0_OR_GREATER
 	public JinaAITaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public JinaAITaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JinaAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.FileSystemConverter))]
 public sealed partial class FileSystem
 {
-#if NET7_0_OR_GREATER
 	public FileSystem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FileSystem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,17 +31,11 @@ public sealed partial class DisMaxQuery
 	{
 		Queries = queries;
 	}
-#if NET7_0_OR_GREATER
+
 	public DisMaxQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DisMaxQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DisMaxQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +59,7 @@ public sealed partial class DisMaxQuery
 	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

@@ -34,41 +34,19 @@ public sealed partial class HttpRouteResponses
 		SizeHistogram = sizeHistogram;
 		TotalSizeInBytes = totalSizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public HttpRouteResponses()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HttpRouteResponses()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HttpRouteResponses(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram> HandlingTimeHistogram { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram> SizeHistogram { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeInBytes { get; set; }
+	public required long Count { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TimeHttpHistogram> HandlingTimeHistogram { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.SizeHttpHistogram> SizeHistogram { get; set; }
+	public required long TotalSizeInBytes { get; set; }
 }

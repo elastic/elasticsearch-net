@@ -27,54 +27,27 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 public sealed partial class ModelSnapshotUpgrade
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ModelSnapshotUpgrade(string assignmentExplanation, string jobId, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> node, string snapshotId, Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState state)
+	public ModelSnapshotUpgrade(string assignmentExplanation, string jobId, string snapshotId, Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState state)
 	{
 		AssignmentExplanation = assignmentExplanation;
 		JobId = jobId;
-		Node = node;
 		SnapshotId = snapshotId;
 		State = state;
 	}
-#if NET7_0_OR_GREATER
+
 	public ModelSnapshotUpgrade()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ModelSnapshotUpgrade()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ModelSnapshotUpgrade(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AssignmentExplanation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent> Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SnapshotId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState State { get; set; }
+	public required string AssignmentExplanation { get; set; }
+	public required string JobId { get; set; }
+	public System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? Node { get; set; }
+	public required string SnapshotId { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.SnapshotUpgradeState State { get; set; }
 }

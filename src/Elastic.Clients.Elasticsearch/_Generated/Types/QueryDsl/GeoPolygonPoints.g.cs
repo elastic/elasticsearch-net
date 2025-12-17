@@ -31,28 +31,18 @@ public sealed partial class GeoPolygonPoints
 	{
 		Points = points;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoPolygonPoints()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoPolygonPoints()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoPolygonPoints(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; set; }
 }
 
 public readonly partial struct GeoPolygonPointsDescriptor

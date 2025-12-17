@@ -31,17 +31,11 @@ public sealed partial class DataframeAnalysisClassification
 	{
 		DependentVariable = dependentVariable;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisClassification()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisClassification()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class DataframeAnalysisClassification
 	/// For regression analysis, the data type of the field must be numeric.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DependentVariable { get; set; }
+	public required string DependentVariable { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TopMetricsAggregationConverter))]
 public sealed partial class TopMetricsAggregation
 {
-#if NET7_0_OR_GREATER
 	public TopMetricsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TopMetricsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TopMetricsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,36 +33,18 @@ public sealed partial class Flattened
 		Enabled = enabled;
 		FieldCount = fieldCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public Flattened()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Flattened()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Flattened(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FieldCount { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
+	public required int FieldCount { get; set; }
 }

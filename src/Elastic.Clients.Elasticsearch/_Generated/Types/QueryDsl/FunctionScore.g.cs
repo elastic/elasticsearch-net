@@ -28,16 +28,11 @@ public partial class FunctionScore
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public FunctionScore()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FunctionScore()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FunctionScore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

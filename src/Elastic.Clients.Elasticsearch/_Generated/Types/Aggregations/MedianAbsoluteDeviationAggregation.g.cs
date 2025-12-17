@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MedianAbsoluteDeviationAggregationConverter))]
 public sealed partial class MedianAbsoluteDeviationAggregation
 {
-#if NET7_0_OR_GREATER
 	public MedianAbsoluteDeviationAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MedianAbsoluteDeviationAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MedianAbsoluteDeviationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

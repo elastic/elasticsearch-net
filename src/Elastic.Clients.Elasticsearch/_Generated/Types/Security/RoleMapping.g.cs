@@ -33,38 +33,20 @@ public sealed partial class RoleMapping
 		Metadata = metadata;
 		Rules = rules;
 	}
-#if NET7_0_OR_GREATER
+
 	public RoleMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RoleMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public required bool Enabled { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.RoleMappingRule Rules { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.RoleMappingRule Rules { get; set; }
 }

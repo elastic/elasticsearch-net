@@ -32,17 +32,11 @@ public sealed partial class DataframeEvaluationOutlierDetection
 		ActualField = actualField;
 		PredictedProbabilityField = predictedProbabilityField;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeEvaluationOutlierDetection()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeEvaluationOutlierDetection()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class DataframeEvaluationOutlierDetection
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,11 +62,7 @@ public sealed partial class DataframeEvaluationOutlierDetection
 	/// The field of the index that defines the probability of whether the item belongs to the class in question or not. It’s the field that contains the results of the analysis.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field PredictedProbabilityField { get; set; }
 }
 
 public readonly partial struct DataframeEvaluationOutlierDetectionDescriptor<TDocument>

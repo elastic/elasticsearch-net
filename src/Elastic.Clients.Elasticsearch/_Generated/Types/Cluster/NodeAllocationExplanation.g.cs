@@ -36,17 +36,11 @@ public sealed partial class NodeAllocationExplanation
 		Roles = roles;
 		TransportAddress = transportAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeAllocationExplanation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeAllocationExplanation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeAllocationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,36 +48,12 @@ public sealed partial class NodeAllocationExplanation
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? Deciders { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> NodeAttributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.Decision NodeDecision { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> NodeAttributes { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.Decision NodeDecision { get; set; }
+	public required string NodeId { get; set; }
+	public required string NodeName { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationStore? Store { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
+	public required string TransportAddress { get; set; }
 	public int? WeightRanking { get; set; }
 }

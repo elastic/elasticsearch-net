@@ -32,17 +32,11 @@ public sealed partial class ResolveIndexItem
 		Attributes = attributes;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public ResolveIndexItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ResolveIndexItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ResolveIndexItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,16 +44,8 @@ public sealed partial class ResolveIndexItem
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<string>? Aliases { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Attributes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Attributes { get; set; }
 	public string? DataStream { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? Mode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

@@ -38,42 +38,14 @@ public sealed partial class AuthenticateResponse : Elastic.Transport.Products.El
 	}
 
 	public Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey? ApiKey { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string AuthenticationType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm { get; set; }
+	public required string AuthenticationType { get; set; }
 	public string? Email { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Enabled { get; set; }
+	public required bool Enabled { get; set; }
 	public string? FullName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
 	public Elastic.Clients.Elasticsearch.Security.AuthenticateToken? Token { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Username { get; set; }
+	public required string Username { get; set; }
 }

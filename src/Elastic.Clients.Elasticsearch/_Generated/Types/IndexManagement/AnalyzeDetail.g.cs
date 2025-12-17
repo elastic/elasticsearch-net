@@ -31,17 +31,11 @@ public sealed partial class AnalyzeDetail
 	{
 		CustomAnalyzer = customAnalyzer;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalyzeDetail()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalyzeDetail()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalyzeDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class AnalyzeDetail
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzerDetail? Analyzer { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.CharFilterDetail>? Charfilters { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool CustomAnalyzer { get; set; }
+	public required bool CustomAnalyzer { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.TokenDetail>? Tokenfilters { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.TokenDetail? Tokenizer { get; set; }
 }

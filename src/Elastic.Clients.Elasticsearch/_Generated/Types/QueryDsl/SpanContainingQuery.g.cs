@@ -32,17 +32,11 @@ public sealed partial class SpanContainingQuery
 		Big = big;
 		Little = little;
 	}
-#if NET7_0_OR_GREATER
+
 	public SpanContainingQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SpanContainingQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SpanContainingQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class SpanContainingQuery
 	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -77,11 +67,7 @@ public sealed partial class SpanContainingQuery
 	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	public string? QueryName { get; set; }
 }
 

@@ -33,17 +33,11 @@ public sealed partial class DataStreamStats
 		BackingIndicesInTotal = backingIndicesInTotal;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class DataStreamStats
 	/// The count of the backing indices for the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int BackingIndicesInError { get; set; }
+	public required int BackingIndicesInError { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The count of the backing indices for the data stream that have encountered an error.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int BackingIndicesInTotal { get; set; }
+	public required int BackingIndicesInTotal { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

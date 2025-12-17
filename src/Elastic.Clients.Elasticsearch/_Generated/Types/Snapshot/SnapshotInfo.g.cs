@@ -33,28 +33,18 @@ public sealed partial class SnapshotInfo
 		Snapshot = snapshot;
 		Uuid = uuid;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> DataStreams { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> DataStreams { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
 	public System.TimeSpan? DurationInMillis { get; set; }
 	public System.DateTimeOffset? EndTime { get; set; }
@@ -68,19 +58,11 @@ public sealed partial class SnapshotInfo
 	public string? Reason { get; set; }
 	public string? Repository { get; set; }
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Snapshot { get; set; }
+	public required string Snapshot { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
 	public System.DateTimeOffset? StartTimeInMillis { get; set; }
 	public string? State { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uuid { get; set; }
+	public required string Uuid { get; set; }
 	public string? Version { get; set; }
 	public long? VersionId { get; set; }
 }

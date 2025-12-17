@@ -37,68 +37,24 @@ public sealed partial class PutJobResponse : Elastic.Transport.Products.Elastics
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool AllowLazyOpen { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead AnalysisConfig { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits AnalysisLimits { get; set; }
+	public required bool AllowLazyOpen { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigRead AnalysisConfig { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits AnalysisLimits { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.DateTimeOffset CreateTime { get; set; }
+	public required System.DateTimeOffset CreateTime { get; set; }
 	public object? CustomSettings { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long DailyModelSnapshotRetentionAfterDays { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
+	public required long DailyModelSnapshotRetentionAfterDays { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Datafeed? DatafeedConfig { get; set; }
 	public string? Description { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Groups { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string JobId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string JobType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string JobVersion { get; set; }
+	public required string JobId { get; set; }
+	public required string JobType { get; set; }
+	public required string JobVersion { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; set; }
 	public string? ModelSnapshotId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long ModelSnapshotRetentionDays { get; set; }
+	public required long ModelSnapshotRetentionDays { get; set; }
 	public long? RenormalizationWindowDays { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ResultsIndexName { get; set; }
+	public required string ResultsIndexName { get; set; }
 	public long? ResultsRetentionDays { get; set; }
 }

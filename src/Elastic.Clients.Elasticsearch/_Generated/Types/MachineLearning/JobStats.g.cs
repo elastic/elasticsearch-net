@@ -36,17 +36,11 @@ public sealed partial class JobStats
 		State = state;
 		TimingStats = timingStats;
 	}
-#if NET7_0_OR_GREATER
+
 	public JobStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JobStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JobStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -67,11 +61,7 @@ public sealed partial class JobStats
 	/// If a model snapshot is reverted or old results are deleted, the job counts are not reset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataCounts DataCounts { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataCounts DataCounts { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,33 +76,21 @@ public sealed partial class JobStats
 	/// Some statistics are omitted if no forecasts have been made.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobForecastStatistics ForecastsStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobForecastStatistics ForecastsStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object that provides information about the size and contents of the model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats ModelSizeStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats ModelSizeStats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -134,20 +112,12 @@ public sealed partial class JobStats
 	/// The status of the anomaly detection job, which can be one of the following values: <c>closed</c>, <c>closing</c>, <c>failed</c>, <c>opened</c>, <c>opening</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobState State { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobState State { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object that provides statistical information about timing aspect of this job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats TimingStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobTimingStats TimingStats { get; set; }
 }

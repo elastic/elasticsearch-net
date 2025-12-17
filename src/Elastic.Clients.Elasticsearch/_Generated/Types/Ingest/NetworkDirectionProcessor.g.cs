@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.NetworkDirectionProcessorConverter))]
 public sealed partial class NetworkDirectionProcessor
 {
-#if NET7_0_OR_GREATER
 	public NetworkDirectionProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NetworkDirectionProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NetworkDirectionProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

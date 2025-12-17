@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisAnalyzedFieldsConverter))]
 public sealed partial class DataframeAnalysisAnalyzedFields
 {
-#if NET7_0_OR_GREATER
 	public DataframeAnalysisAnalyzedFields()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeAnalysisAnalyzedFields()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisAnalyzedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -32,17 +32,11 @@ public sealed partial class RuleQuery
 		MatchCriteria = matchCriteria;
 		Organic = organic;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuleQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuleQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,16 +52,8 @@ public sealed partial class RuleQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object MatchCriteria { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
+	public required object MatchCriteria { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 	public string? QueryName { get; set; }
 	public string? RulesetId { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? RulesetIds { get; set; }

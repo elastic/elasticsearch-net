@@ -37,17 +37,11 @@ public sealed partial class SecurityRolesDlsBitSetCache
 		Misses = misses;
 		MissesTimeInMillis = missesTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public SecurityRolesDlsBitSetCache()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SecurityRolesDlsBitSetCache()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SecurityRolesDlsBitSetCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,44 +53,28 @@ public sealed partial class SecurityRolesDlsBitSetCache
 	/// Number of entries in the cache.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of cache evictions.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Evictions { get; set; }
+	public required long Evictions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of cache hits.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Hits { get; set; }
+	public required long Hits { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total combined time spent in cache for hits in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan HitsTimeInMillis { get; set; }
+	public required System.TimeSpan HitsTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -110,31 +88,19 @@ public sealed partial class SecurityRolesDlsBitSetCache
 	/// Memory taken up by the cache in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemoryInBytes { get; set; }
+	public required long MemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of cache misses.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Misses { get; set; }
+	public required long Misses { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total combined time spent in cache for misses in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MissesTimeInMillis { get; set; }
+	public required System.TimeSpan MissesTimeInMillis { get; set; }
 }

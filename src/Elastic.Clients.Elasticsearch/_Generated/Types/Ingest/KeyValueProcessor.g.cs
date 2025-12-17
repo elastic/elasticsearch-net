@@ -33,17 +33,11 @@ public sealed partial class KeyValueProcessor
 		FieldSplit = fieldSplit;
 		ValueSplit = valueSplit;
 	}
-#if NET7_0_OR_GREATER
+
 	public KeyValueProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KeyValueProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KeyValueProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,22 +65,14 @@ public sealed partial class KeyValueProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Regex pattern to use for splitting key-value pairs.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FieldSplit { get; set; }
+	public required string FieldSplit { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -174,11 +160,7 @@ public sealed partial class KeyValueProcessor
 	/// Regex pattern to use for splitting the key from the value within a key-value pair.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ValueSplit { get; set; }
+	public required string ValueSplit { get; set; }
 }
 
 public readonly partial struct KeyValueProcessorDescriptor<TDocument>

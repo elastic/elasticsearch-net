@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SuggesterConverter))]
 public sealed partial class Suggester
 {
-#if NET7_0_OR_GREATER
 	public Suggester()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Suggester()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Suggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

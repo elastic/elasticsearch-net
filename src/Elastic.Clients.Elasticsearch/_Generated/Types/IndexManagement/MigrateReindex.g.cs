@@ -32,17 +32,11 @@ public sealed partial class MigrateReindex
 		Mode = mode;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public MigrateReindex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MigrateReindex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MigrateReindex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class MigrateReindex
 	/// Reindex mode. Currently only 'upgrade' is supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum Mode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The source index or data stream (only data streams are currently supported).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.SourceIndex Source { get; set; }
 }
 
 public readonly partial struct MigrateReindexDescriptor

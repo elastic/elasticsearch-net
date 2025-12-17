@@ -42,9 +42,5 @@ public sealed partial class FollowStatsResponse : Elastic.Transport.Products.Ela
 	/// An array of follower index statistics.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> Indices { get; set; }
 }

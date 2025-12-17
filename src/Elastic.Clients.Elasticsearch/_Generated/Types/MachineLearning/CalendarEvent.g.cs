@@ -33,17 +33,11 @@ public sealed partial class CalendarEvent
 		EndTime = endTime;
 		StartTime = startTime;
 	}
-#if NET7_0_OR_GREATER
+
 	public CalendarEvent()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CalendarEvent()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CalendarEvent(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,22 +56,14 @@ public sealed partial class CalendarEvent
 	/// A description of the scheduled event.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
+	public required string Description { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset EndTime { get; set; }
+	public required System.DateTimeOffset EndTime { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
 
 	/// <summary>
@@ -106,11 +92,7 @@ public sealed partial class CalendarEvent
 	/// The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTime { get; set; }
+	public required System.DateTimeOffset StartTime { get; set; }
 }
 
 public readonly partial struct CalendarEventDescriptor

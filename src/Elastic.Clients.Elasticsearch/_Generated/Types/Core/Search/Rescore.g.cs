@@ -28,16 +28,11 @@ public sealed partial class Rescore
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Rescore()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Rescore()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Rescore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

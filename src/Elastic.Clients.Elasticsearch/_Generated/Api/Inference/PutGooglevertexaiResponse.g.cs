@@ -51,33 +51,21 @@ public sealed partial class PutGooglevertexaiResponse : Elastic.Transport.Produc
 	/// The inference Id
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string InferenceId { get; set; }
+	public required string InferenceId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The service type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get; set; }
+	public required string Service { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object ServiceSettings { get; set; }
+	public required object ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,9 +79,5 @@ public sealed partial class PutGooglevertexaiResponse : Elastic.Transport.Produc
 	/// The task type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI TaskType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI TaskType { get; set; }
 }

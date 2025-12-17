@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BoxplotAggregationConverter))]
 public sealed partial class BoxplotAggregation
 {
-#if NET7_0_OR_GREATER
 	public BoxplotAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BoxplotAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BoxplotAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

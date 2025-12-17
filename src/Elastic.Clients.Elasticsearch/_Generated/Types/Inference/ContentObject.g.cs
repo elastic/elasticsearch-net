@@ -37,17 +37,11 @@ public sealed partial class ContentObject
 		Text = text;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ContentObject()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ContentObject()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ContentObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,20 +53,12 @@ public sealed partial class ContentObject
 	/// The text content.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Text { get; set; }
+	public required string Text { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of content.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

@@ -31,17 +31,11 @@ public sealed partial class DetectorRead
 	{
 		Function = function;
 	}
-#if NET7_0_OR_GREATER
+
 	public DetectorRead()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DetectorRead()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DetectorRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -105,11 +99,7 @@ public sealed partial class DetectorRead
 	/// For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, and <c>sum</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Function { get; set; }
+	public required string Function { get; set; }
 
 	/// <summary>
 	/// <para>

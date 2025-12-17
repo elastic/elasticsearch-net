@@ -65,11 +65,11 @@ public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasti
 	public PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Id modelId, Elastic.Clients.Elasticsearch.Name modelAlias) : base(r => r.Required("model_id", modelId).Required("model_alias", modelAlias))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public PutTrainedModelAliasRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -89,22 +89,14 @@ public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasti
 	/// The alias to create or update. This value cannot end in numbers.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
+	public required Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
 
 	/// <summary>
 	/// <para>
 	/// The identifier for the trained model that the alias refers to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -212,6 +204,11 @@ public readonly partial struct PutTrainedModelAliasRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

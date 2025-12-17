@@ -37,17 +37,11 @@ public sealed partial class ResolveClusterInfo
 		Connected = connected;
 		SkipUnavailable = skipUnavailable;
 	}
-#if NET7_0_OR_GREATER
+
 	public ResolveClusterInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ResolveClusterInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ResolveClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,11 +53,7 @@ public sealed partial class ResolveClusterInfo
 	/// Whether the remote cluster is connected to the local (querying) cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Connected { get; set; }
+	public required bool Connected { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,11 +76,7 @@ public sealed partial class ResolveClusterInfo
 	/// The <c>skip_unavailable</c> setting for a remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool SkipUnavailable { get; set; }
+	public required bool SkipUnavailable { get; set; }
 
 	/// <summary>
 	/// <para>

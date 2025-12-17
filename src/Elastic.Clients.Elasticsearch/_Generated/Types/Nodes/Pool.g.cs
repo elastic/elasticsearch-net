@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PoolConverter))]
 public sealed partial class Pool
 {
-#if NET7_0_OR_GREATER
 	public Pool()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Pool()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Pool(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

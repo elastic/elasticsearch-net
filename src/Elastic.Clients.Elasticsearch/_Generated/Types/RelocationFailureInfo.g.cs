@@ -31,26 +31,16 @@ public sealed partial class RelocationFailureInfo
 	{
 		FailedAttempts = failedAttempts;
 	}
-#if NET7_0_OR_GREATER
+
 	public RelocationFailureInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RelocationFailureInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RelocationFailureInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FailedAttempts { get; set; }
+	public required int FailedAttempts { get; set; }
 }

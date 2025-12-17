@@ -33,17 +33,11 @@ public sealed partial class ApplicationPrivileges
 		Privileges = privileges;
 		Resources = resources;
 	}
-#if NET7_0_OR_GREATER
+
 	public ApplicationPrivileges()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ApplicationPrivileges()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApplicationPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,33 +49,21 @@ public sealed partial class ApplicationPrivileges
 	/// The name of the application to which this entry applies.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Application { get; set; }
+	public required string Application { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of strings, where each element is the name of an application privilege or action.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Privileges { get; set; }
+	public required System.Collections.Generic.ICollection<string> Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list resources to which the privileges are applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Resources { get; set; }
+	public required System.Collections.Generic.ICollection<string> Resources { get; set; }
 }
 
 public readonly partial struct ApplicationPrivilegesDescriptor

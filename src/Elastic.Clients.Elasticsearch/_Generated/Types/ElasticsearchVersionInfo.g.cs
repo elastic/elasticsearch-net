@@ -39,17 +39,11 @@ public sealed partial class ElasticsearchVersionInfo
 		MinimumWireCompatibilityVersion = minimumWireCompatibilityVersion;
 		Number = number;
 	}
-#if NET7_0_OR_GREATER
+
 	public ElasticsearchVersionInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ElasticsearchVersionInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElasticsearchVersionInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,44 +55,28 @@ public sealed partial class ElasticsearchVersionInfo
 	/// The Elasticsearch Git commit's date.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset BuildDate { get; set; }
+	public required System.DateTimeOffset BuildDate { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The build flavor. For example, <c>default</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildFlavor { get; set; }
+	public required string BuildFlavor { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The Elasticsearch Git commit's SHA hash.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildHash { get; set; }
+	public required string BuildHash { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates whether the Elasticsearch build was a snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool BuildSnapshot { get; set; }
+	public required bool BuildSnapshot { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -106,33 +84,21 @@ public sealed partial class ElasticsearchVersionInfo
 	/// For example, <c>docker</c>, <c>rpm</c>, or <c>tar</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildType { get; set; }
+	public required string BuildType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The version number of Elasticsearch's underlying Lucene software.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string LuceneVersion { get; set; }
+	public required string LuceneVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The minimum index version with which the responding node can read from disk.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string MinimumIndexCompatibilityVersion { get; set; }
+	public required string MinimumIndexCompatibilityVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -140,11 +106,7 @@ public sealed partial class ElasticsearchVersionInfo
 	/// Also the minimum version from which you can perform a rolling upgrade.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string MinimumWireCompatibilityVersion { get; set; }
+	public required string MinimumWireCompatibilityVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -155,9 +117,5 @@ public sealed partial class ElasticsearchVersionInfo
 	/// Serverless environments are versionless and automatically upgraded, so this value can be safely ignored.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Number { get; set; }
+	public required string Number { get; set; }
 }

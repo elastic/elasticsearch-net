@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.SetPriorityActionConverter))]
 public sealed partial class SetPriorityAction
 {
-#if NET7_0_OR_GREATER
 	public SetPriorityAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SetPriorityAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

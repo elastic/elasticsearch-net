@@ -25,6 +25,19 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class SearchMvtRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 }
 
 /// <summary>
@@ -184,11 +197,11 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 	public SearchMvtRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", indices).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchMvtRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchMvtRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -215,11 +228,7 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 	/// This behavior may change in a future release.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get => P<Elastic.Clients.Elasticsearch.Field>("field"); set => PR("field", value); }
+	public required Elastic.Clients.Elasticsearch.Field Field { get => P<Elastic.Clients.Elasticsearch.Field>("field"); set => PR("field", value); }
 
 	/// <summary>
 	/// <para>
@@ -229,44 +238,42 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
 	/// The X coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int X { get => P<int>("x"); set => PR("x", value); }
+	public required int X { get => P<int>("x"); set => PR("x", value); }
 
 	/// <summary>
 	/// <para>
 	/// The Y coordinate for the vector tile to search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Y { get => P<int>("y"); set => PR("y", value); }
+	public required int Y { get => P<int>("y"); set => PR("y", value); }
 
 	/// <summary>
 	/// <para>
 	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Zoom { get => P<int>("zoom"); set => PR("zoom", value); }
+	public required int Zoom { get => P<int>("zoom"); set => PR("zoom", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 
 	/// <summary>
 	/// <para>
@@ -734,6 +741,24 @@ public readonly partial struct SearchMvtRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Zoom(int value)
 	{
 		Instance.Zoom = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -1454,6 +1479,11 @@ public readonly partial struct SearchMvtRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1745,6 +1775,24 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Zoom(int value)
 	{
 		Instance.Zoom = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -2323,6 +2371,11 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
