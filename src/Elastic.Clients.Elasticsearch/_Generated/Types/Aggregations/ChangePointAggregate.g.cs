@@ -31,17 +31,11 @@ public sealed partial class ChangePointAggregate : Elastic.Clients.Elasticsearch
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChangePointAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ChangePointAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChangePointAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class ChangePointAggregate : Elastic.Clients.Elasticsearch
 
 	public Elastic.Clients.Elasticsearch.Aggregations.ChangePointBucket? Bucket { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.ChangeType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.ChangeType Type { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "change_point";
 }

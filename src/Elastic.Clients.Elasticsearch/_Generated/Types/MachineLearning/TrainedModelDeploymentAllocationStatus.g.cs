@@ -33,17 +33,11 @@ public sealed partial class TrainedModelDeploymentAllocationStatus
 		State = state;
 		TargetAllocationCount = targetAllocationCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelDeploymentAllocationStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelDeploymentAllocationStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelDeploymentAllocationStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class TrainedModelDeploymentAllocationStatus
 	/// The current number of nodes where the model is allocated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AllocationCount { get; set; }
+	public required int AllocationCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The detailed allocation state related to the nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState State { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState State { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The desired number of nodes for model allocation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TargetAllocationCount { get; set; }
+	public required int TargetAllocationCount { get; set; }
 }

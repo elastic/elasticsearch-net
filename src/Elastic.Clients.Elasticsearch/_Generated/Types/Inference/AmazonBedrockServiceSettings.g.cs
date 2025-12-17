@@ -34,17 +34,11 @@ public sealed partial class AmazonBedrockServiceSettings
 		Region = region;
 		SecretKey = secretKey;
 	}
-#if NET7_0_OR_GREATER
+
 	public AmazonBedrockServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AmazonBedrockServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AmazonBedrockServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class AmazonBedrockServiceSettings
 	/// A valid AWS access key that has permissions to use Amazon Bedrock and access to models for inference requests.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AccessKey { get; set; }
+	public required string AccessKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,11 +59,7 @@ public sealed partial class AmazonBedrockServiceSettings
 	/// Note that the model ID must be available for the provider chosen and your IAM user must have access to the model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Model { get; set; }
+	public required string Model { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -130,11 +116,7 @@ public sealed partial class AmazonBedrockServiceSettings
 	/// The list of available regions per model can be found in the Amazon Bedrock documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Region { get; set; }
+	public required string Region { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -142,11 +124,7 @@ public sealed partial class AmazonBedrockServiceSettings
 	/// For informationg about creating and managing access and secret keys, refer to the AWS documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SecretKey { get; set; }
+	public required string SecretKey { get; set; }
 }
 
 public readonly partial struct AmazonBedrockServiceSettingsDescriptor

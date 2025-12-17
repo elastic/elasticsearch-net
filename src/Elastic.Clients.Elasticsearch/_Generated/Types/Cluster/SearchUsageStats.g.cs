@@ -36,51 +36,21 @@ public sealed partial class SearchUsageStats
 		Sections = sections;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchUsageStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchUsageStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchUsageStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage Extended { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> Queries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> Rescorers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> Retrievers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> Sections { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage Extended { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> Queries { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> Rescorers { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> Retrievers { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> Sections { get; set; }
+	public required long Total { get; set; }
 }

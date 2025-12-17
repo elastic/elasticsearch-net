@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsLifecycleStepConverter))]
 public sealed partial class IndexSettingsLifecycleStep
 {
-#if NET7_0_OR_GREATER
 	public IndexSettingsLifecycleStep()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexSettingsLifecycleStep()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexSettingsLifecycleStep(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

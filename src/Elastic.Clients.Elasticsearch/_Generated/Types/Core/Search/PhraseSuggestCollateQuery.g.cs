@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestCollateQueryConverter))]
 public sealed partial class PhraseSuggestCollateQuery
 {
-#if NET7_0_OR_GREATER
 	public PhraseSuggestCollateQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PhraseSuggestCollateQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PhraseSuggestCollateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,17 +31,11 @@ public sealed partial class NodeInfoSettingsHttp
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSettingsHttp()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSettingsHttp()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettingsHttp(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,10 +44,6 @@ public sealed partial class NodeInfoSettingsHttp
 
 	public Elastic.Clients.Elasticsearch.Union<bool, string>? Compression { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<int, string>? Port { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType Type { get; set; }
 	public string? TypeDefault { get; set; }
 }

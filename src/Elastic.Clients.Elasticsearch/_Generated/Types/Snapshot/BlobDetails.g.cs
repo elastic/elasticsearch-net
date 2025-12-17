@@ -38,17 +38,11 @@ public sealed partial class BlobDetails
 		Size = size;
 		SizeBytes = sizeBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public BlobDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BlobDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BlobDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class BlobDetails
 	/// The name of the blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,69 +62,41 @@ public sealed partial class BlobDetails
 	/// /**
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Overwritten { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool ReadEarly { get; set; }
+	public required bool Overwritten { get; set; }
+	public required bool ReadEarly { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The position, in bytes, at which read operations completed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ReadEnd { get; set; }
+	public required long ReadEnd { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A description of every read operation performed on the blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Reads { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ReadBlobDetails Reads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The position, in bytes, at which read operations started.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ReadStart { get; set; }
+	public required long ReadStart { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the blob.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize Size { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The size of the blob in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeBytes { get; set; }
+	public required long SizeBytes { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.PivotConverter))]
 public sealed partial class Pivot
 {
-#if NET7_0_OR_GREATER
 	public Pivot()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Pivot()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

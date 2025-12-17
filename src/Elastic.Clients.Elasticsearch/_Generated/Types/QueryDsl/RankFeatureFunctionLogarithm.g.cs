@@ -31,17 +31,11 @@ public sealed partial class RankFeatureFunctionLogarithm
 	{
 		ScalingFactor = scalingFactor;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankFeatureFunctionLogarithm()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankFeatureFunctionLogarithm()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class RankFeatureFunctionLogarithm
 	/// Configurable scaling factor.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float ScalingFactor { get; set; }
+	public required float ScalingFactor { get; set; }
 }
 
 public readonly partial struct RankFeatureFunctionLogarithmDescriptor

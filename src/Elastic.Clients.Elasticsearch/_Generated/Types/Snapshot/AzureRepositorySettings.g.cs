@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.AzureRepositorySettingsConverter))]
 public sealed partial class AzureRepositorySettings
 {
-#if NET7_0_OR_GREATER
 	public AzureRepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AzureRepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AzureRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamLifecycleRolloverConditionsConverter))]
 public sealed partial class DataStreamLifecycleRolloverConditions
 {
-#if NET7_0_OR_GREATER
 	public DataStreamLifecycleRolloverConditions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataStreamLifecycleRolloverConditions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamLifecycleRolloverConditions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

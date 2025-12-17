@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CgroupConverter))]
 public sealed partial class Cgroup
 {
-#if NET7_0_OR_GREATER
 	public Cgroup()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Cgroup()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Cgroup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

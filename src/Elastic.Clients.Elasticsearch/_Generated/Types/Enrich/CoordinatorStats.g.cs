@@ -35,46 +35,20 @@ public sealed partial class CoordinatorStats
 		RemoteRequestsCurrent = remoteRequestsCurrent;
 		RemoteRequestsTotal = remoteRequestsTotal;
 	}
-#if NET7_0_OR_GREATER
+
 	public CoordinatorStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CoordinatorStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CoordinatorStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ExecutedSearchesTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int QueueSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RemoteRequestsCurrent { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RemoteRequestsTotal { get; set; }
+	public required long ExecutedSearchesTotal { get; set; }
+	public required string NodeId { get; set; }
+	public required int QueueSize { get; set; }
+	public required int RemoteRequestsCurrent { get; set; }
+	public required long RemoteRequestsTotal { get; set; }
 }

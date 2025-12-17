@@ -31,27 +31,17 @@ public sealed partial class RankEvalHitItem
 	{
 		Hit = hit;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankEvalHitItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankEvalHitItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalHitItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHit Hit { get; set; }
 	public double? Rating { get; set; }
 }

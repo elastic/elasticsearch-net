@@ -37,19 +37,7 @@ public sealed partial class ClearCachedServiceTokensResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.NodeStatistics NodeStats { get; set; }
+	public required string ClusterName { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.ClusterNode> Nodes { get; set; }
+	public required Elastic.Clients.Elasticsearch.NodeStatistics NodeStats { get; set; }
 }

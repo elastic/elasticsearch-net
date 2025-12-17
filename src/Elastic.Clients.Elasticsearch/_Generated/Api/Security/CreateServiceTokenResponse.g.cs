@@ -37,14 +37,6 @@ public sealed partial class CreateServiceTokenResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Created { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Security.ServiceToken Token { get; set; }
+	public required bool Created { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.ServiceToken Token { get; set; }
 }

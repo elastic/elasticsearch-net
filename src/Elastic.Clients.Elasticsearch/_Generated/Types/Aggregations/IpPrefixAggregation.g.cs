@@ -32,17 +32,11 @@ public sealed partial class IpPrefixAggregation
 		Field = field;
 		PrefixLength = prefixLength;
 	}
-#if NET7_0_OR_GREATER
+
 	public IpPrefixAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IpPrefixAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IpPrefixAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class IpPrefixAggregation
 	/// The IP address field to aggregation on. The field mapping type must be <c>ip</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -87,11 +77,7 @@ public sealed partial class IpPrefixAggregation
 	/// For IPv6 addresses the accepted range is [0, 128].
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int PrefixLength { get; set; }
+	public required int PrefixLength { get; set; }
 }
 
 public readonly partial struct IpPrefixAggregationDescriptor<TDocument>

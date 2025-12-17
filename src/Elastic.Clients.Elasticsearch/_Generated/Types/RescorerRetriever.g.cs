@@ -32,17 +32,11 @@ public sealed partial class RescorerRetriever
 		Rescore = rescore;
 		Retriever = retriever;
 	}
-#if NET7_0_OR_GREATER
+
 	public RescorerRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RescorerRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RescorerRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,22 +63,14 @@ public sealed partial class RescorerRetriever
 	/// </para>
 	/// </summary>
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore> Rescore { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore> Rescore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Inner retriever.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
 public readonly partial struct RescorerRetrieverDescriptor<TDocument>

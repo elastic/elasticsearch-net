@@ -64,11 +64,11 @@ public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsea
 		Maxmind = maxmind;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutGeoipDatabaseRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -88,11 +88,7 @@ public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsea
 	/// ID of the database configuration to create or update.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -115,22 +111,14 @@ public sealed partial class PutGeoipDatabaseRequest : Elastic.Clients.Elasticsea
 	/// At present, the only supported provider is maxmind, and the maxmind provider requires that an account_id (string) is configured.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.Maxmind Maxmind { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The provider-assigned name of the IP geolocation database to download.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 }
 
 /// <summary>
@@ -250,6 +238,11 @@ public readonly partial struct PutGeoipDatabaseRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

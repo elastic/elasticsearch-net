@@ -37,10 +37,6 @@ public sealed partial class PostBehavioralAnalyticsEventResponse : Elastic.Trans
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Accepted { get; set; }
+	public required bool Accepted { get; set; }
 	public object? Event { get; set; }
 }

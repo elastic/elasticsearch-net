@@ -35,47 +35,21 @@ public sealed partial class RefreshStats
 		Total = total;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public RefreshStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RefreshStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RefreshStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ExternalTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ExternalTotalTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Listeners { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long ExternalTotal { get; set; }
+	public required System.TimeSpan ExternalTotalTimeInMillis { get; set; }
+	public required long Listeners { get; set; }
+	public required long Total { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

@@ -37,15 +37,7 @@ public sealed partial class HealthReportResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators Indicators { get; set; }
+	public required string ClusterName { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.Indicators Indicators { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus? Status { get; set; }
 }

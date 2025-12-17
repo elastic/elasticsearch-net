@@ -31,17 +31,11 @@ public sealed partial class RescoreQuery
 	{
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public RescoreQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RescoreQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RescoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class RescoreQuery
 	/// This query is only run on the Top-K results returned by the <c>query</c> and <c>post_filter</c> phases.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
 	/// <para>

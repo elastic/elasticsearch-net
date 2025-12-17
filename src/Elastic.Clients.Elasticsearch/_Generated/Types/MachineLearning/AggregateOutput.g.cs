@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AggregateOutputConverter))]
 public sealed partial class AggregateOutput
 {
-#if NET7_0_OR_GREATER
 	public AggregateOutput()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AggregateOutput()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

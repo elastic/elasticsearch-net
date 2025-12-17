@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ClassicTokenizerConverter))]
 public sealed partial class ClassicTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
-#if NET7_0_OR_GREATER
 	public ClassicTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ClassicTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClassicTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

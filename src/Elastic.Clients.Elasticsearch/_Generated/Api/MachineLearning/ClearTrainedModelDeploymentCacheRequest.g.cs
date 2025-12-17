@@ -45,11 +45,11 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequest : Elastic.Cl
 	public ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Id modelId) : base(r => r.Required("model_id", modelId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClearTrainedModelDeploymentCacheRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +69,7 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequest : Elastic.Cl
 	/// The unique identifier of the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
 /// <summary>
@@ -136,6 +132,11 @@ public readonly partial struct ClearTrainedModelDeploymentCacheRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

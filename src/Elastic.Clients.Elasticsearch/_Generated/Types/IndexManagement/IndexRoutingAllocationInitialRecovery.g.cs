@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingAllocationInitialRecoveryConverter))]
 public sealed partial class IndexRoutingAllocationInitialRecovery
 {
-#if NET7_0_OR_GREATER
 	public IndexRoutingAllocationInitialRecovery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexRoutingAllocationInitialRecovery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexRoutingAllocationInitialRecovery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

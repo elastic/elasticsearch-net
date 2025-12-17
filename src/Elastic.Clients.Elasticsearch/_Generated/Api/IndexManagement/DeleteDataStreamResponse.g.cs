@@ -42,9 +42,5 @@ public sealed partial class DeleteDataStreamResponse : Elastic.Transport.Product
 	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Acknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
 }

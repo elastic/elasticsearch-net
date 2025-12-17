@@ -32,17 +32,11 @@ public sealed partial class ConditionTokenFilter : Elastic.Clients.Elasticsearch
 		Filter = filter;
 		Script = script;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConditionTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConditionTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConditionTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class ConditionTokenFilter : Elastic.Clients.Elasticsearch
 	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Filter { get; set; }
+	public required System.Collections.Generic.ICollection<string> Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public string Type => "condition";
 

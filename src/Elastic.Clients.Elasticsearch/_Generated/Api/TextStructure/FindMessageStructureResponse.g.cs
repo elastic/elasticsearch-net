@@ -37,55 +37,19 @@ public sealed partial class FindMessageStructureResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Charset { get; set; }
+	public required string Charset { get; set; }
 	public Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? EcsCompatibility { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> FieldStats { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.TextStructure.FormatType Format { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> FieldStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.TextStructure.FormatType Format { get; set; }
 	public string? GrokPattern { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Ingest.PipelineConfig IngestPipeline { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.PipelineConfig IngestPipeline { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? JavaTimestampFormats { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? JodaTimestampFormats { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 	public string? MultilineStartPattern { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool NeedClientTimezone { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int NumLinesAnalyzed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int NumMessagesAnalyzed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string SampleStart { get; set; }
+	public required bool NeedClientTimezone { get; set; }
+	public required int NumLinesAnalyzed { get; set; }
+	public required int NumMessagesAnalyzed { get; set; }
+	public required string SampleStart { get; set; }
 	public string? TimestampField { get; set; }
 }

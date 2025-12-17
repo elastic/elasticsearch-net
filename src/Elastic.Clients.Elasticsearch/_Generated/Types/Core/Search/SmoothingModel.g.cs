@@ -28,16 +28,11 @@ public sealed partial class SmoothingModel
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public SmoothingModel()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SmoothingModel()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

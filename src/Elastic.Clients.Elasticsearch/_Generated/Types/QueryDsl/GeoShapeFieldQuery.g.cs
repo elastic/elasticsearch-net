@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoShapeFieldQueryConverter))]
 public sealed partial class GeoShapeFieldQuery
 {
-#if NET7_0_OR_GREATER
 	public GeoShapeFieldQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GeoShapeFieldQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoShapeFieldQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

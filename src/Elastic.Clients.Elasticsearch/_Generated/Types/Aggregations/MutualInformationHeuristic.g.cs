@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MutualInformationHeuristicConverter))]
 public sealed partial class MutualInformationHeuristic
 {
-#if NET7_0_OR_GREATER
 	public MutualInformationHeuristic()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MutualInformationHeuristic()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

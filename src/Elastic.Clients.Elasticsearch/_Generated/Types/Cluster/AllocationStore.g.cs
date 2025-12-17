@@ -36,51 +36,21 @@ public sealed partial class AllocationStore
 		MatchingSyncId = matchingSyncId;
 		StoreException = storeException;
 	}
-#if NET7_0_OR_GREATER
+
 	public AllocationStore()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AllocationStore()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AllocationStore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AllocationId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool InSync { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MatchingSizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool MatchingSyncId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string StoreException { get; set; }
+	public required string AllocationId { get; set; }
+	public required bool Found { get; set; }
+	public required bool InSync { get; set; }
+	public required long MatchingSizeInBytes { get; set; }
+	public required bool MatchingSyncId { get; set; }
+	public required string StoreException { get; set; }
 }

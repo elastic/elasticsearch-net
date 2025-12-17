@@ -48,11 +48,11 @@ public sealed partial class ClearCachedServiceTokensRequest : Elastic.Clients.El
 	public ClearCachedServiceTokensRequest(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("namespace", @namespace).Required("service", service).Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClearCachedServiceTokensRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,33 +74,21 @@ public sealed partial class ClearCachedServiceTokensRequest : Elastic.Clients.El
 	/// It does not support other wildcard patterns.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
 	/// The namespace, which is a top-level grouping of service accounts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
 	/// <summary>
 	/// <para>
 	/// The name of the service, which must be unique within its namespace.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get => P<string>("service"); set => PR("service", value); }
+	public required string Service { get => P<string>("service"); set => PR("service", value); }
 }
 
 /// <summary>
@@ -190,6 +178,11 @@ public readonly partial struct ClearCachedServiceTokensRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

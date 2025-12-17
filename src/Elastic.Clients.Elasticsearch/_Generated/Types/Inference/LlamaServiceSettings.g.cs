@@ -32,17 +32,11 @@ public sealed partial class LlamaServiceSettings
 		ModelId = modelId;
 		Url = url;
 	}
-#if NET7_0_OR_GREATER
+
 	public LlamaServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LlamaServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LlamaServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -75,11 +69,7 @@ public sealed partial class LlamaServiceSettings
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,11 +104,7 @@ public sealed partial class LlamaServiceSettings
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Url { get; set; }
+	public required string Url { get; set; }
 }
 
 public readonly partial struct LlamaServiceSettingsDescriptor

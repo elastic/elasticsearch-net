@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ValueCountAggregationConverter))]
 public sealed partial class ValueCountAggregation
 {
-#if NET7_0_OR_GREATER
 	public ValueCountAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ValueCountAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ValueCountAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -37,17 +37,11 @@ public sealed partial class InferenceEndpoint
 		Service = service;
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceEndpoint()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceEndpoint()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceEndpoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,22 +62,14 @@ public sealed partial class InferenceEndpoint
 	/// The service type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get; set; }
+	public required string Service { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object ServiceSettings { get; set; }
+	public required object ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>

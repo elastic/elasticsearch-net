@@ -34,17 +34,11 @@ public sealed partial class SnapshotStats
 		TimeInMillis = timeInMillis;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,22 +51,14 @@ public sealed partial class SnapshotStats
 	/// For completed snapshots, this property indicates the number and size of files that were not already in the repository and were copied as part of the incremental snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Incremental { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Incremental { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time, in milliseconds, when the snapshot creation process started.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
 
 	/// <summary>
@@ -80,20 +66,12 @@ public sealed partial class SnapshotStats
 	/// The total time, in milliseconds, that it took for the snapshot process to complete.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number and size of files that are referenced by the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Total { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.FileCountSnapshotStats Total { get; set; }
 }

@@ -37,6 +37,7 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPageTimeout = System.Text.Json.JsonEncodedText.Encode("page_timeout"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRequestTimeout = System.Text.Json.JsonEncodedText.Encode("request_timeout"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
@@ -58,6 +59,7 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propPageTimeout = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<object>?> propParams = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRequestTimeout = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
@@ -125,6 +127,11 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 				continue;
 			}
 
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
+			{
+				continue;
+			}
+
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
@@ -174,6 +181,7 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 			KeepOnCompletion = propKeepOnCompletion.Value,
 			PageTimeout = propPageTimeout.Value,
 			Params = propParams.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			RequestTimeout = propRequestTimeout.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
@@ -197,6 +205,7 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPageTimeout, value.PageTimeout, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteCollectionValue<object>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRequestTimeout, value.RequestTimeout, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));

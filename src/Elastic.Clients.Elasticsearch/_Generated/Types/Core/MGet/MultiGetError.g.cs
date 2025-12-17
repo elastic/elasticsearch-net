@@ -33,36 +33,18 @@ public sealed partial class MultiGetError
 		Id = id;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiGetError()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiGetError()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiGetError(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Error { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Error { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
 }

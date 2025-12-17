@@ -33,36 +33,18 @@ public sealed partial class StatusInProgress
 		ReindexedDocCount = reindexedDocCount;
 		TotalDocCount = totalDocCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public StatusInProgress()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StatusInProgress()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StatusInProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ReindexedDocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalDocCount { get; set; }
+	public required string Index { get; set; }
+	public required long ReindexedDocCount { get; set; }
+	public required long TotalDocCount { get; set; }
 }

@@ -32,17 +32,11 @@ public sealed partial class IndexPrivilegesCheck
 		Names = names;
 		Privileges = privileges;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexPrivilegesCheck()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexPrivilegesCheck()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexPrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,22 +57,14 @@ public sealed partial class IndexPrivilegesCheck
 	/// A list of indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Names { get; set; }
+	public required Elastic.Clients.Elasticsearch.Indices Names { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of the privileges that you want to check for the specified indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 }
 
 public readonly partial struct IndexPrivilegesCheckDescriptor

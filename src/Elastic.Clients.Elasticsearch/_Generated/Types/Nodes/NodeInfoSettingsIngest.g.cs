@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoSettingsIngestConverter))]
 public sealed partial class NodeInfoSettingsIngest
 {
-#if NET7_0_OR_GREATER
 	public NodeInfoSettingsIngest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NodeInfoSettingsIngest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettingsIngest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

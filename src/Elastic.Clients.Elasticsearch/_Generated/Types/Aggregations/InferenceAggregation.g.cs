@@ -31,17 +31,11 @@ public sealed partial class InferenceAggregation
 	{
 		ModelId = modelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public InferenceAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InferenceAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -82,11 +76,7 @@ public sealed partial class InferenceAggregation
 	/// The ID or alias for the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name ModelId { get; set; }
 }
 
 public readonly partial struct InferenceAggregationDescriptor<TDocument>

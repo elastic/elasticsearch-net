@@ -42,17 +42,11 @@ public sealed partial class ClusterNodes
 		Process = process;
 		Versions = versions;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterNodes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterNodes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterNodes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,87 +58,51 @@ public sealed partial class ClusterNodes
 	/// Contains counts for nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the discovery types used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> DiscoveryTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> DiscoveryTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about file stores by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.IndexingPressure IndexingPressure { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.IndexingPressure IndexingPressure { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the transport and HTTP networks used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the operating systems used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about Elasticsearch distributions installed on selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -152,31 +110,19 @@ public sealed partial class ClusterNodes
 	/// If no plugins or modules are installed, this array is empty.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about processes used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of Elasticsearch versions used on selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Versions { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Versions { get; set; }
 }

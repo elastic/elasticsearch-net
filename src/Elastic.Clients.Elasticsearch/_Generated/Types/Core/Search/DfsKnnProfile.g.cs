@@ -33,37 +33,19 @@ public sealed partial class DfsKnnProfile
 		Query = query;
 		RewriteTime = rewriteTime;
 	}
-#if NET7_0_OR_GREATER
+
 	public DfsKnnProfile()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DfsKnnProfile()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DfsKnnProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult> Collector { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult> Query { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RewriteTime { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult> Collector { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult> Query { get; set; }
+	public required long RewriteTime { get; set; }
 	public long? VectorOperationsCount { get; set; }
 }

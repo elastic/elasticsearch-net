@@ -52,11 +52,11 @@ public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasti
 	{
 		SearchApplication = searchApplication;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutSearchApplicationRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -76,11 +76,7 @@ public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasti
 	/// The name of the search application to be created or updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -88,11 +84,7 @@ public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasti
 	/// </para>
 	/// </summary>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
+	public required Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
 }
 
 /// <summary>
@@ -174,6 +166,11 @@ public readonly partial struct PutSearchApplicationRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

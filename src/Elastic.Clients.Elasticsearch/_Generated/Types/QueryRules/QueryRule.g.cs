@@ -34,17 +34,11 @@ public sealed partial class QueryRule
 		RuleId = ruleId;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public QueryRule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QueryRule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,11 +51,7 @@ public sealed partial class QueryRule
 	/// The format of this action depends on the rule type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,11 +59,7 @@ public sealed partial class QueryRule
 	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
 	/// <summary>
@@ -81,11 +67,7 @@ public sealed partial class QueryRule
 	/// A unique identifier for the rule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -94,11 +76,7 @@ public sealed partial class QueryRule
 	/// <c>exclude</c> will exclude specific documents from search results.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
 public readonly partial struct QueryRuleDescriptor

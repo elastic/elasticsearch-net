@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScoreSortConverter))]
 public sealed partial class ScoreSort
 {
-#if NET7_0_OR_GREATER
 	public ScoreSort()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ScoreSort()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScoreSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,38 +33,20 @@ public sealed partial class FielddataFrequencyFilter
 		Min = min;
 		MinSegmentSize = minSegmentSize;
 	}
-#if NET7_0_OR_GREATER
+
 	public FielddataFrequencyFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FielddataFrequencyFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Max { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Min { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinSegmentSize { get; set; }
+	public required double Max { get; set; }
+	public required double Min { get; set; }
+	public required int MinSegmentSize { get; set; }
 }
 
 public readonly partial struct FielddataFrequencyFilterDescriptor

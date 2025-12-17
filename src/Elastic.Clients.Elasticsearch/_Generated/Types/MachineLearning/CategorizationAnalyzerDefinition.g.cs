@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.CategorizationAnalyzerDefinitionConverter))]
 public sealed partial class CategorizationAnalyzerDefinition
 {
-#if NET7_0_OR_GREATER
 	public CategorizationAnalyzerDefinition()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CategorizationAnalyzerDefinition()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CategorizationAnalyzerDefinition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,27 +31,17 @@ public sealed partial class NodeInfoScript
 	{
 		AllowedTypes = allowedTypes;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoScript()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoScript()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoScript(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AllowedTypes { get; set; }
+	public required string AllowedTypes { get; set; }
 	public string? DisableMaxCompilationsRate { get; set; }
 }

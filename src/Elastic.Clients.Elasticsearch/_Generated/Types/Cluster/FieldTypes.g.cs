@@ -33,17 +33,11 @@ public sealed partial class FieldTypes
 		IndexCount = indexCount;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldTypes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldTypes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,22 +49,14 @@ public sealed partial class FieldTypes
 	/// The number of occurrences of the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of indices containing the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndexCount { get; set; }
+	public required int IndexCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,11 +84,7 @@ public sealed partial class FieldTypes
 	/// The name for the field type in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>

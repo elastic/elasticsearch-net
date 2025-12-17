@@ -74,11 +74,11 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 	public ResolveIndexRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ResolveIndexRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ResolveIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -87,9 +87,9 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 
 	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementResolveIndex;
 
-	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.resolve_index";
 
@@ -99,11 +99,7 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -136,6 +132,20 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? Mode { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>?>("mode"); set => Q("mode", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
 }
 
 /// <summary>
@@ -255,6 +265,24 @@ public readonly partial struct ResolveIndexRequestDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor> action)
 	{
@@ -269,6 +297,11 @@ public readonly partial struct ResolveIndexRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

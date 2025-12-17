@@ -31,17 +31,11 @@ public sealed partial class CohereTaskSettings
 	{
 		InputType = inputType;
 	}
-#if NET7_0_OR_GREATER
+
 	public CohereTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CohereTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CohereTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +73,7 @@ public sealed partial class CohereTaskSettings
 	/// IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.CohereInputType InputType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.CohereInputType InputType { get; set; }
 
 	/// <summary>
 	/// <para>

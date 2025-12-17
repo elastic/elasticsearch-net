@@ -33,38 +33,20 @@ public sealed partial class SettingsSimilarityIb : Elastic.Clients.Elasticsearch
 		Lambda = lambda;
 		Normalization = normalization;
 	}
-#if NET7_0_OR_GREATER
+
 	public SettingsSimilarityIb()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SettingsSimilarityIb()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsSimilarityIb(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
+	public required Elastic.Clients.Elasticsearch.IBDistribution Distribution { get; set; }
+	public required Elastic.Clients.Elasticsearch.IBLambda Lambda { get; set; }
+	public required Elastic.Clients.Elasticsearch.Normalization Normalization { get; set; }
 
 	public string Type => "IB";
 }

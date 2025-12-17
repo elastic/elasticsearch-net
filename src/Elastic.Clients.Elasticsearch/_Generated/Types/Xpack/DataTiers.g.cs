@@ -36,52 +36,22 @@ public sealed partial class DataTiers
 		DataWarm = dataWarm;
 		Enabled = enabled;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataTiers()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataTiers()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataTiers(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataCold { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataContent { get; set; }
+	public required bool Available { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataCold { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataContent { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics? DataFrozen { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataHot { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataWarm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataHot { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.DataTierPhaseStatistics DataWarm { get; set; }
+	public required bool Enabled { get; set; }
 }

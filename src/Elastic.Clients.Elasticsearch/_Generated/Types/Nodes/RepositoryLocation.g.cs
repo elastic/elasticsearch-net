@@ -31,28 +31,18 @@ public sealed partial class RepositoryLocation
 	{
 		BasePath = basePath;
 	}
-#if NET7_0_OR_GREATER
+
 	public RepositoryLocation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RepositoryLocation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BasePath { get; set; }
+	public required string BasePath { get; set; }
 
 	/// <summary>
 	/// <para>

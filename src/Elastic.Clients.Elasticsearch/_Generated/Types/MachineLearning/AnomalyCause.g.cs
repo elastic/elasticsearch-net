@@ -31,17 +31,11 @@ public sealed partial class AnomalyCause
 	{
 		Probability = probability;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnomalyCause()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnomalyCause()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnomalyCause(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,10 +55,6 @@ public sealed partial class AnomalyCause
 	public string? OverFieldValue { get; set; }
 	public string? PartitionFieldName { get; set; }
 	public string? PartitionFieldValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Probability { get; set; }
+	public required double Probability { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<double>? Typical { get; set; }
 }

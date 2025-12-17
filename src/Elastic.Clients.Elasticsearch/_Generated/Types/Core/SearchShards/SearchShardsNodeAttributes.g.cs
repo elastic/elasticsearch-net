@@ -39,17 +39,11 @@ public sealed partial class SearchShardsNodeAttributes
 		TransportAddress = transportAddress;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchShardsNodeAttributes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchShardsNodeAttributes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchShardsNodeAttributes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,67 +55,31 @@ public sealed partial class SearchShardsNodeAttributes
 	/// Lists node attributes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ephemeral ID of the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EphemeralId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ExternalId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxIndexVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinIndexVersion { get; set; }
+	public required string EphemeralId { get; set; }
+	public required string ExternalId { get; set; }
+	public required int MaxIndexVersion { get; set; }
+	public required int MinIndexVersion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The human-readable identifier of the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
+	public required string Name { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> Roles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The host and port where transport HTTP connections are accepted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string TransportAddress { get; set; }
+	public required string Version { get; set; }
 }

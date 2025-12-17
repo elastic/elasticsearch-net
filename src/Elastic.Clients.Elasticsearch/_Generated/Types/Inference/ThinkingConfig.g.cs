@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ThinkingConfigConverter))]
 public sealed partial class ThinkingConfig
 {
-#if NET7_0_OR_GREATER
 	public ThinkingConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ThinkingConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ThinkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

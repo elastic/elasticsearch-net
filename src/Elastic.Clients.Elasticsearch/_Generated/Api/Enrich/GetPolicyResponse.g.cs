@@ -37,9 +37,5 @@ public sealed partial class GetPolicyResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> Policies { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Enrich.EnrichSummary> Policies { get; set; }
 }

@@ -43,11 +43,11 @@ public sealed partial class ClearApiKeyCacheRequest : Elastic.Clients.Elasticsea
 	public ClearApiKeyCacheRequest(Elastic.Clients.Elasticsearch.Ids ids) : base(r => r.Required("ids", ids))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClearApiKeyCacheRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClearApiKeyCacheRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +69,7 @@ public sealed partial class ClearApiKeyCacheRequest : Elastic.Clients.Elasticsea
 	/// Does not support other wildcard patterns.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ids Ids { get => P<Elastic.Clients.Elasticsearch.Ids>("ids"); set => PR("ids", value); }
+	public required Elastic.Clients.Elasticsearch.Ids Ids { get => P<Elastic.Clients.Elasticsearch.Ids>("ids"); set => PR("ids", value); }
 }
 
 /// <summary>
@@ -136,6 +132,11 @@ public readonly partial struct ClearApiKeyCacheRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

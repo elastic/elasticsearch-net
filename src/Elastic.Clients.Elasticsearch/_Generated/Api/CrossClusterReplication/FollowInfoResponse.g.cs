@@ -37,9 +37,5 @@ public sealed partial class FollowInfoResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> FollowerIndices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndex> FollowerIndices { get; set; }
 }

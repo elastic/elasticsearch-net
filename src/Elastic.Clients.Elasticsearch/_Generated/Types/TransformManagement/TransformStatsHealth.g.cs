@@ -31,17 +31,11 @@ public sealed partial class TransformStatsHealth
 	{
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public TransformStatsHealth()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TransformStatsHealth()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformStatsHealth(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,9 +48,5 @@ public sealed partial class TransformStatsHealth
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>? Issues { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 }

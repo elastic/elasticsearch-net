@@ -35,6 +35,7 @@ public sealed partial class EqlSearchRequestConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSamplesPerKey = System.Text.Json.JsonEncodedText.Encode("max_samples_per_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropResultPosition = System.Text.Json.JsonEncodedText.Encode("result_position"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
@@ -56,6 +57,7 @@ public sealed partial class EqlSearchRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
 		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<int?> propMaxSamplesPerKey = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition?> propResultPosition = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
@@ -111,6 +113,11 @@ public sealed partial class EqlSearchRequestConverter : System.Text.Json.Seriali
 			}
 
 			if (propMaxSamplesPerKey.TryReadProperty(ref reader, options, PropMaxSamplesPerKey, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -172,6 +179,7 @@ public sealed partial class EqlSearchRequestConverter : System.Text.Json.Seriali
 			KeepAlive = propKeepAlive.Value,
 			KeepOnCompletion = propKeepOnCompletion.Value,
 			MaxSamplesPerKey = propMaxSamplesPerKey.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			ResultPosition = propResultPosition.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
@@ -195,6 +203,7 @@ public sealed partial class EqlSearchRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
 		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropResultPosition, value.ResultPosition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Eql.ResultPosition? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition>(o, v));
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));

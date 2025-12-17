@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IngestConverter))]
 public sealed partial class Ingest
 {
-#if NET7_0_OR_GREATER
 	public Ingest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Ingest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ingest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

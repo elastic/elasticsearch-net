@@ -31,17 +31,11 @@ public sealed partial class GeoIpNodeDatabaseName
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoIpNodeDatabaseName()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoIpNodeDatabaseName()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoIpNodeDatabaseName(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class GeoIpNodeDatabaseName
 	/// Name of the database.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

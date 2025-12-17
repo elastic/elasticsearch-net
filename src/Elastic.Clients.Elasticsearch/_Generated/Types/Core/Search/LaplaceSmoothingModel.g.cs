@@ -31,17 +31,11 @@ public sealed partial class LaplaceSmoothingModel
 	{
 		Alpha = alpha;
 	}
-#if NET7_0_OR_GREATER
+
 	public LaplaceSmoothingModel()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LaplaceSmoothingModel()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LaplaceSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class LaplaceSmoothingModel
 	/// A constant that is added to all counts to balance weights.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Alpha { get; set; }
+	public required double Alpha { get; set; }
 }
 
 public readonly partial struct LaplaceSmoothingModelDescriptor

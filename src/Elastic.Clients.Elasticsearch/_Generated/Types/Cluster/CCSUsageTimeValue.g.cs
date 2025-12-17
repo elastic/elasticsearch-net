@@ -33,17 +33,11 @@ public sealed partial class CCSUsageTimeValue
 		Max = max;
 		P90 = p90;
 	}
-#if NET7_0_OR_GREATER
+
 	public CCSUsageTimeValue()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CCSUsageTimeValue()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CCSUsageTimeValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class CCSUsageTimeValue
 	/// The average time taken to execute a request, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan Avg { get; set; }
+	public required System.TimeSpan Avg { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum time taken to execute a request, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan Max { get; set; }
+	public required System.TimeSpan Max { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The 90th percentile of the time taken to execute requests, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan P90 { get; set; }
+	public required System.TimeSpan P90 { get; set; }
 }

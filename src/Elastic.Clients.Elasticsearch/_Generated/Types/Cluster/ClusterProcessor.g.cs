@@ -34,42 +34,20 @@ public sealed partial class ClusterProcessor
 		Failed = failed;
 		TimeInMillis = timeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Failed { get; set; }
+	public required long Count { get; set; }
+	public required long Current { get; set; }
+	public required long Failed { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
 }

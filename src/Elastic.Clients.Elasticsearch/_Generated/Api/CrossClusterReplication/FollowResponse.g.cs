@@ -37,19 +37,7 @@ public sealed partial class FollowResponse : Elastic.Transport.Products.Elastics
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool FollowIndexCreated { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool FollowIndexShardsAcked { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool IndexFollowingStarted { get; set; }
+	public required bool FollowIndexCreated { get; set; }
+	public required bool FollowIndexShardsAcked { get; set; }
+	public required bool IndexFollowingStarted { get; set; }
 }

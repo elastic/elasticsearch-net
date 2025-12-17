@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.AddActionConverter))]
 public sealed partial class AddAction
 {
-#if NET7_0_OR_GREATER
 	public AddAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AddAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AddAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,17 +33,11 @@ public sealed partial class ReadException
 		FromSeqNo = fromSeqNo;
 		Retries = retries;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReadException()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReadException()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReadException(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class ReadException
 	/// The exception that caused the read to fail.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Exception { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Exception { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The starting sequence number of the batch requested from the leader.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FromSeqNo { get; set; }
+	public required long FromSeqNo { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of times the batch has been retried.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Retries { get; set; }
+	public required int Retries { get; set; }
 }

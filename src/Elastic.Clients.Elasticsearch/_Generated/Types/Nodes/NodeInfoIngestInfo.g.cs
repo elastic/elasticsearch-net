@@ -31,26 +31,16 @@ public sealed partial class NodeInfoIngestInfo
 	{
 		Downloader = downloader;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoIngestInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoIngestInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoIngestInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestDownloader Downloader { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngestDownloader Downloader { get; set; }
 }

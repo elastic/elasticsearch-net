@@ -37,9 +37,5 @@ public sealed partial class GetTemplateResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping> Templates { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TemplateMapping> Templates { get; set; }
 }

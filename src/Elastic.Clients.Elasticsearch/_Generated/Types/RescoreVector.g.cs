@@ -31,17 +31,11 @@ public sealed partial class RescoreVector
 	{
 		Oversample = oversample;
 	}
-#if NET7_0_OR_GREATER
+
 	public RescoreVector()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RescoreVector()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RescoreVector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class RescoreVector
 	/// Applies the specified oversample factor to k on the approximate kNN search
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Oversample { get; set; }
+	public required float Oversample { get; set; }
 }
 
 public readonly partial struct RescoreVectorDescriptor

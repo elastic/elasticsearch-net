@@ -45,17 +45,11 @@ public sealed partial class MigrateReindexRequest : Elastic.Clients.Elasticsearc
 	{
 		Reindex = reindex;
 	}
-#if NET7_0_OR_GREATER
+
 	public MigrateReindexRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MigrateReindexRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MigrateReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,11 +64,7 @@ public sealed partial class MigrateReindexRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "indices.migrate_reindex";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex Reindex { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex Reindex { get; set; }
 }
 
 /// <summary>
@@ -131,6 +121,11 @@ public readonly partial struct MigrateReindexRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -70,17 +70,11 @@ public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsea
 		Content = content;
 		Ids = ids;
 	}
-#if NET7_0_OR_GREATER
+
 	public SamlAuthenticateRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SamlAuthenticateRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -100,22 +94,14 @@ public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsea
 	/// The SAML response as it was sent by the user's browser, usually a Base64 encoded XML document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Content { get; set; }
+	public required string Content { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -224,6 +210,11 @@ public readonly partial struct SamlAuthenticateRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

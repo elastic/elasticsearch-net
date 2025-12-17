@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ModelPlotConfigConverter))]
 public sealed partial class ModelPlotConfig
 {
-#if NET7_0_OR_GREATER
 	public ModelPlotConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ModelPlotConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

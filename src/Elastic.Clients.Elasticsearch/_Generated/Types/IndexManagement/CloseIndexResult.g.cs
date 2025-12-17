@@ -31,27 +31,17 @@ public sealed partial class CloseIndexResult
 	{
 		Closed = closed;
 	}
-#if NET7_0_OR_GREATER
+
 	public CloseIndexResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CloseIndexResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CloseIndexResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Closed { get; set; }
+	public required bool Closed { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.CloseShardResult>? Shards { get; set; }
 }

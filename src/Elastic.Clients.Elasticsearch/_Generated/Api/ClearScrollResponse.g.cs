@@ -42,11 +42,7 @@ public sealed partial class ClearScrollResponse : Elastic.Transport.Products.Ela
 	/// The number of scrolling search requests cleared.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumFreed { get; set; }
+	public required int NumFreed { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -54,9 +50,5 @@ public sealed partial class ClearScrollResponse : Elastic.Transport.Products.Ela
 	/// This does not indicate whether any scrolling search requests were cleared.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Succeeded { get; set; }
+	public required bool Succeeded { get; set; }
 }

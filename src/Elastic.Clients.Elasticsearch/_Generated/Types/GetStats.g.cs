@@ -37,59 +37,25 @@ public sealed partial class GetStats
 		TimeInMillis = timeInMillis;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public GetStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GetStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
+	public required long Current { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ExistsTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ExistsTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ExistsTotal { get; set; }
+	public required System.TimeSpan ExistsTimeInMillis { get; set; }
+	public required long ExistsTotal { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? MissingTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MissingTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MissingTotal { get; set; }
+	public required System.TimeSpan MissingTimeInMillis { get; set; }
+	public required long MissingTotal { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
+	public required long Total { get; set; }
 }

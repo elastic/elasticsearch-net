@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GoogleNormalizedDistanceHeuristicConverter))]
 public sealed partial class GoogleNormalizedDistanceHeuristic
 {
-#if NET7_0_OR_GREATER
 	public GoogleNormalizedDistanceHeuristic()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GoogleNormalizedDistanceHeuristic()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GoogleNormalizedDistanceHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

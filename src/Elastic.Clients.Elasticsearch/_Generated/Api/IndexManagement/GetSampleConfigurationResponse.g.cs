@@ -37,14 +37,6 @@ public sealed partial class GetSampleConfigurationResponse : Elastic.Transport.P
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration? Configuration { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration? Configuration { get; set; }
+	public required string Index { get; set; }
 }

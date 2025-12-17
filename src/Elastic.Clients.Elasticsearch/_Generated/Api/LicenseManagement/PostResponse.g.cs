@@ -38,14 +38,6 @@ public sealed partial class PostResponse : Elastic.Transport.Products.Elasticsea
 	}
 
 	public Elastic.Clients.Elasticsearch.LicenseManagement.Acknowledgement? Acknowledge { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus LicenseStatus { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus LicenseStatus { get; set; }
 }

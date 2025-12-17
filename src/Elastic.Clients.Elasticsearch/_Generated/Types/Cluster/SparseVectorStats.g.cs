@@ -31,26 +31,16 @@ public sealed partial class SparseVectorStats
 	{
 		ValueCount = valueCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public SparseVectorStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SparseVectorStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SparseVectorStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ValueCount { get; set; }
+	public required long ValueCount { get; set; }
 }

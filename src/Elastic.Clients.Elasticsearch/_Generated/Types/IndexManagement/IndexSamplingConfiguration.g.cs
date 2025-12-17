@@ -32,31 +32,17 @@ public sealed partial class IndexSamplingConfiguration
 		Configuration = configuration;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexSamplingConfiguration()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexSamplingConfiguration()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexSamplingConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration Configuration { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.SamplingConfiguration Configuration { get; set; }
+	public required string Index { get; set; }
 }

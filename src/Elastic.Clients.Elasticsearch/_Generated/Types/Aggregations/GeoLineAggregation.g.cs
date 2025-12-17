@@ -31,17 +31,11 @@ public sealed partial class GeoLineAggregation
 	{
 		Point = point;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoLineAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoLineAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoLineAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class GeoLineAggregation
 	/// The name of the geo_point field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
+	public required Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -1178,6 +1178,52 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGroqResponse PutGroq(Elastic.Clients.Elasticsearch.Inference.PutGroqRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGroqResponse PutGroq(Elastic.Clients.Elasticsearch.Inference.GroqTaskType taskType, Elastic.Clients.Elasticsearch.Id groqInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(taskType, groqInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGroqResponse PutGroq(Elastic.Clients.Elasticsearch.Inference.GroqTaskType taskType, Elastic.Clients.Elasticsearch.Id groqInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(taskType, groqInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGroqResponse> PutGroqAsync(Elastic.Clients.Elasticsearch.Inference.PutGroqRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGroqResponse> PutGroqAsync(Elastic.Clients.Elasticsearch.Inference.GroqTaskType taskType, Elastic.Clients.Elasticsearch.Id groqInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(taskType, groqInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGroqResponse> PutGroqAsync(Elastic.Clients.Elasticsearch.Inference.GroqTaskType taskType, Elastic.Clients.Elasticsearch.Id groqInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGroqRequestDescriptor(taskType, groqInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest, Elastic.Clients.Elasticsearch.Inference.PutGroqResponse, Elastic.Clients.Elasticsearch.Inference.PutGroqRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest request)
 	{
 		request.BeforeRequest();
@@ -1360,6 +1406,52 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse PutNvidia(Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse PutNvidia(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType taskType, Elastic.Clients.Elasticsearch.Id nvidiaInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(taskType, nvidiaInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse PutNvidia(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType taskType, Elastic.Clients.Elasticsearch.Id nvidiaInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(taskType, nvidiaInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse> PutNvidiaAsync(Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse> PutNvidiaAsync(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType taskType, Elastic.Clients.Elasticsearch.Id nvidiaInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(taskType, nvidiaInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse> PutNvidiaAsync(Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType taskType, Elastic.Clients.Elasticsearch.Id nvidiaInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestDescriptor(taskType, nvidiaInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest, Elastic.Clients.Elasticsearch.Inference.PutNvidiaResponse, Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest request)

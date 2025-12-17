@@ -32,17 +32,11 @@ public sealed partial class CsvProcessor
 		Field = field;
 		TargetFields = targetFields;
 	}
-#if NET7_0_OR_GREATER
+
 	public CsvProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CsvProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -71,11 +65,7 @@ public sealed partial class CsvProcessor
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -132,11 +122,7 @@ public sealed partial class CsvProcessor
 	/// The array of fields to assign extracted values to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
 
 	/// <summary>
 	/// <para>

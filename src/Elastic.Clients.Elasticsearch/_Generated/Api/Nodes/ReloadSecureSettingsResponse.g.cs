@@ -37,16 +37,8 @@ public sealed partial class ReloadSecureSettingsResponse : Elastic.Transport.Pro
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> Nodes { get; set; }
+	public required string ClusterName { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>

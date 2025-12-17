@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CustomCategorizeTextAnalyzerConverter))]
 public sealed partial class CustomCategorizeTextAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public CustomCategorizeTextAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CustomCategorizeTextAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CustomCategorizeTextAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

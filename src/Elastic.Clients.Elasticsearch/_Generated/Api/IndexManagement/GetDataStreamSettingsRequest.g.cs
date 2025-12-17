@@ -50,11 +50,11 @@ public sealed partial class GetDataStreamSettingsRequest : Elastic.Clients.Elast
 	public GetDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.Indices name) : base(r => r.Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetDataStreamSettingsRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +74,7 @@ public sealed partial class GetDataStreamSettingsRequest : Elastic.Clients.Elast
 	/// A comma-separated list of data streams or data stream patterns. Supports wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -160,6 +156,11 @@ public readonly partial struct GetDataStreamSettingsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -266,6 +267,11 @@ public readonly partial struct GetDataStreamSettingsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

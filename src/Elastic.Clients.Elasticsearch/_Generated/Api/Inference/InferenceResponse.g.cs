@@ -37,9 +37,5 @@ public sealed partial class InferenceResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Inference.InferenceResult Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.InferenceResult Result { get; set; }
 }

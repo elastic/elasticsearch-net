@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MissingAggregationConverter))]
 public sealed partial class MissingAggregation
 {
-#if NET7_0_OR_GREATER
 	public MissingAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MissingAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MissingAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

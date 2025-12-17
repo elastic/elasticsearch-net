@@ -37,29 +37,9 @@ public sealed partial class HasPrivilegesResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>>> Application { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, bool> Cluster { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool HasAllRequested { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>> Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Username { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>>> Application { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, bool> Cluster { get; set; }
+	public required bool HasAllRequested { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, bool>> Index { get; set; }
+	public required string Username { get; set; }
 }

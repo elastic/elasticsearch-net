@@ -33,38 +33,20 @@ public sealed partial class SearchableSnapshots
 		Enabled = enabled;
 		IndicesCount = indicesCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchableSnapshots()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchableSnapshots()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchableSnapshots(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
 	public int? FullCopyIndicesCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndicesCount { get; set; }
+	public required int IndicesCount { get; set; }
 	public int? SharedCacheIndicesCount { get; set; }
 }

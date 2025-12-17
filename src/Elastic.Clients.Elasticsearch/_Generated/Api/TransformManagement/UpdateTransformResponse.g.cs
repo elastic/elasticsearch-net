@@ -38,45 +38,17 @@ public sealed partial class UpdateTransformResponse : Elastic.Transport.Products
 	}
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.TransformAuthorization? Authorization { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long CreateTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public required long CreateTime { get; set; }
+	public required string Description { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
+	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.Latest? Latest { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.Pivot? Pivot { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy? RetentionPolicy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.Settings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.Sync? Sync { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Version { get; set; }
+	public required string Version { get; set; }
 }

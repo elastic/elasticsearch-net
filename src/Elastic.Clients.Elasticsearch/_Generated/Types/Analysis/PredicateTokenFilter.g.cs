@@ -31,17 +31,11 @@ public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch
 	{
 		Script = script;
 	}
-#if NET7_0_OR_GREATER
+
 	public PredicateTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PredicateTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PredicateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch
 	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public string Type => "predicate_token_filter";
 

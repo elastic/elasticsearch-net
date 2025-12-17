@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ContextualAITaskSettingsConverter))]
 public sealed partial class ContextualAITaskSettings
 {
-#if NET7_0_OR_GREATER
 	public ContextualAITaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ContextualAITaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ContextualAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

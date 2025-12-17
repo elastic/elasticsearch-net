@@ -38,33 +38,19 @@ public sealed partial class TaskInfo
 		StartTimeInMillis = startTimeInMillis;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public TaskInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TaskInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TaskInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Action { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Cancellable { get; set; }
+	public required string Action { get; set; }
+	public required bool Cancellable { get; set; }
 	public bool? Cancelled { get; set; }
 
 	/// <summary>
@@ -76,33 +62,13 @@ public sealed partial class TaskInfo
 	/// </para>
 	/// </summary>
 	public string? Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Headers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Node { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Headers { get; set; }
+	public required long Id { get; set; }
+	public required string Node { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? ParentTaskId { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? RunningTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan RunningTimeInNanos { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required System.TimeSpan RunningTimeInNanos { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -113,9 +79,5 @@ public sealed partial class TaskInfo
 	/// </para>
 	/// </summary>
 	public object? Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

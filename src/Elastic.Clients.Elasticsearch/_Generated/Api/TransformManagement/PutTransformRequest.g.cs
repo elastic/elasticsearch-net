@@ -91,11 +91,11 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 		Dest = dest;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutTransformRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -116,11 +116,7 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 	/// hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id TransformId { get => P<Elastic.Clients.Elasticsearch.Id>("transform_id"); set => PR("transform_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -152,11 +148,7 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 	/// The destination for the transform.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.Destination Dest { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -209,11 +201,7 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 	/// The source of the data for the transform.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.Source Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.Source Source { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -646,6 +634,11 @@ public readonly partial struct PutTransformRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1049,6 +1042,11 @@ public readonly partial struct PutTransformRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -31,28 +31,18 @@ public sealed partial class KuromojiPartOfSpeechTokenFilter : Elastic.Clients.El
 	{
 		Stoptags = stoptags;
 	}
-#if NET7_0_OR_GREATER
+
 	public KuromojiPartOfSpeechTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KuromojiPartOfSpeechTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KuromojiPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Stoptags { get; set; }
+	public required System.Collections.Generic.ICollection<string> Stoptags { get; set; }
 
 	public string Type => "kuromoji_part_of_speech";
 

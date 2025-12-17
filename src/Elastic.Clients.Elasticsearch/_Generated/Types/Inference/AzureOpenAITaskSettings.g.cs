@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AzureOpenAITaskSettingsConverter))]
 public sealed partial class AzureOpenAITaskSettings
 {
-#if NET7_0_OR_GREATER
 	public AzureOpenAITaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AzureOpenAITaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AzureOpenAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -44,7 +38,7 @@ public sealed partial class AzureOpenAITaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
+	/// For a <c>completion</c>, <c>chat_completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>
@@ -72,7 +66,7 @@ public readonly partial struct AzureOpenAiTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
+	/// For a <c>completion</c>, <c>chat_completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>

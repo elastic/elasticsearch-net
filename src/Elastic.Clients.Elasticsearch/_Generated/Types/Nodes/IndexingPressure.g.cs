@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IndexingPressureConverter))]
 public sealed partial class IndexingPressure
 {
-#if NET7_0_OR_GREATER
 	public IndexingPressure()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexingPressure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

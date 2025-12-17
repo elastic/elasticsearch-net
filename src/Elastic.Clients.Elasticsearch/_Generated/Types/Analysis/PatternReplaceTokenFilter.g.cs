@@ -31,17 +31,11 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 	{
 		Pattern = pattern;
 	}
-#if NET7_0_OR_GREATER
+
 	public PatternReplaceTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PatternReplaceTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Pattern { get; set; }
+	public required string Pattern { get; set; }
 
 	/// <summary>
 	/// <para>

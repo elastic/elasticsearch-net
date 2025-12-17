@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ExtendedBoundsConverterFactory))]
 public sealed partial class ExtendedBounds<T>
 {
-#if NET7_0_OR_GREATER
 	public ExtendedBounds()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ExtendedBounds()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExtendedBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

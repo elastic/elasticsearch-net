@@ -32,31 +32,17 @@ public sealed partial class Overlapping
 		IndexPatterns = indexPatterns;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public Overlapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Overlapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Overlapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> IndexPatterns { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> IndexPatterns { get; set; }
+	public required string Name { get; set; }
 }

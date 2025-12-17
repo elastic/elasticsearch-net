@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SignificantTextAggregationConverter))]
 public sealed partial class SignificantTextAggregation
 {
-#if NET7_0_OR_GREATER
 	public SignificantTextAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SignificantTextAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SignificantTextAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

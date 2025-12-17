@@ -42,11 +42,7 @@ public sealed partial class EqlSearchResponse<TEvent> : Elastic.Transport.Produc
 	/// Contains matching events and sequences. Also contains related metadata.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; set; }
+	public required Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Hits { get; set; }
 
 	/// <summary>
 	/// <para>

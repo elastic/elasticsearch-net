@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.HdrMethodConverter))]
 public sealed partial class HdrMethod
 {
-#if NET7_0_OR_GREATER
 	public HdrMethod()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HdrMethod()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HdrMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

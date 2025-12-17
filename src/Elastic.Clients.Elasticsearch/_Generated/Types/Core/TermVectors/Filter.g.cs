@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.Json.FilterConverter))]
 public sealed partial class Filter
 {
-#if NET7_0_OR_GREATER
 	public Filter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Filter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Filter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

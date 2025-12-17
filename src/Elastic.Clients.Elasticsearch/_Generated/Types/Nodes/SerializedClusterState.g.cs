@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.SerializedClusterStateConverter))]
 public sealed partial class SerializedClusterState
 {
-#if NET7_0_OR_GREATER
 	public SerializedClusterState()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SerializedClusterState()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SerializedClusterState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

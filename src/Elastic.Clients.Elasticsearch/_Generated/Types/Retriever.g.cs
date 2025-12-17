@@ -28,16 +28,11 @@ public sealed partial class Retriever
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Retriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Retriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Retriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

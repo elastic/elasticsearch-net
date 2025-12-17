@@ -35,28 +35,18 @@ public sealed partial class AutoFollowPatternSummary
 		MaxOutstandingReadRequests = maxOutstandingReadRequests;
 		RemoteCluster = remoteCluster;
 	}
-#if NET7_0_OR_GREATER
+
 	public AutoFollowPatternSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AutoFollowPatternSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AutoFollowPatternSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Active { get; set; }
+	public required bool Active { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -70,42 +60,26 @@ public sealed partial class AutoFollowPatternSummary
 	/// An array of simple index patterns that can be used to exclude indices from being auto-followed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexExclusionPatterns { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexExclusionPatterns { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexPatterns { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> LeaderIndexPatterns { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxOutstandingReadRequests { get; set; }
+	public required int MaxOutstandingReadRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The remote cluster containing the leader indices to match against.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RemoteCluster { get; set; }
+	public required string RemoteCluster { get; set; }
 }

@@ -37,17 +37,11 @@ public sealed partial class CompletionToolChoice
 		Function = function;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public CompletionToolChoice()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CompletionToolChoice()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompletionToolChoice(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,20 +53,12 @@ public sealed partial class CompletionToolChoice
 	/// The tool choice function.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.CompletionToolChoiceFunction Function { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.CompletionToolChoiceFunction Function { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of the tool.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

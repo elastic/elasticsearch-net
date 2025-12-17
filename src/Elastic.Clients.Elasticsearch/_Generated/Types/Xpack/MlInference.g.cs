@@ -32,17 +32,11 @@ public sealed partial class MlInference
 		IngestProcessors = ingestProcessors;
 		TrainedModels = trainedModels;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInference()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInference()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInference(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,14 +44,6 @@ public sealed partial class MlInference
 	}
 
 	public Elastic.Clients.Elasticsearch.Xpack.MlInferenceDeployments? Deployments { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor> IngestProcessors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels TrainedModels { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor> IngestProcessors { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModels TrainedModels { get; set; }
 }

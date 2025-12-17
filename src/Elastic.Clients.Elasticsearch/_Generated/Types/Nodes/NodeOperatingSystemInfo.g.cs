@@ -36,17 +36,11 @@ public sealed partial class NodeOperatingSystemInfo
 		RefreshIntervalInMillis = refreshIntervalInMillis;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeOperatingSystemInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeOperatingSystemInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeOperatingSystemInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,22 +59,14 @@ public sealed partial class NodeOperatingSystemInfo
 	/// Name of the JVM architecture (ex: amd64, x86)
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Arch { get; set; }
+	public required string Arch { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of processors available to the Java virtual machine
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AvailableProcessors { get; set; }
+	public required int AvailableProcessors { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoOSCPU? Cpu { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Mem { get; set; }
 
@@ -89,27 +75,15 @@ public sealed partial class NodeOperatingSystemInfo
 	/// Name of the operating system (ex: Linux, Windows, Mac OS X)
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PrettyName { get; set; }
+	public required string Name { get; set; }
+	public required string PrettyName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refresh interval for the OS statistics
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan RefreshIntervalInMillis { get; set; }
+	public required System.TimeSpan RefreshIntervalInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoMemory? Swap { get; set; }
 
 	/// <summary>
@@ -117,9 +91,5 @@ public sealed partial class NodeOperatingSystemInfo
 	/// Version of the operating system
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string Version { get; set; }
 }

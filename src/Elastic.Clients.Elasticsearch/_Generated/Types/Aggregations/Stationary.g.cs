@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StationaryConverter))]
 public sealed partial class Stationary
 {
-#if NET7_0_OR_GREATER
 	public Stationary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Stationary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Stationary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

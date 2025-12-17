@@ -32,17 +32,11 @@ public sealed partial class QueryRulesetMatchedRule
 		RuleId = ruleId;
 		RulesetId = rulesetId;
 	}
-#if NET7_0_OR_GREATER
+
 	public QueryRulesetMatchedRule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QueryRulesetMatchedRule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRulesetMatchedRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class QueryRulesetMatchedRule
 	/// Rule unique identifier within that ruleset
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RuleId { get; set; }
+	public required string RuleId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ruleset unique identifier
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RulesetId { get; set; }
+	public required string RulesetId { get; set; }
 }

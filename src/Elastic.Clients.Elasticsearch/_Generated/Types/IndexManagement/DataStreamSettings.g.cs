@@ -33,17 +33,11 @@ public sealed partial class DataStreamSettings
 		Name = name;
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,31 +50,19 @@ public sealed partial class DataStreamSettings
 	/// are the settings that will be used when a new index is created for this data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings EffectiveSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings EffectiveSettings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The settings specific to this data stream
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }

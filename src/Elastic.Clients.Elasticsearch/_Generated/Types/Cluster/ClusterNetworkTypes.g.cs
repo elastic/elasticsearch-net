@@ -32,17 +32,11 @@ public sealed partial class ClusterNetworkTypes
 		HttpTypes = httpTypes;
 		TransportTypes = transportTypes;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterNetworkTypes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterNetworkTypes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterNetworkTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class ClusterNetworkTypes
 	/// Contains statistics about the HTTP network types used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> HttpTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> HttpTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the transport network types used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> TransportTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> TransportTypes { get; set; }
 }

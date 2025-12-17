@@ -100,11 +100,7 @@ public sealed partial class PutTrainedModelResponse : Elastic.Transport.Products
 	/// The input field names for the model definition.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput Input { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput Input { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -126,11 +122,7 @@ public sealed partial class PutTrainedModelResponse : Elastic.Transport.Products
 	/// Identifier for the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig? ModelPackage { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelSizeBytes { get; set; }
 
@@ -148,11 +140,7 @@ public sealed partial class PutTrainedModelResponse : Elastic.Transport.Products
 	/// A comma delimited string of tags. A trained model can have many tags, or none.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Tags { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Tags { get; set; }
 
 	/// <summary>
 	/// <para>

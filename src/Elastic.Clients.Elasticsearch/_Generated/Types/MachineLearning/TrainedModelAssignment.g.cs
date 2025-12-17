@@ -34,17 +34,11 @@ public sealed partial class TrainedModelAssignment
 		StartTime = startTime;
 		TaskParameters = taskParameters;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelAssignment()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelAssignment()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelAssignment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class TrainedModelAssignment
 	/// The overall assignment state.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; set; }
 	public int? MaxAssignedAllocations { get; set; }
 	public string? Reason { get; set; }
 
@@ -71,25 +61,13 @@ public sealed partial class TrainedModelAssignment
 	/// The allocation state for each node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The timestamp when the deployment started.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters TaskParameters { get; set; }
+	public required System.DateTimeOffset StartTime { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters TaskParameters { get; set; }
 }

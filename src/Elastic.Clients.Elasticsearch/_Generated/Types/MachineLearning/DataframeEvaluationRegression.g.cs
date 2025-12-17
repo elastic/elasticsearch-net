@@ -32,17 +32,11 @@ public sealed partial class DataframeEvaluationRegression
 		ActualField = actualField;
 		PredictedField = predictedField;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeEvaluationRegression()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeEvaluationRegression()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class DataframeEvaluationRegression
 	/// The field of the index which contains the ground truth. The data type of this field must be numerical.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,11 +62,7 @@ public sealed partial class DataframeEvaluationRegression
 	/// The field in the index that contains the predicted value, in other words the results of the regression analysis.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field PredictedField { get; set; }
 }
 
 public readonly partial struct DataframeEvaluationRegressionDescriptor<TDocument>

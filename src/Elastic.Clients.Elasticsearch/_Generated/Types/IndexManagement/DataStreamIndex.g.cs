@@ -32,17 +32,11 @@ public sealed partial class DataStreamIndex
 		IndexName = indexName;
 		IndexUuid = indexUuid;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,22 +62,14 @@ public sealed partial class DataStreamIndex
 	/// Name of the backing index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexName { get; set; }
+	public required string IndexName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Universally unique identifier (UUID) for the index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexUuid { get; set; }
+	public required string IndexUuid { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -32,31 +32,17 @@ public sealed partial class HttpRoute
 		Requests = requests;
 		Responses = responses;
 	}
-#if NET7_0_OR_GREATER
+
 	public HttpRoute()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HttpRoute()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HttpRoute(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.HttpRouteRequests Requests { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.HttpRouteResponses Responses { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.HttpRouteRequests Requests { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.HttpRouteResponses Responses { get; set; }
 }

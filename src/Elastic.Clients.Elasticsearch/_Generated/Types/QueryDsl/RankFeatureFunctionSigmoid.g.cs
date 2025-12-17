@@ -32,17 +32,11 @@ public sealed partial class RankFeatureFunctionSigmoid
 		Exponent = exponent;
 		Pivot = pivot;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankFeatureFunctionSigmoid()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankFeatureFunctionSigmoid()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class RankFeatureFunctionSigmoid
 	/// Configurable Exponent.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Exponent { get; set; }
+	public required float Exponent { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Configurable pivot value so that the result will be less than 0.5.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Pivot { get; set; }
+	public required float Pivot { get; set; }
 }
 
 public readonly partial struct RankFeatureFunctionSigmoidDescriptor

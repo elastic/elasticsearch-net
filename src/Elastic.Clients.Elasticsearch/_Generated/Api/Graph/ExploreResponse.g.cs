@@ -37,29 +37,9 @@ public sealed partial class ExploreResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> Connections { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool TimedOut { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Took { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> Vertices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Connection> Connections { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure> Failures { get; set; }
+	public required bool TimedOut { get; set; }
+	public required long Took { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Graph.Vertex> Vertices { get; set; }
 }

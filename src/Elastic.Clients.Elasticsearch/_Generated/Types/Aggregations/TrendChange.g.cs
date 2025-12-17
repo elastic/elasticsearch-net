@@ -33,36 +33,18 @@ public sealed partial class TrendChange
 		PValue = pValue;
 		RValue = rValue;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrendChange()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrendChange()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrendChange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ChangePoint { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double PValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RValue { get; set; }
+	public required int ChangePoint { get; set; }
+	public required double PValue { get; set; }
+	public required double RValue { get; set; }
 }

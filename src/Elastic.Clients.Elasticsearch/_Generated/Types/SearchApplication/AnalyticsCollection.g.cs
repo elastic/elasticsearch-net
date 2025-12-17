@@ -31,17 +31,11 @@ public sealed partial class AnalyticsCollection
 	{
 		EventDataStream = eventDataStream;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalyticsCollection()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalyticsCollection()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalyticsCollection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class AnalyticsCollection
 	/// Data stream for the collection.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; set; }
+	public required Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; set; }
 }

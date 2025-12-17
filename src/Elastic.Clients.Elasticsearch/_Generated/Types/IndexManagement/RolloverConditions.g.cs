@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RolloverConditionsConverter))]
 public sealed partial class RolloverConditions
 {
-#if NET7_0_OR_GREATER
 	public RolloverConditions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RolloverConditions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RolloverConditions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

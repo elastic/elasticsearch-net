@@ -28,16 +28,11 @@ public sealed partial class InferenceConfigCreate
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public InferenceConfigCreate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public InferenceConfigCreate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InferenceConfigCreate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

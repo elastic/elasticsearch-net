@@ -54,16 +54,10 @@ public sealed partial class GetFeaturesRequestParameters : Elastic.Transport.Req
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.Json.GetFeaturesRequestConverter))]
 public sealed partial class GetFeaturesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public GetFeaturesRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetFeaturesRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -152,6 +146,11 @@ public readonly partial struct GetFeaturesRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

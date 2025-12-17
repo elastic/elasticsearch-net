@@ -31,17 +31,11 @@ public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elastics
 	{
 		Patterns = patterns;
 	}
-#if NET7_0_OR_GREATER
+
 	public PatternCaptureTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PatternCaptureTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elastics
 	/// A list of regular expressions to match.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Patterns { get; set; }
+	public required System.Collections.Generic.ICollection<string> Patterns { get; set; }
 
 	/// <summary>
 	/// <para>

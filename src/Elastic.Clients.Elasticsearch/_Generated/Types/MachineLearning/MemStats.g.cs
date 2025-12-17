@@ -33,17 +33,11 @@ public sealed partial class MemStats
 		Ml = ml;
 		TotalInBytes = totalInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public MemStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MemStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MemStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,22 +58,14 @@ public sealed partial class MemStats
 	/// then this reports the overridden value in bytes. Otherwise it reports the same value as <c>total_in_bytes</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AdjustedTotalInBytes { get; set; }
+	public required int AdjustedTotalInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about machine learning use of native memory on the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Ml { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.MemMlStats Ml { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,9 +79,5 @@ public sealed partial class MemStats
 	/// Total amount of physical memory in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalInBytes { get; set; }
+	public required int TotalInBytes { get; set; }
 }

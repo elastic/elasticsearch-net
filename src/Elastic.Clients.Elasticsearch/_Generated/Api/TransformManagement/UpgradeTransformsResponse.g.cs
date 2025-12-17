@@ -42,31 +42,19 @@ public sealed partial class UpgradeTransformsResponse : Elastic.Transport.Produc
 	/// The number of transforms that need to be upgraded.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NeedsUpdate { get; set; }
+	public required int NeedsUpdate { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of transforms that don’t require upgrading.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NoAction { get; set; }
+	public required int NoAction { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of transforms that have been upgraded.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Updated { get; set; }
+	public required int Updated { get; set; }
 }

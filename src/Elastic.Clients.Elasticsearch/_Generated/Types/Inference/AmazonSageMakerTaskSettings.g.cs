@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonSageMakerTaskSettingsConverter))]
 public sealed partial class AmazonSageMakerTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public AmazonSageMakerTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AmazonSageMakerTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AmazonSageMakerTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

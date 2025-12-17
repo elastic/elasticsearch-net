@@ -36,17 +36,11 @@ public sealed partial class ClusterStatistics
 		Successful = successful;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,34 +48,10 @@ public sealed partial class ClusterStatistics
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ClusterDetails>? Details { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Failed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Partial { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Running { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Skipped { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Successful { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Failed { get; set; }
+	public required int Partial { get; set; }
+	public required int Running { get; set; }
+	public required int Skipped { get; set; }
+	public required int Successful { get; set; }
+	public required int Total { get; set; }
 }

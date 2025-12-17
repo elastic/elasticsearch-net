@@ -33,37 +33,19 @@ public sealed partial class WarmerStats
 		Total = total;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public WarmerStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WarmerStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WarmerStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Current { get; set; }
+	public required long Total { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

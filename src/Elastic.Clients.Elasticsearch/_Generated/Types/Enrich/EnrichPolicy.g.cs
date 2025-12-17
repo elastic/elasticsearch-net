@@ -33,17 +33,11 @@ public sealed partial class EnrichPolicy
 		Indices = indices;
 		MatchField = matchField;
 	}
-#if NET7_0_OR_GREATER
+
 	public EnrichPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EnrichPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EnrichPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,21 +45,9 @@ public sealed partial class EnrichPolicy
 	}
 
 	public string? ElasticsearchVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields EnrichFields { get; set; }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field MatchField { get; set; }
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }

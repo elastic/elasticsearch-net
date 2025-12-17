@@ -32,17 +32,11 @@ public sealed partial class KibanaToken
 		Name = name;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public KibanaToken()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KibanaToken()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KibanaToken(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class KibanaToken
 	/// The name of the bearer token for the <c>elastic/kibana</c> service account.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -66,9 +56,5 @@ public sealed partial class KibanaToken
 	/// Use this value to authenticate the service account with Elasticsearch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Value { get; set; }
+	public required string Value { get; set; }
 }

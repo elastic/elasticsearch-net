@@ -37,17 +37,11 @@ public sealed partial class GeoIpNodeDatabases
 		Databases = databases;
 		FilesInTemp = filesInTemp;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoIpNodeDatabases()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoIpNodeDatabases()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoIpNodeDatabases(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,20 +53,12 @@ public sealed partial class GeoIpNodeDatabases
 	/// Downloaded databases for the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.GeoIpNodeDatabaseName> Databases { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Downloaded database files, including related license files. Elasticsearch stores these files in the node’s temporary directory: $ES_TMPDIR/geoip-databases/&lt;node_id>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> FilesInTemp { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> FilesInTemp { get; set; }
 }

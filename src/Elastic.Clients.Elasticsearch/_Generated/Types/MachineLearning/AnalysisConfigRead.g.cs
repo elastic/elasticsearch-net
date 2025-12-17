@@ -33,17 +33,11 @@ public sealed partial class AnalysisConfigRead
 		Detectors = detectors;
 		Influencers = influencers;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalysisConfigRead()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalysisConfigRead()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalysisConfigRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class AnalysisConfigRead
 	/// The size of the interval that the analysis is aggregated into, typically between <c>5m</c> and <c>1h</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration BucketSpan { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -95,11 +85,7 @@ public sealed partial class AnalysisConfigRead
 	/// You can specify multiple detectors for a job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> Detectors { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorRead> Detectors { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -109,11 +95,7 @@ public sealed partial class AnalysisConfigRead
 	/// When you use multiple detectors, the use of influencers is recommended as it aggregates results for each influencer entity.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields Influencers { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields Influencers { get; set; }
 
 	/// <summary>
 	/// <para>

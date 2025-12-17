@@ -31,28 +31,18 @@ public sealed partial class Maxmind
 	{
 		AccountId = accountId;
 	}
-#if NET7_0_OR_GREATER
+
 	public Maxmind()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Maxmind()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Maxmind(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
 }
 
 public readonly partial struct MaxmindDescriptor

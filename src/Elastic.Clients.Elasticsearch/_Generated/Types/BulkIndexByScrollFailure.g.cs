@@ -34,41 +34,19 @@ public sealed partial class BulkIndexByScrollFailure
 		Index = index;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public BulkIndexByScrollFailure()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BulkIndexByScrollFailure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BulkIndexByScrollFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Cause { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Cause { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
+	public required int Status { get; set; }
 }

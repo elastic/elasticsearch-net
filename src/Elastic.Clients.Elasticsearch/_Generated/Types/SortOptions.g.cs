@@ -28,16 +28,11 @@ public sealed partial class SortOptions
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public SortOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SortOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

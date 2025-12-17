@@ -32,31 +32,17 @@ public sealed partial class ExecutingPolicy
 		Name = name;
 		Task = task;
 	}
-#if NET7_0_OR_GREATER
+
 	public ExecutingPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ExecutingPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExecutingPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; set; }
+	public required string Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Tasks.TaskInfo Task { get; set; }
 }

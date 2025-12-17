@@ -34,17 +34,11 @@ public sealed partial class RemoteUserIndicesPrivileges
 		Names = names;
 		Privileges = privileges;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoteUserIndicesPrivileges()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoteUserIndicesPrivileges()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoteUserIndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,16 +50,8 @@ public sealed partial class RemoteUserIndicesPrivileges
 	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool AllowRestrictedIndices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Clusters { get; set; }
+	public required bool AllowRestrictedIndices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Clusters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,22 +65,14 @@ public sealed partial class RemoteUserIndicesPrivileges
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Names { get; set; }
+	public required System.Collections.Generic.ICollection<string> Names { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index level privileges that owners of the role have on the specified indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -40,71 +40,25 @@ public sealed partial class ReindexTask
 		Status = status;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReindexTask()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReindexTask()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReindexTask(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Action { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Cancellable { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> Headers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan RunningTimeInNanos { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Action { get; set; }
+	public required bool Cancellable { get; set; }
+	public required string Description { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> Headers { get; set; }
+	public required long Id { get; set; }
+	public required string Node { get; set; }
+	public required System.TimeSpan RunningTimeInNanos { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus Status { get; set; }
+	public required string Type { get; set; }
 }

@@ -44,17 +44,11 @@ public sealed partial class RuntimeFieldTypes
 		SourceMax = sourceMax;
 		SourceTotal = sourceTotal;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuntimeFieldTypes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuntimeFieldTypes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuntimeFieldTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,152 +60,96 @@ public sealed partial class RuntimeFieldTypes
 	/// Maximum number of characters for a single runtime field script.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CharsMax { get; set; }
+	public required int CharsMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of characters for the scripts that define the current runtime field data type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CharsTotal { get; set; }
+	public required int CharsTotal { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of runtime fields mapped to the field data type in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of accesses to doc_values for a single runtime field script
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DocMax { get; set; }
+	public required int DocMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of accesses to doc_values for the scripts that define the current runtime field data type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DocTotal { get; set; }
+	public required int DocTotal { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of indices containing a mapping of the runtime field data type in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndexCount { get; set; }
+	public required int IndexCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Script languages used for the runtime fields scripts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Lang { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of lines for a single runtime field script.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int LinesMax { get; set; }
+	public required int LinesMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of lines for the scripts that define the current runtime field data type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int LinesTotal { get; set; }
+	public required int LinesTotal { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Field data type used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of runtime fields that don’t declare a script.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ScriptlessCount { get; set; }
+	public required int ScriptlessCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of runtime fields that shadow an indexed field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShadowedCount { get; set; }
+	public required int ShadowedCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Maximum number of accesses to _source for a single runtime field script.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SourceMax { get; set; }
+	public required int SourceMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of accesses to _source for the scripts that define the current runtime field data type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SourceTotal { get; set; }
+	public required int SourceTotal { get; set; }
 }

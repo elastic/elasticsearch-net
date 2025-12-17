@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TimeSeriesAggregationConverter))]
 public sealed partial class TimeSeriesAggregation
 {
-#if NET7_0_OR_GREATER
 	public TimeSeriesAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TimeSeriesAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TimeSeriesAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.GarbageCollectorTotalConverter))]
 public sealed partial class GarbageCollectorTotal
 {
-#if NET7_0_OR_GREATER
 	public GarbageCollectorTotal()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GarbageCollectorTotal()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GarbageCollectorTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

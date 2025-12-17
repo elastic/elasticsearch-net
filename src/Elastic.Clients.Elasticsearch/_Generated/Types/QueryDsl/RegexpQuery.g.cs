@@ -38,11 +38,11 @@ public sealed partial class RegexpQuery
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public RegexpQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RegexpQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +66,7 @@ public sealed partial class RegexpQuery
 	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -99,11 +95,7 @@ public sealed partial class RegexpQuery
 	/// Regular expression for terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Value { get; set; }
+	public required string Value { get; set; }
 }
 
 public readonly partial struct RegexpQueryDescriptor<TDocument>

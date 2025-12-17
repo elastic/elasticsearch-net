@@ -31,17 +31,11 @@ public sealed partial class DenseVectorIndexOptionsRescoreVector
 	{
 		Oversample = oversample;
 	}
-#if NET7_0_OR_GREATER
+
 	public DenseVectorIndexOptionsRescoreVector()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DenseVectorIndexOptionsRescoreVector()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DenseVectorIndexOptionsRescoreVector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,11 +51,7 @@ public sealed partial class DenseVectorIndexOptionsRescoreVector
 	/// valid values are between <c>1.0</c> and <c>10.0</c> (inclusive), or <c>0</c> exactly to disable oversampling.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	float Oversample { get; set; }
+	public required float Oversample { get; set; }
 }
 
 public readonly partial struct DenseVectorIndexOptionsRescoreVectorDescriptor

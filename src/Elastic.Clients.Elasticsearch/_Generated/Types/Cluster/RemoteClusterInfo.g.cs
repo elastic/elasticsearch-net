@@ -42,17 +42,11 @@ public sealed partial class RemoteClusterInfo
 		TransportCompress = transportCompress;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoteClusterInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoteClusterInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoteClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,22 +58,14 @@ public sealed partial class RemoteClusterInfo
 	/// The UUID of the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterUuid { get; set; }
+	public required string ClusterUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of indices in the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int IndicesCount { get; set; }
+	public required int IndicesCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,11 +79,7 @@ public sealed partial class RemoteClusterInfo
 	/// Total data set size, in bytes, of all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndicesTotalSizeInBytes { get; set; }
+	public required long IndicesTotalSizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,11 +93,7 @@ public sealed partial class RemoteClusterInfo
 	/// Maximum amount of memory, in bytes, available for use by the heap across the nodes of the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxHeapInBytes { get; set; }
+	public required long MaxHeapInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -129,86 +107,54 @@ public sealed partial class RemoteClusterInfo
 	/// Total amount, in bytes, of physical memory across the nodes of the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemTotalInBytes { get; set; }
+	public required long MemTotalInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The connection mode used to communicate with the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Mode { get; set; }
+	public required string Mode { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total count of nodes in the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NodesCount { get; set; }
+	public required int NodesCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of shards in the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardsCount { get; set; }
+	public required int ShardsCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The <c>skip_unavailable</c> setting used for this remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool SkipUnavailable { get; set; }
+	public required bool SkipUnavailable { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Health status of the cluster, based on the state of its primary and replica shards.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Transport compression setting used for this remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportCompress { get; set; }
+	public required string TransportCompress { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of Elasticsearch versions used by the nodes on the remote cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Version { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Version { get; set; }
 }

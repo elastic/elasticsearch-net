@@ -32,17 +32,11 @@ public sealed partial class TermsQuery
 		Field = field;
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermsQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TermsQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,17 +52,9 @@ public sealed partial class TermsQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField Terms { get; set; }
 }
 
 public readonly partial struct TermsQueryDescriptor<TDocument>

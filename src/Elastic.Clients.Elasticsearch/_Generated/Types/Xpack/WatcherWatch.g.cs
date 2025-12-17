@@ -32,17 +32,11 @@ public sealed partial class WatcherWatch
 		Input = input;
 		Trigger = trigger;
 	}
-#if NET7_0_OR_GREATER
+
 	public WatcherWatch()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WatcherWatch()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WatcherWatch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,14 +45,6 @@ public sealed partial class WatcherWatch
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Action { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter>? Condition { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> Input { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Trigger { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Counter> Input { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Trigger { get; set; }
 }

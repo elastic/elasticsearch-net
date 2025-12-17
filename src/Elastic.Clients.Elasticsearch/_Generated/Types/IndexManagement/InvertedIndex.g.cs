@@ -37,56 +37,22 @@ public sealed partial class InvertedIndex
 		TermFrequencies = termFrequencies;
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public InvertedIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InvertedIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InvertedIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Offsets { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Payloads { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Positions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Postings { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Proximity { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TermFrequencies { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Terms { get; set; }
+	public required int Offsets { get; set; }
+	public required int Payloads { get; set; }
+	public required int Positions { get; set; }
+	public required int Postings { get; set; }
+	public required int Proximity { get; set; }
+	public required int TermFrequencies { get; set; }
+	public required int Terms { get; set; }
 }

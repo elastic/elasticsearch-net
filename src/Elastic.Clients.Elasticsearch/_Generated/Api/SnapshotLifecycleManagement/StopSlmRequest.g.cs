@@ -62,16 +62,10 @@ public sealed partial class StopSlmRequestParameters : Elastic.Transport.Request
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.StopSlmRequestConverter))]
 public sealed partial class StopSlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public StopSlmRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StopSlmRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StopSlmRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -183,6 +177,11 @@ public readonly partial struct StopSlmRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

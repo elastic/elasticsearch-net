@@ -53,16 +53,10 @@ public sealed partial class StartIlmRequestParameters : Elastic.Transport.Reques
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.StartIlmRequestConverter))]
 public sealed partial class StartIlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public StartIlmRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StartIlmRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StartIlmRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -161,6 +155,11 @@ public readonly partial struct StartIlmRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

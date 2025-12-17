@@ -32,16 +32,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamOptionsConverter))]
 public sealed partial class DataStreamOptions
 {
-#if NET7_0_OR_GREATER
 	public DataStreamOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataStreamOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

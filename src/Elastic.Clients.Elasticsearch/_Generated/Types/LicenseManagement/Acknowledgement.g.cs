@@ -32,31 +32,17 @@ public sealed partial class Acknowledgement
 		License = license;
 		Message = message;
 	}
-#if NET7_0_OR_GREATER
+
 	public Acknowledgement()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Acknowledgement()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Acknowledgement(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> License { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Message { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> License { get; set; }
+	public required string Message { get; set; }
 }

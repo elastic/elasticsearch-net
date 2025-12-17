@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ExtendedTextSimilarityRetrieverUsageConverter))]
 public sealed partial class ExtendedTextSimilarityRetrieverUsage
 {
-#if NET7_0_OR_GREATER
 	public ExtendedTextSimilarityRetrieverUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ExtendedTextSimilarityRetrieverUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExtendedTextSimilarityRetrieverUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

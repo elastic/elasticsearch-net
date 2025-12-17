@@ -31,17 +31,11 @@ public sealed partial class PatternReplaceCharFilter : Elastic.Clients.Elasticse
 	{
 		Pattern = pattern;
 	}
-#if NET7_0_OR_GREATER
+
 	public PatternReplaceCharFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PatternReplaceCharFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PatternReplaceCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class PatternReplaceCharFilter : Elastic.Clients.Elasticse
 	}
 
 	public string? Flags { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Pattern { get; set; }
+	public required string Pattern { get; set; }
 	public string? Replacement { get; set; }
 
 	public string Type => "pattern_replace";

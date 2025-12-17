@@ -38,11 +38,11 @@ public sealed partial class MatchQuery
 		Field = field;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public MatchQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatchQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +74,7 @@ public sealed partial class MatchQuery
 	public float? Boost { get; set; }
 	[System.Obsolete("Deprecated in '7.3.0'.")]
 	public double? CutoffFrequency { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -141,11 +137,7 @@ public sealed partial class MatchQuery
 	/// Text, number, boolean value or date you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Query { get; set; }
+	public required object Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

@@ -31,17 +31,11 @@ public sealed partial class VoyageAIServiceSettings
 	{
 		ModelId = modelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public VoyageAIServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public VoyageAIServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal VoyageAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -75,11 +69,7 @@ public sealed partial class VoyageAIServiceSettings
 	/// Refer to the VoyageAI documentation for the list of available text embedding and rerank models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>

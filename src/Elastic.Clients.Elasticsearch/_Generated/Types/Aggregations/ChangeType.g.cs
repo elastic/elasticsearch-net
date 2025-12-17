@@ -28,16 +28,11 @@ public sealed partial class ChangeType
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public ChangeType()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ChangeType()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChangeType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

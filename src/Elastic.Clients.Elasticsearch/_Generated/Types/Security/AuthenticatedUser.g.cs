@@ -37,17 +37,11 @@ public sealed partial class AuthenticatedUser
 		Roles = roles;
 		Username = username;
 	}
-#if NET7_0_OR_GREATER
+
 	public AuthenticatedUser()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AuthenticatedUser()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AuthenticatedUser(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,42 +49,14 @@ public sealed partial class AuthenticatedUser
 	}
 
 	public Elastic.Clients.Elasticsearch.Security.AuthenticationProvider? AuthenticationProvider { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.UserRealm AuthenticationRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AuthenticationType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.UserRealm AuthenticationRealm { get; set; }
+	public required string AuthenticationType { get; set; }
 	public string? Email { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Enabled { get; set; }
 	public string? FullName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.UserRealm LookupRealm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.UserRealm LookupRealm { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public string? ProfileUid { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Username { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public required string Username { get; set; }
 }

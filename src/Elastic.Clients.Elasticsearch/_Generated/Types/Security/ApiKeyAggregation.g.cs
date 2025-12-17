@@ -28,16 +28,11 @@ public sealed partial class ApiKeyAggregation
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public ApiKeyAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ApiKeyAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApiKeyAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

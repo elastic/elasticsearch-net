@@ -37,56 +37,22 @@ public sealed partial class EqlFeatures
 		Sequence = sequence;
 		Sequences = sequences;
 	}
-#if NET7_0_OR_GREATER
+
 	public EqlFeatures()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EqlFeatures()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlFeatures(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Event { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Join { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin Joins { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesKeys Keys { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesPipes Pipes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Sequence { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences Sequences { get; set; }
+	public required int Event { get; set; }
+	public required int Join { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesJoin Joins { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesKeys Keys { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesPipes Pipes { get; set; }
+	public required int Sequence { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.EqlFeaturesSequences Sequences { get; set; }
 }

@@ -31,17 +31,11 @@ public sealed partial class FiltersBucket
 	{
 		DocCount = docCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public FiltersBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FiltersBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FiltersBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,10 +48,6 @@ public sealed partial class FiltersBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
+	public required long DocCount { get; set; }
 	public string? Key { get; set; }
 }

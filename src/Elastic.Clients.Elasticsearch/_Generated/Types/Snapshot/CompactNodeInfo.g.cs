@@ -31,17 +31,11 @@ public sealed partial class CompactNodeInfo
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public CompactNodeInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CompactNodeInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompactNodeInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,9 +49,5 @@ public sealed partial class CompactNodeInfo
 	/// The default value is the machine's hostname.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

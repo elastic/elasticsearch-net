@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamLifecycleConverter))]
 public sealed partial class DataStreamLifecycle
 {
-#if NET7_0_OR_GREATER
 	public DataStreamLifecycle()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataStreamLifecycle()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

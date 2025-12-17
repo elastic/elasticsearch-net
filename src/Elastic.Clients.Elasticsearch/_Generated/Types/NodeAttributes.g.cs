@@ -34,17 +34,11 @@ public sealed partial class NodeAttributes
 		Name = name;
 		TransportAddress = transportAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeAttributes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeAttributes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeAttributes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,22 +50,14 @@ public sealed partial class NodeAttributes
 	/// Lists node attributes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ephemeral ID of the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EphemeralId { get; set; }
+	public required string EphemeralId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,20 +71,12 @@ public sealed partial class NodeAttributes
 	/// The unique identifier of the node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The host and port where transport HTTP connections are accepted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
+	public required string TransportAddress { get; set; }
 }

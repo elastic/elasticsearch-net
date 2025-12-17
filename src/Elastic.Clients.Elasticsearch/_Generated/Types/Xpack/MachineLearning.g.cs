@@ -37,62 +37,28 @@ public sealed partial class MachineLearning
 		Jobs = jobs;
 		NodeCount = nodeCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public MachineLearning()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MachineLearning()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MachineLearning(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> Datafeeds { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs DataFrameAnalyticsJobs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; set; }
+	public required bool Available { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.Datafeed> Datafeeds { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobs DataFrameAnalyticsJobs { get; set; }
+	public required bool Enabled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInference Inference { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Job usage statistics. The <c>_all</c> entry is always present and gathers statistics for all jobs.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NodeCount { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Xpack.JobUsage> Jobs { get; set; }
+	public required int NodeCount { get; set; }
 }

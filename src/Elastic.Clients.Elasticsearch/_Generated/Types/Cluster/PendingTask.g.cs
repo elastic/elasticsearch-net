@@ -35,17 +35,11 @@ public sealed partial class PendingTask
 		Source = source;
 		TimeInQueueMillis = timeInQueueMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public PendingTask()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PendingTask()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PendingTask(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,22 +51,14 @@ public sealed partial class PendingTask
 	/// Indicates whether the pending tasks are currently executing or not.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Executing { get; set; }
+	public required bool Executing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number that represents when the task has been inserted into the task queue.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int InsertOrder { get; set; }
+	public required int InsertOrder { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,22 +66,14 @@ public sealed partial class PendingTask
 	/// The valid priorities in descending priority order are: <c>IMMEDIATE</c> > <c>URGENT</c> > <c>HIGH</c> > <c>NORMAL</c> > <c>LOW</c> > <c>LANGUID</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Priority { get; set; }
+	public required string Priority { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A general description of the cluster task that may include a reason and origin.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Source { get; set; }
+	public required string Source { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -109,9 +87,5 @@ public sealed partial class PendingTask
 	/// The time expressed in milliseconds since the task is waiting for being performed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInQueueMillis { get; set; }
+	public required System.TimeSpan TimeInQueueMillis { get; set; }
 }

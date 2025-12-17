@@ -32,17 +32,11 @@ public sealed partial class RenameProcessor
 		Field = field;
 		TargetField = targetField;
 	}
-#if NET7_0_OR_GREATER
+
 	public RenameProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RenameProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RenameProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class RenameProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,11 +101,7 @@ public sealed partial class RenameProcessor
 	/// Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 }
 
 public readonly partial struct RenameProcessorDescriptor<TDocument>

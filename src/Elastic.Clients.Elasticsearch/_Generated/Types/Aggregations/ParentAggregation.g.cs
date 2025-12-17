@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ParentAggregationConverter))]
 public sealed partial class ParentAggregation
 {
-#if NET7_0_OR_GREATER
 	public ParentAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ParentAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ParentAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

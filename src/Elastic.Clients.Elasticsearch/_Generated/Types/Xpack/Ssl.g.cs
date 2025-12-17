@@ -32,31 +32,17 @@ public sealed partial class Ssl
 		Http = http;
 		Transport = transport;
 	}
-#if NET7_0_OR_GREATER
+
 	public Ssl()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Ssl()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ssl(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Http { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Transport { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Http { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FeatureToggle Transport { get; set; }
 }

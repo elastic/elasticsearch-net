@@ -31,17 +31,11 @@ public sealed partial class AnalysisConfig
 	{
 		Detectors = detectors;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalysisConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalysisConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalysisConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -82,11 +76,7 @@ public sealed partial class AnalysisConfig
 	/// Detector configuration objects specify which data fields a job analyzes. They also specify which analytical functions are used. You can specify multiple detectors for a job. If the detectors array does not contain at least one detector, no analysis can occur and an error is returned.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> Detectors { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector> Detectors { get; set; }
 
 	/// <summary>
 	/// <para>

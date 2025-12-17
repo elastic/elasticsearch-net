@@ -32,17 +32,11 @@ public sealed partial class TimeRetentionPolicy
 		Field = field;
 		MaxAge = maxAge;
 	}
-#if NET7_0_OR_GREATER
+
 	public TimeRetentionPolicy()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TimeRetentionPolicy()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TimeRetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class TimeRetentionPolicy
 	/// The date field that is used to calculate the age of the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -66,11 +56,7 @@ public sealed partial class TimeRetentionPolicy
 	/// value are removed from the destination index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration MaxAge { get; set; }
 }
 
 public readonly partial struct TimeRetentionPolicyDescriptor<TDocument>

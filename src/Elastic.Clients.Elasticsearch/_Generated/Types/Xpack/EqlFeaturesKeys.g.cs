@@ -35,46 +35,20 @@ public sealed partial class EqlFeaturesKeys
 		JoinKeysThree = joinKeysThree;
 		JoinKeysTwo = joinKeysTwo;
 	}
-#if NET7_0_OR_GREATER
+
 	public EqlFeaturesKeys()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public EqlFeaturesKeys()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlFeaturesKeys(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinKeysFiveOrMore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinKeysFour { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinKeysOne { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinKeysThree { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JoinKeysTwo { get; set; }
+	public required int JoinKeysFiveOrMore { get; set; }
+	public required int JoinKeysFour { get; set; }
+	public required int JoinKeysOne { get; set; }
+	public required int JoinKeysThree { get; set; }
+	public required int JoinKeysTwo { get; set; }
 }

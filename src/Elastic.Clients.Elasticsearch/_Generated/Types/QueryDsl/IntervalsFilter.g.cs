@@ -28,16 +28,11 @@ public sealed partial class IntervalsFilter
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public IntervalsFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IntervalsFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IntervalsFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

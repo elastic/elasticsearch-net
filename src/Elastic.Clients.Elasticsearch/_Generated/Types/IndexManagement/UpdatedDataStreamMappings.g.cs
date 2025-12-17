@@ -32,17 +32,11 @@ public sealed partial class UpdatedDataStreamMappings
 		AppliedToDataStream = appliedToDataStream;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public UpdatedDataStreamMappings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UpdatedDataStreamMappings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UpdatedDataStreamMappings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class UpdatedDataStreamMappings
 	/// mode), it is <c>true</c>. If an error occurred, it is <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool AppliedToDataStream { get; set; }
+	public required bool AppliedToDataStream { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,9 +78,5 @@ public sealed partial class UpdatedDataStreamMappings
 	/// The data stream name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

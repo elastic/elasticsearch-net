@@ -37,56 +37,22 @@ public sealed partial class RepositoryStatsCurrentCounts
 		SnapshotDeletions = snapshotDeletions;
 		Snapshots = snapshots;
 	}
-#if NET7_0_OR_GREATER
+
 	public RepositoryStatsCurrentCounts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RepositoryStatsCurrentCounts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryStatsCurrentCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ActiveDeletions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Clones { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Deletions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Finalizations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsShards Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SnapshotDeletions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Snapshots { get; set; }
+	public required int ActiveDeletions { get; set; }
+	public required int Clones { get; set; }
+	public required int Deletions { get; set; }
+	public required int Finalizations { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsShards Shards { get; set; }
+	public required int SnapshotDeletions { get; set; }
+	public required int Snapshots { get; set; }
 }

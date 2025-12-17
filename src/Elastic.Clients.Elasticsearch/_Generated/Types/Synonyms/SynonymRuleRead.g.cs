@@ -32,17 +32,11 @@ public sealed partial class SynonymRuleRead
 		Id = id;
 		Synonyms = synonyms;
 	}
-#if NET7_0_OR_GREATER
+
 	public SynonymRuleRead()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SynonymRuleRead()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SynonymRuleRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class SynonymRuleRead
 	/// Synonym Rule identifier
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Synonyms, in Solr format, that conform the synonym rule.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Synonyms { get; set; }
+	public required string Synonyms { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.AllocateActionConverter))]
 public sealed partial class AllocateAction
 {
-#if NET7_0_OR_GREATER
 	public AllocateAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AllocateAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AllocateAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

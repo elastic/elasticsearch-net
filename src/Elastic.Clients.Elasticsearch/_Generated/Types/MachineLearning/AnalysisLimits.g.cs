@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AnalysisLimitsConverter))]
 public sealed partial class AnalysisLimits
 {
-#if NET7_0_OR_GREATER
 	public AnalysisLimits()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AnalysisLimits()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

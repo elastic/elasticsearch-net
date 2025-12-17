@@ -33,36 +33,18 @@ public sealed partial class RankEvalHit
 		Index = index;
 		Score = score;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankEvalHit()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankEvalHit()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalHit(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Score { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
+	public required double Score { get; set; }
 }

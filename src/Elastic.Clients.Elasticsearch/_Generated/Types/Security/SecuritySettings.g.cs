@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SecuritySettingsConverter))]
 public sealed partial class SecuritySettings
 {
-#if NET7_0_OR_GREATER
 	public SecuritySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SecuritySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SecuritySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

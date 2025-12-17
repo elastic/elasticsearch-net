@@ -34,17 +34,11 @@ public sealed partial class PinnedQuery
 	{
 		Organic = organic;
 	}
-#if NET7_0_OR_GREATER
+
 	public PinnedQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PinnedQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PinnedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -82,11 +76,7 @@ public sealed partial class PinnedQuery
 	/// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 	public string? QueryName { get; set; }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

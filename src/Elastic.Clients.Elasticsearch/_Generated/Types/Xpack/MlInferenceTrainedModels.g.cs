@@ -31,28 +31,18 @@ public sealed partial class MlInferenceTrainedModels
 	{
 		All = all;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInferenceTrainedModels()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInferenceTrainedModels()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInferenceTrainedModels(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlCounter All { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlCounter All { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount? Count { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedHeapMemoryUsageBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics? EstimatedOperations { get; set; }

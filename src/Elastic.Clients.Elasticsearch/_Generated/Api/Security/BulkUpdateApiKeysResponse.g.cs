@@ -38,14 +38,6 @@ public sealed partial class BulkUpdateApiKeysResponse : Elastic.Transport.Produc
 	}
 
 	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> Noops { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> Updated { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Noops { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Updated { get; set; }
 }

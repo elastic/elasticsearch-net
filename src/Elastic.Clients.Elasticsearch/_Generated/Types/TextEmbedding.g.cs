@@ -31,17 +31,11 @@ public sealed partial class TextEmbedding
 	{
 		ModelText = modelText;
 	}
-#if NET7_0_OR_GREATER
+
 	public TextEmbedding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TextEmbedding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class TextEmbedding
 	/// </para>
 	/// </summary>
 	public string? ModelId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelText { get; set; }
+	public required string ModelText { get; set; }
 }
 
 public readonly partial struct TextEmbeddingDescriptor

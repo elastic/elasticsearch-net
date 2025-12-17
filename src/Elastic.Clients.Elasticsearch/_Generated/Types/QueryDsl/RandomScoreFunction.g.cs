@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RandomScoreFunctionConverter))]
 public sealed partial class RandomScoreFunction
 {
-#if NET7_0_OR_GREATER
 	public RandomScoreFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RandomScoreFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

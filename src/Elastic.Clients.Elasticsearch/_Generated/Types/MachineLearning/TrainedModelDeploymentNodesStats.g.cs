@@ -33,17 +33,11 @@ public sealed partial class TrainedModelDeploymentNodesStats
 		RoutingState = routingState;
 		ThroughputLastMinute = throughputLastMinute;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelDeploymentNodesStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelDeploymentNodesStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelDeploymentNodesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -108,11 +102,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	public int? NumberOfPendingRequests { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PeakThroughputPerMinute { get; set; }
+	public required long PeakThroughputPerMinute { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -126,11 +116,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// The current routing state and reason for the current routing state for this allocation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason RoutingState { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason RoutingState { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -145,11 +131,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	public int? ThreadsPerAllocation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ThroughputLastMinute { get; set; }
+	public required int ThroughputLastMinute { get; set; }
 
 	/// <summary>
 	/// <para>

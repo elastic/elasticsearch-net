@@ -32,17 +32,11 @@ public sealed partial class RunningStateSearchInterval
 		EndMs = endMs;
 		StartMs = startMs;
 	}
-#if NET7_0_OR_GREATER
+
 	public RunningStateSearchInterval()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RunningStateSearchInterval()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RunningStateSearchInterval(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class RunningStateSearchInterval
 	/// The end time as an epoch in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan EndMs { get; set; }
+	public required System.TimeSpan EndMs { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,9 +69,5 @@ public sealed partial class RunningStateSearchInterval
 	/// The start time as an epoch in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan StartMs { get; set; }
+	public required System.TimeSpan StartMs { get; set; }
 }

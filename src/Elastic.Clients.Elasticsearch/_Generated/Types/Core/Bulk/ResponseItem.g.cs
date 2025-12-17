@@ -31,17 +31,11 @@ public abstract partial class ResponseItem
 		Index = index;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public ResponseItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ResponseItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ResponseItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -72,11 +66,7 @@ public abstract partial class ResponseItem
 	/// If the operation targeted a data stream, this is the backing index into which the document was written.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,11 +104,7 @@ public abstract partial class ResponseItem
 	/// The HTTP status code returned for the operation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Status { get; set; }
+	public required int Status { get; set; }
 
 	/// <summary>
 	/// <para>

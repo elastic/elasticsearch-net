@@ -68,11 +68,11 @@ public sealed partial class DeleteForecastRequest : Elastic.Clients.Elasticsearc
 	public DeleteForecastRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id? forecastId) : base(r => r.Required("job_id", jobId).Optional("forecast_id", forecastId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteForecastRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteForecastRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -101,11 +101,7 @@ public sealed partial class DeleteForecastRequest : Elastic.Clients.Elasticsearc
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -232,6 +228,11 @@ public readonly partial struct DeleteForecastRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

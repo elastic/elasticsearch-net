@@ -31,26 +31,16 @@ public sealed partial class MlDataFrameAnalyticsJobsCount
 	{
 		Count = count;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlDataFrameAnalyticsJobsCount()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlDataFrameAnalyticsJobsCount()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlDataFrameAnalyticsJobsCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 }

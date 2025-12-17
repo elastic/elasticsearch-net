@@ -35,46 +35,20 @@ public sealed partial class JobUsage
 		Forecasts = forecasts;
 		ModelSize = modelSize;
 	}
-#if NET7_0_OR_GREATER
+
 	public JobUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JobUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JobUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, long> CreatedBy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics Detectors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Forecasts { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSize { get; set; }
+	public required int Count { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, long> CreatedBy { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics Detectors { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Forecasts { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics ModelSize { get; set; }
 }

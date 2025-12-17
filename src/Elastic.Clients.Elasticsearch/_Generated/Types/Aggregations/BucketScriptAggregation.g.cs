@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketScriptAggregationConverter))]
 public sealed partial class BucketScriptAggregation
 {
-#if NET7_0_OR_GREATER
 	public BucketScriptAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BucketScriptAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketScriptAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

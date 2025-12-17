@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ExtendedSearchUsageConverter))]
 public sealed partial class ExtendedSearchUsage
 {
-#if NET7_0_OR_GREATER
 	public ExtendedSearchUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ExtendedSearchUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExtendedSearchUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

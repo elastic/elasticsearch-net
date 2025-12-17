@@ -43,17 +43,11 @@ public sealed partial class SegmentsStats
 		TermVectorsMemoryInBytes = termVectorsMemoryInBytes;
 		VersionMapMemoryInBytes = versionMapMemoryInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public SegmentsStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SegmentsStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SegmentsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +59,7 @@ public sealed partial class SegmentsStats
 	/// Total number of segments across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,11 +73,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocValuesMemoryInBytes { get; set; }
+	public required long DocValuesMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -95,11 +81,7 @@ public sealed partial class SegmentsStats
 	/// To get information on segment files, use the node stats API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,11 +96,7 @@ public sealed partial class SegmentsStats
 	/// Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FixedBitSetMemoryInBytes { get; set; }
+	public required long FixedBitSetMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -132,22 +110,14 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexWriterMemoryInBytes { get; set; }
+	public required long IndexWriterMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unix timestamp, in milliseconds, of the most recently retried indexing request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxUnsafeAutoIdTimestamp { get; set; }
+	public required long MaxUnsafeAutoIdTimestamp { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -161,11 +131,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemoryInBytes { get; set; }
+	public required long MemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -179,11 +145,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NormsMemoryInBytes { get; set; }
+	public required long NormsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -197,11 +159,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PointsMemoryInBytes { get; set; }
+	public required long PointsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -215,11 +173,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StoredFieldsMemoryInBytes { get; set; }
+	public required long StoredFieldsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -233,11 +187,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TermsMemoryInBytes { get; set; }
+	public required long TermsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -251,11 +201,7 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TermVectorsMemoryInBytes { get; set; }
+	public required long TermVectorsMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -269,9 +215,5 @@ public sealed partial class SegmentsStats
 	/// Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long VersionMapMemoryInBytes { get; set; }
+	public required long VersionMapMemoryInBytes { get; set; }
 }

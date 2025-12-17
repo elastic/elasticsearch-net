@@ -32,33 +32,19 @@ public sealed partial class KuromojiIterationMarkCharFilter : Elastic.Clients.El
 		NormalizeKana = normalizeKana;
 		NormalizeKanji = normalizeKanji;
 	}
-#if NET7_0_OR_GREATER
+
 	public KuromojiIterationMarkCharFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KuromojiIterationMarkCharFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KuromojiIterationMarkCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool NormalizeKana { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool NormalizeKanji { get; set; }
+	public required bool NormalizeKana { get; set; }
+	public required bool NormalizeKanji { get; set; }
 
 	public string Type => "kuromoji_iteration_mark";
 

@@ -32,33 +32,19 @@ public sealed partial class TransformProgress
 		DocsIndexed = docsIndexed;
 		DocsProcessed = docsProcessed;
 	}
-#if NET7_0_OR_GREATER
+
 	public TransformProgress()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TransformProgress()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocsIndexed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocsProcessed { get; set; }
+	public required long DocsIndexed { get; set; }
+	public required long DocsProcessed { get; set; }
 	public long? DocsRemaining { get; set; }
 	public double? PercentComplete { get; set; }
 	public long? TotalDocs { get; set; }

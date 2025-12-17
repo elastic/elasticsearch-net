@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Eql;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.EqlHitsConverterFactory))]
 public sealed partial class EqlHits<TEvent>
 {
-#if NET7_0_OR_GREATER
 	public EqlHits()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public EqlHits()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EqlHits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

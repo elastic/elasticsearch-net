@@ -33,17 +33,11 @@ public sealed partial class GeoDistanceQuery
 		Field = field;
 		Location = location;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoDistanceQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoDistanceQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoDistanceQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +60,7 @@ public sealed partial class GeoDistanceQuery
 	/// Points which fall into this circle are considered to be matches.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Distance { get; set; }
+	public required string Distance { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,11 +69,7 @@ public sealed partial class GeoDistanceQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -92,11 +78,7 @@ public sealed partial class GeoDistanceQuery
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnmapped { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
+	public required Elastic.Clients.Elasticsearch.GeoLocation Location { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

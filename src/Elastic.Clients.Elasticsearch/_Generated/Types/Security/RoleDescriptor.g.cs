@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleDescriptorConverter))]
 public sealed partial class RoleDescriptor
 {
-#if NET7_0_OR_GREATER
 	public RoleDescriptor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RoleDescriptor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleDescriptor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

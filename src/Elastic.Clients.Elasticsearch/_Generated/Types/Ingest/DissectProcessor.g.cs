@@ -32,17 +32,11 @@ public sealed partial class DissectProcessor
 		Field = field;
 		Pattern = pattern;
 	}
-#if NET7_0_OR_GREATER
+
 	public DissectProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DissectProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DissectProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +63,7 @@ public sealed partial class DissectProcessor
 	/// The field to dissect.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -108,11 +98,7 @@ public sealed partial class DissectProcessor
 	/// The pattern to apply to the field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Pattern { get; set; }
+	public required string Pattern { get; set; }
 
 	/// <summary>
 	/// <para>

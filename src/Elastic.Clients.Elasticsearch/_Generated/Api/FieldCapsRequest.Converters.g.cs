@@ -27,6 +27,7 @@ public sealed partial class FieldCapsRequestConverter : System.Text.Json.Seriali
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
 
 	public override Elastic.Clients.Elasticsearch.FieldCapsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -34,6 +35,7 @@ public sealed partial class FieldCapsRequestConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -43,6 +45,11 @@ public sealed partial class FieldCapsRequestConverter : System.Text.Json.Seriali
 			}
 
 			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -66,6 +73,7 @@ public sealed partial class FieldCapsRequestConverter : System.Text.Json.Seriali
 		{
 			Fields = propFields.Value,
 			IndexFilter = propIndexFilter.Value,
+			ProjectRouting = propProjectRouting.Value,
 			RuntimeMappings = propRuntimeMappings.Value
 		};
 	}
@@ -75,6 +83,7 @@ public sealed partial class FieldCapsRequestConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteEndObject();
 	}

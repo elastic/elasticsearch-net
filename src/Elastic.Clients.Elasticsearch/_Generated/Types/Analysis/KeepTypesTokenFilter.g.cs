@@ -31,17 +31,11 @@ public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch
 	{
 		Types = types;
 	}
-#if NET7_0_OR_GREATER
+
 	public KeepTypesTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KeepTypesTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch
 	/// List of token types to keep or remove.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Types { get; set; }
+	public required System.Collections.Generic.ICollection<string> Types { get; set; }
 	public string? Version { get; set; }
 }
 

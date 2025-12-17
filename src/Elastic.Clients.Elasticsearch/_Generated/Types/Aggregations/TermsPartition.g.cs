@@ -32,17 +32,11 @@ public sealed partial class TermsPartition
 		NumPartitions = numPartitions;
 		Partition = partition;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermsPartition()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TermsPartition()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermsPartition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class TermsPartition
 	/// The number of partitions.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NumPartitions { get; set; }
+	public required long NumPartitions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The partition number for this request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Partition { get; set; }
+	public required long Partition { get; set; }
 }

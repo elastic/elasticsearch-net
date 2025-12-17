@@ -31,17 +31,11 @@ public sealed partial class KuromojiTokenizer : Elastic.Clients.Elasticsearch.An
 	{
 		Mode = mode;
 	}
-#if NET7_0_OR_GREATER
+
 	public KuromojiTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KuromojiTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KuromojiTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class KuromojiTokenizer : Elastic.Clients.Elasticsearch.An
 
 	public bool? DiscardCompoundToken { get; set; }
 	public bool? DiscardPunctuation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
 	public int? NbestCost { get; set; }
 	public string? NbestExamples { get; set; }
 

@@ -37,9 +37,5 @@ public sealed partial class MountResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot Snapshot { get; set; }
+	public required Elastic.Clients.Elasticsearch.SearchableSnapshots.MountedSnapshot Snapshot { get; set; }
 }

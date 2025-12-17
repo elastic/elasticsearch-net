@@ -33,17 +33,11 @@ public sealed partial class TrainedModelConfig
 		ModelId = modelId;
 		Tags = tags;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -113,11 +107,7 @@ public sealed partial class TrainedModelConfig
 	/// The input field names for the model definition.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput Input { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigInput Input { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -139,11 +129,7 @@ public sealed partial class TrainedModelConfig
 	/// Identifier for the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPackageConfig? ModelPackage { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelSizeBytes { get; set; }
 
@@ -161,11 +147,7 @@ public sealed partial class TrainedModelConfig
 	/// A comma delimited string of tags. A trained model can have many tags, or none.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Tags { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Tags { get; set; }
 
 	/// <summary>
 	/// <para>

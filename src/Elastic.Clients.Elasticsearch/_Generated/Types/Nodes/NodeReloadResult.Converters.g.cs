@@ -25,22 +25,50 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeReloadResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropKeystoreDigest = System.Text.Json.JsonEncodedText.Encode("keystore_digest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeystoreLastModifiedTime = System.Text.Json.JsonEncodedText.Encode("keystore_last_modified_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeystorePath = System.Text.Json.JsonEncodedText.Encode("keystore_path"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropReloadException = System.Text.Json.JsonEncodedText.Encode("reload_exception"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecureSettingNames = System.Text.Json.JsonEncodedText.Encode("secure_setting_names"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propKeystoreDigest = default;
+		LocalJsonValue<System.DateTimeOffset?> propKeystoreLastModifiedTime = default;
+		LocalJsonValue<string?> propKeystorePath = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propReloadException = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSecureSettingNames = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propKeystoreDigest.TryReadProperty(ref reader, options, PropKeystoreDigest, null))
+			{
+				continue;
+			}
+
+			if (propKeystoreLastModifiedTime.TryReadProperty(ref reader, options, PropKeystoreLastModifiedTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propKeystorePath.TryReadProperty(ref reader, options, PropKeystorePath, null))
+			{
+				continue;
+			}
+
 			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
 
 			if (propReloadException.TryReadProperty(ref reader, options, PropReloadException, null))
+			{
+				continue;
+			}
+
+			if (propSecureSettingNames.TryReadProperty(ref reader, options, PropSecureSettingNames, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -57,16 +85,24 @@ public sealed partial class NodeReloadResultConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			KeystoreDigest = propKeystoreDigest.Value,
+			KeystoreLastModifiedTime = propKeystoreLastModifiedTime.Value,
+			KeystorePath = propKeystorePath.Value,
 			Name = propName.Value,
-			ReloadException = propReloadException.Value
+			ReloadException = propReloadException.Value,
+			SecureSettingNames = propSecureSettingNames.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeReloadResult value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropKeystoreDigest, value.KeystoreDigest, null, null);
+		writer.WriteProperty(options, PropKeystoreLastModifiedTime, value.KeystoreLastModifiedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropKeystorePath, value.KeystorePath, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropReloadException, value.ReloadException, null, null);
+		writer.WriteProperty(options, PropSecureSettingNames, value.SecureSettingNames, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
