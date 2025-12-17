@@ -40,71 +40,25 @@ public sealed partial class ShardsAvailabilityIndicatorDetails
 		UnassignedPrimaries = unassignedPrimaries;
 		UnassignedReplicas = unassignedReplicas;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardsAvailabilityIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardsAvailabilityIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardsAvailabilityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreatingPrimaries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreatingReplicas { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InitializingPrimaries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InitializingReplicas { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RestartingPrimaries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RestartingReplicas { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StartedPrimaries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long StartedReplicas { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long UnassignedPrimaries { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long UnassignedReplicas { get; set; }
+	public required long CreatingPrimaries { get; set; }
+	public required long CreatingReplicas { get; set; }
+	public required long InitializingPrimaries { get; set; }
+	public required long InitializingReplicas { get; set; }
+	public required long RestartingPrimaries { get; set; }
+	public required long RestartingReplicas { get; set; }
+	public required long StartedPrimaries { get; set; }
+	public required long StartedReplicas { get; set; }
+	public required long UnassignedPrimaries { get; set; }
+	public required long UnassignedReplicas { get; set; }
 }

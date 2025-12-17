@@ -37,54 +37,14 @@ public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats> PolicyStats { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Duration RetentionDeletionTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.TimeSpan RetentionDeletionTimeMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long RetentionFailed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long RetentionRuns { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long RetentionTimedOut { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long TotalSnapshotDeletionFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long TotalSnapshotsDeleted { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long TotalSnapshotsFailed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long TotalSnapshotsTaken { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats> PolicyStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration RetentionDeletionTime { get; set; }
+	public required System.TimeSpan RetentionDeletionTimeMillis { get; set; }
+	public required long RetentionFailed { get; set; }
+	public required long RetentionRuns { get; set; }
+	public required long RetentionTimedOut { get; set; }
+	public required long TotalSnapshotDeletionFailures { get; set; }
+	public required long TotalSnapshotsDeleted { get; set; }
+	public required long TotalSnapshotsFailed { get; set; }
+	public required long TotalSnapshotsTaken { get; set; }
 }

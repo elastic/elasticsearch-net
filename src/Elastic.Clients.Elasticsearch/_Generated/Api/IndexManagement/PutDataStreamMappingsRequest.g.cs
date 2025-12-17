@@ -76,11 +76,11 @@ public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elast
 	{
 		Mappings = mappings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutDataStreamMappingsRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -100,11 +100,7 @@ public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elast
 	/// A comma-separated list of data streams or data stream patterns.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -131,11 +127,7 @@ public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elast
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 }
 
 /// <summary>
@@ -261,6 +253,11 @@ public readonly partial struct PutDataStreamMappingsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -416,6 +413,11 @@ public readonly partial struct PutDataStreamMappingsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

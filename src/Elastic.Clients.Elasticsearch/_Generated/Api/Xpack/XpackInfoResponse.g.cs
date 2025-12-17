@@ -37,24 +37,8 @@ public sealed partial class XpackInfoResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.BuildInformation Build { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Features Features { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation License { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Tagline { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.BuildInformation Build { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Features Features { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation License { get; set; }
+	public required string Tagline { get; set; }
 }

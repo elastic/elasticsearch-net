@@ -31,17 +31,11 @@ public sealed partial class CompletionStats
 	{
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public CompletionStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CompletionStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompletionStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,9 +56,5 @@ public sealed partial class CompletionStats
 	/// Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required long SizeInBytes { get; set; }
 }

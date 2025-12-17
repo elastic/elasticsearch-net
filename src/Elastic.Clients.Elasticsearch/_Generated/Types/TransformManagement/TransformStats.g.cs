@@ -34,44 +34,22 @@ public sealed partial class TransformStats
 		State = state;
 		Stats = stats;
 	}
-#if NET7_0_OR_GREATER
+
 	public TransformStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TransformStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing Checkpointing { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.Checkpointing Checkpointing { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth? Health { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 	public Elastic.Clients.Elasticsearch.NodeAttributes? Node { get; set; }
 	public string? Reason { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string State { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Stats { get; set; }
+	public required string State { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.TransformIndexerStats Stats { get; set; }
 }

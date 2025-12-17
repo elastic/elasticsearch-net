@@ -31,17 +31,11 @@ public sealed partial class IntervalsAnyOf
 	{
 		Intervals = intervals;
 	}
-#if NET7_0_OR_GREATER
+
 	public IntervalsAnyOf()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IntervalsAnyOf()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IntervalsAnyOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class IntervalsAnyOf
 	/// An array of rules to match.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> Intervals { get; set; }
 }
 
 public readonly partial struct IntervalsAnyOfDescriptor<TDocument>

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingAllocationDiskConverter))]
 public sealed partial class IndexRoutingAllocationDisk
 {
-#if NET7_0_OR_GREATER
 	public IndexRoutingAllocationDisk()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexRoutingAllocationDisk()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexRoutingAllocationDisk(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

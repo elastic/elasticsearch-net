@@ -33,36 +33,18 @@ public sealed partial class Template
 		Mappings = mappings;
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public Template()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Template()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Template(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }

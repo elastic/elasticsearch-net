@@ -31,17 +31,11 @@ public sealed partial class AdaptiveAllocationsSettings
 	{
 		Enabled = enabled;
 	}
-#if NET7_0_OR_GREATER
+
 	public AdaptiveAllocationsSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AdaptiveAllocationsSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AdaptiveAllocationsSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class AdaptiveAllocationsSettings
 	/// If true, adaptive_allocations is enabled
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Enabled { get; set; }
 
 	/// <summary>
 	/// <para>

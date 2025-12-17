@@ -31,17 +31,11 @@ public sealed partial class IcuTransformTokenFilter : Elastic.Clients.Elasticsea
 	{
 		Id = id;
 	}
-#if NET7_0_OR_GREATER
+
 	public IcuTransformTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IcuTransformTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class IcuTransformTokenFilter : Elastic.Clients.Elasticsea
 	}
 
 	public Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? Dir { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	public string Type => "icu_transform";
 

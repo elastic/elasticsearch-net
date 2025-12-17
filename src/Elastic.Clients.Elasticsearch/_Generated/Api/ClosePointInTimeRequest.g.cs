@@ -46,17 +46,11 @@ public sealed partial class ClosePointInTimeRequest : Elastic.Clients.Elasticsea
 	{
 		Id = id;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClosePointInTimeRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClosePointInTimeRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClosePointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -76,11 +70,7 @@ public sealed partial class ClosePointInTimeRequest : Elastic.Clients.Elasticsea
 	/// The ID of the point-in-time.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 }
 
 /// <summary>
@@ -137,6 +127,11 @@ public readonly partial struct ClosePointInTimeRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.ClosePointInTimeRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

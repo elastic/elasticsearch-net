@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamFailureStoreTemplateConverter))]
 public sealed partial class DataStreamFailureStoreTemplate
 {
-#if NET7_0_OR_GREATER
 	public DataStreamFailureStoreTemplate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataStreamFailureStoreTemplate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamFailureStoreTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

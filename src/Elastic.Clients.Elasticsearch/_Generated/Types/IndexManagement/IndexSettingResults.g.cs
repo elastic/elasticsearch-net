@@ -32,17 +32,11 @@ public sealed partial class IndexSettingResults
 		AppliedToDataStreamAndBackingIndices = appliedToDataStreamAndBackingIndices;
 		AppliedToDataStreamOnly = appliedToDataStreamOnly;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexSettingResults()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexSettingResults()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexSettingResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class IndexSettingResults
 	/// also be applied to the write index the next time the data stream is rolled over.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamAndBackingIndices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamAndBackingIndices { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,10 +57,6 @@ public sealed partial class IndexSettingResults
 	/// the write index the next time the data stream is rolled over.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamOnly { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> AppliedToDataStreamOnly { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamSettingsError>? Errors { get; set; }
 }

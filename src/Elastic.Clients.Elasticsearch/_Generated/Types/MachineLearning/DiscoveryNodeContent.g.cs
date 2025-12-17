@@ -38,62 +38,24 @@ public sealed partial class DiscoveryNodeContent
 		TransportAddress = transportAddress;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public DiscoveryNodeContent()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DiscoveryNodeContent()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiscoveryNodeContent(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EphemeralId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ExternalId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxIndexVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinIndexVersion { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+	public required string EphemeralId { get; set; }
+	public required string ExternalId { get; set; }
+	public required int MaxIndexVersion { get; set; }
+	public required int MinIndexVersion { get; set; }
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string TransportAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+	public required string TransportAddress { get; set; }
+	public required string Version { get; set; }
 }

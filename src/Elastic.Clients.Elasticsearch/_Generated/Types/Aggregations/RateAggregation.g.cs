@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RateAggregationConverter))]
 public sealed partial class RateAggregation
 {
-#if NET7_0_OR_GREATER
 	public RateAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RateAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RateAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

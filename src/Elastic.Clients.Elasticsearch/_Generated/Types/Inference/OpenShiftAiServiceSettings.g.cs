@@ -32,17 +32,11 @@ public sealed partial class OpenShiftAiServiceSettings
 		ApiKey = apiKey;
 		Url = url;
 	}
-#if NET7_0_OR_GREATER
+
 	public OpenShiftAiServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OpenShiftAiServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OpenShiftAiServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class OpenShiftAiServiceSettings
 	/// Can be found in <c>Token authentication</c> section of model related information.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,6 +95,7 @@ public sealed partial class OpenShiftAiServiceSettings
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+	/// If not specified, the default dot_product value is used.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType? Similarity { get; set; }
@@ -114,11 +105,7 @@ public sealed partial class OpenShiftAiServiceSettings
 	/// The URL of the OpenShift AI hosted model endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Url { get; set; }
+	public required string Url { get; set; }
 }
 
 public readonly partial struct OpenShiftAiServiceSettingsDescriptor
@@ -232,6 +219,7 @@ public readonly partial struct OpenShiftAiServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+	/// If not specified, the default dot_product value is used.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiSimilarityType? value)

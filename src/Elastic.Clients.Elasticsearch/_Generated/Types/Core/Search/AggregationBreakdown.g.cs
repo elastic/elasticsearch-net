@@ -40,73 +40,27 @@ public sealed partial class AggregationBreakdown
 		Reduce = reduce;
 		ReduceCount = reduceCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public AggregationBreakdown()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AggregationBreakdown()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AggregationBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildAggregation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildAggregationCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildLeafCollector { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildLeafCollectorCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Collect { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CollectCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Initialize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InitializeCount { get; set; }
+	public required long BuildAggregation { get; set; }
+	public required long BuildAggregationCount { get; set; }
+	public required long BuildLeafCollector { get; set; }
+	public required long BuildLeafCollectorCount { get; set; }
+	public required long Collect { get; set; }
+	public required long CollectCount { get; set; }
+	public required long Initialize { get; set; }
+	public required long InitializeCount { get; set; }
 	public long? PostCollection { get; set; }
 	public long? PostCollectionCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Reduce { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ReduceCount { get; set; }
+	public required long Reduce { get; set; }
+	public required long ReduceCount { get; set; }
 }

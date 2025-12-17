@@ -34,43 +34,21 @@ public sealed partial class TargetMeanEncodingPreprocessor
 		Field = field;
 		TargetMap = targetMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public TargetMeanEncodingPreprocessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TargetMeanEncodingPreprocessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double DefaultValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FeatureName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, double> TargetMap { get; set; }
+	public required double DefaultValue { get; set; }
+	public required string FeatureName { get; set; }
+	public required string Field { get; set; }
+	public required System.Collections.Generic.IDictionary<string, double> TargetMap { get; set; }
 }
 
 public readonly partial struct TargetMeanEncodingPreprocessorDescriptor

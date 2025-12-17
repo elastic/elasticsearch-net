@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStatsConverter))]
 public sealed partial class ShardStats
 {
-#if NET7_0_OR_GREATER
 	public ShardStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ShardStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

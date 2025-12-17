@@ -37,46 +37,14 @@ public sealed partial class GetMigrateReindexStatusResponse : Elastic.Transport.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Complete { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> Errors { get; set; }
+	public required bool Complete { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> Errors { get; set; }
 	public string? Exception { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> InProgress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int Pending { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> InProgress { get; set; }
+	public required int Pending { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.DateTimeOffset StartTimeMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int Successes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int TotalIndicesInDataStream { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int TotalIndicesRequiringUpgrade { get; set; }
+	public required System.DateTimeOffset StartTimeMillis { get; set; }
+	public required int Successes { get; set; }
+	public required int TotalIndicesInDataStream { get; set; }
+	public required int TotalIndicesRequiringUpgrade { get; set; }
 }

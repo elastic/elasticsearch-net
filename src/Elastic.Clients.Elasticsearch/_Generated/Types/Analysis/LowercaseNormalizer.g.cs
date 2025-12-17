@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.LowercaseNormalizerConverter))]
 public sealed partial class LowercaseNormalizer : Elastic.Clients.Elasticsearch.Analysis.INormalizer
 {
-#if NET7_0_OR_GREATER
 	public LowercaseNormalizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public LowercaseNormalizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LowercaseNormalizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

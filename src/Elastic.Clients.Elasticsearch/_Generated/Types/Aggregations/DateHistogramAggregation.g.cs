@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateHistogramAggregationConverter))]
 public sealed partial class DateHistogramAggregation
 {
-#if NET7_0_OR_GREATER
 	public DateHistogramAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DateHistogramAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DateHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

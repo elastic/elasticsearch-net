@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 		Field = field;
 		NGrams = nGrams;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessorNGramEncoding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisFeatureProcessorNGramEncoding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessorNGramEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	/// The name of the text field to encode.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -81,11 +71,7 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<int> NGrams { get; set; }
+	public required System.Collections.Generic.ICollection<int> NGrams { get; set; }
 
 	/// <summary>
 	/// <para>

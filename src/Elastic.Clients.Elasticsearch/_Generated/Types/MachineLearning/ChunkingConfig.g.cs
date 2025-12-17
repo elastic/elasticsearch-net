@@ -31,17 +31,11 @@ public sealed partial class ChunkingConfig
 	{
 		Mode = mode;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChunkingConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ChunkingConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChunkingConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class ChunkingConfig
 	/// use this mode when the datafeed uses aggregations. If the mode is <c>off</c>, no chunking is applied.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.ChunkingMode Mode { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -37,20 +37,12 @@ public sealed partial class FieldCapsResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.FieldCaps.FieldCapability>> Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Indices { get; set; }
+	public required System.Collections.Generic.ICollection<string> Indices { get; set; }
 }

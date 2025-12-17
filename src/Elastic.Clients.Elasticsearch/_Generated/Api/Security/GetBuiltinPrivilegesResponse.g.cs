@@ -42,31 +42,19 @@ public sealed partial class GetBuiltinPrivilegesResponse : Elastic.Transport.Pro
 	/// The list of cluster privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of index privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Index { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The list of remote_cluster privileges that are understood by this version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> RemoteCluster { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege>? RemoteCluster { get; set; }
 }

@@ -37,9 +37,5 @@ public sealed partial class DeletePrivilegesResponse : Elastic.Transport.Product
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.FoundStatus>> Result { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.FoundStatus>> Result { get; set; }
 }

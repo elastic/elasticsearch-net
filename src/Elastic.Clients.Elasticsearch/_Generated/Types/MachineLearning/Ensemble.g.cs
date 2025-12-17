@@ -31,17 +31,11 @@ public sealed partial class Ensemble
 	{
 		TrainedModels = trainedModels;
 	}
-#if NET7_0_OR_GREATER
+
 	public Ensemble()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Ensemble()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ensemble(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,11 +46,7 @@ public sealed partial class Ensemble
 	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
 	public System.Collections.Generic.ICollection<string>? FeatureNames { get; set; }
 	public string? TargetType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel> TrainedModels { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel> TrainedModels { get; set; }
 }
 
 public readonly partial struct EnsembleDescriptor

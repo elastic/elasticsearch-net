@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MergeSchedulerConverter))]
 public sealed partial class MergeScheduler
 {
-#if NET7_0_OR_GREATER
 	public MergeScheduler()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MergeScheduler()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MergeScheduler(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

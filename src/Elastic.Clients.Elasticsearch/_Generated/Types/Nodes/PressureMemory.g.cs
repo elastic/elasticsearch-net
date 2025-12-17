@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PressureMemoryConverter))]
 public sealed partial class PressureMemory
 {
-#if NET7_0_OR_GREATER
 	public PressureMemory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PressureMemory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PressureMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

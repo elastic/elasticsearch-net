@@ -43,11 +43,11 @@ public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elast
 	public ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Names application) : base(r => r.Required("application", application))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClearCachedPrivilegesRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +69,7 @@ public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elast
 	/// It does not support other wildcard patterns.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Application { get => P<Elastic.Clients.Elasticsearch.Names>("application"); set => PR("application", value); }
+	public required Elastic.Clients.Elasticsearch.Names Application { get => P<Elastic.Clients.Elasticsearch.Names>("application"); set => PR("application", value); }
 }
 
 /// <summary>
@@ -136,6 +132,11 @@ public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

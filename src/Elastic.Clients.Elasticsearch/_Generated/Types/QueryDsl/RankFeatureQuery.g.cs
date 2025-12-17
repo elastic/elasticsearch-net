@@ -31,17 +31,11 @@ public sealed partial class RankFeatureQuery
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankFeatureQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankFeatureQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankFeatureQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class RankFeatureQuery
 	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>

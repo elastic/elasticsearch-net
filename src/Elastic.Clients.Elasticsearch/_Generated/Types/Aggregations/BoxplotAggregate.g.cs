@@ -37,67 +37,33 @@ public sealed partial class BoxplotAggregate : Elastic.Clients.Elasticsearch.Agg
 		Q3 = q3;
 		Upper = upper;
 	}
-#if NET7_0_OR_GREATER
+
 	public BoxplotAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BoxplotAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BoxplotAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Lower { get; set; }
+	public required double Lower { get; set; }
 	public string? LowerAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Max { get; set; }
+	public required double Max { get; set; }
 	public string? MaxAsString { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Min { get; set; }
+	public required double Min { get; set; }
 	public string? MinAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Q1 { get; set; }
+	public required double Q1 { get; set; }
 	public string? Q1AsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Q2 { get; set; }
+	public required double Q2 { get; set; }
 	public string? Q2AsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Q3 { get; set; }
+	public required double Q3 { get; set; }
 	public string? Q3AsString { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "boxplot";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Upper { get; set; }
+	public required double Upper { get; set; }
 	public string? UpperAsString { get; set; }
 }

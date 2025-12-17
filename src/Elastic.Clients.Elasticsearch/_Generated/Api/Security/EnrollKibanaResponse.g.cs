@@ -43,14 +43,6 @@ public sealed partial class EnrollKibanaResponse : Elastic.Transport.Products.El
 	/// The certificate is returned as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string HttpCa { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.KibanaToken Token { get; set; }
+	public required string HttpCa { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.KibanaToken Token { get; set; }
 }

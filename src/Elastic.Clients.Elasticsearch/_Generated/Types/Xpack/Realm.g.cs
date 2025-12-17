@@ -32,34 +32,20 @@ public sealed partial class Realm
 		Available = available;
 		Enabled = enabled;
 	}
-#if NET7_0_OR_GREATER
+
 	public Realm()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Realm()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Realm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Available { get; set; }
+	public required bool Available { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.RealmCache>? Cache { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
+	public required bool Enabled { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<bool>? HasAuthorizationRealms { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<bool>? HasDefaultUsernamePattern { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<bool>? HasTruststore { get; set; }

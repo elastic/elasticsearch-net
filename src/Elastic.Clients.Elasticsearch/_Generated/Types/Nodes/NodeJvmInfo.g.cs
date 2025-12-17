@@ -41,77 +41,27 @@ public sealed partial class NodeJvmInfo
 		VmVendor = vmVendor;
 		VmVersion = vmVersion;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeJvmInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeJvmInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeJvmInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> GcCollectors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> InputArguments { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Mem { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> MemoryPools { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Pid { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool UsingBundledJdk { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> GcCollectors { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> InputArguments { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoJvmMemory Mem { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> MemoryPools { get; set; }
+	public required int Pid { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required bool UsingBundledJdk { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<bool, string>? UsingCompressedOrdinaryObjectPointers { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmVendor { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string VmVersion { get; set; }
+	public required string Version { get; set; }
+	public required string VmName { get; set; }
+	public required string VmVendor { get; set; }
+	public required string VmVersion { get; set; }
 }

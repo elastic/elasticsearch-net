@@ -49,22 +49,14 @@ public sealed partial class GetSearchApplicationResponse : Elastic.Transport.Pro
 	/// Indices that are part of the Search Application.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Search Application name
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -78,9 +70,5 @@ public sealed partial class GetSearchApplicationResponse : Elastic.Transport.Pro
 	/// Last time the Search Application was updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset UpdatedAtMillis { get; set; }
+	public required System.DateTimeOffset UpdatedAtMillis { get; set; }
 }

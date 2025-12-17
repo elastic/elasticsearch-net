@@ -31,17 +31,11 @@ public sealed partial class RollupJobStatus
 	{
 		JobState = jobState;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupJobStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupJobStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupJobStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,10 +43,6 @@ public sealed partial class RollupJobStatus
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? CurrentPosition { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Rollup.IndexingJobState JobState { get; set; }
+	public required Elastic.Clients.Elasticsearch.Rollup.IndexingJobState JobState { get; set; }
 	public bool? UpgradedDocId { get; set; }
 }

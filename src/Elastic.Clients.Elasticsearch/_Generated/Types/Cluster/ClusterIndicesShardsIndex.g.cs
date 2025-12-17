@@ -33,17 +33,11 @@ public sealed partial class ClusterIndicesShardsIndex
 		Replication = replication;
 		Shards = shards;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterIndicesShardsIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterIndicesShardsIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterIndicesShardsIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class ClusterIndicesShardsIndex
 	/// Contains statistics about the number of primary shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Primaries { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Primaries { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the number of replication shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Replication { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Replication { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the number of shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics Shards { get; set; }
 }

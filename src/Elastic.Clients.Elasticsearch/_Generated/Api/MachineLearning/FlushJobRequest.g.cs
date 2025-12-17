@@ -49,11 +49,11 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 	public FlushJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public FlushJobRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FlushJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -73,11 +73,7 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -234,6 +230,11 @@ public readonly partial struct FlushJobRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

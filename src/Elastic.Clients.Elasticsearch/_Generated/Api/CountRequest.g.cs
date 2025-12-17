@@ -169,16 +169,11 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 	public CountRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CountRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CountRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -318,6 +313,20 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 	/// </para>
 	/// </summary>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -572,6 +581,24 @@ public readonly partial struct CountRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Defines the search query using Query DSL. A request body query cannot be used
 	/// with the <c>q</c> query string parameter.
 	/// </para>
@@ -625,6 +652,11 @@ public readonly partial struct CountRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -906,6 +938,24 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Defines the search query using Query DSL. A request body query cannot be used
 	/// with the <c>q</c> query string parameter.
 	/// </para>
@@ -947,6 +997,11 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

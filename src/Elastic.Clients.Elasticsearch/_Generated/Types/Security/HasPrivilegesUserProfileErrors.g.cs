@@ -32,31 +32,17 @@ public sealed partial class HasPrivilegesUserProfileErrors
 		Count = count;
 		Details = details;
 	}
-#if NET7_0_OR_GREATER
+
 	public HasPrivilegesUserProfileErrors()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HasPrivilegesUserProfileErrors()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HasPrivilegesUserProfileErrors(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ErrorCause> Details { get; set; }
+	public required long Count { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ErrorCause> Details { get; set; }
 }

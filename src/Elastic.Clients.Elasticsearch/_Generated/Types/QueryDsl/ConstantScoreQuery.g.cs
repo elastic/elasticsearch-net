@@ -31,17 +31,11 @@ public sealed partial class ConstantScoreQuery
 	{
 		Filter = filter;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConstantScoreQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConstantScoreQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConstantScoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +59,7 @@ public sealed partial class ConstantScoreQuery
 	/// To speed up performance, Elasticsearch automatically caches frequently used filter queries.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Filter { get; set; }
 	public string? QueryName { get; set; }
 }
 

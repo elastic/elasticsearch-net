@@ -31,17 +31,11 @@ public sealed partial class NodeInfoXpack
 	{
 		Security = security;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoXpack()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoXpack()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoXpack(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,9 +45,5 @@ public sealed partial class NodeInfoXpack
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense? License { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl? Ml { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Notification { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity Security { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity Security { get; set; }
 }

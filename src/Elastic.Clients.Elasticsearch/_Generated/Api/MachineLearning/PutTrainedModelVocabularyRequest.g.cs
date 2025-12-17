@@ -50,11 +50,11 @@ public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.E
 	{
 		Vocabulary = vocabulary;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutTrainedModelVocabularyRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +74,7 @@ public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.E
 	/// The unique identifier of the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -99,11 +95,7 @@ public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.E
 	/// The model vocabulary, which must not be empty.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Vocabulary { get; set; }
+	public required System.Collections.Generic.ICollection<string> Vocabulary { get; set; }
 }
 
 /// <summary>
@@ -232,6 +224,11 @@ public readonly partial struct PutTrainedModelVocabularyRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

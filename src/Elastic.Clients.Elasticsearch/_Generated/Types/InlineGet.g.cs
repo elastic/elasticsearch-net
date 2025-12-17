@@ -31,17 +31,11 @@ public sealed partial class InlineGet<TDocument>
 	{
 		Found = found;
 	}
-#if NET7_0_OR_GREATER
+
 	public InlineGet()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InlineGet()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InlineGet(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class InlineGet<TDocument>
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 
 	/// <summary>
 	/// <para>

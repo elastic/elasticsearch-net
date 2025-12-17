@@ -51,22 +51,14 @@ public sealed partial class UpdateResponse<TDocument> : Elastic.Transport.Produc
 	/// The unique identifier for the added document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the index the document was added to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,11 +72,7 @@ public sealed partial class UpdateResponse<TDocument> : Elastic.Transport.Produc
 	/// The result of the indexing operation: <c>created</c> or <c>updated</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Result Result { get; set; }
+	public required Elastic.Clients.Elasticsearch.Result Result { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -99,20 +87,12 @@ public sealed partial class UpdateResponse<TDocument> : Elastic.Transport.Produc
 	/// Information about the replication process of the operation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The document version, which is incremented each time the document is updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Version { get; set; }
+	public required long Version { get; set; }
 }

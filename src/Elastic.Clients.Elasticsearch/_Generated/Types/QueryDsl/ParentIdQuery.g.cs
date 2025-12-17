@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ParentIdQueryConverter))]
 public sealed partial class ParentIdQuery
 {
-#if NET7_0_OR_GREATER
 	public ParentIdQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ParentIdQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ParentIdQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

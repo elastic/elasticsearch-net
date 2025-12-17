@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IdsQueryConverter))]
 public sealed partial class IdsQuery
 {
-#if NET7_0_OR_GREATER
 	public IdsQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IdsQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IdsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

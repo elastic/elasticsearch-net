@@ -46,16 +46,10 @@ public sealed partial class QueryRequestParameters : Elastic.Transport.RequestPa
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.QueryRequestConverter))]
 public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public QueryRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public QueryRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -171,6 +165,20 @@ public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Request
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<object>? Params { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -429,6 +437,24 @@ public readonly partial struct QueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The SQL query to run.
 	/// </para>
 	/// </summary>
@@ -585,6 +611,11 @@ public readonly partial struct QueryRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -826,6 +857,24 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The SQL query to run.
 	/// </para>
 	/// </summary>
@@ -956,6 +1005,11 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

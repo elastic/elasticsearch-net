@@ -31,17 +31,11 @@ public sealed partial class Term
 	{
 		TermFreq = termFreq;
 	}
-#if NET7_0_OR_GREATER
+
 	public Term()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Term()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Term(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class Term
 
 	public int? DocFreq { get; set; }
 	public double? Score { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TermFreq { get; set; }
+	public required int TermFreq { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.TermVectors.Token>? Tokens { get; set; }
 	public int? Ttf { get; set; }
 }

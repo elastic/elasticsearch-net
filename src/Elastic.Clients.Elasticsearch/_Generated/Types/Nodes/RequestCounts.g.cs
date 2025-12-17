@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RequestCountsConverter))]
 public sealed partial class RequestCounts
 {
-#if NET7_0_OR_GREATER
 	public RequestCounts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RequestCounts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RequestCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

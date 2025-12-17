@@ -42,11 +42,7 @@ public sealed partial class InvalidateApiKeyResponse : Elastic.Transport.Product
 	/// The number of errors that were encountered when invalidating the API keys.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ErrorCount { get; set; }
+	public required int ErrorCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,20 +57,12 @@ public sealed partial class InvalidateApiKeyResponse : Elastic.Transport.Product
 	/// The IDs of the API keys that were invalidated as part of this request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> InvalidatedApiKeys { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> InvalidatedApiKeys { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The IDs of the API keys that were already invalidated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> PreviouslyInvalidatedApiKeys { get; set; }
 }

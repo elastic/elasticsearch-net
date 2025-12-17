@@ -32,17 +32,11 @@ public sealed partial class IndicesValidationExplanation
 		Index = index;
 		Valid = valid;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndicesValidationExplanation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndicesValidationExplanation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndicesValidationExplanation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,14 +45,6 @@ public sealed partial class IndicesValidationExplanation
 
 	public string? Error { get; set; }
 	public string? Explanation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Valid { get; set; }
+	public required string Index { get; set; }
+	public required bool Valid { get; set; }
 }

@@ -51,31 +51,15 @@ public sealed partial class AllocationExplainResponse : Elastic.Transport.Produc
 	public Elastic.Clients.Elasticsearch.Duration? ConfiguredDelay { get; set; }
 	public System.TimeSpan? ConfiguredDelayInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Cluster.CurrentNode? CurrentNode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string CurrentState { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Index { get; set; }
+	public required string CurrentState { get; set; }
+	public required string Index { get; set; }
 	public string? MoveExplanation { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation>? NodeAllocationDecisions { get; set; }
 	public string? Note { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Primary { get; set; }
+	public required bool Primary { get; set; }
 	public string? RebalanceExplanation { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? RemainingDelay { get; set; }
 	public System.TimeSpan? RemainingDelayInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int Shard { get; set; }
+	public required int Shard { get; set; }
 	public Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation? UnassignedInfo { get; set; }
 }

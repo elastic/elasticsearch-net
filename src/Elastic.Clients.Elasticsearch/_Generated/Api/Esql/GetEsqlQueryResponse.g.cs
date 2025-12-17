@@ -37,39 +37,11 @@ public sealed partial class GetEsqlQueryResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string CoordinatingNode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<string> DataNodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Query { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long RunningTimeNanos { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long StartTimeMillis { get; set; }
+	public required string CoordinatingNode { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> DataNodes { get; set; }
+	public required long Id { get; set; }
+	public required string Node { get; set; }
+	public required string Query { get; set; }
+	public required long RunningTimeNanos { get; set; }
+	public required long StartTimeMillis { get; set; }
 }

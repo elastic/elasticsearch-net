@@ -42,11 +42,7 @@ public sealed partial class QueryRoleResponse : Elastic.Transport.Products.Elast
 	/// The number of roles returned in the response.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -58,20 +54,12 @@ public sealed partial class QueryRoleResponse : Elastic.Transport.Products.Elast
 	/// It contains the array of values that have been used for sorting.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> Roles { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryRole> Roles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of roles found.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

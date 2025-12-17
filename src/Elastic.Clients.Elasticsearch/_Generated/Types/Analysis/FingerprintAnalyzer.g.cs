@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FingerprintAnalyzerConverter))]
 public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public FingerprintAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FingerprintAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

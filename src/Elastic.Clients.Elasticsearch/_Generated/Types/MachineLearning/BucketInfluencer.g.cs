@@ -40,17 +40,11 @@ public sealed partial class BucketInfluencer
 		ResultType = resultType;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketInfluencer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketInfluencer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketInfluencer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,33 +57,21 @@ public sealed partial class BucketInfluencer
 	/// newer data is analyzed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double AnomalyScore { get; set; }
+	public required double AnomalyScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan BucketSpan { get; set; }
+	public required System.TimeSpan BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field name of the influencer.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string InfluencerFieldName { get; set; }
+	public required string InfluencerFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -97,33 +79,21 @@ public sealed partial class BucketInfluencer
 	/// time the bucket was processed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double InitialAnomalyScore { get; set; }
+	public required double InitialAnomalyScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsInterim { get; set; }
+	public required bool IsInterim { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -132,44 +102,28 @@ public sealed partial class BucketInfluencer
 	/// this.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Probability { get; set; }
+	public required double Probability { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Internal.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RawAnomalyScore { get; set; }
+	public required double RawAnomalyScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Internal. This value is always set to <c>bucket_influencer</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time of the bucket for which these results were calculated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FunctionScoreQueryConverter))]
 public sealed partial class FunctionScoreQuery
 {
-#if NET7_0_OR_GREATER
 	public FunctionScoreQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FunctionScoreQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FunctionScoreQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

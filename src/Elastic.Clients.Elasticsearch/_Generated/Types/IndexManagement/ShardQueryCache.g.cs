@@ -37,56 +37,22 @@ public sealed partial class ShardQueryCache
 		MissCount = missCount;
 		TotalCount = totalCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardQueryCache()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardQueryCache()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardQueryCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CacheCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CacheSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Evictions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HitCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemorySizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MissCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalCount { get; set; }
+	public required long CacheCount { get; set; }
+	public required long CacheSize { get; set; }
+	public required long Evictions { get; set; }
+	public required long HitCount { get; set; }
+	public required long MemorySizeInBytes { get; set; }
+	public required long MissCount { get; set; }
+	public required long TotalCount { get; set; }
 }

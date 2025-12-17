@@ -37,30 +37,14 @@ public sealed partial class GetServiceCredentialsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Service account credentials collected from all nodes of the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.NodesCredentials NodesCredentials { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ServiceAccount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> Tokens { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.NodesCredentials NodesCredentials { get; set; }
+	public required string ServiceAccount { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> Tokens { get; set; }
 }

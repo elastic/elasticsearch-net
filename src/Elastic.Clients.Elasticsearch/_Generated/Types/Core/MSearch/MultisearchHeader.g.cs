@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultisearchHeaderConverter))]
 public sealed partial class MultisearchHeader
 {
-#if NET7_0_OR_GREATER
 	public MultisearchHeader()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MultisearchHeader()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultisearchHeader(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,36 +33,18 @@ public sealed partial class AllocationDecision
 		Decision = decision;
 		Explanation = explanation;
 	}
-#if NET7_0_OR_GREATER
+
 	public AllocationDecision()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AllocationDecision()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AllocationDecision(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Decider { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision Decision { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Explanation { get; set; }
+	public required string Decider { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision Decision { get; set; }
+	public required string Explanation { get; set; }
 }

@@ -33,17 +33,11 @@ public sealed partial class Hyperparameter
 		Supplied = supplied;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public Hyperparameter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Hyperparameter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Hyperparameter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class Hyperparameter
 	/// Name of the hyperparameter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,20 +70,12 @@ public sealed partial class Hyperparameter
 	/// Indicates if the hyperparameter is specified by the user (true) or optimized (false).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Supplied { get; set; }
+	public required bool Supplied { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The value of the hyperparameter, either optimized or specified by the user.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Value { get; set; }
+	public required double Value { get; set; }
 }

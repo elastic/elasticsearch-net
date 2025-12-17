@@ -34,41 +34,19 @@ public sealed partial class ConfusionMatrixItem
 		OtherPredictedClassDocCount = otherPredictedClassDocCount;
 		PredictedClasses = predictedClasses;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConfusionMatrixItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConfusionMatrixItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConfusionMatrixItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ActualClass { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ActualClassDocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int OtherPredictedClassDocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixPrediction> PredictedClasses { get; set; }
+	public required string ActualClass { get; set; }
+	public required int ActualClassDocCount { get; set; }
+	public required int OtherPredictedClassDocCount { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixPrediction> PredictedClasses { get; set; }
 }

@@ -32,28 +32,18 @@ public sealed partial class DateDecayFunction : Elastic.Clients.Elasticsearch.Qu
 		Field = field;
 		Placement = placement;
 	}
-#if NET7_0_OR_GREATER
+
 	public DateDecayFunction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DateDecayFunction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DateDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -61,11 +51,7 @@ public sealed partial class DateDecayFunction : Elastic.Clients.Elasticsearch.Qu
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> Placement { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.DateMath, Elastic.Clients.Elasticsearch.Duration> Placement { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "date";
 }

@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.Json;
 public sealed partial class OpenPointInTimeRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpenPointInTimeRequest>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 
 	public override Elastic.Clients.Elasticsearch.OpenPointInTimeRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class OpenPointInTimeRequestConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.OpenPointInTimeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			IndexFilter = propIndexFilter.Value
+			IndexFilter = propIndexFilter.Value,
+			ProjectRouting = propProjectRouting.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class OpenPointInTimeRequestConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteEndObject();
 	}
 }

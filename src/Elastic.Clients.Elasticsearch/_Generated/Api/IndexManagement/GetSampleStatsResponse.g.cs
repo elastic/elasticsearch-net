@@ -38,57 +38,17 @@ public sealed partial class GetSampleStatsResponse : Elastic.Transport.Products.
 	}
 
 	public string? LastException { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long PotentialSamples { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesAccepted { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesRejectedForCondition { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesRejectedForException { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesRejectedForMaxSamplesExceeded { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesRejectedForRate { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long SamplesRejectedForSize { get; set; }
+	public required long PotentialSamples { get; set; }
+	public required long SamplesAccepted { get; set; }
+	public required long SamplesRejectedForCondition { get; set; }
+	public required long SamplesRejectedForException { get; set; }
+	public required long SamplesRejectedForMaxSamplesExceeded { get; set; }
+	public required long SamplesRejectedForRate { get; set; }
+	public required long SamplesRejectedForSize { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeCompilingCondition { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.TimeSpan TimeCompilingConditionMillis { get; set; }
+	public required System.TimeSpan TimeCompilingConditionMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeEvaluatingCondition { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.TimeSpan TimeEvaluatingConditionMillis { get; set; }
+	public required System.TimeSpan TimeEvaluatingConditionMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TimeSampling { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.TimeSpan TimeSamplingMillis { get; set; }
+	public required System.TimeSpan TimeSamplingMillis { get; set; }
 }

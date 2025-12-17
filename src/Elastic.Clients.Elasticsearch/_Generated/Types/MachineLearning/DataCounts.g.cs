@@ -42,88 +42,34 @@ public sealed partial class DataCounts
 		ProcessedRecordCount = processedRecordCount;
 		SparseBucketCount = sparseBucketCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataCounts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataCounts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BucketCount { get; set; }
+	public required long BucketCount { get; set; }
 	public long? EarliestRecordTimestamp { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long EmptyBucketCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InputBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InputFieldCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InputRecordCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long InvalidDateCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required long EmptyBucketCount { get; set; }
+	public required long InputBytes { get; set; }
+	public required long InputFieldCount { get; set; }
+	public required long InputRecordCount { get; set; }
+	public required long InvalidDateCount { get; set; }
+	public required string JobId { get; set; }
 	public long? LastDataTime { get; set; }
 	public long? LatestBucketTimestamp { get; set; }
 	public long? LatestEmptyBucketTimestamp { get; set; }
 	public long? LatestRecordTimestamp { get; set; }
 	public long? LatestSparseBucketTimestamp { get; set; }
 	public long? LogTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MissingFieldCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long OutOfOrderTimestampCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ProcessedFieldCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ProcessedRecordCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SparseBucketCount { get; set; }
+	public required long MissingFieldCount { get; set; }
+	public required long OutOfOrderTimestampCount { get; set; }
+	public required long ProcessedFieldCount { get; set; }
+	public required long ProcessedRecordCount { get; set; }
+	public required long SparseBucketCount { get; set; }
 }

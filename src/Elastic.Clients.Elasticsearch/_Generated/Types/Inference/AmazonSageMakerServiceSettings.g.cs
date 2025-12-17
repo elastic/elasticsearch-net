@@ -35,17 +35,11 @@ public sealed partial class AmazonSageMakerServiceSettings
 		Region = region;
 		SecretKey = secretKey;
 	}
-#if NET7_0_OR_GREATER
+
 	public AmazonSageMakerServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AmazonSageMakerServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AmazonSageMakerServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,11 +51,7 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// A valid AWS access key that has permissions to use Amazon SageMaker and access to models for invoking requests.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string AccessKey { get; set; }
+	public required string AccessKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,11 +59,7 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// Elasticsearch will convert the POST _inference request to this data format when invoking the SageMaker endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi Api { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerApi Api { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -97,11 +83,7 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// The name of the SageMaker endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EndpointName { get; set; }
+	public required string EndpointName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -116,11 +98,7 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// The list of available regions per model can be found in the Amazon SageMaker documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Region { get; set; }
+	public required string Region { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -128,11 +106,7 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// For information about creating and managing access and secret keys, refer to the AWS documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SecretKey { get; set; }
+	public required string SecretKey { get; set; }
 
 	/// <summary>
 	/// <para>

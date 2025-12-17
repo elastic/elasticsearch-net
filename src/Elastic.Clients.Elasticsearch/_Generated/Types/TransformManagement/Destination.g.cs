@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.DestinationConverter))]
 public sealed partial class Destination
 {
-#if NET7_0_OR_GREATER
 	public Destination()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Destination()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,6 +31,7 @@ public sealed partial class DiversifyRetrieverConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
@@ -45,6 +46,7 @@ public sealed partial class DiversifyRetrieverConverter : System.Text.Json.Seria
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
 		LocalJsonValue<int?> propSize = default;
@@ -77,6 +79,11 @@ public sealed partial class DiversifyRetrieverConverter : System.Text.Json.Seria
 			}
 
 			if (propQueryVector.TryReadProperty(ref reader, options, PropQueryVector, static System.Collections.Generic.ICollection<float>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<float>(o, null)))
+			{
+				continue;
+			}
+
+			if (propQueryVectorBuilder.TryReadProperty(ref reader, options, PropQueryVectorBuilder, null))
 			{
 				continue;
 			}
@@ -119,6 +126,7 @@ public sealed partial class DiversifyRetrieverConverter : System.Text.Json.Seria
 			MinScore = propMinScore.Value,
 			Name = propName.Value,
 			QueryVector = propQueryVector.Value,
+			QueryVectorBuilder = propQueryVectorBuilder.Value,
 			RankWindowSize = propRankWindowSize.Value,
 			Retriever = propRetriever.Value,
 			Size = propSize.Value,
@@ -135,6 +143,7 @@ public sealed partial class DiversifyRetrieverConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
+		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

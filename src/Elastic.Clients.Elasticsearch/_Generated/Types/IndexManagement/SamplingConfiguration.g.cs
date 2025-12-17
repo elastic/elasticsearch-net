@@ -40,17 +40,11 @@ public sealed partial class SamplingConfiguration
 		Rate = rate;
 		TimeToLiveInMillis = timeToLiveInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public SamplingConfiguration()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SamplingConfiguration()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamplingConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -69,11 +63,7 @@ public sealed partial class SamplingConfiguration
 	/// The time when the sampling configuration was created, in milliseconds since epoch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreationTimeInMillis { get; set; }
+	public required long CreationTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -87,11 +77,7 @@ public sealed partial class SamplingConfiguration
 	/// The maximum number of documents to sample.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxSamples { get; set; }
+	public required int MaxSamples { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,22 +91,14 @@ public sealed partial class SamplingConfiguration
 	/// The maximum total size of sampled documents in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxSizeInBytes { get; set; }
+	public required long MaxSizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The fraction of documents to sample between 0 and 1.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Rate { get; set; }
+	public required double Rate { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -134,9 +112,5 @@ public sealed partial class SamplingConfiguration
 	/// The duration for which the sampled documents should be retained, in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TimeToLiveInMillis { get; set; }
+	public required long TimeToLiveInMillis { get; set; }
 }

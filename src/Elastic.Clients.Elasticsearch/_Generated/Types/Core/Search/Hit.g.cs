@@ -32,17 +32,11 @@ public sealed partial class Hit<TDocument>
 		Id = id;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public Hit()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Hit()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Hit(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,18 +46,10 @@ public sealed partial class Hit<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Explain.Explanation? Explanation { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>>? Highlight { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Ignored { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? IgnoredFieldValues { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.Search.InnerHitsResult>? InnerHits { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<string>, System.Collections.Generic.IReadOnlyDictionary<string, double>>? MatchedQueries { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.NestedIdentity? Nested { get; set; }

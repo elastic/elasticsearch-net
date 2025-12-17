@@ -34,17 +34,11 @@ public sealed partial class RecoveryFiles
 		Reused = reused;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public RecoveryFiles()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RecoveryFiles()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RecoveryFiles(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,24 +46,8 @@ public sealed partial class RecoveryFiles
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.FileDetails>? Details { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Percentage Percent { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Recovered { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Reused { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required Elastic.Clients.Elasticsearch.Percentage Percent { get; set; }
+	public required long Recovered { get; set; }
+	public required long Reused { get; set; }
+	public required long Total { get; set; }
 }

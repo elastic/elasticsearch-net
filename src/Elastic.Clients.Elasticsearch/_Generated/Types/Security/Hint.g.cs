@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.HintConverter))]
 public sealed partial class Hint
 {
-#if NET7_0_OR_GREATER
 	public Hint()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Hint()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Hint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

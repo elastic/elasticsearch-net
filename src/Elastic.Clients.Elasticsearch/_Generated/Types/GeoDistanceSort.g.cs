@@ -32,17 +32,11 @@ public sealed partial class GeoDistanceSort
 		Field = field;
 		Location = location;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoDistanceSort()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoDistanceSort()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoDistanceSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,17 +44,9 @@ public sealed partial class GeoDistanceSort
 	}
 
 	public Elastic.Clients.Elasticsearch.GeoDistanceType? DistanceType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Location { get; set; }
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }

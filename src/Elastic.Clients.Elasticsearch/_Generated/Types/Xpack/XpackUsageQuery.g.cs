@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.XpackUsageQueryConverter))]
 public sealed partial class XpackUsageQuery
 {
-#if NET7_0_OR_GREATER
 	public XpackUsageQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public XpackUsageQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal XpackUsageQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

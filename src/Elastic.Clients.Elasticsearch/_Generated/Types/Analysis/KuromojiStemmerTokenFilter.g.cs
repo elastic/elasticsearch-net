@@ -31,28 +31,18 @@ public sealed partial class KuromojiStemmerTokenFilter : Elastic.Clients.Elastic
 	{
 		MinimumLength = minimumLength;
 	}
-#if NET7_0_OR_GREATER
+
 	public KuromojiStemmerTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KuromojiStemmerTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KuromojiStemmerTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MinimumLength { get; set; }
+	public required int MinimumLength { get; set; }
 
 	public string Type => "kuromoji_stemmer";
 

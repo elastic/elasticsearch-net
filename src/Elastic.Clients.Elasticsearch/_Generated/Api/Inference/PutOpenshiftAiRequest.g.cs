@@ -55,11 +55,11 @@ public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearc
 	{
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutOpenshiftAiRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutOpenshiftAiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +79,7 @@ public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearc
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id OpenshiftaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openshiftai_inference_id"); set => PR("openshiftai_inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id OpenshiftaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openshiftai_inference_id"); set => PR("openshiftai_inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -91,11 +87,7 @@ public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearc
 	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType>("task_type"); set => PR("task_type", value); }
+	public required Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType>("task_type"); set => PR("task_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -125,11 +117,7 @@ public sealed partial class PutOpenshiftAiRequest : Elastic.Clients.Elasticsearc
 	/// Settings used to install the inference model. These settings are specific to the <c>openshift_ai</c> service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings ServiceSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.OpenShiftAiServiceSettings ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -327,6 +315,11 @@ public readonly partial struct PutOpenshiftAiRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

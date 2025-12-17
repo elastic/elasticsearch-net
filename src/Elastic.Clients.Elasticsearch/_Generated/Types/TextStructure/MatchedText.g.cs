@@ -31,17 +31,11 @@ public sealed partial class MatchedText
 	{
 		Matched = matched;
 	}
-#if NET7_0_OR_GREATER
+
 	public MatchedText()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MatchedText()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatchedText(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,9 +43,5 @@ public sealed partial class MatchedText
 	}
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>? Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Matched { get; set; }
+	public required bool Matched { get; set; }
 }

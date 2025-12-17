@@ -34,17 +34,11 @@ public sealed partial class FollowerIndex
 		RemoteCluster = remoteCluster;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public FollowerIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FollowerIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FollowerIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,22 +50,14 @@ public sealed partial class FollowerIndex
 	/// The name of the follower index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string FollowerIndexValue { get; set; }
+	public required string FollowerIndexValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the index in the leader cluster that is followed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string LeaderIndex { get; set; }
+	public required string LeaderIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,20 +71,12 @@ public sealed partial class FollowerIndex
 	/// The remote cluster that contains the leader index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RemoteCluster { get; set; }
+	public required string RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The status of the index following: <c>active</c> or <c>paused</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Status { get; set; }
 }

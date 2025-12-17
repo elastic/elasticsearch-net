@@ -32,31 +32,17 @@ public sealed partial class ClusterIngest
 		NumberOfPipelines = numberOfPipelines;
 		ProcessorStats = processorStats;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterIngest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterIngest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterIngest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumberOfPipelines { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor> ProcessorStats { get; set; }
+	public required int NumberOfPipelines { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor> ProcessorStats { get; set; }
 }

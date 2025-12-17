@@ -51,17 +51,11 @@ public sealed partial class SamlLogoutRequest : Elastic.Clients.Elasticsearch.Re
 	{
 		Token = token;
 	}
-#if NET7_0_OR_GREATER
+
 	public SamlLogoutRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SamlLogoutRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamlLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -90,11 +84,7 @@ public sealed partial class SamlLogoutRequest : Elastic.Clients.Elasticsearch.Re
 	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Token { get; set; }
+	public required string Token { get; set; }
 }
 
 /// <summary>
@@ -169,6 +159,11 @@ public readonly partial struct SamlLogoutRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

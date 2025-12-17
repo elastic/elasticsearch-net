@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeAggregationConverter))]
 public sealed partial class CompositeAggregation
 {
-#if NET7_0_OR_GREATER
 	public CompositeAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CompositeAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

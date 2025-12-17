@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.WhitespaceAnalyzerConverter))]
 public sealed partial class WhitespaceAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-#if NET7_0_OR_GREATER
 	public WhitespaceAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public WhitespaceAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WhitespaceAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

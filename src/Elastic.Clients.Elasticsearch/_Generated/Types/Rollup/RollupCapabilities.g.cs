@@ -31,17 +31,11 @@ public sealed partial class RollupCapabilities
 	{
 		RollupJobs = rollupJobs;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupCapabilities()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupCapabilities()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupCapabilities(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,9 +47,5 @@ public sealed partial class RollupCapabilities
 	/// There can be multiple, independent jobs configured for a single index or index pattern. Each of these jobs may have different configurations, so the API returns a list of all the various configurations available.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary> RollupJobs { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary> RollupJobs { get; set; }
 }

@@ -34,42 +34,20 @@ public sealed partial class RequestCacheStats
 		MemorySizeInBytes = memorySizeInBytes;
 		MissCount = missCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public RequestCacheStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RequestCacheStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RequestCacheStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Evictions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long HitCount { get; set; }
+	public required long Evictions { get; set; }
+	public required long HitCount { get; set; }
 	public string? MemorySize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemorySizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MissCount { get; set; }
+	public required long MemorySizeInBytes { get; set; }
+	public required long MissCount { get; set; }
 }

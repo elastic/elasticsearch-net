@@ -31,17 +31,11 @@ public sealed partial class SharedFileSystemRepositorySettings
 	{
 		Location = location;
 	}
-#if NET7_0_OR_GREATER
+
 	public SharedFileSystemRepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SharedFileSystemRepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SharedFileSystemRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -74,11 +68,7 @@ public sealed partial class SharedFileSystemRepositorySettings
 	/// Unlike <c>path.repo</c>, this setting supports only a single file path.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Location { get; set; }
+	public required string Location { get; set; }
 
 	/// <summary>
 	/// <para>

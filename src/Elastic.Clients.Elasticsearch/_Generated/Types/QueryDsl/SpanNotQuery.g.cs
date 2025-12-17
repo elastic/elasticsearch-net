@@ -32,17 +32,11 @@ public sealed partial class SpanNotQuery
 		Exclude = exclude;
 		Include = include;
 	}
-#if NET7_0_OR_GREATER
+
 	public SpanNotQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SpanNotQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SpanNotQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -72,22 +66,14 @@ public sealed partial class SpanNotQuery
 	/// Span query whose matches must not overlap those returned.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Exclude { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Span query whose matches are filtered.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Include { get; set; }
 
 	/// <summary>
 	/// <para>

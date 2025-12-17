@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsConverter))]
 public sealed partial class SourceOnlyRepositorySettings
 {
-#if NET7_0_OR_GREATER
 	public SourceOnlyRepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SourceOnlyRepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

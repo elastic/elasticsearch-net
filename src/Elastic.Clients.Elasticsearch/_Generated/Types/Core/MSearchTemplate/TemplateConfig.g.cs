@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.Json.TemplateConfigConverter))]
 public sealed partial class TemplateConfig
 {
-#if NET7_0_OR_GREATER
 	public TemplateConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TemplateConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TemplateConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

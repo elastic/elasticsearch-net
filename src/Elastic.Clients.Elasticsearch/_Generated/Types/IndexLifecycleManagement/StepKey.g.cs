@@ -31,17 +31,11 @@ public sealed partial class StepKey
 	{
 		Phase = phase;
 	}
-#if NET7_0_OR_GREATER
+
 	public StepKey()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StepKey()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StepKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class StepKey
 	/// </para>
 	/// </summary>
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Phase { get; set; }
+	public required string Phase { get; set; }
 }
 
 public readonly partial struct StepKeyDescriptor

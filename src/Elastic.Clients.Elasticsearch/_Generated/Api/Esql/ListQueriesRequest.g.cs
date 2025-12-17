@@ -38,16 +38,10 @@ public sealed partial class ListQueriesRequestParameters : Elastic.Transport.Req
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.ListQueriesRequestConverter))]
 public sealed partial class ListQueriesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public ListQueriesRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ListQueriesRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ListQueriesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -108,6 +102,11 @@ public readonly partial struct ListQueriesRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+)]
 	public Elastic.Clients.Elasticsearch.Esql.ListQueriesRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

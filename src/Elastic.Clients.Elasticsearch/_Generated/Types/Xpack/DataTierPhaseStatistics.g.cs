@@ -40,71 +40,25 @@ public sealed partial class DataTierPhaseStatistics
 		TotalShardCount = totalShardCount;
 		TotalSizeBytes = totalSizeBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataTierPhaseStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataTierPhaseStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataTierPhaseStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NodeCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryShardCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryShardSizeAvgBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryShardSizeMadBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryShardSizeMedianBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimarySizeBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalShardCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeBytes { get; set; }
+	public required long DocCount { get; set; }
+	public required long IndexCount { get; set; }
+	public required long NodeCount { get; set; }
+	public required long PrimaryShardCount { get; set; }
+	public required long PrimaryShardSizeAvgBytes { get; set; }
+	public required long PrimaryShardSizeMadBytes { get; set; }
+	public required long PrimaryShardSizeMedianBytes { get; set; }
+	public required long PrimarySizeBytes { get; set; }
+	public required long TotalShardCount { get; set; }
+	public required long TotalSizeBytes { get; set; }
 }

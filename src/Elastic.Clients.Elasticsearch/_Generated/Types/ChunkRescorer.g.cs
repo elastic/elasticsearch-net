@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ChunkRescorerConverter))]
 public sealed partial class ChunkRescorer
 {
-#if NET7_0_OR_GREATER
 	public ChunkRescorer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ChunkRescorer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChunkRescorer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

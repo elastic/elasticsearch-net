@@ -31,26 +31,16 @@ public sealed partial class NodeInfoSearch
 	{
 		Remote = remote;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSearch()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSearch()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearchRemote Remote { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSearchRemote Remote { get; set; }
 }

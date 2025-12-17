@@ -31,17 +31,11 @@ public sealed partial class QueryRuleCriteria
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public QueryRuleCriteria()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public QueryRuleCriteria()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal QueryRuleCriteria(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -114,11 +108,7 @@ public sealed partial class QueryRuleCriteria
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType Type { get; set; }
 
 	/// <summary>
 	/// <para>

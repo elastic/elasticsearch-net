@@ -35,17 +35,11 @@ public sealed partial class BulkStats
 		TotalSizeInBytes = totalSizeInBytes;
 		TotalTimeInMillis = totalTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public BulkStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BulkStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BulkStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,32 +47,12 @@ public sealed partial class BulkStats
 	}
 
 	public Elastic.Clients.Elasticsearch.ByteSize? AvgSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long AvgSizeInBytes { get; set; }
+	public required long AvgSizeInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? AvgTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan AvgTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalOperations { get; set; }
+	public required System.TimeSpan AvgTimeInMillis { get; set; }
+	public required long TotalOperations { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeInBytes { get; set; }
+	public required long TotalSizeInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalTimeInMillis { get; set; }
+	public required System.TimeSpan TotalTimeInMillis { get; set; }
 }

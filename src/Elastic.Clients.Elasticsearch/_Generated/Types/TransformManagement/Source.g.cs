@@ -31,17 +31,11 @@ public sealed partial class Source
 	{
 		Indices = indices;
 	}
-#if NET7_0_OR_GREATER
+
 	public Source()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Source()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Source(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class Source
 	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
 	/// <summary>
 	/// <para>

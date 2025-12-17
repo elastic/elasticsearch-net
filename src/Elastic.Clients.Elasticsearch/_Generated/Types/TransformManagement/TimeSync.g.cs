@@ -31,17 +31,11 @@ public sealed partial class TimeSync
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public TimeSync()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TimeSync()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TimeSync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class TimeSync
 	/// accounts for data transmission delays.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
 public readonly partial struct TimeSyncDescriptor<TDocument>

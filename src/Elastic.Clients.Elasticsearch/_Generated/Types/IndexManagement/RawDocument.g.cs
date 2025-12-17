@@ -32,17 +32,11 @@ public sealed partial class RawDocument
 		Index = index;
 		Source = source;
 	}
-#if NET7_0_OR_GREATER
+
 	public RawDocument()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RawDocument()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RawDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class RawDocument
 	/// Name of the index for this raw document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The original raw source.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.Properties Source { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.Properties Source { get; set; }
 }

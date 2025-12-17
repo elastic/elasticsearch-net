@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CumulativeSumAggregationConverter))]
 public sealed partial class CumulativeSumAggregation
 {
-#if NET7_0_OR_GREATER
 	public CumulativeSumAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CumulativeSumAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CumulativeSumAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

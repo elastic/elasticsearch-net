@@ -32,33 +32,19 @@ public sealed partial class IcuAnalyzer : Elastic.Clients.Elasticsearch.Analysis
 		Method = method;
 		Mode = mode;
 	}
-#if NET7_0_OR_GREATER
+
 	public IcuAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IcuAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IcuAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType Method { get; set; }
+	public required Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Mode { get; set; }
 
 	public string Type => "icu_analyzer";
 }

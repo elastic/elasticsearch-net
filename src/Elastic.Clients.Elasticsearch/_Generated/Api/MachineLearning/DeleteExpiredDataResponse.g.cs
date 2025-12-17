@@ -37,9 +37,5 @@ public sealed partial class DeleteExpiredDataResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Deleted { get; set; }
+	public required bool Deleted { get; set; }
 }

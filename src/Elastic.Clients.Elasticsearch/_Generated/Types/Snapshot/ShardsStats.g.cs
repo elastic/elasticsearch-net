@@ -36,17 +36,11 @@ public sealed partial class ShardsStats
 		Started = started;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardsStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardsStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,64 +52,40 @@ public sealed partial class ShardsStats
 	/// The number of shards that initialized, started, and finalized successfully.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Done { get; set; }
+	public required long Done { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that failed to be included in the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Failed { get; set; }
+	public required long Failed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that are finalizing but are not done.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Finalizing { get; set; }
+	public required long Finalizing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that are still initializing.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Initializing { get; set; }
+	public required long Initializing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards that have started but are not finalized.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Started { get; set; }
+	public required long Started { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of shards included in the snapshot.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Total { get; set; }
 }

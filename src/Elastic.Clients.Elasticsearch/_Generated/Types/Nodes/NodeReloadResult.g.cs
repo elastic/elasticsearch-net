@@ -31,27 +31,44 @@ public sealed partial class NodeReloadResult
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeReloadResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeReloadResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeReloadResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	/// <summary>
+	/// <para>
+	/// A SHA-256 hash of the keystore file contents.
+	/// </para>
+	/// </summary>
+	public string? KeystoreDigest { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The last modification time of the keystore file.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? KeystoreLastModifiedTime { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The path to the keystore file.
+	/// </para>
+	/// </summary>
+	public string? KeystorePath { get; set; }
+	public required string Name { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? ReloadException { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The names of the secure settings that were reloaded.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyCollection<string>? SecureSettingNames { get; set; }
 }

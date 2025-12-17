@@ -38,11 +38,11 @@ public sealed partial class SpanTermQuery
 		Field = field;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public SpanTermQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SpanTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,17 +58,9 @@ public sealed partial class SpanTermQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
+	public required Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
 }
 
 public readonly partial struct SpanTermQueryDescriptor<TDocument>

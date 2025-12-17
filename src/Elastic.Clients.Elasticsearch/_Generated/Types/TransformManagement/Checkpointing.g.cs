@@ -31,17 +31,11 @@ public sealed partial class Checkpointing
 	{
 		Last = last;
 	}
-#if NET7_0_OR_GREATER
+
 	public Checkpointing()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Checkpointing()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Checkpointing(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class Checkpointing
 
 	public long? ChangesLastDetectedAt { get; set; }
 	public System.DateTimeOffset? ChangesLastDetectedAtString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats Last { get; set; }
+	public required Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats Last { get; set; }
 	public long? LastSearchTime { get; set; }
 	public System.DateTimeOffset? LastSearchTimeString { get; set; }
 	public Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats? Next { get; set; }

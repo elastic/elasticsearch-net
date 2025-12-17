@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SuggestFuzzinessConverter))]
 public sealed partial class SuggestFuzziness
 {
-#if NET7_0_OR_GREATER
 	public SuggestFuzziness()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SuggestFuzziness()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SuggestFuzziness(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

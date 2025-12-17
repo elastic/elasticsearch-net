@@ -37,9 +37,5 @@ public sealed partial class StreamsStatusResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Streams.LogsStatus Logs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Streams.LogsStatus Logs { get; set; }
 }

@@ -59,11 +59,7 @@ public sealed partial class GetAsyncResponse : Elastic.Transport.Products.Elasti
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-ID</c> HTTP header.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,11 +70,7 @@ public sealed partial class GetAsyncResponse : Elastic.Transport.Products.Elasti
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsPartial { get; set; }
+	public required bool IsPartial { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,20 +80,12 @@ public sealed partial class GetAsyncResponse : Elastic.Transport.Products.Elasti
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRunning { get; set; }
+	public required bool IsRunning { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The values for the search results.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
 }

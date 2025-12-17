@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ProcessorConverter))]
 public sealed partial class Processor
 {
-#if NET7_0_OR_GREATER
 	public Processor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Processor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Processor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

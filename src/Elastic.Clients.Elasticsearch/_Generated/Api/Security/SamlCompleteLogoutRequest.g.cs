@@ -55,17 +55,11 @@ public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elastics
 		Ids = ids;
 		Realm = realm;
 	}
-#if NET7_0_OR_GREATER
+
 	public SamlCompleteLogoutRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SamlCompleteLogoutRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -92,11 +86,7 @@ public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elastics
 	/// A JSON array with all the valid SAML Request Ids that the caller of the API has for the current user.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ids Ids { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -110,11 +100,7 @@ public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elastics
 	/// The name of the SAML realm in Elasticsearch for which the configuration is used to verify the logout response.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Realm { get; set; }
+	public required string Realm { get; set; }
 }
 
 /// <summary>
@@ -212,6 +198,11 @@ public readonly partial struct SamlCompleteLogoutRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

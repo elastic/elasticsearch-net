@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsAuthorizationConverter))]
 public sealed partial class DataframeAnalyticsAuthorization
 {
-#if NET7_0_OR_GREATER
 	public DataframeAnalyticsAuthorization()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeAnalyticsAuthorization()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsAuthorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

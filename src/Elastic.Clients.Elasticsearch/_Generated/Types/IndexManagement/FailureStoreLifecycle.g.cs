@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FailureStoreLifecycleConverter))]
 public sealed partial class FailureStoreLifecycle
 {
-#if NET7_0_OR_GREATER
 	public FailureStoreLifecycle()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FailureStoreLifecycle()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FailureStoreLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

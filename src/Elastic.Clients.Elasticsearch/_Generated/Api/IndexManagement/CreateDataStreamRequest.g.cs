@@ -55,11 +55,11 @@ public sealed partial class CreateDataStreamRequest : Elastic.Clients.Elasticsea
 	public CreateDataStreamRequest(Elastic.Clients.Elasticsearch.DataStreamName name) : base(r => r.Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CreateDataStreamRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateDataStreamRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -84,11 +84,7 @@ public sealed partial class CreateDataStreamRequest : Elastic.Clients.Elasticsea
 	/// Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DataStreamName Name { get => P<Elastic.Clients.Elasticsearch.DataStreamName>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.DataStreamName Name { get => P<Elastic.Clients.Elasticsearch.DataStreamName>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -189,6 +185,11 @@ public readonly partial struct CreateDataStreamRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

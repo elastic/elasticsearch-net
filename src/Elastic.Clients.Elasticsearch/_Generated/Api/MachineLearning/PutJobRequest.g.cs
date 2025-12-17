@@ -81,11 +81,11 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 		AnalysisConfig = analysisConfig;
 		DataDescription = dataDescription;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutJobRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -105,11 +105,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -154,11 +150,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -193,11 +185,7 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -694,6 +682,11 @@ public readonly partial struct PutJobRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -1125,6 +1118,11 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

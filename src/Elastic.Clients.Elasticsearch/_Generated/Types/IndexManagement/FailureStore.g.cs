@@ -33,36 +33,18 @@ public sealed partial class FailureStore
 		Indices = indices;
 		RolloverOnWrite = rolloverOnWrite;
 	}
-#if NET7_0_OR_GREATER
+
 	public FailureStore()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FailureStore()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FailureStore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool RolloverOnWrite { get; set; }
+	public required bool Enabled { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> Indices { get; set; }
+	public required bool RolloverOnWrite { get; set; }
 }

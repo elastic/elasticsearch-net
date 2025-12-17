@@ -34,41 +34,19 @@ public sealed partial class ShardLease
 		Source = source;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardLease()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardLease()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardLease(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RetainingSeqNo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Source { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Timestamp { get; set; }
+	public required string Id { get; set; }
+	public required long RetainingSeqNo { get; set; }
+	public required string Source { get; set; }
+	public required long Timestamp { get; set; }
 }

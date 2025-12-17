@@ -38,11 +38,11 @@ public sealed partial class MatchBoolPrefixQuery
 		Field = field;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public MatchBoolPrefixQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatchBoolPrefixQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +65,7 @@ public sealed partial class MatchBoolPrefixQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -133,11 +129,7 @@ public sealed partial class MatchBoolPrefixQuery
 	/// The last term is used in a prefix query.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 

@@ -31,17 +31,11 @@ public sealed partial class KuromojiReadingFormTokenFilter : Elastic.Clients.Ela
 	{
 		UseRomaji = useRomaji;
 	}
-#if NET7_0_OR_GREATER
+
 	public KuromojiReadingFormTokenFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KuromojiReadingFormTokenFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KuromojiReadingFormTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class KuromojiReadingFormTokenFilter : Elastic.Clients.Ela
 
 	public string Type => "kuromoji_readingform";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool UseRomaji { get; set; }
+	public required bool UseRomaji { get; set; }
 	public string? Version { get; set; }
 }
 

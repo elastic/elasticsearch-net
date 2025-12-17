@@ -32,17 +32,11 @@ public sealed partial class DocStats
 		Count = count;
 		TotalSizeInBytes = totalSizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DocStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DocStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DocStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class DocStats
 	/// This number is based on documents in Lucene segments and may include documents from nested fields.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,9 +73,5 @@ public sealed partial class DocStats
 	/// This value may be more reliable than store_stats.size_in_bytes in estimating the index size.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeInBytes { get; set; }
+	public required long TotalSizeInBytes { get; set; }
 }

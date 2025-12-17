@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.DataPathStatsConverter))]
 public sealed partial class DataPathStats
 {
-#if NET7_0_OR_GREATER
 	public DataPathStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataPathStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataPathStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

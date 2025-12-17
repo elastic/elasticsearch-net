@@ -43,9 +43,5 @@ public sealed partial class PutUserResponse : Elastic.Transport.Products.Elastic
 	/// When an existing user is updated, <c>created</c> is set to <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Created { get; set; }
+	public required bool Created { get; set; }
 }

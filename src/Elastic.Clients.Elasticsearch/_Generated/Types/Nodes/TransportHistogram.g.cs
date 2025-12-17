@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.TransportHistogramConverter))]
 public sealed partial class TransportHistogram
 {
-#if NET7_0_OR_GREATER
 	public TransportHistogram()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TransportHistogram()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransportHistogram(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

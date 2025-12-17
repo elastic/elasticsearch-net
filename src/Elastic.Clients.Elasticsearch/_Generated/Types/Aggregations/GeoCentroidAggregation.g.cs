@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoCentroidAggregationConverter))]
 public sealed partial class GeoCentroidAggregation
 {
-#if NET7_0_OR_GREATER
 	public GeoCentroidAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GeoCentroidAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoCentroidAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

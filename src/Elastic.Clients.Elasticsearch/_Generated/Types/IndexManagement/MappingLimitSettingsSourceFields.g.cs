@@ -31,28 +31,18 @@ public sealed partial class MappingLimitSettingsSourceFields
 	{
 		Mode = mode;
 	}
-#if NET7_0_OR_GREATER
+
 	public MappingLimitSettingsSourceFields()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MappingLimitSettingsSourceFields()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MappingLimitSettingsSourceFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.SourceMode Mode { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.SourceMode Mode { get; set; }
 }
 
 public readonly partial struct MappingLimitSettingsSourceFieldsDescriptor

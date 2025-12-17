@@ -40,6 +40,7 @@ public sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json
 	private static readonly System.Text.Json.JsonEncodedText PropPit = System.Text.Json.JsonEncodedText.Encode("pit"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
@@ -76,6 +77,7 @@ public sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference?> propPit = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propPostFilter = default;
 		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?> propRescore = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
@@ -162,6 +164,11 @@ public sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json
 			}
 
 			if (propProfile.TryReadProperty(ref reader, options, PropProfile, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -282,6 +289,7 @@ public sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json
 			Pit = propPit.Value,
 			PostFilter = propPostFilter.Value,
 			Profile = propProfile.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			Rescore = propRescore.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
@@ -320,6 +328,7 @@ public sealed partial class SubmitAsyncSearchRequestConverter : System.Text.Json
 		writer.WriteProperty(options, PropPit, value.Pit, null, null);
 		writer.WriteProperty(options, PropPostFilter, value.PostFilter, null, null);
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRescore, value.Rescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(o, v, null));
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));

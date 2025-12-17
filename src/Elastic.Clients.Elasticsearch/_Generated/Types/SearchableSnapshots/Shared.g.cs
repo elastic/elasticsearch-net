@@ -38,61 +38,23 @@ public sealed partial class Shared
 		SizeInBytes = sizeInBytes;
 		Writes = writes;
 	}
-#if NET7_0_OR_GREATER
+
 	public Shared()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Shared()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Shared(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize BytesReadInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize BytesWrittenInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Evictions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumRegions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Reads { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize RegionSizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize SizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Writes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize BytesReadInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize BytesWrittenInBytes { get; set; }
+	public required long Evictions { get; set; }
+	public required int NumRegions { get; set; }
+	public required long Reads { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize RegionSizeInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize SizeInBytes { get; set; }
+	public required long Writes { get; set; }
 }

@@ -34,17 +34,11 @@ public sealed partial class IngestTotal
 		Failed = failed;
 		TimeInMillis = timeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public IngestTotal()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IngestTotal()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IngestTotal(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,42 +50,26 @@ public sealed partial class IngestTotal
 	/// Total number of documents ingested during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of documents currently being ingested.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Current { get; set; }
+	public required long Current { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of failed ingest operations during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Failed { get; set; }
+	public required long Failed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInMillis { get; set; }
+	public required System.TimeSpan TimeInMillis { get; set; }
 }

@@ -35,17 +35,11 @@ public sealed partial class Datafeed
 		JobId = jobId;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public Datafeed()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Datafeed()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Datafeed(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,16 +55,8 @@ public sealed partial class Datafeed
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedAuthorization? Authorization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig? ChunkingConfig { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DatafeedId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig DelayedDataCheckConfig { get; set; }
+	public required string DatafeedId { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig DelayedDataCheckConfig { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,23 +65,11 @@ public sealed partial class Datafeed
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Indexes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 	public Elastic.Clients.Elasticsearch.IndicesOptions? IndicesOptions { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 	public int? MaxEmptySearches { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? QueryDelay { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }

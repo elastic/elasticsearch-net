@@ -37,9 +37,5 @@ public sealed partial class RepositoryVerifyIntegrityResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-object Result { get; set; }
+	public required object Result { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterFileSystemConverter))]
 public sealed partial class ClusterFileSystem
 {
-#if NET7_0_OR_GREATER
 	public ClusterFileSystem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ClusterFileSystem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterFileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

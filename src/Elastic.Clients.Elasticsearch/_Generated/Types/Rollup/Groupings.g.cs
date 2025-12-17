@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Rollup;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GroupingsConverter))]
 public sealed partial class Groupings
 {
-#if NET7_0_OR_GREATER
 	public Groupings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Groupings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Groupings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

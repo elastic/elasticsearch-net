@@ -37,25 +37,9 @@ public sealed partial class GrantApiKeyResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ApiKey { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Encoded { get; set; }
+	public required string ApiKey { get; set; }
+	public required string Encoded { get; set; }
 	public System.DateTimeOffset? Expiration { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Name { get; set; }
+	public required string Id { get; set; }
+	public required string Name { get; set; }
 }

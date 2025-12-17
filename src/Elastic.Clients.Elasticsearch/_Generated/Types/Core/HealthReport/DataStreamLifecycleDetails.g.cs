@@ -32,17 +32,11 @@ public sealed partial class DataStreamLifecycleDetails
 		StagnatingBackingIndicesCount = stagnatingBackingIndicesCount;
 		TotalBackingIndicesInError = totalBackingIndicesInError;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamLifecycleDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamLifecycleDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamLifecycleDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,14 +44,6 @@ public sealed partial class DataStreamLifecycleDetails
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.StagnatingBackingIndices>? StagnatingBackingIndices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int StagnatingBackingIndicesCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalBackingIndicesInError { get; set; }
+	public required int StagnatingBackingIndicesCount { get; set; }
+	public required int TotalBackingIndicesInError { get; set; }
 }

@@ -28,16 +28,11 @@ public sealed partial class IndexModifyDataStreamAction
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public IndexModifyDataStreamAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexModifyDataStreamAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexModifyDataStreamAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

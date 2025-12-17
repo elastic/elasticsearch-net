@@ -34,17 +34,11 @@ public partial class AsyncSearch<TDocument>
 		TimedOut = timedOut;
 		Took = took;
 	}
-#if NET7_0_OR_GREATER
+
 	public AsyncSearch()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AsyncSearch()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AsyncSearch(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,11 +53,7 @@ public partial class AsyncSearch<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 
 	/// <summary>
@@ -83,21 +73,9 @@ public partial class AsyncSearch<TDocument>
 	/// Note that in order for shard results to be included in the search response, they need to be reduced first.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool TimedOut { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Took { get; set; }
+	public required bool TimedOut { get; set; }
+	public required long Took { get; set; }
 }

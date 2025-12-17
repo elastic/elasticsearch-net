@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RemoveIndexActionConverter))]
 public sealed partial class RemoveIndexAction
 {
-#if NET7_0_OR_GREATER
 	public RemoveIndexAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RemoveIndexAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoveIndexAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

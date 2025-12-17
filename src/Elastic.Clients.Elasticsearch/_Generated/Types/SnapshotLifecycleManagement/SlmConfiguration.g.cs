@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.SlmConfigurationConverter))]
 public sealed partial class SlmConfiguration
 {
-#if NET7_0_OR_GREATER
 	public SlmConfiguration()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SlmConfiguration()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SlmConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

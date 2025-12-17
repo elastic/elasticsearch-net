@@ -38,9 +38,5 @@ public sealed partial class SimulateIndexTemplateResponse : Elastic.Transport.Pr
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.Overlapping>? Overlapping { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.IndexManagement.Template Template { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.Template Template { get; set; }
 }

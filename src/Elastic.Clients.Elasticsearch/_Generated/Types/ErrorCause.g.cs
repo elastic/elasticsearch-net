@@ -37,17 +37,11 @@ public sealed partial class ErrorCause
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public ErrorCause()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ErrorCause()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ErrorCause(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -84,9 +78,5 @@ public sealed partial class ErrorCause
 	/// The type of error
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

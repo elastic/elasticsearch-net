@@ -42,31 +42,19 @@ public sealed partial class SamlInvalidateResponse : Elastic.Transport.Products.
 	/// The number of tokens that were invalidated as part of this logout.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Invalidated { get; set; }
+	public required int Invalidated { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The realm name of the SAML realm in Elasticsearch that authenticated the user.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Realm { get; set; }
+	public required string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A SAML logout response as a parameter so that the user can be redirected back to the SAML IdP.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Redirect { get; set; }
+	public required string Redirect { get; set; }
 }

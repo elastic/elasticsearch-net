@@ -57,17 +57,11 @@ public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elastic
 	{
 		GrantType = grantType;
 	}
-#if NET7_0_OR_GREATER
+
 	public ActivateUserProfileRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ActivateUserProfileRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -97,11 +91,7 @@ public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elastic
 	/// The type of grant.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.GrantType GrantType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -227,6 +217,11 @@ public readonly partial struct ActivateUserProfileRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.TransportConverter))]
 public sealed partial class Transport
 {
-#if NET7_0_OR_GREATER
 	public Transport()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Transport()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Transport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

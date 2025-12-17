@@ -37,53 +37,17 @@ public sealed partial class PutDataFrameAnalyticsResponse : Elastic.Transport.Pr
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool AllowLazyStart { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
+	public required bool AllowLazyStart { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization? Authorization { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.DateTimeOffset CreateTime { get; set; }
+	public required System.DateTimeOffset CreateTime { get; set; }
 	public string? Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-int MaxNumThreads { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
+	public required string Id { get; set; }
+	public required int MaxNumThreads { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ModelMemoryLimit { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Version { get; set; }
+	public required string ModelMemoryLimit { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
+	public required string Version { get; set; }
 }

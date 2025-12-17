@@ -48,11 +48,11 @@ public sealed partial class DeleteServiceTokenRequest : Elastic.Clients.Elastics
 	public DeleteServiceTokenRequest(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("namespace", @namespace).Required("service", service).Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteServiceTokenRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteServiceTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -72,33 +72,21 @@ public sealed partial class DeleteServiceTokenRequest : Elastic.Clients.Elastics
 	/// The name of the service account token.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
 	/// The namespace, which is a top-level grouping of service accounts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
 	/// <summary>
 	/// <para>
 	/// The service name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get => P<string>("service"); set => PR("service", value); }
+	public required string Service { get => P<string>("service"); set => PR("service", value); }
 
 	/// <summary>
 	/// <para>
@@ -198,6 +186,11 @@ public readonly partial struct DeleteServiceTokenRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

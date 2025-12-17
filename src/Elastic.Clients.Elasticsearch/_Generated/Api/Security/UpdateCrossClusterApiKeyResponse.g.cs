@@ -43,9 +43,5 @@ public sealed partial class UpdateCrossClusterApiKeyResponse : Elastic.Transport
 	/// If <c>false</c>, the API key didn’t change because no change was detected.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Updated { get; set; }
+	public required bool Updated { get; set; }
 }

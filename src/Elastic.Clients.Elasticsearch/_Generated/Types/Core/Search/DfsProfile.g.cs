@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.DfsProfileConverter))]
 public sealed partial class DfsProfile
 {
-#if NET7_0_OR_GREATER
 	public DfsProfile()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DfsProfile()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DfsProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

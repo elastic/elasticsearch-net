@@ -32,17 +32,11 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
 		DocCount = docCount;
 		Expectations = expectations;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketCorrelationFunctionCountCorrelationIndicator()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketCorrelationFunctionCountCorrelationIndicator()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
 	/// to which the term values are correlated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DocCount { get; set; }
+	public required int DocCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,11 +58,7 @@ public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
 	/// The length of this value must always equal the number of buckets returned by the <c>bucket_path</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<double> Expectations { get; set; }
+	public required System.Collections.Generic.ICollection<double> Expectations { get; set; }
 
 	/// <summary>
 	/// <para>

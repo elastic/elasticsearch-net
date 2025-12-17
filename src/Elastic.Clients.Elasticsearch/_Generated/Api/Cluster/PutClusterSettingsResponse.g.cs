@@ -37,19 +37,7 @@ public sealed partial class PutClusterSettingsResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, object> Persistent { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, object> Transient { get; set; }
+	public required bool Acknowledged { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Persistent { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Transient { get; set; }
 }

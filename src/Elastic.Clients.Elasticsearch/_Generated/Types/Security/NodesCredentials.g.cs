@@ -32,17 +32,11 @@ public sealed partial class NodesCredentials
 		FileTokens = fileTokens;
 		Nodes = nodes;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodesCredentials()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodesCredentials()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodesCredentials(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class NodesCredentials
 	/// File-backed tokens collected from all nodes
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> FileTokens { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodesCredentialsFileToken> FileTokens { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// General status showing how nodes respond to the above collection request
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
+	public required Elastic.Clients.Elasticsearch.NodeStatistics Nodes { get; set; }
 }

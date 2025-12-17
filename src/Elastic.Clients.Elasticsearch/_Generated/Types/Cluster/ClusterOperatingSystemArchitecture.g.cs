@@ -32,17 +32,11 @@ public sealed partial class ClusterOperatingSystemArchitecture
 		Arch = arch;
 		Count = count;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterOperatingSystemArchitecture()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterOperatingSystemArchitecture()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterOperatingSystemArchitecture(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class ClusterOperatingSystemArchitecture
 	/// Name of an architecture used by one or more selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Arch { get; set; }
+	public required string Arch { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of selected nodes using the architecture.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 }

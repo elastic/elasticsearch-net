@@ -37,19 +37,7 @@ public sealed partial class GetMemoryStatsResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.NodeStatistics NodeStatistics { get; set; }
+	public required string ClusterName { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.Memory> Nodes { get; set; }
+	public required Elastic.Clients.Elasticsearch.NodeStatistics NodeStatistics { get; set; }
 }

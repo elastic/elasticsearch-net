@@ -42,31 +42,19 @@ public sealed partial class SuggestUserProfilesResponse : Elastic.Transport.Prod
 	/// A list of profile documents, ordered by relevance, that match the search criteria.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfile> Profiles { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of milliseconds it took Elasticsearch to run the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Took { get; set; }
+	public required long Took { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Metadata about the number of matching profiles.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.TotalUserProfiles Total { get; set; }
 }

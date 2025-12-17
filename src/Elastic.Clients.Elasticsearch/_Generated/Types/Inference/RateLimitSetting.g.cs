@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RateLimitSettingConverter))]
 public sealed partial class RateLimitSetting
 {
-#if NET7_0_OR_GREATER
 	public RateLimitSetting()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RateLimitSetting()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RateLimitSetting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -75,7 +69,7 @@ public sealed partial class RateLimitSetting
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>azureopenai</c> service and task type <c>completion</c>: <c>120</c>
+	/// <c>azureopenai</c> service and task types <c>completion</c> or <c>chat_completion</c>: <c>120</c>
 	/// </para>
 	/// </item>
 	/// <item>
@@ -205,7 +199,7 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>azureopenai</c> service and task type <c>completion</c>: <c>120</c>
+	/// <c>azureopenai</c> service and task types <c>completion</c> or <c>chat_completion</c>: <c>120</c>
 	/// </para>
 	/// </item>
 	/// <item>

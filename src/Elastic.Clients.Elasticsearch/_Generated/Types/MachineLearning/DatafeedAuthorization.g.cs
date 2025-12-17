@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedAuthorizationConverter))]
 public sealed partial class DatafeedAuthorization
 {
-#if NET7_0_OR_GREATER
 	public DatafeedAuthorization()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DatafeedAuthorization()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatafeedAuthorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

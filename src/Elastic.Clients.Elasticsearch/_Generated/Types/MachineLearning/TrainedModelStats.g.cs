@@ -33,17 +33,11 @@ public sealed partial class TrainedModelStats
 		ModelSizeStats = modelSizeStats;
 		PipelineCount = pipelineCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -78,31 +72,19 @@ public sealed partial class TrainedModelStats
 	/// The unique identifier of the trained model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A collection of model size stats.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats ModelSizeStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of ingest pipelines that currently refer to the model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int PipelineCount { get; set; }
+	public required int PipelineCount { get; set; }
 }

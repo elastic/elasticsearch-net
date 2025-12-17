@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NlpRobertaTokenizationConfigConverter))]
 public sealed partial class NlpRobertaTokenizationConfig
 {
-#if NET7_0_OR_GREATER
 	public NlpRobertaTokenizationConfig()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NlpRobertaTokenizationConfig()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

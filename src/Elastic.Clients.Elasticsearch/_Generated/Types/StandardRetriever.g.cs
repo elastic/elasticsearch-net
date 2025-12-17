@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.StandardRetrieverConverter))]
 public sealed partial class StandardRetriever
 {
-#if NET7_0_OR_GREATER
 	public StandardRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StandardRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StandardRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

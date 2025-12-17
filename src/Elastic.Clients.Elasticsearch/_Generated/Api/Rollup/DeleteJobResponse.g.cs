@@ -37,10 +37,6 @@ public sealed partial class DeleteJobResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
 }

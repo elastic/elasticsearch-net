@@ -32,17 +32,11 @@ public sealed partial class ShardFileSizeInfo
 		Description = description;
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardFileSizeInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardFileSizeInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardFileSizeInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,16 +45,8 @@ public sealed partial class ShardFileSizeInfo
 
 	public long? AverageSizeInBytes { get; set; }
 	public long? Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
+	public required string Description { get; set; }
 	public long? MaxSizeInBytes { get; set; }
 	public long? MinSizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required long SizeInBytes { get; set; }
 }

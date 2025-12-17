@@ -46,9 +46,5 @@ public sealed partial class GetUserProfileResponse : Elastic.Transport.Products.
 	/// The content of the data field is not returned by default to avoid deserializing a potential large payload.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> Profiles { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.UserProfileWithMetadata> Profiles { get; set; }
 }

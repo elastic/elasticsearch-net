@@ -39,17 +39,11 @@ public sealed partial class CharFilterTypes
 		Synonyms = synonyms;
 		TokenizerTypes = tokenizerTypes;
 	}
-#if NET7_0_OR_GREATER
+
 	public CharFilterTypes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CharFilterTypes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CharFilterTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,97 +55,61 @@ public sealed partial class CharFilterTypes
 	/// Contains statistics about analyzer types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> AnalyzerTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> AnalyzerTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in analyzers used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInAnalyzers { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInAnalyzers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in character filters used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInCharFilters { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInCharFilters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in token filters used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInFilters { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInFilters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about built-in tokenizers used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> BuiltInTokenizers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about character filter types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> CharFilterTypes2 { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about token filter types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about synonyms types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats> Synonyms { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats> Synonyms { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about tokenizer types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> TokenizerTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> TokenizerTypes { get; set; }
 }

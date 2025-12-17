@@ -33,17 +33,11 @@ public sealed partial class DataStreamMappings
 		Mappings = mappings;
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamMappings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamMappings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamMappings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,31 +50,19 @@ public sealed partial class DataStreamMappings
 	/// are the settings that will be used when a new index is created for this data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.TypeMapping EffectiveMappings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping EffectiveMappings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The settings specific to this data stream
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 }

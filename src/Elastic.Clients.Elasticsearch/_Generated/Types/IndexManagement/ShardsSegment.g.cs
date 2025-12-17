@@ -34,41 +34,19 @@ public sealed partial class ShardsSegment
 		Routing = routing;
 		Segments = segments;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardsSegment()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardsSegment()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardsSegment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumCommittedSegments { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumSearchSegments { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting Routing { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> Segments { get; set; }
+	public required int NumCommittedSegments { get; set; }
+	public required int NumSearchSegments { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting Routing { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> Segments { get; set; }
 }

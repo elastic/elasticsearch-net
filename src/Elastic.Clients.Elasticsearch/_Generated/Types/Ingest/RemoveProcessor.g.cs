@@ -31,17 +31,11 @@ public sealed partial class RemoveProcessor
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoveProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoveProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoveProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class RemoveProcessor
 	/// Fields to be removed. Supports template snippets.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields Field { get; set; }
 
 	/// <summary>
 	/// <para>

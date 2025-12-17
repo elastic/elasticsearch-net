@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ThreadCountConverter))]
 public sealed partial class ThreadCount
 {
-#if NET7_0_OR_GREATER
 	public ThreadCount()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ThreadCount()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ThreadCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -42,31 +42,19 @@ public sealed partial class SamlPrepareAuthenticationResponse : Elastic.Transpor
 	/// A unique identifier for the SAML Request to be stored by the caller of the API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the Elasticsearch realm that was used to construct the authentication request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Realm { get; set; }
+	public required string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The URL to redirect the user to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Redirect { get; set; }
+	public required string Redirect { get; set; }
 }

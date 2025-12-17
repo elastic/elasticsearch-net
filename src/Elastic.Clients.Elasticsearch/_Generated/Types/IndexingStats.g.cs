@@ -40,78 +40,32 @@ public sealed partial class IndexingStats
 		NoopUpdateTotal = noopUpdateTotal;
 		ThrottleTimeInMillis = throttleTimeInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexingStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexingStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DeleteCurrent { get; set; }
+	public required long DeleteCurrent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? DeleteTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan DeleteTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DeleteTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexCurrent { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexFailed { get; set; }
+	public required System.TimeSpan DeleteTimeInMillis { get; set; }
+	public required long DeleteTotal { get; set; }
+	public required long IndexCurrent { get; set; }
+	public required long IndexFailed { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? IndexTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan IndexTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsThrottled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NoopUpdateTotal { get; set; }
+	public required System.TimeSpan IndexTimeInMillis { get; set; }
+	public required long IndexTotal { get; set; }
+	public required bool IsThrottled { get; set; }
+	public required long NoopUpdateTotal { get; set; }
 	public double? PeakWriteLoad { get; set; }
 	public double? RecentWriteLoad { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ThrottleTimeInMillis { get; set; }
+	public required System.TimeSpan ThrottleTimeInMillis { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? Types { get; set; }
 	public double? WriteLoad { get; set; }
 }

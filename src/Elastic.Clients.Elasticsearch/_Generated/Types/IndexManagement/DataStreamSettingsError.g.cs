@@ -32,17 +32,11 @@ public sealed partial class DataStreamSettingsError
 		Error = error;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataStreamSettingsError()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataStreamSettingsError()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataStreamSettingsError(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,14 +48,6 @@ public sealed partial class DataStreamSettingsError
 	/// A message explaining why the settings could not be applied to specific indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Error { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Error { get; set; }
+	public required string Index { get; set; }
 }

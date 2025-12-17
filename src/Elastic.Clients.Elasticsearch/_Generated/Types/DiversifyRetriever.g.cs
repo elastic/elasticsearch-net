@@ -33,17 +33,11 @@ public sealed partial class DiversifyRetriever
 		Retriever = retriever;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public DiversifyRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DiversifyRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiversifyRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class DiversifyRetriever
 	/// The document field on which to diversify results on.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
+	public required string Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,6 +88,13 @@ public sealed partial class DiversifyRetriever
 
 	/// <summary>
 	/// <para>
+	/// a dense vector query vector builder to use instead of a static query_vector
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The number of top documents from the nested retriever to consider for diversification.
 	/// </para>
 	/// </summary>
@@ -108,11 +105,7 @@ public sealed partial class DiversifyRetriever
 	/// The nested retriever whose results will be diversified.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
+	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -126,11 +119,7 @@ public sealed partial class DiversifyRetriever
 	/// The diversification strategy to apply.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes Type { get; set; }
 }
 
 public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
@@ -254,6 +243,28 @@ public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// a dense vector query vector builder to use instead of a static query_vector
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
+	{
+		Instance.QueryVectorBuilder = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// a dense vector query vector builder to use instead of a static query_vector
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
+	{
+		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
@@ -459,6 +470,28 @@ public readonly partial struct DiversifyRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// a dense vector query vector builder to use instead of a static query_vector
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
+	{
+		Instance.QueryVectorBuilder = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// a dense vector query vector builder to use instead of a static query_vector
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
+	{
+		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 

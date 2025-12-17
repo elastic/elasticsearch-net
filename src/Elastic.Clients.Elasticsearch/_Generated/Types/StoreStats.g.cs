@@ -32,17 +32,11 @@ public sealed partial class StoreStats
 		ReservedInBytes = reservedInBytes;
 		SizeInBytes = sizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public StoreStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StoreStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StoreStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class StoreStats
 	/// A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ReservedInBytes { get; set; }
+	public required long ReservedInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,11 +69,7 @@ public sealed partial class StoreStats
 	/// Total size, in bytes, of all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
+	public required long SizeInBytes { get; set; }
 
 	/// <summary>
 	/// <para>

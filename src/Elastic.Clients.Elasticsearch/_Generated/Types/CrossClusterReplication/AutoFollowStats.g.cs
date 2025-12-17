@@ -35,28 +35,18 @@ public sealed partial class AutoFollowStats
 		NumberOfSuccessfulFollowIndices = numberOfSuccessfulFollowIndices;
 		RecentAutoFollowErrors = recentAutoFollowErrors;
 	}
-#if NET7_0_OR_GREATER
+
 	public AutoFollowStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AutoFollowStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AutoFollowStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> AutoFollowedClusters { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> AutoFollowedClusters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -64,42 +54,26 @@ public sealed partial class AutoFollowStats
 	/// The causes of recent failures are captured in the logs of the elected master node and in the <c>auto_follow_stats.recent_auto_follow_errors</c> field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NumberOfFailedFollowIndices { get; set; }
+	public required long NumberOfFailedFollowIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of times that the auto-follow coordinator failed to retrieve the cluster state from a remote cluster registered in a collection of auto-follow patterns.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NumberOfFailedRemoteClusterStateRequests { get; set; }
+	public required long NumberOfFailedRemoteClusterStateRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of indices that the auto-follow coordinator successfully followed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NumberOfSuccessfulFollowIndices { get; set; }
+	public required long NumberOfSuccessfulFollowIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of objects representing failures by the auto-follow coordinator.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors { get; set; }
 }

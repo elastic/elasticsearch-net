@@ -34,43 +34,21 @@ public sealed partial class PhraseSuggest : Elastic.Clients.Elasticsearch.Core.S
 		Options = options;
 		Text = text;
 	}
-#if NET7_0_OR_GREATER
+
 	public PhraseSuggest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PhraseSuggest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PhraseSuggest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Length { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Offset { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption> Options { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Text { get; set; }
+	public required int Length { get; set; }
+	public required int Offset { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption> Options { get; set; }
+	public required string Text { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Core.Search.ISuggest.Type => "phrase";
 }

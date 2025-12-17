@@ -37,30 +37,14 @@ public sealed partial class OidcPrepareAuthenticationResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Nonce { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Realm { get; set; }
+	public required string Nonce { get; set; }
+	public required string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A URI that points to the authorization endpoint of the OpenID Connect Provider with all the parameters of the authentication request as HTTP GET parameters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Redirect { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string State { get; set; }
+	public required string Redirect { get; set; }
+	public required string State { get; set; }
 }

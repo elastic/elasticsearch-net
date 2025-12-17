@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.TranslogRetentionConverter))]
 public sealed partial class TranslogRetention
 {
-#if NET7_0_OR_GREATER
 	public TranslogRetention()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TranslogRetention()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TranslogRetention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

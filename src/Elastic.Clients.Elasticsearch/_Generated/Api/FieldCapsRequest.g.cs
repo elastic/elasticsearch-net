@@ -98,16 +98,11 @@ public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Req
 	public FieldCapsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldCapsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FieldCapsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -200,6 +195,20 @@ public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Req
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? IndexFilter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the field-caps query using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -445,6 +454,24 @@ public readonly partial struct FieldCapsRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for the field-caps query using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
@@ -552,6 +579,11 @@ public readonly partial struct FieldCapsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -808,6 +840,24 @@ public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for the field-caps query using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Define ad-hoc runtime fields in the request similar to the way it is done in search requests.
 	/// These fields exist only as part of the query and take precedence over fields defined with the same name in the index mappings.
 	/// </para>
@@ -889,6 +939,11 @@ public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

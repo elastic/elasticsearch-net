@@ -38,11 +38,11 @@ public sealed partial class WeightedTokensQuery
 		Field = field;
 		Tokens = tokens;
 	}
-#if NET7_0_OR_GREATER
+
 	public WeightedTokensQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WeightedTokensQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +58,7 @@ public sealed partial class WeightedTokensQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -77,11 +73,7 @@ public sealed partial class WeightedTokensQuery
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, float>> Tokens { get; set; }
+	public required System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, float>> Tokens { get; set; }
 }
 
 public readonly partial struct WeightedTokensQueryDescriptor<TDocument>

@@ -31,28 +31,18 @@ public sealed partial class SettingsQueryString
 	{
 		Lenient = lenient;
 	}
-#if NET7_0_OR_GREATER
+
 	public SettingsQueryString()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SettingsQueryString()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SettingsQueryString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Lenient { get; set; }
+	public required bool Lenient { get; set; }
 }
 
 public readonly partial struct SettingsQueryStringDescriptor

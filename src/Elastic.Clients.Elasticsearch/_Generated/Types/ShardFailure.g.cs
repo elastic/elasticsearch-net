@@ -31,17 +31,11 @@ public sealed partial class ShardFailure
 	{
 		Reason = reason;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardFailure()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardFailure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +45,7 @@ public sealed partial class ShardFailure
 	public string? Index { get; set; }
 	public string? Node { get; set; }
 	public bool? Primary { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
+	public required Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
 	public int? Shard { get; set; }
 	public string? Status { get; set; }
 }

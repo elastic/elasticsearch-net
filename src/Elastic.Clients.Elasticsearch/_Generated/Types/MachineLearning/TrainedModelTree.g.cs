@@ -32,17 +32,11 @@ public sealed partial class TrainedModelTree
 		FeatureNames = featureNames;
 		TreeStructure = treeStructure;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelTree()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelTree()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelTree(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,17 +44,9 @@ public sealed partial class TrainedModelTree
 	}
 
 	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> FeatureNames { get; set; }
+	public required System.Collections.Generic.ICollection<string> FeatureNames { get; set; }
 	public string? TargetType { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode> TreeStructure { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode> TreeStructure { get; set; }
 }
 
 public readonly partial struct TrainedModelTreeDescriptor

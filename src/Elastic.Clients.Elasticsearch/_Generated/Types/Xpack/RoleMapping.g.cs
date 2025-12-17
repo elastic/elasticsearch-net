@@ -32,31 +32,17 @@ public sealed partial class RoleMapping
 		Enabled = enabled;
 		Size = size;
 	}
-#if NET7_0_OR_GREATER
+
 	public RoleMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RoleMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Size { get; set; }
+	public required int Enabled { get; set; }
+	public required int Size { get; set; }
 }

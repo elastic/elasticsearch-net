@@ -33,38 +33,20 @@ public sealed partial class TermsLookup
 		Index = index;
 		Path = path;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermsLookup()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TermsLookup()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermsLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Path { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 }
 

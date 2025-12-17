@@ -31,17 +31,11 @@ public sealed partial class ForceMergeAction
 	{
 		MaxNumSegments = maxNumSegments;
 	}
-#if NET7_0_OR_GREATER
+
 	public ForceMergeAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ForceMergeAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class ForceMergeAction
 	}
 
 	public string? IndexCodec { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxNumSegments { get; set; }
+	public required int MaxNumSegments { get; set; }
 }
 
 public readonly partial struct ForceMergeActionDescriptor

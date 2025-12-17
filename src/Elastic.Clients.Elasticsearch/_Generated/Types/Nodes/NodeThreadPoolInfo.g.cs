@@ -32,17 +32,11 @@ public sealed partial class NodeThreadPoolInfo
 		QueueSize = queueSize;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeThreadPoolInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeThreadPoolInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeThreadPoolInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,15 +46,7 @@ public sealed partial class NodeThreadPoolInfo
 	public int? Core { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 	public int? Max { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int QueueSize { get; set; }
+	public required int QueueSize { get; set; }
 	public int? Size { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

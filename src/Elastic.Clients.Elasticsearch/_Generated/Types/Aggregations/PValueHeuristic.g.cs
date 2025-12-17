@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PValueHeuristicConverter))]
 public sealed partial class PValueHeuristic
 {
-#if NET7_0_OR_GREATER
 	public PValueHeuristic()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PValueHeuristic()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PValueHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

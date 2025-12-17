@@ -37,9 +37,5 @@ public sealed partial class GetIndexResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexState> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexState> Indices { get; set; }
 }

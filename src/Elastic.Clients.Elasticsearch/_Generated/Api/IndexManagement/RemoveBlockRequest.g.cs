@@ -85,11 +85,11 @@ public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.R
 	public RemoveBlockRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block) : base(r => r.Required("index", indices).Required("block", block))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoveBlockRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoveBlockRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -109,11 +109,7 @@ public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.R
 	/// The block type to remove from the index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions Block { get => P<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>("block"); set => PR("block", value); }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions Block { get => P<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>("block"); set => PR("block", value); }
 
 	/// <summary>
 	/// <para>
@@ -123,11 +119,7 @@ public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.R
 	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -321,6 +313,11 @@ public readonly partial struct RemoveBlockRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -506,6 +503,11 @@ public readonly partial struct RemoveBlockRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

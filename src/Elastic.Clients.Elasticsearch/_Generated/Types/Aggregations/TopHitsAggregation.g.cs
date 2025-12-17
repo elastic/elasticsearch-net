@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TopHitsAggregationConverter))]
 public sealed partial class TopHitsAggregation
 {
-#if NET7_0_OR_GREATER
 	public TopHitsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TopHitsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TopHitsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

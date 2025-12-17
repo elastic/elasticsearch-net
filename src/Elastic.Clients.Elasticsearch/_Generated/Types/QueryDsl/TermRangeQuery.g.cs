@@ -31,11 +31,11 @@ public sealed partial class TermRangeQuery : Elastic.Clients.Elasticsearch.Query
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermRangeQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +51,7 @@ public sealed partial class TermRangeQuery : Elastic.Clients.Elasticsearch.Query
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>

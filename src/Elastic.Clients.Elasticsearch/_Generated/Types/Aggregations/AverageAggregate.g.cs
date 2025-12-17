@@ -31,17 +31,11 @@ public sealed partial class AverageAggregate : Elastic.Clients.Elasticsearch.Agg
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public AverageAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AverageAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AverageAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,10 +52,6 @@ public sealed partial class AverageAggregate : Elastic.Clients.Elasticsearch.Agg
 	/// unless specified otherwise.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Value { get; set; }
+	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

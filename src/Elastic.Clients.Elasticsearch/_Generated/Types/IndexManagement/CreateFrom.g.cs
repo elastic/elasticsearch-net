@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateFromConverter))]
 public sealed partial class CreateFrom
 {
-#if NET7_0_OR_GREATER
 	public CreateFrom()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CreateFrom()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateFrom(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

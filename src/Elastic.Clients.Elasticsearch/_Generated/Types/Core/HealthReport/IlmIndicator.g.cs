@@ -37,17 +37,11 @@ public sealed partial class IlmIndicator
 		Status = status;
 		Symptom = symptom;
 	}
-#if NET7_0_OR_GREATER
+
 	public IlmIndicator()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IlmIndicator()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IlmIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,14 +51,6 @@ public sealed partial class IlmIndicator
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails? Details { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis>? Diagnosis { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.HealthReport.Impact>? Impacts { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Symptom { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus Status { get; set; }
+	public required string Symptom { get; set; }
 }

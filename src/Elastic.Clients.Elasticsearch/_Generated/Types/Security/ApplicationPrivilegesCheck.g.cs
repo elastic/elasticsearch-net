@@ -33,17 +33,11 @@ public sealed partial class ApplicationPrivilegesCheck
 		Privileges = privileges;
 		Resources = resources;
 	}
-#if NET7_0_OR_GREATER
+
 	public ApplicationPrivilegesCheck()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ApplicationPrivilegesCheck()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApplicationPrivilegesCheck(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class ApplicationPrivilegesCheck
 	/// The name of the application.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Application { get; set; }
+	public required string Application { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,22 +57,14 @@ public sealed partial class ApplicationPrivilegesCheck
 	/// It may be either application privilege names or the names of actions that are granted by those privileges
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Privileges { get; set; }
+	public required System.Collections.Generic.ICollection<string> Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of resource names against which the privileges should be checked.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Resources { get; set; }
+	public required System.Collections.Generic.ICollection<string> Resources { get; set; }
 }
 
 public readonly partial struct ApplicationPrivilegesCheckDescriptor

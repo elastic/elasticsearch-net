@@ -33,38 +33,20 @@ public sealed partial class ShardStore
 		Node = node;
 		NodeId = nodeId;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardStore()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardStore()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardStore(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; set; }
 	public string? AllocationId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode Node { get; set; }
+	public required string NodeId { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException? StoreException { get; set; }
 }

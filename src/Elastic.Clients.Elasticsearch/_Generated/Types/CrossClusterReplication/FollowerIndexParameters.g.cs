@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowerIndexParametersConverter))]
 public sealed partial class FollowerIndexParameters
 {
-#if NET7_0_OR_GREATER
 	public FollowerIndexParameters()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FollowerIndexParameters()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FollowerIndexParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,37 +33,19 @@ public sealed partial class ShardRouting
 		Primary = primary;
 		State = state;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardRouting()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardRouting()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Node { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Primary { get; set; }
+	public required string Node { get; set; }
+	public required bool Primary { get; set; }
 	public string? RelocatingNode { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState State { get; set; }
 }

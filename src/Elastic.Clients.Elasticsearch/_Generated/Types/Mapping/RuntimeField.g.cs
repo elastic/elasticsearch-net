@@ -31,17 +31,11 @@ public sealed partial class RuntimeField
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public RuntimeField()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RuntimeField()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RuntimeField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -102,11 +96,7 @@ public sealed partial class RuntimeField
 	/// Field type, which can be: <c>boolean</c>, <c>composite</c>, <c>date</c>, <c>double</c>, <c>geo_point</c>, <c>ip</c>,<c>keyword</c>, <c>long</c>, or <c>lookup</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
 
 public readonly partial struct RuntimeFieldDescriptor<TDocument>

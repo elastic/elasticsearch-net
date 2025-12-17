@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FiltersAggregationConverter))]
 public sealed partial class FiltersAggregation
 {
-#if NET7_0_OR_GREATER
 	public FiltersAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FiltersAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

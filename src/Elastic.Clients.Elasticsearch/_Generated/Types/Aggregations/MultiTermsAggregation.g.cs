@@ -31,17 +31,11 @@ public sealed partial class MultiTermsAggregation
 	{
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiTermsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiTermsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiTermsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -104,11 +98,7 @@ public sealed partial class MultiTermsAggregation
 	/// The field from which to generate sets of terms.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 }
 
 public readonly partial struct MultiTermsAggregationDescriptor<TDocument>

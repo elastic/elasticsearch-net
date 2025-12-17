@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionSaturationConverter))]
 public sealed partial class RankFeatureFunctionSaturation
 {
-#if NET7_0_OR_GREATER
 	public RankFeatureFunctionSaturation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RankFeatureFunctionSaturation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

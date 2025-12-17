@@ -37,14 +37,6 @@ public sealed partial class PreviewTransformResponse<TTransform> : Elastic.Trans
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<TTransform> Preview { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexState GeneratedDestIndex { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<TTransform> Preview { get; set; }
 }

@@ -38,17 +38,11 @@ public sealed partial class ApiKey
 		Type = type;
 		Username = username;
 	}
-#if NET7_0_OR_GREATER
+
 	public ApiKey()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ApiKey()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +73,7 @@ public sealed partial class ApiKey
 	/// Creation time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Creation { get; set; }
+	public required System.DateTimeOffset Creation { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -97,11 +87,7 @@ public sealed partial class ApiKey
 	/// Id for the API key
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -109,11 +95,7 @@ public sealed partial class ApiKey
 	/// If the key has been invalidated, it has a value of <c>true</c>. Otherwise, it is <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Invalidated { get; set; }
+	public required bool Invalidated { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -136,22 +118,14 @@ public sealed partial class ApiKey
 	/// Metadata of the API key
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -165,11 +139,7 @@ public sealed partial class ApiKey
 	/// Realm name of the principal for which this API key was created.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Realm { get; set; }
+	public required string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -198,20 +168,12 @@ public sealed partial class ApiKey
 	/// The type of the API key (e.g. <c>rest</c> or <c>cross_cluster</c>).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.ApiKeyType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.ApiKeyType Type { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Principal for which this API key was created
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Username { get; set; }
+	public required string Username { get; set; }
 }

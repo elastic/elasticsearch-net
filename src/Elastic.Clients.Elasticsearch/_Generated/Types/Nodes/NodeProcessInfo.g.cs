@@ -33,17 +33,11 @@ public sealed partial class NodeProcessInfo
 		Mlockall = mlockall;
 		RefreshIntervalInMillis = refreshIntervalInMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeProcessInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeProcessInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeProcessInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class NodeProcessInfo
 	/// Process identifier (PID)
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Id { get; set; }
+	public required long Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Indicates if the process address space has been successfully locked in memory
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Mlockall { get; set; }
+	public required bool Mlockall { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refresh interval for the process statistics
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan RefreshIntervalInMillis { get; set; }
+	public required System.TimeSpan RefreshIntervalInMillis { get; set; }
 }

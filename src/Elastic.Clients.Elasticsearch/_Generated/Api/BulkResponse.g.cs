@@ -42,11 +42,7 @@ public partial class BulkResponse : Elastic.Transport.Products.Elasticsearch.Ela
 	/// If <c>true</c>, one or more of the operations in the bulk request did not complete successfully.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Errors { get; set; }
+	public required bool Errors { get; set; }
 	public long? IngestTook { get; set; }
 
 	/// <summary>
@@ -54,20 +50,12 @@ public partial class BulkResponse : Elastic.Transport.Products.Elasticsearch.Ela
 	/// The result of each operation in the bulk request, in the order they were submitted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> Items { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> Items { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The length of time, in milliseconds, it took to process the bulk request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Took { get; set; }
+	public required long Took { get; set; }
 }

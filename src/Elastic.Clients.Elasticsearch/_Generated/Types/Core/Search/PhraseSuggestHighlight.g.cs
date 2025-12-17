@@ -32,17 +32,11 @@ public sealed partial class PhraseSuggestHighlight
 		PostTag = postTag;
 		PreTag = preTag;
 	}
-#if NET7_0_OR_GREATER
+
 	public PhraseSuggestHighlight()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PhraseSuggestHighlight()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class PhraseSuggestHighlight
 	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PostTag { get; set; }
+	public required string PostTag { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PreTag { get; set; }
+	public required string PreTag { get; set; }
 }
 
 public readonly partial struct PhraseSuggestHighlightDescriptor

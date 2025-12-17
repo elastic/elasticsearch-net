@@ -31,17 +31,11 @@ public sealed partial class TermVector
 	{
 		Terms = terms;
 	}
-#if NET7_0_OR_GREATER
+
 	public TermVector()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TermVector()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TermVector(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,9 +43,5 @@ public sealed partial class TermVector
 	}
 
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics? FieldStatistics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.TermVectors.Term> Terms { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.TermVectors.Term> Terms { get; set; }
 }

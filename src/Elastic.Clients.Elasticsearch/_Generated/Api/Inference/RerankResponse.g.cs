@@ -37,9 +37,5 @@ public sealed partial class RerankResponse : Elastic.Transport.Products.Elastics
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.RankedDocument> Rerank { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.RankedDocument> Rerank { get; set; }
 }

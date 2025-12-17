@@ -36,17 +36,11 @@ public sealed partial class Message
 	{
 		Role = role;
 	}
-#if NET7_0_OR_GREATER
+
 	public Message()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Message()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Message(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -86,11 +80,7 @@ public sealed partial class Message
 	/// The role of the message author. Valid values are <c>user</c>, <c>assistant</c>, <c>system</c>, and <c>tool</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Role { get; set; }
+	public required string Role { get; set; }
 
 	/// <summary>
 	/// <para>

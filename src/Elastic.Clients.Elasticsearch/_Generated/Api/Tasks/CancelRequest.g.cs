@@ -79,16 +79,11 @@ public sealed partial class CancelRequest : Elastic.Clients.Elasticsearch.Reques
 	public CancelRequest(Elastic.Clients.Elasticsearch.TaskId? taskId) : base(r => r.Optional("task_id", taskId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CancelRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CancelRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CancelRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -277,6 +272,11 @@ public readonly partial struct CancelRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

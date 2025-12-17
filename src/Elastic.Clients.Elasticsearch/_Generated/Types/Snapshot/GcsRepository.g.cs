@@ -31,17 +31,11 @@ public sealed partial class GcsRepository : Elastic.Clients.Elasticsearch.Snapsh
 	{
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public GcsRepository()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GcsRepository()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GcsRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class GcsRepository : Elastic.Clients.Elasticsearch.Snapsh
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

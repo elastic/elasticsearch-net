@@ -78,16 +78,10 @@ public sealed partial class PutClusterSettingsRequestParameters : Elastic.Transp
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PutClusterSettingsRequestConverter))]
 public sealed partial class PutClusterSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>
 {
-#if NET7_0_OR_GREATER
 	public PutClusterSettingsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PutClusterSettingsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutClusterSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -316,6 +310,11 @@ public readonly partial struct PutClusterSettingsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

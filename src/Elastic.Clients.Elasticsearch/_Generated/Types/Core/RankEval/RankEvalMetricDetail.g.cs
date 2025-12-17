@@ -34,17 +34,11 @@ public sealed partial class RankEvalMetricDetail
 		MetricScore = metricScore;
 		UnratedDocs = unratedDocs;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankEvalMetricDetail()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankEvalMetricDetail()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalMetricDetail(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,42 +50,26 @@ public sealed partial class RankEvalMetricDetail
 	/// The hits section shows a grouping of the search results with their supplied ratings
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalHitItem> Hits { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The metric_details give additional information about the calculated quality metric (e.g. how many of the retrieved documents were relevant). The content varies for each metric but allows for better interpretation of the results
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> MetricDetails { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, object>> MetricDetails { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The metric_score in the details section shows the contribution of this query to the global quality metric score
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double MetricScore { get; set; }
+	public required double MetricScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unrated_docs section contains an _index and _id entry for each document in the search result for this query that didn’t have a ratings value. This can be used to ask the user to supply ratings for these documents
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.RankEval.UnratedDocument> UnratedDocs { get; set; }
 }
