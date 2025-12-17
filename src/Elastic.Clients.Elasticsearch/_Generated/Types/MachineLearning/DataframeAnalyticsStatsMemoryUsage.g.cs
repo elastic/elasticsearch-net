@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalyticsStatsMemoryUsage
 		PeakUsageBytes = peakUsageBytes;
 		Status = status;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsStatsMemoryUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsStatsMemoryUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsStatsMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,22 +55,14 @@ public sealed partial class DataframeAnalyticsStatsMemoryUsage
 	/// The number of bytes used at the highest peak of memory usage.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PeakUsageBytes { get; set; }
+	public required long PeakUsageBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The memory usage status.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Status { get; set; }
+	public required string Status { get; set; }
 
 	/// <summary>
 	/// <para>

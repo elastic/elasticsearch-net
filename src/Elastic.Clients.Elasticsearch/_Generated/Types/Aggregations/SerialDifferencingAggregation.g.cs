@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SerialDifferencingAggregationConverter))]
 public sealed partial class SerialDifferencingAggregation
 {
-#if NET7_0_OR_GREATER
 	public SerialDifferencingAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SerialDifferencingAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SerialDifferencingAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

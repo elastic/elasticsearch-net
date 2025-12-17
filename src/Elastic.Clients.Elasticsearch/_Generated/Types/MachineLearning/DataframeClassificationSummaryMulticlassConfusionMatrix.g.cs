@@ -32,31 +32,17 @@ public sealed partial class DataframeClassificationSummaryMulticlassConfusionMat
 		ConfusionMatrix = confusionMatrix;
 		OtherActualClassCount = otherActualClassCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeClassificationSummaryMulticlassConfusionMatrix()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeClassificationSummaryMulticlassConfusionMatrix()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeClassificationSummaryMulticlassConfusionMatrix(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixItem> ConfusionMatrix { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int OtherActualClassCount { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixItem> ConfusionMatrix { get; set; }
+	public required int OtherActualClassCount { get; set; }
 }

@@ -32,31 +32,17 @@ public sealed partial class UserProfileHitMetadata
 		PrimaryTerm = primaryTerm;
 		SeqNo = seqNo;
 	}
-#if NET7_0_OR_GREATER
+
 	public UserProfileHitMetadata()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public UserProfileHitMetadata()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UserProfileHitMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PrimaryTerm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SeqNo { get; set; }
+	public required long PrimaryTerm { get; set; }
+	public required long SeqNo { get; set; }
 }

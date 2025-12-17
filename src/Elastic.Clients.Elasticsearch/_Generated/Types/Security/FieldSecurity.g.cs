@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.FieldSecurityConverter))]
 public sealed partial class FieldSecurity
 {
-#if NET7_0_OR_GREATER
 	public FieldSecurity()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FieldSecurity()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldSecurity(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

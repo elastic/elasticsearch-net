@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StatsBucketAggregationConverter))]
 public sealed partial class StatsBucketAggregation
 {
-#if NET7_0_OR_GREATER
 	public StatsBucketAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public StatsBucketAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StatsBucketAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

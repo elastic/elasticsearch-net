@@ -37,17 +37,11 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 	{
 		MaximumRelevance = maximumRelevance;
 	}
-#if NET7_0_OR_GREATER
+
 	public RankEvalMetricExpectedReciprocalRank()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RankEvalMetricExpectedReciprocalRank()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -66,11 +60,7 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 	/// The highest relevance grade used in the user-supplied relevance judgments.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaximumRelevance { get; set; }
+	public required int MaximumRelevance { get; set; }
 }
 
 /// <summary>

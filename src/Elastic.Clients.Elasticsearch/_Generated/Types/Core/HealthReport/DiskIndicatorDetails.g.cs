@@ -35,46 +35,20 @@ public sealed partial class DiskIndicatorDetails
 		NodesWithEnoughDiskSpace = nodesWithEnoughDiskSpace;
 		NodesWithUnknownDiskStatus = nodesWithUnknownDiskStatus;
 	}
-#if NET7_0_OR_GREATER
+
 	public DiskIndicatorDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DiskIndicatorDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DiskIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndicesWithReadonlyBlock { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NodesOverFloodStageWatermark { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NodesOverHighWatermark { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NodesWithEnoughDiskSpace { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NodesWithUnknownDiskStatus { get; set; }
+	public required long IndicesWithReadonlyBlock { get; set; }
+	public required long NodesOverFloodStageWatermark { get; set; }
+	public required long NodesOverHighWatermark { get; set; }
+	public required long NodesWithEnoughDiskSpace { get; set; }
+	public required long NodesWithUnknownDiskStatus { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.IpinfoConverter))]
 public sealed partial class Ipinfo
 {
-#if NET7_0_OR_GREATER
 	public Ipinfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Ipinfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ipinfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

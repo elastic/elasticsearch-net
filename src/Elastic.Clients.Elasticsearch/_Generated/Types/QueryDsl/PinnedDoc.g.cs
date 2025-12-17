@@ -32,17 +32,11 @@ public sealed partial class PinnedDoc
 		Id = id;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public PinnedDoc()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PinnedDoc()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PinnedDoc(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class PinnedDoc
 	/// The unique document ID.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id Id { get; set; }
+	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index that contains the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
 public readonly partial struct PinnedDocDescriptor

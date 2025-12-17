@@ -42,41 +42,21 @@ public sealed partial class InfoResponse : Elastic.Transport.Products.Elasticsea
 	/// The responding cluster's name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterUuid { get; set; }
+	public required string ClusterName { get; set; }
+	public required string ClusterUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The responding node's name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Tagline { get; set; }
+	public required string Name { get; set; }
+	public required string Tagline { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The running version of Elasticsearch.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; set; }
+	public required Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; set; }
 }

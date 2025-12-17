@@ -37,9 +37,5 @@ public sealed partial class StartJobResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Started { get; set; }
+	public required bool Started { get; set; }
 }

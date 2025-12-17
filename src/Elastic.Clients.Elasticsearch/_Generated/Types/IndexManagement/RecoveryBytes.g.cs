@@ -34,46 +34,24 @@ public sealed partial class RecoveryBytes
 		ReusedInBytes = reusedInBytes;
 		TotalInBytes = totalInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public RecoveryBytes()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RecoveryBytes()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RecoveryBytes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Percentage Percent { get; set; }
+	public required Elastic.Clients.Elasticsearch.Percentage Percent { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? Recovered { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshot { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? RecoveredFromSnapshotInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize RecoveredInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize RecoveredInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? Reused { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize ReusedInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize ReusedInBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize TotalInBytes { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize TotalInBytes { get; set; }
 }

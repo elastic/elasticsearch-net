@@ -31,17 +31,11 @@ public sealed partial class GeoLineSort
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoLineSort()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoLineSort()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoLineSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class GeoLineSort
 	/// The name of the numeric field to use as the sort key for ordering the points.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
 public readonly partial struct GeoLineSortDescriptor<TDocument>

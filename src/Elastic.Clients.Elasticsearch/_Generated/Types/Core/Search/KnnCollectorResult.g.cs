@@ -33,17 +33,11 @@ public sealed partial class KnnCollectorResult
 		Reason = reason;
 		TimeInNanos = timeInNanos;
 	}
-#if NET7_0_OR_GREATER
+
 	public KnnCollectorResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KnnCollectorResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KnnCollectorResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,20 +45,8 @@ public sealed partial class KnnCollectorResult
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>? Children { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Reason { get; set; }
+	public required string Name { get; set; }
+	public required string Reason { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Time { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeInNanos { get; set; }
+	public required System.TimeSpan TimeInNanos { get; set; }
 }

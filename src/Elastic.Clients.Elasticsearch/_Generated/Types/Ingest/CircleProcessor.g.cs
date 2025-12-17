@@ -33,17 +33,11 @@ public sealed partial class CircleProcessor
 		Field = field;
 		ShapeType = shapeType;
 	}
-#if NET7_0_OR_GREATER
+
 	public CircleProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CircleProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CircleProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,22 +57,14 @@ public sealed partial class CircleProcessor
 	/// The difference between the resulting inscribed distance from center to side and the circle’s radius (measured in meters for <c>geo_shape</c>, unit-less for <c>shape</c>).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double ErrorDistance { get; set; }
+	public required double ErrorDistance { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field to interpret as a circle. Either a string in WKT format or a map for GeoJSON.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -113,11 +99,7 @@ public sealed partial class CircleProcessor
 	/// Which field mapping type is to be used when processing the circle: <c>geo_shape</c> or <c>shape</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
+	public required Elastic.Clients.Elasticsearch.Ingest.ShapeType ShapeType { get; set; }
 
 	/// <summary>
 	/// <para>

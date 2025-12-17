@@ -31,17 +31,11 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	{
 		Pattern = pattern;
 	}
-#if NET7_0_OR_GREATER
+
 	public PatternAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PatternAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PatternAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,11 +44,7 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 
 	public string? Flags { get; set; }
 	public bool? Lowercase { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Pattern { get; set; }
+	public required string Pattern { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
 	public string Type => "pattern";

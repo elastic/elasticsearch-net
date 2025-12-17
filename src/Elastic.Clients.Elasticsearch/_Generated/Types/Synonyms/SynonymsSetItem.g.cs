@@ -32,17 +32,11 @@ public sealed partial class SynonymsSetItem
 		Count = count;
 		SynonymsSet = synonymsSet;
 	}
-#if NET7_0_OR_GREATER
+
 	public SynonymsSetItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SynonymsSetItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SynonymsSetItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class SynonymsSetItem
 	/// Number of synonym rules that the synonym set contains
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Synonyms set identifier
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SynonymsSet { get; set; }
+	public required string SynonymsSet { get; set; }
 }

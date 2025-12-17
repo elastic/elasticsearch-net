@@ -31,17 +31,11 @@ public sealed partial class NestedSortValue
 	{
 		Path = path;
 	}
-#if NET7_0_OR_GREATER
+
 	public NestedSortValue()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NestedSortValue()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +45,7 @@ public sealed partial class NestedSortValue
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 	public int? MaxChildren { get; set; }
 	public Elastic.Clients.Elasticsearch.NestedSortValue? Nested { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Path { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
 }
 
 public readonly partial struct NestedSortValueDescriptor<TDocument>

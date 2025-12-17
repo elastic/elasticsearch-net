@@ -32,32 +32,18 @@ public sealed partial class MasterIsStableIndicatorClusterFormationNode
 		ClusterFormationMessage = clusterFormationMessage;
 		NodeId = nodeId;
 	}
-#if NET7_0_OR_GREATER
+
 	public MasterIsStableIndicatorClusterFormationNode()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MasterIsStableIndicatorClusterFormationNode()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MasterIsStableIndicatorClusterFormationNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterFormationMessage { get; set; }
+	public required string ClusterFormationMessage { get; set; }
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
+	public required string NodeId { get; set; }
 }

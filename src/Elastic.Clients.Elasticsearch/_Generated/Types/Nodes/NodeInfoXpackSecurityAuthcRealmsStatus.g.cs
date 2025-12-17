@@ -31,17 +31,11 @@ public sealed partial class NodeInfoXpackSecurityAuthcRealmsStatus
 	{
 		Order = order;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoXpackSecurityAuthcRealmsStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoXpackSecurityAuthcRealmsStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoXpackSecurityAuthcRealmsStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,9 +43,5 @@ public sealed partial class NodeInfoXpackSecurityAuthcRealmsStatus
 	}
 
 	public string? Enabled { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Order { get; set; }
+	public required string Order { get; set; }
 }

@@ -55,11 +55,11 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	{
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutOpenaiRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutOpenaiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +79,7 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id OpenaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openai_inference_id"); set => PR("openai_inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id OpenaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("openai_inference_id"); set => PR("openai_inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -91,11 +87,7 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.OpenAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenAITaskType>("task_type"); set => PR("task_type", value); }
+	public required Elastic.Clients.Elasticsearch.Inference.OpenAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.OpenAITaskType>("task_type"); set => PR("task_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -123,11 +115,7 @@ public sealed partial class PutOpenaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings ServiceSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -311,6 +299,11 @@ public readonly partial struct PutOpenaiRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -34,17 +34,11 @@ public sealed partial class AzureAiStudioServiceSettings
 		Provider = provider;
 		Target = target;
 	}
-#if NET7_0_OR_GREATER
+
 	public AzureAiStudioServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AzureAiStudioServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AzureAiStudioServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class AzureAiStudioServiceSettings
 	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,11 +66,7 @@ public sealed partial class AzureAiStudioServiceSettings
 	/// The <c>realtime</c> endpoint type is for "real-time" endpoints that are billed per hour of usage.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string EndpointType { get; set; }
+	public required string EndpointType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -121,11 +107,7 @@ public sealed partial class AzureAiStudioServiceSettings
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Provider { get; set; }
+	public required string Provider { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -141,11 +123,7 @@ public sealed partial class AzureAiStudioServiceSettings
 	/// This can be found on the overview page for your deployment in the management section of your Azure AI Studio account.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Target { get; set; }
+	public required string Target { get; set; }
 }
 
 public readonly partial struct AzureAiStudioServiceSettingsDescriptor

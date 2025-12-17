@@ -42,20 +42,12 @@ public sealed partial class ExplainDataFrameAnalyticsResponse : Elastic.Transpor
 	/// An array of objects that explain selection for each field, sorted by the field names.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> FieldSelection { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> FieldSelection { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of objects that explain selection for each field, sorted by the field names.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation MemoryEstimation { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation MemoryEstimation { get; set; }
 }

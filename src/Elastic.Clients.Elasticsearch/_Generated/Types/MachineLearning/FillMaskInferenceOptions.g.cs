@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FillMaskInferenceOptionsConverter))]
 public sealed partial class FillMaskInferenceOptions
 {
-#if NET7_0_OR_GREATER
 	public FillMaskInferenceOptions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FillMaskInferenceOptions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FillMaskInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

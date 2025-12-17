@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexTemplateDataStreamConfigurationConverter))]
 public sealed partial class IndexTemplateDataStreamConfiguration
 {
-#if NET7_0_OR_GREATER
 	public IndexTemplateDataStreamConfiguration()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexTemplateDataStreamConfiguration()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexTemplateDataStreamConfiguration(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

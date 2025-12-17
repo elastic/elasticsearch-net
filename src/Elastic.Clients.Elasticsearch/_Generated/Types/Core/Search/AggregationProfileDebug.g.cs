@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.AggregationProfileDebugConverter))]
 public sealed partial class AggregationProfileDebug
 {
-#if NET7_0_OR_GREATER
 	public AggregationProfileDebug()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AggregationProfileDebug()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AggregationProfileDebug(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

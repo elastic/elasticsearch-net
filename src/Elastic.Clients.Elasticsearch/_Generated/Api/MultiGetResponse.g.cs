@@ -44,9 +44,5 @@ public sealed partial class MultiGetResponse<TDocument> : Elastic.Transport.Prod
 	/// If there is a failure getting a particular document, the error is included in place of the document.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>> Docs { get; set; }
 }

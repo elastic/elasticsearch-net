@@ -33,17 +33,11 @@ public sealed partial class TransformHealthIssue
 		Issue = issue;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public TransformHealthIssue()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TransformHealthIssue()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformHealthIssue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class TransformHealthIssue
 	/// Number of times this issue has occurred since it started
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -81,20 +71,12 @@ public sealed partial class TransformHealthIssue
 	/// A description of the issue
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Issue { get; set; }
+	public required string Issue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of the issue
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

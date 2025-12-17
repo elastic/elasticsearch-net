@@ -31,17 +31,11 @@ public sealed partial class ReverseNestedAggregate : Elastic.Clients.Elasticsear
 	{
 		DocCount = docCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReverseNestedAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReverseNestedAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReverseNestedAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class ReverseNestedAggregate : Elastic.Clients.Elasticsear
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
+	public required long DocCount { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "reverse_nested";

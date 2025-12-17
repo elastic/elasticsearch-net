@@ -31,17 +31,11 @@ public sealed partial class AnalysisMemoryLimit
 	{
 		ModelMemoryLimit = modelMemoryLimit;
 	}
-#if NET7_0_OR_GREATER
+
 	public AnalysisMemoryLimit()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AnalysisMemoryLimit()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AnalysisMemoryLimit(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class AnalysisMemoryLimit
 	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelMemoryLimit { get; set; }
+	public required string ModelMemoryLimit { get; set; }
 }
 
 public readonly partial struct AnalysisMemoryLimitDescriptor

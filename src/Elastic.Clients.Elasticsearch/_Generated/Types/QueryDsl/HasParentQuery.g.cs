@@ -32,17 +32,11 @@ public sealed partial class HasParentQuery
 		ParentType = parentType;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public HasParentQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HasParentQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HasParentQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +73,7 @@ public sealed partial class HasParentQuery
 	/// Name of the parent relationship mapped for the <c>join</c> field.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ParentType { get; set; }
+	public required string ParentType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,11 +81,7 @@ public sealed partial class HasParentQuery
 	/// If a parent document matches the search, the query returns its child documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

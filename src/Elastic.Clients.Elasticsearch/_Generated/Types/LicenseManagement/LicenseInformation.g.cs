@@ -39,17 +39,11 @@ public sealed partial class LicenseInformation
 		Type = type;
 		Uid = uid;
 	}
-#if NET7_0_OR_GREATER
+
 	public LicenseInformation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LicenseInformation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LicenseInformation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,50 +52,14 @@ public sealed partial class LicenseInformation
 
 	public System.DateTimeOffset? ExpiryDate { get; set; }
 	public System.DateTimeOffset? ExpiryDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset IssueDate { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset IssueDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IssuedTo { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Issuer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long? MaxNodes { get; set; }
+	public required System.DateTimeOffset IssueDate { get; set; }
+	public required System.DateTimeOffset IssueDateInMillis { get; set; }
+	public required string IssuedTo { get; set; }
+	public required string Issuer { get; set; }
+	public required long? MaxNodes { get; set; }
 	public int? MaxResourceUnits { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartDateInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uid { get; set; }
+	public required System.DateTimeOffset StartDateInMillis { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+	public required string Uid { get; set; }
 }

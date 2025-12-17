@@ -35,46 +35,20 @@ public sealed partial class SnapshotPolicyStats
 		SnapshotsFailed = snapshotsFailed;
 		SnapshotsTaken = snapshotsTaken;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnapshotPolicyStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnapshotPolicyStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnapshotPolicyStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Policy { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SnapshotDeletionFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SnapshotsDeleted { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SnapshotsFailed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SnapshotsTaken { get; set; }
+	public required string Policy { get; set; }
+	public required long SnapshotDeletionFailures { get; set; }
+	public required long SnapshotsDeleted { get; set; }
+	public required long SnapshotsFailed { get; set; }
+	public required long SnapshotsTaken { get; set; }
 }

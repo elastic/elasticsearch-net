@@ -38,61 +38,23 @@ public sealed partial class NodeInfoOSCPU
 		TotalSockets = totalSockets;
 		Vendor = vendor;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoOSCPU()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoOSCPU()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoOSCPU(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string CacheSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CacheSizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CoresPerSocket { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Mhz { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Model { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalCores { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalSockets { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Vendor { get; set; }
+	public required string CacheSize { get; set; }
+	public required int CacheSizeInBytes { get; set; }
+	public required int CoresPerSocket { get; set; }
+	public required int Mhz { get; set; }
+	public required string Model { get; set; }
+	public required int TotalCores { get; set; }
+	public required int TotalSockets { get; set; }
+	public required string Vendor { get; set; }
 }

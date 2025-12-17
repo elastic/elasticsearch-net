@@ -32,32 +32,18 @@ public sealed partial class SecurityRolesDlsBitSetCache
 		Count = count;
 		MemoryInBytes = memoryInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public SecurityRolesDlsBitSetCache()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SecurityRolesDlsBitSetCache()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SecurityRolesDlsBitSetCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MemoryInBytes { get; set; }
+	public required long MemoryInBytes { get; set; }
 }

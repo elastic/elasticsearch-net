@@ -33,36 +33,18 @@ public sealed partial class ContextMethod
 		Params = @params;
 		ReturnType = returnType;
 	}
-#if NET7_0_OR_GREATER
+
 	public ContextMethod()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ContextMethod()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ContextMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> Params { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ReturnType { get; set; }
+	public required string Name { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> Params { get; set; }
+	public required string ReturnType { get; set; }
 }

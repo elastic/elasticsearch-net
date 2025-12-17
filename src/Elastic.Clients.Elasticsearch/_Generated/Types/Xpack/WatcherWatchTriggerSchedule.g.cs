@@ -34,41 +34,19 @@ public sealed partial class WatcherWatchTriggerSchedule
 		Cron = cron;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public WatcherWatchTriggerSchedule()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WatcherWatchTriggerSchedule()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WatcherWatchTriggerSchedule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Active { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Counter All { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.Counter Cron { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Active { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Counter All { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Counter Cron { get; set; }
+	public required long Total { get; set; }
 }

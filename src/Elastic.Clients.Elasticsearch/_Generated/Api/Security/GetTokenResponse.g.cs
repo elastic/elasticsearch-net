@@ -37,27 +37,11 @@ public sealed partial class GetTokenResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string AccessToken { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Security.AuthenticatedUser Authentication { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long ExpiresIn { get; set; }
+	public required string AccessToken { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.AuthenticatedUser Authentication { get; set; }
+	public required long ExpiresIn { get; set; }
 	public string? KerberosAuthenticationResponseToken { get; set; }
 	public string? RefreshToken { get; set; }
 	public string? Scope { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Type { get; set; }
+	public required string Type { get; set; }
 }

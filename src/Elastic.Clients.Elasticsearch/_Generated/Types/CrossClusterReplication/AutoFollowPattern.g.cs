@@ -32,31 +32,17 @@ public sealed partial class AutoFollowPattern
 		Name = name;
 		Pattern = pattern;
 	}
-#if NET7_0_OR_GREATER
+
 	public AutoFollowPattern()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AutoFollowPattern()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AutoFollowPattern(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPatternSummary Pattern { get; set; }
+	public required string Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowPatternSummary Pattern { get; set; }
 }

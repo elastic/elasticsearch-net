@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.AliasConverter))]
 public sealed partial class Alias
 {
-#if NET7_0_OR_GREATER
 	public Alias()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Alias()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Alias(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

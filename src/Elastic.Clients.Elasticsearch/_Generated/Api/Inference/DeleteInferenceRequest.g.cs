@@ -57,11 +57,11 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 	public DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteInferenceRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -81,11 +81,7 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 	/// The inference identifier.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -201,6 +197,11 @@ public readonly partial struct DeleteInferenceRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

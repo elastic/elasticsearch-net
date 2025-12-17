@@ -33,17 +33,11 @@ public sealed partial class DataframeAnalyticsStatsDataCounts
 		TestDocsCount = testDocsCount;
 		TrainingDocsCount = trainingDocsCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsStatsDataCounts()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsStatsDataCounts()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsStatsDataCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class DataframeAnalyticsStatsDataCounts
 	/// The number of documents that are skipped during the analysis because they contained values that are not supported by the analysis. For example, outlier detection does not support missing fields so it skips documents with missing fields. Likewise, all types of analysis skip documents that contain arrays with more than one element.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int SkippedDocsCount { get; set; }
+	public required int SkippedDocsCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that are not used for training the model and can be used for testing.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TestDocsCount { get; set; }
+	public required int TestDocsCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of documents that are used for training the model.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TrainingDocsCount { get; set; }
+	public required int TrainingDocsCount { get; set; }
 }

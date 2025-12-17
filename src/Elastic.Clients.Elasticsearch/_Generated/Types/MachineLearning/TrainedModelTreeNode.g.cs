@@ -31,17 +31,11 @@ public sealed partial class TrainedModelTreeNode
 	{
 		NodeIndex = nodeIndex;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelTreeNode()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelTreeNode()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelTreeNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,11 +46,7 @@ public sealed partial class TrainedModelTreeNode
 	public bool? DefaultLeft { get; set; }
 	public double? LeafValue { get; set; }
 	public int? LeftChild { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NodeIndex { get; set; }
+	public required int NodeIndex { get; set; }
 	public int? RightChild { get; set; }
 	public int? SplitFeature { get; set; }
 	public int? SplitGain { get; set; }

@@ -67,11 +67,11 @@ public sealed partial class ExistsTemplateRequest : Elastic.Clients.Elasticsearc
 	public ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ExistsTemplateRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExistsTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -92,11 +92,7 @@ public sealed partial class ExistsTemplateRequest : Elastic.Clients.Elasticsearc
 	/// Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -219,6 +215,11 @@ public readonly partial struct ExistsTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -31,26 +31,16 @@ public sealed partial class FoundStatus
 	{
 		Found = found;
 	}
-#if NET7_0_OR_GREATER
+
 	public FoundStatus()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FoundStatus()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FoundStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Found { get; set; }
+	public required bool Found { get; set; }
 }

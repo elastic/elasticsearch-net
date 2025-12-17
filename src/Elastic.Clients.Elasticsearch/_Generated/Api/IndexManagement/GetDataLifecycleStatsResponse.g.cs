@@ -42,22 +42,14 @@ public sealed partial class GetDataLifecycleStatsResponse : Elastic.Transport.Pr
 	/// The count of data streams currently being managed by the data stream lifecycle.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DataStreamCount { get; set; }
+	public required int DataStreamCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Information about the data streams that are managed by the data stream lifecycle.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamStats> DataStreams { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamStats> DataStreams { get; set; }
 
 	/// <summary>
 	/// <para>

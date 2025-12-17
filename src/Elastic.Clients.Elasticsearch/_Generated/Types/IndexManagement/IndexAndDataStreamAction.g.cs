@@ -32,17 +32,11 @@ public sealed partial class IndexAndDataStreamAction
 		DataStream = dataStream;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public IndexAndDataStreamAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexAndDataStreamAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexAndDataStreamAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class IndexAndDataStreamAction
 	/// Data stream targeted by the action.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.DataStreamName DataStream { get; set; }
+	public required Elastic.Clients.Elasticsearch.DataStreamName DataStream { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Index for the action.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
 public readonly partial struct IndexAndDataStreamActionDescriptor

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.EdgeNGramTokenizerConverter))]
 public sealed partial class EdgeNGramTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
-#if NET7_0_OR_GREATER
 	public EdgeNGramTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public EdgeNGramTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EdgeNGramTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

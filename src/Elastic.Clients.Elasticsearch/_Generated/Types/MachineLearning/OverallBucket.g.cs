@@ -36,17 +36,11 @@ public sealed partial class OverallBucket
 		ResultType = resultType;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public OverallBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OverallBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OverallBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,66 +52,42 @@ public sealed partial class OverallBucket
 	/// The length of the bucket in seconds. Matches the job with the longest bucket_span value.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan BucketSpan { get; set; }
+	public required System.TimeSpan BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsInterim { get; set; }
+	public required bool IsInterim { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of objects that contain the max_anomaly_score per job_id.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob> Jobs { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucketJob> Jobs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The top_n average of the maximum bucket anomaly_score per job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double OverallScore { get; set; }
+	public required double OverallScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Internal. This is always set to overall_bucket.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time of the bucket for which these results were calculated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -33,17 +33,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 		Field = field;
 		FrequencyMap = frequencyMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessorFrequencyEncoding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisFeatureProcessorFrequencyEncoding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessorFrequencyEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,27 +49,15 @@ public sealed partial class DataframeAnalysisFeatureProcessorFrequencyEncoding
 	/// The resulting feature name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
+	public required System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
 }
 
 public readonly partial struct DataframeAnalysisFeatureProcessorFrequencyEncodingDescriptor<TDocument>

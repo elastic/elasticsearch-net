@@ -35,17 +35,11 @@ public sealed partial class TrainedModelInferenceStats
 		MissingAllFieldsCount = missingAllFieldsCount;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public TrainedModelInferenceStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TrainedModelInferenceStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TrainedModelInferenceStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,22 +54,14 @@ public sealed partial class TrainedModelInferenceStats
 	/// Refer to general machine learning settings for the appropriate settings.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CacheMissCount { get; set; }
+	public required int CacheMissCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of failures when using the model for inference.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FailureCount { get; set; }
+	public required int FailureCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,31 +69,19 @@ public sealed partial class TrainedModelInferenceStats
 	/// This is across all inference contexts, including all pipelines.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int InferenceCount { get; set; }
+	public required int InferenceCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of inference calls where all the training features for the model were missing.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MissingAllFieldsCount { get; set; }
+	public required int MissingAllFieldsCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The time when the statistics were last updated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 }

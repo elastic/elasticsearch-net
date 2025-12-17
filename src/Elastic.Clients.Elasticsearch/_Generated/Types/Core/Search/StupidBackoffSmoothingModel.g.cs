@@ -31,17 +31,11 @@ public sealed partial class StupidBackoffSmoothingModel
 	{
 		Discount = discount;
 	}
-#if NET7_0_OR_GREATER
+
 	public StupidBackoffSmoothingModel()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public StupidBackoffSmoothingModel()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal StupidBackoffSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class StupidBackoffSmoothingModel
 	/// A constant factor that the lower order n-gram model is discounted by.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Discount { get; set; }
+	public required double Discount { get; set; }
 }
 
 public readonly partial struct StupidBackoffSmoothingModelDescriptor

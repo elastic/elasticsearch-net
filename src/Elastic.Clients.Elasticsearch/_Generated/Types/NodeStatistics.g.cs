@@ -38,17 +38,11 @@ public sealed partial class NodeStatistics
 		Successful = successful;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public sealed partial class NodeStatistics
 	/// Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Failed { get; set; }
+	public required int Failed { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Failures { get; set; }
 
 	/// <summary>
@@ -72,20 +62,12 @@ public sealed partial class NodeStatistics
 	/// Number of nodes that responded successfully to the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Successful { get; set; }
+	public required int Successful { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of nodes selected by the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

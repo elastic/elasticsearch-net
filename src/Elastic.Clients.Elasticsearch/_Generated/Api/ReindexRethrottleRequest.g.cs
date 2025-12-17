@@ -58,11 +58,11 @@ public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticse
 	public ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ReindexRethrottleRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -82,11 +82,7 @@ public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticse
 	/// The task identifier, which can be found by using the tasks API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -175,6 +171,11 @@ public readonly partial struct ReindexRethrottleRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

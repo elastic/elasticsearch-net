@@ -35,17 +35,11 @@ public sealed partial class MemMlStats
 		NativeCodeOverheadInBytes = nativeCodeOverheadInBytes;
 		NativeInferenceInBytes = nativeInferenceInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public MemMlStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MemMlStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MemMlStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class MemMlStats
 	/// Amount of native memory, in bytes, set aside for anomaly detection jobs.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int AnomalyDetectorsInBytes { get; set; }
+	public required int AnomalyDetectorsInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -82,11 +72,7 @@ public sealed partial class MemMlStats
 	/// Amount of native memory, in bytes, set aside for data frame analytics jobs.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DataFrameAnalyticsInBytes { get; set; }
+	public required int DataFrameAnalyticsInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -100,11 +86,7 @@ public sealed partial class MemMlStats
 	/// Maximum amount of native memory (separate to the JVM heap), in bytes, that may be used by machine learning native processes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int MaxInBytes { get; set; }
+	public required int MaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -118,11 +100,7 @@ public sealed partial class MemMlStats
 	/// Amount of native memory, in bytes, set aside for loading machine learning native code shared libraries.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NativeCodeOverheadInBytes { get; set; }
+	public required int NativeCodeOverheadInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -136,9 +114,5 @@ public sealed partial class MemMlStats
 	/// Amount of native memory, in bytes, set aside for trained models that have a PyTorch model_type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NativeInferenceInBytes { get; set; }
+	public required int NativeInferenceInBytes { get; set; }
 }

@@ -33,17 +33,11 @@ public sealed partial class FieldCapability
 		Searchable = searchable;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldCapability()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldCapability()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldCapability(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class FieldCapability
 	/// Whether this field can be aggregated on all indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Aggregatable { get; set; }
+	public required bool Aggregatable { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -117,11 +107,7 @@ public sealed partial class FieldCapability
 	/// Whether this field is indexed for search on all indices.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Searchable { get; set; }
+	public required bool Searchable { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -137,9 +123,5 @@ public sealed partial class FieldCapability
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

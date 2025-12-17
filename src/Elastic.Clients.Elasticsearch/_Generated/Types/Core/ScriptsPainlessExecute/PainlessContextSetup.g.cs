@@ -32,17 +32,11 @@ public sealed partial class PainlessContextSetup
 		Document = document;
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public PainlessContextSetup()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PainlessContextSetup()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class PainlessContextSetup
 	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Document { get; set; }
+	public required object Document { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,11 +62,7 @@ public sealed partial class PainlessContextSetup
 	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>

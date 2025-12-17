@@ -37,9 +37,5 @@ public sealed partial class GetMappingResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexMappingRecord> Mappings { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexMappingRecord> Mappings { get; set; }
 }

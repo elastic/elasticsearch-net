@@ -34,17 +34,11 @@ public partial class MultiSearchItem<TDocument>
 		TimedOut = timedOut;
 		Took = took;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiSearchItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiSearchItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiSearchItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -60,11 +54,7 @@ public partial class MultiSearchItem<TDocument>
 	/// The returned documents and metadata.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
@@ -84,11 +74,7 @@ public partial class MultiSearchItem<TDocument>
 	/// A count of shards used for the request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public int? Status { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
@@ -98,11 +84,7 @@ public partial class MultiSearchItem<TDocument>
 	/// If <c>true</c>, the request timed out before completion; returned results may be partial or empty.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool TimedOut { get; set; }
+	public required bool TimedOut { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -148,9 +130,5 @@ public partial class MultiSearchItem<TDocument>
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Took { get; set; }
+	public required long Took { get; set; }
 }

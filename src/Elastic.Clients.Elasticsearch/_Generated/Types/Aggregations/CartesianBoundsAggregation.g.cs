@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CartesianBoundsAggregationConverter))]
 public sealed partial class CartesianBoundsAggregation
 {
-#if NET7_0_OR_GREATER
 	public CartesianBoundsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CartesianBoundsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CartesianBoundsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

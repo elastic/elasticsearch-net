@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketSortAggregationConverter))]
 public sealed partial class BucketSortAggregation
 {
-#if NET7_0_OR_GREATER
 	public BucketSortAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public BucketSortAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketSortAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

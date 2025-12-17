@@ -37,9 +37,5 @@ public sealed partial class GetRepositoryResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Snapshot.Repositories Repositories { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.Repositories Repositories { get; set; }
 }

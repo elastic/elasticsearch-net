@@ -33,17 +33,11 @@ public sealed partial class MlInferenceTrainedModelsCount
 		Prepackaged = prepackaged;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInferenceTrainedModelsCount()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInferenceTrainedModelsCount()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInferenceTrainedModelsCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -52,22 +46,10 @@ public sealed partial class MlInferenceTrainedModelsCount
 
 	public long? Classification { get; set; }
 	public long? Ner { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Other { get; set; }
+	public required long Other { get; set; }
 	public long? PassThrough { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Prepackaged { get; set; }
+	public required long Prepackaged { get; set; }
 	public long? Regression { get; set; }
 	public long? TextEmbedding { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required long Total { get; set; }
 }

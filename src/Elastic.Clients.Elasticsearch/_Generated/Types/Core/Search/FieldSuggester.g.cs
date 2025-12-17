@@ -28,16 +28,11 @@ public sealed partial class FieldSuggester
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public FieldSuggester()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public FieldSuggester()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -32,17 +32,11 @@ public sealed partial class Latest
 		Sort = sort;
 		UniqueKey = uniqueKey;
 	}
-#if NET7_0_OR_GREATER
+
 	public Latest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Latest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Latest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class Latest
 	/// Specifies the date field that is used to identify the latest documents.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Sort { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Sort { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies an array of one or more fields that are used to group the data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields UniqueKey { get; set; }
 }
 
 public readonly partial struct LatestDescriptor<TDocument>

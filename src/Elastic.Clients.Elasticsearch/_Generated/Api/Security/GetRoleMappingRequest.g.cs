@@ -43,16 +43,11 @@ public sealed partial class GetRoleMappingRequest : Elastic.Clients.Elasticsearc
 	public GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetRoleMappingRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetRoleMappingRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -138,6 +133,11 @@ public readonly partial struct GetRoleMappingRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

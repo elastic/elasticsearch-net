@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ShrinkActionConverter))]
 public sealed partial class ShrinkAction
 {
-#if NET7_0_OR_GREATER
 	public ShrinkAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ShrinkAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

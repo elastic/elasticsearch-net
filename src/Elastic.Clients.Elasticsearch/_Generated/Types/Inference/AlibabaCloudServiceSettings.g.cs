@@ -34,17 +34,11 @@ public sealed partial class AlibabaCloudServiceSettings
 		ServiceId = serviceId;
 		Workspace = workspace;
 	}
-#if NET7_0_OR_GREATER
+
 	public AlibabaCloudServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AlibabaCloudServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AlibabaCloudServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class AlibabaCloudServiceSettings
 	/// A valid API key for the AlibabaCloud AI Search API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -68,11 +58,7 @@ public sealed partial class AlibabaCloudServiceSettings
 	/// You can find the host address in the API keys section of the documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Host { get; set; }
+	public required string Host { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -139,22 +125,14 @@ public sealed partial class AlibabaCloudServiceSettings
 	/// <c>ops-text-embedding-002</c>
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ServiceId { get; set; }
+	public required string ServiceId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the workspace used for the inference task.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Workspace { get; set; }
+	public required string Workspace { get; set; }
 }
 
 public readonly partial struct AlibabaCloudServiceSettingsDescriptor

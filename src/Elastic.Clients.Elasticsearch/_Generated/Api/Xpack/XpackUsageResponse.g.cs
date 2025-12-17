@@ -37,117 +37,33 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base AggregateMetric { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Analytics Analytics { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base AggregateMetric { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Analytics Analytics { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Archive Archive { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Ccr Ccr { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Base? DataFrame { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Base? DataScience { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.DataStreams? DataStreams { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.DataTiers DataTiers { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.DataTiers DataTiers { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Base? Enrich { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Flattened? Flattened { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.FrozenIndices FrozenIndices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.FrozenIndices FrozenIndices { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base Rollup { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base Logstash { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MachineLearning Ml { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Monitoring Monitoring { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base Rollup { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldTypes? RuntimeFields { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots SearchableSnapshots { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Security Security { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Slm Slm { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base Spatial { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Sql Sql { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base Transform { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.SearchableSnapshots SearchableSnapshots { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Security Security { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Slm Slm { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base Spatial { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Sql Sql { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base Transform { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Vector? Vectors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Base VotingOnly { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Xpack.Watcher Watcher { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Base VotingOnly { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.Watcher Watcher { get; set; }
 }

@@ -56,11 +56,11 @@ public sealed partial class DeleteIpLocationDatabaseRequest : Elastic.Clients.El
 	public DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ids id) : base(r => r.Required("id", id))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteIpLocationDatabaseRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -80,11 +80,7 @@ public sealed partial class DeleteIpLocationDatabaseRequest : Elastic.Clients.El
 	/// A comma-separated list of IP location database configurations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -185,6 +181,11 @@ public readonly partial struct DeleteIpLocationDatabaseRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

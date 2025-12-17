@@ -33,36 +33,18 @@ public sealed partial class MatchedField
 		Match = match;
 		Offset = offset;
 	}
-#if NET7_0_OR_GREATER
+
 	public MatchedField()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MatchedField()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MatchedField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Length { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Match { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Offset { get; set; }
+	public required int Length { get; set; }
+	public required string Match { get; set; }
+	public required int Offset { get; set; }
 }

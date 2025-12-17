@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.PhaseConverter))]
 public sealed partial class Phase
 {
-#if NET7_0_OR_GREATER
 	public Phase()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Phase()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Phase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

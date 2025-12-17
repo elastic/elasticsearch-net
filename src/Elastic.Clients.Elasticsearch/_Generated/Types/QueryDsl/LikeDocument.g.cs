@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.LikeDocumentConverter))]
 public sealed partial class LikeDocument
 {
-#if NET7_0_OR_GREATER
 	public LikeDocument()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public LikeDocument()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LikeDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

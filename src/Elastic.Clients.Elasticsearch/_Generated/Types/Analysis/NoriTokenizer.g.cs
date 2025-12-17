@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.NoriTokenizerConverter))]
 public sealed partial class NoriTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
-#if NET7_0_OR_GREATER
 	public NoriTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public NoriTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NoriTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

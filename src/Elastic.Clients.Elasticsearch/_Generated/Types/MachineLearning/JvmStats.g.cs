@@ -33,17 +33,11 @@ public sealed partial class JvmStats
 		JavaInferenceInBytes = javaInferenceInBytes;
 		JavaInferenceMaxInBytes = javaInferenceMaxInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public JvmStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JvmStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JvmStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,11 +56,7 @@ public sealed partial class JvmStats
 	/// Maximum amount of memory, in bytes, available for use by the heap.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int HeapMaxInBytes { get; set; }
+	public required int HeapMaxInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -80,11 +70,7 @@ public sealed partial class JvmStats
 	/// Amount of Java heap, in bytes, currently being used for caching inference models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JavaInferenceInBytes { get; set; }
+	public required int JavaInferenceInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,9 +84,5 @@ public sealed partial class JvmStats
 	/// Maximum amount of Java heap, in bytes, to be used for caching inference models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int JavaInferenceMaxInBytes { get; set; }
+	public required int JavaInferenceMaxInBytes { get; set; }
 }

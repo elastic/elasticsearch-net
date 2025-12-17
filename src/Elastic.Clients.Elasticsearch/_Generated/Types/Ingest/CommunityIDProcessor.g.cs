@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.CommunityIDProcessorConverter))]
 public sealed partial class CommunityIDProcessor
 {
-#if NET7_0_OR_GREATER
 	public CommunityIDProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public CommunityIDProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CommunityIDProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -37,14 +37,6 @@ public sealed partial class SearchableSnapshotsStatsResponse : Elastic.Transport
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-object Stats { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-object Total { get; set; }
+	public required object Stats { get; set; }
+	public required object Total { get; set; }
 }

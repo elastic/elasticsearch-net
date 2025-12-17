@@ -37,19 +37,7 @@ public sealed partial class SearchShardsResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes> Nodes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.ShardStoreIndex> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.SearchShards.SearchShardsNodeAttributes> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeShard>> Shards { get; set; }
 }

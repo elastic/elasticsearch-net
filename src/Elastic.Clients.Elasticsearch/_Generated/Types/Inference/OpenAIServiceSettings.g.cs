@@ -32,17 +32,11 @@ public sealed partial class OpenAIServiceSettings
 		ApiKey = apiKey;
 		ModelId = modelId;
 	}
-#if NET7_0_OR_GREATER
+
 	public OpenAIServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OpenAIServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OpenAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class OpenAIServiceSettings
 	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -82,11 +72,7 @@ public sealed partial class OpenAIServiceSettings
 	/// Refer to the OpenAI documentation for the list of available text embedding models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -37,17 +37,11 @@ public sealed partial class WriteSummaryInfo
 		TotalThrottled = totalThrottled;
 		TotalThrottledNanos = totalThrottledNanos;
 	}
-#if NET7_0_OR_GREATER
+
 	public WriteSummaryInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WriteSummaryInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WriteSummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,75 +53,47 @@ public sealed partial class WriteSummaryInfo
 	/// The number of write operations performed in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on writing blobs in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on writing blobs in the test, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalElapsedNanos { get; set; }
+	public required System.TimeSpan TotalElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs written in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs written in the test, in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeBytes { get; set; }
+	public required long TotalSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalThrottledNanos { get; set; }
+	public required long TotalThrottledNanos { get; set; }
 }

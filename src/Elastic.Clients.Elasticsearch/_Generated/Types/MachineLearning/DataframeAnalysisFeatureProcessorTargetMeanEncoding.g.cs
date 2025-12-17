@@ -34,17 +34,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 		Field = field;
 		TargetMap = targetMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessorTargetMeanEncoding()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisFeatureProcessorTargetMeanEncoding()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessorTargetMeanEncoding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,44 +50,28 @@ public sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncoding
 	/// The default value if field value is not found in the target_map.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DefaultValue { get; set; }
+	public required int DefaultValue { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The resulting feature name.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name FeatureName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the field to encode.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The field value to target mean transition map.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, object> TargetMap { get; set; }
+	public required System.Collections.Generic.IDictionary<string, object> TargetMap { get; set; }
 }
 
 public readonly partial struct DataframeAnalysisFeatureProcessorTargetMeanEncodingDescriptor<TDocument>

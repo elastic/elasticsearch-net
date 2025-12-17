@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.VoyageAITaskSettingsConverter))]
 public sealed partial class VoyageAITaskSettings
 {
-#if NET7_0_OR_GREATER
 	public VoyageAITaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public VoyageAITaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal VoyageAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

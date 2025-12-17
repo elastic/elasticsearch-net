@@ -34,41 +34,19 @@ public sealed partial class InProgress
 		State = state;
 		Uuid = uuid;
 	}
-#if NET7_0_OR_GREATER
+
 	public InProgress()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public InProgress()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal InProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string State { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Uuid { get; set; }
+	public required string Name { get; set; }
+	public required System.DateTimeOffset StartTimeMillis { get; set; }
+	public required string State { get; set; }
+	public required string Uuid { get; set; }
 }

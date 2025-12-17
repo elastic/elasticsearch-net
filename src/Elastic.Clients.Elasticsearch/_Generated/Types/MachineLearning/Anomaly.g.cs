@@ -39,17 +39,11 @@ public sealed partial class Anomaly
 		ResultType = resultType;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public Anomaly()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Anomaly()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Anomaly(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -75,11 +69,7 @@ public sealed partial class Anomaly
 	/// The length of the bucket in seconds. This value matches the <c>bucket_span</c> that is specified in the job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan BucketSpan { get; set; }
+	public required System.TimeSpan BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -107,11 +97,7 @@ public sealed partial class Anomaly
 	/// A unique identifier for the detector.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DetectorIndex { get; set; }
+	public required int DetectorIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -153,33 +139,21 @@ public sealed partial class Anomaly
 	/// A normalized score between 0-100, which is based on the probability of the anomalousness of this record. This is the initial value that was calculated at the time the bucket was processed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double InitialRecordScore { get; set; }
+	public required double InitialRecordScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsInterim { get; set; }
+	public required bool IsInterim { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -214,44 +188,28 @@ public sealed partial class Anomaly
 	/// The probability of the individual anomaly occurring, in the range 0 to 1. For example, <c>0.0000772031</c>. This value can be held to a high precision of over 300 decimal places, so the <c>record_score</c> is provided as a human-readable and friendly interpretation of this.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Probability { get; set; }
+	public required double Probability { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A normalized score between 0-100, which is based on the probability of the anomalousness of this record. Unlike <c>initial_record_score</c>, this value will be updated by a re-normalization process as new data is analyzed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RecordScore { get; set; }
+	public required double RecordScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Internal. This is always set to <c>record</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The start time of the bucket for which these results were calculated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>

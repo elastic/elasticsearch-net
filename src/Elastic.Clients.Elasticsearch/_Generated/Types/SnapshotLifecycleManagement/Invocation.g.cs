@@ -32,31 +32,17 @@ public sealed partial class Invocation
 		SnapshotName = snapshotName;
 		Time = time;
 	}
-#if NET7_0_OR_GREATER
+
 	public Invocation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Invocation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Invocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SnapshotName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Time { get; set; }
+	public required string SnapshotName { get; set; }
+	public required System.DateTimeOffset Time { get; set; }
 }

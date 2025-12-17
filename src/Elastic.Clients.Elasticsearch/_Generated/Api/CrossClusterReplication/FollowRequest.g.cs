@@ -65,11 +65,11 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 		LeaderIndex = leaderIndex;
 		RemoteCluster = remoteCluster;
 	}
-#if NET7_0_OR_GREATER
+
 	public FollowRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FollowRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -89,11 +89,7 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The name of the follower index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -124,11 +120,7 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The name of the index in the leader cluster to follow.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName LeaderIndex { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName LeaderIndex { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -210,11 +202,7 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 	/// The remote cluster containing the leader index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string RemoteCluster { get; set; }
+	public required string RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -533,6 +521,11 @@ public readonly partial struct FollowRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -869,6 +862,11 @@ public readonly partial struct FollowRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

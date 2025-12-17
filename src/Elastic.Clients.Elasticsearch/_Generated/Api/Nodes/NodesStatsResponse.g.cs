@@ -38,11 +38,7 @@ public sealed partial class NodesStatsResponse : Elastic.Transport.Products.Elas
 	}
 
 	public string? ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>

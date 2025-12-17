@@ -33,42 +33,24 @@ public sealed partial class FieldStat
 		Count = count;
 		TopHits = topHits;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldStat()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldStat()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldStat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Cardinality { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Cardinality { get; set; }
+	public required int Count { get; set; }
 	public string? Earliest { get; set; }
 	public string? Latest { get; set; }
 	public int? MaxValue { get; set; }
 	public int? MeanValue { get; set; }
 	public int? MedianValue { get; set; }
 	public int? MinValue { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.TopHit> TopHits { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.TopHit> TopHits { get; set; }
 }

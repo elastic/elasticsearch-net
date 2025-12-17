@@ -37,17 +37,11 @@ public sealed partial class GeoLine
 		Coordinates = coordinates;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoLine()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoLine()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoLine(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -59,20 +53,12 @@ public sealed partial class GeoLine
 	/// Array of <c>[lon, lat]</c> coordinates
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> Coordinates { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyCollection<double>> Coordinates { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Always <c>"LineString"</c>
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }

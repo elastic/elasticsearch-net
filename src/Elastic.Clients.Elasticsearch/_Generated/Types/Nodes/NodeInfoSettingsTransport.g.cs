@@ -31,17 +31,11 @@ public sealed partial class NodeInfoSettingsTransport
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoSettingsTransport()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoSettingsTransport()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,10 +50,6 @@ public sealed partial class NodeInfoSettingsTransport
 	/// </para>
 	/// </summary>
 	public bool? IgnoreDeserializationErrors { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType Type { get; set; }
 	public string? TypeDefault { get; set; }
 }

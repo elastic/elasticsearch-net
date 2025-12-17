@@ -33,17 +33,11 @@ public sealed partial class TotalFeatureImportanceStatistics
 		MeanMagnitude = meanMagnitude;
 		Min = min;
 	}
-#if NET7_0_OR_GREATER
+
 	public TotalFeatureImportanceStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TotalFeatureImportanceStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TotalFeatureImportanceStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,31 +49,19 @@ public sealed partial class TotalFeatureImportanceStatistics
 	/// The maximum importance value across all the training data for this feature.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Max { get; set; }
+	public required int Max { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double MeanMagnitude { get; set; }
+	public required double MeanMagnitude { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The minimum importance value across all the training data for this feature.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Min { get; set; }
+	public required int Min { get; set; }
 }

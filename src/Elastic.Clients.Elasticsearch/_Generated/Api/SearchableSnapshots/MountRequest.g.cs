@@ -71,11 +71,11 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 	{
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public MountRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MountRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -95,22 +95,14 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 	/// The name of the repository containing the snapshot of the index to mount.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>
 	/// The name of the snapshot of the index to mount.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+	public required Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>
@@ -148,11 +140,7 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 	/// If no <c>renamed_index</c> is specified, this name will also be used to create the new index.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -359,6 +347,11 @@ public readonly partial struct MountRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

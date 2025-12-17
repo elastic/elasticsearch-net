@@ -31,17 +31,11 @@ public sealed partial class TypeQuery
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public TypeQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TypeQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TypeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +52,7 @@ public sealed partial class TypeQuery
 	/// </summary>
 	public float? Boost { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Value { get; set; }
+	public required string Value { get; set; }
 }
 
 public readonly partial struct TypeQueryDescriptor

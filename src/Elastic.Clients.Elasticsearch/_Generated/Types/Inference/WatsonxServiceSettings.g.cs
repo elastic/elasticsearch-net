@@ -35,17 +35,11 @@ public sealed partial class WatsonxServiceSettings
 		ProjectId = projectId;
 		Url = url;
 	}
-#if NET7_0_OR_GREATER
+
 	public WatsonxServiceSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WatsonxServiceSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WatsonxServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class WatsonxServiceSettings
 	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiKey { get; set; }
+	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,11 +66,7 @@ public sealed partial class WatsonxServiceSettings
 	/// For the active version data parameters, refer to the Wastonx documentation.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ApiVersion { get; set; }
+	public required string ApiVersion { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -88,22 +74,14 @@ public sealed partial class WatsonxServiceSettings
 	/// Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The identifier of the IBM Cloud project to use for the inference task.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ProjectId { get; set; }
+	public required string ProjectId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -118,11 +96,7 @@ public sealed partial class WatsonxServiceSettings
 	/// The URL of the inference endpoint that you created on Watsonx.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Url { get; set; }
+	public required string Url { get; set; }
 }
 
 public readonly partial struct WatsonxServiceSettingsDescriptor

@@ -34,41 +34,19 @@ public sealed partial class DanglingIndex
 		IndexUuid = indexUuid;
 		NodeIds = nodeIds;
 	}
-#if NET7_0_OR_GREATER
+
 	public DanglingIndex()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DanglingIndex()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DanglingIndex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset CreationDateMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string IndexUuid { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> NodeIds { get; set; }
+	public required System.DateTimeOffset CreationDateMillis { get; set; }
+	public required string IndexName { get; set; }
+	public required string IndexUuid { get; set; }
+	public required System.Collections.Generic.ICollection<string> NodeIds { get; set; }
 }

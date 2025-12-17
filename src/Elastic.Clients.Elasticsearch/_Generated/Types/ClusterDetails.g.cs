@@ -33,17 +33,11 @@ public sealed partial class ClusterDetails
 		Status = status;
 		TimedOut = timedOut;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterDetails()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterDetails()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,21 +45,9 @@ public sealed partial class ClusterDetails
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Indices { get; set; }
+	public required string Indices { get; set; }
 	public Elastic.Clients.Elasticsearch.ShardStatistics? Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ClusterSearchStatus Status { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool TimedOut { get; set; }
+	public required Elastic.Clients.Elasticsearch.ClusterSearchStatus Status { get; set; }
+	public required bool TimedOut { get; set; }
 	public System.TimeSpan? Took { get; set; }
 }

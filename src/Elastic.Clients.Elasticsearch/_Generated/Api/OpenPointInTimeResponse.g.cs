@@ -37,20 +37,12 @@ public sealed partial class OpenPointInTimeResponse : Elastic.Transport.Products
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Shards used to create the PIT
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 }

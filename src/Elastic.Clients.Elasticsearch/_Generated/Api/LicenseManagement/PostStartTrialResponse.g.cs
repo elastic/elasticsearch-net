@@ -37,16 +37,8 @@ public sealed partial class PostStartTrialResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool Acknowledged { get; set; }
+	public required bool Acknowledged { get; set; }
 	public string? ErrorMessage { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool TrialWasStarted { get; set; }
+	public required bool TrialWasStarted { get; set; }
 	public Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? Type { get; set; }
 }

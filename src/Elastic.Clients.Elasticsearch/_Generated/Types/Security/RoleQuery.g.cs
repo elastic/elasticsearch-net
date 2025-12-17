@@ -28,16 +28,11 @@ public sealed partial class RoleQuery
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public RoleQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RoleQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RoleQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

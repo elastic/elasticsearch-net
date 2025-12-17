@@ -81,16 +81,11 @@ public sealed partial class GetTrainedModelsStatsRequest : Elastic.Clients.Elast
 	public GetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetTrainedModelsStatsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetTrainedModelsStatsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -271,6 +266,11 @@ public readonly partial struct GetTrainedModelsStatsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

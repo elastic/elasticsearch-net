@@ -34,41 +34,19 @@ public sealed partial class RepositoryStatsShards
 		States = states;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public RepositoryStatsShards()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RepositoryStatsShards()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RepositoryStatsShards(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Complete { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Incomplete { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Cluster.ShardState, int> States { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Complete { get; set; }
+	public required int Incomplete { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<Elastic.Clients.Elasticsearch.Cluster.ShardState, int> States { get; set; }
+	public required int Total { get; set; }
 }

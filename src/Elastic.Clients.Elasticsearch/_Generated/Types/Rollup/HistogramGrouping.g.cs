@@ -32,17 +32,11 @@ public sealed partial class HistogramGrouping
 		Fields = fields;
 		Interval = interval;
 	}
-#if NET7_0_OR_GREATER
+
 	public HistogramGrouping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public HistogramGrouping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,11 +50,7 @@ public sealed partial class HistogramGrouping
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public required Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -69,11 +59,7 @@ public sealed partial class HistogramGrouping
 	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Interval { get; set; }
+	public required long Interval { get; set; }
 }
 
 public readonly partial struct HistogramGroupingDescriptor<TDocument>

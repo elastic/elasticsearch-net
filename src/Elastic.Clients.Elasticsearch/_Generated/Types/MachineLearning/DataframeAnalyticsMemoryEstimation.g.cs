@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalyticsMemoryEstimation
 		ExpectedMemoryWithDisk = expectedMemoryWithDisk;
 		ExpectedMemoryWithoutDisk = expectedMemoryWithoutDisk;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalyticsMemoryEstimation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalyticsMemoryEstimation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalyticsMemoryEstimation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class DataframeAnalyticsMemoryEstimation
 	/// Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ExpectedMemoryWithDisk { get; set; }
+	public required string ExpectedMemoryWithDisk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ExpectedMemoryWithoutDisk { get; set; }
+	public required string ExpectedMemoryWithoutDisk { get; set; }
 }

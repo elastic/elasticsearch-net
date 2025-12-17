@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RangeAggregationConverter))]
 public sealed partial class RangeAggregation
 {
-#if NET7_0_OR_GREATER
 	public RangeAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RangeAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RangeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

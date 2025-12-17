@@ -50,22 +50,14 @@ public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.
 	/// The timestamp, in milliseconds since the Unix epoch, when Elasticsearch will delete the search and its results, even if the search is still running.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ExpirationTimeInMillis { get; set; }
+	public required System.DateTimeOffset ExpirationTimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The identifier for the search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -74,11 +66,7 @@ public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.
 	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsPartial { get; set; }
+	public required bool IsPartial { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -86,11 +74,7 @@ public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.
 	/// If <c>false</c>, the search has finished.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRunning { get; set; }
+	public required bool IsRunning { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,9 +82,5 @@ public sealed partial class GetAsyncStatusResponse : Elastic.Transport.Products.
 	/// The API returns this property only for running searches.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 }

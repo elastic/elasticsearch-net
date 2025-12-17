@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingConverter))]
 public sealed partial class IndexRouting
 {
-#if NET7_0_OR_GREATER
 	public IndexRouting()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexRouting()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexRouting(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

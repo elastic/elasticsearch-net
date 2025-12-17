@@ -38,25 +38,9 @@ public sealed partial class RollupSearchResponse<TDocument> : Elastic.Transport.
 	}
 
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public bool? TerminatedEarly { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-bool TimedOut { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Took { get; set; }
+	public required bool TimedOut { get; set; }
+	public required long Took { get; set; }
 }

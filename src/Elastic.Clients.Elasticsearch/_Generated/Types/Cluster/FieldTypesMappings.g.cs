@@ -33,17 +33,11 @@ public sealed partial class FieldTypesMappings
 		RuntimeFieldTypes = runtimeFieldTypes;
 		SourceModes = sourceModes;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldTypesMappings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldTypesMappings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldTypesMappings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,33 +49,21 @@ public sealed partial class FieldTypesMappings
 	/// Contains statistics about field data types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FieldTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FieldTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about runtime field data types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> RuntimeFieldTypes { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> RuntimeFieldTypes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Source mode usage count.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> SourceModes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> SourceModes { get; set; }
 
 	/// <summary>
 	/// <para>

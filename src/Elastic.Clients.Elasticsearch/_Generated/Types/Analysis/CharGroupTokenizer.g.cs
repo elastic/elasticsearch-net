@@ -31,17 +31,11 @@ public sealed partial class CharGroupTokenizer : Elastic.Clients.Elasticsearch.A
 	{
 		TokenizeOnChars = tokenizeOnChars;
 	}
-#if NET7_0_OR_GREATER
+
 	public CharGroupTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CharGroupTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CharGroupTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class CharGroupTokenizer : Elastic.Clients.Elasticsearch.A
 	}
 
 	public int? MaxTokenLength { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> TokenizeOnChars { get; set; }
+	public required System.Collections.Generic.ICollection<string> TokenizeOnChars { get; set; }
 
 	public string Type => "char_group";
 

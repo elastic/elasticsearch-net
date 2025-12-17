@@ -100,17 +100,11 @@ public partial class MultiSearchTemplateRequest : Elastic.Clients.Elasticsearch.
 	{
 		SearchTemplates = searchTemplates;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiSearchTemplateRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiSearchTemplateRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -169,11 +163,7 @@ public partial class MultiSearchTemplateRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
 }
 
 /// <summary>
@@ -315,6 +305,11 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;
@@ -491,6 +486,11 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

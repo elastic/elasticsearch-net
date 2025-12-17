@@ -42,9 +42,5 @@ public sealed partial class PutRoleResponse : Elastic.Transport.Products.Elastic
 	/// When an existing role is updated, <c>created</c> is set to <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Security.CreatedStatus Role { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.CreatedStatus Role { get; set; }
 }

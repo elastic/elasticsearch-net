@@ -31,17 +31,11 @@ public sealed partial class S3RepositorySettings
 	{
 		Bucket = bucket;
 	}
-#if NET7_0_OR_GREATER
+
 	public S3RepositorySettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public S3RepositorySettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal S3RepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -67,11 +61,7 @@ public sealed partial class S3RepositorySettings
 	/// The bucket name must adhere to Amazon's S3 bucket naming rules.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Bucket { get; set; }
+	public required string Bucket { get; set; }
 
 	/// <summary>
 	/// <para>

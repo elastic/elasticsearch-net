@@ -32,17 +32,11 @@ public sealed partial class ChiSquareHeuristic
 		BackgroundIsSuperset = backgroundIsSuperset;
 		IncludeNegatives = includeNegatives;
 	}
-#if NET7_0_OR_GREATER
+
 	public ChiSquareHeuristic()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ChiSquareHeuristic()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ChiSquareHeuristic(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class ChiSquareHeuristic
 	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool BackgroundIsSuperset { get; set; }
+	public required bool BackgroundIsSuperset { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IncludeNegatives { get; set; }
+	public required bool IncludeNegatives { get; set; }
 }
 
 public readonly partial struct ChiSquareHeuristicDescriptor

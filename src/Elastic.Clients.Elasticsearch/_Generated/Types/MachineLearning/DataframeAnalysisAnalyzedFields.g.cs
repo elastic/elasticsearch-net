@@ -32,17 +32,11 @@ public sealed partial class DataframeAnalysisAnalyzedFields
 		Excludes = excludes;
 		Includes = includes;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisAnalyzedFields()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalysisAnalyzedFields()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisAnalyzedFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class DataframeAnalysisAnalyzedFields
 	/// An array of strings that defines the fields that will be included in the analysis.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Excludes { get; set; }
+	public required System.Collections.Generic.ICollection<string> Excludes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Includes { get; set; }
+	public required System.Collections.Generic.ICollection<string> Includes { get; set; }
 }
 
 public readonly partial struct DataframeAnalysisAnalyzedFieldsDescriptor

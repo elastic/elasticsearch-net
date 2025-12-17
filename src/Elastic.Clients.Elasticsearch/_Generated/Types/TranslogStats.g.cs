@@ -35,48 +35,22 @@ public sealed partial class TranslogStats
 		UncommittedOperations = uncommittedOperations;
 		UncommittedSizeInBytes = uncommittedSizeInBytes;
 	}
-#if NET7_0_OR_GREATER
+
 	public TranslogStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TranslogStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TranslogStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long EarliestLastModifiedAge { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Operations { get; set; }
+	public required long EarliestLastModifiedAge { get; set; }
+	public required long Operations { get; set; }
 	public string? Size { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SizeInBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int UncommittedOperations { get; set; }
+	public required long SizeInBytes { get; set; }
+	public required int UncommittedOperations { get; set; }
 	public string? UncommittedSize { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long UncommittedSizeInBytes { get; set; }
+	public required long UncommittedSizeInBytes { get; set; }
 }

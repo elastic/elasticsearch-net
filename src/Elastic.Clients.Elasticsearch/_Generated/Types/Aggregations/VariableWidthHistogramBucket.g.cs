@@ -34,17 +34,11 @@ public sealed partial class VariableWidthHistogramBucket
 		Max = max;
 		Min = min;
 	}
-#if NET7_0_OR_GREATER
+
 	public VariableWidthHistogramBucket()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public VariableWidthHistogramBucket()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal VariableWidthHistogramBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,27 +51,11 @@ public sealed partial class VariableWidthHistogramBucket
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Key { get; set; }
+	public required long DocCount { get; set; }
+	public required double Key { get; set; }
 	public string? KeyAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Max { get; set; }
+	public required double Max { get; set; }
 	public string? MaxAsString { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Min { get; set; }
+	public required double Min { get; set; }
 	public string? MinAsString { get; set; }
 }

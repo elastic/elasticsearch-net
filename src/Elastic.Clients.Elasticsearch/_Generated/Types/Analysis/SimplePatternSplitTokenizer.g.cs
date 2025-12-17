@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SimplePatternSplitTokenizerConverter))]
 public sealed partial class SimplePatternSplitTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
-#if NET7_0_OR_GREATER
 	public SimplePatternSplitTokenizer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SimplePatternSplitTokenizer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SimplePatternSplitTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

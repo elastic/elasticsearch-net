@@ -28,16 +28,11 @@ public sealed partial class Sync
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public Sync()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Sync()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

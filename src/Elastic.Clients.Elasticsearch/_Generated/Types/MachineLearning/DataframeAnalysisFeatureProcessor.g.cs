@@ -28,16 +28,11 @@ public sealed partial class DataframeAnalysisFeatureProcessor
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysisFeatureProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeAnalysisFeatureProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysisFeatureProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -28,16 +28,11 @@ public sealed partial class ApiKeyQuery
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public ApiKeyQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ApiKeyQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ApiKeyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

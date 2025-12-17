@@ -33,36 +33,18 @@ public sealed partial class DataframeEvaluationSummaryAucRocCurveItem
 		Threshold = threshold;
 		Tpr = tpr;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeEvaluationSummaryAucRocCurveItem()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeEvaluationSummaryAucRocCurveItem()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeEvaluationSummaryAucRocCurveItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Fpr { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Threshold { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Tpr { get; set; }
+	public required double Fpr { get; set; }
+	public required double Threshold { get; set; }
+	public required double Tpr { get; set; }
 }

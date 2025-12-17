@@ -81,16 +81,11 @@ public sealed partial class GetDatafeedsRequest : Elastic.Clients.Elasticsearch.
 	public GetDatafeedsRequest(Elastic.Clients.Elasticsearch.Ids? datafeedId) : base(r => r.Optional("datafeed_id", datafeedId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetDatafeedsRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public GetDatafeedsRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetDatafeedsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -266,6 +261,11 @@ public readonly partial struct GetDatafeedsRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetDatafeedsRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

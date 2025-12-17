@@ -49,31 +49,19 @@ public sealed partial class QueryApiKeysResponse : Elastic.Transport.Products.El
 	/// A list of API key information.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApiKey> ApiKeys { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of API keys returned in the response.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of API keys found.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

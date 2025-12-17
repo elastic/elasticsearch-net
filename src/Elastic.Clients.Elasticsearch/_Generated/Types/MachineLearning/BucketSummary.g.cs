@@ -40,17 +40,11 @@ public sealed partial class BucketSummary
 		ResultType = resultType;
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public BucketSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public BucketSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal BucketSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,38 +58,22 @@ public sealed partial class BucketSummary
 	/// new data is analyzed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double AnomalyScore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> BucketInfluencers { get; set; }
+	public required double AnomalyScore { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.BucketInfluencer> BucketInfluencers { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The length of the bucket in seconds. This value matches the bucket span that is specified in the job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan BucketSpan { get; set; }
+	public required System.TimeSpan BucketSpan { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of input data records processed in this bucket.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long EventCount { get; set; }
+	public required long EventCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -103,55 +81,35 @@ public sealed partial class BucketSummary
 	/// time the bucket was processed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double InitialAnomalyScore { get; set; }
+	public required double InitialAnomalyScore { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If true, this is an interim result. In other words, the results are calculated based on partial input data.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsInterim { get; set; }
+	public required bool IsInterim { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
+	public required string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The amount of time, in milliseconds, that it took to analyze the bucket contents and calculate results.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ProcessingTimeMs { get; set; }
+	public required System.TimeSpan ProcessingTimeMs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Internal. This value is always set to bucket.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required string ResultType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -159,11 +117,7 @@ public sealed partial class BucketSummary
 	/// timestamp of the bucket are included in the results for the bucket.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 
 	/// <summary>
 	/// <para>

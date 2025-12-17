@@ -33,17 +33,11 @@ public sealed partial class KnnRetriever
 		K = k;
 		NumCandidates = numCandidates;
 	}
-#if NET7_0_OR_GREATER
+
 	public KnnRetriever()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KnnRetriever()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KnnRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class KnnRetriever
 	/// The name of the vector field to search against.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
+	public required string Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -73,11 +63,7 @@ public sealed partial class KnnRetriever
 	/// Number of nearest neighbors to return as top hits.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int K { get; set; }
+	public required int K { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,11 +84,7 @@ public sealed partial class KnnRetriever
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumCandidates { get; set; }
+	public required int NumCandidates { get; set; }
 
 	/// <summary>
 	/// <para>

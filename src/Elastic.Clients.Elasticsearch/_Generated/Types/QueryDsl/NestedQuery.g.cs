@@ -32,17 +32,11 @@ public sealed partial class NestedQuery
 		Path = path;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public NestedQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NestedQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NestedQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -78,22 +72,14 @@ public sealed partial class NestedQuery
 	/// Path to the nested object you wish to search.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Path { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query you wish to run on nested objects in the path.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

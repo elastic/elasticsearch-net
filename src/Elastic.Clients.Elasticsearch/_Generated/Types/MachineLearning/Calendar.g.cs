@@ -32,17 +32,11 @@ public sealed partial class Calendar
 		CalendarId = calendarId;
 		JobIds = jobIds;
 	}
-#if NET7_0_OR_GREATER
+
 	public Calendar()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Calendar()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Calendar(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class Calendar
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string CalendarId { get; set; }
+	public required string CalendarId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -72,9 +62,5 @@ public sealed partial class Calendar
 	/// An array of anomaly detection job identifiers.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> JobIds { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> JobIds { get; set; }
 }

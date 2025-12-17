@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MergeConverter))]
 public sealed partial class Merge
 {
-#if NET7_0_OR_GREATER
 	public Merge()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public Merge()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Merge(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

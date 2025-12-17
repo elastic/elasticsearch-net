@@ -31,17 +31,11 @@ public sealed partial class DetectorUpdate
 	{
 		DetectorIndex = detectorIndex;
 	}
-#if NET7_0_OR_GREATER
+
 	public DetectorUpdate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DetectorUpdate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -70,11 +64,7 @@ public sealed partial class DetectorUpdate
 	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DetectorIndex { get; set; }
+	public required int DetectorIndex { get; set; }
 }
 
 public readonly partial struct DetectorUpdateDescriptor<TDocument>

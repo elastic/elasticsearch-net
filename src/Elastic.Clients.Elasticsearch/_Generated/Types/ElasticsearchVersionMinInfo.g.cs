@@ -39,41 +39,19 @@ public sealed partial class ElasticsearchVersionMinInfo
 		MinimumWireCompatibilityVersion = minimumWireCompatibilityVersion;
 		Number = number;
 	}
-#if NET7_0_OR_GREATER
+
 	public ElasticsearchVersionMinInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ElasticsearchVersionMinInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ElasticsearchVersionMinInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string BuildFlavor { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string MinimumIndexCompatibilityVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string MinimumWireCompatibilityVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Number { get; set; }
+	public required string BuildFlavor { get; set; }
+	public required string MinimumIndexCompatibilityVersion { get; set; }
+	public required string MinimumWireCompatibilityVersion { get; set; }
+	public required string Number { get; set; }
 }

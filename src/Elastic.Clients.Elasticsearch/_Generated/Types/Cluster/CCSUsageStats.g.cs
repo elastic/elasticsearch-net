@@ -40,17 +40,11 @@ public sealed partial class CCSUsageStats
 		Took = took;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public CCSUsageStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CCSUsageStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CCSUsageStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -62,99 +56,63 @@ public sealed partial class CCSUsageStats
 	/// Statistics about the clients that executed cross-cluster search requests. The keys are the names of the clients, and the values are the number of requests that were executed by that client. Only known clients (such as <c>kibana</c> or <c>elasticsearch</c>) are counted.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> Clients { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> Clients { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about the clusters that were queried in cross-cluster search requests. The keys are cluster names, and the values are per-cluster telemetry data. This also includes the local cluster itself, which uses the name <c>(local)</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.CCSUsageClusterStats> Clusters { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.CCSUsageClusterStats> Clusters { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about the reasons for cross-cluster search request failures. The keys are the failure reason names and the values are the number of requests that failed for that reason.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> FailureReasons { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> FailureReasons { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The keys are the names of the search feature, and the values are the number of requests that used that feature. Single request can use more than one feature (e.g. both <c>async</c> and <c>wildcard</c>).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, int> Features { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, int> Features { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The average number of remote clusters that were queried in a single cross-cluster search request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double RemotesPerSearchAvg { get; set; }
+	public required double RemotesPerSearchAvg { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of remote clusters that were queried in a single cross-cluster search request.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RemotesPerSearchMax { get; set; }
+	public required int RemotesPerSearchMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of cross-cluster search requests (successful or failed) that had at least one remote cluster skipped.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Skipped { get; set; }
+	public required int Skipped { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total number of cross-cluster search requests that have been successfully executed by the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Success { get; set; }
+	public required int Success { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Statistics about the time taken to execute cross-cluster search requests.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -175,9 +133,5 @@ public sealed partial class CCSUsageStats
 	/// The total number of cross-cluster search requests that have been executed by the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

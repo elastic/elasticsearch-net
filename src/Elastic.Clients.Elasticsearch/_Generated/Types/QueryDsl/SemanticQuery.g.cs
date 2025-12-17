@@ -32,17 +32,11 @@ public sealed partial class SemanticQuery
 		Field = field;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public SemanticQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SemanticQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SemanticQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,22 +58,14 @@ public sealed partial class SemanticQuery
 	/// The field to query, which must be a semantic_text field type
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
+	public required string Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The query text
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TransformAuthorizationConverter))]
 public sealed partial class TransformAuthorization
 {
-#if NET7_0_OR_GREATER
 	public TransformAuthorization()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TransformAuthorization()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TransformAuthorization(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

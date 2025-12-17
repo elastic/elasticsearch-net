@@ -42,81 +42,27 @@ public sealed partial class RollupJobStats
 		SearchTotal = searchTotal;
 		TriggerCount = triggerCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public RollupJobStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RollupJobStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RollupJobStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocumentsProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan IndexTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long IndexTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long PagesProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ProcessingTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ProcessingTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long RollupsIndexed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SearchFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan SearchTimeInMs { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SearchTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TriggerCount { get; set; }
+	public required long DocumentsProcessed { get; set; }
+	public required long IndexFailures { get; set; }
+	public required System.TimeSpan IndexTimeInMs { get; set; }
+	public required long IndexTotal { get; set; }
+	public required long PagesProcessed { get; set; }
+	public required System.TimeSpan ProcessingTimeInMs { get; set; }
+	public required long ProcessingTotal { get; set; }
+	public required long RollupsIndexed { get; set; }
+	public required long SearchFailures { get; set; }
+	public required System.TimeSpan SearchTimeInMs { get; set; }
+	public required long SearchTotal { get; set; }
+	public required long TriggerCount { get; set; }
 }

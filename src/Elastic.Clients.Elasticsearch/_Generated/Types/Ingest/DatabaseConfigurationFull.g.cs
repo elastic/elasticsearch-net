@@ -34,17 +34,11 @@ public sealed partial class DatabaseConfigurationFull
 	{
 		Name = name;
 	}
-#if NET7_0_OR_GREATER
+
 	public DatabaseConfigurationFull()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DatabaseConfigurationFull()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatabaseConfigurationFull(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,11 +55,7 @@ public sealed partial class DatabaseConfigurationFull
 	/// The provider-assigned name of the IP geolocation database to download.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
+	public required string Name { get; set; }
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)

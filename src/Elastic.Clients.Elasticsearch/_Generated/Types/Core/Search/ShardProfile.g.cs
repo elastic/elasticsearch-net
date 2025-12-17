@@ -37,58 +37,24 @@ public sealed partial class ShardProfile
 		Searches = searches;
 		ShardId = shardId;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardProfile()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardProfile()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> Aggregations { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Cluster { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> Aggregations { get; set; }
+	public required string Cluster { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.DfsProfile? Dfs { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.FetchProfile? Fetch { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int ShardId { get; set; }
+	public required string Id { get; set; }
+	public required string Index { get; set; }
+	public required string NodeId { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; set; }
+	public required int ShardId { get; set; }
 }

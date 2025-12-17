@@ -28,16 +28,11 @@ public sealed partial class UserQuery
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public UserQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public UserQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UserQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

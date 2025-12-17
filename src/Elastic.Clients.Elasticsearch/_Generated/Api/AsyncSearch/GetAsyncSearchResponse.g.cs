@@ -53,11 +53,7 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : Elastic.Transpor
 	/// </para>
 	/// </summary>
 	public System.DateTimeOffset? ExpirationTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset ExpirationTimeInMillis { get; set; }
+	public required System.DateTimeOffset ExpirationTimeInMillis { get; set; }
 	public string? Id { get; set; }
 
 	/// <summary>
@@ -66,11 +62,7 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : Elastic.Transpor
 	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsPartial { get; set; }
+	public required bool IsPartial { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -81,20 +73,8 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : Elastic.Transpor
 	/// If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool IsRunning { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; set; }
+	public required bool IsRunning { get; set; }
+	public required Elastic.Clients.Elasticsearch.AsyncSearch.AsyncSearch<TDocument> Response { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset StartTimeInMillis { get; set; }
+	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 }

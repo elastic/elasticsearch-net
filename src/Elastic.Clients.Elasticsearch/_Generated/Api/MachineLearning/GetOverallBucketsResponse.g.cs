@@ -37,20 +37,12 @@ public sealed partial class GetOverallBucketsResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Count { get; set; }
+	public required long Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Array of overall bucket objects
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucket> OverallBuckets { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.OverallBucket> OverallBuckets { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PercentileRanksAggregationConverter))]
 public sealed partial class PercentileRanksAggregation
 {
-#if NET7_0_OR_GREATER
 	public PercentileRanksAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public PercentileRanksAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PercentileRanksAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

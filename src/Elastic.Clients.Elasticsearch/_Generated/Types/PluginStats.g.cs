@@ -39,66 +39,24 @@ public sealed partial class PluginStats
 		Name = name;
 		Version = version;
 	}
-#if NET7_0_OR_GREATER
+
 	public PluginStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PluginStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PluginStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Classname { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Description { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ElasticsearchVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> ExtendedPlugins { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool HasNativeController { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JavaVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Licensed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Version { get; set; }
+	public required string Classname { get; set; }
+	public required string Description { get; set; }
+	public required string ElasticsearchVersion { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> ExtendedPlugins { get; set; }
+	public required bool HasNativeController { get; set; }
+	public required string JavaVersion { get; set; }
+	public required bool Licensed { get; set; }
+	public required string Name { get; set; }
+	public required string Version { get; set; }
 }

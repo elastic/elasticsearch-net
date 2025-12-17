@@ -42,25 +42,13 @@ public sealed partial class RankEvalResponse : Elastic.Transport.Products.Elasti
 	/// The details section contains one entry for every query in the original requests section, keyed by the search request id
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Failures { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDetail> Details { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Failures { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The overall evaluation quality calculated by the defined metric
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double MetricScore { get; set; }
+	public required double MetricScore { get; set; }
 }

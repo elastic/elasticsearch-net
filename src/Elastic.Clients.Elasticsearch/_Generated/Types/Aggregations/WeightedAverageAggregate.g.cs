@@ -36,17 +36,11 @@ public sealed partial class WeightedAverageAggregate : Elastic.Clients.Elasticse
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public WeightedAverageAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WeightedAverageAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WeightedAverageAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,10 +57,6 @@ public sealed partial class WeightedAverageAggregate : Elastic.Clients.Elasticse
 	/// unless specified otherwise.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double? Value { get; set; }
+	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

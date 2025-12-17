@@ -50,121 +50,35 @@ public sealed partial class KnnQueryProfileBreakdown
 		ShallowAdvance = shallowAdvance;
 		ShallowAdvanceCount = shallowAdvanceCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public KnnQueryProfileBreakdown()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public KnnQueryProfileBreakdown()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal KnnQueryProfileBreakdown(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Advance { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long AdvanceCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildScorer { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BuildScorerCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ComputeMaxScore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ComputeMaxScoreCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CountWeight { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CountWeightCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreateWeight { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long CreateWeightCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Match { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MatchCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NextDoc { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long NextDocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Score { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ScoreCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SetMinCompetitiveScore { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SetMinCompetitiveScoreCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ShallowAdvance { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ShallowAdvanceCount { get; set; }
+	public required long Advance { get; set; }
+	public required long AdvanceCount { get; set; }
+	public required long BuildScorer { get; set; }
+	public required long BuildScorerCount { get; set; }
+	public required long ComputeMaxScore { get; set; }
+	public required long ComputeMaxScoreCount { get; set; }
+	public required long CountWeight { get; set; }
+	public required long CountWeightCount { get; set; }
+	public required long CreateWeight { get; set; }
+	public required long CreateWeightCount { get; set; }
+	public required long Match { get; set; }
+	public required long MatchCount { get; set; }
+	public required long NextDoc { get; set; }
+	public required long NextDocCount { get; set; }
+	public required long Score { get; set; }
+	public required long ScoreCount { get; set; }
+	public required long SetMinCompetitiveScore { get; set; }
+	public required long SetMinCompetitiveScoreCount { get; set; }
+	public required long ShallowAdvance { get; set; }
+	public required long ShallowAdvanceCount { get; set; }
 }

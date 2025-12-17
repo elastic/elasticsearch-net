@@ -59,11 +59,11 @@ public sealed partial class PutJinaaiRequest : Elastic.Clients.Elasticsearch.Req
 	{
 		ServiceSettings = serviceSettings;
 	}
-#if NET7_0_OR_GREATER
+
 	public PutJinaaiRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutJinaaiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -83,22 +83,14 @@ public sealed partial class PutJinaaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id JinaaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("jinaai_inference_id"); set => PR("jinaai_inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id JinaaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("jinaai_inference_id"); set => PR("jinaai_inference_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.JinaAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.JinaAITaskType>("task_type"); set => PR("task_type", value); }
+	public required Elastic.Clients.Elasticsearch.Inference.JinaAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.JinaAITaskType>("task_type"); set => PR("task_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -126,11 +118,7 @@ public sealed partial class PutJinaaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// Settings used to install the inference model. These settings are specific to the <c>jinaai</c> service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings ServiceSettings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -317,6 +305,11 @@ public readonly partial struct PutJinaaiRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

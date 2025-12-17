@@ -31,17 +31,11 @@ public sealed partial class Storage
 	{
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public Storage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Storage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Storage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class Storage
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? StatsRefreshInterval { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.StorageType Type { get; set; }
 }
 
 public readonly partial struct StorageDescriptor

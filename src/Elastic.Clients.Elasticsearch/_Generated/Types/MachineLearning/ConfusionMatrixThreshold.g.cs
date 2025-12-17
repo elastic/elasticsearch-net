@@ -34,17 +34,11 @@ public sealed partial class ConfusionMatrixThreshold
 		TrueNegative = trueNegative;
 		TruePositive = truePositive;
 	}
-#if NET7_0_OR_GREATER
+
 	public ConfusionMatrixThreshold()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ConfusionMatrixThreshold()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ConfusionMatrixThreshold(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -56,42 +50,26 @@ public sealed partial class ConfusionMatrixThreshold
 	/// False Negative
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FalseNegative { get; set; }
+	public required int FalseNegative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// False Positive
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FalsePositive { get; set; }
+	public required int FalsePositive { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// True Negative
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TrueNegative { get; set; }
+	public required int TrueNegative { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// True Positive
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TruePositive { get; set; }
+	public required int TruePositive { get; set; }
 }

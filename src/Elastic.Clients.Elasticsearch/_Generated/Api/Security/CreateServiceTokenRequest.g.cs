@@ -57,11 +57,11 @@ public sealed partial class CreateServiceTokenRequest : Elastic.Clients.Elastics
 	public CreateServiceTokenRequest(string @namespace, string service) : base(r => r.Required("namespace", @namespace).Required("service", service))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public CreateServiceTokenRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CreateServiceTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -97,22 +97,14 @@ public sealed partial class CreateServiceTokenRequest : Elastic.Clients.Elastics
 	/// The name of the namespace, which is a top-level grouping of service accounts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
 	/// <summary>
 	/// <para>
 	/// The name of the service.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Service { get => P<string>("service"); set => PR("service", value); }
+	public required string Service { get => P<string>("service"); set => PR("service", value); }
 
 	/// <summary>
 	/// <para>
@@ -230,6 +222,11 @@ public readonly partial struct CreateServiceTokenRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

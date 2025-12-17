@@ -151,11 +151,11 @@ public sealed partial class GetSnapshotRequest : Elastic.Clients.Elasticsearch.R
 	public GetSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetSnapshotRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -176,11 +176,7 @@ public sealed partial class GetSnapshotRequest : Elastic.Clients.Elasticsearch.R
 	/// Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
+	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
 	/// <summary>
 	/// <para>
@@ -200,11 +196,7 @@ public sealed partial class GetSnapshotRequest : Elastic.Clients.Elasticsearch.R
 	/// </item>
 	/// </list>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Names Snapshot { get => P<Elastic.Clients.Elasticsearch.Names>("snapshot"); set => PR("snapshot", value); }
+	public required Elastic.Clients.Elasticsearch.Names Snapshot { get => P<Elastic.Clients.Elasticsearch.Names>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>
@@ -559,6 +551,11 @@ public readonly partial struct GetSnapshotRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

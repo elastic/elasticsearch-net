@@ -33,36 +33,18 @@ public sealed partial class NodeDiskUsage
 		MostAvailable = mostAvailable;
 		NodeName = nodeName;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeDiskUsage()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeDiskUsage()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeDiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.DiskUsage LeastAvailable { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.DiskUsage MostAvailable { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeName { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.DiskUsage LeastAvailable { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.DiskUsage MostAvailable { get; set; }
+	public required string NodeName { get; set; }
 }

@@ -40,11 +40,11 @@ public sealed partial class GetSynonymRuleRequest : Elastic.Clients.Elasticsearc
 	public GetSynonymRuleRequest(Elastic.Clients.Elasticsearch.Id setId, Elastic.Clients.Elasticsearch.Id ruleId) : base(r => r.Required("set_id", setId).Required("rule_id", ruleId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public GetSynonymRuleRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GetSynonymRuleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,22 +64,14 @@ public sealed partial class GetSynonymRuleRequest : Elastic.Clients.Elasticsearc
 	/// The ID of the synonym rule to retrieve.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
 	/// <summary>
 	/// <para>
 	/// The ID of the synonym set to retrieve the synonym rule from.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
 }
 
 /// <summary>
@@ -148,6 +140,11 @@ public readonly partial struct GetSynonymRuleRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

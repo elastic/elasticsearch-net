@@ -31,17 +31,11 @@ public sealed partial class WrapperQuery
 	{
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public WrapperQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public WrapperQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WrapperQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,11 +58,7 @@ public sealed partial class WrapperQuery
 	/// The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 

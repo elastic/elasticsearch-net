@@ -33,36 +33,18 @@ public sealed partial class AutoFollowedCluster
 		LastSeenMetadataVersion = lastSeenMetadataVersion;
 		TimeSinceLastCheckMillis = timeSinceLastCheckMillis;
 	}
-#if NET7_0_OR_GREATER
+
 	public AutoFollowedCluster()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public AutoFollowedCluster()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AutoFollowedCluster(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long LastSeenMetadataVersion { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TimeSinceLastCheckMillis { get; set; }
+	public required string ClusterName { get; set; }
+	public required long LastSeenMetadataVersion { get; set; }
+	public required System.TimeSpan TimeSinceLastCheckMillis { get; set; }
 }

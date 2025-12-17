@@ -38,11 +38,11 @@ public sealed partial class CommonTermsQuery
 		Field = field;
 		Query = query;
 	}
-#if NET7_0_OR_GREATER
+
 	public CommonTermsQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CommonTermsQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -61,19 +61,11 @@ public sealed partial class CommonTermsQuery
 	/// </summary>
 	public float? Boost { get; set; }
 	public double? CutoffFrequency { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? HighFreqOperator { get; set; }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? LowFreqOperator { get; set; }
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Query { get; set; }
+	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 

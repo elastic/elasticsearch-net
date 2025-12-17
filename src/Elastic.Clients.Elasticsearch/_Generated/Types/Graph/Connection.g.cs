@@ -34,41 +34,19 @@ public sealed partial class Connection
 		Target = target;
 		Weight = weight;
 	}
-#if NET7_0_OR_GREATER
+
 	public Connection()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Connection()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Connection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Source { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Target { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Weight { get; set; }
+	public required long DocCount { get; set; }
+	public required long Source { get; set; }
+	public required long Target { get; set; }
+	public required double Weight { get; set; }
 }

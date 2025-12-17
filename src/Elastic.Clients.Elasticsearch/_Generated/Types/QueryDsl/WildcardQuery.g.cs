@@ -31,11 +31,11 @@ public sealed partial class WildcardQuery
 	{
 		Field = field;
 	}
-#if NET7_0_OR_GREATER
+
 	public WildcardQuery()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal WildcardQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -58,11 +58,7 @@ public sealed partial class WildcardQuery
 	/// </para>
 	/// </summary>
 	public bool? CaseInsensitive { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
 	/// <summary>

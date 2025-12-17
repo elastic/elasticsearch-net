@@ -49,20 +49,12 @@ public sealed partial class GetClusterSettingsResponse : Elastic.Transport.Produ
 	/// The settings that persist after the cluster restarts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Persistent { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Persistent { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The settings that do not persist after the cluster restarts.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Transient { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Transient { get; set; }
 }

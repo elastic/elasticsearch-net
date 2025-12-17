@@ -31,28 +31,18 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	{
 		Language = language;
 	}
-#if NET7_0_OR_GREATER
+
 	public SnowballAnalyzer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SnowballAnalyzer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SnowballAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
+	public required Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
 	public string Type => "snowball";

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IoStatDeviceConverter))]
 public sealed partial class IoStatDevice
 {
-#if NET7_0_OR_GREATER
 	public IoStatDevice()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IoStatDevice()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IoStatDevice(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -31,17 +31,11 @@ public sealed partial class Ingest
 	{
 		Timestamp = timestamp;
 	}
-#if NET7_0_OR_GREATER
+
 	public Ingest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Ingest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Ingest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -50,9 +44,5 @@ public sealed partial class Ingest
 
 	public string? Pipeline { get; set; }
 	public Elastic.Clients.Elasticsearch.Ingest.Redact? Redact { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset Timestamp { get; set; }
+	public required System.DateTimeOffset Timestamp { get; set; }
 }

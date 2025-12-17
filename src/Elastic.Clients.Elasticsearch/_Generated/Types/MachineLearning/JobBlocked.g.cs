@@ -31,27 +31,17 @@ public sealed partial class JobBlocked
 	{
 		Reason = reason;
 	}
-#if NET7_0_OR_GREATER
+
 	public JobBlocked()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public JobBlocked()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal JobBlocked(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason Reason { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.JobBlockedReason Reason { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get; set; }
 }

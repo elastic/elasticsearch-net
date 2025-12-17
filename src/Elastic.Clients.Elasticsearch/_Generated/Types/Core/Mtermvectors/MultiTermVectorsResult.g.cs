@@ -31,17 +31,11 @@ public sealed partial class MultiTermVectorsResult
 	{
 		Index = index;
 	}
-#if NET7_0_OR_GREATER
+
 	public MultiTermVectorsResult()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MultiTermVectorsResult()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MultiTermVectorsResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -51,11 +45,7 @@ public sealed partial class MultiTermVectorsResult
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 	public bool? Found { get; set; }
 	public string? Id { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Index { get; set; }
+	public required string Index { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.TermVectors.TermVector>? TermVectors { get; set; }
 	public long? Took { get; set; }
 	public long? Version { get; set; }

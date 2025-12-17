@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MinAggregationConverter))]
 public sealed partial class MinAggregation
 {
-#if NET7_0_OR_GREATER
 	public MinAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public MinAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MinAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

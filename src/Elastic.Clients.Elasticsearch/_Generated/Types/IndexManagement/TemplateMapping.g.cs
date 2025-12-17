@@ -35,47 +35,21 @@ public sealed partial class TemplateMapping
 		Order = order;
 		Settings = settings;
 	}
-#if NET7_0_OR_GREATER
+
 	public TemplateMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TemplateMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TemplateMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> IndexPatterns { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Order { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, object> Settings { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias> Aliases { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> IndexPatterns { get; set; }
+	public required Elastic.Clients.Elasticsearch.Mapping.TypeMapping Mappings { get; set; }
+	public required int Order { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Settings { get; set; }
 	public long? Version { get; set; }
 }

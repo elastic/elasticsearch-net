@@ -26,22 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.HttpConverter))]
 public sealed partial class Http
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Http(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> routes)
-	{
-		Routes = routes;
-	}
-#if NET7_0_OR_GREATER
 	public Http()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Http()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Http(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -68,11 +56,7 @@ public sealed partial class Http
 	/// Detailed HTTP stats broken down by route
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> Routes { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>? Routes { get; set; }
 
 	/// <summary>
 	/// <para>

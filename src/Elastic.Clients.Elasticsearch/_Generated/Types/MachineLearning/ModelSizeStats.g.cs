@@ -46,17 +46,11 @@ public sealed partial class ModelSizeStats
 		TotalOverFieldCount = totalOverFieldCount;
 		TotalPartitionFieldCount = totalPartitionFieldCount;
 	}
-#if NET7_0_OR_GREATER
+
 	public ModelSizeStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ModelSizeStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ModelSizeStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,89 +58,25 @@ public sealed partial class ModelSizeStats
 	}
 
 	public string? AssignmentMemoryBasis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long BucketAllocationFailuresCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus CategorizationStatus { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int CategorizedDocCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int DeadCategoryCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FailedCategoryCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int FrequentCategoryCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string JobId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.DateTimeOffset LogTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus MemoryStatus { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
+	public required long BucketAllocationFailuresCount { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.CategorizationStatus CategorizationStatus { get; set; }
+	public required int CategorizedDocCount { get; set; }
+	public required int DeadCategoryCount { get; set; }
+	public required int FailedCategoryCount { get; set; }
+	public required int FrequentCategoryCount { get; set; }
+	public required string JobId { get; set; }
+	public required System.DateTimeOffset LogTime { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus MemoryStatus { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelBytesExceeded { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? ModelBytesMemoryLimit { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? OutputMemoryAllocatorBytes { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? PeakModelBytes { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RareCategoryCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ResultType { get; set; }
+	public required int RareCategoryCount { get; set; }
+	public required string ResultType { get; set; }
 	public long? Timestamp { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalByFieldCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int TotalCategoryCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalOverFieldCount { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalPartitionFieldCount { get; set; }
+	public required long TotalByFieldCount { get; set; }
+	public required int TotalCategoryCount { get; set; }
+	public required long TotalOverFieldCount { get; set; }
+	public required long TotalPartitionFieldCount { get; set; }
 }

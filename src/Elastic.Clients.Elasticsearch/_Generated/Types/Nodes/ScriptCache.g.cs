@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ScriptCacheConverter))]
 public sealed partial class ScriptCache
 {
-#if NET7_0_OR_GREATER
 	public ScriptCache()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ScriptCache()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ScriptCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

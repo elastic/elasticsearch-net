@@ -31,28 +31,18 @@ public sealed partial class GeoHashLocation
 	{
 		Geohash = geohash;
 	}
-#if NET7_0_OR_GREATER
+
 	public GeoHashLocation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public GeoHashLocation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal GeoHashLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Geohash { get; set; }
+	public required string Geohash { get; set; }
 }
 
 public readonly partial struct GeoHashLocationDescriptor

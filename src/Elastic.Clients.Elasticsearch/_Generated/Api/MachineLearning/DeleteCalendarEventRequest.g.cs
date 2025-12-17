@@ -39,11 +39,11 @@ public sealed partial class DeleteCalendarEventRequest : Elastic.Clients.Elastic
 	public DeleteCalendarEventRequest(Elastic.Clients.Elasticsearch.Id calendarId, Elastic.Clients.Elasticsearch.Id eventId) : base(r => r.Required("calendar_id", calendarId).Required("event_id", eventId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteCalendarEventRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteCalendarEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +63,7 @@ public sealed partial class DeleteCalendarEventRequest : Elastic.Clients.Elastic
 	/// A string that uniquely identifies a calendar.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -75,11 +71,7 @@ public sealed partial class DeleteCalendarEventRequest : Elastic.Clients.Elastic
 	/// You can obtain this identifier by using the get calendar events API.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id EventId { get => P<Elastic.Clients.Elasticsearch.Id>("event_id"); set => PR("event_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id EventId { get => P<Elastic.Clients.Elasticsearch.Id>("event_id"); set => PR("event_id", value); }
 }
 
 /// <summary>
@@ -148,6 +140,11 @@ public readonly partial struct DeleteCalendarEventRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarEventRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

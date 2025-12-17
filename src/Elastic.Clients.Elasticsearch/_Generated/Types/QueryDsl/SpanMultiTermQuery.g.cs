@@ -31,17 +31,11 @@ public sealed partial class SpanMultiTermQuery
 	{
 		Match = match;
 	}
-#if NET7_0_OR_GREATER
+
 	public SpanMultiTermQuery()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SpanMultiTermQuery()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SpanMultiTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class SpanMultiTermQuery
 	/// Should be a multi term query (one of <c>wildcard</c>, <c>fuzzy</c>, <c>prefix</c>, <c>range</c>, or <c>regexp</c> query).
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
+	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Match { get; set; }
 	public string? QueryName { get; set; }
 }
 

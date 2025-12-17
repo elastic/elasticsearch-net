@@ -66,11 +66,11 @@ public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsear
 	{
 		InferenceConfig = inferenceConfig;
 	}
-#if NET7_0_OR_GREATER
+
 	public UpdateInferenceRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -90,11 +90,7 @@ public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsear
 	/// The unique identifier of the inference endpoint.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -102,11 +98,7 @@ public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsear
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint InferenceConfig { get; set; }
 }
 
 /// <summary>
@@ -203,6 +195,11 @@ public readonly partial struct UpdateInferenceRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

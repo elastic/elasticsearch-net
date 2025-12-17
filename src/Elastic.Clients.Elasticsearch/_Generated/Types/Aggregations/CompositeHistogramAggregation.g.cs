@@ -31,17 +31,11 @@ public sealed partial class CompositeHistogramAggregation
 	{
 		Interval = interval;
 	}
-#if NET7_0_OR_GREATER
+
 	public CompositeHistogramAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CompositeHistogramAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CompositeHistogramAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,11 +48,7 @@ public sealed partial class CompositeHistogramAggregation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Interval { get; set; }
+	public required double Interval { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }

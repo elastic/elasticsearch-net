@@ -28,16 +28,11 @@ public sealed partial class DataframeAnalysis
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalysis()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public DataframeAnalysis()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

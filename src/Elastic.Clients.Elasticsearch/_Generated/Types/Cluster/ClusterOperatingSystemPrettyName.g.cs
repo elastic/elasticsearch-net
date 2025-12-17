@@ -32,17 +32,11 @@ public sealed partial class ClusterOperatingSystemPrettyName
 		Count = count;
 		PrettyName = prettyName;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterOperatingSystemPrettyName()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterOperatingSystemPrettyName()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterOperatingSystemPrettyName(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,20 +48,12 @@ public sealed partial class ClusterOperatingSystemPrettyName
 	/// Number of selected nodes using the operating system.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Human-readable name of an operating system used by one or more selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PrettyName { get; set; }
+	public required string PrettyName { get; set; }
 }

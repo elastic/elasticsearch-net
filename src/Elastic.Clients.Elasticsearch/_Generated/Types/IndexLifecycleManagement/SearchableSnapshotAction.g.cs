@@ -31,17 +31,11 @@ public sealed partial class SearchableSnapshotAction
 	{
 		SnapshotRepository = snapshotRepository;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchableSnapshotAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchableSnapshotAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchableSnapshotAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -49,11 +43,7 @@ public sealed partial class SearchableSnapshotAction
 	}
 
 	public bool? ForceMergeIndex { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SnapshotRepository { get; set; }
+	public required string SnapshotRepository { get; set; }
 }
 
 public readonly partial struct SearchableSnapshotActionDescriptor

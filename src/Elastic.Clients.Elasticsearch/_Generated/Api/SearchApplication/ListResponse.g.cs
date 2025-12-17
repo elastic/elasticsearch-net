@@ -37,14 +37,6 @@ public sealed partial class ListResponse : Elastic.Transport.Products.Elasticsea
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-long Count { get; set; }
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication> Results { get; set; }
+	public required long Count { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplication> Results { get; set; }
 }

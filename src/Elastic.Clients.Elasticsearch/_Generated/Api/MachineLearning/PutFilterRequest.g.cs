@@ -41,11 +41,11 @@ public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Req
 	public PutFilterRequest(Elastic.Clients.Elasticsearch.Id filterId) : base(r => r.Required("filter_id", filterId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public PutFilterRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PutFilterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -65,11 +65,7 @@ public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Req
 	/// A string that uniquely identifies a filter.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
+	public required Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -178,6 +174,11 @@ public readonly partial struct PutFilterRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

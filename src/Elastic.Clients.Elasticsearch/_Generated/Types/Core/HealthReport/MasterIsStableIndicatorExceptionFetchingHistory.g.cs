@@ -32,31 +32,17 @@ public sealed partial class MasterIsStableIndicatorExceptionFetchingHistory
 		Message = message;
 		StackTrace = stackTrace;
 	}
-#if NET7_0_OR_GREATER
+
 	public MasterIsStableIndicatorExceptionFetchingHistory()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MasterIsStableIndicatorExceptionFetchingHistory()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MasterIsStableIndicatorExceptionFetchingHistory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Message { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string StackTrace { get; set; }
+	public required string Message { get; set; }
+	public required string StackTrace { get; set; }
 }

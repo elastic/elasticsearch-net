@@ -32,16 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricDiscountedCumulativeGainConverter))]
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
-#if NET7_0_OR_GREATER
 	public RankEvalMetricDiscountedCumulativeGain()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RankEvalMetricDiscountedCumulativeGain()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

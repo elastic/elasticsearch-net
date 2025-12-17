@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.TypeMappingConverter))]
 public sealed partial class TypeMapping
 {
-#if NET7_0_OR_GREATER
 	public TypeMapping()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public TypeMapping()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TypeMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

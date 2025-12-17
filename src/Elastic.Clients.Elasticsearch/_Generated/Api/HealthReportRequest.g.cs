@@ -80,16 +80,11 @@ public sealed partial class HealthReportRequest : Elastic.Clients.Elasticsearch.
 	public HealthReportRequest(System.Collections.Generic.ICollection<string>? feature) : base(r => r.Optional("feature", feature))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public HealthReportRequest()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HealthReportRequest()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -257,6 +252,11 @@ public readonly partial struct HealthReportRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.HealthReportRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

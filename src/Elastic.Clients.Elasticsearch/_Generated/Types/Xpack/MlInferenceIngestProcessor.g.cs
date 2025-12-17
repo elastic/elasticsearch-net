@@ -34,41 +34,19 @@ public sealed partial class MlInferenceIngestProcessor
 		Pipelines = pipelines;
 		TimeMs = timeMs;
 	}
-#if NET7_0_OR_GREATER
+
 	public MlInferenceIngestProcessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public MlInferenceIngestProcessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal MlInferenceIngestProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount NumDocsProcessed { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount NumFailures { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlCounter Pipelines { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount TimeMs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount NumDocsProcessed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount NumFailures { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlCounter Pipelines { get; set; }
+	public required Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount TimeMs { get; set; }
 }

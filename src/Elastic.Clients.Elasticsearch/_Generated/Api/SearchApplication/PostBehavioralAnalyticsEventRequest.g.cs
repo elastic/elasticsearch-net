@@ -52,11 +52,11 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Client
 	{
 		Payload = payload;
 	}
-#if NET7_0_OR_GREATER
+
 	public PostBehavioralAnalyticsEventRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -76,22 +76,14 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Client
 	/// The name of the behavioral analytics collection.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name CollectionName { get => P<Elastic.Clients.Elasticsearch.Name>("collection_name"); set => PR("collection_name", value); }
+	public required Elastic.Clients.Elasticsearch.Name CollectionName { get => P<Elastic.Clients.Elasticsearch.Name>("collection_name"); set => PR("collection_name", value); }
 
 	/// <summary>
 	/// <para>
 	/// The analytics event type.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.SearchApplication.EventType EventType { get => P<Elastic.Clients.Elasticsearch.SearchApplication.EventType>("event_type"); set => PR("event_type", value); }
+	public required Elastic.Clients.Elasticsearch.SearchApplication.EventType EventType { get => P<Elastic.Clients.Elasticsearch.SearchApplication.EventType>("event_type"); set => PR("event_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -99,11 +91,7 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Client
 	/// </para>
 	/// </summary>
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object Payload { get; set; }
+	public required object Payload { get; set; }
 }
 
 /// <summary>
@@ -190,6 +178,11 @@ public readonly partial struct PostBehavioralAnalyticsEventRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

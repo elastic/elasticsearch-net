@@ -56,11 +56,11 @@ public sealed partial class ExecuteLifecycleRequest : Elastic.Clients.Elasticsea
 	public ExecuteLifecycleRequest(Elastic.Clients.Elasticsearch.Name policyId) : base(r => r.Required("policy_id", policyId))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ExecuteLifecycleRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ExecuteLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -80,11 +80,7 @@ public sealed partial class ExecuteLifecycleRequest : Elastic.Clients.Elasticsea
 	/// The id of the snapshot lifecycle policy to be executed
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
+	public required Elastic.Clients.Elasticsearch.Name PolicyId { get => P<Elastic.Clients.Elasticsearch.Name>("policy_id"); set => PR("policy_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -183,6 +179,11 @@ public readonly partial struct ExecuteLifecycleRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

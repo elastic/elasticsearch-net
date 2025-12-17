@@ -33,36 +33,18 @@ public sealed partial class NodeInfoTransport
 		Profiles = profiles;
 		PublishAddress = publishAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public NodeInfoTransport()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public NodeInfoTransport()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal NodeInfoTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> BoundAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, string> Profiles { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PublishAddress { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> BoundAddress { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Profiles { get; set; }
+	public required string PublishAddress { get; set; }
 }

@@ -43,19 +43,7 @@ public sealed partial class TermsEnumResponse : Elastic.Transport.Products.Elast
 	/// This can occur due to a few reasons, such as a request timeout or a node error.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Complete { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Terms { get; set; }
+	public required bool Complete { get; set; }
+	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Terms { get; set; }
 }

@@ -37,9 +37,5 @@ public sealed partial class CompletionResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.CompletionResult> Completion { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.CompletionResult> Completion { get; set; }
 }

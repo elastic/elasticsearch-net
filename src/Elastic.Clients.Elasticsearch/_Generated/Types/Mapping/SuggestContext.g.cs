@@ -32,35 +32,21 @@ public sealed partial class SuggestContext
 		Name = name;
 		Type = type;
 	}
-#if NET7_0_OR_GREATER
+
 	public SuggestContext()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SuggestContext()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Name Name { get; set; }
+	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<int, string>? Precision { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
+	public required string Type { get; set; }
 }
 
 public readonly partial struct SuggestContextDescriptor<TDocument>

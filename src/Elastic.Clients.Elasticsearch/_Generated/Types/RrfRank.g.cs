@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RrfRankConverter))]
 public sealed partial class RrfRank
 {
-#if NET7_0_OR_GREATER
 	public RrfRank()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public RrfRank()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RrfRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

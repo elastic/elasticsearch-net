@@ -56,11 +56,11 @@ public sealed partial class DeleteGeoipDatabaseRequest : Elastic.Clients.Elastic
 	public DeleteGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Ids id) : base(r => r.Required("id", id))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public DeleteGeoipDatabaseRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DeleteGeoipDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -80,11 +80,7 @@ public sealed partial class DeleteGeoipDatabaseRequest : Elastic.Clients.Elastic
 	/// A comma-separated list of geoip database configurations to delete
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
+	public required Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
 	/// <summary>
 	/// <para>
@@ -182,6 +178,11 @@ public readonly partial struct DeleteGeoipDatabaseRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -41,17 +41,11 @@ public sealed partial class ReadSummaryInfo
 		TotalWait = totalWait;
 		TotalWaitNanos = totalWaitNanos;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReadSummaryInfo()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReadSummaryInfo()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReadSummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,119 +57,75 @@ public sealed partial class ReadSummaryInfo
 	/// The number of read operations performed in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Count { get; set; }
+	public required int Count { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum time spent waiting for the first byte of any read request to be received.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration MaxWait { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration MaxWait { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum time spent waiting for the first byte of any read request to be received, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MaxWaitNanos { get; set; }
+	public required System.TimeSpan MaxWaitNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on reading blobs in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total elapsed time spent on reading blobs in the test, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalElapsedNanos { get; set; }
+	public required System.TimeSpan TotalElapsedNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs or partial blobs read in the test.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
+	public required Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total size of all the blobs or partial blobs read in the test, in bytes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalSizeBytes { get; set; }
+	public required long TotalSizeBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalThrottledNanos { get; set; }
+	public required System.TimeSpan TotalThrottledNanos { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting for the first byte of each read request to be received.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Duration TotalWait { get; set; }
+	public required Elastic.Clients.Elasticsearch.Duration TotalWait { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time spent waiting for the first byte of each read request to be received, in nanoseconds.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan TotalWaitNanos { get; set; }
+	public required System.TimeSpan TotalWaitNanos { get; set; }
 }

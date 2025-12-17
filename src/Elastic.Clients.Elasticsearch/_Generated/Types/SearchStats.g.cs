@@ -42,87 +42,33 @@ public sealed partial class SearchStats
 		SuggestTimeInMillis = suggestTimeInMillis;
 		SuggestTotal = suggestTotal;
 	}
-#if NET7_0_OR_GREATER
+
 	public SearchStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public SearchStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SearchStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FetchCurrent { get; set; }
+	public required long FetchCurrent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? FetchTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan FetchTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FetchTotal { get; set; }
+	public required System.TimeSpan FetchTimeInMillis { get; set; }
+	public required long FetchTotal { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? Groups { get; set; }
 	public long? OpenContexts { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long QueryCurrent { get; set; }
+	public required long QueryCurrent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? QueryTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan QueryTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long QueryTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ScrollCurrent { get; set; }
+	public required System.TimeSpan QueryTimeInMillis { get; set; }
+	public required long QueryTotal { get; set; }
+	public required long ScrollCurrent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ScrollTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan ScrollTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long ScrollTotal { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SuggestCurrent { get; set; }
+	public required System.TimeSpan ScrollTimeInMillis { get; set; }
+	public required long ScrollTotal { get; set; }
+	public required long SuggestCurrent { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? SuggestTime { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan SuggestTimeInMillis { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long SuggestTotal { get; set; }
+	public required System.TimeSpan SuggestTimeInMillis { get; set; }
+	public required long SuggestTotal { get; set; }
 }

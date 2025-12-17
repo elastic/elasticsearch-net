@@ -32,17 +32,11 @@ public sealed partial class FieldMetric
 		Field = field;
 		Metrics = metrics;
 	}
-#if NET7_0_OR_GREATER
+
 	public FieldMetric()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FieldMetric()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -54,22 +48,14 @@ public sealed partial class FieldMetric
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of metrics to collect for the field. At least one metric must be configured.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
 }
 
 public readonly partial struct FieldMetricDescriptor<TDocument>

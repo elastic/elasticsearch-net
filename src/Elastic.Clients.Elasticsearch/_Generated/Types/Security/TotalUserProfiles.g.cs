@@ -32,31 +32,17 @@ public sealed partial class TotalUserProfiles
 		Relation = relation;
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public TotalUserProfiles()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public TotalUserProfiles()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal TotalUserProfiles(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Relation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Value { get; set; }
+	public required string Relation { get; set; }
+	public required long Value { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonBedrockTaskSettingsConverter))]
 public sealed partial class AmazonBedrockTaskSettings
 {
-#if NET7_0_OR_GREATER
 	public AmazonBedrockTaskSettings()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public AmazonBedrockTaskSettings()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal AmazonBedrockTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

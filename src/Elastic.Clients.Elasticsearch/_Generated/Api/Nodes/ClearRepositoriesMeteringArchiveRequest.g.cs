@@ -40,11 +40,11 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Cl
 	public ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion) : base(r => r.Required("node_id", nodeId).Required("max_archive_version", maxArchiveVersion))
 	{
 	}
-#if NET7_0_OR_GREATER
+
 	public ClearRepositoriesMeteringArchiveRequest()
 	{
 	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,22 +64,14 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Cl
 	/// Specifies the maximum <c>archive_version</c> to be cleared from the archive.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long MaxArchiveVersion { get => P<long>("max_archive_version"); set => PR("max_archive_version", value); }
+	public required long MaxArchiveVersion { get => P<long>("max_archive_version"); set => PR("max_archive_version", value); }
 
 	/// <summary>
 	/// <para>
 	/// Comma-separated list of node IDs or names used to limit returned information.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
+	public required Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
 /// <summary>
@@ -148,6 +140,11 @@ public readonly partial struct ClearRepositoriesMeteringArchiveRequestDescriptor
 		return this;
 	}
 
+	[System.Diagnostics.CodeAnalysis.Experimental("ESEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+	, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized to the respective response type for the request."
+#endif
+	)]
 	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor FilterPath(params string[]? value)
 	{
 		Instance.FilterPath = value;

@@ -36,28 +36,18 @@ public sealed partial class LongRareTermsAggregate : Elastic.Clients.Elasticsear
 	{
 		Buckets = buckets;
 	}
-#if NET7_0_OR_GREATER
+
 	public LongRareTermsAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LongRareTermsAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LongRareTermsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsBucket> Buckets { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsBucket> Buckets { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "lrareterms";

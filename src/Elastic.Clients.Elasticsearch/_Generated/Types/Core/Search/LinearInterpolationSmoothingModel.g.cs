@@ -33,38 +33,20 @@ public sealed partial class LinearInterpolationSmoothingModel
 		TrigramLambda = trigramLambda;
 		UnigramLambda = unigramLambda;
 	}
-#if NET7_0_OR_GREATER
+
 	public LinearInterpolationSmoothingModel()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public LinearInterpolationSmoothingModel()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal LinearInterpolationSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double BigramLambda { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double TrigramLambda { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double UnigramLambda { get; set; }
+	public required double BigramLambda { get; set; }
+	public required double TrigramLambda { get; set; }
+	public required double UnigramLambda { get; set; }
 }
 
 public readonly partial struct LinearInterpolationSmoothingModelDescriptor

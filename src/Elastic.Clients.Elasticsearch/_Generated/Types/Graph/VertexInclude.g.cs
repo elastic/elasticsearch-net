@@ -32,33 +32,19 @@ public sealed partial class VertexInclude
 		Boost = boost;
 		Term = term;
 	}
-#if NET7_0_OR_GREATER
+
 	public VertexInclude()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public VertexInclude()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	double Boost { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Term { get; set; }
+	public required double Boost { get; set; }
+	public required string Term { get; set; }
 }
 
 public readonly partial struct VertexIncludeDescriptor

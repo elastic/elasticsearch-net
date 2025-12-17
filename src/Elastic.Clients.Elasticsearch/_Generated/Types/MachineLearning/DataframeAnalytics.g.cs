@@ -35,17 +35,11 @@ public sealed partial class DataframeAnalytics
 		Progress = progress;
 		State = state;
 	}
-#if NET7_0_OR_GREATER
+
 	public DataframeAnalytics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DataframeAnalytics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DataframeAnalytics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -64,33 +58,21 @@ public sealed partial class DataframeAnalytics
 	/// An object that provides counts for the quantity of documents skipped, used in training, or available for testing.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts DataCounts { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts DataCounts { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The unique identifier of the data frame analytics job.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Id { get; set; }
+	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An object describing memory usage of the analytics. It is present only after the job is started and memory usage is reported.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage MemoryUsage { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage MemoryUsage { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -104,20 +86,12 @@ public sealed partial class DataframeAnalytics
 	/// The progress report of the data frame analytics job by phase.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress> Progress { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsProgress> Progress { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The status of the data frame analytics job, which can be one of the following values: failed, started, starting, stopping, stopped.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DataframeState State { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeState State { get; set; }
 }

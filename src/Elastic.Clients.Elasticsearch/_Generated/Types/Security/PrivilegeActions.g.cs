@@ -31,28 +31,18 @@ public sealed partial class PrivilegeActions
 	{
 		Actions = actions;
 	}
-#if NET7_0_OR_GREATER
+
 	public PrivilegeActions()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public PrivilegeActions()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal PrivilegeActions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Actions { get; set; }
+	public required System.Collections.Generic.ICollection<string> Actions { get; set; }
 	public string? Application { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }

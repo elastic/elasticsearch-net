@@ -53,9 +53,5 @@ public sealed partial class HasPrivilegesUserProfileResponse : Elastic.Transport
 	/// have all the requested privileges.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> HasPrivilegeUids { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> HasPrivilegeUids { get; set; }
 }

@@ -28,16 +28,11 @@ public sealed partial class IndexUpdateAliasesAction
 {
 	internal string? VariantType { get; set; }
 	internal object? Variant { get; set; }
-#if NET7_0_OR_GREATER
+
 	public IndexUpdateAliasesAction()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public IndexUpdateAliasesAction()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal IndexUpdateAliasesAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -33,17 +33,11 @@ public sealed partial class ShardStatistics
 		Successful = successful;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ShardStatistics()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardStatistics()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ShardStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -55,11 +49,7 @@ public sealed partial class ShardStatistics
 	/// The number of shards the operation or search attempted to run on but failed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Failed { get; set; }
+	public required int Failed { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; set; }
 	public int? Skipped { get; set; }
 
@@ -68,20 +58,12 @@ public sealed partial class ShardStatistics
 	/// The number of shards the operation or search succeeded on.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Successful { get; set; }
+	public required int Successful { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of shards the operation or search will run on overall.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Total { get; set; }
+	public required int Total { get; set; }
 }

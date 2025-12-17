@@ -31,17 +31,11 @@ public sealed partial class FrequentItemSetsAggregation
 	{
 		Fields = fields;
 	}
-#if NET7_0_OR_GREATER
+
 	public FrequentItemSetsAggregation()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public FrequentItemSetsAggregation()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal FrequentItemSetsAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -53,11 +47,7 @@ public sealed partial class FrequentItemSetsAggregation
 	/// Fields to analyze.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> Fields { get; set; }
 
 	/// <summary>
 	/// <para>

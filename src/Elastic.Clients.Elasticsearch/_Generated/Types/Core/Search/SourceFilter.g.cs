@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SourceFilterConverter))]
 public sealed partial class SourceFilter
 {
-#if NET7_0_OR_GREATER
 	public SourceFilter()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public SourceFilter()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

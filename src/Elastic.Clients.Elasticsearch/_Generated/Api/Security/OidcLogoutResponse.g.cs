@@ -42,9 +42,5 @@ public sealed partial class OidcLogoutResponse : Elastic.Transport.Products.Elas
 	/// A URI that points to the end session endpoint of the OpenID Connect Provider with all the parameters of the logout request as HTTP GET parameters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Redirect { get; set; }
+	public required string Redirect { get; set; }
 }

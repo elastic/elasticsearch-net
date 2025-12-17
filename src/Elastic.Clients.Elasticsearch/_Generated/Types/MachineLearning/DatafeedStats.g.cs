@@ -32,17 +32,11 @@ public sealed partial class DatafeedStats
 		DatafeedId = datafeedId;
 		State = state;
 	}
-#if NET7_0_OR_GREATER
+
 	public DatafeedStats()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public DatafeedStats()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal DatafeedStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,11 +57,7 @@ public sealed partial class DatafeedStats
 	/// It must start and end with alphanumeric characters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string DatafeedId { get; set; }
+	public required string DatafeedId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -89,11 +79,7 @@ public sealed partial class DatafeedStats
 	/// The status of the datafeed, which can be one of the following values: <c>starting</c>, <c>started</c>, <c>stopping</c>, <c>stopped</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; set; }
+	public required Elastic.Clients.Elasticsearch.MachineLearning.DatafeedState State { get; set; }
 
 	/// <summary>
 	/// <para>

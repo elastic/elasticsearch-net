@@ -31,17 +31,11 @@ public sealed partial class Highlight
 	{
 		Fields = fields;
 	}
-#if NET7_0_OR_GREATER
+
 	public Highlight()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Highlight()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal Highlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -79,11 +73,7 @@ public sealed partial class Highlight
 	/// </summary>
 	public string? BoundaryScannerLocale { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? Encoder { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
+	public required System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> Fields { get; set; }
 	public bool? ForceSource { get; set; }
 
 	/// <summary>

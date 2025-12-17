@@ -32,31 +32,17 @@ public sealed partial class RemoveClusterServer
 		BoundAddress = boundAddress;
 		PublishAddress = publishAddress;
 	}
-#if NET7_0_OR_GREATER
+
 	public RemoveClusterServer()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public RemoveClusterServer()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal RemoveClusterServer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> BoundAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string PublishAddress { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> BoundAddress { get; set; }
+	public required string PublishAddress { get; set; }
 }

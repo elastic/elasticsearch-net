@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ComponentTemplateSummaryConverter))]
 public sealed partial class ComponentTemplateSummary
 {
-#if NET7_0_OR_GREATER
 	public ComponentTemplateSummary()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public ComponentTemplateSummary()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ComponentTemplateSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

@@ -36,17 +36,11 @@ public sealed partial class CumulativeCardinalityAggregate : Elastic.Clients.Ela
 	{
 		Value = value;
 	}
-#if NET7_0_OR_GREATER
+
 	public CumulativeCardinalityAggregate()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CumulativeCardinalityAggregate()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal CumulativeCardinalityAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -57,10 +51,6 @@ public sealed partial class CumulativeCardinalityAggregate : Elastic.Clients.Ela
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "simple_long_value";
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Value { get; set; }
+	public required long Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

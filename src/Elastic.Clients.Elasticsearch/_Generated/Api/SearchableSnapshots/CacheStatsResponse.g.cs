@@ -37,9 +37,5 @@ public sealed partial class CacheStatsResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node> Nodes { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchableSnapshots.Node> Nodes { get; set; }
 }

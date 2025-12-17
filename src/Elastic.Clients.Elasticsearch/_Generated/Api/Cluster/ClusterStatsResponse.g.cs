@@ -42,55 +42,35 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 	/// Cross-cluster stats
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Name of the cluster, based on the cluster name setting.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterName { get; set; }
+	public required string ClusterName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unique identifier for the cluster.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ClusterUuid { get; set; }
+	public required string ClusterUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -104,22 +84,14 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 	/// Contains stats on repository feature usage exposed in cluster stats for telemetry.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> Repositories { get; set; }
+	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> Repositories { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains stats cluster snapshots.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Snapshots { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Snapshots { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -133,9 +105,5 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 	/// Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Timestamp { get; set; }
+	public required long Timestamp { get; set; }
 }

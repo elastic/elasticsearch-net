@@ -32,33 +32,19 @@ public sealed partial class OneHotEncodingPreprocessor
 		Field = field;
 		HotMap = hotMap;
 	}
-#if NET7_0_OR_GREATER
+
 	public OneHotEncodingPreprocessor()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public OneHotEncodingPreprocessor()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal OneHotEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Field { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IDictionary<string, string> HotMap { get; set; }
+	public required string Field { get; set; }
+	public required System.Collections.Generic.IDictionary<string, string> HotMap { get; set; }
 }
 
 public readonly partial struct OneHotEncodingPreprocessorDescriptor

@@ -34,41 +34,19 @@ public sealed partial class ReservedSize
 		Shards = shards;
 		Total = total;
 	}
-#if NET7_0_OR_GREATER
+
 	public ReservedSize()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ReservedSize()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ReservedSize(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string NodeId { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Path { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<string> Shards { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Total { get; set; }
+	public required string NodeId { get; set; }
+	public required string Path { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<string> Shards { get; set; }
+	public required long Total { get; set; }
 }

@@ -31,16 +31,10 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.EmptyObjectConverter))]
 public sealed partial class EmptyObject
 {
-#if NET7_0_OR_GREATER
 	public EmptyObject()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public EmptyObject()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal EmptyObject(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

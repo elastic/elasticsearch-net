@@ -34,17 +34,11 @@ public sealed partial class ClusterJvm
 		Threads = threads;
 		Versions = versions;
 	}
-#if NET7_0_OR_GREATER
+
 	public ClusterJvm()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ClusterJvm()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal ClusterJvm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
@@ -63,42 +57,26 @@ public sealed partial class ClusterJvm
 	/// Uptime duration, in milliseconds, since JVM last started.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.TimeSpan MaxUptimeInMillis { get; set; }
+	public required System.TimeSpan MaxUptimeInMillis { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about memory used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Number of active threads in use by JVM across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long Threads { get; set; }
+	public required long Threads { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the JVM versions used by selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; set; }
 }

@@ -26,16 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.HighlightFieldConverter))]
 public sealed partial class HighlightField
 {
-#if NET7_0_OR_GREATER
 	public HighlightField()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	public HighlightField()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	internal HighlightField(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{

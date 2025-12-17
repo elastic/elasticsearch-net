@@ -42,20 +42,12 @@ public sealed partial class ClosePointInTimeResponse : Elastic.Transport.Product
 	/// The number of search contexts that were successfully closed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int NumFreed { get; set; }
+	public required int NumFreed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, all search contexts associated with the point-in-time ID were successfully closed.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	bool Succeeded { get; set; }
+	public required bool Succeeded { get; set; }
 }

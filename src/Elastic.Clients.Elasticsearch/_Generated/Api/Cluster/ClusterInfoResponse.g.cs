@@ -37,11 +37,7 @@ public sealed partial class ClusterInfoResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-required
-#endif
-string ClusterName { get; set; }
+	public required string ClusterName { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.Http? Http { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.Ingest? Ingest { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.Scripting? Script { get; set; }
