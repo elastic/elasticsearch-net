@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using Elastic.Transport;
 
@@ -28,11 +29,17 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 	/// <summary>
 	/// A list of filters used to reduce the response.
 	/// <para>
-	///     Use of response filtering can result in a response from Elasticsearch
-	///     that cannot be correctly deserialized to the respective response type for the request.
-	///     In such situations, use the low level client to issue the request and handle response deserialization.
+	///     Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized
+	///     to the respective response type for the request. In such situations, use the low level client to issue the
+	///     request and handle response deserialization.
 	/// </para>
 	/// </summary>
+	[Experimental("ESCEXP0001", UrlFormat = "https://www.elastic.co/docs/reference/elasticsearch/clients/dotnet/experimental#{0}"
+#if NET10_0_OR_GREATER
+		, Message = "Use of response filtering can result in a response from Elasticsearch that cannot be correctly deserialized " +
+		            "to the respective response type for the request."
+#endif
+	)]
 	[JsonIgnore]
 	public string[]? FilterPath
 	{
