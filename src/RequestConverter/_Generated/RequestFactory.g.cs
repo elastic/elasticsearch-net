@@ -193,6 +193,97 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"capabilities",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.CapabilitiesRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "capabilities", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Capabilities = list.Select(x => x).ToList();
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "local_only", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.LocalOnly = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "method", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Method = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Core.Capabilities.RestMethod>.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "parameters", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Parameters = list.Select(x => x).ToList();
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "path", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Path = parameter.Value;
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"clear_scroll",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -439,28 +530,6 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
-						if (string.Equals(parameter.Key, "if_primary_term", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.IfPrimaryTerm = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "if_seq_no", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.IfSeqNo = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
 						if (string.Equals(parameter.Key, "include_source_on_error", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -469,17 +538,6 @@ internal static partial class RequestFactory
 							}
 
 							request.IncludeSourceOnError = bool.Parse(parameter.Value);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "op_type", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.OpType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.OpType>.Parse(parameter.Value);
 							continue;
 						}
 
@@ -963,22 +1021,6 @@ internal static partial class RequestFactory
 							}
 
 							request.Slices = Elastic.Clients.Elasticsearch.Slices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "sort", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
-							{
-								continue;
-							}
-
-							request.Sort = list.Select(x => x).ToList();
 							continue;
 						}
 
@@ -1646,7 +1688,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Filters = parameter.Value;
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Filters = list.Select(x => x).ToList();
 							continue;
 						}
 
@@ -1806,6 +1853,17 @@ internal static partial class RequestFactory
 							}
 
 							request.SourceExcludes = Elastic.Clients.Elasticsearch.Fields.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "_source_exclude_vectors", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.SourceExcludeVectors = bool.Parse(parameter.Value);
 							continue;
 						}
 
@@ -2019,17 +2077,6 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						if (string.Equals(parameter.Key, "stored_fields", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.StoredFields = Elastic.Clients.Elasticsearch.Fields.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
 						if (string.Equals(parameter.Key, "version", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -2239,6 +2286,17 @@ internal static partial class RequestFactory
 							}
 
 							request.RequireAlias = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "require_data_stream", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.RequireDataStream = bool.Parse(parameter.Value);
 							continue;
 						}
 
@@ -2518,8 +2576,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.IgnoreThrottled = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -2575,6 +2634,17 @@ internal static partial class RequestFactory
 							}
 
 							request.PreFilterShardSize = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ProjectRouting = parameter.Value;
 							continue;
 						}
 
@@ -2678,6 +2748,17 @@ internal static partial class RequestFactory
 							}
 
 							request.MaxConcurrentSearches = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ProjectRouting = parameter.Value;
 							continue;
 						}
 
@@ -3132,7 +3213,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.SearchType = parameter.Value;
+							request.SearchType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.SearchType>.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -3633,6 +3714,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "_source_exclude_vectors", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.SourceExcludeVectors = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "_source_includes", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -3741,6 +3833,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "zoom", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.Zoom = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ProjectRouting = parameter.Value;
 							continue;
 						}
 					}
@@ -3962,6 +4071,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ProjectRouting = parameter.Value;
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "rest_total_hits_as_int", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -4039,7 +4159,7 @@ internal static partial class RequestFactory
 					{
 						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
 						{
-							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -5828,8 +5948,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -5904,8 +6025,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -5917,6 +6039,22 @@ internal static partial class RequestFactory
 							}
 
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "settings_filter", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.SettingsFilter = list.Select(x => x).ToList();
 							continue;
 						}
 					}
@@ -6291,6 +6429,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "cause", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Cause = parameter.Value;
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "create", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -6310,6 +6459,54 @@ internal static partial class RequestFactory
 							}
 
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"cluster.put_settings",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "flat_settings", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.FlatSettings = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -6704,6 +6901,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "ccs_minimize_roundtrips", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.CcsMinimizeRoundtrips = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "expand_wildcards", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -6854,6 +7062,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "format", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Format = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Esql.EsqlFormat>.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "keep_alive", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -6921,6 +7140,27 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"esql.delete_view",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"esql.get_query",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -6942,10 +7182,62 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"esql.get_view",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.GetViewRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"esql.list_queries",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest>(serializer, body);
+				return request;
+			}
+		}
+,
+		{
+			"esql.put_view",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Esql.PutViewRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -7893,11 +8185,6 @@ internal static partial class RequestFactory
 			"indices.create_from",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
-				if (string.IsNullOrEmpty(body))
-				{
-					throw new System.InvalidOperationException("Body is required.");
-				}
-
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest>(serializer, body);
 				if (pathParameters is not null)
 				{
@@ -7937,7 +8224,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Name = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -8307,6 +8594,55 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.Name = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"indices.delete_sample_configuration",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.DeleteSampleConfigurationRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -8795,8 +9131,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -9366,6 +9703,32 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"indices.get_all_sample_configuration",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetAllSampleConfigurationRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"indices.get_data_lifecycle",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -9511,6 +9874,44 @@ internal static partial class RequestFactory
 							}
 
 							request.Verbose = bool.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"indices.get_data_stream_mappings",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -9753,8 +10154,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -9890,6 +10292,86 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"indices.get_sample",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"indices.get_sample_configuration",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleConfigurationRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"indices.get_sample_stats",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"indices.get_settings",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -9992,8 +10474,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -10057,8 +10540,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.Local = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 
@@ -10413,6 +10897,71 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"indices.put_data_stream_mappings",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "dry_run", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.DryRun = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"indices.put_data_stream_options",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -10701,6 +11250,60 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"indices.put_sample_configuration",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.PutSampleConfigurationRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Index = Elastic.Clients.Elasticsearch.IndexName.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"indices.put_settings",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -10927,6 +11530,17 @@ internal static partial class RequestFactory
 							continue;
 						}
 
+						if (string.Equals(parameter.Key, "allow_no_indices", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.AllowNoIndices = bool.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "detailed", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -10935,6 +11549,33 @@ internal static partial class RequestFactory
 							}
 
 							request.Detailed = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "expand_wildcards", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.ExpandWildcards = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ExpandWildcard>.Parse(x)).ToList();
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "ignore_unavailable", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.IgnoreUnavailable = bool.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -11081,6 +11722,99 @@ internal static partial class RequestFactory
 							}
 
 							request.Resource = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"indices.remove_block",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "block", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Block = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "index", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Indices = Elastic.Clients.Elasticsearch.Indices.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "allow_no_indices", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.AllowNoIndices = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "expand_wildcards", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.ExpandWildcards = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.ExpandWildcard>.Parse(x)).ToList();
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "ignore_unavailable", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.IgnoreUnavailable = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -11239,6 +11973,22 @@ internal static partial class RequestFactory
 							}
 
 							request.IgnoreUnavailable = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "mode", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Mode = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>.Parse(x)).ToList();
 							continue;
 						}
 					}
@@ -11803,7 +12553,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Metric = Elastic.Clients.Elasticsearch.Metrics.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Metric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.CommonStatsFlag>.Parse(x)).ToList();
 							continue;
 						}
 					}
@@ -12404,6 +13159,72 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_ai21",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutAi21Request>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "ai21_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Ai21InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12431,6 +13252,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12468,6 +13306,72 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_amazonsagemaker",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "amazonsagemaker_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.AmazonsagemakerInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12495,6 +13399,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12532,6 +13453,23 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12559,6 +13497,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12596,6 +13551,153 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_contextualai",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "contextualai_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.ContextualaiInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_custom",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutCustomRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "custom_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.CustomInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.CustomTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_deepseek",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutDeepseekRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "deepseek_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.DeepseekInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeDeepSeek>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12623,6 +13725,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12660,6 +13779,23 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12687,6 +13823,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12724,6 +13877,72 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_groq",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutGroqRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "groq_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.GroqInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.GroqTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12751,6 +13970,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12788,6 +14024,72 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_llama",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutLlamaRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "llama_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.LlamaInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.LlamaTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12815,6 +14117,72 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_nvidia",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutNvidiaRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "nvidia_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.NvidiaInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.NvidiaTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -12852,6 +14220,72 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"inference.put_openshift_ai",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "openshiftai_inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.OpenshiftaiInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "task_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.TaskType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12884,6 +14318,23 @@ internal static partial class RequestFactory
 					}
 				}
 
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -12911,6 +14362,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "watsonx_inference_id", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.WatsonxInferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -13023,6 +14491,23 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "inference_id", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -13316,23 +14801,6 @@ internal static partial class RequestFactory
 					}
 				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
 				return request;
 			}
 		}
@@ -13536,7 +15004,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.IfVersion = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.IfVersion = int.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 
@@ -13836,14 +15304,14 @@ internal static partial class RequestFactory
 							continue;
 						}
 
-						if (string.Equals(parameter.Key, "type_query_string", System.StringComparison.OrdinalIgnoreCase))
+						if (string.Equals(parameter.Key, "type", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
 							{
 								continue;
 							}
 
-							request.TypeQueryString = parameter.Value;
+							request.Type = parameter.Value;
 							continue;
 						}
 					}
@@ -14630,7 +16098,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.CategoryId = parameter.Value;
+							request.CategoryId = long.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 
@@ -15914,6 +17382,18 @@ internal static partial class RequestFactory
 				}
 
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "job_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.JobId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				if (queryParameters is not null)
 				{
 					foreach (var parameter in queryParameters)
@@ -16255,23 +17735,6 @@ internal static partial class RequestFactory
 					}
 				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
 				return request;
 			}
 		}
@@ -16429,45 +17892,6 @@ internal static partial class RequestFactory
 					}
 				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "allow_no_match", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.AllowNoMatch = bool.Parse(parameter.Value);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "force", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Force = bool.Parse(parameter.Value);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
 				return request;
 			}
 		}
@@ -16505,34 +17929,6 @@ internal static partial class RequestFactory
 						if (string.Equals(parameter.Key, "model_id", System.StringComparison.OrdinalIgnoreCase))
 						{
 							request.ModelId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "allow_no_match", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.AllowNoMatch = bool.Parse(parameter.Value);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "force", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Force = bool.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -16981,7 +18377,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Metric = Elastic.Clients.Elasticsearch.Metrics.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Metric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>.Parse(x)).ToList();
 							continue;
 						}
 
@@ -17089,7 +18490,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.IndexMetric = Elastic.Clients.Elasticsearch.Metrics.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.IndexMetric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.CommonStatsFlag>.Parse(x)).ToList();
 							continue;
 						}
 
@@ -17100,7 +18506,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Metric = Elastic.Clients.Elasticsearch.Metrics.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Metric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>.Parse(x)).ToList();
 							continue;
 						}
 
@@ -17194,7 +18605,7 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Level = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Level>.Parse(parameter.Value);
+							request.Level = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.NodeStatsLevel>.Parse(parameter.Value);
 							continue;
 						}
 
@@ -17247,7 +18658,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.Metric = Elastic.Clients.Elasticsearch.Metrics.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.Metric = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>.Parse(x)).ToList();
 							continue;
 						}
 
@@ -17281,6 +18697,123 @@ internal static partial class RequestFactory
 					}
 				}
 
+				return request;
+			}
+		}
+,
+		{
+			"project.tags",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.TagsRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.ProjectRouting = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project_routing.create",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.CreateProjectRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project_routing.create_many",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.CreateManyRequest>(serializer, body);
+				return request;
+			}
+		}
+,
+		{
+			"project_routing.delete",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.DeleteProjectRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project_routing.get",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.GetProjectRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project_routing.get_many",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.GetManyRequest>(serializer, body);
 				return request;
 			}
 		}
@@ -18456,7 +19989,7 @@ internal static partial class RequestFactory
 					{
 						if (string.Equals(parameter.Key, "application", System.StringComparison.OrdinalIgnoreCase))
 						{
-							request.Application = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.Application = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -19342,6 +20875,15 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"security.get_stats",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetStatsRequest>(serializer, body);
+				return request;
+			}
+		}
+,
+		{
 			"security.get_token",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -19403,45 +20945,6 @@ internal static partial class RequestFactory
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest>(serializer, body);
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "application", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Application = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "priviledge", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Priviledge = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "username", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.Username = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
-							continue;
-						}
-					}
-				}
-
 				return request;
 			}
 		}
@@ -19504,6 +21007,23 @@ internal static partial class RequestFactory
 				}
 
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "refresh", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Refresh = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Refresh>.Parse(parameter.Value);
+							continue;
+						}
+					}
+				}
+
 				return request;
 			}
 		}
@@ -19715,6 +21235,18 @@ internal static partial class RequestFactory
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Security.PutUserRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "username", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Username = Elastic.Clients.Elasticsearch.Username.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
 				if (queryParameters is not null)
 				{
 					foreach (var parameter in queryParameters)
@@ -20089,6 +21621,17 @@ internal static partial class RequestFactory
 				{
 					foreach (var parameter in queryParameters)
 					{
+						if (string.Equals(parameter.Key, "merge_type", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MergeType = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Simulate.MergeType>.Parse(parameter.Value);
+							continue;
+						}
+
 						if (string.Equals(parameter.Key, "pipeline", System.StringComparison.OrdinalIgnoreCase))
 						{
 							if (parameter.Value is null)
@@ -20733,7 +22276,7 @@ internal static partial class RequestFactory
 
 						if (string.Equals(parameter.Key, "snapshot", System.StringComparison.OrdinalIgnoreCase))
 						{
-							request.Snapshot = Elastic.Clients.Elasticsearch.Name.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							request.Snapshot = Elastic.Clients.Elasticsearch.Names.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
 							continue;
 						}
 					}
@@ -20751,6 +22294,17 @@ internal static partial class RequestFactory
 							}
 
 							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "wait_for_completion", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.WaitForCompletion = bool.Parse(parameter.Value);
 							continue;
 						}
 					}
@@ -21666,6 +23220,106 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"streams.logs_disable",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"streams.logs_enable",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"streams.status",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "master_timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.MasterTimeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"synonyms.delete_synonym",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -22183,7 +23837,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.ColumnNames = parameter.Value;
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.ColumnNames = list.Select(x => x).ToList();
 							continue;
 						}
 
@@ -22357,7 +24016,12 @@ internal static partial class RequestFactory
 								continue;
 							}
 
-							request.ColumnNames = parameter.Value;
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.ColumnNames = list.Select(x => x).ToList();
 							continue;
 						}
 
@@ -22564,6 +24228,15 @@ internal static partial class RequestFactory
 					}
 				}
 
+				return request;
+			}
+		}
+,
+		{
+			"transform.get_node_stats",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.GetNodeStatsRequest>(serializer, body);
 				return request;
 			}
 		}
@@ -22900,6 +24573,43 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"transform.set_upgrade_mode",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest>(serializer, body);
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "enabled", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Enabled = bool.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"transform.start_transform",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -23131,8 +24841,9 @@ internal static partial class RequestFactory
 							{
 								continue;
 							}
-
+#pragma warning disable CS0618
 							request.AcceptEnterprise = bool.Parse(parameter.Value);
+#pragma warning restore CS0618
 							continue;
 						}
 

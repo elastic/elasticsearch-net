@@ -1,21 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>annotations</Nullable>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elastic.Transport" Version="0.9.2" />
+    <PackageReference Include="Elastic.Transport" Version="0.10.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" Exclude="**\bin\**;**\obj\**" LinkBase="Client" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RequestConverter.SourceGenerator\RequestConverter.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

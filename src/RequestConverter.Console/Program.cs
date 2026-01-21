@@ -235,22 +235,7 @@ internal class Program
 
 	public static void Main(string[] args)
 	{
-		new SearchRequest().FormatToSource();
-		new TermsAggregation().FormatToSource();
-
 		var converter = new RequestConverter();
-
-		//var b = new ArrayBufferWriter<byte>();
-		//var writer = new Utf8JsonWriter(b, new JsonWriterOptions { SkipValidation = false });
-		//writer.
-		//writer.WriteStartObject();
-		//writer.WriteEndObject();
-		//writer.WriteRawValue("\n"u8, true);
-		//writer.WriteStartObject();
-		//writer.WriteEndObject();
-		//writer.WriteRawValue("\n"u8, true);
-		//writer.Flush();
-		//var s = b.ToString();
 
 		using var file = File.OpenRead("D:\\elastic\\elasticsearch-net\\alternatives_report.json");
 
