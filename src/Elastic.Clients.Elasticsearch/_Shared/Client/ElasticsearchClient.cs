@@ -67,7 +67,11 @@ public partial class ElasticsearchClient
 	{
 	}
 
-	internal ElasticsearchClient(ITransport<IElasticsearchClientSettings> transport)
+	/// <summary>
+	/// Initializes a new instance of the client using the provided transport instance.
+	/// </summary>
+	/// <param name="transport">The transport implementation that provides connectivity and configuration for the Elasticsearch client.</param>
+	public ElasticsearchClient(ITransport<IElasticsearchClientSettings> transport)
 	{
 		transport.ThrowIfNull(nameof(transport));
 		transport.Configuration.ThrowIfNull(nameof(transport.Configuration));
