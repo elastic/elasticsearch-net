@@ -23,46 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
-public sealed partial class AppendProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.AppendProcessor>
+public sealed partial class CefProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.CefProcessor>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowDuplicates = System.Text.Json.JsonEncodedText.Encode("allow_duplicates"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropCopyFrom = System.Text.Json.JsonEncodedText.Encode("copy_from"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreEmptyValues = System.Text.Json.JsonEncodedText.Encode("ignore_empty_values"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropMediaType = System.Text.Json.JsonEncodedText.Encode("media_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimezone = System.Text.Json.JsonEncodedText.Encode("timezone"u8);
 
-	public override Elastic.Clients.Elasticsearch.Ingest.AppendProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Ingest.CefProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAllowDuplicates = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propCopyFrom = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreEmptyValues = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
-		LocalJsonValue<string?> propMediaType = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<string?> propTag = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<object>?> propValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		LocalJsonValue<string?> propTimezone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowDuplicates.TryReadProperty(ref reader, options, PropAllowDuplicates, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propCopyFrom.TryReadProperty(ref reader, options, PropCopyFrom, null))
-			{
-				continue;
-			}
-
 			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
 			{
 				continue;
@@ -88,7 +76,7 @@ public sealed partial class AppendProcessorConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMediaType.TryReadProperty(ref reader, options, PropMediaType, null))
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -103,7 +91,12 @@ public sealed partial class AppendProcessorConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, static System.Collections.Generic.ICollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<object>(o, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (propTimezone.TryReadProperty(ref reader, options, PropTimezone, null))
 			{
 				continue;
 			}
@@ -118,36 +111,34 @@ public sealed partial class AppendProcessorConverter : System.Text.Json.Serializ
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Ingest.AppendProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Ingest.CefProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			AllowDuplicates = propAllowDuplicates.Value,
-			CopyFrom = propCopyFrom.Value,
 			Description = propDescription.Value,
 			Field = propField.Value,
 			If = propIf.Value,
 			IgnoreEmptyValues = propIgnoreEmptyValues.Value,
 			IgnoreFailure = propIgnoreFailure.Value,
-			MediaType = propMediaType.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
 			OnFailure = propOnFailure.Value,
 			Tag = propTag.Value,
-			Value = propValue.Value
+			TargetField = propTargetField.Value,
+			Timezone = propTimezone.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.AppendProcessor value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.CefProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowDuplicates, value.AllowDuplicates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropCopyFrom, value.CopyFrom, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
 		writer.WriteProperty(options, PropIgnoreEmptyValues, value.IgnoreEmptyValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropMediaType, value.MediaType, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteSingleOrManyCollectionValue<object>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteProperty(options, PropTimezone, value.Timezone, null, null);
 		writer.WriteEndObject();
 	}
 }

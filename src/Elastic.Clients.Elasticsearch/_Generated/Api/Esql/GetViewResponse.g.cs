@@ -21,34 +21,21 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.Esql;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingResultConverter))]
-public sealed partial class SparseEmbeddingResult
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.GetViewResponseConverter))]
+public sealed partial class GetViewResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SparseEmbeddingResult(System.Collections.Generic.IReadOnlyDictionary<string, float> embedding, bool isTruncated)
-	{
-		Embedding = embedding;
-		IsTruncated = isTruncated;
-	}
-
-	public SparseEmbeddingResult()
+	public GetViewResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SparseEmbeddingResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GetViewResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyDictionary<string, float> Embedding { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Indicates if the text input was truncated in the request sent to the service
-	/// </para>
-	/// </summary>
-	public required bool IsTruncated { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Esql.ESQLView> Views { get; set; }
 }

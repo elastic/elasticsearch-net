@@ -30,6 +30,7 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOrganizationId = System.Text.Json.JsonEncodedText.Encode("organization_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -40,6 +41,7 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<string?> propOrganizationId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType?> propSimilarity = default;
 		LocalJsonValue<string?> propUrl = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -68,6 +70,11 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 				continue;
 			}
 
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType>(o)))
+			{
+				continue;
+			}
+
 			if (propUrl.TryReadProperty(ref reader, options, PropUrl, null))
 			{
 				continue;
@@ -90,6 +97,7 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 			ModelId = propModelId.Value,
 			OrganizationId = propOrganizationId.Value,
 			RateLimit = propRateLimit.Value,
+			Similarity = propSimilarity.Value,
 			Url = propUrl.Value
 		};
 	}
@@ -102,6 +110,7 @@ public sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropOrganizationId, value.OrganizationId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType>(o, v));
 		writer.WriteProperty(options, PropUrl, value.Url, null, null);
 		writer.WriteEndObject();
 	}

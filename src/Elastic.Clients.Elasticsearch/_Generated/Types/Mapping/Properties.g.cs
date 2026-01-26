@@ -587,6 +587,42 @@ public readonly partial struct PropertiesDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ExponentialHistogram(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> Flattened(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
 	{
 		_items.Add(key, value);
@@ -2648,6 +2684,54 @@ public readonly partial struct PropertiesDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor DoubleRange<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor ExponentialHistogram<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>.Build(action));
 		return this;
 	}
 

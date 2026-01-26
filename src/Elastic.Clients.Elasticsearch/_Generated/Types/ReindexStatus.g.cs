@@ -21,16 +21,15 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
+namespace Elastic.Clients.Elasticsearch;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.Json.ReindexStatusConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ReindexStatusConverter))]
 public sealed partial class ReindexStatus
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReindexStatus(long batches, long created, long deleted, long noops, float requestsPerSecond, Elastic.Clients.Elasticsearch.Retries retries, System.TimeSpan throttledMillis, System.TimeSpan throttledUntilMillis, long total, long updated, long versionConflicts)
+	public ReindexStatus(long batches, long deleted, long noops, float requestsPerSecond, Elastic.Clients.Elasticsearch.Retries retries, System.TimeSpan throttledMillis, System.TimeSpan throttledUntilMillis, long total, long versionConflicts)
 	{
 		Batches = batches;
-		Created = created;
 		Deleted = deleted;
 		Noops = noops;
 		RequestsPerSecond = requestsPerSecond;
@@ -38,7 +37,6 @@ public sealed partial class ReindexStatus
 		ThrottledMillis = throttledMillis;
 		ThrottledUntilMillis = throttledUntilMillis;
 		Total = total;
-		Updated = updated;
 		VersionConflicts = versionConflicts;
 	}
 
@@ -61,10 +59,17 @@ public sealed partial class ReindexStatus
 
 	/// <summary>
 	/// <para>
+	/// The reason for cancellation if the slice was canceled
+	/// </para>
+	/// </summary>
+	public string? Cancelled { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The number of documents that were successfully created.
 	/// </para>
 	/// </summary>
-	public required long Created { get; set; }
+	public long? Created { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,6 +98,13 @@ public sealed partial class ReindexStatus
 	/// </para>
 	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Retries Retries { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The slice ID
+	/// </para>
+	/// </summary>
+	public int? SliceId { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 
 	/// <summary>
@@ -123,7 +135,7 @@ public sealed partial class ReindexStatus
 	/// The number of documents that were successfully updated, for example, a document with same ID already existed prior to reindex updating it.
 	/// </para>
 	/// </summary>
-	public required long Updated { get; set; }
+	public long? Updated { get; set; }
 
 	/// <summary>
 	/// <para>
