@@ -88,12 +88,7 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
+	/// The documents to rank.
 	/// </para>
 	/// </summary>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
@@ -107,11 +102,25 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
+	/// Include the document text in the response.
+	/// </para>
+	/// </summary>
+	public bool? ReturnDocuments { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Task settings for the individual inference request.
 	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public object? TaskSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Limit the response to the top N documents.
+	/// </para>
+	/// </summary>
+	public int? TopN { get; set; }
 }
 
 /// <summary>
@@ -169,12 +178,7 @@ public readonly partial struct RerankRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
+	/// The documents to rank.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
@@ -185,12 +189,7 @@ public readonly partial struct RerankRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
+	/// The documents to rank.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(params string[] values)
@@ -212,6 +211,17 @@ public readonly partial struct RerankRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Include the document text in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor ReturnDocuments(bool? value = true)
+	{
+		Instance.ReturnDocuments = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Task settings for the individual inference request.
 	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
 	/// </para>
@@ -219,6 +229,17 @@ public readonly partial struct RerankRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the response to the top N documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor TopN(int? value)
+	{
+		Instance.TopN = value;
 		return this;
 	}
 

@@ -23,15 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.WatsonxTaskTypeConverter))]
-public enum WatsonxTaskType
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAIElementTypeConverter))]
+public enum JinaAIElementType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
-	ChatCompletion,
-	[System.Runtime.Serialization.EnumMember(Value = "completion")]
-	Completion,
-	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
-	Rerank,
-	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
-	TextEmbedding
+	[System.Runtime.Serialization.EnumMember(Value = "binary")]
+	Binary,
+	[System.Runtime.Serialization.EnumMember(Value = "bit")]
+	Bit,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float
 }
