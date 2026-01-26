@@ -25,16 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank;
+		}
+
 		if (reader.ValueTextEquals(MemberTextEmbedding))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding;
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank;
+		}
+
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding;
@@ -47,6 +58,9 @@ public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serializ
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);
 				break;

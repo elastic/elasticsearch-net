@@ -80,7 +80,7 @@ public sealed partial class IndexTemplate
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Names IndexPatterns { get; set; }
@@ -234,7 +234,7 @@ public readonly partial struct IndexTemplateDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Names value)
@@ -471,7 +471,7 @@ public readonly partial struct IndexTemplateDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Names value)

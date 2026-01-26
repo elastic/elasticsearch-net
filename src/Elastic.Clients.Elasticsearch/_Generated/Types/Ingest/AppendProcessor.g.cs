@@ -27,10 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class AppendProcessor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AppendProcessor(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<object> value)
+	public AppendProcessor(Elastic.Clients.Elasticsearch.Field field)
 	{
 		Field = field;
-		Value = value;
 	}
 
 	public AppendProcessor()
@@ -82,6 +81,15 @@ public sealed partial class AppendProcessor
 
 	/// <summary>
 	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public string? MediaType { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
@@ -100,7 +108,7 @@ public sealed partial class AppendProcessor
 	/// The value to be appended. Supports template snippets.
 	/// </para>
 	/// </summary>
-	public required System.Collections.Generic.ICollection<object> Value { get; set; }
+	public System.Collections.Generic.ICollection<object>? Value { get; set; }
 }
 
 public readonly partial struct AppendProcessorDescriptor<TDocument>
@@ -193,6 +201,19 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> MediaType(string? value)
+	{
+		Instance.MediaType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
@@ -247,7 +268,7 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 	/// The value to be appended. Supports template snippets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(System.Collections.Generic.ICollection<object> value)
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;
@@ -363,6 +384,19 @@ public readonly partial struct AppendProcessorDescriptor
 
 	/// <summary>
 	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor MediaType(string? value)
+	{
+		Instance.MediaType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
@@ -434,7 +468,7 @@ public readonly partial struct AppendProcessorDescriptor
 	/// The value to be appended. Supports template snippets.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(System.Collections.Generic.ICollection<object> value)
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;

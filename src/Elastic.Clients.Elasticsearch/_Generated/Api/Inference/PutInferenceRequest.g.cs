@@ -138,7 +138,7 @@ public sealed partial class PutInferenceRequestParameters : Elastic.Transport.Re
 /// </item>
 /// <item>
 /// <para>
-/// Watsonx inference integration (<c>text_embedding</c>)
+/// Watsonx (<c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// </list>
@@ -316,7 +316,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// Watsonx inference integration (<c>text_embedding</c>)
+/// Watsonx (<c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// </list>

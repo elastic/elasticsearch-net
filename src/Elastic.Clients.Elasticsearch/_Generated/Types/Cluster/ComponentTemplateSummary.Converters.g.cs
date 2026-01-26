@@ -37,7 +37,7 @@ public sealed partial class ComponentTemplateSummaryConverter : System.Text.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>?> propAliases = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate?> propDataStreamOptions = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions?> propDataStreamOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
