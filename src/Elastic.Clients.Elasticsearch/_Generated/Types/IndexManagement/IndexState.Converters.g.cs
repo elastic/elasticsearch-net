@@ -35,15 +35,15 @@ public sealed partial class IndexStateConverter : System.Text.Json.Serialization
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.DataStreamName?> propDataStream = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<string?> propDataStream = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propDefaults = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
 			{
 				continue;
 			}
@@ -97,7 +97,7 @@ public sealed partial class IndexStateConverter : System.Text.Json.Serialization
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexState value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
 		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
 		writer.WriteProperty(options, PropDefaults, value.Defaults, null, null);
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);

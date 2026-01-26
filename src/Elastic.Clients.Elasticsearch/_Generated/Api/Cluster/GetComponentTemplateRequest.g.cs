@@ -97,8 +97,7 @@ public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of component template names used to limit the request.
-	/// Wildcard (<c>*</c>) expressions are supported.
+	/// Name of component template to retrieve. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
@@ -173,8 +172,7 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of component template names used to limit the request.
-	/// Wildcard (<c>*</c>) expressions are supported.
+	/// Name of component template to retrieve. Wildcard (<c>*</c>) expressions are supported.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)

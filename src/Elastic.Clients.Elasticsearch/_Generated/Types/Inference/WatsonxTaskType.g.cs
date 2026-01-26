@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.WatsonxTaskTypeConverter))]
 public enum WatsonxTaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

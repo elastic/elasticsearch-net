@@ -21,37 +21,15 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexStateConverter))]
-public sealed partial class IndexState
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenAISimilarityTypeConverter))]
+public enum OpenAISimilarityType
 {
-	public IndexState()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal IndexState(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
-
-	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
-	public string? DataStream { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Default settings, included when the request's <c>include_default</c> is <c>true</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Defaults { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Data stream lifecycle applicable if this is a data stream.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
-	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
+	[System.Runtime.Serialization.EnumMember(Value = "cosine")]
+	Cosine,
+	[System.Runtime.Serialization.EnumMember(Value = "dot_product")]
+	DotProduct,
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm
 }
