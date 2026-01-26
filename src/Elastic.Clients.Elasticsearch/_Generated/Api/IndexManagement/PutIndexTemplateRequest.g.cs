@@ -188,7 +188,7 @@ public sealed partial class PutIndexTemplateRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template to create.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Indices? IndexPatterns { get; set; }
@@ -457,7 +457,7 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template to create.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)
@@ -874,7 +874,7 @@ public readonly partial struct PutIndexTemplateRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Name of the index template to create.
+	/// Array of wildcard (<c>*</c>) expressions used to match the names of data streams and indices during creation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Indices? value)

@@ -51,8 +51,6 @@ public sealed partial class OpenAIServiceSettings
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public required string ApiKey { get; set; }
@@ -94,6 +92,13 @@ public sealed partial class OpenAIServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm. Defaults to <c>dot_product</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? Similarity { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The URL endpoint to use for the requests.
 	/// It can be changed for testing purposes.
 	/// </para>
@@ -128,8 +133,6 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ApiKey(string value)
@@ -214,6 +217,17 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm. Defaults to <c>dot_product</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? value)
+	{
+		Instance.Similarity = value;
 		return this;
 	}
 

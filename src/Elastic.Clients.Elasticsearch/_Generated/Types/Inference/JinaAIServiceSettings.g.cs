@@ -27,9 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class JinaAIServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public JinaAIServiceSettings(string apiKey)
+	public JinaAIServiceSettings(string apiKey, string modelId)
 	{
 		ApiKey = apiKey;
+		ModelId = modelId;
 	}
 
 	public JinaAIServiceSettings()
@@ -49,20 +50,35 @@ public sealed partial class JinaAIServiceSettings
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public required string ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The name of the model to use for the inference task.
-	/// For a <c>rerank</c> task, it is required.
-	/// For a <c>text_embedding</c> task, it is optional.
+	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+	/// By default, the model's standard output dimension is used.
+	/// Refer to the Jina documentation for more information.
 	/// </para>
 	/// </summary>
-	public string? ModelId { get; set; }
+	public int? Dimensions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For a <c>text_embedding</c> task, the data type returned by the model.
+	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
+	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
+	/// Use <c>float</c> for the default float embeddings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? ElementType { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the model to use for the inference task.
+	/// </para>
+	/// </summary>
+	public required string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -108,8 +124,6 @@ public readonly partial struct JinaAiServiceSettingsDescriptor
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ApiKey(string value)
@@ -120,12 +134,37 @@ public readonly partial struct JinaAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the model to use for the inference task.
-	/// For a <c>rerank</c> task, it is required.
-	/// For a <c>text_embedding</c> task, it is optional.
+	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+	/// By default, the model's standard output dimension is used.
+	/// Refer to the Jina documentation for more information.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ModelId(string? value)
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor Dimensions(int? value)
+	{
+		Instance.Dimensions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>text_embedding</c> task, the data type returned by the model.
+	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
+	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>bit</c>).
+	/// Use <c>float</c> for the default float embeddings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ElementType(Elastic.Clients.Elasticsearch.Inference.JinaAIElementType? value)
+	{
+		Instance.ElementType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the model to use for the inference task.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;

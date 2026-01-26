@@ -35,7 +35,7 @@ public sealed partial class PutComponentTemplateRequestConverter : System.Text.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexState> propTemplate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping> propTemplate = default;
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

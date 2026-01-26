@@ -23,15 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.WatsonxTaskTypeConverter))]
-public enum WatsonxTaskType
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenAISimilarityTypeConverter))]
+public enum OpenAISimilarityType
 {
-	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
-	ChatCompletion,
-	[System.Runtime.Serialization.EnumMember(Value = "completion")]
-	Completion,
-	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
-	Rerank,
-	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
-	TextEmbedding
+	[System.Runtime.Serialization.EnumMember(Value = "cosine")]
+	Cosine,
+	[System.Runtime.Serialization.EnumMember(Value = "dot_product")]
+	DotProduct,
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm
 }

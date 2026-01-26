@@ -35,7 +35,7 @@ public sealed partial class StreamCompletionRequestParameters : Elastic.Transpor
 
 /// <summary>
 /// <para>
-/// Perform streaming inference.
+/// Perform streaming inference on the service.
 /// </para>
 /// <para>
 /// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
@@ -116,7 +116,7 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 /// <summary>
 /// <para>
-/// Perform streaming inference.
+/// Perform streaming inference on the service.
 /// </para>
 /// <para>
 /// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
