@@ -69,8 +69,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls EsqlAsyncQueryDelete = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryGet = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryStop = new ApiUrls(new[] { "_query/async/{id}/stop" });
+	internal static ApiUrls EsqlDeleteView = new ApiUrls(new[] { "_query/view/{name}" });
 	internal static ApiUrls EsqlGetQuery = new ApiUrls(new[] { "_query/queries/{id}" });
+	internal static ApiUrls EsqlGetView = new ApiUrls(new[] { "_query/view", "_query/view/{name}" });
 	internal static ApiUrls EsqlListQueries = new ApiUrls(new[] { "_query/queries" });
+	internal static ApiUrls EsqlPutView = new ApiUrls(new[] { "_query/view/{name}" });
 	internal static ApiUrls EsqlQuery = new ApiUrls(new[] { "_query" });
 	internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "_features" });
 	internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "_features/_reset" });

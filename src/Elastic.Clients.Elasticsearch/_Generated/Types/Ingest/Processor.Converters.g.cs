@@ -28,6 +28,7 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText VariantAppend = System.Text.Json.JsonEncodedText.Encode("append");
 	private static readonly System.Text.Json.JsonEncodedText VariantAttachment = System.Text.Json.JsonEncodedText.Encode("attachment");
 	private static readonly System.Text.Json.JsonEncodedText VariantBytes = System.Text.Json.JsonEncodedText.Encode("bytes");
+	private static readonly System.Text.Json.JsonEncodedText VariantCef = System.Text.Json.JsonEncodedText.Encode("cef");
 	private static readonly System.Text.Json.JsonEncodedText VariantCircle = System.Text.Json.JsonEncodedText.Encode("circle");
 	private static readonly System.Text.Json.JsonEncodedText VariantCommunityId = System.Text.Json.JsonEncodedText.Encode("community_id");
 	private static readonly System.Text.Json.JsonEncodedText VariantConvert = System.Text.Json.JsonEncodedText.Encode("convert");
@@ -99,6 +100,14 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 				variantType = VariantBytes.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCef))
+			{
+				variantType = VariantCef.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.CefProcessor>(options, null);
 				continue;
 			}
 
@@ -470,6 +479,9 @@ public sealed partial class ProcessorConverter : System.Text.Json.Serialization.
 				break;
 			case "bytes":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)value.Variant, null, null);
+				break;
+			case "cef":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CefProcessor)value.Variant, null, null);
 				break;
 			case "circle":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)value.Variant, null, null);

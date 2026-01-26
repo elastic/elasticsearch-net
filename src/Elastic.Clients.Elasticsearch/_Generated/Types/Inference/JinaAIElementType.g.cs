@@ -23,32 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingResultConverter))]
-public sealed partial class SparseEmbeddingResult
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAIElementTypeConverter))]
+public enum JinaAIElementType
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SparseEmbeddingResult(System.Collections.Generic.IReadOnlyDictionary<string, float> embedding, bool isTruncated)
-	{
-		Embedding = embedding;
-		IsTruncated = isTruncated;
-	}
-
-	public SparseEmbeddingResult()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SparseEmbeddingResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
-
-	public required System.Collections.Generic.IReadOnlyDictionary<string, float> Embedding { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Indicates if the text input was truncated in the request sent to the service
-	/// </para>
-	/// </summary>
-	public required bool IsTruncated { get; set; }
+	[System.Runtime.Serialization.EnumMember(Value = "binary")]
+	Binary,
+	[System.Runtime.Serialization.EnumMember(Value = "bit")]
+	Bit,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float
 }

@@ -56,7 +56,7 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (defayult: dynamic)
+	/// The number of segments the index should be merged into (default: dynamic)
 	/// </para>
 	/// </summary>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
@@ -226,7 +226,7 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (defayult: dynamic)
+	/// The number of segments the index should be merged into (default: dynamic)
 	/// </para>
 	/// </summary>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
@@ -425,7 +425,7 @@ public readonly partial struct ForcemergeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (defayult: dynamic)
+	/// The number of segments the index should be merged into (default: dynamic)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor MaxNumSegments(long? value)
@@ -696,7 +696,7 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The number of segments the index should be merged into (defayult: dynamic)
+	/// The number of segments the index should be merged into (default: dynamic)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> MaxNumSegments(long? value)

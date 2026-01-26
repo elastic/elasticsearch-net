@@ -60,6 +60,7 @@ public sealed partial class IPropertyConverter : System.Text.Json.Serialization.
 			"dense_vector" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty>(options, null),
 			"double" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty>(options, null),
 			"double_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty>(options, null),
+			"exponential_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty>(options, null),
 			"flattened" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty>(options, null),
 			"float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty>(options, null),
 			"float_range" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty>(options, null),
@@ -149,6 +150,9 @@ public sealed partial class IPropertyConverter : System.Text.Json.Serialization.
 				break;
 			case "double_range":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty)value, null);
+				break;
+			case "exponential_histogram":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty)value, null);
 				break;
 			case "flattened":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty)value, null);

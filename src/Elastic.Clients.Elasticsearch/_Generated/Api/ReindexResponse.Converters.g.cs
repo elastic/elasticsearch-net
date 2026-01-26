@@ -33,6 +33,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSliceId = System.Text.Json.JsonEncodedText.Encode("slice_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlices = System.Text.Json.JsonEncodedText.Encode("slices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottledMillis = System.Text.Json.JsonEncodedText.Encode("throttled_millis"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottledUntilMillis = System.Text.Json.JsonEncodedText.Encode("throttled_until_millis"u8);
@@ -53,6 +54,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 		LocalJsonValue<float?> propRequestsPerSecond = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retries?> propRetries = default;
 		LocalJsonValue<int?> propSliceId = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>?> propSlices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTask = default;
 		LocalJsonValue<System.DateTimeOffset?> propThrottledMillis = default;
 		LocalJsonValue<System.DateTimeOffset?> propThrottledUntilMillis = default;
@@ -99,6 +101,11 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 			}
 
 			if (propSliceId.TryReadProperty(ref reader, options, PropSliceId, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propSlices.TryReadProperty(ref reader, options, PropSlices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ReindexStatus>(o, null)))
 			{
 				continue;
 			}
@@ -163,6 +170,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 			RequestsPerSecond = propRequestsPerSecond.Value,
 			Retries = propRetries.Value,
 			SliceId = propSliceId.Value,
+			Slices = propSlices.Value,
 			Task = propTask.Value,
 			ThrottledMillis = propThrottledMillis.Value,
 			ThrottledUntilMillis = propThrottledUntilMillis.Value,
@@ -185,6 +193,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
 		writer.WriteProperty(options, PropSliceId, value.SliceId, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSlices, value.Slices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ReindexStatus>(o, v, null));
 		writer.WriteProperty(options, PropTask, value.Task, null, null);
 		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropThrottledUntilMillis, value.ThrottledUntilMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));

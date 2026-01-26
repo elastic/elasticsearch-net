@@ -21,34 +21,44 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.Esql;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingResultConverter))]
-public sealed partial class SparseEmbeddingResult
+/// <summary>
+/// <para>
+/// A non-materialized ES|QL view.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.ESQLViewConverter))]
+public sealed partial class ESQLView
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SparseEmbeddingResult(System.Collections.Generic.IReadOnlyDictionary<string, float> embedding, bool isTruncated)
+	public ESQLView(string name, string query)
 	{
-		Embedding = embedding;
-		IsTruncated = isTruncated;
+		Name = name;
+		Query = query;
 	}
 
-	public SparseEmbeddingResult()
+	public ESQLView()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SparseEmbeddingResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal ESQLView(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyDictionary<string, float> Embedding { get; set; }
+	/// <summary>
+	/// <para>
+	/// The name of the ES|QL view
+	/// </para>
+	/// </summary>
+	public required string Name { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Indicates if the text input was truncated in the request sent to the service
+	/// The ES|QL query
 	/// </para>
 	/// </summary>
-	public required bool IsTruncated { get; set; }
+	public required string Query { get; set; }
 }

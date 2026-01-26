@@ -49,8 +49,6 @@ public sealed partial class GroqServiceSettings
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public string? ApiKey { get; set; }
@@ -106,8 +104,6 @@ public readonly partial struct GroqServiceSettingsDescriptor
 	/// <para>
 	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
 	/// The get inference endpoint API does not retrieve your API key.
-	/// After creating the inference model, you cannot change the associated API key.
-	/// If you want to use a different API key, delete the inference model and recreate it with the same name and the updated API key.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.GroqServiceSettingsDescriptor ApiKey(string? value)
