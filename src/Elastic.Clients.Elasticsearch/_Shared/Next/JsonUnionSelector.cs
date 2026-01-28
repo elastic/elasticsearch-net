@@ -77,6 +77,7 @@ internal static class JsonUnionSelector
 	}
 
 	// We avoid using a `params` array for performance reasons. Create `Match()` overloads with additional parameters as needed.
+
 	public static UnionTag Match(ref Utf8JsonReader reader, JsonSerializerOptions options, JsonUnionSelectorFunc case1, JsonUnionSelectorFunc case2)
 	{
 		if (case1(ref reader, options) is var tag1 and not UnionTag.None)
@@ -87,6 +88,27 @@ internal static class JsonUnionSelector
 		if (case2(ref reader, options) is var tag2 and not UnionTag.None)
 		{
 			return tag2;
+		}
+
+		return UnionTag.None;
+	}
+
+	public static UnionTag Match(ref Utf8JsonReader reader, JsonSerializerOptions options, JsonUnionSelectorFunc case1, JsonUnionSelectorFunc case2,
+		JsonUnionSelectorFunc case3)
+	{
+		if (case1(ref reader, options) is var tag1 and not UnionTag.None)
+		{
+			return tag1;
+		}
+
+		if (case2(ref reader, options) is var tag2 and not UnionTag.None)
+		{
+			return tag2;
+		}
+
+		if (case3(ref reader, options) is var tag3 and not UnionTag.None)
+		{
+			return tag3;
 		}
 
 		return UnionTag.None;
