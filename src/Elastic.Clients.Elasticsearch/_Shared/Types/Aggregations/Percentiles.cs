@@ -70,7 +70,8 @@ internal sealed partial class PercentilesItemConverter : System.Text.Json.Serial
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentilesItemConverter))]
-public sealed class PercentilesItem
+[Codegen(ShouldGenerate = false)]
+public sealed partial class PercentilesItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PercentilesItem(string key, double? value)

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 
 using Elastic.Clients.Elasticsearch;
-using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
@@ -12,12 +11,7 @@ public sealed class RequestConverter
 {
 	public static readonly Serializer DefaultSerializer = new DefaultRequestResponseSerializer(new ElasticsearchClientSettings());
 
-	public string Convert(Request request)
-	{
-		return string.Empty;
-	}
-
-	public string Convert(
+	public static string Convert(
 		Serializer requestResponseSerializer,
 		string id,
 		IReadOnlyDictionary<string, string>? pathParameters,
@@ -30,6 +24,11 @@ public sealed class RequestConverter
 			throw new NotSupportedException($"Endpoint '{id}' is not supported.");
 		}
 
-		return Convert(request);
+		if (request is not ICodeFormattable formattable)
+		{
+			throw new NotSupportedException($"Request for endpoint '{id}' does not implement '{nameof(ICodeFormattable)}'.");
+		}
+
+		return CodeFormatter.FormatCode(formattable);
 	}
 }

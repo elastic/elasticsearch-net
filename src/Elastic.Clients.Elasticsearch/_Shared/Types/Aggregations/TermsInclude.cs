@@ -14,7 +14,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// Filters which terms to include in the response.
 /// </summary>
 [JsonConverter(typeof(Json.TermsIncludeConverter))]
-public class TermsInclude
+[Codegen(ShouldGenerate = false)]
+public partial class TermsInclude
 {
 	/// <summary>
 	/// Creates an instance of <see cref="TermsInclude" /> that uses a regular expression pattern

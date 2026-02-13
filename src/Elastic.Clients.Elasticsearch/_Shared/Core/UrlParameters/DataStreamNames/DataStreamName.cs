@@ -13,7 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.DataStreamNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class DataStreamName :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class DataStreamName :
 	IEquatable<DataStreamName>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

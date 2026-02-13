@@ -13,7 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(Json.IndexAliasConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class IndexAlias :
+[Codegen(ShouldGenerate = false)]
+public partial class IndexAlias :
 	IEquatable<IndexAlias>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

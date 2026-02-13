@@ -16,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 /// </summary>
 [JsonConverter(typeof(Json.IndexNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class IndexName :
+[Codegen(ShouldGenerate = false)]
+public partial class IndexName :
 	IEquatable<IndexName>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

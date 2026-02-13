@@ -17,10 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
-using System.Collections.Frozen;
 
 namespace RequestConverter;
 
@@ -3838,23 +3837,6 @@ internal static partial class RequestFactory
 					}
 				}
 
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.ProjectRouting = parameter.Value;
-							continue;
-						}
-					}
-				}
-
 				return request;
 			}
 		}
@@ -4068,17 +4050,6 @@ internal static partial class RequestFactory
 							}
 
 							request.Preference = parameter.Value;
-							continue;
-						}
-
-						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.ProjectRouting = parameter.Value;
 							continue;
 						}
 
@@ -13036,6 +13007,49 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"inference.embedding",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Inference.EmbeddingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "inference_id", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.InferenceId = Elastic.Clients.Elasticsearch.Id.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				if (queryParameters is not null)
+				{
+					foreach (var parameter in queryParameters)
+					{
+						if (string.Equals(parameter.Key, "timeout", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							request.Timeout = Elastic.Clients.Elasticsearch.Duration.Parse(parameter.Value, System.Globalization.CultureInfo.InvariantCulture);
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"inference.get",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
@@ -18702,118 +18716,101 @@ internal static partial class RequestFactory
 		}
 ,
 		{
+			"project.create_many_routing",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest>(serializer, body);
+				return request;
+			}
+		}
+,
+		{
+			"project.create_routing",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				if (string.IsNullOrEmpty(body))
+				{
+					throw new System.InvalidOperationException("Body is required.");
+				}
+
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project.delete_routing",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
+			"project.get_many_routing",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest>(serializer, body);
+				return request;
+			}
+		}
+,
+		{
+			"project.get_routing",
+			(serializer, pathParameters, queryParameters, body) =>
+			{
+				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest>(serializer, body);
+				if (pathParameters is not null)
+				{
+					foreach (var parameter in pathParameters)
+					{
+						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
+						{
+							request.Name = parameter.Value;
+							continue;
+						}
+					}
+				}
+
+				return request;
+			}
+		}
+,
+		{
 			"project.tags",
 			(serializer, pathParameters, queryParameters, body) =>
 			{
 				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.Project.TagsRequest>(serializer, body);
-				if (queryParameters is not null)
-				{
-					foreach (var parameter in queryParameters)
-					{
-						if (string.Equals(parameter.Key, "project_routing", System.StringComparison.OrdinalIgnoreCase))
-						{
-							if (parameter.Value is null)
-							{
-								continue;
-							}
-
-							request.ProjectRouting = parameter.Value;
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"project_routing.create",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				if (string.IsNullOrEmpty(body))
-				{
-					throw new System.InvalidOperationException("Body is required.");
-				}
-
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.CreateProjectRoutingRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Name = parameter.Value;
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"project_routing.create_many",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				if (string.IsNullOrEmpty(body))
-				{
-					throw new System.InvalidOperationException("Body is required.");
-				}
-
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.CreateManyRequest>(serializer, body);
-				return request;
-			}
-		}
-,
-		{
-			"project_routing.delete",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.DeleteProjectRoutingRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Name = parameter.Value;
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"project_routing.get",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.GetProjectRoutingRequest>(serializer, body);
-				if (pathParameters is not null)
-				{
-					foreach (var parameter in pathParameters)
-					{
-						if (string.Equals(parameter.Key, "name", System.StringComparison.OrdinalIgnoreCase))
-						{
-							request.Name = parameter.Value;
-							continue;
-						}
-					}
-				}
-
-				return request;
-			}
-		}
-,
-		{
-			"project_routing.get_many",
-			(serializer, pathParameters, queryParameters, body) =>
-			{
-				var request = Elastic.Transport.Extensions.TransportSerializerExtensions.Deserialize<Elastic.Clients.Elasticsearch.ProjectRouting.GetManyRequest>(serializer, body);
 				return request;
 			}
 		}

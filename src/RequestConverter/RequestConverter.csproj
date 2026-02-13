@@ -15,4 +15,8 @@
     <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" Exclude="**\bin\**;**\obj\**" LinkBase="Client" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="_Shared\" />
+  </ItemGroup>
+
 </Project>

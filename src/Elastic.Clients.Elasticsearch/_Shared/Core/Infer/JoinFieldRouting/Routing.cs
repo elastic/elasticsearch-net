@@ -16,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [JsonConverter(typeof(RoutingConverter))]
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-public class Routing :
+[Codegen(ShouldGenerate = false)]
+public partial class Routing :
 	IEquatable<Routing>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

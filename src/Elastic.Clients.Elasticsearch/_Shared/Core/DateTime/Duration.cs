@@ -16,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 /// Represents a duration value.
 /// </summary>
 [JsonConverter(typeof(Json.DurationConverter))]
-public sealed class Duration :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class Duration :
 	IComparable<Duration>,
 	IEquatable<Duration>,
 	IUrlParameter
