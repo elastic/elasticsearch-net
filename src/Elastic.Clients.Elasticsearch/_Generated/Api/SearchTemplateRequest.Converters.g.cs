@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Json;
 
@@ -29,6 +29,7 @@ public sealed partial class SearchTemplateRequestConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -38,6 +39,7 @@ public sealed partial class SearchTemplateRequestConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -57,6 +59,11 @@ public sealed partial class SearchTemplateRequestConverter : System.Text.Json.Se
 			}
 
 			if (propProfile.TryReadProperty(ref reader, options, PropProfile, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -82,6 +89,7 @@ public sealed partial class SearchTemplateRequestConverter : System.Text.Json.Se
 			Id = propId.Value,
 			Params = propParams.Value,
 			Profile = propProfile.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Source = propSource.Value
 		};
 	}
@@ -93,6 +101,7 @@ public sealed partial class SearchTemplateRequestConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}

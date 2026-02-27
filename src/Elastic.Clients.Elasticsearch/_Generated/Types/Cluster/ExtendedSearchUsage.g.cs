@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
@@ -37,4 +37,5 @@ public sealed partial class ExtendedSearchUsage
 	}
 
 	public Elastic.Clients.Elasticsearch.Cluster.ExtendedRetrieversSearchUsage? Retrievers { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.ExtendedSectionSearchUsage? Section { get; set; }
 }

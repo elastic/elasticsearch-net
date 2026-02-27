@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -42,7 +42,7 @@ public sealed partial class PutJinaaiRequestParameters : Elastic.Transport.Reque
 /// </para>
 /// <para>
 /// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
-/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+/// To review the available <c>embedding</c> and <c>text_embedding</c> models, refer to <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutJinaaiRequestConverter))]
@@ -102,8 +102,7 @@ public sealed partial class PutJinaaiRequest : Elastic.Clients.Elasticsearch.Req
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c> task type.
+	/// Applies only to the <c>embedding</c> and text_embedding<c>task types. Not applicable to the</c>rerank` task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -140,7 +139,7 @@ public sealed partial class PutJinaaiRequest : Elastic.Clients.Elasticsearch.Req
 /// </para>
 /// <para>
 /// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
-/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+/// To review the available <c>embedding</c> and <c>text_embedding</c> models, refer to <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 /// </para>
 /// </summary>
 public readonly partial struct PutJinaaiRequestDescriptor
@@ -205,8 +204,7 @@ public readonly partial struct PutJinaaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c> task type.
+	/// Applies only to the <c>embedding</c> and text_embedding<c>task types. Not applicable to the</c>rerank` task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -218,8 +216,7 @@ public readonly partial struct PutJinaaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c> task type.
+	/// Applies only to the <c>embedding</c> and text_embedding<c>task types. Not applicable to the</c>rerank` task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings()
@@ -231,8 +228,7 @@ public readonly partial struct PutJinaaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c> task type.
+	/// Applies only to the <c>embedding</c> and text_embedding<c>task types. Not applicable to the</c>rerank` task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

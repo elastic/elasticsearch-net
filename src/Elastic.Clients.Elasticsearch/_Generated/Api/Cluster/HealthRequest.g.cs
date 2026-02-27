@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
@@ -27,77 +27,88 @@ public sealed partial class HealthRequestParameters : Elastic.Transport.RequestP
 {
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+	/// Return health information at a specific level of detail.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// If true, retrieve information from the local node only.
+	/// If false, retrieve information from the master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+	/// Wait for the specified number of active shards.
+	/// Use <c>all</c> to wait for all shards in the cluster to be active.
+	/// Use <c>0</c> to not wait.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+	/// Wait until all currently queued events with the given priority are processed.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 
 	/// <summary>
 	/// <para>
-	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+	/// Wait until the specified number (N) of nodes is available.
+	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
+	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
+	/// If false, the request does not wait for initializing shards.
 	/// </para>
 	/// </summary>
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
+	/// If false, the request not wait for relocating shards.
 	/// </para>
 	/// </summary>
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
+	/// A green status is better than yellow and yellow is better than red.
+	/// By default, the request does not wait for a particular status.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
@@ -148,84 +159,97 @@ public sealed partial class HealthRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
+	/// Wildcard expressions (<c>*</c>) are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+	/// Return health information at a specific level of detail.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// If true, retrieve information from the local node only.
+	/// If false, retrieve information from the master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+	/// Wait for the specified number of active shards.
+	/// Use <c>all</c> to wait for all shards in the cluster to be active.
+	/// Use <c>0</c> to not wait.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+	/// Wait until all currently queued events with the given priority are processed.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForEvents? WaitForEvents { get => Q<Elastic.Clients.Elasticsearch.WaitForEvents?>("wait_for_events"); set => Q("wait_for_events", value); }
 
 	/// <summary>
 	/// <para>
-	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+	/// Wait until the specified number (N) of nodes is available.
+	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
+	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
+	/// If false, the request does not wait for initializing shards.
 	/// </para>
 	/// </summary>
 	public bool? WaitForNoInitializingShards { get => Q<bool?>("wait_for_no_initializing_shards"); set => Q("wait_for_no_initializing_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
+	/// If false, the request not wait for relocating shards.
 	/// </para>
 	/// </summary>
 	public bool? WaitForNoRelocatingShards { get => Q<bool?>("wait_for_no_relocating_shards"); set => Q("wait_for_no_relocating_shards", value); }
 
 	/// <summary>
 	/// <para>
-	/// One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
+	/// A green status is better than yellow and yellow is better than red.
+	/// By default, the request does not wait for a particular status.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.HealthStatus? WaitForStatus { get => Q<Elastic.Clients.Elasticsearch.HealthStatus?>("wait_for_status"); set => Q("wait_for_status", value); }
@@ -274,7 +298,9 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
+	/// Wildcard expressions (<c>*</c>) are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
@@ -285,7 +311,7 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -296,7 +322,7 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -307,7 +333,7 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+	/// Return health information at a specific level of detail.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
@@ -318,7 +344,8 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// If true, retrieve information from the local node only.
+	/// If false, retrieve information from the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Local(bool? value = true)
@@ -329,7 +356,8 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -340,7 +368,8 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -351,7 +380,9 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+	/// Wait for the specified number of active shards.
+	/// Use <c>all</c> to wait for all shards in the cluster to be active.
+	/// Use <c>0</c> to not wait.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
@@ -362,7 +393,7 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+	/// Wait until all currently queued events with the given priority are processed.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? value)
@@ -373,7 +404,9 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+	/// Wait until the specified number (N) of nodes is available.
+	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
+	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
@@ -384,7 +417,8 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
+	/// If false, the request does not wait for initializing shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNoInitializingShards(bool? value = true)
@@ -395,7 +429,8 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
+	/// If false, the request not wait for relocating shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForNoRelocatingShards(bool? value = true)
@@ -406,7 +441,9 @@ public readonly partial struct HealthRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
+	/// A green status is better than yellow and yellow is better than red.
+	/// By default, the request does not wait for a particular status.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? value)
@@ -519,7 +556,9 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+	/// A comma-separated list of data streams, indices, and index aliases that limit the request.
+	/// Wildcard expressions (<c>*</c>) are supported.
+	/// To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
@@ -530,7 +569,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -541,7 +580,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// Expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -552,7 +591,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+	/// Return health information at a specific level of detail.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
@@ -563,7 +602,8 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// If true, retrieve information from the local node only.
+	/// If false, retrieve information from the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Local(bool? value = true)
@@ -574,7 +614,8 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -585,7 +626,8 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -596,7 +638,9 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+	/// Wait for the specified number of active shards.
+	/// Use <c>all</c> to wait for all shards in the cluster to be active.
+	/// Use <c>0</c> to not wait.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
@@ -607,7 +651,7 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+	/// Wait until all currently queued events with the given priority are processed.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? value)
@@ -618,7 +662,9 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+	/// Wait until the specified number (N) of nodes is available.
+	/// It also accepts <c>>=N</c>, <c>&lt;=N</c>, <c>>N</c> and <c>&lt;N</c>.
+	/// Alternatively, use the notations <c>ge(N)</c>, <c>le(N)</c>, <c>gt(N)</c>, and <c>lt(N)</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? value)
@@ -629,7 +675,8 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard initializations.
+	/// If false, the request does not wait for initializing shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? value = true)
@@ -640,7 +687,8 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+	/// Wait (until the timeout expires) for the cluster to have no shard relocations.
+	/// If false, the request not wait for relocating shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? value = true)
@@ -651,7 +699,9 @@ public readonly partial struct HealthRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+	/// Wait (until the timeout expires) for the cluster to reach a specific health status (or a better status).
+	/// A green status is better than yellow and yellow is better than red.
+	/// By default, the request does not wait for a particular status.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? value)

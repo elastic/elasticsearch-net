@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -40,16 +40,18 @@ public sealed partial class InferenceResult
 	}
 
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.CompletionResult>? Completion { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.CompletionResult>>("completion"); set => SetVariant("completion", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>? Embeddings { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>>("embeddings"); set => SetVariant("embeddings", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>? EmbeddingsBits { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>("embeddings_bits"); set => SetVariant("embeddings_bits", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>? EmbeddingsBytes { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>("embeddings_bytes"); set => SetVariant("embeddings_bytes", value); }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.RankedDocument>? Rerank { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.RankedDocument>>("rerank"); set => SetVariant("rerank", value); }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult>? SparseEmbedding { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult>>("sparse_embedding"); set => SetVariant("sparse_embedding", value); }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>? TextEmbedding { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>>("text_embedding"); set => SetVariant("text_embedding", value); }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>? TextEmbeddingBits { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>>("text_embedding_bits"); set => SetVariant("text_embedding_bits", value); }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>? TextEmbeddingBytes { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>>("text_embedding_bytes"); set => SetVariant("text_embedding_bytes", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>? TextEmbedding { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>>("text_embedding"); set => SetVariant("text_embedding", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>? TextEmbeddingBits { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>("text_embedding_bits"); set => SetVariant("text_embedding_bits", value); }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>? TextEmbeddingBytes { get => GetVariant<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>("text_embedding_bytes"); set => SetVariant("text_embedding_bytes", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceResult(Elastic.Clients.Elasticsearch.Inference.CompletionResult[] value) => new Elastic.Clients.Elasticsearch.Inference.InferenceResult { Completion = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceResult(Elastic.Clients.Elasticsearch.Inference.RankedDocument[] value) => new Elastic.Clients.Elasticsearch.Inference.InferenceResult { Rerank = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceResult(Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult[] value) => new Elastic.Clients.Elasticsearch.Inference.InferenceResult { SparseEmbedding = value };
-	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceResult(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult[] value) => new Elastic.Clients.Elasticsearch.Inference.InferenceResult { TextEmbedding = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)

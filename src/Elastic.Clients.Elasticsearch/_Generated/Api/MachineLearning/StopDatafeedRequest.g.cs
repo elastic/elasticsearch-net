@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
@@ -77,6 +77,13 @@ public sealed partial class StopDatafeedRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoMatch { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Refer to the description for the <c>close_job</c> query parameter.
+	/// </para>
+	/// </summary>
+	public bool? CloseJob { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -147,6 +154,17 @@ public readonly partial struct StopDatafeedRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Refer to the description for the <c>close_job</c> query parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor CloseJob(bool? value = true)
+	{
+		Instance.CloseJob = value;
 		return this;
 	}
 

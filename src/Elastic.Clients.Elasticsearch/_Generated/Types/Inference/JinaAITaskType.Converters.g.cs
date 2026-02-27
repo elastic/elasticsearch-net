@@ -17,19 +17,25 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class JinaAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.JinaAITaskType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.JinaAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Embedding;
+		}
+
 		if (reader.ValueTextEquals(MemberRerank))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank;
@@ -41,6 +47,11 @@ public sealed partial class JinaAITaskTypeConverter : System.Text.Json.Serializa
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Embedding;
+		}
+
 		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank;
@@ -58,6 +69,9 @@ public sealed partial class JinaAITaskTypeConverter : System.Text.Json.Serializa
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Embedding:
+				writer.WriteStringValue(MemberEmbedding);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank:
 				writer.WriteStringValue(MemberRerank);
 				break;

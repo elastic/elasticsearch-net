@@ -17,19 +17,25 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class TaskTypeAmazonBedrockConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.ChatCompletion;
+		}
+
 		if (reader.ValueTextEquals(MemberCompletion))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.Completion;
@@ -41,6 +47,11 @@ public sealed partial class TaskTypeAmazonBedrockConverter : System.Text.Json.Se
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.ChatCompletion;
+		}
+
 		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.Completion;
@@ -58,6 +69,9 @@ public sealed partial class TaskTypeAmazonBedrockConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonBedrock.Completion:
 				writer.WriteStringValue(MemberCompletion);
 				break;

@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Json;
 
@@ -31,6 +31,7 @@ public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText PropNoops = System.Text.Json.JsonEncodedText.Encode("noops"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlices = System.Text.Json.JsonEncodedText.Encode("slices"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTask = System.Text.Json.JsonEncodedText.Encode("task"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottled = System.Text.Json.JsonEncodedText.Encode("throttled"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropThrottledMillis = System.Text.Json.JsonEncodedText.Encode("throttled_millis"u8);
@@ -51,6 +52,7 @@ public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Se
 		LocalJsonValue<long?> propNoops = default;
 		LocalJsonValue<float?> propRequestsPerSecond = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retries?> propRetries = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>?> propSlices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.TaskId?> propTask = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottled = default;
 		LocalJsonValue<System.TimeSpan?> propThrottledMillis = default;
@@ -89,6 +91,11 @@ public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Se
 			}
 
 			if (propRetries.TryReadProperty(ref reader, options, PropRetries, null))
+			{
+				continue;
+			}
+
+			if (propSlices.TryReadProperty(ref reader, options, PropSlices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ReindexStatus>(o, null)))
 			{
 				continue;
 			}
@@ -161,6 +168,7 @@ public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Se
 			Noops = propNoops.Value,
 			RequestsPerSecond = propRequestsPerSecond.Value,
 			Retries = propRetries.Value,
+			Slices = propSlices.Value,
 			Task = propTask.Value,
 			Throttled = propThrottled.Value,
 			ThrottledMillis = propThrottledMillis.Value,
@@ -183,6 +191,7 @@ public sealed partial class UpdateByQueryResponseConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropNoops, value.Noops, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
+		writer.WriteProperty(options, PropSlices, value.Slices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ReindexStatus>(o, v, null));
 		writer.WriteProperty(options, PropTask, value.Task, null, null);
 		writer.WriteProperty(options, PropThrottled, value.Throttled, null, null);
 		writer.WriteProperty(options, PropThrottledMillis, value.ThrottledMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));

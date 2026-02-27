@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -60,6 +60,44 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// </para>
 	/// </summary>
 	public string? Location { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Only applicable for the <c>text_embedding</c> task type.
+	/// Controls the batch size of chunked inference requests sent to Google Vertex AI.
+	/// </para>
+	/// <para>
+	/// Setting this parameter lower reduces the risk of exceeding token limits but may result in more API calls. Setting it higher increases throughput but may risk hitting token limits.
+	/// </para>
+	/// <para>
+	/// To estimate a safe <c>max_batch_size</c> value, you can use it together with the <c>max_chunk_size</c> parameter using the following formula:
+	/// <c>max_batch_size ≈ max_chunk_size × 1.3 × 512 ÷ 20000</c>
+	/// </para>
+	/// <para>
+	/// Where:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>1.3</c> is an approximate tokens-per-word ratio
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>512</c> is the maximum number of chunks that can be generated per document
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>20000</c> is the Google Vertex AI token limit per request
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// This estimate assumes the worst-case scenario with a document generating the maximum 512 chunks.
+	/// </para>
+	/// </summary>
+	public int? MaxBatchSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -186,6 +224,48 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Location(string? value)
 	{
 		Instance.Location = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only applicable for the <c>text_embedding</c> task type.
+	/// Controls the batch size of chunked inference requests sent to Google Vertex AI.
+	/// </para>
+	/// <para>
+	/// Setting this parameter lower reduces the risk of exceeding token limits but may result in more API calls. Setting it higher increases throughput but may risk hitting token limits.
+	/// </para>
+	/// <para>
+	/// To estimate a safe <c>max_batch_size</c> value, you can use it together with the <c>max_chunk_size</c> parameter using the following formula:
+	/// <c>max_batch_size ≈ max_chunk_size × 1.3 × 512 ÷ 20000</c>
+	/// </para>
+	/// <para>
+	/// Where:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>1.3</c> is an approximate tokens-per-word ratio
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>512</c> is the maximum number of chunks that can be generated per document
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>20000</c> is the Google Vertex AI token limit per request
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// This estimate assumes the worst-case scenario with a document generating the maximum 512 chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor MaxBatchSize(int? value)
+	{
+		Instance.MaxBatchSize = value;
 		return this;
 	}
 

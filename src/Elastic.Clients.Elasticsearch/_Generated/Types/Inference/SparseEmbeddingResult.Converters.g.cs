@@ -17,23 +17,30 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class SparseEmbeddingResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsTruncated = System.Text.Json.JsonEncodedText.Encode("is_truncated"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, float>> propEmbedding = default;
+		LocalJsonValue<bool> propIsTruncated = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propEmbedding.TryReadProperty(ref reader, options, PropEmbedding, static System.Collections.Generic.IReadOnlyDictionary<string, float> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, float>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propIsTruncated.TryReadProperty(ref reader, options, PropIsTruncated, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class SparseEmbeddingResultConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Embedding = propEmbedding.Value
+			Embedding = propEmbedding.Value,
+			IsTruncated = propIsTruncated.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class SparseEmbeddingResultConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEmbedding, value.Embedding, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, float> v) => w.WriteDictionaryValue<string, float>(o, v, null, null));
+		writer.WriteProperty(options, PropIsTruncated, value.IsTruncated, null, null);
 		writer.WriteEndObject();
 	}
 }

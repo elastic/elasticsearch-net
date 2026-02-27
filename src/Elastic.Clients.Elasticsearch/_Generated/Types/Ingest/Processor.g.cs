@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
@@ -65,6 +65,13 @@ public sealed partial class Processor
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.BytesProcessor? Bytes { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.BytesProcessor>("bytes"); set => SetVariant("bytes", value); }
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CefProcessor? Cef { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.CefProcessor>("cef"); set => SetVariant("cef", value); }
 
 	/// <summary>
 	/// <para>
@@ -402,6 +409,7 @@ public sealed partial class Processor
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Append = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Attachment = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Bytes = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.CefProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Cef = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Circle = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { CommunityId = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor value) => new Elastic.Clients.Elasticsearch.Ingest.Processor { Convert = value };
@@ -558,6 +566,28 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Bytes(System.Action<Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Bytes = Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Cef(Elastic.Clients.Elasticsearch.Ingest.CefProcessor? value)
+	{
+		Instance.Cef = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Cef(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>> action)
+	{
+		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -1779,6 +1809,39 @@ public readonly partial struct ProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Bytes<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<T>> action)
 	{
 		Instance.Bytes = Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef(Elastic.Clients.Elasticsearch.Ingest.CefProcessor? value)
+	{
+		Instance.Cef = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor> action)
+	{
+		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Converts a CEF message into a structured format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Cef<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<T>> action)
+	{
+		Instance.Cef = Elastic.Clients.Elasticsearch.Ingest.CefProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 

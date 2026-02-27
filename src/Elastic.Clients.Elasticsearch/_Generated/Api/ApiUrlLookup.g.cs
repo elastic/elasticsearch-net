@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Requests;
 
@@ -69,8 +69,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls EsqlAsyncQueryDelete = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryGet = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryStop = new ApiUrls(new[] { "_query/async/{id}/stop" });
+	internal static ApiUrls EsqlDeleteView = new ApiUrls(new[] { "_query/view/{name}" });
 	internal static ApiUrls EsqlGetQuery = new ApiUrls(new[] { "_query/queries/{id}" });
+	internal static ApiUrls EsqlGetView = new ApiUrls(new[] { "_query/view", "_query/view/{name}" });
 	internal static ApiUrls EsqlListQueries = new ApiUrls(new[] { "_query/queries" });
+	internal static ApiUrls EsqlPutView = new ApiUrls(new[] { "_query/view/{name}" });
 	internal static ApiUrls EsqlQuery = new ApiUrls(new[] { "_query" });
 	internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "_features" });
 	internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "_features/_reset" });
@@ -164,6 +167,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceChatCompletionUnified = new ApiUrls(new[] { "_inference/chat_completion/{inference_id}/_stream" });
 	internal static ApiUrls InferenceCompletion = new ApiUrls(new[] { "_inference/completion/{inference_id}" });
 	internal static ApiUrls InferenceDelete = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferenceEmbedding = new ApiUrls(new[] { "_inference/embedding/{inference_id}" });
 	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
@@ -338,6 +342,11 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "{index}/_update/{id}" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "_update_by_query/{task_id}/_rethrottle" });
+	internal static ApiUrls ProjectCreateManyRouting = new ApiUrls(new[] { "_project_routing" });
+	internal static ApiUrls ProjectCreateRouting = new ApiUrls(new[] { "_project_routing/{name}" });
+	internal static ApiUrls ProjectDeleteRouting = new ApiUrls(new[] { "_project_routing/{name}" });
+	internal static ApiUrls ProjectGetManyRouting = new ApiUrls(new[] { "_project_routing" });
+	internal static ApiUrls ProjectGetRouting = new ApiUrls(new[] { "_project_routing/{name}" });
 	internal static ApiUrls ProjectTags = new ApiUrls(new[] { "_project/tags" });
 	internal static ApiUrls QueryRulesDeleteRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesDeleteRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
