@@ -19,7 +19,8 @@ public enum WaitForNodesCondition
 	GreaterThanOrEqualTo
 }
 
-public readonly struct WaitForNodes :
+[Codegen(ShouldGenerate = false)]
+public readonly partial struct WaitForNodes :
 	IUrlParameter
 #if NET7_0_OR_GREATER
 	, IParsable<WaitForNodes>

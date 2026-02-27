@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
@@ -55,6 +55,9 @@ public sealed partial class PutDataStreamSettingsRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Update data stream settings.
+/// </para>
+/// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
 /// </para>
 /// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what
@@ -134,6 +137,9 @@ public sealed partial class PutDataStreamSettingsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Update data stream settings.
+/// </para>
+/// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
 /// </para>
 /// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what
@@ -300,6 +306,9 @@ public readonly partial struct PutDataStreamSettingsRequestDescriptor
 /// <summary>
 /// <para>
 /// Update data stream settings.
+/// </para>
+/// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
 /// </para>
 /// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what

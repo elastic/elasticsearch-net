@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -50,6 +50,11 @@ public sealed partial class RateLimitSetting
 	/// <item>
 	/// <para>
 	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>amazonbedrock</c> service: <c>240</c>
 	/// </para>
 	/// </item>
 	/// <item>
@@ -180,6 +185,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <item>
 	/// <para>
 	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>amazonbedrock</c> service: <c>240</c>
 	/// </para>
 	/// </item>
 	/// <item>

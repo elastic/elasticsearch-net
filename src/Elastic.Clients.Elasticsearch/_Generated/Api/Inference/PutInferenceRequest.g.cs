@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -58,7 +58,7 @@ public sealed partial class PutInferenceRequestParameters : Elastic.Transport.Re
 /// </item>
 /// <item>
 /// <para>
-/// Amazon Bedrock (<c>completion</c>, <c>text_embedding</c>)
+/// Amazon Bedrock (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -123,7 +123,7 @@ public sealed partial class PutInferenceRequestParameters : Elastic.Transport.Re
 /// </item>
 /// <item>
 /// <para>
-/// JinaAI (<c>rerank</c>, <c>text_embedding</c>)
+/// JinaAI (<c>embedding</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -158,7 +158,7 @@ public sealed partial class PutInferenceRequestParameters : Elastic.Transport.Re
 /// </item>
 /// <item>
 /// <para>
-/// Watsonx inference integration (<c>text_embedding</c>)
+/// Watsonx (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// </list>
@@ -256,7 +256,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// Amazon Bedrock (<c>completion</c>, <c>text_embedding</c>)
+/// Amazon Bedrock (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -321,7 +321,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// JinaAI (<c>rerank</c>, <c>text_embedding</c>)
+/// JinaAI (<c>embedding</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -356,7 +356,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// Watsonx inference integration (<c>text_embedding</c>)
+/// Watsonx (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// </list>

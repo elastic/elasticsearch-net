@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
@@ -64,6 +64,7 @@ public sealed partial class DynamicTemplate
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DoubleNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.DoubleRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FloatNumberProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(Elastic.Clients.Elasticsearch.Mapping.FloatRangeProperty value) => new Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate { Mapping = value };

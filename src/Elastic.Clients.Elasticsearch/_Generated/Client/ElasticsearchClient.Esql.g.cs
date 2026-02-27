@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
@@ -224,6 +224,52 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Id name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse GetQuery(Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest request)
 	{
 		request.BeforeRequest();
@@ -270,6 +316,86 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest, Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse, Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Esql.GetViewRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Id? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.GetViewResponse GetView(Elastic.Clients.Elasticsearch.Id? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Esql.GetViewRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Id? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.GetViewResponse> GetViewAsync(Elastic.Clients.Elasticsearch.Id? name, System.Action<Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.GetViewRequest, Elastic.Clients.Elasticsearch.Esql.GetViewResponse, Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Esql.ListQueriesResponse ListQueries(Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest request)
 	{
 		request.BeforeRequest();
@@ -314,6 +440,52 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.ListQueriesRequest, Elastic.Clients.Elasticsearch.Esql.ListQueriesResponse, Elastic.Clients.Elasticsearch.Esql.ListQueriesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutViewResponse PutView(Elastic.Clients.Elasticsearch.Esql.PutViewRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutViewResponse PutView(Elastic.Clients.Elasticsearch.Id name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Esql.PutViewResponse PutView(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutViewResponse> PutViewAsync(Elastic.Clients.Elasticsearch.Esql.PutViewRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutViewResponse> PutViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.PutViewResponse> PutViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Esql.PutViewRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.PutViewRequest, Elastic.Clients.Elasticsearch.Esql.PutViewResponse, Elastic.Clients.Elasticsearch.Esql.PutViewRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse Query(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest request)

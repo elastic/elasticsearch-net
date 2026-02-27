@@ -13,7 +13,8 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 
 [JsonConverter(typeof(JsonIncompatibleConverter))]
-public sealed class SearchTemplateRequestItem :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class SearchTemplateRequestItem :
 	IStreamSerializable
 {
 	public SearchTemplateRequestItem(TemplateConfig body) => Body = body;

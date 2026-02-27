@@ -16,7 +16,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(Json.IndicesJsonConverter))]
-public sealed class Indices :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class Indices :
 	IUrlParameter,
 	IEnumerable<IndexName>,
 	IEquatable<Indices>

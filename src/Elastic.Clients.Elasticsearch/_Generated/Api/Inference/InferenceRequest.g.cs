@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -130,7 +130,7 @@ public sealed partial class InferenceRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Specifies the input data type for the text embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>text_embedding</c> task type. Possible values include:
+	/// Specifies the input data type for the embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>embedding</c> or <c>text_embedding</c> task type. Possible values include:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
@@ -297,7 +297,7 @@ public readonly partial struct InferenceRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the input data type for the text embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>text_embedding</c> task type. Possible values include:
+	/// Specifies the input data type for the embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>embedding</c> or <c>text_embedding</c> task type. Possible values include:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>

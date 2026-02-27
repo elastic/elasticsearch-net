@@ -13,7 +13,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(Json.NameConverter))]
-public sealed class Name :
+[Codegen(ShouldGenerate = false)]
+public sealed partial class Name :
 	IEquatable<Name>,
 	IUrlParameter
 #if NET7_0_OR_GREATER

@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
@@ -27,6 +27,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxBatchSize = System.Text.Json.JsonEncodedText.Encode("max_batch_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProjectId = System.Text.Json.JsonEncodedText.Encode("project_id"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider"u8);
@@ -40,6 +41,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int?> propDimensions = default;
 		LocalJsonValue<string?> propLocation = default;
+		LocalJsonValue<int?> propMaxBatchSize = default;
 		LocalJsonValue<string?> propModelId = default;
 		LocalJsonValue<string?> propProjectId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider?> propProvider = default;
@@ -55,6 +57,11 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 			}
 
 			if (propLocation.TryReadProperty(ref reader, options, PropLocation, null))
+			{
+				continue;
+			}
+
+			if (propMaxBatchSize.TryReadProperty(ref reader, options, PropMaxBatchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -108,6 +115,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		{
 			Dimensions = propDimensions.Value,
 			Location = propLocation.Value,
+			MaxBatchSize = propMaxBatchSize.Value,
 			ModelId = propModelId.Value,
 			ProjectId = propProjectId.Value,
 			Provider = propProvider.Value,
@@ -123,6 +131,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLocation, value.Location, null, null);
+		writer.WriteProperty(options, PropMaxBatchSize, value.MaxBatchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropProjectId, value.ProjectId, null, null);
 		writer.WriteProperty(options, PropProvider, value.Provider, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>(o, v));

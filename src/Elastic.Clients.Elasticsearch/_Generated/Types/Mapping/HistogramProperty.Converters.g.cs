@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
@@ -32,6 +32,7 @@ public sealed partial class HistogramPropertyConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.HistogramProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -44,6 +45,7 @@ public sealed partial class HistogramPropertyConverter : System.Text.Json.Serial
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, static Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o)))
@@ -81,6 +83,11 @@ public sealed partial class HistogramPropertyConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, static Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType>(o)))
+			{
+				continue;
+			}
+
 			if (reader.ValueTextEquals(PropType))
 			{
 				reader.SafeSkip();
@@ -105,7 +112,8 @@ public sealed partial class HistogramPropertyConverter : System.Text.Json.Serial
 			IgnoreMalformed = propIgnoreMalformed.Value,
 			Meta = propMeta.Value,
 			Properties = propProperties.Value,
-			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TimeSeriesMetric = propTimeSeriesMetric.Value
 		};
 	}
 
@@ -119,6 +127,7 @@ public sealed partial class HistogramPropertyConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

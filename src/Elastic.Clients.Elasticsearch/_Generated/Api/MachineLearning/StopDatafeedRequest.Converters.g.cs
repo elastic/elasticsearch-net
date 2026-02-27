@@ -17,15 +17,16 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class StopDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCloseJob = System.Text.Json.JsonEncodedText.Encode("close_job"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropForce = System.Text.Json.JsonEncodedText.Encode("force"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout"u8);
 
@@ -33,11 +34,17 @@ public sealed partial class StopDatafeedRequestConverter : System.Text.Json.Seri
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAllowNoMatch = default;
+		LocalJsonValue<bool?> propCloseJob = default;
 		LocalJsonValue<bool?> propForce = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAllowNoMatch.TryReadProperty(ref reader, options, PropAllowNoMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propCloseJob.TryReadProperty(ref reader, options, PropCloseJob, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,6 +72,7 @@ public sealed partial class StopDatafeedRequestConverter : System.Text.Json.Seri
 		return new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AllowNoMatch = propAllowNoMatch.Value,
+			CloseJob = propCloseJob.Value,
 			Force = propForce.Value,
 			Timeout = propTimeout.Value
 		};
@@ -74,6 +82,7 @@ public sealed partial class StopDatafeedRequestConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllowNoMatch, value.AllowNoMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCloseJob, value.CloseJob, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropForce, value.Force, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
 		writer.WriteEndObject();

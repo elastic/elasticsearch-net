@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>annotations</Nullable>
+    <AllowMissingPrunePackageData>true</AllowMissingPrunePackageData>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Elastic.Transport" Version="0.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" Exclude="**\bin\**;**\obj\**" LinkBase="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_Shared\" />
+  </ItemGroup>
+
+</Project>

@@ -17,9 +17,9 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
@@ -30,6 +30,8 @@ public enum WatsonxTaskType
 	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

@@ -17,27 +17,14 @@
 
 #nullable restore
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using System;
 using System.Linq;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class SearchMvtRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 }
 
 /// <summary>
@@ -263,20 +250,6 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
-
-	/// <summary>
-	/// <para>
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
@@ -410,6 +383,20 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridType { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -741,24 +728,6 @@ public readonly partial struct SearchMvtRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Zoom(int value)
 	{
 		Instance.Zoom = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ProjectRouting(string? value)
-	{
-		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -1199,6 +1168,24 @@ public readonly partial struct SearchMvtRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
 		Instance.GridType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -1780,24 +1767,6 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ProjectRouting(string? value)
-	{
-		Instance.ProjectRouting = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
@@ -2147,6 +2116,24 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
 		Instance.GridType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
