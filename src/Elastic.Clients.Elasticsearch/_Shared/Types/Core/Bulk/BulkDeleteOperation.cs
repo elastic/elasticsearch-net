@@ -103,7 +103,11 @@ public sealed class BulkDeleteOperation<T> :
 				Routing = routing;
 		}
 
-		Index ??= typeof(T);
+		// Only infer the index from the CLR type if PrepareIndex has not already resolved it
+		// from the BulkRequest URL (in which case _indexPrepared is true and Index is null
+		// intentionally to avoid writing a redundant _index field in the operation body).
+		if (!_indexPrepared)
+			Index ??= typeof(T);
 	}
 
 	protected override Type ClrType => typeof(T);

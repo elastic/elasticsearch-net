@@ -103,12 +103,18 @@ public abstract class BulkOperation :
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 	protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
 
+	// Set to true after PrepareIndex has resolved the index from the BulkRequest URL, so that
+	// SetValues overrides in subclasses do not overwrite a null Index with a CLR type inference.
+	private protected bool _indexPrepared;
+
 	void IBulkOperation.PrepareIndex(IndexName? bulkRequestIndex)
 	{
 		Index ??= bulkRequestIndex ?? ClrType;
 
 		if (bulkRequestIndex is not null && (Index?.Equals(bulkRequestIndex) ?? false))
 			Index = null;
+
+		_indexPrepared = true;
 	}
 
 	/// <inheritdoc />
