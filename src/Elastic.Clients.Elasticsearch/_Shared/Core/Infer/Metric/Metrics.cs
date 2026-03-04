@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 using Elastic.Transport;
 
@@ -20,8 +21,6 @@ public sealed class Metrics :
 	, IParsable<Metrics>
 #endif
 {
-	private static readonly HashSet<string> EmptyMetrics = new();
-
 	/// <summary>
 	/// An instance of <see cref="Metrics"/> representing all statistics.
 	/// </summary>
@@ -33,12 +32,12 @@ public sealed class Metrics :
 	public Metrics(string metric)
 	{
 		if (string.IsNullOrEmpty(metric))
-			Values = EmptyMetrics;
-
-		Values = new HashSet<string>()
 		{
-			metric
-		};
+			Values = [];
+			return;
+		}
+
+		Values = [metric];
 	}
 
 	/// <summary>
@@ -47,12 +46,17 @@ public sealed class Metrics :
 	public Metrics(IEnumerable<string> metrics)
 	{
 		if (metrics is null)
-			Values = EmptyMetrics;
+		{
+			Values = [];
+			return;
+		}
 
-		Values = new HashSet<string>(metrics);
+		Values = new HashSet<string>(metrics).ToArray();
 	}
 
-	private HashSet<string> Values { get; }
+	// Stored as an immutable array to prevent mutation of the shared Metrics.All singleton
+	// and any other Metrics instances.
+	private string[] Values { get; }
 
 	/// <inheritdoc />
 	public bool Equals(Metrics other)
@@ -61,7 +65,7 @@ public sealed class Metrics :
 			return false;
 
 		// Equality is true when both instances have the same metric names.
-		return Values.SetEquals(other.Values);
+		return new HashSet<string>(Values).SetEquals(other.Values);
 	}
 
 	string IUrlParameter.GetString(ITransportConfiguration settings) => GetString();
@@ -71,7 +75,7 @@ public sealed class Metrics :
 
 	private string GetString()
 	{
-		if (Values == EmptyMetrics)
+		if (Values.Length == 0)
 			return string.Empty;
 
 		return string.Join(",", Values);
