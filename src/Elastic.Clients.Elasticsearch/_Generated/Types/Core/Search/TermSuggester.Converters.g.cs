@@ -183,7 +183,8 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort>(o, v));
 		writer.WriteProperty(options, PropStringDistance, value.StringDistance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.StringDistance? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.StringDistance>(o, v));
 		writer.WriteProperty(options, PropSuggestMode, value.SuggestMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SuggestMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SuggestMode>(o, v));
-		writer.WriteProperty(options, PropText, value.Text, null, null);
+		// "text" is intentionally not written here. It must be serialized at the FieldSuggester level
+		// (as a sibling of "term"), not inside the "term" object. See: https://github.com/elastic/elasticsearch-net/issues/8310
 		writer.WriteEndObject();
 	}
 }

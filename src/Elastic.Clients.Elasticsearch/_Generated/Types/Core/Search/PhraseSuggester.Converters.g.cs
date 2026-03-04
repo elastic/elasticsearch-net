@@ -191,7 +191,8 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSmoothing, value.Smoothing, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, null);
+		// "text" is intentionally not written here. It must be serialized at the FieldSuggester level
+		// (as a sibling of "phrase"), not inside the "phrase" object. See: https://github.com/elastic/elasticsearch-net/issues/8310
 		writer.WriteProperty(options, PropTokenLimit, value.TokenLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}

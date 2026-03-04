@@ -121,9 +121,16 @@ public sealed partial class FieldSuggesterConverter : System.Text.Json.Serializa
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester)}'.");
 		}
 
+		// "text" must always be written at this level (sibling to the variant), never inside the variant object.
+		// If the user set Text on the inner variant (TermSuggester/PhraseSuggester), promote it here.
+		// See: https://github.com/elastic/elasticsearch-net/issues/8310
+		var effectiveText = value.Text
+			?? (value.Variant as Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)?.Text
+			?? (value.Variant as Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester)?.Text;
+
 		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
 		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, null);
+		writer.WriteProperty(options, PropText, effectiveText, null, null);
 		writer.WriteEndObject();
 	}
 }
