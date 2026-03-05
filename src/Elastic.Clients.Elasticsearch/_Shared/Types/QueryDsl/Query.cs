@@ -14,10 +14,10 @@ public partial class Query
 
 	public static bool operator true(Query _) => false;
 
-	public static Query operator &(Query leftContainer, Query rightContainer) =>
+	public static Query operator &(Query? leftContainer, Query? rightContainer) =>
 		And(leftContainer, rightContainer);
 
-	internal static Query And(Query leftContainer, Query rightContainer)
+	internal static Query And(Query? leftContainer, Query? rightContainer)
 	{
 		if (leftContainer is null && rightContainer is null)
 		{
@@ -25,7 +25,7 @@ public partial class Query
 		}
 
 		if (rightContainer is null)
-			return leftContainer;
+			return leftContainer!;
 
 		if (leftContainer is null)
 			return rightContainer;
@@ -33,9 +33,9 @@ public partial class Query
 		return leftContainer.CombineAsMust(rightContainer);
 	}
 
-	public static Query operator |(Query leftContainer, Query rightContainer) => Or(leftContainer, rightContainer);
+	public static Query operator |(Query? leftContainer, Query? rightContainer) => Or(leftContainer, rightContainer);
 
-	internal static Query Or(Query leftContainer, Query rightContainer)
+	internal static Query Or(Query? leftContainer, Query? rightContainer)
 	{
 		if (leftContainer is null && rightContainer is null)
 		{
@@ -43,7 +43,7 @@ public partial class Query
 		}
 
 		if (rightContainer is null)
-			return leftContainer;
+			return leftContainer!;
 
 		if (leftContainer is null)
 			return rightContainer;
@@ -51,11 +51,11 @@ public partial class Query
 		return leftContainer.CombineAsShould(rightContainer);
 	}
 
-	public static Query operator !(Query queryContainer) => queryContainer is null
+	public static Query? operator !(Query? queryContainer) => queryContainer is null
 			? null
 			: new() { Bool = new() { MustNot = [queryContainer] } };
 
-	public static Query operator +(Query queryContainer) => queryContainer is null
+	public static Query? operator +(Query? queryContainer) => queryContainer is null
 		? null
 		: new() { Bool = new() { Filter = [queryContainer] } };
 }
