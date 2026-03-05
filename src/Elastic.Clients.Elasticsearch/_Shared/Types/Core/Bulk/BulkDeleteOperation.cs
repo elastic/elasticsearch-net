@@ -102,8 +102,6 @@ public sealed class BulkDeleteOperation<T> :
 			if (!string.IsNullOrEmpty(routing.GetString(settings)))
 				Routing = routing;
 		}
-
-		Index ??= typeof(T);
 	}
 
 	protected override Type ClrType => typeof(T);
