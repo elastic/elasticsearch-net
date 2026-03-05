@@ -103,17 +103,49 @@ public abstract class BulkOperation :
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 	protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
 
+	private IndexName? _bulkRequestIndex;
+
 	void IBulkOperation.PrepareIndex(IndexName? bulkRequestIndex)
 	{
-		Index ??= bulkRequestIndex ?? ClrType;
+		_bulkRequestIndex = bulkRequestIndex;
+	}
 
-		if (bulkRequestIndex is not null && (Index?.Equals(bulkRequestIndex) ?? false))
-			Index = null;
+	private void ResolveIndex(IElasticsearchClientSettings settings)
+	{
+		if (_bulkRequestIndex is not null)
+		{
+			var resolvedBulkIndex = settings.Inferrer.IndexName(_bulkRequestIndex);
+
+			string? inferredIndex;
+			if (Index is not null)
+				inferredIndex = settings.Inferrer.IndexName(Index);
+			else if (ClrType is not null)
+				inferredIndex = settings.Inferrer.TryIndexName(ClrType);
+			else
+				inferredIndex = null;
+
+			if (inferredIndex is null || inferredIndex == resolvedBulkIndex)
+				Index = null;
+			else
+				Index = inferredIndex;
+		}
+		else
+		{
+			Index ??= ClrType;
+		}
 	}
 
 	/// <inheritdoc />
-	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => Serialize(stream, settings);
+	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		ResolveIndex(settings);
+		Serialize(stream, settings);
+	}
 
 	/// <inheritdoc />
-	Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting) => SerializeAsync(stream, settings);
+	Task IStreamSerializable.SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	{
+		ResolveIndex(settings);
+		return SerializeAsync(stream, settings);
+	}
 }

@@ -29,6 +29,13 @@ internal class IndexNameResolver
 
 	public string Resolve(Type type)
 	{
+		var indexName = TryResolve(type);
+		ValidateIndexName(indexName);
+		return indexName;
+	}
+
+	public string? TryResolve(Type type)
+	{
 		var indexName = _transportClientSettings.DefaultIndex;
 		var defaultIndices = _transportClientSettings.DefaultIndices;
 		if (defaultIndices != null && type != null)
@@ -36,8 +43,8 @@ internal class IndexNameResolver
 			if (defaultIndices.TryGetValue(type, out var value) && !string.IsNullOrEmpty(value))
 				indexName = value;
 		}
-		ValidateIndexName(indexName);
-		return indexName;
+
+		return string.IsNullOrWhiteSpace(indexName) ? null : indexName;
 	}
 
 	private static string PrefixClusterName(IndexName i, string name) => i.Cluster.IsNullOrEmpty() ? name : $"{i.Cluster}:{name}";
