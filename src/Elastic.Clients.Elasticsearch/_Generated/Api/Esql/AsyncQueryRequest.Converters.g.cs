@@ -34,6 +34,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout"u8);
 
@@ -49,6 +50,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propLocale = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<string> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -98,6 +100,11 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
+			{
+				continue;
+			}
+
 			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
@@ -129,6 +136,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 			Locale = propLocale.Value,
 			Params = propParams.Value,
 			Profile = propProfile.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
 		};
@@ -146,6 +154,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
 		writer.WriteEndObject();

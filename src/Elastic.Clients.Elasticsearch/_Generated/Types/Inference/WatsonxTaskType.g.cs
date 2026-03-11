@@ -30,6 +30,8 @@ public enum WatsonxTaskType
 	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

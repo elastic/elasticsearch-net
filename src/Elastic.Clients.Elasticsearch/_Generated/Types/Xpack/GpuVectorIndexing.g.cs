@@ -21,56 +21,57 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Nodes;
+namespace Elastic.Clients.Elasticsearch.Xpack;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeUsageConverter))]
-public sealed partial class NodeUsage
+/// <summary>
+/// <para>
+/// GPU vector indexing usage statistics.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.GpuVectorIndexingConverter))]
+public sealed partial class GpuVectorIndexing
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodeUsage(System.Collections.Generic.IReadOnlyDictionary<string, object> aggregations, System.Collections.Generic.IReadOnlyDictionary<string, int> restActions, System.DateTimeOffset since, System.DateTimeOffset timestamp)
+	public GpuVectorIndexing(bool available, bool enabled, long indexBuildCount, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.GpuNodeStats> nodes, int nodesWithGpu)
 	{
-		Aggregations = aggregations;
-		RestActions = restActions;
-		Since = since;
-		Timestamp = timestamp;
+		Available = available;
+		Enabled = enabled;
+		IndexBuildCount = indexBuildCount;
+		Nodes = nodes;
+		NodesWithGpu = nodesWithGpu;
 	}
 
-	public NodeUsage()
+	public GpuVectorIndexing()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal NodeUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GpuVectorIndexing(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of times search aggregations have been called on this node since the last restart.
-	/// </para>
-	/// </summary>
-	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
+	public required bool Available { get; set; }
+	public required bool Enabled { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The total number of times each REST endpoint has been called on this node since the last restart.
-	/// Note that the REST endpoint names are not considered stable.
+	/// Total GPU index builds across the cluster.
 	/// </para>
 	/// </summary>
-	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
+	public required long IndexBuildCount { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The timestamp for when the collection of these statistics started.
+	/// Per-node GPU details including type, memory, enabled status, and build count.
 	/// </para>
 	/// </summary>
-	public required System.DateTimeOffset Since { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.GpuNodeStats> Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The timestamp for when these statistics were collected.
+	/// Count of data nodes with GPU support.
 	/// </para>
 	/// </summary>
-	public required System.DateTimeOffset Timestamp { get; set; }
+	public required int NodesWithGpu { get; set; }
 }

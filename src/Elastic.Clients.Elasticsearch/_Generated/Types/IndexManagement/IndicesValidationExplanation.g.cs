@@ -27,9 +27,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndicesValidationExplanation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndicesValidationExplanation(string index, bool valid)
+	public IndicesValidationExplanation(bool valid)
 	{
-		Index = index;
 		Valid = valid;
 	}
 
@@ -45,6 +44,7 @@ public sealed partial class IndicesValidationExplanation
 
 	public string? Error { get; set; }
 	public string? Explanation { get; set; }
-	public required string Index { get; set; }
+	public string? Index { get; set; }
+	public int? Shard { get; set; }
 	public required bool Valid { get; set; }
 }

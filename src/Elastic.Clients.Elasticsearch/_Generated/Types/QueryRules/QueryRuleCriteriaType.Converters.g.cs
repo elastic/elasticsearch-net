@@ -28,7 +28,6 @@ public sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Se
 	private static readonly System.Text.Json.JsonEncodedText MemberAlways = System.Text.Json.JsonEncodedText.Encode("always"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberContains = System.Text.Json.JsonEncodedText.Encode("contains"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberExact = System.Text.Json.JsonEncodedText.Encode("exact"u8);
-	private static readonly System.Text.Json.JsonEncodedText MemberExactFuzzy = System.Text.Json.JsonEncodedText.Encode("exact_fuzzy"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberGlobal = System.Text.Json.JsonEncodedText.Encode("global"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt"u8);
@@ -53,11 +52,6 @@ public sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Se
 		if (reader.ValueTextEquals(MemberExact))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact;
-		}
-
-		if (reader.ValueTextEquals(MemberExactFuzzy))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.ExactFuzzy;
 		}
 
 		if (reader.ValueTextEquals(MemberFuzzy))
@@ -116,11 +110,6 @@ public sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Se
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact;
 		}
 
-		if (string.Equals(value, MemberExactFuzzy.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.ExactFuzzy;
-		}
-
 		if (string.Equals(value, MemberFuzzy.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy;
@@ -176,9 +165,6 @@ public sealed partial class QueryRuleCriteriaTypeConverter : System.Text.Json.Se
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Exact:
 				writer.WriteStringValue(MemberExact);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.ExactFuzzy:
-				writer.WriteStringValue(MemberExactFuzzy);
 				break;
 			case Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaType.Fuzzy:
 				writer.WriteStringValue(MemberFuzzy);

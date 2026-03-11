@@ -47,7 +47,7 @@ public sealed partial class TermsLookup
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 }
 
 public readonly partial struct TermsLookupDescriptor<TDocument>
@@ -93,7 +93,7 @@ public readonly partial struct TermsLookupDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -151,7 +151,7 @@ public readonly partial struct TermsLookupDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

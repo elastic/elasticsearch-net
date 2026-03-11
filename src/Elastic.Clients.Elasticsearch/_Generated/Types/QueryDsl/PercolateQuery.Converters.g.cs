@@ -49,7 +49,7 @@ public sealed partial class PercolateQueryConverter : System.Text.Json.Serializa
 		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<string?> propPreference = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<string?> propRouting = default;
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

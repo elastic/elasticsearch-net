@@ -28,6 +28,7 @@ public sealed partial class IndicesValidationExplanationConverter : System.Text.
 	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropExplanation = System.Text.Json.JsonEncodedText.Encode("explanation"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropValid = System.Text.Json.JsonEncodedText.Encode("valid"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesValidationExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -35,7 +36,8 @@ public sealed partial class IndicesValidationExplanationConverter : System.Text.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propError = default;
 		LocalJsonValue<string?> propExplanation = default;
-		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<string?> propIndex = default;
+		LocalJsonValue<int?> propShard = default;
 		LocalJsonValue<bool> propValid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +52,11 @@ public sealed partial class IndicesValidationExplanationConverter : System.Text.
 			}
 
 			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propShard.TryReadProperty(ref reader, options, PropShard, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ public sealed partial class IndicesValidationExplanationConverter : System.Text.
 			Error = propError.Value,
 			Explanation = propExplanation.Value,
 			Index = propIndex.Value,
+			Shard = propShard.Value,
 			Valid = propValid.Value
 		};
 	}
@@ -84,6 +92,7 @@ public sealed partial class IndicesValidationExplanationConverter : System.Text.
 		writer.WriteProperty(options, PropError, value.Error, null, null);
 		writer.WriteProperty(options, PropExplanation, value.Explanation, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropValid, value.Valid, null, null);
 		writer.WriteEndObject();
 	}

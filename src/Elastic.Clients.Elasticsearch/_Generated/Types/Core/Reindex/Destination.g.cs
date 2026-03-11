@@ -74,7 +74,7 @@ public sealed partial class Destination
 	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -147,7 +147,7 @@ public readonly partial struct DestinationDescriptor
 	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

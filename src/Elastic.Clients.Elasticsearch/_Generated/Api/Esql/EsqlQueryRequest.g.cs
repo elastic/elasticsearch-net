@@ -186,6 +186,20 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
@@ -380,6 +394,24 @@ public readonly partial struct EsqlQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -627,6 +659,24 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

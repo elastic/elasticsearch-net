@@ -107,7 +107,7 @@ public sealed partial class PercolateQuery
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -260,7 +260,7 @@ public readonly partial struct PercolateQueryDescriptor<TDocument>
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -429,7 +429,7 @@ public readonly partial struct PercolateQueryDescriptor
 	/// Routing used to fetch document to percolate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

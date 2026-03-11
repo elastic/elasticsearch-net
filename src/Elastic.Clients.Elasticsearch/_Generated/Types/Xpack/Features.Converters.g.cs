@@ -35,6 +35,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropEnterpriseSearch = System.Text.Json.JsonEncodedText.Encode("enterprise_search"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropEsql = System.Text.Json.JsonEncodedText.Encode("esql"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGpuVectorIndexing = System.Text.Json.JsonEncodedText.Encode("gpu_vector_indexing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb"u8);
@@ -66,6 +67,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propEnterpriseSearch = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propEsql = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature?> propGpuVectorIndexing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propLogsdb = default;
@@ -131,6 +133,11 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propEsql.TryReadProperty(ref reader, options, PropEsql, null))
+			{
+				continue;
+			}
+
+			if (propGpuVectorIndexing.TryReadProperty(ref reader, options, PropGpuVectorIndexing, null))
 			{
 				continue;
 			}
@@ -242,6 +249,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 			EnterpriseSearch = propEnterpriseSearch.Value,
 			Eql = propEql.Value,
 			Esql = propEsql.Value,
+			GpuVectorIndexing = propGpuVectorIndexing.Value,
 			Graph = propGraph.Value,
 			Ilm = propIlm.Value,
 			Logsdb = propLogsdb.Value,
@@ -275,6 +283,7 @@ public sealed partial class FeaturesConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropEnterpriseSearch, value.EnterpriseSearch, null, null);
 		writer.WriteProperty(options, PropEql, value.Eql, null, null);
 		writer.WriteProperty(options, PropEsql, value.Esql, null, null);
+		writer.WriteProperty(options, PropGpuVectorIndexing, value.GpuVectorIndexing, null, null);
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropLogsdb, value.Logsdb, null, null);
