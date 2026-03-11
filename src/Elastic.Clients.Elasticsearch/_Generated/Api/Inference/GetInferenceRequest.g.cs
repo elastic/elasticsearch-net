@@ -43,6 +43,10 @@ public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.
 	{
 	}
 
+	public GetInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType) : base(r => r.Optional("task_type", taskType))
+	{
+	}
+
 	public GetInferenceRequest()
 	{
 	}
@@ -63,14 +67,15 @@ public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// The inference Id
+	/// The inference Id of the endpoint to return. Using <c>_all</c> or <c>*</c> will return all endpoints with the specified
+	/// <c>task_type</c> if one is specified, or all endpoints for all task types if no <c>task_type</c> is specified
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Id? InferenceId { get => P<Elastic.Clients.Elasticsearch.Id?>("inference_id"); set => PO("inference_id", value); }
 
 	/// <summary>
 	/// <para>
-	/// The task type
+	/// The task type of the endpoint to return
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
@@ -101,6 +106,11 @@ public readonly partial struct GetInferenceRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(taskType, inferenceId);
 	}
 
+	public GetInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(taskType);
+	}
+
 	public GetInferenceRequestDescriptor()
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
@@ -111,7 +121,8 @@ public readonly partial struct GetInferenceRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The inference Id
+	/// The inference Id of the endpoint to return. Using <c>_all</c> or <c>*</c> will return all endpoints with the specified
+	/// <c>task_type</c> if one is specified, or all endpoints for all task types if no <c>task_type</c> is specified
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
@@ -122,7 +133,7 @@ public readonly partial struct GetInferenceRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The task type
+	/// The task type of the endpoint to return
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)

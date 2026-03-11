@@ -104,8 +104,8 @@ public sealed partial class AmazonBedrockServiceSettings
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
@@ -217,8 +217,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
@@ -229,8 +229,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit()
@@ -241,8 +241,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)

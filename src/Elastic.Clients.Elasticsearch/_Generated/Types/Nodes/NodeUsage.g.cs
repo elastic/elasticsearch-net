@@ -45,8 +45,32 @@ public sealed partial class NodeUsage
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The total number of times search aggregations have been called on this node since the last restart.
+	/// </para>
+	/// </summary>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of times each REST endpoint has been called on this node since the last restart.
+	/// Note that the REST endpoint names are not considered stable.
+	/// </para>
+	/// </summary>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The timestamp for when the collection of these statistics started.
+	/// </para>
+	/// </summary>
 	public required System.DateTimeOffset Since { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The timestamp for when these statistics were collected.
+	/// </para>
+	/// </summary>
 	public required System.DateTimeOffset Timestamp { get; set; }
 }

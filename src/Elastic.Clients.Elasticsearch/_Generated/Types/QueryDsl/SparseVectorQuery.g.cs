@@ -58,6 +58,14 @@ public sealed partial class SparseVectorQuery
 
 	/// <summary>
 	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IDictionary<string, float>? QueryVector { get => GetVariant<System.Collections.Generic.IDictionary<string, float>>("query_vector"); set => SetVariant("query_vector", value); }
+
+	/// <summary>
+	/// <para>
 	/// Floating point number used to decrease or increase the relevance scores of the query.
 	/// Boost values are relative to the default value of 1.0.
 	/// A boost value between 0 and 1.0 decreases the relevance score.
@@ -152,6 +160,49 @@ public readonly partial struct SparseVectorQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector(System.Collections.Generic.IDictionary<string, float>? value)
+	{
+		Instance.QueryVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector()
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor<TDocument> AddQueryVector(string key, float value)
+	{
+		Instance.QueryVector ??= new System.Collections.Generic.Dictionary<string, float>();
+		Instance.QueryVector.Add(key, value);
 		return this;
 	}
 
@@ -306,6 +357,49 @@ public readonly partial struct SparseVectorQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.InferenceId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector(System.Collections.Generic.IDictionary<string, float>? value)
+	{
+		Instance.QueryVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector()
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Dictionary of precomputed sparse vectors and their associated weights.
+	/// Only one of inference_id or query_vector may be supplied in a request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor QueryVector(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
+	{
+		Instance.QueryVector = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor AddQueryVector(string key, float value)
+	{
+		Instance.QueryVector ??= new System.Collections.Generic.Dictionary<string, float>();
+		Instance.QueryVector.Add(key, value);
 		return this;
 	}
 

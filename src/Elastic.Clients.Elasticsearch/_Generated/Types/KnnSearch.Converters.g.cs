@@ -31,6 +31,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 	private static readonly System.Text.Json.JsonEncodedText PropInnerHits = System.Text.Json.JsonEncodedText.Encode("inner_hits"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropNumCandidates = System.Text.Json.JsonEncodedText.Encode("num_candidates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector"u8);
@@ -45,6 +46,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits?> propInnerHits = default;
 		LocalJsonValue<int?> propK = default;
 		LocalJsonValue<int?> propNumCandidates = default;
+		LocalJsonValue<string?> propQueryName = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.RescoreVector?> propRescoreVector = default;
@@ -77,6 +79,11 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 			}
 
 			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
 			{
 				continue;
 			}
@@ -119,6 +126,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 			InnerHits = propInnerHits.Value,
 			K = propK.Value,
 			NumCandidates = propNumCandidates.Value,
+			QueryName = propQueryName.Value,
 			QueryVector = propQueryVector.Value,
 			QueryVectorBuilder = propQueryVectorBuilder.Value,
 			RescoreVector = propRescoreVector.Value,
@@ -135,6 +143,7 @@ public sealed partial class KnnSearchConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
 		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);

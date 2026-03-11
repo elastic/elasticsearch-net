@@ -231,7 +231,7 @@ public sealed partial class Processor
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? Json { get => GetVariant<Elastic.Clients.Elasticsearch.Ingest.JsonProcessor>("json"); set => SetVariant("json", value); }
@@ -1082,7 +1082,7 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? value)
@@ -1093,7 +1093,7 @@ public readonly partial struct ProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> Json(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<TDocument>> action)
@@ -2550,7 +2550,7 @@ public readonly partial struct ProcessorDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor? value)
@@ -2561,7 +2561,7 @@ public readonly partial struct ProcessorDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor> action)
@@ -2572,7 +2572,7 @@ public readonly partial struct ProcessorDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Converts a JSON string into a structured JSON object.
+	/// Parses a string containing JSON data into a structured object, string, or other value.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor Json<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor<T>> action)

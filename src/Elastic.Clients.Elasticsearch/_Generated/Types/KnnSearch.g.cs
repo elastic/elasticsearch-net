@@ -83,6 +83,7 @@ public sealed partial class KnnSearch
 	/// </para>
 	/// </summary>
 	public int? NumCandidates { get; set; }
+	public string? QueryName { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -256,6 +257,12 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryName(string? value)
+	{
+		Instance.QueryName = value;
 		return this;
 	}
 
@@ -516,6 +523,12 @@ public readonly partial struct KnnSearchDescriptor
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryName(string? value)
+	{
+		Instance.QueryName = value;
 		return this;
 	}
 
