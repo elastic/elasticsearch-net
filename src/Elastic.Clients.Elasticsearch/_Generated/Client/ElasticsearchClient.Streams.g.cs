@@ -44,17 +44,17 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable()
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(Elastic.Clients.Elasticsearch.Streams.StreamType name)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse LogsDisable(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -67,17 +67,17 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest, Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse, Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsDisableResponse> LogsDisableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -90,17 +90,17 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable()
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(Elastic.Clients.Elasticsearch.Streams.StreamType name)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse LogsEnable(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -113,17 +113,17 @@ public partial class StreamsNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest, Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse, Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Streams.LogsEnableResponse> LogsEnableAsync(Elastic.Clients.Elasticsearch.Streams.StreamType name, System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

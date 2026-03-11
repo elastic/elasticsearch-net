@@ -27,10 +27,11 @@ namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 public sealed partial class ReindexTask
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ReindexTask(string action, bool cancellable, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus status, string type)
+	public ReindexTask(string action, bool cancellable, bool cancelled, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.ReindexStatus status, string type)
 	{
 		Action = action;
 		Cancellable = cancellable;
+		Cancelled = cancelled;
 		Description = description;
 		Headers = headers;
 		Id = id;
@@ -53,12 +54,13 @@ public sealed partial class ReindexTask
 
 	public required string Action { get; set; }
 	public required bool Cancellable { get; set; }
+	public required bool Cancelled { get; set; }
 	public required string Description { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> Headers { get; set; }
 	public required long Id { get; set; }
 	public required string Node { get; set; }
 	public required System.TimeSpan RunningTimeInNanos { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
-	public required Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.ReindexStatus Status { get; set; }
 	public required string Type { get; set; }
 }

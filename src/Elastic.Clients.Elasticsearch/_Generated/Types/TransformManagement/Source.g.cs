@@ -54,6 +54,20 @@ public sealed partial class Source
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A query clause that retrieves a subset of data from the source index.
 	/// </para>
 	/// </summary>
@@ -98,6 +112,24 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -226,6 +258,24 @@ public readonly partial struct SourceDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

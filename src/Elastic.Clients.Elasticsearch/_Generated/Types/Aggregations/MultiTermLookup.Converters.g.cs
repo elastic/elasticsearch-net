@@ -25,23 +25,36 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class MultiTermLookupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText VariantField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("script");
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<object?> propMissing = default;
+		string? variantType = null;
+		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
 			{
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (reader.ValueTextEquals(VariantField))
 			{
+				variantType = VariantField.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Script>(options, null);
 				continue;
 			}
 
@@ -57,7 +70,8 @@ public sealed partial class MultiTermLookupConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Field = propField.Value,
+			VariantType = variantType,
+			Variant = variant,
 			Missing = propMissing.Value
 		};
 	}
@@ -65,7 +79,20 @@ public sealed partial class MultiTermLookupConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field, null, null);
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "field":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Field)value.Variant, null, null);
+				break;
+			case "script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Script)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup)}'.");
+		}
+
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteEndObject();
 	}

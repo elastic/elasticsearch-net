@@ -38,20 +38,13 @@ public sealed partial class JinaAITaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>rerank</c> task, return the doc text within the results.
-	/// </para>
-	/// </summary>
-	public bool? ReturnDocuments { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the task passed to the model.
+	/// For an <c>embedding</c> or <c>text_embedding</c> task, the task passed to the model.
 	/// Valid values are:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a text classifier.
+	/// <c>classification</c>: Use it for embeddings passed through a classifier.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -71,7 +64,28 @@ public sealed partial class JinaAITaskSettings
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? Task { get; set; }
+	public Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? InputType { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For an <c>embedding</c> or <c>text_embedding</c> task, controls when text is split into chunks.
+	/// When set to <c>true</c>, a request from Elasticsearch contains only chunks related to a single document. Instead of batching chunks across documents, Elasticsearch sends them in separate requests. This ensures that chunk embeddings retain context from the entire document, improving semantic quality.
+	/// </para>
+	/// <para>
+	/// If a document exceeds the model's context limits, or if the document contains non-text inputs (relevant when using the multimodal <c>embedding</c> task), late chunking is automatically disabled for that document only and standard chunking is used instead.
+	/// </para>
+	/// <para>
+	/// If not specified, defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? LateChunking { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For a <c>rerank</c> task, return the doc text within the results.
+	/// </para>
+	/// </summary>
+	public bool? ReturnDocuments { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -104,24 +118,13 @@ public readonly partial struct JinaAiTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>rerank</c> task, return the doc text within the results.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
-	{
-		Instance.ReturnDocuments = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the task passed to the model.
+	/// For an <c>embedding</c> or <c>text_embedding</c> task, the task passed to the model.
 	/// Valid values are:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>classification</c>: Use it for embeddings passed through a text classifier.
+	/// <c>classification</c>: Use it for embeddings passed through a classifier.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -141,9 +144,38 @@ public readonly partial struct JinaAiTaskSettingsDescriptor
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor Task(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? value)
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? value)
 	{
-		Instance.Task = value;
+		Instance.InputType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For an <c>embedding</c> or <c>text_embedding</c> task, controls when text is split into chunks.
+	/// When set to <c>true</c>, a request from Elasticsearch contains only chunks related to a single document. Instead of batching chunks across documents, Elasticsearch sends them in separate requests. This ensures that chunk embeddings retain context from the entire document, improving semantic quality.
+	/// </para>
+	/// <para>
+	/// If a document exceeds the model's context limits, or if the document contains non-text inputs (relevant when using the multimodal <c>embedding</c> task), late chunking is automatically disabled for that document only and standard chunking is used instead.
+	/// </para>
+	/// <para>
+	/// If not specified, defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor LateChunking(bool? value = true)
+	{
+		Instance.LateChunking = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>rerank</c> task, return the doc text within the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.JinaAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
+	{
+		Instance.ReturnDocuments = value;
 		return this;
 	}
 

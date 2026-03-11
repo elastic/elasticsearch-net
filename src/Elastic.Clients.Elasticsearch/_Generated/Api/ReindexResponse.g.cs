@@ -89,6 +89,13 @@ public sealed partial class ReindexResponse : Elastic.Transport.Products.Elastic
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 	public int? SliceId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Status of each slice if the reindex was sliced
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? Slices { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; set; }
 
 	/// <summary>

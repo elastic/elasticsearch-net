@@ -35,10 +35,10 @@ public sealed partial class PutAliasRequestConverter : System.Text.Json.Serializ
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propIndexRouting = default;
+		LocalJsonValue<string?> propIndexRouting = default;
 		LocalJsonValue<bool?> propIsWriteIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
+		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<string?> propSearchRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))

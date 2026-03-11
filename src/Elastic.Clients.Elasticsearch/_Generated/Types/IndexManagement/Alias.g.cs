@@ -49,7 +49,7 @@ public sealed partial class Alias
 	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
+	public string? IndexRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -71,7 +71,7 @@ public sealed partial class Alias
 	/// Value used to route indexing and search operations to a specific shard.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,7 +79,7 @@ public sealed partial class Alias
 	/// If specified, this overwrites the <c>routing</c> value for search operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
+	public string? SearchRouting { get; set; }
 }
 
 public readonly partial struct AliasDescriptor<TDocument>
@@ -129,7 +129,7 @@ public readonly partial struct AliasDescriptor<TDocument>
 	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -163,7 +163,7 @@ public readonly partial struct AliasDescriptor<TDocument>
 	/// Value used to route indexing and search operations to a specific shard.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -175,7 +175,7 @@ public readonly partial struct AliasDescriptor<TDocument>
 	/// If specified, this overwrites the <c>routing</c> value for search operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument> SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
 		return this;
@@ -253,7 +253,7 @@ public readonly partial struct AliasDescriptor
 	/// If specified, this overwrites the <c>routing</c> value for indexing operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -287,7 +287,7 @@ public readonly partial struct AliasDescriptor
 	/// Value used to route indexing and search operations to a specific shard.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -299,7 +299,7 @@ public readonly partial struct AliasDescriptor
 	/// If specified, this overwrites the <c>routing</c> value for search operations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
 		return this;

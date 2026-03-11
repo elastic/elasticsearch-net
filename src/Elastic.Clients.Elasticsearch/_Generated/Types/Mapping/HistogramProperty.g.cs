@@ -49,6 +49,7 @@ public sealed partial class HistogramProperty : Elastic.Clients.Elasticsearch.Ma
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "histogram";
 }
@@ -157,6 +158,12 @@ public readonly partial struct HistogramPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
+	{
+		Instance.TimeSeriesMetric = value;
 		return this;
 	}
 
@@ -290,6 +297,12 @@ public readonly partial struct HistogramPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
+	{
+		Instance.TimeSeriesMetric = value;
 		return this;
 	}
 

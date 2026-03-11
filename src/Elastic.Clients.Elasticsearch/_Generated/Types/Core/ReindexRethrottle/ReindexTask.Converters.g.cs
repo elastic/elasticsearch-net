@@ -27,6 +27,7 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropCancellable = System.Text.Json.JsonEncodedText.Encode("cancellable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCancelled = System.Text.Json.JsonEncodedText.Encode("cancelled"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
@@ -41,13 +42,14 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propAction = default;
 		LocalJsonValue<bool> propCancellable = default;
+		LocalJsonValue<bool> propCancelled = default;
 		LocalJsonValue<string> propDescription = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>>> propHeaders = default;
 		LocalJsonValue<long> propId = default;
 		LocalJsonValue<string> propNode = default;
 		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
 		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexStatus> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ReindexStatus> propStatus = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -57,6 +59,11 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 			}
 
 			if (propCancellable.TryReadProperty(ref reader, options, PropCancellable, null))
+			{
+				continue;
+			}
+
+			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, null))
 			{
 				continue;
 			}
@@ -115,6 +122,7 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 		{
 			Action = propAction.Value,
 			Cancellable = propCancellable.Value,
+			Cancelled = propCancelled.Value,
 			Description = propDescription.Value,
 			Headers = propHeaders.Value,
 			Id = propId.Value,
@@ -131,6 +139,7 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAction, value.Action, null, null);
 		writer.WriteProperty(options, PropCancellable, value.Cancellable, null, null);
+		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);

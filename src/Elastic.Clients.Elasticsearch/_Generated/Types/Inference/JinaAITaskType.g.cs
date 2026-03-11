@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAITaskTypeConverter))]
 public enum JinaAITaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "embedding")]
+	Embedding,
 	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
 	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]

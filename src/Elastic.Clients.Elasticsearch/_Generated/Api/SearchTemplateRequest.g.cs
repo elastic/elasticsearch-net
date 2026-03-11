@@ -36,7 +36,7 @@ public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -72,20 +72,6 @@ public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 
 	/// <summary>
 	/// <para>
@@ -174,7 +160,7 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -210,20 +196,6 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 	/// </para>
 	/// </summary>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 
 	/// <summary>
 	/// <para>
@@ -296,6 +268,20 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
 	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
@@ -359,7 +345,7 @@ public readonly partial struct SearchTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
@@ -426,24 +412,6 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ProjectRouting(string? value)
-	{
-		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -587,6 +555,24 @@ public readonly partial struct SearchTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
 	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
@@ -714,7 +700,7 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
@@ -781,24 +767,6 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ProjectRouting(string? value)
-	{
-		Instance.ProjectRouting = value;
 		return this;
 	}
 
@@ -937,6 +905,24 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a subset of projects to target for the search using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

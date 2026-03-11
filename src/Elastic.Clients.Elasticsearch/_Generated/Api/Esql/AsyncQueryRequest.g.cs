@@ -196,6 +196,12 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 	/// </para>
 	/// </summary>
 	public bool? KeepOnCompletion { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -217,10 +223,31 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public required string Query { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public string? TimeZone { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -416,6 +443,11 @@ public readonly partial struct AsyncQueryRequestDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
@@ -460,12 +492,41 @@ public readonly partial struct AsyncQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
 		return this;
 	}
 
@@ -711,6 +772,11 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
@@ -755,12 +821,41 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
 		return this;
 	}
 

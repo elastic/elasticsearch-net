@@ -37,4 +37,5 @@ public sealed partial class ExtendedSearchUsage
 	}
 
 	public Elastic.Clients.Elasticsearch.Cluster.ExtendedRetrieversSearchUsage? Retrievers { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.ExtendedSectionSearchUsage? Section { get; set; }
 }

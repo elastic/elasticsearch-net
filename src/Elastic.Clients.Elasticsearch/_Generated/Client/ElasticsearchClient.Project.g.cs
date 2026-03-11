@@ -38,6 +38,220 @@ public partial class ProjectNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse CreateManyRouting(Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse CreateManyRouting(System.Action<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse> CreateManyRoutingAsync(Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse> CreateManyRoutingAsync(System.Action<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateManyRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(string name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse CreateRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse> CreateRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.CreateRoutingRequest, Elastic.Clients.Elasticsearch.Project.CreateRoutingResponse, Elastic.Clients.Elasticsearch.Project.CreateRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(string name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse DeleteRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse> DeleteRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequest, Elastic.Clients.Elasticsearch.Project.DeleteRoutingResponse, Elastic.Clients.Elasticsearch.Project.DeleteRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting(Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse GetManyRouting(System.Action<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse> GetManyRoutingAsync(System.Action<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetManyRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetManyRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(Elastic.Clients.Elasticsearch.Project.GetRoutingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(string name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Project.GetRoutingResponse GetRouting(string name, System.Action<Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(Elastic.Clients.Elasticsearch.Project.GetRoutingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(string name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Project.GetRoutingResponse> GetRoutingAsync(string name, System.Action<Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Project.GetRoutingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Project.GetRoutingRequest, Elastic.Clients.Elasticsearch.Project.GetRoutingResponse, Elastic.Clients.Elasticsearch.Project.GetRoutingRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Project.TagsResponse Tags(Elastic.Clients.Elasticsearch.Project.TagsRequest request)
 	{
 		request.BeforeRequest();

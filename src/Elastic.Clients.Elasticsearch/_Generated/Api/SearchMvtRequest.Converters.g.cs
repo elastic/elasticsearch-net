@@ -33,6 +33,7 @@ public sealed partial class SearchMvtRequestConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropGridAgg = System.Text.Json.JsonEncodedText.Encode("grid_agg"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGridPrecision = System.Text.Json.JsonEncodedText.Encode("grid_precision"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropGridType = System.Text.Json.JsonEncodedText.Encode("grid_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
@@ -51,6 +52,7 @@ public sealed partial class SearchMvtRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType?> propGridAgg = default;
 		LocalJsonValue<int?> propGridPrecision = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType?> propGridType = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		LocalJsonValue<int?> propSize = default;
@@ -95,6 +97,11 @@ public sealed partial class SearchMvtRequestConverter : System.Text.Json.Seriali
 			}
 
 			if (propGridType.TryReadProperty(ref reader, options, PropGridType, static Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>(o)))
+			{
+				continue;
+			}
+
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
 			{
 				continue;
 			}
@@ -149,6 +156,7 @@ public sealed partial class SearchMvtRequestConverter : System.Text.Json.Seriali
 			GridAgg = propGridAgg.Value,
 			GridPrecision = propGridPrecision.Value,
 			GridType = propGridType.Value,
+			ProjectRouting = propProjectRouting.Value,
 			Query = propQuery.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
 			Size = propSize.Value,
@@ -169,6 +177,7 @@ public sealed partial class SearchMvtRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropGridAgg, value.GridAgg, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType>(o, v));
 		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropGridType, value.GridType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>(o, v));
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

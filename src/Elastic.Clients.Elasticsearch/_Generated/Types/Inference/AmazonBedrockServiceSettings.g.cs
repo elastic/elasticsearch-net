@@ -75,27 +75,27 @@ public sealed partial class AmazonBedrockServiceSettings
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>anthropic</c> - available for <c>completion</c> task type only
+	/// <c>anthropic</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>ai21labs</c> - available for <c>completion</c> task type only
+	/// <c>ai21labs</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c> and <c>completion</c> task types
+	/// <c>cohere</c> - available for <c>chat_completion</c>, <c>completion</c> and <c>text_embedding</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>meta</c> - available for <c>completion</c> task type only
+	/// <c>meta</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>mistral</c> - available for <c>completion</c> task type only
+	/// <c>mistral</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// </list>
@@ -104,8 +104,8 @@ public sealed partial class AmazonBedrockServiceSettings
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
@@ -184,27 +184,27 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>anthropic</c> - available for <c>completion</c> task type only
+	/// <c>anthropic</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>ai21labs</c> - available for <c>completion</c> task type only
+	/// <c>ai21labs</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>cohere</c> - available for <c>text_embedding</c> and <c>completion</c> task types
+	/// <c>cohere</c> - available for <c>chat_completion</c>, <c>completion</c> and <c>text_embedding</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>meta</c> - available for <c>completion</c> task type only
+	/// <c>meta</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>mistral</c> - available for <c>completion</c> task type only
+	/// <c>mistral</c> - available for <c>chat_completion</c> and <c>completion</c> task types
 	/// </para>
 	/// </item>
 	/// </list>
@@ -217,8 +217,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
@@ -229,8 +229,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit()
@@ -241,8 +241,8 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Watsonx.
-	/// By default, the <c>watsonxai</c> service sets the number of requests allowed per minute to 120.
+	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
+	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
