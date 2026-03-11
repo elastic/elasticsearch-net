@@ -94,6 +94,16 @@ public sealed partial class FindMessageStructureRequestParameters : Elastic.Tran
 
 	/// <summary>
 	/// <para>
+	/// If the format is <c>ndjson</c>, you can specify whether to parse nested JSON objects recursively.
+	/// The nested objects are parsed to a maximum depth equal to the default value of the <c>index.mapping.depth.limit</c> setting.
+	/// Anything beyond that depth is parsed as an <c>object</c> type field.
+	/// For formats other than <c>ndjson</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public bool? ShouldParseRecursively { get => Q<bool?>("should_parse_recursively"); set => Q("should_parse_recursively", value); }
+
+	/// <summary>
+	/// <para>
 	/// If the format is <c>delimited</c>, you can specify whether values between delimiters should have whitespace trimmed from them.
 	/// If this parameter is not specified and the delimiter is pipe (<c>|</c>), the default value is true.
 	/// Otherwise, the default value is <c>false</c>.
@@ -385,6 +395,16 @@ public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasti
 	/// </para>
 	/// </summary>
 	public string? Quote { get => Q<string?>("quote"); set => Q("quote", value); }
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>ndjson</c>, you can specify whether to parse nested JSON objects recursively.
+	/// The nested objects are parsed to a maximum depth equal to the default value of the <c>index.mapping.depth.limit</c> setting.
+	/// Anything beyond that depth is parsed as an <c>object</c> type field.
+	/// For formats other than <c>ndjson</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public bool? ShouldParseRecursively { get => Q<bool?>("should_parse_recursively"); set => Q("should_parse_recursively", value); }
 
 	/// <summary>
 	/// <para>
@@ -716,6 +736,20 @@ public readonly partial struct FindMessageStructureRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor Quote(string? value)
 	{
 		Instance.Quote = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>ndjson</c>, you can specify whether to parse nested JSON objects recursively.
+	/// The nested objects are parsed to a maximum depth equal to the default value of the <c>index.mapping.depth.limit</c> setting.
+	/// Anything beyond that depth is parsed as an <c>object</c> type field.
+	/// For formats other than <c>ndjson</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ShouldParseRecursively(bool? value = true)
+	{
+		Instance.ShouldParseRecursively = value;
 		return this;
 	}
 
@@ -1158,6 +1192,20 @@ public readonly partial struct FindMessageStructureRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> Quote(string? value)
 	{
 		Instance.Quote = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>ndjson</c>, you can specify whether to parse nested JSON objects recursively.
+	/// The nested objects are parsed to a maximum depth equal to the default value of the <c>index.mapping.depth.limit</c> setting.
+	/// Anything beyond that depth is parsed as an <c>object</c> type field.
+	/// For formats other than <c>ndjson</c>, this parameter is ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ShouldParseRecursively(bool? value = true)
+	{
+		Instance.ShouldParseRecursively = value;
 		return this;
 	}
 

@@ -83,6 +83,13 @@ public partial class FunctionScore
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction? ScriptScore { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction>("script_score"); set => SetVariant("script_score", value); }
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A name to identify which function matched and influenced the score.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
 	public double? Weight { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction value) => new Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore { FieldValueFactor = value };
@@ -284,6 +291,17 @@ public readonly partial struct FunctionScoreDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A name to identify which function matched and influenced the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor<TDocument> Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 
@@ -541,6 +559,17 @@ public readonly partial struct FunctionScoreDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A name to identify which function matched and influenced the score.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 

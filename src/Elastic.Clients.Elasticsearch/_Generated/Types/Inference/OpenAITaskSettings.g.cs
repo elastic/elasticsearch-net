@@ -52,7 +52,7 @@ public sealed partial class OpenAITaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
+	/// For a <c>completion</c>, <c>chat_completion</c>, or <c>text_embedding</c> task, specify the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>
@@ -98,7 +98,7 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
+	/// For a <c>completion</c>, <c>chat_completion</c>, or <c>text_embedding</c> task, specify the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>

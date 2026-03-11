@@ -81,10 +81,27 @@ public sealed partial class AppendProcessor
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
+	/// rather than appending them to the field.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreEmptyValues { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public string? MediaType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -232,12 +249,37 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
+	/// rather than appending them to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> IgnoreEmptyValues(bool? value = true)
+	{
+		Instance.IgnoreEmptyValues = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> MediaType(string? value)
+	{
+		Instance.MediaType = value;
 		return this;
 	}
 
@@ -446,12 +488,37 @@ public readonly partial struct AppendProcessorDescriptor
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the processor will skip empty values from the source (e.g. empty strings, and null values),
+	/// rather than appending them to the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor IgnoreEmptyValues(bool? value = true)
+	{
+		Instance.IgnoreEmptyValues = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The media type for encoding <c>value</c>.
+	/// Applies only when value is a template snippet.
+	/// Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor MediaType(string? value)
+	{
+		Instance.MediaType = value;
 		return this;
 	}
 

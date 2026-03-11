@@ -68,7 +68,7 @@ public sealed partial class FieldLookup
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 }
 
 public readonly partial struct FieldLookupDescriptor<TDocument>
@@ -139,7 +139,7 @@ public readonly partial struct FieldLookupDescriptor<TDocument>
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -222,7 +222,7 @@ public readonly partial struct FieldLookupDescriptor
 	/// Custom routing value.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

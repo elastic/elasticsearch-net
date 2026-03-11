@@ -25,11 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Embedding;
+		}
+
 		if (reader.ValueTextEquals(MemberRerank))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
@@ -41,6 +47,11 @@ public sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serializa
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Embedding;
+		}
+
 		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
@@ -58,6 +69,9 @@ public sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serializa
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Embedding:
+				writer.WriteStringValue(MemberEmbedding);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank:
 				writer.WriteStringValue(MemberRerank);
 				break;

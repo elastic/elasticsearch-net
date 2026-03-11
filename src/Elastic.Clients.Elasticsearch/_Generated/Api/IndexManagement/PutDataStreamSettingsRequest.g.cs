@@ -57,6 +57,9 @@ public sealed partial class PutDataStreamSettingsRequestParameters : Elastic.Tra
 /// Update data stream settings.
 /// </para>
 /// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
+/// </para>
+/// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what
 /// is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
 /// only certain settings are allowed. If possible, the setting change is applied to all
@@ -134,6 +137,9 @@ public sealed partial class PutDataStreamSettingsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Update data stream settings.
+/// </para>
+/// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
 /// </para>
 /// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what
@@ -300,6 +306,9 @@ public readonly partial struct PutDataStreamSettingsRequestDescriptor
 /// <summary>
 /// <para>
 /// Update data stream settings.
+/// </para>
+/// <para>
+/// NOTE: Available in 8.19. Not available in earlier versions.
 /// </para>
 /// <para>
 /// This API can be used to override settings on specific data streams. These overrides will take precedence over what

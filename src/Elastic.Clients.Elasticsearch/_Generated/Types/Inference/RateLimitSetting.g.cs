@@ -54,6 +54,11 @@ public sealed partial class RateLimitSetting
 	/// </item>
 	/// <item>
 	/// <para>
+	/// <c>amazonbedrock</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>anthropic</c> service: <c>50</c>
 	/// </para>
 	/// </item>
@@ -85,6 +90,11 @@ public sealed partial class RateLimitSetting
 	/// <item>
 	/// <para>
 	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>fireworksai</c> service: <c>6000</c>
 	/// </para>
 	/// </item>
 	/// <item>
@@ -184,6 +194,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// </item>
 	/// <item>
 	/// <para>
+	/// <c>amazonbedrock</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>anthropic</c> service: <c>50</c>
 	/// </para>
 	/// </item>
@@ -215,6 +230,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <item>
 	/// <para>
 	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>fireworksai</c> service: <c>6000</c>
 	/// </para>
 	/// </item>
 	/// <item>

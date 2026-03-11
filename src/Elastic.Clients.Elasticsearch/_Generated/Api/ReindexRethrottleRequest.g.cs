@@ -25,6 +25,8 @@ namespace Elastic.Clients.Elasticsearch;
 
 public sealed partial class ReindexRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
+	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
+
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
@@ -83,6 +85,7 @@ public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticse
 	/// </para>
 	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
+	public Elastic.Clients.Elasticsearch.Tasks.GroupBy? GroupBy { get => Q<Elastic.Clients.Elasticsearch.Tasks.GroupBy?>("group_by"); set => Q("group_by", value); }
 
 	/// <summary>
 	/// <para>
@@ -142,6 +145,12 @@ public readonly partial struct ReindexRethrottleRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TaskId = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor GroupBy(Elastic.Clients.Elasticsearch.Tasks.GroupBy? value)
+	{
+		Instance.GroupBy = value;
 		return this;
 	}
 

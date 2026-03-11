@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 public sealed partial class FunctionScoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantExp = System.Text.Json.JsonEncodedText.Encode("exp");
 	private static readonly System.Text.Json.JsonEncodedText VariantFieldValueFactor = System.Text.Json.JsonEncodedText.Encode("field_value_factor");
@@ -38,12 +39,18 @@ public sealed partial class FunctionScoreConverter : System.Text.Json.Serializat
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<double?> propWeight = default;
 		string? variantType = null;
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -116,6 +123,7 @@ public sealed partial class FunctionScoreConverter : System.Text.Json.Serializat
 			VariantType = variantType,
 			Variant = variant,
 			Filter = propFilter.Value,
+			Name = propName.Value,
 			Weight = propWeight.Value
 		};
 	}
@@ -150,6 +158,7 @@ public sealed partial class FunctionScoreConverter : System.Text.Json.Serializat
 		}
 
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropWeight, value.Weight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}

@@ -124,7 +124,7 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? IndexRouting { get; set; }
+	public string? IndexRouting { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -142,7 +142,7 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -151,7 +151,7 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? SearchRouting { get; set; }
+	public string? SearchRouting { get; set; }
 }
 
 /// <summary>
@@ -276,7 +276,7 @@ public readonly partial struct PutAliasRequestDescriptor
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -302,7 +302,7 @@ public readonly partial struct PutAliasRequestDescriptor
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -315,7 +315,7 @@ public readonly partial struct PutAliasRequestDescriptor
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
 		return this;
@@ -488,7 +488,7 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> IndexRouting(string? value)
 	{
 		Instance.IndexRouting = value;
 		return this;
@@ -514,7 +514,7 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -527,7 +527,7 @@ public readonly partial struct PutAliasRequestDescriptor<TDocument>
 	/// Data stream aliases don’t support this parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument> SearchRouting(string? value)
 	{
 		Instance.SearchRouting = value;
 		return this;

@@ -37,5 +37,8 @@ public sealed partial class ReindexRethrottleResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode> Nodes { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexNode>? Nodes { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ReindexTask>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexTask>>? Tasks { get; set; }
 }

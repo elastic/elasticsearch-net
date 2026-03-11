@@ -38,6 +38,19 @@ public sealed partial class GetAsyncSearchRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
+	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
+	/// expires or if no wait_for_completion_timeout is specified.
+	/// If true and the search is still running, the search response
+	/// will include any hits and partial aggregations that are available.
+	/// If false and the search is still running, the search response will not include any hits (but possibly include
+	/// total hits) nor will include any partial aggregations.
+	/// When not specified, the intermediate results are returned for running queries.
+	/// </para>
+	/// </summary>
+	public bool? ReturnIntermediateResults { get => Q<bool?>("return_intermediate_results"); set => Q("return_intermediate_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 	/// </para>
 	/// </summary>
@@ -105,6 +118,19 @@ public partial class GetAsyncSearchRequest : Elastic.Clients.Elasticsearch.Reque
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
+	/// expires or if no wait_for_completion_timeout is specified.
+	/// If true and the search is still running, the search response
+	/// will include any hits and partial aggregations that are available.
+	/// If false and the search is still running, the search response will not include any hits (but possibly include
+	/// total hits) nor will include any partial aggregations.
+	/// When not specified, the intermediate results are returned for running queries.
+	/// </para>
+	/// </summary>
+	public bool? ReturnIntermediateResults { get => Q<bool?>("return_intermediate_results"); set => Q("return_intermediate_results", value); }
 
 	/// <summary>
 	/// <para>
@@ -179,6 +205,23 @@ public readonly partial struct GetAsyncSearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
+	/// expires or if no wait_for_completion_timeout is specified.
+	/// If true and the search is still running, the search response
+	/// will include any hits and partial aggregations that are available.
+	/// If false and the search is still running, the search response will not include any hits (but possibly include
+	/// total hits) nor will include any partial aggregations.
+	/// When not specified, the intermediate results are returned for running queries.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.AsyncSearch.GetAsyncSearchRequestDescriptor ReturnIntermediateResults(bool? value = true)
+	{
+		Instance.ReturnIntermediateResults = value;
 		return this;
 	}
 

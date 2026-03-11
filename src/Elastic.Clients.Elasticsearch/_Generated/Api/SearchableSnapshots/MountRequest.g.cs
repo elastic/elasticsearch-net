@@ -37,9 +37,10 @@ public sealed partial class MountRequestParameters : Elastic.Transport.RequestPa
 	/// <summary>
 	/// <para>
 	/// The mount option for the searchable snapshot index.
+	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
 	/// </para>
 	/// </summary>
-	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? Storage { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
 	/// <para>
@@ -118,9 +119,10 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 	/// <summary>
 	/// <para>
 	/// The mount option for the searchable snapshot index.
+	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
 	/// </para>
 	/// </summary>
-	public string? Storage { get => Q<string?>("storage"); set => Q("storage", value); }
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? Storage { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption?>("storage"); set => Q("storage", value); }
 
 	/// <summary>
 	/// <para>
@@ -233,9 +235,10 @@ public readonly partial struct MountRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The mount option for the searchable snapshot index.
+	/// For further information on mount options, refer to: <a href="https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/searchable-snapshots#searchable-snapshot-mount-storage-options">Mount options</a>
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Storage(string? value)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor Storage(Elastic.Clients.Elasticsearch.SearchableSnapshots.StorageOption? value)
 	{
 		Instance.Storage = value;
 		return this;

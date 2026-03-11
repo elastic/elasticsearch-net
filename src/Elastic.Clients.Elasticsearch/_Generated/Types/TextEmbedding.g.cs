@@ -49,6 +49,12 @@ public sealed partial class TextEmbedding
 	/// </para>
 	/// </summary>
 	public string? ModelId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The text to be converted into a vector by the specified model
+	/// </para>
+	/// </summary>
 	public required string ModelText { get; set; }
 }
 
@@ -83,6 +89,11 @@ public readonly partial struct TextEmbeddingDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The text to be converted into a vector by the specified model
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelText(string value)
 	{
 		Instance.ModelText = value;

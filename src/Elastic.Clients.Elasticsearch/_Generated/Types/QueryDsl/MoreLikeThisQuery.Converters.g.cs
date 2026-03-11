@@ -64,7 +64,7 @@ public sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Serial
 		LocalJsonValue<int?> propMinTermFreq = default;
 		LocalJsonValue<int?> propMinWordLength = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<string?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopWords = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>?> propUnlike = default;
 		LocalJsonValue<long?> propVersion = default;

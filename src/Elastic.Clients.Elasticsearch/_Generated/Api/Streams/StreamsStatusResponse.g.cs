@@ -37,5 +37,7 @@ public sealed partial class StreamsStatusResponse : Elastic.Transport.Products.E
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.Streams.LogsStatus Logs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Streams.StreamStatus Logs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Streams.StreamStatus LogsEcs { get; set; }
+	public required Elastic.Clients.Elasticsearch.Streams.StreamStatus LogsOtel { get; set; }
 }

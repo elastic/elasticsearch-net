@@ -40,7 +40,7 @@ public sealed partial class PutGooglevertexaiResponse : Elastic.Transport.Produc
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Applies only to the <c>embedding</c>, <c>sparse_embedding</c> and <c>text_embedding</c> task types.
 	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>

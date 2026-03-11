@@ -165,6 +165,12 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	/// </para>
 	/// </summary>
 	public bool? IncludeExecutionMetadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -172,7 +178,7 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? Params { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -186,10 +192,31 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public string? ProjectRouting { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public required string Query { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public string? TimeZone { get; set; }
 }
 
 /// <summary>
@@ -341,6 +368,11 @@ public readonly partial struct EsqlQueryRequestDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
@@ -352,20 +384,9 @@ public readonly partial struct EsqlQueryRequestDescriptor
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? value)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(params System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>[] values)
-	{
-		Instance.Params = [.. values];
 		return this;
 	}
 
@@ -385,12 +406,41 @@ public readonly partial struct EsqlQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
 		return this;
 	}
 
@@ -588,6 +638,11 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Returns results (especially dates) formatted per the conventions of the locale.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
@@ -599,20 +654,9 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? value)
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(params System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>[] values)
-	{
-		Instance.Params = [.. values];
 		return this;
 	}
 
@@ -632,12 +676,41 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Specifies a subset of projects to target using project
+	/// metadata tags in a subset of Lucene query syntax.
+	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sets the default timezone of the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
 		return this;
 	}
 

@@ -85,6 +85,13 @@ public sealed partial class DeleteByQueryResponse : Elastic.Transport.Products.E
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 	public int? SliceId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Status of each slice if the delete by query was sliced
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexStatus>? Slices { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Throttled { get; set; }
 

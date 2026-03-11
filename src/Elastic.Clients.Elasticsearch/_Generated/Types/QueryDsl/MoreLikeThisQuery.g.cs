@@ -148,7 +148,7 @@ public sealed partial class MoreLikeThisQuery
 	/// </summary>
 	public int? MinWordLength { get; set; }
 	public string? QueryName { get; set; }
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
+	public string? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -395,7 +395,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;
@@ -717,7 +717,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Routing(string? value)
 	{
 		Instance.Routing = value;
 		return this;

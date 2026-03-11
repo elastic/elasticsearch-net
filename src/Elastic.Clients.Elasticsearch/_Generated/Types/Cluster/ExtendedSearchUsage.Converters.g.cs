@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 public sealed partial class ExtendedSearchUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSection = System.Text.Json.JsonEncodedText.Encode("section"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ExtendedRetrieversSearchUsage?> propRetrievers = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ExtendedSectionSearchUsage?> propSection = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, null))
+			{
+				continue;
+			}
+
+			if (propSection.TryReadProperty(ref reader, options, PropSection, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class ExtendedSearchUsageConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Retrievers = propRetrievers.Value
+			Retrievers = propRetrievers.Value,
+			Section = propSection.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class ExtendedSearchUsageConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, null);
+		writer.WriteProperty(options, PropSection, value.Section, null, null);
 		writer.WriteEndObject();
 	}
 }

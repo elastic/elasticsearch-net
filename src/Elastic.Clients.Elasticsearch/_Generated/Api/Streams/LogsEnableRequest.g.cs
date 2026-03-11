@@ -44,20 +44,26 @@ public sealed partial class LogsEnableRequestParameters : Elastic.Transport.Requ
 
 /// <summary>
 /// <para>
-/// Enable logs stream.
+/// Enable a named stream.
 /// </para>
 /// <para>
-/// Turn on the logs stream feature for this cluster.
+/// Turn on the named stream feature for this cluster.
 /// </para>
 /// <para>
-/// NOTE: To protect existing data, this feature can be turned on only if the
-/// cluster does not have existing indices or data streams that match the pattern <c>logs|logs.*</c>.
-/// If those indices or data streams exist, a <c>409 - Conflict</c> response and error is returned.
+/// NOTE: To protect existing data, this feature can be turned on only if the cluster does not have
+/// existing indices or data streams that match the pattern <c>&lt;name>|&lt;name>.*</c> for the enabled stream
+/// type name. If those indices or data streams exist, a <c>409 - Conflict</c> response and error is
+/// returned.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsEnableRequestConverter))]
 public sealed partial class LogsEnableRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LogsEnableRequest(Elastic.Clients.Elasticsearch.Streams.StreamType name) : base(r => r.Required("name", name))
+	{
+	}
+
 	public LogsEnableRequest()
 	{
 	}
@@ -78,6 +84,13 @@ public sealed partial class LogsEnableRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// The stream type to enable.
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.Streams.StreamType Name { get => P<Elastic.Clients.Elasticsearch.Streams.StreamType>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -95,15 +108,16 @@ public sealed partial class LogsEnableRequest : Elastic.Clients.Elasticsearch.Re
 
 /// <summary>
 /// <para>
-/// Enable logs stream.
+/// Enable a named stream.
 /// </para>
 /// <para>
-/// Turn on the logs stream feature for this cluster.
+/// Turn on the named stream feature for this cluster.
 /// </para>
 /// <para>
-/// NOTE: To protect existing data, this feature can be turned on only if the
-/// cluster does not have existing indices or data streams that match the pattern <c>logs|logs.*</c>.
-/// If those indices or data streams exist, a <c>409 - Conflict</c> response and error is returned.
+/// NOTE: To protect existing data, this feature can be turned on only if the cluster does not have
+/// existing indices or data streams that match the pattern <c>&lt;name>|&lt;name>.*</c> for the enabled stream
+/// type name. If those indices or data streams exist, a <c>409 - Conflict</c> response and error is
+/// returned.
 /// </para>
 /// </summary>
 public readonly partial struct LogsEnableRequestDescriptor
@@ -116,13 +130,30 @@ public readonly partial struct LogsEnableRequestDescriptor
 		Instance = instance;
 	}
 
+	public LogsEnableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.StreamType name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(name);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public LogsEnableRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest instance) => new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The stream type to enable.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor Name(Elastic.Clients.Elasticsearch.Streams.StreamType value)
+	{
+		Instance.Name = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -149,13 +180,8 @@ public readonly partial struct LogsEnableRequestDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest Build(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest Build(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequestDescriptor(new Elastic.Clients.Elasticsearch.Streams.LogsEnableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

@@ -27,9 +27,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class SparseEmbeddingResult
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SparseEmbeddingResult(System.Collections.Generic.IReadOnlyDictionary<string, float> embedding)
+	public SparseEmbeddingResult(System.Collections.Generic.IReadOnlyDictionary<string, float> embedding, bool isTruncated)
 	{
 		Embedding = embedding;
+		IsTruncated = isTruncated;
 	}
 
 	public SparseEmbeddingResult()
@@ -43,4 +44,11 @@ public sealed partial class SparseEmbeddingResult
 	}
 
 	public required System.Collections.Generic.IReadOnlyDictionary<string, float> Embedding { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates if the text input was truncated in the request sent to the service
+	/// </para>
+	/// </summary>
+	public required bool IsTruncated { get; set; }
 }

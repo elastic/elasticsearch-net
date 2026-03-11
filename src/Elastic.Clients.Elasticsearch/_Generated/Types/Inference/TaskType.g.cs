@@ -30,6 +30,8 @@ public enum TaskType
 	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "embedding")]
+	Embedding,
 	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
 	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]

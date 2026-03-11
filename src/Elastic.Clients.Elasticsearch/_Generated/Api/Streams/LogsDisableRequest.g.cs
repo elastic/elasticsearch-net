@@ -44,15 +44,20 @@ public sealed partial class LogsDisableRequestParameters : Elastic.Transport.Req
 
 /// <summary>
 /// <para>
-/// Disable logs stream.
+/// Disable a named stream.
 /// </para>
 /// <para>
-/// Turn off the logs stream feature for this cluster.
+/// Turn off the named stream feature for this cluster.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsDisableRequestConverter))]
 public sealed partial class LogsDisableRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LogsDisableRequest(Elastic.Clients.Elasticsearch.Streams.StreamType name) : base(r => r.Required("name", name))
+	{
+	}
+
 	public LogsDisableRequest()
 	{
 	}
@@ -73,6 +78,13 @@ public sealed partial class LogsDisableRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
+	/// The stream type to disable.
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.Streams.StreamType Name { get => P<Elastic.Clients.Elasticsearch.Streams.StreamType>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -90,10 +102,10 @@ public sealed partial class LogsDisableRequest : Elastic.Clients.Elasticsearch.R
 
 /// <summary>
 /// <para>
-/// Disable logs stream.
+/// Disable a named stream.
 /// </para>
 /// <para>
-/// Turn off the logs stream feature for this cluster.
+/// Turn off the named stream feature for this cluster.
 /// </para>
 /// </summary>
 public readonly partial struct LogsDisableRequestDescriptor
@@ -106,13 +118,30 @@ public readonly partial struct LogsDisableRequestDescriptor
 		Instance = instance;
 	}
 
+	public LogsDisableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.StreamType name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(name);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public LogsDisableRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest instance) => new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The stream type to disable.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor Name(Elastic.Clients.Elasticsearch.Streams.StreamType value)
+	{
+		Instance.Name = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -139,13 +168,8 @@ public readonly partial struct LogsDisableRequestDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest Build(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest Build(System.Action<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

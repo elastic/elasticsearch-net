@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonBedrockTaskTypeConverter))]
 public enum AmazonBedrockTaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]

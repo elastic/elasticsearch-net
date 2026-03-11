@@ -25,12 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Project;
 
 public sealed partial class TagsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A Lucene query using project metadata tags used to filter which projects are returned in the response, such as _alias:_origin or _alias:<em>pr</em>.
-	/// </para>
-	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
 }
 
 /// <summary>
@@ -58,16 +52,21 @@ public sealed partial class TagsRequest : Elastic.Clients.Elasticsearch.Requests
 
 	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "project.tags";
 
 	/// <summary>
 	/// <para>
-	/// A Lucene query using project metadata tags used to filter which projects are returned in the response, such as _alias:_origin or _alias:<em>pr</em>.
+	/// A Lucene query using project metadata tags used to filter which projects are returned in the response.
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
 	/// </para>
 	/// </summary>
-	public string? ProjectRouting { get => Q<string?>("project_routing"); set => Q("project_routing", value); }
+	public string? ProjectRouting { get; set; }
 }
 
 /// <summary>
@@ -98,7 +97,12 @@ public readonly partial struct TagsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A Lucene query using project metadata tags used to filter which projects are returned in the response, such as _alias:_origin or _alias:<em>pr</em>.
+	/// A Lucene query using project metadata tags used to filter which projects are returned in the response.
+	/// Examples:
+	/// _alias:my-project
+	/// _alias:_origin
+	/// _alias:<em>pr</em>
+	/// Supported in serverless only.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Project.TagsRequestDescriptor ProjectRouting(string? value)

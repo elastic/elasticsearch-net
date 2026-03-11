@@ -38,14 +38,14 @@ public sealed partial class AmazonBedrockTaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it sets the maximum number for the output tokens to be generated.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it sets the maximum number for the output tokens to be generated.
 	/// </para>
 	/// </summary>
 	public int? MaxNewTokens { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
 	/// At temperature 0.0 the model is most deterministic, at temperature 1.0 most random.
 	/// It should not be used if <c>top_p</c> or <c>top_k</c> is specified.
 	/// </para>
@@ -54,7 +54,7 @@ public sealed partial class AmazonBedrockTaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it limits samples to the top-K most likely words, balancing coherence and variability.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it limits samples to the top-K most likely words, balancing coherence and variability.
 	/// It is only available for anthropic, cohere, and mistral providers.
 	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
 	/// </para>
@@ -63,7 +63,7 @@ public sealed partial class AmazonBedrockTaskSettings
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
 	/// Top-p uses nucleus sampling to select top tokens whose sum of likelihoods does not exceed a certain value, ensuring both variety and coherence.
 	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
 	/// </para>
@@ -92,7 +92,7 @@ public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it sets the maximum number for the output tokens to be generated.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it sets the maximum number for the output tokens to be generated.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor MaxNewTokens(int? value)
@@ -103,7 +103,7 @@ public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
 	/// At temperature 0.0 the model is most deterministic, at temperature 1.0 most random.
 	/// It should not be used if <c>top_p</c> or <c>top_k</c> is specified.
 	/// </para>
@@ -116,7 +116,7 @@ public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it limits samples to the top-K most likely words, balancing coherence and variability.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it limits samples to the top-K most likely words, balancing coherence and variability.
 	/// It is only available for anthropic, cohere, and mistral providers.
 	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
 	/// </para>
@@ -129,7 +129,7 @@ public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c> task, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
+	/// For <c>chat_completion</c> and <c>completion</c> tasks, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
 	/// Top-p uses nucleus sampling to select top tokens whose sum of likelihoods does not exceed a certain value, ensuring both variety and coherence.
 	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
 	/// </para>

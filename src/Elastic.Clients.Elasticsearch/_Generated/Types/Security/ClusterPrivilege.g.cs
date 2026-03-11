@@ -58,6 +58,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege ManageOidc { get; } = new ClusterPrivilege("manage_oidc");
 	public static ClusterPrivilege ManageOwnApiKey { get; } = new ClusterPrivilege("manage_own_api_key");
 	public static ClusterPrivilege ManagePipeline { get; } = new ClusterPrivilege("manage_pipeline");
+	public static ClusterPrivilege ManageProjectRouting { get; } = new ClusterPrivilege("manage_project_routing");
 	public static ClusterPrivilege ManageRollup { get; } = new ClusterPrivilege("manage_rollup");
 	public static ClusterPrivilege ManageSaml { get; } = new ClusterPrivilege("manage_saml");
 	public static ClusterPrivilege ManageSearchApplication { get; } = new ClusterPrivilege("manage_search_application");
@@ -89,6 +90,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege ReadFleetSecrets { get; } = new ClusterPrivilege("read_fleet_secrets");
 	public static ClusterPrivilege ReadIlm { get; } = new ClusterPrivilege("read_ilm");
 	public static ClusterPrivilege ReadPipeline { get; } = new ClusterPrivilege("read_pipeline");
+	public static ClusterPrivilege ReadProjectRouting { get; } = new ClusterPrivilege("read_project_routing");
 	public static ClusterPrivilege ReadSecurity { get; } = new ClusterPrivilege("read_security");
 	public static ClusterPrivilege ReadSlm { get; } = new ClusterPrivilege("read_slm");
 	public static ClusterPrivilege TransportClient { get; } = new ClusterPrivilege("transport_client");

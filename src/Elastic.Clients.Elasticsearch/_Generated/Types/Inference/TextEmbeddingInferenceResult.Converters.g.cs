@@ -40,7 +40,7 @@ public sealed partial class TextEmbeddingInferenceResultConverter : System.Text.
 			{
 				variantType = VariantTextEmbedding.Value;
 				reader.Read();
-				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>(o, null)!);
+				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>(o, null)!);
 				continue;
 			}
 
@@ -48,7 +48,7 @@ public sealed partial class TextEmbeddingInferenceResultConverter : System.Text.
 			{
 				variantType = VariantTextEmbeddingBits.Value;
 				reader.Read();
-				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>(o, null)!);
+				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>(o, null)!);
 				continue;
 			}
 
@@ -56,7 +56,7 @@ public sealed partial class TextEmbeddingInferenceResultConverter : System.Text.
 			{
 				variantType = VariantTextEmbeddingBytes.Value;
 				reader.Read();
-				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>(o, null)!);
+				variant = reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>(o, null)!);
 				continue;
 			}
 
@@ -85,13 +85,13 @@ public sealed partial class TextEmbeddingInferenceResultConverter : System.Text.
 			case null:
 				break;
 			case "text_embedding":
-				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResult>(o, v, null));
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingResult>(o, v, null));
 				break;
 			case "text_embedding_bits":
-				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>(o, v, null));
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>(o, v, null));
 				break;
 			case "text_embedding_bytes":
-				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingByteResult>(o, v, null));
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.DenseEmbeddingByteResult>(o, v, null));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult)}'.");

@@ -251,6 +251,21 @@ public readonly partial struct PropertyFactory<TDocument>
 		return Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<TDocument>.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram(Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram()
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram(System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<TDocument>.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty Flattened(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
 	{
 		return value;
@@ -1109,6 +1124,26 @@ public readonly partial struct PropertyFactory
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty DoubleRange<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Mapping.DoubleRangePropertyDescriptor<T>.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram(Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramProperty value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram()
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram(System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty ExponentialHistogram<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.ExponentialHistogramPropertyDescriptor<T>.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty Flattened(Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty value)
