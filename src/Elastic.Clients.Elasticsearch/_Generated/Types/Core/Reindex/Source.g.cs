@@ -100,7 +100,7 @@ public sealed partial class Source
 	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Fields? SourceFields { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceFields { get; set; }
 }
 
 public readonly partial struct SourceDescriptor<TDocument>
@@ -324,7 +324,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Fields? value)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.SourceFields = value;
 		return this;
@@ -336,9 +336,9 @@ public readonly partial struct SourceDescriptor<TDocument>
 	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.SourceFields = value;
+		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
@@ -638,7 +638,7 @@ public readonly partial struct SourceDescriptor
 	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Fields? value)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.SourceFields = value;
 		return this;
@@ -650,9 +650,21 @@ public readonly partial struct SourceDescriptor
 	/// Set it to a list to reindex select fields.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
-		Instance.SourceFields = value;
+		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, reindex all source fields.
+	/// Set it to a list to reindex select fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
+	{
+		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 

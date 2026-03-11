@@ -32,6 +32,7 @@ public sealed partial class SparseVectorQueryConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
+	private static readonly System.Text.Json.JsonEncodedText VariantQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -84,6 +85,14 @@ public sealed partial class SparseVectorQueryConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantQueryVector))
+			{
+				variantType = VariantQueryVector.Value;
+				reader.Read();
+				variant = reader.ReadValue<System.Collections.Generic.IDictionary<string, float>>(options, static System.Collections.Generic.IDictionary<string, float> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, float>(o, null, null)!);
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -116,6 +125,9 @@ public sealed partial class SparseVectorQueryConverter : System.Text.Json.Serial
 				break;
 			case "inference_id":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Id)value.Variant, null, null);
+				break;
+			case "query_vector":
+				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.IDictionary<string, float>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, float> v) => w.WriteDictionaryValue<string, float>(o, v, null, null));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery)}'.");

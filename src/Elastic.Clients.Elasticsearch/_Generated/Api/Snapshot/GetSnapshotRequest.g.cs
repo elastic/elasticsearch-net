@@ -97,7 +97,7 @@ public sealed partial class GetSnapshotRequestParameters : Elastic.Transport.Req
 	/// <summary>
 	/// <para>
 	/// The maximum number of snapshots to return.
-	/// The default is 0, which means to return all that match the request without limit.
+	/// The default is -1, which means to return all that match the request without limit.
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -270,7 +270,7 @@ public sealed partial class GetSnapshotRequest : Elastic.Clients.Elasticsearch.R
 	/// <summary>
 	/// <para>
 	/// The maximum number of snapshots to return.
-	/// The default is 0, which means to return all that match the request without limit.
+	/// The default is -1, which means to return all that match the request without limit.
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
@@ -485,7 +485,7 @@ public readonly partial struct GetSnapshotRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The maximum number of snapshots to return.
-	/// The default is 0, which means to return all that match the request without limit.
+	/// The default is -1, which means to return all that match the request without limit.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor Size(int? value)
