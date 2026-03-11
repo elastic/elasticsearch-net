@@ -27,6 +27,7 @@ public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serializ
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,6 +40,11 @@ public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serializ
 		if (reader.ValueTextEquals(MemberCompletion))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank;
 		}
 
 		if (reader.ValueTextEquals(MemberTextEmbedding))
@@ -55,6 +61,11 @@ public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serializ
 		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank;
 		}
 
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -74,6 +85,9 @@ public sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serializ
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Completion:
 				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);

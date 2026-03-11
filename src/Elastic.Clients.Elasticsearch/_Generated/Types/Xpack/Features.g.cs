@@ -73,6 +73,7 @@ public sealed partial class Features
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? EnterpriseSearch { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Eql { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Feature? Esql { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.Feature? GpuVectorIndexing { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Graph { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Ilm { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Feature Logsdb { get; set; }

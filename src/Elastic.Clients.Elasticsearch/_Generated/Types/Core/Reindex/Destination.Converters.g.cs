@@ -37,7 +37,7 @@ public sealed partial class DestinationConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.OpType?> propOpType = default;
 		LocalJsonValue<string?> propPipeline = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<string?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

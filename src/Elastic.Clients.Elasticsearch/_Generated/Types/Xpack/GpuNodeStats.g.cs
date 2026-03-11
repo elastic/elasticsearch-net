@@ -21,35 +21,60 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.Search;
+namespace Elastic.Clients.Elasticsearch.Xpack;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.CompletionSuggestOptionConverterFactory))]
-public sealed partial class CompletionSuggestOption<TDocument>
+/// <summary>
+/// <para>
+/// Per-node GPU statistics for vector indexing.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.GpuNodeStatsConverter))]
+public sealed partial class GpuNodeStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CompletionSuggestOption(string text)
+	public GpuNodeStats(bool enabled, long indexBuildCount, long memoryInBytes, string type)
 	{
-		Text = text;
+		Enabled = enabled;
+		IndexBuildCount = indexBuildCount;
+		MemoryInBytes = memoryInBytes;
+		Type = type;
 	}
 
-	public CompletionSuggestOption()
+	public GpuNodeStats()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal CompletionSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GpuNodeStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public bool? CollateMatch { get; set; }
-	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Context>>? Contexts { get; set; }
-	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
-	public string? Id { get; set; }
-	public string? Index { get; set; }
-	public string? Routing { get; set; }
-	public double? Score { get; set; }
-	public double? Score0 { get; set; }
-	public TDocument? Source { get; set; }
-	public required string Text { get; set; }
+	/// <summary>
+	/// <para>
+	/// Whether GPU vector indexing is enabled on this node.
+	/// </para>
+	/// </summary>
+	public required bool Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Number of GPU index builds performed on this node.
+	/// </para>
+	/// </summary>
+	public required long IndexBuildCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// GPU memory in bytes.
+	/// </para>
+	/// </summary>
+	public required long MemoryInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// GPU device type (e.g., "NVIDIA L4", "NVIDIA A100").
+	/// </para>
+	/// </summary>
+	public required string Type { get; set; }
 }

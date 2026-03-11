@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricExpectedReciprocalRankConverter))]
 public sealed partial class RankEvalMetricExpectedReciprocalRank
@@ -67,7 +67,7 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricExpectedReciprocalRankDescriptor
 {

@@ -48,6 +48,7 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 	public Elastic.Clients.Elasticsearch.Xpack.Base? Enrich { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Flattened? Flattened { get; set; }
+	public Elastic.Clients.Elasticsearch.Xpack.GpuVectorIndexing? GpuVectorIndexing { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Base Graph { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.HealthStatistics? HealthApi { get; set; }
 	public required Elastic.Clients.Elasticsearch.Xpack.Ilm Ilm { get; set; }

@@ -32,8 +32,6 @@ public enum QueryRuleCriteriaType
 	Contains,
 	[System.Runtime.Serialization.EnumMember(Value = "exact")]
 	Exact,
-	[System.Runtime.Serialization.EnumMember(Value = "exact_fuzzy")]
-	ExactFuzzy,
 	[System.Runtime.Serialization.EnumMember(Value = "fuzzy")]
 	Fuzzy,
 	[System.Runtime.Serialization.EnumMember(Value = "global")]
