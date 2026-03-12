@@ -26,7 +26,7 @@ jobs:
       - name: 'Replace outdated versions with redirects'
         run: |-
           write_redirect() {
-            local mode="$1" dir="$2" url="$3" target="$4" requested="$5" requested_branch="$6" bleeding_url="$7" bleeding_target="$8"
+            local mode="$1" dir="$2" url="$3" target="$4" requested="$5" requested_branch="$6"
             rm -rf "./${dir}"
             mkdir "./${dir}"
             if [[ "$mode" == "older_patch" ]]; then
@@ -53,16 +53,39 @@ jobs:
               echo '<html lang="en">'
               echo '<head>'
               echo '  <meta charset="utf-8">'
+              echo '  <meta name="viewport" content="width=device-width, initial-scale=1">'
               printf '  <link rel="canonical" href="%s">\n' "$url"
               printf '  <title>Unsupported docs version %s</title>\n' "$requested"
+              echo '  <style>'
+              echo '    :root { color-scheme: light dark; }'
+              echo '    body { margin: 0; padding: 2rem 1rem; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f8fa; color: #1f2328; }'
+              echo '    main { max-width: 50rem; margin: 0 auto; }'
+              echo '    h1 { margin: 0 0 0.4rem; font-size: 1.8rem; }'
+              echo '    p { margin: 0.35rem 0; line-height: 1.45; }'
+              echo '    .actions { margin-top: 0.75rem; display: grid; gap: 0.45rem; }'
+              echo '    a.version { display: inline-flex; align-items: center; gap: 0.45rem; width: fit-content; padding: 0.45rem 0.65rem; border: 1px solid #d0d7de; border-radius: 0.5rem; background: #ffffff; color: inherit; text-decoration: none; }'
+              echo '    a.version:hover { background: #f3f4f6; }'
+              echo '    h2 { margin: 1.25rem 0 0.55rem; font-size: 1.15rem; }'
+              echo '    pre { margin: 0; padding: 0.75rem; border: 1px solid #d0d7de; border-radius: 0.5rem; background: #ffffff; overflow-x: auto; }'
+              echo '    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.9rem; }'
+              echo '    @media (prefers-color-scheme: dark) {'
+              echo '      body { background: #0d1117; color: #e6edf3; }'
+              echo '      a.version { border-color: #30363d; background: #161b22; }'
+              echo '      a.version:hover { background: #1f2937; }'
+              echo '      pre { border-color: #30363d; background: #161b22; }'
+              echo '    }'
+              echo '  </style>'
               echo '</head>'
               echo '<body>'
-              printf '  <h1>Version %s is no longer supported</h1>\n' "$requested"
-              echo '  <p>This documentation version is outside the retained support window.</p>'
-              printf '  <p>Closest supported version in this major line: <a href="%s">%s</a>.</p>\n' "$url" "$target"
-              printf '  <p>Latest bleeding-edge documentation: <a href="%s">%s</a>.</p>\n' "$bleeding_url" "$bleeding_target"
-              echo '  <h2>Serve this version locally</h2>'
-              echo '  <pre><code>'
+              echo '  <main>'
+              printf '    <h1>Version %s is no longer supported</h1>\n' "$requested"
+              echo '    <p>This documentation version is outside the retained support window.</p>'
+              echo '    <div class="actions">'
+              printf '      <a class="version" href="%s">Closest supported version: %s</a>\n' "$url" "$target"
+              echo '      <a class="version" href="../">Version overview</a>'
+              echo '    </div>'
+              echo '    <h2>Serve this version locally</h2>'
+              echo '    <pre><code>'
               echo 'git clone https://github.com/elastic/elasticsearch-net.git'
               echo 'cd elasticsearch-net'
               echo 'dotnet tool update -g docfx'
@@ -71,10 +94,78 @@ jobs:
               echo 'cd docfx'
               echo 'docfx docfx.json'
               echo 'docfx serve _site'
-              echo '  </code></pre>'
+              echo '    </code></pre>'
+              echo '  </main>'
               echo '</body>'
               echo '</html>'
             } > "./${dir}/index.html"
+          }
+
+          write_root_index() {
+            local current_major="" version major
+            {
+              echo '<!DOCTYPE html>'
+              echo '<html lang="en">'
+              echo '<head>'
+              echo '  <meta charset="utf-8">'
+              echo '  <meta name="viewport" content="width=device-width, initial-scale=1">'
+              echo '  <title>Elasticsearch .NET Reference Docs</title>'
+              echo '  <style>'
+              echo '    :root { color-scheme: light dark; }'
+              echo '    body { margin: 0; padding: 2rem 1rem; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f8fa; color: #1f2328; }'
+              echo '    main { max-width: 50rem; margin: 0 auto; }'
+              echo '    h1 { margin: 0 0 0.4rem; font-size: 1.8rem; }'
+              echo '    p { margin: 0.35rem 0; line-height: 1.45; }'
+              echo '    section { margin-top: 1.5rem; }'
+              echo '    h2 { margin: 0 0 0.55rem; font-size: 1.15rem; }'
+              echo '    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }'
+              echo '    a.version { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.65rem; border: 1px solid #d0d7de; border-radius: 0.5rem; background: #ffffff; color: inherit; text-decoration: none; }'
+              echo '    a.version:hover { background: #f3f4f6; }'
+              echo '    .badge { padding: 0.1rem 0.4rem; border-radius: 999px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.02em; background: #0969da; color: #ffffff; }'
+              echo '    @media (prefers-color-scheme: dark) {'
+              echo '      body { background: #0d1117; color: #e6edf3; }'
+              echo '      a.version { border-color: #30363d; background: #161b22; }'
+              echo '      a.version:hover { background: #1f2937; }'
+              echo '    }'
+              echo '  </style>'
+              echo '</head>'
+              echo '<body>'
+              echo '  <main>'
+              echo '    <h1>Elasticsearch .NET Reference Docs</h1>'
+              echo '    <p>Retained versions available on GitHub Pages.</p>'
+              printf '    <p>Latest bleeding-edge version: <a href="./%s/">%s</a></p>\n' "$BLEEDING_EDGE_TARGET" "$BLEEDING_EDGE_TARGET"
+              if (( ${#RETAINED_VERSIONS[@]} == 0 )); then
+                echo '    <p>No retained versions are currently published.</p>'
+              else
+                for version in "${RETAINED_VERSIONS[@]}"; do
+                  major="${version%%.*}"
+                  if [[ "$major" != "$current_major" ]]; then
+                    if [[ -n "$current_major" ]]; then
+                      echo '      </ul>'
+                      echo '    </section>'
+                    fi
+                    echo '    <section>'
+                    printf '      <h2>%s.x</h2>\n' "$major"
+                    echo '      <ul>'
+                    current_major="$major"
+                  fi
+
+                  if [[ "$version" == "$BLEEDING_EDGE_TARGET" ]]; then
+                    printf '        <li><a class="version" href="./%s/">%s <span class="badge">latest</span></a></li>\n' "$version" "$version"
+                  else
+                    printf '        <li><a class="version" href="./%s/">%s</a></li>\n' "$version" "$version"
+                  fi
+                done
+
+                if [[ -n "$current_major" ]]; then
+                  echo '      </ul>'
+                  echo '    </section>'
+                fi
+              fi
+              echo '  </main>'
+              echo '</body>'
+              echo '</html>'
+            } > "./index.html"
           }
 
           declare -A LATEST_PATCH
@@ -99,7 +190,6 @@ jobs:
           # Absolute bleeding-edge version = latest patch on highest major/minor
           BLEEDING_EDGE_MINOR="${LATEST_MINOR[$CURRENT_MAJOR]}"
           BLEEDING_EDGE_TARGET="${CURRENT_MAJOR}.${BLEEDING_EDGE_MINOR}.${LATEST_PATCH[${CURRENT_MAJOR}.${BLEEDING_EDGE_MINOR}]}"
-          BLEEDING_EDGE_URL="https://elastic.github.io/elasticsearch-net/${BLEEDING_EDGE_TARGET}/"
 
           # Determine supported major.minor combinations:
           #   current major  -> last 3 minor versions
@@ -115,6 +205,14 @@ jobs:
               SUPPORTED["${M}.${sorted_minors[-1]}"]=1
             fi
           done
+
+          mapfile -t RETAINED_VERSIONS < <(
+            for KEY in "${!SUPPORTED[@]}"; do
+              PATCH="${LATEST_PATCH[$KEY]}"
+              [[ -z "$PATCH" ]] && continue
+              printf '%s.%s\n' "$KEY" "$PATCH"
+            done | sort -t '.' -k1,1nr -k2,2nr -k3,3nr
+          )
 
           # Best redirect target per major = latest patch of the highest supported minor
           declare -A BEST_TARGET
@@ -140,12 +238,14 @@ jobs:
               fi
               REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${TARGET}/"
               if [[ -z "${SUPPORTED[$KEY]}" ]]; then
-                write_redirect "unsupported_minor" "$dir" "$REDIRECT_URL" "$TARGET" "$dir" "${M}.${N}" "$BLEEDING_EDGE_URL" "$BLEEDING_EDGE_TARGET"
+                write_redirect "unsupported_minor" "$dir" "$REDIRECT_URL" "$TARGET" "$dir" "${M}.${N}"
               else
-                write_redirect "older_patch" "$dir" "$REDIRECT_URL" "$TARGET" "" "" "" ""
+                write_redirect "older_patch" "$dir" "$REDIRECT_URL" "$TARGET" "" ""
               fi
             fi
           done
+
+          write_root_index
 
       - name: 'Commit'
         run: |-
