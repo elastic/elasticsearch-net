@@ -23,6 +23,55 @@ jobs:
           find . -name '*.map' -delete
           touch .nojekyll
 
+      - name: 'Replace older patches with redirects'
+        run: |-
+          declare -A LATEST_PATCH
+          shopt -s nullglob
+          for dir in */; do
+            dir="${dir%/}"
+            if [[ "$dir" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              MAJOR="${BASH_REMATCH[1]}"
+              MINOR="${BASH_REMATCH[2]}"
+              PATCH="${BASH_REMATCH[3]}"
+              KEY="${MAJOR}.${MINOR}"
+              if [[ -z "${LATEST_PATCH[$KEY]}" ]] || (( PATCH > LATEST_PATCH[$KEY] )); then
+                LATEST_PATCH[$KEY]="$PATCH"
+              fi
+            fi
+          done
+          for dir in */; do
+            dir="${dir%/}"
+            if [[ "$dir" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              MAJOR="${BASH_REMATCH[1]}"
+              MINOR="${BASH_REMATCH[2]}"
+              PATCH="${BASH_REMATCH[3]}"
+              KEY="${MAJOR}.${MINOR}"
+              LATEST="${LATEST_PATCH[$KEY]}"
+              if (( PATCH != LATEST )); then
+                LATEST_VERSION="${MAJOR}.${MINOR}.${LATEST}"
+                REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${LATEST_VERSION}/"
+                echo "Replacing ${dir} with redirect to ${LATEST_VERSION}"
+                rm -rf "./${dir}"
+                mkdir "./${dir}"
+                {
+                  echo '<!DOCTYPE html>'
+                  echo '<html lang="en">'
+                  echo '<head>'
+                  echo '  <meta charset="utf-8">'
+                  printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$REDIRECT_URL"
+                  printf '  <link rel="canonical" href="%s">\n' "$REDIRECT_URL"
+                  printf '  <title>Redirecting to %s</title>\n' "$LATEST_VERSION"
+                  printf '  <script>window.location.replace("%s");</script>\n' "$REDIRECT_URL"
+                  echo '</head>'
+                  echo '<body>'
+                  printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$REDIRECT_URL" "$LATEST_VERSION"
+                  echo '</body>'
+                  echo '</html>'
+                } > "./${dir}/index.html"
+              fi
+            fi
+          done
+
       - name: 'Commit'
         run: |-
           git config --global user.name '${{ github.actor }}'

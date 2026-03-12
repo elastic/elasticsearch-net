@@ -67,6 +67,39 @@ jobs:
         with:
           ref: ${{ inputs.target_branch }}
 
+      - name: 'Redirect older patches'
+        run: |-
+          VERSION="${{ inputs.name }}"
+          if [[ "$VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            MAJOR="${BASH_REMATCH[1]}"
+            MINOR="${BASH_REMATCH[2]}"
+            REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${VERSION}/"
+            shopt -s nullglob
+            for dir in */; do
+              dir="${dir%/}"
+              if [[ "$dir" != "$VERSION" && "$dir" =~ ^${MAJOR}\.${MINOR}\.[0-9]+$ ]]; then
+                echo "Replacing ${dir} with redirect to ${VERSION}"
+                rm -rf "./${dir}"
+                mkdir "./${dir}"
+                {
+                  echo '<!DOCTYPE html>'
+                  echo '<html lang="en">'
+                  echo '<head>'
+                  echo '  <meta charset="utf-8">'
+                  printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$REDIRECT_URL"
+                  printf '  <link rel="canonical" href="%s">\n' "$REDIRECT_URL"
+                  printf '  <title>Redirecting to %s</title>\n' "$VERSION"
+                  printf '  <script>window.location.replace("%s");</script>\n' "$REDIRECT_URL"
+                  echo '</head>'
+                  echo '<body>'
+                  printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$REDIRECT_URL" "$VERSION"
+                  echo '</body>'
+                  echo '</html>'
+                } > "./${dir}/index.html"
+              fi
+            done
+          fi
+
       - name: 'Commit'
         run: |-
           rm -r "./${{ inputs.name }}" || true
