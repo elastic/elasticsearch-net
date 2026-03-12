@@ -67,38 +67,102 @@ jobs:
         with:
           ref: ${{ inputs.target_branch }}
 
-      - name: 'Redirect older patches'
+      - name: 'Redirect outdated versions'
         run: |-
           VERSION="${{ inputs.name }}"
-          if [[ "$VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            MAJOR="${BASH_REMATCH[1]}"
-            MINOR="${BASH_REMATCH[2]}"
-            REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${VERSION}/"
-            shopt -s nullglob
-            for dir in */; do
-              dir="${dir%/}"
-              if [[ "$dir" != "$VERSION" && "$dir" =~ ^${MAJOR}\.${MINOR}\.[0-9]+$ ]]; then
-                echo "Replacing ${dir} with redirect to ${VERSION}"
-                rm -rf "./${dir}"
-                mkdir "./${dir}"
-                {
-                  echo '<!DOCTYPE html>'
-                  echo '<html lang="en">'
-                  echo '<head>'
-                  echo '  <meta charset="utf-8">'
-                  printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$REDIRECT_URL"
-                  printf '  <link rel="canonical" href="%s">\n' "$REDIRECT_URL"
-                  printf '  <title>Redirecting to %s</title>\n' "$VERSION"
-                  printf '  <script>window.location.replace("%s");</script>\n' "$REDIRECT_URL"
-                  echo '</head>'
-                  echo '<body>'
-                  printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$REDIRECT_URL" "$VERSION"
-                  echo '</body>'
-                  echo '</html>'
-                } > "./${dir}/index.html"
+          if [[ ! "$VERSION" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then exit 0; fi
+          NEW_MAJOR="${BASH_REMATCH[1]}"
+          NEW_MINOR="${BASH_REMATCH[2]}"
+          NEW_PATCH="${BASH_REMATCH[3]}"
+
+          write_redirect() {
+            local dir="$1" url="$2" target="$3"
+            rm -rf "./${dir}"
+            mkdir "./${dir}"
+            {
+              echo '<!DOCTYPE html>'
+              echo '<html lang="en">'
+              echo '<head>'
+              echo '  <meta charset="utf-8">'
+              printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$url"
+              printf '  <link rel="canonical" href="%s">\n' "$url"
+              printf '  <title>Redirecting to %s</title>\n' "$target"
+              printf '  <script>window.location.replace("%s");</script>\n' "$url"
+              echo '</head>'
+              echo '<body>'
+              printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$url" "$target"
+              echo '</body>'
+              echo '</html>'
+            } > "./${dir}/index.html"
+          }
+
+          declare -A LATEST_PATCH
+          declare -A LATEST_MINOR
+          declare -A MINORS_PER_MAJOR
+          shopt -s nullglob
+          for dir in */; do
+            dir="${dir%/}"
+            if [[ "$dir" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              M="${BASH_REMATCH[1]}" N="${BASH_REMATCH[2]}" P="${BASH_REMATCH[3]}"
+              KEY="${M}.${N}"
+              if [[ -z "${LATEST_PATCH[$KEY]}" ]] || (( P > LATEST_PATCH[$KEY] )); then LATEST_PATCH[$KEY]="$P"; fi
+              if [[ -z "${LATEST_MINOR[$M]}" ]] || (( N > LATEST_MINOR[$M] )); then LATEST_MINOR[$M]="$N"; fi
+              if [[ ! " ${MINORS_PER_MAJOR[$M]} " =~ " ${N} " ]]; then MINORS_PER_MAJOR[$M]+=" $N"; fi
+            fi
+          done
+
+          # Include the new version being deployed so the support window accounts for it
+          KEY="${NEW_MAJOR}.${NEW_MINOR}"
+          if [[ -z "${LATEST_PATCH[$KEY]}" ]] || (( NEW_PATCH > LATEST_PATCH[$KEY] )); then LATEST_PATCH[$KEY]="$NEW_PATCH"; fi
+          if [[ -z "${LATEST_MINOR[$NEW_MAJOR]}" ]] || (( NEW_MINOR > LATEST_MINOR[$NEW_MAJOR] )); then LATEST_MINOR[$NEW_MAJOR]="$NEW_MINOR"; fi
+          if [[ ! " ${MINORS_PER_MAJOR[$NEW_MAJOR]} " =~ " ${NEW_MINOR} " ]]; then MINORS_PER_MAJOR[$NEW_MAJOR]+=" $NEW_MINOR"; fi
+
+          # Determine the highest major version (= current major)
+          CURRENT_MAJOR=0
+          for M in "${!LATEST_MINOR[@]}"; do (( M > CURRENT_MAJOR )) && CURRENT_MAJOR="$M"; done
+
+          # Determine supported major.minor combinations:
+          #   current major  -> last 3 minor versions
+          #   previous majors -> last minor version only
+          declare -A SUPPORTED
+          for M in "${!MINORS_PER_MAJOR[@]}"; do
+            mapfile -t sorted_minors < <(echo "${MINORS_PER_MAJOR[$M]}" | tr ' ' '\n' | grep -v '^$' | sort -nu)
+            total=${#sorted_minors[@]}
+            if (( M == CURRENT_MAJOR )); then
+              start=$(( total > 3 ? total - 3 : 0 ))
+              for (( i=start; i<total; i++ )); do SUPPORTED["${M}.${sorted_minors[$i]}"]=1; done
+            else
+              SUPPORTED["${M}.${sorted_minors[-1]}"]=1
+            fi
+          done
+
+          # Best redirect target per major = latest patch of the highest supported minor
+          declare -A BEST_TARGET
+          for M in "${!LATEST_MINOR[@]}"; do
+            BEST_M_MINOR="${LATEST_MINOR[$M]}"
+            BEST_TARGET[$M]="${M}.${BEST_M_MINOR}.${LATEST_PATCH[${M}.${BEST_M_MINOR}]}"
+          done
+
+          # Apply redirects to all directories that are no longer supported
+          for dir in */; do
+            dir="${dir%/}"
+            if [[ "$dir" == "$VERSION" ]]; then continue; fi
+            if [[ "$dir" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+              M="${BASH_REMATCH[1]}" N="${BASH_REMATCH[2]}" P="${BASH_REMATCH[3]}"
+              KEY="${M}.${N}"
+              if [[ -z "${SUPPORTED[$KEY]}" ]]; then
+                TARGET="${BEST_TARGET[$M]}"
+                echo "Replacing ${dir} with redirect to ${TARGET} (unsupported minor)"
+              elif (( P != LATEST_PATCH[$KEY] )); then
+                TARGET="${KEY}.${LATEST_PATCH[$KEY]}"
+                echo "Replacing ${dir} with redirect to ${TARGET} (older patch)"
+              else
+                continue
               fi
-            done
-          fi
+              REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${TARGET}/"
+              write_redirect "$dir" "$REDIRECT_URL" "$TARGET"
+            fi
+          done
 
       - name: 'Commit'
         run: |-
