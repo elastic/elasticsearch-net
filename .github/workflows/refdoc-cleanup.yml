@@ -195,14 +195,21 @@ jobs:
           #   current major  -> last 3 minor versions
           #   previous majors -> last minor version only
           declare -A SUPPORTED
+          declare -A SUPPORTED_MINORS_ASC
           for M in "${!MINORS_PER_MAJOR[@]}"; do
             mapfile -t sorted_minors < <(echo "${MINORS_PER_MAJOR[$M]}" | tr ' ' '\n' | grep -v '^$' | sort -nu)
             total=${#sorted_minors[@]}
             if (( M == CURRENT_MAJOR )); then
               start=$(( total > 3 ? total - 3 : 0 ))
-              for (( i=start; i<total; i++ )); do SUPPORTED["${M}.${sorted_minors[$i]}"]=1; done
+              for (( i=start; i<total; i++ )); do
+                minor="${sorted_minors[$i]}"
+                SUPPORTED["${M}.${minor}"]=1
+                SUPPORTED_MINORS_ASC[$M]+=" ${minor}"
+              done
             else
-              SUPPORTED["${M}.${sorted_minors[-1]}"]=1
+              minor="${sorted_minors[-1]}"
+              SUPPORTED["${M}.${minor}"]=1
+              SUPPORTED_MINORS_ASC[$M]+=" ${minor}"
             fi
           done
 
@@ -214,7 +221,7 @@ jobs:
             done | sort -t '.' -k1,1nr -k2,2nr -k3,3nr
           )
 
-          # Best redirect target per major = latest patch of the highest supported minor
+          # Fallback target per major = latest patch of the highest known minor
           declare -A BEST_TARGET
           for M in "${!LATEST_MINOR[@]}"; do
             BEST_M_MINOR="${LATEST_MINOR[$M]}"
@@ -228,7 +235,29 @@ jobs:
               M="${BASH_REMATCH[1]}" N="${BASH_REMATCH[2]}" P="${BASH_REMATCH[3]}"
               KEY="${M}.${N}"
               if [[ -z "${SUPPORTED[$KEY]}" ]]; then
-                TARGET="${BEST_TARGET[$M]}"
+                TARGET_MINOR=""
+                for RETAINED_MINOR in ${SUPPORTED_MINORS_ASC[$M]}; do
+                  if (( RETAINED_MINOR >= N )); then
+                    TARGET_MINOR="$RETAINED_MINOR"
+                    break
+                  fi
+                done
+
+                if [[ -z "$TARGET_MINOR" ]]; then
+                  for RETAINED_MINOR in ${SUPPORTED_MINORS_ASC[$M]}; do TARGET_MINOR="$RETAINED_MINOR"; done
+                fi
+
+                if [[ -n "$TARGET_MINOR" ]]; then
+                  TARGET_KEY="${M}.${TARGET_MINOR}"
+                  TARGET_PATCH="${LATEST_PATCH[$TARGET_KEY]}"
+                  if [[ -n "$TARGET_PATCH" ]]; then
+                    TARGET="${TARGET_KEY}.${TARGET_PATCH}"
+                  else
+                    TARGET="${BEST_TARGET[$M]}"
+                  fi
+                else
+                  TARGET="${BEST_TARGET[$M]}"
+                fi
                 echo "Replacing ${dir} with guidance page linking to ${TARGET} (unsupported minor)"
               elif (( P != LATEST_PATCH[$KEY] )); then
                 TARGET="${KEY}.${LATEST_PATCH[$KEY]}"
