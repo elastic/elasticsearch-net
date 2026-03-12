@@ -58,6 +58,8 @@ jobs:
           docfx docfx.json
           rm -f ./_site/xrefmap.yml
           rm -f ./_site/manifest.json
+          find ./_site -name 'index.json' -delete
+          find ./_site -name '*.map' -delete
           mv ./_site ./../..
 
       - name: 'Checkout'

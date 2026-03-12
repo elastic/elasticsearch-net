@@ -19,6 +19,8 @@ jobs:
         run: |-
           find . -name 'xrefmap.yml' -delete
           find . -name 'manifest.json' -delete
+          find . -name 'index.json' -delete
+          find . -name '*.map' -delete
           touch .nojekyll
 
       - name: 'Commit'
