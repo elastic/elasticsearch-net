@@ -2,16 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://elastic.github.io/elasticsearch-net/8.19.16/">
   <title>Unsupported docs version 8.16.3</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; padding: 2rem 1rem; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f8fa; color: #1f2328; }
+    main { max-width: 50rem; margin: 0 auto; }
+    h1 { margin: 0 0 0.4rem; font-size: 1.8rem; }
+    p { margin: 0.35rem 0; line-height: 1.45; }
+    .actions { margin-top: 0.75rem; display: grid; gap: 0.45rem; }
+    a.version { display: inline-flex; align-items: center; gap: 0.45rem; width: fit-content; padding: 0.45rem 0.65rem; border: 1px solid #d0d7de; border-radius: 0.5rem; background: #ffffff; color: inherit; text-decoration: none; }
+    a.version:hover { background: #f3f4f6; }
+    h2 { margin: 1.25rem 0 0.55rem; font-size: 1.15rem; }
+    pre { margin: 0; padding: 0.75rem; border: 1px solid #d0d7de; border-radius: 0.5rem; background: #ffffff; overflow-x: auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.9rem; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1117; color: #e6edf3; }
+      a.version { border-color: #30363d; background: #161b22; }
+      a.version:hover { background: #1f2937; }
+      pre { border-color: #30363d; background: #161b22; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Version 8.16.3 is no longer supported</h1>
-  <p>This documentation version is outside the retained support window.</p>
-  <p>Closest supported version in this major line: <a href="https://elastic.github.io/elasticsearch-net/8.19.16/">8.19.16</a>.</p>
-  <p>Latest bleeding-edge documentation: <a href="https://elastic.github.io/elasticsearch-net/9.3.1/">9.3.1</a>.</p>
-  <h2>Serve this version locally</h2>
-  <pre><code>
+  <main>
+    <h1>Version 8.16.3 is no longer supported</h1>
+    <p>This documentation version is outside the retained support window.</p>
+    <div class="actions">
+      <a class="version" href="https://elastic.github.io/elasticsearch-net/8.19.16/">Closest supported version: 8.19.16</a>
+      <a class="version" href="../">Version overview</a>
+    </div>
+    <h2>Serve this version locally</h2>
+    <pre><code>
 git clone https://github.com/elastic/elasticsearch-net.git
 cd elasticsearch-net
 dotnet tool update -g docfx
@@ -20,6 +43,7 @@ git checkout 8.16.3 || git checkout 8.16
 cd docfx
 docfx docfx.json
 docfx serve _site
-  </code></pre>
+    </code></pre>
+  </main>
 </body>
 </html>
