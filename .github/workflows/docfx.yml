@@ -76,21 +76,52 @@ jobs:
           NEW_PATCH="${BASH_REMATCH[3]}"
 
           write_redirect() {
-            local dir="$1" url="$2" target="$3"
+            local mode="$1" dir="$2" url="$3" target="$4" requested="$5" requested_branch="$6" bleeding_url="$7" bleeding_target="$8"
             rm -rf "./${dir}"
             mkdir "./${dir}"
+            if [[ "$mode" == "older_patch" ]]; then
+              {
+                echo '<!DOCTYPE html>'
+                echo '<html lang="en">'
+                echo '<head>'
+                echo '  <meta charset="utf-8">'
+                printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$url"
+                printf '  <link rel="canonical" href="%s">\n' "$url"
+                printf '  <title>Redirecting to %s</title>\n' "$target"
+                printf '  <script>window.location.replace("%s");</script>\n' "$url"
+                echo '</head>'
+                echo '<body>'
+                printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$url" "$target"
+                echo '</body>'
+                echo '</html>'
+              } > "./${dir}/index.html"
+              return
+            fi
+
             {
               echo '<!DOCTYPE html>'
               echo '<html lang="en">'
               echo '<head>'
               echo '  <meta charset="utf-8">'
-              printf '  <meta http-equiv="refresh" content="0; url=%s">\n' "$url"
               printf '  <link rel="canonical" href="%s">\n' "$url"
-              printf '  <title>Redirecting to %s</title>\n' "$target"
-              printf '  <script>window.location.replace("%s");</script>\n' "$url"
+              printf '  <title>Unsupported docs version %s</title>\n' "$requested"
               echo '</head>'
               echo '<body>'
-              printf '  <p>This documentation has been superseded. Redirecting to <a href="%s">%s</a>.</p>\n' "$url" "$target"
+              printf '  <h1>Version %s is no longer supported</h1>\n' "$requested"
+              echo '  <p>This documentation version is outside the retained support window.</p>'
+              printf '  <p>Closest supported version in this major line: <a href="%s">%s</a>.</p>\n' "$url" "$target"
+              printf '  <p>Latest bleeding-edge documentation: <a href="%s">%s</a>.</p>\n' "$bleeding_url" "$bleeding_target"
+              echo '  <h2>Serve this version locally</h2>'
+              echo '  <pre><code>'
+              echo 'git clone https://github.com/elastic/elasticsearch-net.git'
+              echo 'cd elasticsearch-net'
+              echo 'dotnet tool update -g docfx'
+              echo 'git fetch --tags origin'
+              printf 'git checkout %s || git checkout %s\n' "$requested" "$requested_branch"
+              echo 'cd docfx'
+              echo 'docfx docfx.json'
+              echo 'docfx serve _site'
+              echo '  </code></pre>'
               echo '</body>'
               echo '</html>'
             } > "./${dir}/index.html"
@@ -120,6 +151,11 @@ jobs:
           # Determine the highest major version (= current major)
           CURRENT_MAJOR=0
           for M in "${!LATEST_MINOR[@]}"; do (( M > CURRENT_MAJOR )) && CURRENT_MAJOR="$M"; done
+
+          # Absolute bleeding-edge version = latest patch on highest major/minor
+          BLEEDING_EDGE_MINOR="${LATEST_MINOR[$CURRENT_MAJOR]}"
+          BLEEDING_EDGE_TARGET="${CURRENT_MAJOR}.${BLEEDING_EDGE_MINOR}.${LATEST_PATCH[${CURRENT_MAJOR}.${BLEEDING_EDGE_MINOR}]}"
+          BLEEDING_EDGE_URL="https://elastic.github.io/elasticsearch-net/${BLEEDING_EDGE_TARGET}/"
 
           # Determine supported major.minor combinations:
           #   current major  -> last 3 minor versions
@@ -152,7 +188,7 @@ jobs:
               KEY="${M}.${N}"
               if [[ -z "${SUPPORTED[$KEY]}" ]]; then
                 TARGET="${BEST_TARGET[$M]}"
-                echo "Replacing ${dir} with redirect to ${TARGET} (unsupported minor)"
+                echo "Replacing ${dir} with guidance page linking to ${TARGET} (unsupported minor)"
               elif (( P != LATEST_PATCH[$KEY] )); then
                 TARGET="${KEY}.${LATEST_PATCH[$KEY]}"
                 echo "Replacing ${dir} with redirect to ${TARGET} (older patch)"
@@ -160,7 +196,11 @@ jobs:
                 continue
               fi
               REDIRECT_URL="https://elastic.github.io/elasticsearch-net/${TARGET}/"
-              write_redirect "$dir" "$REDIRECT_URL" "$TARGET"
+              if [[ -z "${SUPPORTED[$KEY]}" ]]; then
+                write_redirect "unsupported_minor" "$dir" "$REDIRECT_URL" "$TARGET" "$dir" "${M}.${N}" "$BLEEDING_EDGE_URL" "$BLEEDING_EDGE_TARGET"
+              else
+                write_redirect "older_patch" "$dir" "$REDIRECT_URL" "$TARGET" "" "" "" ""
+              fi
             fi
           done
 
