@@ -112,27 +112,33 @@ public abstract class BulkOperation :
 
 	private void ResolveIndex(IElasticsearchClientSettings settings)
 	{
-		if (_bulkRequestIndex is not null)
-		{
-			var resolvedBulkIndex = settings.Inferrer.IndexName(_bulkRequestIndex);
+		// Index resolution follows a strict hierarchy:
+		//   1. Explicit per-operation Index (highest priority)
+		//   2. Bulk request URL-level index
+		//   3. CLR type inference via DefaultMappingFor<T> / DefaultIndex (lowest priority)
 
-			string? inferredIndex;
-			if (Index is not null)
-				inferredIndex = settings.Inferrer.IndexName(Index);
-			else if (ClrType is not null)
-				inferredIndex = settings.Inferrer.TryIndexName(ClrType);
-			else
-				inferredIndex = null;
-
-			if (inferredIndex is null || inferredIndex == resolvedBulkIndex)
-				Index = null;
-			else
-				Index = inferredIndex;
-		}
-		else
+		// When no bulk request index exists, fall back to CLR type inference
+		// so the operation can resolve its index from settings (DefaultMappingFor / DefaultIndex).
+		if (_bulkRequestIndex is null)
 		{
 			Index ??= ClrType;
+			return;
 		}
+
+		// When a bulk request index is set but the operation has no explicit index,
+		// the bulk request index takes precedence — leave Index null so the
+		// URL-level index applies. Do not infer from ClrType here, as that would
+		// allow DefaultIndex to override the explicit bulk request index.
+		if (Index is null)
+			return;
+
+		// When the operation has an explicit index, resolve both to compare.
+		// If they match, clear the per-operation index to avoid redundancy in the
+		// serialized body. If they differ, keep the per-operation override.
+		var resolvedBulkIndex = settings.Inferrer.IndexName(_bulkRequestIndex);
+		var resolvedIndex = settings.Inferrer.IndexName(Index);
+
+		Index = resolvedIndex == resolvedBulkIndex ? null : resolvedIndex;
 	}
 
 	/// <inheritdoc />
