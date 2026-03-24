@@ -39,7 +39,6 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropStringDistance = System.Text.Json.JsonEncodedText.Encode("string_distance"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSuggestMode = System.Text.Json.JsonEncodedText.Encode("suggest_mode"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.TermSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -58,7 +57,6 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort?> propSort = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.StringDistance?> propStringDistance = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SuggestMode?> propSuggestMode = default;
-		LocalJsonValue<string?> propText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
@@ -131,11 +129,6 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propText.TryReadProperty(ref reader, options, PropText, null))
-			{
-				continue;
-			}
-
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -161,8 +154,7 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 			Size = propSize.Value,
 			Sort = propSort.Value,
 			StringDistance = propStringDistance.Value,
-			SuggestMode = propSuggestMode.Value,
-			Text = propText.Value
+			SuggestMode = propSuggestMode.Value
 		};
 	}
 
@@ -183,7 +175,6 @@ public sealed partial class TermSuggesterConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.SuggestSort? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestSort>(o, v));
 		writer.WriteProperty(options, PropStringDistance, value.StringDistance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.StringDistance? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.StringDistance>(o, v));
 		writer.WriteProperty(options, PropSuggestMode, value.SuggestMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SuggestMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SuggestMode>(o, v));
-		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteEndObject();
 	}
 }

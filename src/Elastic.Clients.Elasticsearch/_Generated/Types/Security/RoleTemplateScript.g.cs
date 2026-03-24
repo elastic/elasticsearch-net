@@ -21,40 +21,42 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Synonyms;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.SynonymRuleReadConverter))]
-public sealed partial class SynonymRuleRead
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleTemplateScriptConverter))]
+public sealed partial class RoleTemplateScript
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SynonymRuleRead(string id, string synonyms)
-	{
-		Id = id;
-		Synonyms = synonyms;
-	}
-
-	public SynonymRuleRead()
+	public RoleTemplateScript()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SynonymRuleRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal RoleTemplateScript(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The identifier for the synonym rule.
-	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
+	/// The <c>id</c> for a stored script.
 	/// </para>
 	/// </summary>
-	public required string Id { get; set; }
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The synonyms that conform the synonym rule in Solr format.
+	/// Specifies the language the script is written in.
 	/// </para>
 	/// </summary>
-	public required string Synonyms { get; set; }
+	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies any named parameters that are passed into the script as variables.
+	/// Use parameters instead of hard-coded values to decrease compile time.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Source { get; set; }
 }

@@ -143,14 +143,6 @@ public sealed partial class TermSuggester
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The suggest text.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public string? Text { get; set; }
 }
 
 public readonly partial struct TermSuggesterDescriptor<TDocument>
@@ -340,18 +332,6 @@ public readonly partial struct TermSuggesterDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The suggest text.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument> Text(string? value)
-	{
-		Instance.Text = value;
 		return this;
 	}
 
@@ -551,18 +531,6 @@ public readonly partial struct TermSuggesterDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The suggest text.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor Text(string? value)
-	{
-		Instance.Text = value;
 		return this;
 	}
 
