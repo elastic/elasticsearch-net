@@ -50,16 +50,87 @@ public sealed partial class LicenseInformation
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The date and time the license expires in ISO 8601 format.
+	/// </para>
+	/// </summary>
 	public System.DateTimeOffset? ExpiryDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The date and time the license expires in milliseconds since the Unix epoch.
+	/// </para>
+	/// </summary>
 	public System.DateTimeOffset? ExpiryDateInMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The date and time the license was issued in ISO 8601 format.
+	/// </para>
+	/// </summary>
 	public required System.DateTimeOffset IssueDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The date and time the license was issued in milliseconds since the Unix epoch.
+	/// </para>
+	/// </summary>
 	public required System.DateTimeOffset IssueDateInMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the customer or organization that received the license.
+	/// </para>
+	/// </summary>
 	public required string IssuedTo { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the organization that issued the license.
+	/// </para>
+	/// </summary>
 	public required string Issuer { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of nodes the license allows.
+	/// </para>
+	/// </summary>
 	public required long? MaxNodes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of resource units the license allows (for enterprise licenses only).
+	/// </para>
+	/// </summary>
 	public int? MaxResourceUnits { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The date and time the license was started in milliseconds since the Unix epoch.
+	/// </para>
+	/// </summary>
 	public required System.DateTimeOffset StartDateInMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The status of the license. For example,active, valid, invalid, or expired.
+	/// </para>
+	/// </summary>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseStatus Status { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The type of the license. For example, trial, basic, gold, platinum, or enterprise.
+	/// </para>
+	/// </summary>
 	public required Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType Type { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the license.
+	/// </para>
+	/// </summary>
 	public required string Uid { get; set; }
 }

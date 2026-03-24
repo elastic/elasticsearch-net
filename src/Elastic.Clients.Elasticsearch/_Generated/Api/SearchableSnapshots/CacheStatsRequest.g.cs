@@ -25,7 +25,6 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
 public sealed partial class CacheStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -67,7 +66,6 @@ public sealed partial class CacheStatsRequest : Elastic.Clients.Elasticsearch.Re
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -109,12 +107,6 @@ public readonly partial struct CacheStatsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.MasterTimeout = value;
 		return this;
 	}
 
