@@ -59,7 +59,7 @@ public sealed partial class RoleDescriptorRead
 
 	/// <summary>
 	/// <para>
-	/// An optional description of the role descriptor.
+	/// Optional description of the role descriptor
 	/// </para>
 	/// </summary>
 	public string? Description { get; set; }
@@ -102,7 +102,7 @@ public sealed partial class RoleDescriptorRead
 
 	/// <summary>
 	/// <para>
-	/// A restriction for when the role descriptor is allowed to be effective.
+	/// Restriction for when the role descriptor is allowed to be effective.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; set; }
@@ -110,6 +110,8 @@ public sealed partial class RoleDescriptorRead
 	/// <summary>
 	/// <para>
 	/// A list of users that the API keys can impersonate.
+	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
+	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IReadOnlyCollection<string>? RunAs { get; set; }

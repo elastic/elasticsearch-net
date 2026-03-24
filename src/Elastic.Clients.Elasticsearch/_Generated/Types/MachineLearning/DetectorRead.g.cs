@@ -44,18 +44,14 @@ public sealed partial class DetectorRead
 
 	/// <summary>
 	/// <para>
-	/// The field used to split the data.
-	/// In particular, this property is used for analyzing the splits with respect to their own history.
-	/// It is used for finding unusual values in the context of the split.
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to their own history. It is used for finding unusual values in the context of the split.
 	/// </para>
 	/// </summary>
 	public string? ByFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// An array of custom rule objects, which enable you to customize the way detectors operate.
-	/// For example, a rule may dictate to the detector conditions under which results should be skipped.
-	/// Kibana refers to custom rules as job rules.
+	/// Custom rules enable you to customize the way detectors operate. For example, a rule may dictate conditions under which results should be skipped. Kibana refers to custom rules as job rules.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? CustomRules { get; set; }
@@ -69,51 +65,42 @@ public sealed partial class DetectorRead
 
 	/// <summary>
 	/// <para>
-	/// A unique identifier for the detector.
-	/// This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero.
+	/// A unique identifier for the detector. This identifier is based on the order of the detectors in the <c>analysis_config</c>, starting at zero. If you specify a value for this property, it is ignored.
 	/// </para>
 	/// </summary>
 	public int? DetectorIndex { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Contains one of the following values: <c>all</c>, <c>none</c>, <c>by</c>, or <c>over</c>.
-	/// If set, frequent entities are excluded from influencing the anomaly results.
-	/// Entities can be considered frequent over time or frequent in a population.
-	/// If you are working with both over and by fields, then you can set <c>exclude_frequent</c> to all for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
+	/// If set, frequent entities are excluded from influencing the anomaly results. Entities can be considered frequent over time or frequent in a population. If you are working with both over and by fields, you can set <c>exclude_frequent</c> to <c>all</c> for both fields, or to <c>by</c> or <c>over</c> for those specific fields.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? ExcludeFrequent { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The field that the detector uses in the function.
-	/// If you use an event rate function such as <c>count</c> or <c>rare</c>, do not specify this field.
+	/// The field that the detector uses in the function. If you use an event rate function such as count or rare, do not specify this field. The <c>field_name</c> cannot contain double quotes or backslashes.
 	/// </para>
 	/// </summary>
 	public string? FieldName { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The analysis function that is used.
-	/// For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, and <c>sum</c>.
+	/// The analysis function that is used. For example, <c>count</c>, <c>rare</c>, <c>mean</c>, <c>min</c>, <c>max</c>, or <c>sum</c>.
 	/// </para>
 	/// </summary>
 	public required string Function { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The field used to split the data.
-	/// In particular, this property is used for analyzing the splits with respect to the history of all splits.
-	/// It is used for finding unusual values in the population of all splits.
+	/// The field used to split the data. In particular, this property is used for analyzing the splits with respect to the history of all splits. It is used for finding unusual values in the population of all splits.
 	/// </para>
 	/// </summary>
 	public string? OverFieldName { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The field used to segment the analysis.
-	/// When you use this property, you have completely independent baselines for each value of this field.
+	/// The field used to segment the analysis. When you use this property, you have completely independent baselines for each value of this field.
 	/// </para>
 	/// </summary>
 	public string? PartitionFieldName { get; set; }

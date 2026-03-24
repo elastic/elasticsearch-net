@@ -21,40 +21,28 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Synonyms;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.SynonymRuleReadConverter))]
-public sealed partial class SynonymRuleRead
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleTemplateQueryConverter))]
+public sealed partial class RoleTemplateQuery
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SynonymRuleRead(string id, string synonyms)
-	{
-		Id = id;
-		Synonyms = synonyms;
-	}
-
-	public SynonymRuleRead()
+	public RoleTemplateQuery()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SynonymRuleRead(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal RoleTemplateQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The identifier for the synonym rule.
-	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
+	/// When you create a role, you can specify a query that defines the document level security permissions. You can optionally
+	/// use Mustache templates in the role query to insert the username of the current authenticated user into the role.
+	/// Like other places in Elasticsearch that support templating or scripting, you can specify inline, stored, or file-based
+	/// templates and define custom parameters. You access the details for the current authenticated user through the _user parameter.
 	/// </para>
 	/// </summary>
-	public required string Id { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The synonyms that conform the synonym rule in Solr format.
-	/// </para>
-	/// </summary>
-	public required string Synonyms { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.RoleTemplateScript? Template { get; set; }
 }

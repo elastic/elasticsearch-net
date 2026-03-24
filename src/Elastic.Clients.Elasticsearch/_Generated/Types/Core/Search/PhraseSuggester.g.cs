@@ -142,13 +142,6 @@ public sealed partial class PhraseSuggester
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel? Smoothing { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The text/query to provide suggestions for.
-	/// </para>
-	/// </summary>
-	public string? Text { get; set; }
 	public int? TokenLimit { get; set; }
 }
 
@@ -401,17 +394,6 @@ public readonly partial struct PhraseSuggesterDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Smoothing(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> action)
 	{
 		Instance.Smoothing = Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text/query to provide suggestions for.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument> Text(string? value)
-	{
-		Instance.Text = value;
 		return this;
 	}
 
@@ -696,17 +678,6 @@ public readonly partial struct PhraseSuggesterDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Smoothing(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor> action)
 	{
 		Instance.Smoothing = Elastic.Clients.Elasticsearch.Core.Search.SmoothingModelDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The text/query to provide suggestions for.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor Text(string? value)
-	{
-		Instance.Text = value;
 		return this;
 	}
 

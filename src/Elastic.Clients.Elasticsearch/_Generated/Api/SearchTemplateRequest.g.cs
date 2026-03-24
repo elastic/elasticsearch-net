@@ -36,7 +36,7 @@ public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -174,7 +174,7 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
@@ -359,7 +359,7 @@ public readonly partial struct SearchTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
@@ -714,7 +714,7 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
+	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)

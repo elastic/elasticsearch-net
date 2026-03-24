@@ -39,14 +39,15 @@ public sealed partial class GetSynonymRuleResponse : Elastic.Transport.Products.
 
 	/// <summary>
 	/// <para>
-	/// Synonym Rule identifier
+	/// The identifier for the synonym rule.
+	/// If you do not specify a synonym rule ID when you create a rule, an identifier is created automatically by Elasticsearch.
 	/// </para>
 	/// </summary>
 	public required string Id { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule.
+	/// The synonyms that conform the synonym rule in Solr format.
 	/// </para>
 	/// </summary>
 	public required string Synonyms { get; set; }
