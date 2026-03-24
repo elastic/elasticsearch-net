@@ -23,24 +23,23 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RemoteUserIndicesPrivilegesConverter))]
-public sealed partial class RemoteUserIndicesPrivileges
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UserIndicesPrivilegesBaseConverter))]
+public sealed partial class UserIndicesPrivilegesBase
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RemoteUserIndicesPrivileges(bool allowRestrictedIndices, System.Collections.Generic.IReadOnlyCollection<string> clusters, System.Collections.Generic.IReadOnlyCollection<string> names, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	public UserIndicesPrivilegesBase(bool allowRestrictedIndices, System.Collections.Generic.IReadOnlyCollection<string> names, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
 	{
 		AllowRestrictedIndices = allowRestrictedIndices;
-		Clusters = clusters;
 		Names = names;
 		Privileges = privileges;
 	}
 
-	public RemoteUserIndicesPrivileges()
+	public UserIndicesPrivilegesBase()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal RemoteUserIndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal UserIndicesPrivilegesBase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
@@ -51,7 +50,6 @@ public sealed partial class RemoteUserIndicesPrivileges
 	/// </para>
 	/// </summary>
 	public required bool AllowRestrictedIndices { get; set; }
-	public required System.Collections.Generic.IReadOnlyCollection<string> Clusters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -79,5 +77,5 @@ public sealed partial class RemoteUserIndicesPrivileges
 	/// Search queries that define the documents the user has access to. A document within the specified indices must match these queries for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
-	public object? Query { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<object>? Query { get; set; }
 }

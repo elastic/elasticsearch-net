@@ -191,7 +191,7 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? Params { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -399,20 +399,9 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Params = [.. values];
 		return this;
 	}
 
@@ -678,20 +667,9 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Params(params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Params = [.. values];
 		return this;
 	}
 

@@ -23,24 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RemoteUserIndicesPrivilegesConverter))]
-public sealed partial class RemoteUserIndicesPrivileges
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.IndicesPrivilegesBaseConverter))]
+public sealed partial class IndicesPrivilegesBase
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RemoteUserIndicesPrivileges(bool allowRestrictedIndices, System.Collections.Generic.IReadOnlyCollection<string> clusters, System.Collections.Generic.IReadOnlyCollection<string> names, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	public IndicesPrivilegesBase(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> names, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
 	{
-		AllowRestrictedIndices = allowRestrictedIndices;
-		Clusters = clusters;
 		Names = names;
 		Privileges = privileges;
 	}
 
-	public RemoteUserIndicesPrivileges()
+	public IndicesPrivilegesBase()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal RemoteUserIndicesPrivileges(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal IndicesPrivilegesBase(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
@@ -50,33 +48,32 @@ public sealed partial class RemoteUserIndicesPrivileges
 	/// Set to <c>true</c> if using wildcard or regular expressions for patterns that cover restricted indices. Implicitly, restricted indices have limited privileges that can cause pattern tests to fail. If restricted indices are explicitly included in the <c>names</c> list, Elasticsearch checks privileges against these indices regardless of the value set for <c>allow_restricted_indices</c>.
 	/// </para>
 	/// </summary>
-	public required bool AllowRestrictedIndices { get; set; }
-	public required System.Collections.Generic.IReadOnlyCollection<string> Clusters { get; set; }
+	public bool? AllowRestrictedIndices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The document fields that the owners of the role have read access to.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>? FieldSecurity { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.FieldSecurity? FieldSecurity { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of indices (or index name patterns) to which the permissions in this entry apply.
 	/// </para>
 	/// </summary>
-	public required System.Collections.Generic.IReadOnlyCollection<string> Names { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The index level privileges that owners of the role have on the specified indices.
 	/// </para>
 	/// </summary>
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Search queries that define the documents the user has access to. A document within the specified indices must match these queries for it to be accessible by the owners of the role.
+	/// A search query that defines the documents the owners of the role have access to. A document within the specified indices must match this query for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
 	public object? Query { get; set; }

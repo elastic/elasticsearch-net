@@ -79,7 +79,7 @@ public abstract partial class ResponseItem
 	/// <summary>
 	/// <para>
 	/// The result of the operation.
-	/// Successful values are <c>created</c>, <c>deleted</c>, and <c>updated</c>.
+	/// Possible values are <c>created</c>, <c>updated</c>, <c>deleted</c>, <c>noop</c>, and <c>not_found</c>.
 	/// </para>
 	/// </summary>
 	public string? Result { get; set; }
