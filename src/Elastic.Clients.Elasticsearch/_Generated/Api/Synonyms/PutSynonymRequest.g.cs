@@ -40,7 +40,6 @@ public sealed partial class PutSynonymRequestParameters : Elastic.Transport.Requ
 /// </para>
 /// <para>
 /// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-/// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// <para>
 /// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
@@ -112,7 +111,6 @@ public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Re
 /// </para>
 /// <para>
 /// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-/// If you need to manage more synonym rules, you can create multiple synonym sets.
 /// </para>
 /// <para>
 /// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.

@@ -31,7 +31,7 @@ public sealed partial class ComponentTemplateConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode> propComponentTemplateNode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeWithRollover> propComponentTemplateNode = default;
 		LocalJsonValue<string> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

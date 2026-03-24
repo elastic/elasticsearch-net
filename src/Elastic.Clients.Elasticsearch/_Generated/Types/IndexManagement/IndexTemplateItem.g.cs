@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class IndexTemplateItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexTemplateItem(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate indexTemplate, string name)
+	public IndexTemplateItem(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateWithRollover indexTemplate, string name)
 	{
 		IndexTemplate = indexTemplate;
 		Name = name;
@@ -43,6 +43,6 @@ public sealed partial class IndexTemplateItem
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate IndexTemplate { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateWithRollover IndexTemplate { get; set; }
 	public required string Name { get; set; }
 }

@@ -50,7 +50,7 @@ public sealed partial class CustomTaskSettings
 	/// }
 	/// </code>
 	/// </summary>
-	public object? Parameters { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Parameters { get; set; }
 }
 
 public readonly partial struct CustomTaskSettingsDescriptor
@@ -86,9 +86,56 @@ public readonly partial struct CustomTaskSettingsDescriptor
 	/// }
 	/// </code>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor Parameters(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor Parameters(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Parameters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies parameters that are required to run the custom service. The parameters depend on the model your custom service uses.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "task_settings":{
+	///   "parameters":{
+	///     "input_type":"query",
+	///     "return_token":true
+	///   }
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor Parameters()
+	{
+		Instance.Parameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies parameters that are required to run the custom service. The parameters depend on the model your custom service uses.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "task_settings":{
+	///   "parameters":{
+	///     "input_type":"query",
+	///     "return_token":true
+	///   }
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor Parameters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Parameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor AddParameter(string key, object value)
+	{
+		Instance.Parameters ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Parameters.Add(key, value);
 		return this;
 	}
 

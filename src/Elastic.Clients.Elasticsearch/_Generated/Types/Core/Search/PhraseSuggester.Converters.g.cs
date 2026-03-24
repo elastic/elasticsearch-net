@@ -39,7 +39,6 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropSmoothing = System.Text.Json.JsonEncodedText.Encode("smoothing"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTokenLimit = System.Text.Json.JsonEncodedText.Encode("token_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -59,7 +58,6 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 		LocalJsonValue<int?> propShardSize = default;
 		LocalJsonValue<int?> propSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel?> propSmoothing = default;
-		LocalJsonValue<string?> propText = default;
 		LocalJsonValue<int?> propTokenLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -133,11 +131,6 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propText.TryReadProperty(ref reader, options, PropText, null))
-			{
-				continue;
-			}
-
 			if (propTokenLimit.TryReadProperty(ref reader, options, PropTokenLimit, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
@@ -169,7 +162,6 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 			ShardSize = propShardSize.Value,
 			Size = propSize.Value,
 			Smoothing = propSmoothing.Value,
-			Text = propText.Value,
 			TokenLimit = propTokenLimit.Value
 		};
 	}
@@ -191,7 +183,6 @@ public sealed partial class PhraseSuggesterConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSmoothing, value.Smoothing, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, null);
 		writer.WriteProperty(options, PropTokenLimit, value.TokenLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}

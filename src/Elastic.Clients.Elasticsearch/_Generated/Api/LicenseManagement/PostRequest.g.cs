@@ -27,7 +27,8 @@ public sealed partial class PostRequestParameters : Elastic.Transport.RequestPar
 {
 	/// <summary>
 	/// <para>
-	/// Specifies whether you acknowledge the license changes.
+	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
+	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -85,7 +86,8 @@ public sealed partial class PostRequest : Elastic.Clients.Elasticsearch.Requests
 
 	/// <summary>
 	/// <para>
-	/// Specifies whether you acknowledge the license changes.
+	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
+	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -148,7 +150,8 @@ public readonly partial struct PostRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies whether you acknowledge the license changes.
+	/// To update a license, you must accept the acknowledge messages and set this parameter to <c>true</c>.
+	/// In particular, if you are upgrading or downgrading a license, you must acknowlege the feature changes.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor Acknowledge(bool? value = true)

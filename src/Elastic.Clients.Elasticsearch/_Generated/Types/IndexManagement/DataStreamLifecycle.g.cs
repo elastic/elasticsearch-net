@@ -72,6 +72,13 @@ public sealed partial class DataStreamLifecycle
 	/// </para>
 	/// </summary>
 	public bool? Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Only available with feature flag dlm_searchable_snapshots.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? FrozenAfter { get; set; }
 }
 
 /// <summary>
@@ -171,6 +178,17 @@ public readonly partial struct DataStreamLifecycleDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only available with feature flag dlm_searchable_snapshots.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor FrozenAfter(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.FrozenAfter = value;
 		return this;
 	}
 

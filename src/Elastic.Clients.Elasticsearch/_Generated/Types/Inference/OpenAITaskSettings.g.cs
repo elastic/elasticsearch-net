@@ -42,17 +42,17 @@ public sealed partial class OpenAITaskSettings
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Custom-Header": "Some-Value",
 	///   "Another-Custom-Header": "Another-Value"
 	/// }
 	/// </code>
 	/// </summary>
-	public object? Headers { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c>, <c>chat_completion</c>, or <c>text_embedding</c> task, specify the user issuing the request.
+	/// Specifies the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>
@@ -84,13 +84,13 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Custom-Header": "Some-Value",
 	///   "Another-Custom-Header": "Another-Value"
 	/// }
 	/// </code>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
@@ -98,7 +98,50 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>completion</c>, <c>chat_completion</c>, or <c>text_embedding</c> task, specify the user issuing the request.
+	/// Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor AddHeader(string key, string value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Headers.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
 	/// </summary>
