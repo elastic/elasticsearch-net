@@ -37,6 +37,7 @@ public sealed partial class DataStreamVisibility
 	}
 
 	public bool? AllowCustomRouting { get; set; }
+	public bool? FailureStore { get; set; }
 	public bool? Hidden { get; set; }
 }
 
@@ -62,6 +63,12 @@ public readonly partial struct DataStreamVisibilityDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor AllowCustomRouting(bool? value = true)
 	{
 		Instance.AllowCustomRouting = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibilityDescriptor FailureStore(bool? value = true)
+	{
+		Instance.FailureStore = value;
 		return this;
 	}
 

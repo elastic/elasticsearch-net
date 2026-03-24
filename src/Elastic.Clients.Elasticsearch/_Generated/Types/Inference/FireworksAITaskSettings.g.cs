@@ -42,13 +42,13 @@ public sealed partial class FireworksAITaskSettings
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Custom-Header": "Some-Value",
 	///   "Another-Custom-Header": "Another-Value"
 	/// }
 	/// </code>
 	/// </summary>
-	public object? Headers { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -84,15 +84,58 @@ public readonly partial struct FireworksAiTaskSettingsDescriptor
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Custom-Header": "Some-Value",
 	///   "Another-Custom-Header": "Another-Value"
 	/// }
 	/// </code>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor AddHeader(string key, string value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Headers.Add(key, value);
 		return this;
 	}
 

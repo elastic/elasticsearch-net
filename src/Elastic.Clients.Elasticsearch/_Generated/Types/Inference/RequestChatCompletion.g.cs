@@ -67,6 +67,68 @@ public sealed partial class RequestChatCompletion
 
 	/// <summary>
 	/// <para>
+	/// The reasoning configuration for the completion request.
+	/// This controls the model's reasoning process in one of two ways:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// By specifying the model’s reasoning effort level with the <c>effort</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// By enabling reasoning with default settings by setting <c>enabled</c> field to <c>true</c>.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// It also includes optional settings to control:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The level of detail in the summary returned in the response with the <c>summary</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether reasoning details are included in the response at all with the <c>exclude</c> field.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Example (effort):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "effort": "high",
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Example (enabled):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "enabled": true,
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Currently supported only for <c>elastic</c> provider.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.Reasoning? Reasoning { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// A sequence of strings to control when the model should stop generating additional tokens.
 	/// </para>
 	/// </summary>
@@ -221,6 +283,204 @@ public readonly partial struct RequestChatCompletionDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Model(string? value)
 	{
 		Instance.Model = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The reasoning configuration for the completion request.
+	/// This controls the model's reasoning process in one of two ways:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// By specifying the model’s reasoning effort level with the <c>effort</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// By enabling reasoning with default settings by setting <c>enabled</c> field to <c>true</c>.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// It also includes optional settings to control:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The level of detail in the summary returned in the response with the <c>summary</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether reasoning details are included in the response at all with the <c>exclude</c> field.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Example (effort):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "effort": "high",
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Example (enabled):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "enabled": true,
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Currently supported only for <c>elastic</c> provider.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Reasoning(Elastic.Clients.Elasticsearch.Inference.Reasoning? value)
+	{
+		Instance.Reasoning = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The reasoning configuration for the completion request.
+	/// This controls the model's reasoning process in one of two ways:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// By specifying the model’s reasoning effort level with the <c>effort</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// By enabling reasoning with default settings by setting <c>enabled</c> field to <c>true</c>.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// It also includes optional settings to control:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The level of detail in the summary returned in the response with the <c>summary</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether reasoning details are included in the response at all with the <c>exclude</c> field.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Example (effort):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "effort": "high",
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Example (enabled):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "enabled": true,
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Currently supported only for <c>elastic</c> provider.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Reasoning()
+	{
+		Instance.Reasoning = Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The reasoning configuration for the completion request.
+	/// This controls the model's reasoning process in one of two ways:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// By specifying the model’s reasoning effort level with the <c>effort</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// By enabling reasoning with default settings by setting <c>enabled</c> field to <c>true</c>.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// It also includes optional settings to control:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The level of detail in the summary returned in the response with the <c>summary</c> field.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether reasoning details are included in the response at all with the <c>exclude</c> field.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Example (effort):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "effort": "high",
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Example (enabled):
+	/// </para>
+	/// <code>
+	/// {
+	///    "reasoning": {
+	///        "enabled": true,
+	///        "summary": "concise",
+	///        "exclude": false
+	///    }
+	/// }
+	/// </code>
+	/// <para>
+	/// Currently supported only for <c>elastic</c> provider.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Reasoning(System.Action<Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor>? action)
+	{
+		Instance.Reasoning = Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor.Build(action);
 		return this;
 	}
 

@@ -27,7 +27,7 @@ public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.
 {
 	/// <summary>
 	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
+	/// To start a trial, you must accept the acknowledge messages and set this parameter to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -85,7 +85,7 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
+	/// To start a trial, you must accept the acknowledge messages and set this parameter to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -140,7 +140,7 @@ public readonly partial struct PostStartTrialRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
+	/// To start a trial, you must accept the acknowledge messages and set this parameter to <c>true</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Acknowledge(bool? value = true)

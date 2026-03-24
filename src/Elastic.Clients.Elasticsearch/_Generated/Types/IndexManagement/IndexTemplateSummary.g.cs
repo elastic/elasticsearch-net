@@ -46,7 +46,7 @@ public sealed partial class IndexTemplateSummary
 	/// </summary>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptions? DataStreamOptions { get; set; }
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? Lifecycle { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -198,7 +198,7 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? value)
 	{
 		Instance.Lifecycle = value;
 		return this;
@@ -206,13 +206,13 @@ public readonly partial struct IndexTemplateSummaryDescriptor<TDocument>
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Lifecycle()
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(null);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument> Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor>? action)
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(action);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(action);
 		return this;
 	}
 
@@ -454,7 +454,7 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle? value)
 	{
 		Instance.Lifecycle = value;
 		return this;
@@ -462,13 +462,13 @@ public readonly partial struct IndexTemplateSummaryDescriptor
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Lifecycle()
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(null);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(null);
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor>? action)
 	{
-		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor.Build(action);
+		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor.Build(action);
 		return this;
 	}
 

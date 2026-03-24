@@ -26,16 +26,23 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class DataStreamVisibilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAllowCustomRouting = System.Text.Json.JsonEncodedText.Encode("allow_custom_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAllowCustomRouting = default;
+		LocalJsonValue<bool?> propFailureStore = default;
 		LocalJsonValue<bool?> propHidden = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propFailureStore.TryReadProperty(ref reader, options, PropFailureStore, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -58,6 +65,7 @@ public sealed partial class DataStreamVisibilityConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AllowCustomRouting = propAllowCustomRouting.Value,
+			FailureStore = propFailureStore.Value,
 			Hidden = propHidden.Value
 		};
 	}
@@ -66,6 +74,7 @@ public sealed partial class DataStreamVisibilityConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFailureStore, value.FailureStore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropHidden, value.Hidden, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}

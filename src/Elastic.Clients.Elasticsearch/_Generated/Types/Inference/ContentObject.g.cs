@@ -32,8 +32,10 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class ContentObject
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ContentObject(string text, string type)
+	public ContentObject(Elastic.Clients.Elasticsearch.Inference.FileContent file, Elastic.Clients.Elasticsearch.Inference.ImageUrl imageUrl, string text, Elastic.Clients.Elasticsearch.Inference.ContentType type)
 	{
+		File = file;
+		ImageUrl = imageUrl;
 		Text = text;
 		Type = type;
 	}
@@ -50,15 +52,30 @@ public sealed partial class ContentObject
 
 	/// <summary>
 	/// <para>
-	/// The text content.
+	/// The file content. Only applicable for the <c>file</c> type
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.Inference.FileContent File { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The image content. Only applicable for the <c>image_url</c> type
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.Inference.ImageUrl ImageUrl { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The text content. Only applicable for the <c>text</c> type
 	/// </para>
 	/// </summary>
 	public required string Text { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The type of content.
+	/// The type of content. Must be one of <c>text</c>, <c>image_url</c> or <c>file</c>. Not all services/models support content
+	/// types other than "text"
 	/// </para>
 	/// </summary>
-	public required string Type { get; set; }
+	public required Elastic.Clients.Elasticsearch.Inference.ContentType Type { get; set; }
 }

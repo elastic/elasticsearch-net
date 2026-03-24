@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class ComponentTemplate
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode componentTemplateNode, string name)
+	public ComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeWithRollover componentTemplateNode, string name)
 	{
 		ComponentTemplateNode = componentTemplateNode;
 		Name = name;
@@ -43,6 +43,6 @@ public sealed partial class ComponentTemplate
 		_ = sentinel;
 	}
 
-	public required Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode ComponentTemplateNode { get; set; }
+	public required Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeWithRollover ComponentTemplateNode { get; set; }
 	public required string Name { get; set; }
 }

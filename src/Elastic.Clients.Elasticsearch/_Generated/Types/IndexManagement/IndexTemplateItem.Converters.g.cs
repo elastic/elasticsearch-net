@@ -31,7 +31,7 @@ public sealed partial class IndexTemplateItemConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate> propIndexTemplate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateWithRollover> propIndexTemplate = default;
 		LocalJsonValue<string> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

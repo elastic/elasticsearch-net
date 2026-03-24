@@ -38,10 +38,12 @@ public readonly partial struct IndexPrivilege : Elastic.Clients.Elasticsearch.Se
 	public static IndexPrivilege Create { get; } = new IndexPrivilege("create");
 	public static IndexPrivilege CreateDoc { get; } = new IndexPrivilege("create_doc");
 	public static IndexPrivilege CreateIndex { get; } = new IndexPrivilege("create_index");
+	public static IndexPrivilege CreateView { get; } = new IndexPrivilege("create_view");
 	public static IndexPrivilege CrossClusterReplication { get; } = new IndexPrivilege("cross_cluster_replication");
 	public static IndexPrivilege CrossClusterReplicationInternal { get; } = new IndexPrivilege("cross_cluster_replication_internal");
 	public static IndexPrivilege Delete { get; } = new IndexPrivilege("delete");
 	public static IndexPrivilege DeleteIndex { get; } = new IndexPrivilege("delete_index");
+	public static IndexPrivilege DeleteView { get; } = new IndexPrivilege("delete_view");
 	public static IndexPrivilege Index { get; } = new IndexPrivilege("index");
 	public static IndexPrivilege Maintenance { get; } = new IndexPrivilege("maintenance");
 	public static IndexPrivilege Manage { get; } = new IndexPrivilege("manage");
@@ -49,10 +51,12 @@ public readonly partial struct IndexPrivilege : Elastic.Clients.Elasticsearch.Se
 	public static IndexPrivilege ManageFollowIndex { get; } = new IndexPrivilege("manage_follow_index");
 	public static IndexPrivilege ManageIlm { get; } = new IndexPrivilege("manage_ilm");
 	public static IndexPrivilege ManageLeaderIndex { get; } = new IndexPrivilege("manage_leader_index");
+	public static IndexPrivilege ManageView { get; } = new IndexPrivilege("manage_view");
 	public static IndexPrivilege Monitor { get; } = new IndexPrivilege("monitor");
 	public static IndexPrivilege None { get; } = new IndexPrivilege("none");
 	public static IndexPrivilege Read { get; } = new IndexPrivilege("read");
 	public static IndexPrivilege ReadCrossCluster { get; } = new IndexPrivilege("read_cross_cluster");
+	public static IndexPrivilege ReadViewMetadata { get; } = new IndexPrivilege("read_view_metadata");
 	public static IndexPrivilege ViewIndexMetadata { get; } = new IndexPrivilege("view_index_metadata");
 	public static IndexPrivilege Write { get; } = new IndexPrivilege("write");
 

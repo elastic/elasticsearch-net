@@ -38,12 +38,12 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int?> propBatchSize = default;
-		LocalJsonValue<object?> propHeaders = default;
-		LocalJsonValue<object?> propInputType = default;
-		LocalJsonValue<object?> propQueryParameters = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propHeaders = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>?> propInputType = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>?> propQueryParameters = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CustomRequestParams> propRequest = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CustomResponseParams> propResponse = default;
-		LocalJsonValue<object> propSecretParameters = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>> propSecretParameters = default;
 		LocalJsonValue<string?> propUrl = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -52,17 +52,17 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
+			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propInputType.TryReadProperty(ref reader, options, PropInputType, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
+			if (propInputType.TryReadProperty(ref reader, options, PropInputType, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>(o, null, null)))
 			{
 				continue;
 			}
 
-			if (propQueryParameters.TryReadProperty(ref reader, options, PropQueryParameters, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
+			if (propQueryParameters.TryReadProperty(ref reader, options, PropQueryParameters, static System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.ICollection<string>>(o, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
 			{
 				continue;
 			}
@@ -77,7 +77,7 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propSecretParameters.TryReadProperty(ref reader, options, PropSecretParameters, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
+			if (propSecretParameters.TryReadProperty(ref reader, options, PropSecretParameters, static System.Collections.Generic.IDictionary<string, string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)!))
 			{
 				continue;
 			}
@@ -114,12 +114,12 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBatchSize, value.BatchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
-		writer.WriteProperty(options, PropInputType, value.InputType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
-		writer.WriteProperty(options, PropQueryParameters, value.QueryParameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
+		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropInputType, value.InputType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>(o, v, null, null));
+		writer.WriteProperty(options, PropQueryParameters, value.QueryParameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? v) => w.WriteCollectionValue<System.Collections.Generic.ICollection<string>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropRequest, value.Request, null, null);
 		writer.WriteProperty(options, PropResponse, value.Response, null, null);
-		writer.WriteProperty(options, PropSecretParameters, value.SecretParameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
+		writer.WriteProperty(options, PropSecretParameters, value.SecretParameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropUrl, value.Url, null, null);
 		writer.WriteEndObject();
 	}

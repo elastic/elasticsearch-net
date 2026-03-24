@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class CustomServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CustomServiceSettings(Elastic.Clients.Elasticsearch.Inference.CustomRequestParams request, Elastic.Clients.Elasticsearch.Inference.CustomResponseParams response, object secretParameters)
+	public CustomServiceSettings(Elastic.Clients.Elasticsearch.Inference.CustomRequestParams request, Elastic.Clients.Elasticsearch.Inference.CustomResponseParams response, System.Collections.Generic.IDictionary<string, string> secretParameters)
 	{
 		Request = request;
 		Response = response;
@@ -59,13 +59,13 @@ public sealed partial class CustomServiceSettings
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Authorization": "Bearer ${api_key}",
 	///   "Content-Type": "application/json;charset=utf-8"
 	/// }
 	/// </code>
 	/// </summary>
-	public object? Headers { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -109,7 +109,7 @@ public sealed partial class CustomServiceSettings
 	/// </item>
 	/// </list>
 	/// </summary>
-	public object? InputType { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? InputType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -127,7 +127,7 @@ public sealed partial class CustomServiceSettings
 	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
 	/// </para>
 	/// </summary>
-	public object? QueryParameters { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? QueryParameters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -154,7 +154,7 @@ public sealed partial class CustomServiceSettings
 	/// }
 	/// </code>
 	/// </summary>
-	public required object SecretParameters { get; set; }
+	public required System.Collections.Generic.IDictionary<string, string> SecretParameters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -202,15 +202,58 @@ public readonly partial struct CustomServiceSettingsDescriptor
 	/// For example:
 	/// </para>
 	/// <code>
-	/// "headers":{
+	/// "headers": {
 	///   "Authorization": "Bearer ${api_key}",
 	///   "Content-Type": "application/json;charset=utf-8"
 	/// }
 	/// </code>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Authorization": "Bearer ${api_key}",
+	///   "Content-Type": "application/json;charset=utf-8"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers()
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers": {
+	///   "Authorization": "Bearer ${api_key}",
+	///   "Content-Type": "application/json;charset=utf-8"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor AddHeader(string key, string value)
+	{
+		Instance.Headers ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Headers.Add(key, value);
 		return this;
 	}
 
@@ -256,9 +299,112 @@ public readonly partial struct CustomServiceSettingsDescriptor
 	/// </item>
 	/// </list>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>? value)
 	{
 		Instance.InputType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "input_type": {
+	///   "translation": {
+	///     "ingest": "do_ingest",
+	///     "search": "do_search"
+	///   },
+	///   "default": "a_default"
+	/// },
+	/// </code>
+	/// <para>
+	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
+	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
+	/// <c>translation</c> can be:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>classification</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>clustering</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ingest</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>search</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType()
+	{
+		Instance.InputType = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the input type translation values that are used to replace the <c>${input_type}</c> template in the request body.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "input_type": {
+	///   "translation": {
+	///     "ingest": "do_ingest",
+	///     "search": "do_search"
+	///   },
+	///   "default": "a_default"
+	/// },
+	/// </code>
+	/// <para>
+	/// If the subsequent inference requests come from a search context, the <c>search</c> key will be used and the template will be replaced with <c>do_search</c>.
+	/// If it comes from the ingest context <c>do_ingest</c> is used. If it's a different context that is not specified, the default value will be used. If no default is specified an empty string is used.
+	/// <c>translation</c> can be:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>classification</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>clustering</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>ingest</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>search</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor InputType(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString>? action)
+	{
+		Instance.InputType = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfCustomServiceInputTypeString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor AddInputType(Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType key, string value)
+	{
+		Instance.InputType ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Inference.CustomServiceInputType, string>();
+		Instance.InputType.Add(key, value);
 		return this;
 	}
 
@@ -278,9 +424,31 @@ public readonly partial struct CustomServiceSettingsDescriptor
 	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor QueryParameters(object? value)
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor QueryParameters(System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.QueryParameters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the query parameters as a list of tuples. The arrays inside the <c>query_parameters</c> must have two items, a key and a value.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "query_parameters":[
+	///   ["param_key", "some_value"],
+	///   ["param_key", "another_value"],
+	///   ["other_key", "other_value"]
+	/// ]
+	/// </code>
+	/// <para>
+	/// If the base url is <c>https://www.elastic.co</c> it results in: <c>https://www.elastic.co?param_key=some_value&amp;param_key=another_value&amp;other_key=other_value</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor QueryParameters(params System.Collections.Generic.ICollection<string>[] values)
+	{
+		Instance.QueryParameters = [.. values];
 		return this;
 	}
 
@@ -339,9 +507,50 @@ public readonly partial struct CustomServiceSettingsDescriptor
 	/// }
 	/// </code>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters(object value)
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters(System.Collections.Generic.IDictionary<string, string> value)
 	{
 		Instance.SecretParameters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "secret_parameters":{
+	///   "api_key":"&lt;api_key>"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters()
+	{
+		Instance.SecretParameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies secret parameters, like <c>api_key</c> or <c>api_token</c>, that are required to access the custom service.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "secret_parameters":{
+	///   "api_key":"&lt;api_key>"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor SecretParameters(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.SecretParameters = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor AddSecretParameter(string key, string value)
+	{
+		Instance.SecretParameters ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.SecretParameters.Add(key, value);
 		return this;
 	}
 
