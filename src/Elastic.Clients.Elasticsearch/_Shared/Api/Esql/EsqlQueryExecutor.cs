@@ -161,11 +161,9 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 			return;
 
 		request.Locale = options.Locale;
-		request.TimeZone = options.TimeZone;
 		request.Filter = options.Filter;
 		request.AllowPartialResults = options.AllowPartialResults;
 		request.DropNullColumns = options.DropNullColumns;
-		request.ProjectRouting = options.ProjectRouting;
 
 		if (options.RequestConfiguration is not null)
 			request.RequestConfiguration = options.RequestConfiguration;
@@ -177,11 +175,9 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 			return;
 
 		request.Locale = options.Locale;
-		request.TimeZone = options.TimeZone;
 		request.Filter = options.Filter;
 		request.AllowPartialResults = options.AllowPartialResults;
 		request.DropNullColumns = options.DropNullColumns;
-		request.ProjectRouting = options.ProjectRouting;
 
 		if (options.RequestConfiguration is not null)
 			request.RequestConfiguration = options.RequestConfiguration;
