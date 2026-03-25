@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.QueryDsl | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.QueryDsl | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl">
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl" data-uid="Elastic.Clients.Elasticsearch.QueryDsl" class="text-break">Namespace Elastic.Clients.Elasticsearch.QueryDsl</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery.html">BoostingQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery.html">CombinedFieldsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery.html">CommonTermsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQuery.html">ConstantScoreQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction.html">DateDecayFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQuery.html">DateDistanceFeatureQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement-2.html">DecayPlacement&lt;TOrigin, TScale&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery.html">DisMaxQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a></dt>
+      <dd><p>
+A reference to a field with formatting instructions on how to return the value
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup.html">FieldLookup</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction.html">FieldValueFactorScoreFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.html">FunctionScore</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQuery.html">FunctionScoreQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery.html">FuzzyQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery.html">GeoBoundingBoxQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction.html">GeoDecayFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery.html">GeoDistanceFeatureQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQuery.html">GeoDistanceQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQuery.html">GeoGridQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints.html">GeoPolygonPoints</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery.html">GeoPolygonQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery.html">GeoShapeFieldQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQuery.html">GeoShapeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery.html">HasChildQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQuery.html">HasParentQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Intervals.html">Intervals</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf.html">IntervalsAllOf</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf.html">IntervalsAnyOf</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter.html">IntervalsFilter</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy.html">IntervalsFuzzy</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch.html">IntervalsMatch</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix.html">IntervalsPrefix</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery.html">IntervalsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange.html">IntervalsRange</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp.html">IntervalsRegexp</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard.html">IntervalsWildcard</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Like.html">Like</a></dt>
+      <dd><p>
+Text that we want similar documents for or a lookup to a document's field for the text.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</a></p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument.html">LikeDocument</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.html">MatchBoolPrefixQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQuery.html">MatchNoneQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQuery.html">MatchPhrasePrefixQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQuery.html">MatchPhraseQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery.html">MoreLikeThisQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery.html">NestedQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction.html">NumericDecayFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery.html">ParentIdQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQuery.html">PercolateQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedDoc.html">PinnedDoc</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQuery.html">PinnedQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery.html">QueryStringQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction.html">RandomScoreFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear.html">RankFeatureFunctionLinear</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm.html">RankFeatureFunctionLogarithm</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation.html">RankFeatureFunctionSaturation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid.html">RankFeatureFunctionSigmoid</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery.html">RankFeatureQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery.html">RegexpQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery.html">RuleQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQuery.html">ScriptQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction.html">ScriptScoreFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery.html">ScriptScoreQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQuery.html">SemanticQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQuery.html">ShapeFieldQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQuery.html">ShapeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery.html">SpanContainingQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery.html">SpanFieldMaskingQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQuery.html">SpanFirstQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQuery.html">SpanMultiTermQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery.html">SpanNearQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery.html">SpanNotQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQuery.html">SpanOrQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery.html">SpanQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery.html">SpanTermQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery.html">SpanWithinQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQuery.html">SparseVectorQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsLookup.html">TermsLookup</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField.html">TermsQueryField</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery.html">TermsSetQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQuery.html">TextExpansionQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TypeQuery.html">TypeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction.html">UntypedDecayFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQuery.html">UntypedDistanceFeatureQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery.html">UntypedRangeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQuery.html">WeightedTokensQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery.html">WrapperQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.html">BoolQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor-1.html">BoolQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor.html">BoostingQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor-1.html">BoostingQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor.html">CombinedFieldsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQueryDescriptor-1.html">CombinedFieldsQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor.html">CommonTermsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQueryDescriptor-1.html">CommonTermsQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor.html">ConstantScoreQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ConstantScoreQueryDescriptor-1.html">ConstantScoreQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunctionDescriptor.html">DateDecayFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunctionDescriptor-1.html">DateDecayFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQueryDescriptor.html">DateDistanceFeatureQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateDistanceFeatureQueryDescriptor-1.html">DateDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor.html">DateRangeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor-1.html">DateRangeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDateMathDurationDescriptor.html">DecayPlacementOfDateMathDurationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfDoubleDoubleDescriptor.html">DecayPlacementOfDoubleDoubleDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfGeoLocationStringDescriptor.html">DecayPlacementOfGeoLocationStringDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacementOfObjectObjectDescriptor.html">DecayPlacementOfObjectObjectDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor.html">DisMaxQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor-1.html">DisMaxQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.html">ExistsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor-1.html">ExistsQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a></dt>
+      <dd><p>
+A reference to a field with formatting instructions on how to return the value
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor-1.html">FieldAndFormatDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+A reference to a field with formatting instructions on how to return the value
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor.html">FieldLookupDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldLookupDescriptor-1.html">FieldLookupDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor.html">FieldValueFactorScoreFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor-1.html">FieldValueFactorScoreFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor-1.html">FunctionScoreDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor.html">FunctionScoreQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreQueryDescriptor-1.html">FunctionScoreQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor.html">FuzzyQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor-1.html">FuzzyQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor.html">GeoBoundingBoxQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQueryDescriptor-1.html">GeoBoundingBoxQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor.html">GeoDecayFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunctionDescriptor-1.html">GeoDecayFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor.html">GeoDistanceFeatureQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQueryDescriptor-1.html">GeoDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor.html">GeoDistanceQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceQueryDescriptor-1.html">GeoDistanceQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor.html">GeoGridQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor-1.html">GeoGridQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPointsDescriptor.html">GeoPolygonPointsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor.html">GeoPolygonQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor-1.html">GeoPolygonQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor.html">GeoShapeFieldQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryDescriptor-1.html">GeoShapeFieldQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor.html">GeoShapeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeQueryDescriptor-1.html">GeoShapeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor.html">HasChildQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasChildQueryDescriptor-1.html">HasChildQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor.html">HasParentQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.HasParentQueryDescriptor-1.html">HasParentQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.html">IDecayFunctionFactory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory-1.html">IDecayFunctionFactory&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory.html">IDistanceFeatureQueryFactory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQueryFactory-1.html">IDistanceFeatureQueryFactory&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.html">IRangeQueryFactory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory-1.html">IRangeQueryFactory&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.html">IdsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor.html">IntervalsAllOfDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfDescriptor-1.html">IntervalsAllOfDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor.html">IntervalsAnyOfDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOfDescriptor-1.html">IntervalsAnyOfDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor.html">IntervalsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor-1.html">IntervalsDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.html">IntervalsFilterDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor-1.html">IntervalsFilterDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor.html">IntervalsFuzzyDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzyDescriptor-1.html">IntervalsFuzzyDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor.html">IntervalsMatchDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor-1.html">IntervalsMatchDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor.html">IntervalsPrefixDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor-1.html">IntervalsPrefixDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor.html">IntervalsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor-1.html">IntervalsQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor.html">IntervalsRangeDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor-1.html">IntervalsRangeDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor.html">IntervalsRegexpDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor-1.html">IntervalsRegexpDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor.html">IntervalsWildcardDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcardDescriptor-1.html">IntervalsWildcardDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor.html">LikeDocumentDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor-1.html">LikeDocumentDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory.html">LikeFactory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory-1.html">LikeFactory&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.html">MatchAllQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor.html">MatchBoolPrefixQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQueryDescriptor-1.html">MatchBoolPrefixQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchNoneQueryDescriptor.html">MatchNoneQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor.html">MatchPhrasePrefixQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhrasePrefixQueryDescriptor-1.html">MatchPhrasePrefixQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor.html">MatchPhraseQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchPhraseQueryDescriptor-1.html">MatchPhraseQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.html">MatchQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor-1.html">MatchQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor.html">MoreLikeThisQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor-1.html">MoreLikeThisQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor-1.html">MultiMatchQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor.html">NestedQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor-1.html">NestedQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor.html">NumberRangeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor-1.html">NumberRangeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor.html">NumericDecayFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor-1.html">NumericDecayFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor.html">ParentIdQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor.html">PercolateQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PercolateQueryDescriptor-1.html">PercolateQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor.html">PinnedDocDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor.html">PinnedQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PinnedQueryDescriptor-1.html">PinnedQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.html">PrefixQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor-1.html">PrefixQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor.html">QueryStringQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQueryDescriptor-1.html">QueryStringQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.html">RandomScoreFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor-1.html">RandomScoreFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.html">RankFeatureFunctionLinearDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor.html">RankFeatureFunctionLogarithmDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.html">RankFeatureFunctionSaturationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor.html">RankFeatureFunctionSigmoidDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor.html">RankFeatureQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor-1.html">RankFeatureQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor.html">RegexpQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor-1.html">RegexpQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor.html">RuleQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor-1.html">RuleQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptQueryDescriptor.html">ScriptQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.html">ScriptScoreFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor.html">ScriptScoreQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor-1.html">ScriptScoreQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SemanticQueryDescriptor.html">SemanticQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor.html">ShapeFieldQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeFieldQueryDescriptor-1.html">ShapeFieldQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor.html">ShapeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ShapeQueryDescriptor-1.html">ShapeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor-1.html">SimpleQueryStringQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor.html">SpanContainingQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor-1.html">SpanContainingQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor.html">SpanFieldMaskingQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor-1.html">SpanFieldMaskingQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor.html">SpanFirstQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanFirstQueryDescriptor-1.html">SpanFirstQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor.html">SpanMultiTermQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanMultiTermQueryDescriptor-1.html">SpanMultiTermQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor.html">SpanNearQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor-1.html">SpanNearQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor.html">SpanNotQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQueryDescriptor-1.html">SpanNotQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor.html">SpanOrQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanOrQueryDescriptor-1.html">SpanOrQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.html">SpanQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor-1.html">SpanQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor.html">SpanTermQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor-1.html">SpanTermQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor.html">SpanWithinQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor-1.html">SpanWithinQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor.html">SparseVectorQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SparseVectorQueryDescriptor-1.html">SparseVectorQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.html">TermQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor-1.html">TermQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor.html">TermRangeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor-1.html">TermRangeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor.html">TermsLookupDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsLookupDescriptor-1.html">TermsLookupDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.html">TermsQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor-1.html">TermsQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory.html">TermsQueryFieldFactory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryFieldFactory-1.html">TermsQueryFieldFactory&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor.html">TermsSetQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor-1.html">TermsSetQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor.html">TextExpansionQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor-1.html">TextExpansionQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TypeQueryDescriptor.html">TypeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunctionDescriptor.html">UntypedDecayFunctionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunctionDescriptor-1.html">UntypedDecayFunctionDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor.html">UntypedDistanceFeatureQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedDistanceFeatureQueryDescriptor-1.html">UntypedDistanceFeatureQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor.html">UntypedRangeQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor-1.html">UntypedRangeQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor.html">WeightedTokensQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor-1.html">WeightedTokensQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.html">WildcardQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor-1.html">WildcardQueryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor.html">WrapperQueryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDistanceFeatureQuery.html">IDistanceFeatureQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode.html">ChildScoreMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator.html">CombinedFieldsOperator</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms.html">CombinedFieldsZeroTerms</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier.html">FieldValueFactorModifier</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionBoostMode.html">FunctionBoostMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreMode.html">FunctionScoreMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution.html">GeoExecution</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod.html">GeoValidationMethod</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode.html">MultiValueMode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation.html">RangeRelation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.html">SimpleQueryStringFlags</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.html">TextQueryType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.html">ZeroTermsQuery</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
