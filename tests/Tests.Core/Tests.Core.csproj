@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Elastic.Elasticsearch.Xunit" Version="0.4.3" />
-    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="JunitXml.TestLogger" Version="3.0.110" />
     <PackageReference Include="Nullean.VsTest.Pretty.TestLogger" Version="0.3.0" />
