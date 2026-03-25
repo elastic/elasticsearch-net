@@ -20,6 +20,31 @@ To check for security updates, go to [Security announcements for the Elastic sta
 % ### Fixes [elasticsearch-net-client-next-fixes]
 % *
 
+## 9.3.4 [elasticsearch-net-client-934-release-notes]
+
+### Overview
+
+- [1. LINQ to ES|QL](#1-linq-to-esql)
+
+### Features and enhancements
+
+#### 1. LINQ to ES|QL [1-linq-to-esql]
+
+The 9.3.4 client introduces a LINQ provider that translates standard C# LINQ expressions into ES|QL queries at runtime. Instead of writing ES|QL strings by hand, you compose queries using familiar LINQ operators like `Where`, `Select`, `OrderBy`, `GroupBy`, and `Take`. The provider handles translation, parameterization, and result deserialization automatically.
+
+```csharp
+var products = client.Esql.Query<Product>(q => q
+    .From("products")
+    .Where(p => p.InStock)
+    .OrderByDescending(p => p.Price)
+    .Take(10));
+
+foreach (var product in products)
+    Console.WriteLine($"{product.Name}: {product.Price}");
+```
+
+For the full list of supported operators, ES|QL-specific extensions, and the built-in function library, refer to the [LINQ to ES|QL](../reference/linq-to-esql.md) documentation.
+
 ## 9.0.0 [elasticsearch-net-client-900-release-notes]
 
 ### Overview

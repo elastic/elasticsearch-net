@@ -16,6 +16,8 @@ toc:
     children:
       - file: aggregations.md
       - file: esql.md
+        children:
+          - file: linq-to-esql.md
       - file: examples.md
       - file: mappings.md
       - file: query.md

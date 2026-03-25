@@ -16,6 +16,22 @@ Review the deprecated functionality for Elasticsearch .NET Client. While depreca
 % **Action**<br> Steps for mitigating deprecation impact.
 % ::::
 
+## 9.3.4 [elasticsearch-net-client-934-deprecations]
+
+### Overview
+
+- [1. ES|QL `QueryAsObjectsAsync`](#1-esql-query-as-objects)
+
+### Deprecations
+
+#### 1. ES|QL `QueryAsObjectsAsync` [#1-esql-query-as-objects]
+
+**Impact**: Medium.
+
+The ESQL `QueryAsObjectsAsync` method should no longer be used.
+
+The new recommended approach is [LINQ to ES|QL](../reference/linq-to-esql.md), which provides type-safe queries with automatic result mapping. Refer to the [LINQ to ES|QL](../reference/linq-to-esql.md) documentation for details.
+
 ## 9.0.0 [elasticsearch-net-client-900-deprecations]
 
 _No deprecations_
