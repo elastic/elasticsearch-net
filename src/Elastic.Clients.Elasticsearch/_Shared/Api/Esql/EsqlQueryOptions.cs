@@ -29,9 +29,6 @@ public sealed record EsqlQueryOptions
 	/// <summary>Project routing for serverless cross-project queries.</summary>
 	public string? ProjectRouting { get; init; }
 
-	/// <summary>Default timezone for date operations (e.g., "UTC").</summary>
-	public string? TimeZone { get; init; }
-
 	/// <summary>
 	/// User-supplied named parameters. Merged with parameters from the translated query.
 	/// If a key exists in both, NamedParameters takes precedence.
