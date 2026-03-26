@@ -31,7 +31,6 @@ public class SearchMvtApiTests : ClusterTestClassBase<ReadOnlyCluster>
 		AssertResponse(response);
 	}
 
- 
 	[I]
 	public async Task SearchMvtAsync_ReturnsBinaryTileResponse()
 	{
