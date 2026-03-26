@@ -38,6 +38,8 @@
     <!-- TODO ADD THESE BACK -->
     <Compile Remove="**" />
     <Compile Include="ClientConcepts\OpenTelemetry\OpenTelemetryTests.cs" />
+    <Compile Include="Search\SearchMvt\SearchMvtApiTests.cs" />
+    <Compile Include="Search\SearchMvt\SearchMvtResponseBuilderTests.cs" />
     <Compile Include="XunitBootstrap.cs" />
   </ItemGroup>
 </Project>

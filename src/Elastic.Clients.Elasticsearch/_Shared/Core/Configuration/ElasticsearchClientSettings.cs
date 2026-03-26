@@ -424,6 +424,7 @@ public abstract class ConnectionConfigurationBase<TConnectionConfiguration> :
 	{
 		UserAgent(ConnectionConfiguration.DefaultUserAgent);
 		ResponseBuilder(new EsqlResponseBuilder());
+		ResponseBuilder(new SearchMvtResponseBuilder());
 	}
 
 	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
