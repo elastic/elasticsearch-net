@@ -23,7 +23,6 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingsTimeSeriesConverter))]
 public sealed partial class IndexSettingsTimeSeries
 {
 	public IndexSettingsTimeSeries()
