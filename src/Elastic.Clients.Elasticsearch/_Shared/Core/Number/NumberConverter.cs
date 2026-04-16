@@ -17,14 +17,14 @@ public sealed class NumberConverter :
 	{
 		reader.ValidateToken(JsonTokenType.Number);
 
-		if (reader.TryGetDouble(out var d))
-		{
-			return new(d);
-		}
-
 		if (reader.TryGetInt64(out var l))
 		{
 			return new(l);
+		}
+
+		if (reader.TryGetDouble(out var d))
+		{
+			return new(d);
 		}
 
 		throw new JsonException("Could not read JSON value as number.");
