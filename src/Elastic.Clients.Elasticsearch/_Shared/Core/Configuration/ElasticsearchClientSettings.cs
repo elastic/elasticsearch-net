@@ -321,6 +321,11 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 		if (!string.IsNullOrWhiteSpace(inferMapping._idProperty))
 			_idProperties[inferMapping._clrType] = inferMapping._idProperty;
 
+		if (inferMapping._disableIdInference)
+			_disableIdInference.Add(inferMapping._clrType);
+		else
+			_disableIdInference.Remove(inferMapping._clrType);
+
 		return (TConnectionSettings)this;
 	}
 
@@ -340,6 +345,14 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 			if (!inferMapping.RelationName.IsNullOrEmpty())
 				_defaultRelationNames[inferMapping.ClrType] = inferMapping.RelationName;
+
+			if (!string.IsNullOrWhiteSpace(inferMapping.IdPropertyName))
+				_idProperties[inferMapping.ClrType] = inferMapping.IdPropertyName;
+
+			if (inferMapping.DisableIdInference)
+				_disableIdInference.Add(inferMapping.ClrType);
+			else
+				_disableIdInference.Remove(inferMapping.ClrType);
 		}
 
 		return (TConnectionSettings)this;
