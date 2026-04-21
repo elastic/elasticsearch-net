@@ -47,12 +47,10 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// <summary>
 	/// <para>
 	/// A valid API key for your Azure OpenAI account.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
 	/// </para>
 	/// </summary>
 	public string? ApiKey { get; set; }
@@ -67,6 +65,34 @@ public sealed partial class AzureOpenAIServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The application ID that's assigned to your app.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public string? ClientId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The application secret that you created in the Microsoft app registration portal for your app.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public string? ClientSecret { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The deployment name of your deployed models.
 	/// Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
 	/// </para>
@@ -76,8 +102,10 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// <summary>
 	/// <para>
 	/// A valid Microsoft Entra token.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
 	/// </para>
 	/// </summary>
 	public string? EntraId { get; set; }
@@ -99,6 +127,36 @@ public sealed partial class AzureOpenAIServiceSettings
 	/// </para>
 	/// </summary>
 	public required string ResourceName { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The resource identifier (application ID URI) of the resource you want, suffixed with .default
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "scopes": [
+	///   "https://cognitiveservices.azure.com/.default"
+	/// ]
+	/// </code>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Scopes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The directory tenant the application plans to operate against.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public string? TenantId { get; set; }
 }
 
 public readonly partial struct AzureOpenAiServiceSettingsDescriptor
@@ -123,12 +181,10 @@ public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// A valid API key for your Azure OpenAI account.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ApiKey(string? value)
@@ -151,6 +207,42 @@ public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The application ID that's assigned to your app.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ClientId(string? value)
+	{
+		Instance.ClientId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The application secret that you created in the Microsoft app registration portal for your app.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ClientSecret(string? value)
+	{
+		Instance.ClientSecret = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The deployment name of your deployed models.
 	/// Your Azure OpenAI deployments can be found though the Azure OpenAI Studio portal that is linked to your subscription.
 	/// </para>
@@ -164,8 +256,10 @@ public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// A valid Microsoft Entra token.
-	/// You must specify either <c>api_key</c> or <c>entra_id</c>.
-	/// If you do not provide either or you provide both, you will receive an error when you try to create your model.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: You must specify either <c>api_key</c>, <c>entra_id</c>, or <c>client_secret</c>.
+	/// If you do not provide one or you provide more than one of them, you will receive an error when you try to create your endpoint.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor EntraId(string? value)
@@ -225,6 +319,66 @@ public readonly partial struct AzureOpenAiServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor ResourceName(string value)
 	{
 		Instance.ResourceName = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The resource identifier (application ID URI) of the resource you want, suffixed with .default
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "scopes": [
+	///   "https://cognitiveservices.azure.com/.default"
+	/// ]
+	/// </code>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor Scopes(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Scopes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The resource identifier (application ID URI) of the resource you want, suffixed with .default
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "scopes": [
+	///   "https://cognitiveservices.azure.com/.default"
+	/// ]
+	/// </code>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor Scopes(params string[] values)
+	{
+		Instance.Scopes = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For OAuth 2.0 authentication using the client credentials grant flow.
+	/// The directory tenant the application plans to operate against.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To configure OAuth 2.0, you must specify client_id, scopes, tenant_id, and client_secret together.
+	/// If one of the fields is missing, you will receive an error when you try to create your endpoint.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor TenantId(string? value)
+	{
+		Instance.TenantId = value;
 		return this;
 	}
 

@@ -23,58 +23,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security.Json;
 
-public sealed partial class ApiKeyManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy>
+public sealed partial class CredentialManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.CredentialManagedBy>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberCloud = System.Text.Json.JsonEncodedText.Encode("cloud"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberElasticsearch = System.Text.Json.JsonEncodedText.Encode("elasticsearch"u8);
 
-	public override Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Security.CredentialManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		if (reader.ValueTextEquals(MemberCloud))
 		{
-			return Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Cloud;
+			return Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Cloud;
 		}
 
 		if (reader.ValueTextEquals(MemberElasticsearch))
 		{
-			return Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Elasticsearch;
+			return Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Elasticsearch;
 		}
 
 		var value = reader.GetString()!;
 		if (string.Equals(value, MemberCloud.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Cloud;
+			return Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Cloud;
 		}
 
 		if (string.Equals(value, MemberElasticsearch.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Elasticsearch;
+			return Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Elasticsearch;
 		}
 
-		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy)}'.");
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.CredentialManagedBy)}'.");
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.CredentialManagedBy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Cloud:
+			case Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Cloud:
 				writer.WriteStringValue(MemberCloud);
 				break;
-			case Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy.Elasticsearch:
+			case Elastic.Clients.Elasticsearch.Security.CredentialManagedBy.Elasticsearch:
 				writer.WriteStringValue(MemberElasticsearch);
 				break;
 			default:
-				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy)}'.");
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Security.CredentialManagedBy)}'.");
 		}
 	}
 
-	public override Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Security.CredentialManagedBy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		return Read(ref reader, typeToConvert, options);
 	}
 
-	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy value, System.Text.Json.JsonSerializerOptions options)
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.CredentialManagedBy value, System.Text.Json.JsonSerializerOptions options)
 	{
 		Write(writer, value, options);
 	}

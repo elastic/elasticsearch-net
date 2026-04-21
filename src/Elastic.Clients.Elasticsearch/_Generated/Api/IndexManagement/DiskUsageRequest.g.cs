@@ -27,9 +27,12 @@ public sealed partial class DiskUsageRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -53,7 +56,9 @@ public sealed partial class DiskUsageRequestParameters : Elastic.Transport.Reque
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -121,9 +126,12 @@ public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -147,7 +155,9 @@ public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -217,9 +227,12 @@ public readonly partial struct DiskUsageRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor AllowNoIndices(bool? value = true)
@@ -268,7 +281,9 @@ public readonly partial struct DiskUsageRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor IgnoreUnavailable(bool? value = true)
@@ -400,9 +415,12 @@ public readonly partial struct DiskUsageRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -451,7 +469,9 @@ public readonly partial struct DiskUsageRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)

@@ -124,6 +124,13 @@ public sealed partial class GrokProcessor
 	/// </para>
 	/// </summary>
 	public bool? TraceMatch { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When <c>true</c>, the processor does matching but does not extract structured fields
+	/// </para>
+	/// </summary>
+	public bool? ValidateOnly { get; set; }
 }
 
 public readonly partial struct GrokProcessorDescriptor<TDocument>
@@ -372,6 +379,17 @@ public readonly partial struct GrokProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> TraceMatch(bool? value = true)
 	{
 		Instance.TraceMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When <c>true</c>, the processor does matching but does not extract structured fields
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor<TDocument> ValidateOnly(bool? value = true)
+	{
+		Instance.ValidateOnly = value;
 		return this;
 	}
 
@@ -647,6 +665,17 @@ public readonly partial struct GrokProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor TraceMatch(bool? value = true)
 	{
 		Instance.TraceMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When <c>true</c>, the processor does matching but does not extract structured fields
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor ValidateOnly(bool? value = true)
+	{
+		Instance.ValidateOnly = value;
 		return this;
 	}
 

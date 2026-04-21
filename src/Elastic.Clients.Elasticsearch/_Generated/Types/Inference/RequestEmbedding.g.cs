@@ -67,7 +67,7 @@ public sealed partial class RequestEmbedding
 	///     "content": {
 	///       "type": "image",
 	///       "format": "base64",
-	///       "value": "data:image/jpg;base64,..."
+	///       "value": "data:image/jpeg;base64,..."
 	///     }
 	///   }
 	/// </code>
@@ -87,7 +87,7 @@ public sealed partial class RequestEmbedding
 	///     "content": {
 	///       "type": "image",
 	///       "format": "base64",
-	///       "value": "data:image/jpg;base64,..."
+	///       "value": "data:image/jpeg;base64,..."
 	///     }
 	///   }
 	/// ]
@@ -184,7 +184,7 @@ public readonly partial struct RequestEmbeddingDescriptor
 	///     "content": {
 	///       "type": "image",
 	///       "format": "base64",
-	///       "value": "data:image/jpg;base64,..."
+	///       "value": "data:image/jpeg;base64,..."
 	///     }
 	///   }
 	/// </code>
@@ -204,7 +204,7 @@ public readonly partial struct RequestEmbeddingDescriptor
 	///     "content": {
 	///       "type": "image",
 	///       "format": "base64",
-	///       "value": "data:image/jpg;base64,..."
+	///       "value": "data:image/jpeg;base64,..."
 	///     }
 	///   }
 	/// ]

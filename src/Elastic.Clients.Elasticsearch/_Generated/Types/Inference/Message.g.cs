@@ -80,7 +80,7 @@ public sealed partial class Message
 	///   "content": [
 	///       {
 	///        "image_url": {
-	///          "url": "data:image/jpg;base64,..."
+	///          "url": "data:image/jpeg;base64,..."
 	///        },
 	///        "type": "image_url"
 	///       }
@@ -216,7 +216,7 @@ public readonly partial struct MessageDescriptor
 	///   "content": [
 	///       {
 	///        "image_url": {
-	///          "url": "data:image/jpg;base64,..."
+	///          "url": "data:image/jpeg;base64,..."
 	///        },
 	///        "type": "image_url"
 	///       }

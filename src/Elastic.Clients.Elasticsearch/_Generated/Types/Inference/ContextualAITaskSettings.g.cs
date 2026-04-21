@@ -46,14 +46,6 @@ public sealed partial class ContextualAITaskSettings
 
 	/// <summary>
 	/// <para>
-	/// Whether to return the source documents in the response.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
-	public bool? ReturnDocuments { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// The number of most relevant documents to return.
 	/// If not specified, the reranking results of all documents will be returned.
 	/// Only for the <c>rerank</c> task type.
@@ -90,18 +82,6 @@ public readonly partial struct ContextualAiTaskSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor Instruction(string? value)
 	{
 		Instance.Instruction = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Whether to return the source documents in the response.
-	/// Only for the <c>rerank</c> task type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.ContextualAiTaskSettingsDescriptor ReturnDocuments(bool? value = true)
-	{
-		Instance.ReturnDocuments = value;
 		return this;
 	}
 

@@ -85,6 +85,19 @@ public sealed partial class Settings
 
 	/// <summary>
 	/// <para>
+	/// Defines the number of retries on a recoverable failure before the transform task is marked as <c>failed</c>.
+	/// The minimum value is <c>0</c> and the maximum is <c>100</c>, where <c>-1</c> indicates that the transform retries indefinitely.
+	/// If unset, the cluster-level setting <c>num_transform_failure_retries</c> is used.
+	/// </para>
+	/// <para>
+	/// This setting cannot be specified when <c>unattended</c> is <c>true</c>, because unattended transforms always retry
+	/// indefinitely.
+	/// </para>
+	/// </summary>
+	public int? NumFailureRetries { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, the transform runs in unattended mode. In unattended mode, the transform retries indefinitely in case
 	/// of an error which means the transform never fails. Setting the number of retries other than infinite fails in
 	/// validation.
@@ -187,6 +200,23 @@ public readonly partial struct SettingsDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor MaxPageSearchSize(int? value)
 	{
 		Instance.MaxPageSearchSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the number of retries on a recoverable failure before the transform task is marked as <c>failed</c>.
+	/// The minimum value is <c>0</c> and the maximum is <c>100</c>, where <c>-1</c> indicates that the transform retries indefinitely.
+	/// If unset, the cluster-level setting <c>num_transform_failure_retries</c> is used.
+	/// </para>
+	/// <para>
+	/// This setting cannot be specified when <c>unattended</c> is <c>true</c>, because unattended transforms always retry
+	/// indefinitely.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor NumFailureRetries(int? value)
+	{
+		Instance.NumFailureRetries = value;
 		return this;
 	}
 

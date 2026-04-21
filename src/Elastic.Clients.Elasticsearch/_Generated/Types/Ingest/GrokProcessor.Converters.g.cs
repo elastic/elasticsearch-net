@@ -36,6 +36,7 @@ public sealed partial class GrokProcessorConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropPatterns = System.Text.Json.JsonEncodedText.Encode("patterns"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTraceMatch = System.Text.Json.JsonEncodedText.Encode("trace_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValidateOnly = System.Text.Json.JsonEncodedText.Encode("validate_only"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.GrokProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -51,6 +52,7 @@ public sealed partial class GrokProcessorConverter : System.Text.Json.Serializat
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propPatterns = default;
 		LocalJsonValue<string?> propTag = default;
 		LocalJsonValue<bool?> propTraceMatch = default;
+		LocalJsonValue<bool?> propValidateOnly = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
@@ -108,6 +110,11 @@ public sealed partial class GrokProcessorConverter : System.Text.Json.Serializat
 				continue;
 			}
 
+			if (propValidateOnly.TryReadProperty(ref reader, options, PropValidateOnly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -130,7 +137,8 @@ public sealed partial class GrokProcessorConverter : System.Text.Json.Serializat
 			PatternDefinitions = propPatternDefinitions.Value,
 			Patterns = propPatterns.Value,
 			Tag = propTag.Value,
-			TraceMatch = propTraceMatch.Value
+			TraceMatch = propTraceMatch.Value,
+			ValidateOnly = propValidateOnly.Value
 		};
 	}
 
@@ -148,6 +156,7 @@ public sealed partial class GrokProcessorConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteProperty(options, PropTraceMatch, value.TraceMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropValidateOnly, value.ValidateOnly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

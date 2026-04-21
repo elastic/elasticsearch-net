@@ -50,13 +50,73 @@ public sealed partial class Segment
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Contains information about whether high compression was enabled and per-field vector formats.
+	/// </para>
+	/// </summary>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Attributes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the segment is synced to disk. Segments that are synced can survive a hard reboot.
+	/// If <c>false</c>, the data from uncommitted segments is also stored in the transaction log so that Elasticsearch is able to replay changes on the next start.
+	/// </para>
+	/// </summary>
 	public required bool Committed { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, Lucene merged all files from the segment into a single file to save file descriptors.
+	/// </para>
+	/// </summary>
 	public required bool Compound { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of deleted documents as reported by Lucene, which may be higher or lower than the number of delete operations you have performed.
+	/// This number excludes deletes that were performed recently and do not yet belong to a segment.
+	/// Deleted documents are cleaned up by the automatic merge process if it makes sense to do so.
+	/// Also, Elasticsearch creates extra deleted documents to internally track the recent history of operations on a shard.
+	/// </para>
+	/// </summary>
 	public required long DeletedDocs { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Generation number, such as <c>0</c>. Elasticsearch increments this generation number for each segment written then uses this number to derive the segment name.
+	/// </para>
+	/// </summary>
 	public required int Generation { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The number of documents as reported by Lucene.
+	/// This excludes deleted documents and counts any nested documents separately from their parents.
+	/// It also excludes documents which were indexed recently and do not yet belong to a segment.
+	/// </para>
+	/// </summary>
 	public required long NumDocs { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the segment is searchable.
+	/// If <c>false</c>, the segment has most likely been written to disk but needs a refresh to be searchable.
+	/// </para>
+	/// </summary>
 	public required bool Search { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Disk space used by the segment, in bytes.
+	/// </para>
+	/// </summary>
 	public required double SizeInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Version of Lucene used to write the segment.
+	/// </para>
+	/// </summary>
 	public required string Version { get; set; }
 }

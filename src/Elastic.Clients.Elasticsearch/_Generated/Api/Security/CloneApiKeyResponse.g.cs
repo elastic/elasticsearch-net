@@ -21,18 +21,56 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Esql;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class AsyncQueryStopResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CloneApiKeyResponseConverter))]
+public sealed partial class CloneApiKeyResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AsyncQueryStopResponse()
+	public CloneApiKeyResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal AsyncQueryStopResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal CloneApiKeyResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// The generated API key value for the cloned key.
+	/// </para>
+	/// </summary>
+	public required string ApiKey { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// API key credentials which is the base64-encoding of
+	/// the UTF-8 representation of <c>id</c> and <c>api_key</c> joined
+	/// by a colon (<c>:</c>).
+	/// </para>
+	/// </summary>
+	public required string Encoded { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Expiration in milliseconds for the API key.
+	/// </para>
+	/// </summary>
+	public long? Expiration { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The unique ID of the cloned API key.
+	/// </para>
+	/// </summary>
+	public required string Id { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the cloned API key.
+	/// </para>
+	/// </summary>
+	public required string Name { get; set; }
 }

@@ -44,9 +44,26 @@ public sealed partial class ShardStore
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The status of the store copy, whether it is used as a primary, replica, or not used at all.
+	/// </para>
+	/// </summary>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Allocation { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The allocation ID of the store copy.
+	/// </para>
+	/// </summary>
 	public string? AllocationId { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreNode Node { get; set; }
 	public required string NodeId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Any exception encountered while opening the shard index or from an earlier engine failure.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreException? StoreException { get; set; }
 }

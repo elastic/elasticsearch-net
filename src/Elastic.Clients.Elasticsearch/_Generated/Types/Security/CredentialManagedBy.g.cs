@@ -21,18 +21,13 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SearchMvtResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CredentialManagedByConverter))]
+public enum CredentialManagedBy
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchMvtResponse()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SearchMvtResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "cloud")]
+	Cloud,
+	[System.Runtime.Serialization.EnumMember(Value = "elasticsearch")]
+	Elasticsearch
 }
