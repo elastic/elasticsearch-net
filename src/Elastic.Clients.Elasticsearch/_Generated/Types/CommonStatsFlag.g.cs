@@ -26,48 +26,163 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CommonStatsFlagConverter))]
 public enum CommonStatsFlag
 {
+	/// <summary>
+	/// <para>
+	/// Return all statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "_all")]
 	All,
+	/// <summary>
+	/// <para>
+	/// Bulk operations statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "bulk")]
 	Bulk,
+	/// <summary>
+	/// <para>
+	/// Completion suggester statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	/// <summary>
+	/// <para>
+	/// Total number of dense vectors indexed. Index refreshes can affect this statistic.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "dense_vector")]
 	DenseVector,
+	/// <summary>
+	/// <para>
+	/// Number of documents and deleted docs not yet merged out. Index refreshes can affect this statistic.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "docs")]
 	Docs,
+	/// <summary>
+	/// <para>
+	/// Fielddata statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "fielddata")]
 	Fielddata,
+	/// <summary>
+	/// <para>
+	/// Flush statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "flush")]
 	Flush,
+	/// <summary>
+	/// <para>
+	/// Get statistics, including missing stats.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "get")]
 	Get,
+	/// <summary>
+	/// <para>
+	/// Indexing statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "indexing")]
 	Indexing,
+	/// <summary>
+	/// <para>
+	/// Mapping statistics, including the total count and estimated overhead.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "mappings")]
 	Mappings,
+	/// <summary>
+	/// <para>
+	/// Merge statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "merge")]
 	Merge,
+	/// <summary>
+	/// <para>
+	/// Query cache statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "query_cache")]
 	QueryCache,
+	/// <summary>
+	/// <para>
+	/// Recovery statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "recovery")]
 	Recovery,
+	/// <summary>
+	/// <para>
+	/// Refresh statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "refresh")]
 	Refresh,
+	/// <summary>
+	/// <para>
+	/// Shard request cache statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "request_cache")]
 	RequestCache,
+	/// <summary>
+	/// <para>
+	/// Search statistics including suggest statistics.
+	/// You can include statistics for custom groups by adding an extra <c>groups</c> parameter
+	/// (search operations can be associated with one or more groups).
+	/// The <c>groups</c> parameter accepts a comma-separated list of group names.
+	/// Use <c>_all</c> to return statistics for all groups.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "search")]
 	Search,
+	/// <summary>
+	/// <para>
+	/// Memory use of all open segments.
+	/// If the <c>include_segment_file_sizes</c> parameter is <c>true</c>, this metric includes the aggregated disk usage of each Lucene index file.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "segments")]
 	Segments,
+	/// <summary>
+	/// <para>
+	/// Shard statistics, including the total number of shards.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "shard_stats")]
 	ShardStats,
+	/// <summary>
+	/// <para>
+	/// Total number of sparse vectors indexed. Index refreshes can affect this statistic.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "sparse_vector")]
 	SparseVector,
+	/// <summary>
+	/// <para>
+	/// Size of the index in byte units.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "store")]
 	Store,
+	/// <summary>
+	/// <para>
+	/// Translog statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "translog")]
 	Translog,
+	/// <summary>
+	/// <para>
+	/// Index warming statistics.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "warmer")]
 	Warmer
 }

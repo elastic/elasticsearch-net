@@ -81,6 +81,10 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "inference.stream_completion";
 
+	private static readonly Elastic.Transport.IRequestConfiguration DefaultRequestConfiguration = new Elastic.Transport.RequestConfiguration { Accept = "text/event-stream" };
+
+	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
+
 	/// <summary>
 	/// <para>
 	/// The unique identifier for the inference endpoint.

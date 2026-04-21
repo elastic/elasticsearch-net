@@ -21,44 +21,44 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ThreadTypeConverter))]
-public enum ThreadType
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryTypeConverter))]
+public enum RecoveryType
 {
 	/// <summary>
 	/// <para>
-	/// Threads that have been blocked the longest.
+	/// An empty store. Indicates a new primary shard or the forced allocation of an empty primary shard using the cluster reroute API.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "block")]
-	Block,
+	[System.Runtime.Serialization.EnumMember(Value = "EMPTY_STORE")]
+	EmptyStore,
 	/// <summary>
 	/// <para>
-	/// Threads that consume the most CPU time.
+	/// The store of an existing primary shard. Indicates recovery is related to node startup or the allocation of an existing primary shard.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "cpu")]
-	Cpu,
+	[System.Runtime.Serialization.EnumMember(Value = "EXISTING_STORE")]
+	ExistingStore,
 	/// <summary>
 	/// <para>
-	/// Threads that consume the most GPU time.
+	/// Shards of another index on the same node. Indicates recovery is related to a clone, shrink, or split operation.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "gpu")]
-	Gpu,
+	[System.Runtime.Serialization.EnumMember(Value = "LOCAL_SHARDS")]
+	LocalShards,
 	/// <summary>
 	/// <para>
-	/// Threads that allocate the most memory.
+	/// A primary shard on another node. Indicates recovery is related to shard replication.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "mem")]
-	Mem,
+	[System.Runtime.Serialization.EnumMember(Value = "PEER")]
+	Peer,
 	/// <summary>
 	/// <para>
-	/// Threads that have been in a waiting state the longest.
+	/// A snapshot. Indicates recovery is related to a snapshot restore operation.
 	/// </para>
 	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "wait")]
-	Wait
+	[System.Runtime.Serialization.EnumMember(Value = "SNAPSHOT")]
+	Snapshot
 }
