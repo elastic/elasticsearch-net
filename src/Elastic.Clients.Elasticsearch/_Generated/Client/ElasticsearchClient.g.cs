@@ -226,6 +226,52 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.BulkRequest, Elastic.Clients.Elasticsearch.BulkResponse, Elastic.Clients.Elasticsearch.BulkRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.CancelReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.TaskId taskId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.CancelReindexResponse CancelReindex(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.CancelReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.CancelReindexResponse> CancelReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.CancelReindexRequest, Elastic.Clients.Elasticsearch.CancelReindexResponse, Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.CapabilitiesResponse Capabilities(Elastic.Clients.Elasticsearch.CapabilitiesRequest request)
 	{
 		request.BeforeRequest();
@@ -2084,6 +2130,52 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetRequest, Elastic.Clients.Elasticsearch.GetResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.GetRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.GetReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.TaskId taskId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.GetReindexResponse GetReindex(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.GetReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.GetReindexResponse> GetReindexAsync(Elastic.Clients.Elasticsearch.TaskId taskId, System.Action<Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.GetReindexRequestDescriptor(taskId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.GetReindexRequest, Elastic.Clients.Elasticsearch.GetReindexResponse, Elastic.Clients.Elasticsearch.GetReindexRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.GetScriptRequest request)
 	{
 		request.BeforeRequest();
@@ -2744,6 +2836,52 @@ public partial class ElasticsearchClient
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.InfoRequest, Elastic.Clients.Elasticsearch.InfoResponse, Elastic.Clients.Elasticsearch.InfoRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex(Elastic.Clients.Elasticsearch.ListReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.ListReindexResponse ListReindex(System.Action<Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(Elastic.Clients.Elasticsearch.ListReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.ListReindexResponse> ListReindexAsync(System.Action<Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ListReindexRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.ListReindexRequest, Elastic.Clients.Elasticsearch.ListReindexResponse, Elastic.Clients.Elasticsearch.ListReindexRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.MultiTermVectorsRequest request)
@@ -3946,68 +4084,68 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchRequest, Elastic.Clients.Elasticsearch.SearchResponse<TDocumentResponse>, Elastic.Clients.Elasticsearch.SearchRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.SearchMvtRequest request)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.SearchMvtRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.SearchMvtRequest request, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.SearchMvtRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(indices, field, zoom, x, y);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Clients.Elasticsearch.SearchMvtResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchMvtRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.SearchShardsRequest request)

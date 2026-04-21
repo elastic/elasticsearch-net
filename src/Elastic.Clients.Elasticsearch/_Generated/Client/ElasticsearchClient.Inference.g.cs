@@ -38,50 +38,50 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 	{
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Inference.CompletionResponse Completion(Elastic.Clients.Elasticsearch.Inference.CompletionRequest request)
@@ -1856,50 +1856,50 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse StreamCompletion(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
-	}
-
-	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request, System.Threading.CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest request)

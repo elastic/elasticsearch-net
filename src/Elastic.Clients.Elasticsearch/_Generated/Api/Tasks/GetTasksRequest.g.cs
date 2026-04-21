@@ -27,6 +27,13 @@ public sealed partial class GetTasksRequestParameters : Elastic.Transport.Reques
 {
 	/// <summary>
 	/// <para>
+	/// Internal use only
+	/// </para>
+	/// </summary>
+	public bool? FollowRelocations { get => Q<bool?>("follow_relocations"); set => Q("follow_relocations", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -91,6 +98,13 @@ public sealed partial class GetTasksRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <summary>
 	/// <para>
+	/// Internal use only
+	/// </para>
+	/// </summary>
+	public bool? FollowRelocations { get => Q<bool?>("follow_relocations"); set => Q("follow_relocations", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -152,6 +166,17 @@ public readonly partial struct GetTasksRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TaskId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Internal use only
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor FollowRelocations(bool? value = true)
+	{
+		Instance.FollowRelocations = value;
 		return this;
 	}
 

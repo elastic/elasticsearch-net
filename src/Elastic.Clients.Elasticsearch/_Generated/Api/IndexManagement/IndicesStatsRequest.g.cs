@@ -153,7 +153,7 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics
+	/// Comma-separated list of metrics used to limit the request.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>?>("metric"); set => PO("metric", value); }
@@ -290,7 +290,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics
+	/// Comma-separated list of metrics used to limit the request.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
@@ -301,7 +301,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics
+	/// Comma-separated list of metrics used to limit the request.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
@@ -595,7 +595,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics
+	/// Comma-separated list of metrics used to limit the request.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
@@ -606,7 +606,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the information returned the specific metrics
+	/// Comma-separated list of metrics used to limit the request.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)

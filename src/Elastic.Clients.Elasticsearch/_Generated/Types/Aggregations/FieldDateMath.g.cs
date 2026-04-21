@@ -30,18 +30,18 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FieldDateMathConverter))]
-public sealed partial class FieldDateMath : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.DateMath, double>
+public sealed partial class FieldDateMath : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.DateMath, long>
 {
 	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath value) : base(value)
 	{
 	}
 
-	public FieldDateMath(double value) : base(value)
+	public FieldDateMath(long value) : base(value)
 	{
 	}
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(Elastic.Clients.Elasticsearch.DateMath value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(double value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(long value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
 }
 
 public readonly partial struct FieldDateMathFactory
@@ -51,7 +51,7 @@ public readonly partial struct FieldDateMathFactory
 		return new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
 	}
 
-	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Value(double value)
+	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Value(long value)
 	{
 		return new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
 	}

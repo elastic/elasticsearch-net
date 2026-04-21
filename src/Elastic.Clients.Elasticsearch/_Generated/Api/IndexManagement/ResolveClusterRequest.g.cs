@@ -27,9 +27,12 @@ public sealed partial class ResolveClusterRequestParameters : Elastic.Transport.
 {
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
-	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -59,7 +62,9 @@ public sealed partial class ResolveClusterRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -215,9 +220,12 @@ public sealed partial class ResolveClusterRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
-	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -247,7 +255,9 @@ public sealed partial class ResolveClusterRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -405,9 +415,12 @@ public readonly partial struct ResolveClusterRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
-	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -464,7 +477,9 @@ public readonly partial struct ResolveClusterRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>

@@ -27,6 +27,15 @@ public sealed partial class ScheduleNowTransformRequestParameters : Elastic.Tran
 {
 	/// <summary>
 	/// <para>
+	/// When true, defers the scheduling by the transform's configured sync delay
+	/// instead of triggering immediately. The transform will process new data after
+	/// the delay elapses rather than right away.
+	/// </para>
+	/// </summary>
+	public bool? Defer { get => Q<bool?>("defer"); set => Q("defer", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the time to wait for the scheduling to take place
 	/// </para>
 	/// </summary>
@@ -80,6 +89,15 @@ public sealed partial class ScheduleNowTransformRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
+	/// When true, defers the scheduling by the transform's configured sync delay
+	/// instead of triggering immediately. The transform will process new data after
+	/// the delay elapses rather than right away.
+	/// </para>
+	/// </summary>
+	public bool? Defer { get => Q<bool?>("defer"); set => Q("defer", value); }
+
+	/// <summary>
+	/// <para>
 	/// Controls the time to wait for the scheduling to take place
 	/// </para>
 	/// </summary>
@@ -130,6 +148,19 @@ public readonly partial struct ScheduleNowTransformRequestDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.TransformId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When true, defers the scheduling by the transform's configured sync delay
+	/// instead of triggering immediately. The transform will process new data after
+	/// the delay elapses rather than right away.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor Defer(bool? value = true)
+	{
+		Instance.Defer = value;
 		return this;
 	}
 
