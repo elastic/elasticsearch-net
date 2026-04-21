@@ -17,6 +17,7 @@ using Elastic.Esql.Execution;
 using Elastic.Esql.Extensions;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
@@ -243,10 +244,10 @@ public partial class EsqlNamespacedClient
 	}
 
 	[Obsolete("Use CreateQuery<T>() for LINQ-based ES|QL queries.")]
-	private static IEnumerable<T> EsqlToObject<T>(ElasticsearchClient client, EsqlQueryResponse response)
+	private static IEnumerable<T> EsqlToObject<T>(ElasticsearchClient client, ElasticsearchStreamResponse response)
 	{
 #pragma warning disable IL2026, IL3050
-		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Data, EsqlJsonSerializerOptions) ?? throw new JsonException();
+		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Body, EsqlJsonSerializerOptions) ?? throw new JsonException();
 #pragma warning restore IL2026, IL3050
 
 		if (!doc.RootElement.TryGetProperty("columns"u8, out var columns) || (columns.ValueKind is not JsonValueKind.Array))
