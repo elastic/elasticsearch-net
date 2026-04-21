@@ -31,7 +31,7 @@ public sealed partial class FieldDateMathConverter : System.Text.Json.Serializat
 		return selector(ref reader, options) switch
 		{
 			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(reader.ReadValue<Elastic.Clients.Elasticsearch.DateMath>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(reader.ReadValue<double>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(reader.ReadValue<long>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath)}")
 		};
 	}
