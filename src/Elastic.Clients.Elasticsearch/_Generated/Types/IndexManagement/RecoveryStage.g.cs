@@ -21,18 +21,51 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Esql;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class AsyncQueryGetResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RecoveryStageConverter))]
+public enum RecoveryStage
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AsyncQueryGetResponse()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal AsyncQueryGetResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
+	/// <summary>
+	/// <para>
+	/// Complete.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "DONE")]
+	Done,
+	/// <summary>
+	/// <para>
+	/// Cleanup.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "FINALIZE")]
+	Finalize,
+	/// <summary>
+	/// <para>
+	/// Reading index metadata and copying bytes from source to destination.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "INDEX")]
+	Index,
+	/// <summary>
+	/// <para>
+	/// Recovery has not started.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "INIT")]
+	Init,
+	/// <summary>
+	/// <para>
+	/// Replaying the transaction log.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "TRANSLOG")]
+	Translog,
+	/// <summary>
+	/// <para>
+	/// Verifying the integrity of the index.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "VERIFY_INDEX")]
+	VerifyIndex
 }
