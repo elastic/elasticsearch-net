@@ -12,6 +12,7 @@ using Elastic.Esql;
 using Elastic.Esql.Execution;
 using Elastic.Esql.QueryModel;
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 
 #if NET10_0_OR_GREATER
 using System.IO.Pipelines;
@@ -37,7 +38,7 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		var queryOptions = ResolveOptions(options);
 		var request = BuildQueryRequest(esql, parameters, queryOptions);
 		request.BeforeRequest();
-		var response = _client.DoRequest<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request);
+		var response = _client.DoRequest<EsqlQueryRequest, ElasticsearchStreamResponse, EsqlQueryRequestParameters>(request);
 		return new EsqlTransportResponse(response);
 	}
 
@@ -46,8 +47,13 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		var queryOptions = ResolveOptions(options);
 		var request = BuildQueryRequest(esql, parameters, queryOptions);
 		request.BeforeRequest();
-		var response = await _client.DoRequestAsync<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request, cancellationToken)
+#if NET10_0_OR_GREATER
+		var response = await _client.DoRequestAsync<EsqlQueryRequest, ElasticsearchPipeResponse, EsqlQueryRequestParameters>(request, cancellationToken)
 			.ConfigureAwait(false);
+#else
+		var response = await _client.DoRequestAsync<EsqlQueryRequest, ElasticsearchStreamResponse, EsqlQueryRequestParameters>(request, cancellationToken)
+			.ConfigureAwait(false);
+#endif
 		return new EsqlTransportAsyncResponse(response);
 	}
 
@@ -56,7 +62,7 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		var queryOptions = ResolveOptions(options);
 		var request = BuildAsyncQueryRequest(esql, parameters, queryOptions, asyncOptions);
 		request.BeforeRequest();
-		var response = _client.DoRequest<AsyncQueryRequest, StreamResponse, AsyncQueryRequestParameters>(request);
+		var response = _client.DoRequest<AsyncQueryRequest, ElasticsearchStreamResponse, AsyncQueryRequestParameters>(request);
 		return new EsqlTransportResponse(response);
 	}
 
@@ -65,8 +71,13 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		var queryOptions = ResolveOptions(options);
 		var request = BuildAsyncQueryRequest(esql, parameters, queryOptions, asyncOptions);
 		request.BeforeRequest();
-		var response = await _client.DoRequestAsync<AsyncQueryRequest, StreamResponse, AsyncQueryRequestParameters>(request, cancellationToken)
+#if NET10_0_OR_GREATER
+		var response = await _client.DoRequestAsync<AsyncQueryRequest, ElasticsearchPipeResponse, AsyncQueryRequestParameters>(request, cancellationToken)
 			.ConfigureAwait(false);
+#else
+		var response = await _client.DoRequestAsync<AsyncQueryRequest, ElasticsearchStreamResponse, AsyncQueryRequestParameters>(request, cancellationToken)
+			.ConfigureAwait(false);
+#endif
 		return new EsqlTransportAsyncResponse(response);
 	}
 
@@ -77,7 +88,7 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		if (queryOptions?.RequestConfiguration is not null)
 			request.RequestConfiguration = queryOptions.RequestConfiguration;
 		request.BeforeRequest();
-		var response = _client.DoRequest<AsyncQueryGetRequest, StreamResponse, AsyncQueryGetRequestParameters>(request);
+		var response = _client.DoRequest<AsyncQueryGetRequest, ElasticsearchStreamResponse, AsyncQueryGetRequestParameters>(request);
 		return new EsqlTransportResponse(response);
 	}
 
@@ -88,8 +99,13 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 		if (queryOptions?.RequestConfiguration is not null)
 			request.RequestConfiguration = queryOptions.RequestConfiguration;
 		request.BeforeRequest();
-		var response = await _client.DoRequestAsync<AsyncQueryGetRequest, StreamResponse, AsyncQueryGetRequestParameters>(request, cancellationToken)
+#if NET10_0_OR_GREATER
+		var response = await _client.DoRequestAsync<AsyncQueryGetRequest, ElasticsearchPipeResponse, AsyncQueryGetRequestParameters>(request, cancellationToken)
 			.ConfigureAwait(false);
+#else
+		var response = await _client.DoRequestAsync<AsyncQueryGetRequest, ElasticsearchStreamResponse, AsyncQueryGetRequestParameters>(request, cancellationToken)
+			.ConfigureAwait(false);
+#endif
 		return new EsqlTransportAsyncResponse(response);
 	}
 
@@ -231,9 +247,9 @@ internal sealed class EsqlQueryExecutor : IEsqlQueryExecutor
 
 internal sealed class EsqlTransportResponse : IEsqlResponse
 {
-	private readonly StreamResponse _response;
+	private readonly ElasticsearchStreamResponse _response;
 
-	public EsqlTransportResponse(StreamResponse response) => _response = response;
+	public EsqlTransportResponse(ElasticsearchStreamResponse response) => _response = response;
 
 	public Stream Body => _response.Body;
 
@@ -243,28 +259,21 @@ internal sealed class EsqlTransportResponse : IEsqlResponse
 #if NET10_0_OR_GREATER
 internal sealed class EsqlTransportAsyncResponse : IEsqlAsyncResponse
 {
-	private readonly StreamResponse _response;
+	private readonly ElasticsearchPipeResponse _response;
 
-	public EsqlTransportAsyncResponse(StreamResponse response)
-	{
-		_response = response;
-		Body = PipeReader.Create(response.Body);
-	}
+	public EsqlTransportAsyncResponse(ElasticsearchPipeResponse response) => _response = response;
 
-	public PipeReader Body { get; }
+	public PipeReader Body => _response.Body;
 
-	public async ValueTask DisposeAsync()
-	{
-		await Body.CompleteAsync().ConfigureAwait(false);
-		_response.Dispose();
-	}
+	public async ValueTask DisposeAsync() =>
+		await _response.DisposeAsync().ConfigureAwait(false);
 }
 #else
 internal sealed class EsqlTransportAsyncResponse : IEsqlAsyncResponse
 {
-	private readonly StreamResponse _response;
+	private readonly ElasticsearchStreamResponse _response;
 
-	public EsqlTransportAsyncResponse(StreamResponse response) => _response = response;
+	public EsqlTransportAsyncResponse(ElasticsearchStreamResponse response) => _response = response;
 
 	public Stream Body => _response.Body;
 
