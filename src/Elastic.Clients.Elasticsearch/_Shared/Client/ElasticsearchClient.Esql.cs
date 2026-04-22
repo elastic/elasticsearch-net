@@ -41,7 +41,7 @@ public partial class EsqlNamespacedClient
 	/// </summary>
 	/// <returns>The ES|QL query result as a generic stream response.</returns>
 	/// <remarks>The response must be disposed after use.</remarks>
-	public virtual Task<StreamResponse> QueryAsStreamAsync<TDocument>(
+	public virtual Task<ElasticsearchStreamResponse> QueryAsStreamAsync<TDocument>(
 		Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest,
 		CancellationToken cancellationToken = default)
 	{
@@ -49,7 +49,7 @@ public partial class EsqlNamespacedClient
 		configureRequest?.Invoke(descriptor);
 		var request = descriptor.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<EsqlQueryRequest, ElasticsearchStreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
@@ -57,7 +57,7 @@ public partial class EsqlNamespacedClient
 	/// </summary>
 	/// <returns>The ES|QL query result as a generic stream response.</returns>
 	/// <remarks>The response must be disposed after use.</remarks>
-	public virtual Task<StreamResponse> QueryAsStreamAsync(
+	public virtual Task<ElasticsearchStreamResponse> QueryAsStreamAsync(
 		Action<EsqlQueryRequestDescriptor> configureRequest,
 		CancellationToken cancellationToken = default)
 	{
@@ -65,7 +65,7 @@ public partial class EsqlNamespacedClient
 		configureRequest?.Invoke(descriptor);
 		var request = descriptor.Instance;
 		request.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<EsqlQueryRequest, ElasticsearchStreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
 	#endregion
