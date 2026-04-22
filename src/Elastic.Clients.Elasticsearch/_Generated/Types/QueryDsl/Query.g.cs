@@ -504,6 +504,7 @@ public partial class Query
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Prefix = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryStringQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { QueryString = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Range = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Range = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Range = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Query(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery value) => new Elastic.Clients.Elasticsearch.QueryDsl.Query { Range = value };
