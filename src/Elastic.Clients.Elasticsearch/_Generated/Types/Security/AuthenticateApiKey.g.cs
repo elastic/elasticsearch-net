@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Security;
 public sealed partial class AuthenticateApiKey
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AuthenticateApiKey(string id, Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy managedBy)
+	public AuthenticateApiKey(string id, Elastic.Clients.Elasticsearch.Security.CredentialManagedBy managedBy)
 	{
 		Id = id;
 		ManagedBy = managedBy;
@@ -45,6 +45,6 @@ public sealed partial class AuthenticateApiKey
 
 	public required string Id { get; set; }
 	public bool? Internal { get; set; }
-	public required Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy ManagedBy { get; set; }
+	public required Elastic.Clients.Elasticsearch.Security.CredentialManagedBy ManagedBy { get; set; }
 	public string? Name { get; set; }
 }

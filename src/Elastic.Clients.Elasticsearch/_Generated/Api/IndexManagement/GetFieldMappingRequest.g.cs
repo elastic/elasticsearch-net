@@ -27,8 +27,12 @@ public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport
 {
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -44,7 +48,9 @@ public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -119,8 +125,12 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -136,7 +146,9 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -229,8 +241,12 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor AllowNoIndices(bool? value = true)
@@ -267,7 +283,9 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor IgnoreUnavailable(bool? value = true)
@@ -423,8 +441,12 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -461,7 +483,9 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)

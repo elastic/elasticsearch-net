@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class ShardRecovery
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShardRecovery(long id, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus index, bool primary, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin source, string stage, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin target, System.TimeSpan totalTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus translog, string type, Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex verifyIndex)
+	public ShardRecovery(long id, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus index, bool primary, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin source, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage stage, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin target, System.TimeSpan totalTimeInMillis, Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus translog, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType type, Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex verifyIndex)
 	{
 		Id = id;
 		Index = index;
@@ -56,7 +56,13 @@ public sealed partial class ShardRecovery
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus Index { get; set; }
 	public required bool Primary { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin Source { get; set; }
-	public required string Stage { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The recovery stage.
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage Stage { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus? Start { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
@@ -66,6 +72,12 @@ public sealed partial class ShardRecovery
 	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
 	public required System.TimeSpan TotalTimeInMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus Translog { get; set; }
-	public required string Type { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The recovery source type.
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType Type { get; set; }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex VerifyIndex { get; set; }
 }

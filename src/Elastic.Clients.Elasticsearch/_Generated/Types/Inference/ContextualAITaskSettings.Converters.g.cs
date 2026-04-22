@@ -26,23 +26,16 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 public sealed partial class ContextualAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropInstruction = System.Text.Json.JsonEncodedText.Encode("instruction"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propInstruction = default;
-		LocalJsonValue<bool?> propReturnDocuments = default;
 		LocalJsonValue<int?> propTopK = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propInstruction.TryReadProperty(ref reader, options, PropInstruction, null))
-			{
-				continue;
-			}
-
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,7 +58,6 @@ public sealed partial class ContextualAITaskSettingsConverter : System.Text.Json
 		return new Elastic.Clients.Elasticsearch.Inference.ContextualAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Instruction = propInstruction.Value,
-			ReturnDocuments = propReturnDocuments.Value,
 			TopK = propTopK.Value
 		};
 	}
@@ -74,7 +66,6 @@ public sealed partial class ContextualAITaskSettingsConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInstruction, value.Instruction, null, null);
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTopK, value.TopK, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}

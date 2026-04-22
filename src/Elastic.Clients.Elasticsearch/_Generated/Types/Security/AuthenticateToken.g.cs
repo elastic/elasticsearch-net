@@ -26,12 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Security;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AuthenticateTokenConverter))]
 public sealed partial class AuthenticateToken
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AuthenticateToken(string name)
-	{
-		Name = name;
-	}
-
 	public AuthenticateToken()
 	{
 	}
@@ -42,6 +36,7 @@ public sealed partial class AuthenticateToken
 		_ = sentinel;
 	}
 
-	public required string Name { get; set; }
+	public Elastic.Clients.Elasticsearch.Security.CredentialManagedBy? ManagedBy { get; set; }
+	public string? Name { get; set; }
 	public string? Type { get; set; }
 }

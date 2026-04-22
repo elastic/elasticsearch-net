@@ -45,7 +45,9 @@ public sealed partial class OpenPointInTimeRequestParameters : Elastic.Transport
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -185,7 +187,9 @@ public sealed partial class OpenPointInTimeRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -369,7 +373,9 @@ public readonly partial struct OpenPointInTimeRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? value = true)
@@ -657,7 +663,9 @@ public readonly partial struct OpenPointInTimeRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)

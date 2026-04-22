@@ -49,7 +49,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryIndexStatus> propIndex = default;
 		LocalJsonValue<bool> propPrimary = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin> propSource = default;
-		LocalJsonValue<string> propStage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStage> propStage = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryStartStatus?> propStart = default;
 		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
 		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
@@ -59,7 +59,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
 		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.TranslogStatus> propTranslog = default;
-		LocalJsonValue<string> propType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryType> propType = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.VerifyIndex> propVerifyIndex = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

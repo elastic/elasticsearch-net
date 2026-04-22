@@ -294,6 +294,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NodesStats = new ApiUrls(new[] { "_nodes/stats", "_nodes/{node_id}/stats", "_nodes/stats/{metric}", "_nodes/{node_id}/stats/{metric}", "_nodes/stats/{metric}/{index_metric}", "_nodes/{node_id}/stats/{metric}/{index_metric}" });
 	internal static ApiUrls NodesUsage = new ApiUrls(new[] { "_nodes/usage", "_nodes/{node_id}/usage", "_nodes/usage/{metric}", "_nodes/{node_id}/usage/{metric}" });
 	internal static ApiUrls NoNamespaceBulk = new ApiUrls(new[] { "_bulk", "{index}/_bulk" });
+	internal static ApiUrls NoNamespaceCancelReindex = new ApiUrls(new[] { "_reindex/{task_id}/_cancel" });
 	internal static ApiUrls NoNamespaceCapabilities = new ApiUrls(new[] { "_capabilities" });
 	internal static ApiUrls NoNamespaceClearScroll = new ApiUrls(new[] { "_search/scroll" });
 	internal static ApiUrls NoNamespaceClosePointInTime = new ApiUrls(new[] { "_pit" });
@@ -308,6 +309,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceExplain = new ApiUrls(new[] { "{index}/_explain/{id}" });
 	internal static ApiUrls NoNamespaceFieldCaps = new ApiUrls(new[] { "_field_caps", "{index}/_field_caps" });
 	internal static ApiUrls NoNamespaceGet = new ApiUrls(new[] { "{index}/_doc/{id}" });
+	internal static ApiUrls NoNamespaceGetReindex = new ApiUrls(new[] { "_reindex/{task_id}" });
 	internal static ApiUrls NoNamespaceGetScript = new ApiUrls(new[] { "_scripts/{id}" });
 	internal static ApiUrls NoNamespaceGetScriptContext = new ApiUrls(new[] { "_script_context" });
 	internal static ApiUrls NoNamespaceGetScriptLanguages = new ApiUrls(new[] { "_script_language" });
@@ -315,6 +317,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceHealthReport = new ApiUrls(new[] { "_health_report", "_health_report/{feature}" });
 	internal static ApiUrls NoNamespaceIndex = new ApiUrls(new[] { "{index}/_doc/{id}", "{index}/_doc" });
 	internal static ApiUrls NoNamespaceInfo = new ApiUrls(new[] { "" });
+	internal static ApiUrls NoNamespaceListReindex = new ApiUrls(new[] { "_reindex" });
 	internal static ApiUrls NoNamespaceMtermvectors = new ApiUrls(new[] { "_mtermvectors", "{index}/_mtermvectors" });
 	internal static ApiUrls NoNamespaceMultiGet = new ApiUrls(new[] { "_mget", "{index}/_mget" });
 	internal static ApiUrls NoNamespaceMultiSearch = new ApiUrls(new[] { "_msearch", "{index}/_msearch" });
@@ -384,6 +387,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecurityClearCachedRealms = new ApiUrls(new[] { "_security/realm/{realms}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedRoles = new ApiUrls(new[] { "_security/role/{name}/_clear_cache" });
 	internal static ApiUrls SecurityClearCachedServiceTokens = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}/_clear_cache" });
+	internal static ApiUrls SecurityCloneApiKey = new ApiUrls(new[] { "_security/api_key/clone" });
 	internal static ApiUrls SecurityCreateApiKey = new ApiUrls(new[] { "_security/api_key" });
 	internal static ApiUrls SecurityCreateCrossClusterApiKey = new ApiUrls(new[] { "_security/cross_cluster/api_key" });
 	internal static ApiUrls SecurityCreateServiceToken = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential/token/{name}", "_security/service/{namespace}/{service}/credential/token" });
