@@ -436,7 +436,6 @@ public abstract class ConnectionConfigurationBase<TConnectionConfiguration> :
 		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient)))
 	{
 		UserAgent(ConnectionConfiguration.DefaultUserAgent);
-		ResponseBuilder(new EsqlResponseBuilder());
 	}
 
 	bool TransportClientConfigurationValues.IncludeServerStackTraceOnError => _includeServerStackTraceOnError;
