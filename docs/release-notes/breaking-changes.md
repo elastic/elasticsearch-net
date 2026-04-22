@@ -25,6 +25,7 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 
 - [1. Binary-response endpoints now return `ElasticsearchStreamResponse`](#1-binary-response-endpoints)
 - [2. Default `Accept` header on `SearchMvtRequest`](#2-search-mvt-accept-header)
+- [3. ES|QL `QueryAsStreamAsync` return type](#3-esql-querystream-return-type)
 
 ### Breaking changes
 
@@ -77,6 +78,12 @@ Stream tile = response.Body;
 Code that read `request.RequestConfiguration` and expected `null` when nothing was assigned will now observe the default singleton instead.
 
 No `Accept` override is emitted for ES|QL or Inference request types; the transport default (`application/json`) continues to apply to them.
+
+#### 3. ES|QL `QueryAsStreamAsync` return type [3-esql-querystream-return-type]
+
+**Impact**: Low.
+
+`EsqlNamespacedClient.QueryAsStreamAsync` (both the generic `<TDocument>` and the non-generic overload) return type changed from `Task<Elastic.Transport.StreamResponse>` to `Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse>`. `ElasticsearchStreamResponse` is a drop-in replacement with the same `Body` (`System.IO.Stream`) property, additionally exposing `IsValidResponse`, `ElasticsearchServerError`, `ElasticsearchWarnings`, `ApiCallDetails`, and `DebugInformation`.
 
 ## 9.1.8 [elasticsearch-net-client-918-breaking-changes]
 
