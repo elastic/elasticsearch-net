@@ -19,7 +19,7 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 %
 % ::::
 
-## 9.4.0 [elasticsearch-net-client-940-breaking-changes]
+## 9.3.5 [elasticsearch-net-client-935-breaking-changes]
 
 ### Overview
 
@@ -58,11 +58,11 @@ All sync and async overloads of the following client methods now return `Elastic
 Replace `response.Data` (previously a `byte[]`) with `response.Body` (`System.IO.Stream`). The response owns the stream, so disposing the response disposes the stream — no separate disposal of `Body` is required.
 
 ```csharp
-// 9.3.x
+// 9.3.4 and below
 SearchMvtResponse response = await client.SearchMvtAsync(req);
 byte[] tile = response.Data;
 
-// 9.4.0
+// 9.3.5
 using var response = await client.SearchMvtAsync(req);
 Stream tile = response.Body;
 ```
