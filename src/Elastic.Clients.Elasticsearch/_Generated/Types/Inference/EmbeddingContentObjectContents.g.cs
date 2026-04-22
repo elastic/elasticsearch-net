@@ -50,7 +50,8 @@ public sealed partial class EmbeddingContentObjectContents
 
 	/// <summary>
 	/// <para>
-	/// The format of the input. For the <c>text</c> type this defaults to <c>text</c>. For the <c>image</c> type, this defaults to <c>base64</c>.
+	/// The format of the input. For the <c>text</c> type this must be <c>text</c>. For the <c>image</c> type, this must be <c>base64</c>.
+	/// If not specified, this will default to <c>text</c> for the <c>text</c> type and <c>base64</c> for the <c>image</c> type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? Format { get; set; }
@@ -64,7 +65,7 @@ public sealed partial class EmbeddingContentObjectContents
 
 	/// <summary>
 	/// <para>
-	/// The value of the input to embed.
+	/// The value of the input to embed. For images, this must be a base64-encoded data URI, i.e. "data:content/type;base64,..."
 	/// </para>
 	/// </summary>
 	public required string Value { get; set; }

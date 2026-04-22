@@ -26,14 +26,39 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ThreadTypeConverter))]
 public enum ThreadType
 {
+	/// <summary>
+	/// <para>
+	/// Threads that have been blocked the longest.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "block")]
 	Block,
+	/// <summary>
+	/// <para>
+	/// Threads that consume the most CPU time.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "cpu")]
 	Cpu,
+	/// <summary>
+	/// <para>
+	/// Threads that consume the most GPU time.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "gpu")]
 	Gpu,
+	/// <summary>
+	/// <para>
+	/// Threads that allocate the most memory.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "mem")]
 	Mem,
+	/// <summary>
+	/// <para>
+	/// Threads that have been in a waiting state the longest.
+	/// </para>
+	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "wait")]
 	Wait
 }

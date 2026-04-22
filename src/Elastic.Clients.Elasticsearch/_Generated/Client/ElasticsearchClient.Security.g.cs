@@ -550,6 +550,36 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse CloneApiKey(Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse CloneApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse> CloneApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse> CloneApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CloneApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CloneApiKeyRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest request)
 	{
 		request.BeforeRequest();

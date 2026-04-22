@@ -21,18 +21,40 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ChatCompletionUnifiedResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ListReindexResponseConverter))]
+public sealed partial class ListReindexResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ChatCompletionUnifiedResponse()
+	public ListReindexResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal ChatCompletionUnifiedResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal ListReindexResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// Node-level failures that occurred while listing reindex tasks.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? NodeFailures { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The list of currently running reindex tasks.
+	/// </para>
+	/// </summary>
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ReindexTaskInfo> Reindex { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Task-level failures that occurred while listing reindex tasks.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TaskFailure>? TaskFailures { get; set; }
 }

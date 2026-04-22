@@ -27,8 +27,12 @@ public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestP
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
-	/// <c>_all</c> string or when no indices are specified.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -51,7 +55,9 @@ public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestP
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -109,8 +115,12 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
-	/// <c>_all</c> string or when no indices are specified.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -133,7 +143,9 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
@@ -292,8 +304,12 @@ public readonly partial struct PutJobRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
-	/// <c>_all</c> string or when no indices are specified.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AllowNoIndices(bool? value = true)
@@ -340,7 +356,9 @@ public readonly partial struct PutJobRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor IgnoreUnavailable(bool? value = true)
@@ -772,8 +790,12 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
-	/// <c>_all</c> string or when no indices are specified.
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
@@ -820,7 +842,9 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)

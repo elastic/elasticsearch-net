@@ -41,11 +41,29 @@ public sealed partial class MultisearchHeader
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
+	/// </para>
+	/// </summary>
 	public bool? AllowNoIndices { get; set; }
 	public bool? AllowPartialSearchResults { get; set; }
 	public bool? CcsMinimizeRoundtrips { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 	public bool? IgnoreThrottled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
+	/// </para>
+	/// </summary>
 	public bool? IgnoreUnavailable { get; set; }
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 	public string? Preference { get; set; }
@@ -79,6 +97,16 @@ public readonly partial struct MultisearchHeaderDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A setting that does two separate checks on the index expression.
+	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
+	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+	/// complete set of resolved indices, aliases or data streams is empty after all
+	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+	/// indices are allowed and the request returns an empty result.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
@@ -115,6 +143,13 @@ public readonly partial struct MultisearchHeaderDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
+	/// If <c>true</c>, unavailable concrete targets are silently ignored.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
