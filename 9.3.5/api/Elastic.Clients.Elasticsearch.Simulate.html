@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.Simulate | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.Simulate | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Simulate">
+
+  <h1 id="Elastic_Clients_Elasticsearch_Simulate" data-uid="Elastic.Clients.Elasticsearch.Simulate" class="text-break">Namespace Elastic.Clients.Elasticsearch.Simulate</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestDocumentSimulation.html">IngestDocumentSimulation</a></dt>
+      <dd><p>
+The results of ingest simulation on a single document. The _source of the document contains
+the results after running all pipelines listed in executed_pipelines on the document. The
+list of executed pipelines is derived from the pipelines that would be executed if this
+document had been ingested into _index.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequest.html">IngestRequest</a></dt>
+      <dd><p>
+Simulate data ingestion.
+</p>
+<p>
+Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
+</p>
+<p>
+This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
+</p>
+<p>
+The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
+If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
+No data is indexed into Elasticsearch.
+Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
+The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
+</p>
+<p>
+This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
+The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
+</p>
+<p>
+By default, the pipeline definitions that are currently in the system are used.
+However, you can supply substitute pipeline definitions in the body of the request.
+These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters.html">IngestRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestResponse.html">IngestResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.SimulateIngestDocumentResult.html">SimulateIngestDocumentResult</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.SimulateNamespacedClient.html">SimulateNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor.html">IngestRequestDescriptor</a></dt>
+      <dd><p>
+Simulate data ingestion.
+</p>
+<p>
+Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
+</p>
+<p>
+This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
+</p>
+<p>
+The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
+If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
+No data is indexed into Elasticsearch.
+Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
+The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
+</p>
+<p>
+This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
+The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
+</p>
+<p>
+By default, the pipeline definitions that are currently in the system are used.
+However, you can supply substitute pipeline definitions in the body of the request.
+These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor-1.html">IngestRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Simulate data ingestion.
+</p>
+<p>
+Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
+</p>
+<p>
+This API is meant to be used for troubleshooting or pipeline development, as it does not actually index any data into Elasticsearch.
+</p>
+<p>
+The API runs the default and final pipeline for that index against a set of documents provided in the body of the request.
+If a pipeline contains a reroute processor, it follows that reroute processor to the new index, running that index's pipelines as well the same way that a non-simulated ingest would.
+No data is indexed into Elasticsearch.
+Instead, the transformed document is returned, along with the list of pipelines that have been run and the name of the index where the document would have been indexed if this were not a simulation.
+The transformed document is validated against the mappings that would apply to this index, and any validation error is reported in the result.
+</p>
+<p>
+This API differs from the simulate pipeline API in that you specify a single pipeline for that API, and it runs only that one pipeline.
+The simulate pipeline API is more useful for developing a single pipeline, while the simulate ingest API is more useful for troubleshooting the interaction of the various pipelines that get applied when ingesting into an index.
+</p>
+<p>
+By default, the pipeline definitions that are currently in the system are used.
+However, you can supply substitute pipeline definitions in the body of the request.
+These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Simulate.MergeType.html">MergeType</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
