@@ -19,6 +19,72 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 %
 % ::::
 
+## 9.3.5 [elasticsearch-net-client-935-breaking-changes]
+
+### Overview
+
+- [1. Binary-response endpoints now return `ElasticsearchStreamResponse`](#1-binary-response-endpoints)
+- [2. Default `Accept` header on `SearchMvtRequest`](#2-search-mvt-accept-header)
+- [3. ES|QL `QueryAsStreamAsync` return type](#3-esql-querystream-return-type)
+
+### Breaking changes
+
+#### 1. Binary-response endpoints now return `ElasticsearchStreamResponse` [1-binary-response-endpoints]
+
+**Impact**: Medium.
+
+Endpoints whose response bodies are binary (`search_mvt`) or that the client intentionally exposes as streams (ES|QL, streaming Inference) now return `Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse` instead of endpoint-specific response classes.
+
+The following response types have been removed:
+
+- `Elastic.Clients.Elasticsearch.SearchMvtResponse`
+- `Elastic.Clients.Elasticsearch.Esql.EsqlQueryResponse`
+- `Elastic.Clients.Elasticsearch.Esql.AsyncQueryResponse`
+- `Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetResponse`
+- `Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopResponse`
+- `Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse`
+- `Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse`
+
+All sync and async overloads of the following client methods now return `ElasticsearchStreamResponse` / `Task<ElasticsearchStreamResponse>`:
+
+- `ElasticsearchClient.SearchMvt` / `SearchMvtAsync`
+- `EsqlNamespacedClient.Query` / `QueryAsync`
+- `EsqlNamespacedClient.AsyncQuery` / `AsyncQueryAsync`
+- `EsqlNamespacedClient.AsyncQueryGet` / `AsyncQueryGetAsync`
+- `EsqlNamespacedClient.AsyncQueryStop` / `AsyncQueryStopAsync`
+- `InferenceNamespacedClient.ChatCompletionUnified` / `ChatCompletionUnifiedAsync`
+- `InferenceNamespacedClient.StreamCompletion` / `StreamCompletionAsync`
+
+Replace `response.Data` (previously a `byte[]`) with `response.Body` (`System.IO.Stream`). The response owns the stream, so disposing the response disposes the stream — no separate disposal of `Body` is required.
+
+```csharp
+// 9.3.4 and below
+SearchMvtResponse response = await client.SearchMvtAsync(req);
+byte[] tile = response.Data;
+
+// 9.3.5
+using var response = await client.SearchMvtAsync(req);
+Stream tile = response.Body;
+```
+
+`Elastic.Clients.Elasticsearch` now requires `Elastic.Transport >= 0.16.0` (previously `0.15.1`); `ElasticsearchStreamResponse` was introduced in transport 0.16.0.
+
+#### 2. Default `Accept` header on `SearchMvtRequest` [2-search-mvt-accept-header]
+
+**Impact**: Low.
+
+`SearchMvtRequest` now overrides the inherited `IRequestConfiguration? RequestConfiguration` property. The getter returns a static default (`new RequestConfiguration { Accept = "application/vnd.mapbox-vector-tile" }`) when the user has not assigned a value. The setter still forwards to the base class, so user-assigned values take precedence.
+
+Code that read `request.RequestConfiguration` and expected `null` when nothing was assigned will now observe the default singleton instead.
+
+No `Accept` override is emitted for ES|QL or Inference request types; the transport default (`application/json`) continues to apply to them.
+
+#### 3. ES|QL `QueryAsStreamAsync` return type [3-esql-querystream-return-type]
+
+**Impact**: Low.
+
+`EsqlNamespacedClient.QueryAsStreamAsync` (both the generic `<TDocument>` and the non-generic overload) return type changed from `Task<Elastic.Transport.StreamResponse>` to `Task<Elastic.Transport.Products.Elasticsearch.ElasticsearchStreamResponse>`. `ElasticsearchStreamResponse` is a drop-in replacement with the same `Body` (`System.IO.Stream`) property, additionally exposing `IsValidResponse`, `ElasticsearchServerError`, `ElasticsearchWarnings`, `ApiCallDetails`, and `DebugInformation`.
+
 ## 9.1.8 [elasticsearch-net-client-918-breaking-changes]
 
 ### Overview
