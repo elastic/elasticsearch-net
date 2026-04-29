@@ -7,7 +7,7 @@ mapped_pages:
 
 This page contains the information you need to create an instance of the .NET Client for {{es}} that connects to your {{es}} cluster.
 
-It’s possible to connect to your {{es}} cluster via a single node, or by specifying multiple nodes using a node pool. Using a node pool has a few advantages over a single node, such as load balancing and cluster failover support. The client provides convenient configuration options to connect to an Elastic Cloud deployment.
+It’s possible to connect to your {{es}} cluster using a single node, or by specifying multiple nodes using a node pool. Using a node pool has a few advantages over a single node, such as load balancing and cluster failover support. The client provides convenient configuration options to connect to an Elastic Cloud deployment.
 
 ::::{important}
 
@@ -17,7 +17,7 @@ Client applications should create a single instance of `ElasticsearchClient` tha
 
 ## Connecting to a cloud deployment [cloud-deployment]
 
-[Elastic Cloud](docs-content://deploy-manage/deploy/elastic-cloud/cloud-hosted.md) is the easiest way to get started with {{es}}. Configure the client with your deployment’s **Elasticsearch endpoint** URL (from the deployment or **My deployment** page in the Elastic Cloud console) and credentials. Using the endpoint URL matches how you connect with command-line examples, other language clients, and many tutorials, and it is the most portable approach across deployment types.
+[Elastic Cloud](docs-content://deploy-manage/deploy/elastic-cloud/cloud-hosted.md) is the easiest way to get started with {{es}}. Configure the client with your deployment’s **Elasticsearch endpoint** URL (from your deployment in the Elastic Cloud console) and credentials. Using the endpoint URL matches how you connect with command-line examples, other language clients, and many tutorials, and it is the most portable approach across deployment types.
 
 As a security best practice, it is recommended to create a dedicated API key per application, with permissions limited to only those required for any API calls the application is authorized to make.
 
@@ -52,11 +52,11 @@ Prefer the endpoint URL when you want the same connection details as other tools
 
 ## Connecting to a single node [single-node]
 
-Single node configuration is best suited to connections to a multi-node cluster running behind a load balancer or reverse proxy, which is exposed via a single URL. It may also be convenient to use a single node during local application development. If the URL represents a single {{es}} node, be aware that this offers no resiliency should the server be unreachable or unresponsive.
+Single node configuration is best suited to connections to a multi-node cluster running behind a load balancer or reverse proxy, which is exposed as a single URL. Using a single node can also be convenient during local application development. If the URL represents a single {{es}} node, be aware that this offers no resiliency should the server be unreachable or unresponsive.
 
 By default, security features such as authentication and TLS are enabled on {{es}} clusters. When you start {{es}} for the first time, TLS is configured automatically for the HTTP layer. A CA certificate is generated and stored on disk which is used to sign the certificates for the HTTP layer of the {{es}} cluster.
 
-In order for the client to establish a connection with the cluster over HTTPS, the CA certificate must be trusted by the client application. The simplest choice is to use the hex-encoded SHA-256 fingerprint of the CA certificate. The CA fingerprint is output to the terminal when you start {{es}} for the first time. You’ll see a distinct block like the one below in the output from {{es}} (you may have to scroll up if it’s been a while):
+In order for the client to establish a connection with the cluster over HTTPS, the CA certificate must be trusted by the client application. The simplest choice is to use the hex-encoded SHA-256 fingerprint of the CA certificate. The CA fingerprint is output to the terminal when you start {{es}} for the first time. You’ll see a distinct block like the one below in the output from {{es}} (you might have to scroll up if it’s been a while):
 
 ```sh
 ----------------------------------------------------------------
@@ -89,7 +89,7 @@ SHA256 Fingerprint=<FINGERPRINT>
 
 Visit the [Start the Elastic Stack with security enabled automatically](docs-content://deploy-manage/deploy/self-managed/installing-elasticsearch.md) documentation for more information.
 
-The following snippet shows you how to create a client instance that connects to your {{es}} cluster via a single node, using the CA fingerprint:
+The following snippet shows you how to create a client instance that connects to your {{es}} cluster on a single node, using the CA fingerprint:
 
 ```csharp
 using Elastic.Clients.Elasticsearch;
@@ -102,7 +102,7 @@ var settings = new ElasticsearchClientSettings(new Uri("https://localhost:9200")
 var client = new ElasticsearchClient(settings);
 ```
 
-The preceding snippet demonstrates configuring the client to authenticate by providing a username and password with basic authentication. If preferred, you may also use `ApiKey` authentication as shown in the cloud connection example.
+The preceding snippet demonstrates configuring the client to authenticate by providing a username and password with basic authentication. If preferred, you can also use `ApiKey` authentication as shown in the cloud connection example.
 
 ## Connecting to multiple nodes using a node pool [multiple-nodes]
 

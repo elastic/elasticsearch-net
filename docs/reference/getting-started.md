@@ -38,7 +38,7 @@ var client = new ElasticsearchClient(settings);
 
 Replace `<ELASTICSEARCH_ENDPOINT>` with the URL shown for Elasticsearch on the deployment page (for example, the value you get when you choose **Copy endpoint** or **Copy as curl**). Replace `<API_KEY>` with an API key that your application is allowed to use.
 
-Your Elasticsearch endpoint can be found on the **My deployment** page of your deployment:
+In the Elastic Cloud console, open **Deployments**, select your deployment, and locate the Elasticsearch endpoint URL in the connection details:
 
 ![Finding Elasticsearch endpoint](images/es-endpoint.jpg)
 
