@@ -17,15 +17,27 @@ Client applications should create a single instance of `ElasticsearchClient` tha
 
 ## Connecting to a cloud deployment [cloud-deployment]
 
-[Elastic Cloud](docs-content://deploy-manage/deploy/elastic-cloud/cloud-hosted.md) is the easiest way to get started with {{es}}. When connecting to Elastic Cloud with the .NET {{es}} client you should always use the Cloud ID. You can find this value within the "Manage Deployment" page after you’ve created a cluster (look in the top-left if you’re in Kibana).
-
-We recommend using a Cloud ID whenever possible because your client will be automatically configured for optimal use with Elastic Cloud, including HTTPS and HTTP compression.
-
-Connecting to an Elasticsearch Service deployment is achieved by providing the unique Cloud ID for your deployment when configuring the `ElasticsearchClient` instance. You also require suitable credentials, either a username and password or an API key that your application uses to authenticate with your deployment.
+[Elastic Cloud](docs-content://deploy-manage/deploy/elastic-cloud/cloud-hosted.md) is the easiest way to get started with {{es}}. Configure the client with your deployment’s **Elasticsearch endpoint** URL (from the deployment or **My deployment** page in the Elastic Cloud console) and credentials. Using the endpoint URL matches how you connect with command-line examples, other language clients, and many tutorials, and it is the most portable approach across deployment types.
 
 As a security best practice, it is recommended to create a dedicated API key per application, with permissions limited to only those required for any API calls the application is authorized to make.
 
-The following snippet demonstrates how to create a client instance that connects to an {{es}} deployment in the cloud.
+The following snippet demonstrates how to create a client instance that connects to an {{es}} deployment in the cloud using an API key.
+
+```csharp
+using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
+
+var settings = new ElasticsearchClientSettings(new Uri("<ELASTICSEARCH_ENDPOINT>"))
+    .Authentication(new ApiKey("<API_KEY>")); <1>
+
+var client = new ElasticsearchClient(settings);
+```
+
+1. Replace `<ELASTICSEARCH_ENDPOINT>` with your cluster’s HTTPS URL and `<API_KEY>` with the API key configured for your application.
+
+### Using a Cloud ID (Elastic Cloud hosted only) [cloud-id]
+
+On hosted Elastic Cloud deployments you can alternatively pass the **Cloud ID** string from the deployment overview together with credentials. The client resolves the Cloud ID to cluster nodes and applies defaults suited to Elastic Cloud (including HTTPS and HTTP compression).
 
 ```csharp
 using Elastic.Clients.Elasticsearch;
@@ -34,7 +46,9 @@ using Elastic.Transport;
 var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); <1>
 ```
 
-1. Replace the placeholder string values above with your cloud ID and the API key configured for your application to access your deployment.
+1. Replace the placeholder string values above with your Cloud ID and the API key configured for your application.
+
+Prefer the endpoint URL when you want the same connection details as other tools, or when you are not on a classic hosted Elastic Cloud deployment.
 
 ## Connecting to a single node [single-node]
 
