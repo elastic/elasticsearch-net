@@ -21,32 +21,15 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.Search;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ProfileConverter))]
-public sealed partial class Profile
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonSageMakerElementTypeConverter))]
+public enum AmazonSageMakerElementType
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Profile(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> shards)
-	{
-		Shards = shards;
-	}
-
-	public Profile()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal Profile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
-
-	/// <summary>
-	/// <para>
-	/// When profiling is enabled, the original query source and target indices from the coordinating request.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SearchRequestCoordinatorMetadata? Request { get; set; }
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> Shards { get; set; }
+	[System.Runtime.Serialization.EnumMember(Value = "bit")]
+	Bit,
+	[System.Runtime.Serialization.EnumMember(Value = "byte")]
+	Byte,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float
 }

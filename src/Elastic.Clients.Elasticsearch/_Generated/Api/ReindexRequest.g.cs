@@ -144,7 +144,7 @@ public sealed partial class ReindexRequestParameters : Elastic.Transport.Request
 /// </list>
 /// <para>
 /// If reindexing from a remote cluster into a cluster using Elastic Stack, you must explicitly allow the remote host using the <c>reindex.remote.whitelist</c> node setting on the destination cluster.
-/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted</a> are allowed.
+/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted and Elastic Cloud Serverless</a> are allowed.
 /// Automatic data stream creation requires a matching index template with data stream enabled.
 /// </para>
 /// <para>
@@ -378,7 +378,7 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 /// </list>
 /// <para>
 /// If reindexing from a remote cluster into a cluster using Elastic Stack, you must explicitly allow the remote host using the <c>reindex.remote.whitelist</c> node setting on the destination cluster.
-/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted</a> are allowed.
+/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted and Elastic Cloud Serverless</a> are allowed.
 /// Automatic data stream creation requires a matching index template with data stream enabled.
 /// </para>
 /// <para>
@@ -788,7 +788,7 @@ public readonly partial struct ReindexRequestDescriptor
 /// </list>
 /// <para>
 /// If reindexing from a remote cluster into a cluster using Elastic Stack, you must explicitly allow the remote host using the <c>reindex.remote.whitelist</c> node setting on the destination cluster.
-/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted</a> are allowed.
+/// If reindexing from a remote cluster into an Elastic Cloud Serverless project, only remote hosts from <a href="https://cloud.elastic.co/registration?page=docs&amp;placement=docs-body">Elastic Cloud Hosted and Elastic Cloud Serverless</a> are allowed.
 /// Automatic data stream creation requires a matching index template with data stream enabled.
 /// </para>
 /// <para>

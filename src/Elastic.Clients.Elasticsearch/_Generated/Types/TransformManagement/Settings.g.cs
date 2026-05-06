@@ -78,7 +78,7 @@ public sealed partial class Settings
 	/// <para>
 	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
 	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
-	/// maximum is <c>65,536</c>.
+	/// maximum is <c>65,536</c>. The default value is <c>500</c> for <c>pivot</c> transforms and <c>5000</c> for <c>latest</c> transforms.
 	/// </para>
 	/// </summary>
 	public int? MaxPageSearchSize { get; set; }
@@ -194,7 +194,7 @@ public readonly partial struct SettingsDescriptor
 	/// <para>
 	/// Defines the initial page size to use for the composite aggregation for each checkpoint. If circuit breaker
 	/// exceptions occur, the page size is dynamically adjusted to a lower value. The minimum value is <c>10</c> and the
-	/// maximum is <c>65,536</c>.
+	/// maximum is <c>65,536</c>. The default value is <c>500</c> for <c>pivot</c> transforms and <c>5000</c> for <c>latest</c> transforms.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor MaxPageSearchSize(int? value)
