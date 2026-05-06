@@ -81,7 +81,7 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "inference.chat_completion_unified";
 
-	private static readonly Elastic.Transport.IRequestConfiguration DefaultRequestConfiguration = new Elastic.Transport.RequestConfiguration { Accept = "text/event-stream" };
+	private static readonly Elastic.Transport.IRequestConfiguration DefaultRequestConfiguration = new Elastic.Transport.RequestConfiguration { Accept = "text/event-stream", ContentType = "application/json" };
 
 	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
 
