@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GetReindexResponse | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GetReindexResponse | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.4.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_GetReindexResponse.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.GetReindexResponse%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_GetReindexResponse" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse" class="text-break">
+Class GetReindexResponse  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(GetReindexResponseConverter))]
+public sealed class GetReindexResponse : ElasticsearchResponse, IElasticsearchResponse</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Responses/TransportResponse.cs">TransportResponse</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse</a></div>
+      <div><span class="xref">GetReindexResponse</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/IElasticsearchResponse.cs">IElasticsearchResponse</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.TryGetOriginalException(out Exception)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.ElasticsearchWarnings</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.DebugInformation</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.IsValidResponse</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Products/Elasticsearch/Responses/ElasticsearchResponse.cs">ElasticsearchResponse.ElasticsearchServerError</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.4.0/src/Elastic.Transport/Responses/TransportResponse.cs">TransportResponse.ApiCallDetails</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchResponseExtensions.html#Elastic_Clients_Elasticsearch_ElasticsearchResponseExtensions_IsSuccess_Elastic_Transport_Products_Elasticsearch_ElasticsearchResponse_">ElasticsearchResponseExtensions.IsSuccess(ElasticsearchResponse)</a>
+  </div>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse__ctor_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse__ctor" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.#ctor">
+  GetReindexResponse()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetReindexResponse()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Cancelled_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Cancelled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Cancelled" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Cancelled">
+  Cancelled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether the reindex task has been cancelled.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public required bool Cancelled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Completed_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Completed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Completed" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Completed">
+  Completed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether the reindex task has completed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public required bool Completed { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Description_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Description" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A sanitized description of the reindex operation (source and destination indices, and optionally remote host info).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Error_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Error*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Error" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Error">
+  Error
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The error that caused the reindex task to fail, if any.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ErrorCause? Error { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ErrorCause.html">ErrorCause</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Id_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Id" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ID of the reindex task, in <code>nodeId:taskNum</code> format.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public required TaskId Id { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TaskId.html">TaskId</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Response_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Response*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Response" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Response">
+  Response
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The final result of the completed reindex operation, if the task has finished successfully.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexTaskResult? Response { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexTaskResult.html">ReindexTaskResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_RunningTime_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.RunningTime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_RunningTime" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.RunningTime">
+  RunningTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The elapsed running time of the reindex task, in a human-readable format.
+Only present when the request includes the <code>?human=true</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? RunningTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_RunningTimeInNanos_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.RunningTimeInNanos*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_RunningTimeInNanos" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.RunningTimeInNanos">
+  RunningTimeInNanos
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The elapsed running time of the reindex task, in nanoseconds.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public required TimeSpan RunningTimeInNanos { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_StartTime_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.StartTime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_StartTime" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.StartTime">
+  StartTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The time at which the reindex task started, as an ISO 8601 formatted string.
+Only present when the request includes the <code>?human=true</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? StartTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_StartTimeInMillis_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.StartTimeInMillis*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_StartTimeInMillis" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.StartTimeInMillis">
+  StartTimeInMillis
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The time at which the reindex task started, in milliseconds since the Unix epoch.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public required DateTimeOffset StartTimeInMillis { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetReindexResponse_Status_" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetReindexResponse_Status" data-uid="Elastic.Clients.Elasticsearch.GetReindexResponse.Status">
+  Status
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.4.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetReindexResponse.g.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The current progress of the reindex operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexStatus? Status { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexStatus.html">ReindexStatus</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
