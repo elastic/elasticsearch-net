@@ -35,6 +35,14 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 
 	/// <summary>
 	/// <para>
+	/// Whether to run the overwrite protection check.
+	/// For realistic experiments, leave this parameter unset.
+	/// </para>
+	/// </summary>
+	public bool? CheckOverwriteProtection { get => Q<bool?>("check_overwrite_protection"); set => Q("check_overwrite_protection", value); }
+
+	/// <summary>
+	/// <para>
 	/// The number of operations to run concurrently during the test.
 	/// For realistic experiments, leave this parameter unset.
 	/// </para>
@@ -313,6 +321,14 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// </para>
 	/// </summary>
 	public int? BlobCount { get => Q<int?>("blob_count"); set => Q("blob_count", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether to run the overwrite protection check.
+	/// For realistic experiments, leave this parameter unset.
+	/// </para>
+	/// </summary>
+	public bool? CheckOverwriteProtection { get => Q<bool?>("check_overwrite_protection"); set => Q("check_overwrite_protection", value); }
 
 	/// <summary>
 	/// <para>
@@ -598,6 +614,18 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor BlobCount(int? value)
 	{
 		Instance.BlobCount = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to run the overwrite protection check.
+	/// For realistic experiments, leave this parameter unset.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor CheckOverwriteProtection(bool? value = true)
+	{
+		Instance.CheckOverwriteProtection = value;
 		return this;
 	}
 

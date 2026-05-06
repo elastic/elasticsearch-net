@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Security;
 public sealed partial class RoleInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RoleInfo(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> applications, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> indices, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata)
+	public RoleInfo(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges> applications, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> cluster, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesRead> indices, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata)
 	{
 		Applications = applications;
 		Cluster = cluster;
@@ -49,7 +49,7 @@ public sealed partial class RoleInfo
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege> Cluster { get; set; }
 	public string? Description { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>>>>? Global { get; set; }
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges> Indices { get; set; }
+	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesRead> Indices { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }

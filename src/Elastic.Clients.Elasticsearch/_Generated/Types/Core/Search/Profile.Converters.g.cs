@@ -25,14 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class ProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Profile>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropRequest = System.Text.Json.JsonEncodedText.Encode("request"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.Profile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SearchRequestCoordinatorMetadata?> propRequest = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile>> propShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propRequest.TryReadProperty(ref reader, options, PropRequest, null))
+			{
+				continue;
+			}
+
 			if (propShards.TryReadProperty(ref reader, options, PropShards, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile>(o, null)!))
 			{
 				continue;
@@ -50,6 +57,7 @@ public sealed partial class ProfileConverter : System.Text.Json.Serialization.Js
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Core.Search.Profile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Request = propRequest.Value,
 			Shards = propShards.Value
 		};
 	}
@@ -57,6 +65,7 @@ public sealed partial class ProfileConverter : System.Text.Json.Serialization.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.Profile value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRequest, value.Request, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile>(o, v, null));
 		writer.WriteEndObject();
 	}
