@@ -37,7 +37,7 @@ var client = new ElasticsearchClient(settings);
 
 ### Using a Cloud ID (Elastic Cloud hosted only) [cloud-id]
 
-On hosted Elastic Cloud deployments you can alternatively pass the **Cloud ID** string from the deployment overview together with credentials. The client resolves the Cloud ID to cluster nodes and applies defaults suited to Elastic Cloud (including HTTPS and HTTP compression).
+On hosted Elastic Cloud deployments you can alternatively pass the **Cloud ID** string from the deployment overview together with credentials. The client turns that into your deployment’s {{es}} endpoint—the URL exposed through Elastic Cloud’s proxy, not a list of separate machines you connect to one by one.
 
 ```csharp
 using Elastic.Clients.Elasticsearch;
@@ -108,7 +108,7 @@ The preceding snippet demonstrates configuring the client to authenticate by pro
 
 To provide resiliency, you should configure multiple nodes for your cluster to which the client attempts to communicate. By default, the client cycles through nodes for each request in a round robin fashion. The client also tracks unhealthy nodes and avoids sending requests to them until they become healthy.
 
-This configuration is best suited to connect to a known small sized cluster, where you do not require sniffing to detect the cluster topology.
+This configuration is best suited to connect to a known small sized cluster, where you do not require sniffing to detect the cluster topology. If you need sniffing, choose a sniffing-capable node pool from Elastic.Transport when you build the client (see the [elastic-transport-net](https://github.com/elastic/elastic-transport-net) repository).
 
 The following snippet shows you how to connect to multiple nodes by using a static node pool:
 
