@@ -23,30 +23,36 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ProfileConverter))]
-public sealed partial class Profile
+/// <summary>
+/// <para>
+/// Coordinator snapshot of the original search request, serialized under <c>profile.request</c> when profiling is enabled.
+/// Introduced in Elasticsearch 9.5; omitted when the cluster contains mixed-version nodes that do not serialize this metadata.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SearchRequestCoordinatorMetadataConverter))]
+public sealed partial class SearchRequestCoordinatorMetadata
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Profile(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> shards)
-	{
-		Shards = shards;
-	}
-
-	public Profile()
+	public SearchRequestCoordinatorMetadata()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal Profile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal SearchRequestCoordinatorMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// When profiling is enabled, the original query source and target indices from the coordinating request.
+	/// Target index expressions from the request (before index resolution).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.Search.SearchRequestCoordinatorMetadata? Request { get; set; }
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> Shards { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Indices { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Original query source from the search request (<c>SearchSourceBuilder</c> as JSON).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody? Source { get; set; }
 }

@@ -25,6 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class GetRoleRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
+	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
+	/// </para>
+	/// </summary>
+	public bool? IncludeImplicit { get => Q<bool?>("include_implicit"); set => Q("include_implicit", value); }
 }
 
 /// <summary>
@@ -70,6 +77,14 @@ public sealed partial class GetRoleRequest : Elastic.Clients.Elasticsearch.Reque
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
+	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
+	/// </para>
+	/// </summary>
+	public bool? IncludeImplicit { get => Q<bool?>("include_implicit"); set => Q("include_implicit", value); }
 }
 
 /// <summary>
@@ -115,6 +130,18 @@ public readonly partial struct GetRoleRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, include privileges that are implicitly granted by registered <c>ImplicitPrivilegesProviders</c> alongside the explicitly configured privileges.
+	/// Each implicit entry in the response is annotated with <c>implicitly_granted: true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor IncludeImplicit(bool? value = true)
+	{
+		Instance.IncludeImplicit = value;
 		return this;
 	}
 

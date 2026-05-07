@@ -80,6 +80,15 @@ public sealed partial class AmazonSageMakerServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// Required when <c>api</c> is <c>elastic</c> and task type is <c>text_embedding</c>. The data type returned by the text embedding
+	/// model.
+	/// This value is used when parsing the response back to Elasticsearch data structures.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType? ElementType { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The name of the SageMaker endpoint.
 	/// </para>
 	/// </summary>
@@ -107,6 +116,14 @@ public sealed partial class AmazonSageMakerServiceSettings
 	/// </para>
 	/// </summary>
 	public required string SecretKey { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Required when <c>api</c> is <c>elastic</c> and task type is <c>text_embedding</c>. The similarity measure used when invoking the
+	/// <c>text_embedding</c> task type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity? Similarity { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -192,6 +209,19 @@ public readonly partial struct AmazonSageMakerServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Required when <c>api</c> is <c>elastic</c> and task type is <c>text_embedding</c>. The data type returned by the text embedding
+	/// model.
+	/// This value is used when parsing the response back to Elasticsearch data structures.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor ElementType(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerElementType? value)
+	{
+		Instance.ElementType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The name of the SageMaker endpoint.
 	/// </para>
 	/// </summary>
@@ -233,6 +263,18 @@ public readonly partial struct AmazonSageMakerServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor SecretKey(string value)
 	{
 		Instance.SecretKey = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Required when <c>api</c> is <c>elastic</c> and task type is <c>text_embedding</c>. The similarity measure used when invoking the
+	/// <c>text_embedding</c> task type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerSimilarity? value)
+	{
+		Instance.Similarity = value;
 		return this;
 	}
 

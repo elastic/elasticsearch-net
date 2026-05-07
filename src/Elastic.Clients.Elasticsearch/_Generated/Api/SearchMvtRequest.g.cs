@@ -203,7 +203,7 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "search_mvt";
 
-	private static readonly Elastic.Transport.IRequestConfiguration DefaultRequestConfiguration = new Elastic.Transport.RequestConfiguration { Accept = "application/vnd.mapbox-vector-tile" };
+	private static readonly Elastic.Transport.IRequestConfiguration DefaultRequestConfiguration = new Elastic.Transport.RequestConfiguration { Accept = "application/vnd.elasticsearch+vnd.mapbox-vector-tile" };
 
 	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
 
