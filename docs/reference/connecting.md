@@ -37,7 +37,7 @@ var client = new ElasticsearchClient(settings);
 
 ### Using a Cloud ID (Elastic Cloud hosted only) [cloud-id]
 
-On hosted Elastic Cloud deployments you can alternatively pass the **Cloud ID** string from the deployment overview together with credentials. The client turns that into your deployment’s {{es}} endpoint—the URL exposed through Elastic Cloud’s proxy, not a list of separate machines you connect to one by one.
+On hosted Elastic Cloud deployments you can alternatively pass the **Cloud ID** string from the deployment overview together with credentials. The client turns that into your deployment’s {{es}} endpoint.
 
 ```csharp
 using Elastic.Clients.Elasticsearch;
