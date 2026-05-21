@@ -475,9 +475,150 @@ internal static class JsonReaderExtensions
 
 		return selector(ref reader, options) switch
 		{
-			UnionTag.T1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
-			UnionTag.T2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
 			_ => throw new InvalidOperationException($"Failed to select an union variant for union of type '{typeof(T1).Name}' or '{typeof(T2).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}' or '{typeof(T3).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <typeparam name="T4">The fourth union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <param name="readType4">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fourth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T4"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3, T4>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3, JsonReadFunc<T4>? readType4)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			4 => (readType4 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T4>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}', '{typeof(T3).Name}' or '{typeof(T4).Name}'.")
+		};
+	}
+
+	/// <summary>
+	/// Reads an inline union value from a given <see cref="Utf8JsonReader"/> instance.
+	/// </summary>
+	/// <typeparam name="T1">The first union type.</typeparam>
+	/// <typeparam name="T2">The second union type.</typeparam>
+	/// <typeparam name="T3">The third union type.</typeparam>
+	/// <typeparam name="T4">The fourth union type.</typeparam>
+	/// <typeparam name="T5">The fifth union type.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/>.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="selector">A function that selects the union variant (e.g. based on the current JSON token type).</param>
+	/// <param name="readType1">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the first union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T1"/>.
+	/// </param>
+	/// <param name="readType2">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the second union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T2"/>.
+	/// </param>
+	/// <param name="readType3">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the third union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T3"/>.
+	/// </param>
+	/// <param name="readType4">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fourth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T4"/>.
+	/// </param>
+	/// <param name="readType5">
+	/// The <see cref="JsonReadFunc{T}"/> delegate that should be called to read the fifth union variant type, or <see langword="null"/>
+	/// to use the default converter for the type <typeparamref name="T5"/>.
+	/// </param>
+	/// <returns>A boxed value of the selected union variant.</returns>
+	/// <exception cref="InvalidOperationException">If no matching union variant could be selected.</exception>
+	public static object? ReadUnionValue<T1, T2, T3, T4, T5>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		JsonUnionSelectorFunc selector, JsonReadFunc<T1>? readType1, JsonReadFunc<T2>? readType2,
+		JsonReadFunc<T3>? readType3, JsonReadFunc<T4>? readType4, JsonReadFunc<T5>? readType5)
+	{
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return selector(ref reader, options) switch
+		{
+			1 => (readType1 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T1>(ref r, o))).Invoke(ref reader, options),
+			2 => (readType2 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T2>(ref r, o))).Invoke(ref reader, options),
+			3 => (readType3 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T3>(ref r, o))).Invoke(ref reader, options),
+			4 => (readType4 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T4>(ref r, o))).Invoke(ref reader, options),
+			5 => (readType5 ?? (static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T5>(ref r, o))).Invoke(ref reader, options),
+			_ => throw new InvalidOperationException($"Failed to select a union variant for union of type '{typeof(T1).Name}', '{typeof(T2).Name}', '{typeof(T3).Name}', '{typeof(T4).Name}' or '{typeof(T5).Name}'.")
 		};
 	}
 
