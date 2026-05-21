@@ -77,5 +77,5 @@ public sealed partial class UserIndicesPrivileges
 	/// Search queries that define the documents the user has access to. A document within the specified indices must match these queries for it to be accessible by the owners of the role.
 	/// </para>
 	/// </summary>
-	public object? Query { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<object>? Query { get; set; }
 }

@@ -30,8 +30,8 @@ public sealed partial class CategorizeTextAnalyzerConverter : System.Text.Json.S
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(reader.ReadValue<string>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(reader.ReadValue<string>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer(reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer)}")
 		};
 	}

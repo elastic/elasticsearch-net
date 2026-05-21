@@ -60,11 +60,25 @@ public sealed partial class DataStreamLifecycleWithRollover
 
 	/// <summary>
 	/// <para>
+	/// The least amount of time data should be kept by elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? EffectiveRetention { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
 	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
 	/// </para>
 	/// </summary>
 	public bool? Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Configuration source that can influence the retention of a data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? RetentionDeterminedBy { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -155,6 +169,17 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 
 	/// <summary>
 	/// <para>
+	/// The least amount of time data should be kept by elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor EffectiveRetention(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.EffectiveRetention = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
 	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
 	/// </para>
@@ -162,6 +187,17 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration source that can influence the retention of a data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor RetentionDeterminedBy(Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? value)
+	{
+		Instance.RetentionDeterminedBy = value;
 		return this;
 	}
 

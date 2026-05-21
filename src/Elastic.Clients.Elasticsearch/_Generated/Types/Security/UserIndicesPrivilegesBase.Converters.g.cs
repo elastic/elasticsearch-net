@@ -61,7 +61,7 @@ public sealed partial class UserIndicesPrivilegesBaseConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static System.Collections.Generic.IReadOnlyCollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static System.Collections.Generic.IReadOnlyCollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, static object (ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options) => reader.ReadUnionValue<string, Elastic.Clients.Elasticsearch.QueryDsl.Query, Elastic.Clients.Elasticsearch.Security.RoleTemplateQuery>(options, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 3)), null, null, null))))
 			{
 				continue;
 			}

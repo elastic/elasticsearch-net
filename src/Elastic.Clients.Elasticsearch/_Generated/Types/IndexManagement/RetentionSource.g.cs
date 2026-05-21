@@ -23,20 +23,15 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleResponseConverter))]
-public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RetentionSourceConverter))]
+public enum RetentionSource
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDataLifecycleResponse()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal GetDataLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
-
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> DataStreams { get; set; }
-	public required Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention GlobalRetention { get; set; }
+	[System.Runtime.Serialization.EnumMember(Value = "data_stream_configuration")]
+	DataStreamConfiguration,
+	[System.Runtime.Serialization.EnumMember(Value = "default_failures_retention")]
+	DefaultFailuresRetention,
+	[System.Runtime.Serialization.EnumMember(Value = "default_global_retention")]
+	DefaultGlobalRetention,
+	[System.Runtime.Serialization.EnumMember(Value = "max_global_retention")]
+	MaxGlobalRetention
 }

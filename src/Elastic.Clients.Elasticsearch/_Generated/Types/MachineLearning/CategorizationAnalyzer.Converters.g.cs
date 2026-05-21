@@ -30,8 +30,8 @@ public sealed partial class CategorizationAnalyzerConverter : System.Text.Json.S
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<string>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<string>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer(reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzerDefinition>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer)}")
 		};
 	}
