@@ -46,6 +46,8 @@ public sealed partial class RequestEmbedding
 	/// <para>
 	/// Inference input.
 	/// Either a string, an array of strings, a <c>content</c> object, or an array of <c>content</c> objects.
+	/// <c>content</c> objects may contain a single item or an array of items. Models that support multiple items per <c>content</c>
+	/// object will return a single embedding for each <c>content</c> object, regardless of how many items it contains.
 	/// </para>
 	/// <para>
 	/// string example:
@@ -89,6 +91,26 @@ public sealed partial class RequestEmbedding
 	///       "format": "base64",
 	///       "value": "data:image/jpeg;base64,..."
 	///     }
+	///   }
+	/// ]
+	/// </code>
+	/// <para>
+	/// Multiple items in one <c>content</c> object example:
+	/// </para>
+	/// <code>
+	/// "input": [
+	///   {
+	///     "content": [
+	///       {
+	///         "type": "image",
+	///         "format": "base64",
+	///         "value": "data:image/jpeg;base64,..."
+	///       },
+	///       {
+	///         "type": "text",
+	///         "value": "Some text to create an embedding"
+	///       }
+	///     ]
 	///   }
 	/// ]
 	/// </code>
@@ -163,6 +185,8 @@ public readonly partial struct RequestEmbeddingDescriptor
 	/// <para>
 	/// Inference input.
 	/// Either a string, an array of strings, a <c>content</c> object, or an array of <c>content</c> objects.
+	/// <c>content</c> objects may contain a single item or an array of items. Models that support multiple items per <c>content</c>
+	/// object will return a single embedding for each <c>content</c> object, regardless of how many items it contains.
 	/// </para>
 	/// <para>
 	/// string example:
@@ -206,6 +230,26 @@ public readonly partial struct RequestEmbeddingDescriptor
 	///       "format": "base64",
 	///       "value": "data:image/jpeg;base64,..."
 	///     }
+	///   }
+	/// ]
+	/// </code>
+	/// <para>
+	/// Multiple items in one <c>content</c> object example:
+	/// </para>
+	/// <code>
+	/// "input": [
+	///   {
+	///     "content": [
+	///       {
+	///         "type": "image",
+	///         "format": "base64",
+	///         "value": "data:image/jpeg;base64,..."
+	///       },
+	///       {
+	///         "type": "text",
+	///         "value": "Some text to create an embedding"
+	///       }
+	///     ]
 	///   }
 	/// ]
 	/// </code>

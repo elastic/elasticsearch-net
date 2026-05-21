@@ -43,7 +43,7 @@ public sealed partial class FuzzyQueryConverter : System.Text.Json.Serialization
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<object>(options, null);
+			var value = reader.ReadValue<object>(options, static object (ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options) => reader.ReadUnionValue<string, double, bool>(options, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2), static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 3)), null, null, null));
 			reader.Read();
 			return new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
@@ -98,7 +98,7 @@ public sealed partial class FuzzyQueryConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static object (ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options) => reader.ReadUnionValue<string, double, bool>(options, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2), static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 3)), null, null, null)))
 			{
 				continue;
 			}

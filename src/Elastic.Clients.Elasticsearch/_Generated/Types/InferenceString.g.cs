@@ -21,51 +21,45 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// An object containing the input data for the model to embed.
-/// </para>
-/// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.EmbeddingContentObjectContentsConverter))]
-public sealed partial class EmbeddingContentObjectContents
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InferenceStringConverter))]
+public sealed partial class InferenceString
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EmbeddingContentObjectContents(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType type, string value)
+	public InferenceString(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType type, string value)
 	{
 		Type = type;
 		Value = value;
 	}
 
-	public EmbeddingContentObjectContents()
+	public InferenceString()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal EmbeddingContentObjectContents(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal InferenceString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The format of the input. For the <c>text</c> type this must be <c>text</c>. For the <c>image</c> type, this must be <c>base64</c>.
-	/// If not specified, this will default to <c>text</c> for the <c>text</c> type and <c>base64</c> for the <c>image</c> type.
+	/// The format of the data. If null, the default data format for the given type is used.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? Format { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The type of input to embed.
+	/// The type of data that the value represents.
 	/// </para>
 	/// </summary>
 	public required Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType Type { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The value of the input to embed. For images, this must be a base64-encoded data URI, i.e. "data:content/type;base64,..."
+	/// String which may be raw text, or the string representation of some other data such as an image in base64.
 	/// </para>
 	/// </summary>
 	public required string Value { get; set; }

@@ -30,10 +30,10 @@ public sealed partial class EmbeddingContentObjectConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents> propContent = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem>> propContent = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propContent.TryReadProperty(ref reader, options, PropContent, null))
+			if (propContent.TryReadProperty(ref reader, options, PropContent, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem>(o, null)!))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ public sealed partial class EmbeddingContentObjectConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObject value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContent, value.Content, null, null);
+		writer.WriteProperty(options, PropContent, value.Content, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

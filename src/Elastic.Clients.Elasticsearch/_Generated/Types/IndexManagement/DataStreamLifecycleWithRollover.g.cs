@@ -68,6 +68,13 @@ public sealed partial class DataStreamLifecycleWithRollover
 
 	/// <summary>
 	/// <para>
+	/// The least amount of time data should be kept by elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? EffectiveRetention { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
 	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
 	/// </para>
@@ -80,6 +87,13 @@ public sealed partial class DataStreamLifecycleWithRollover
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? FrozenAfter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Configuration source that can influence the retention of a data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? RetentionDeterminedBy { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -26,8 +26,14 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.EmbeddingContentTypeConverter))]
 public enum EmbeddingContentType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "audio")]
+	Audio,
 	[System.Runtime.Serialization.EnumMember(Value = "image")]
 	Image,
+	[System.Runtime.Serialization.EnumMember(Value = "pdf")]
+	Pdf,
 	[System.Runtime.Serialization.EnumMember(Value = "text")]
-	Text
+	Text,
+	[System.Runtime.Serialization.EnumMember(Value = "video")]
+	Video
 }

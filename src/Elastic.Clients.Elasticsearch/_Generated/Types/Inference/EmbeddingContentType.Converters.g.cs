@@ -25,14 +25,27 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class EmbeddingContentTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberAudio = System.Text.Json.JsonEncodedText.Encode("audio"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberImage = System.Text.Json.JsonEncodedText.Encode("image"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPdf = System.Text.Json.JsonEncodedText.Encode("pdf"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberText = System.Text.Json.JsonEncodedText.Encode("text"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberVideo = System.Text.Json.JsonEncodedText.Encode("video"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberAudio))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Audio;
+		}
+
 		if (reader.ValueTextEquals(MemberImage))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Image;
+		}
+
+		if (reader.ValueTextEquals(MemberPdf))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Pdf;
 		}
 
 		if (reader.ValueTextEquals(MemberText))
@@ -40,15 +53,35 @@ public sealed partial class EmbeddingContentTypeConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Text;
 		}
 
+		if (reader.ValueTextEquals(MemberVideo))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Video;
+		}
+
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAudio.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Audio;
+		}
+
 		if (string.Equals(value, MemberImage.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Image;
 		}
 
+		if (string.Equals(value, MemberPdf.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Pdf;
+		}
+
 		if (string.Equals(value, MemberText.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Text;
+		}
+
+		if (string.Equals(value, MemberVideo.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Video;
 		}
 
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType)}'.");
@@ -58,11 +91,20 @@ public sealed partial class EmbeddingContentTypeConverter : System.Text.Json.Ser
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Audio:
+				writer.WriteStringValue(MemberAudio);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Image:
 				writer.WriteStringValue(MemberImage);
 				break;
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Pdf:
+				writer.WriteStringValue(MemberPdf);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Text:
 				writer.WriteStringValue(MemberText);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType.Video:
+				writer.WriteStringValue(MemberVideo);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType)}'.");

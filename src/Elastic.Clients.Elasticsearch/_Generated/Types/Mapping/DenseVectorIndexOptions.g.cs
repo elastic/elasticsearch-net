@@ -74,6 +74,18 @@ public sealed partial class DenseVectorIndexOptions
 
 	/// <summary>
 	/// <para>
+	/// The segment document count threshold below which HNSW graph construction is skipped in favor of brute-force flat
+	/// search. <c>-1</c> (default) defers to format defaults: <c>300</c> for <c>bbq_hnsw</c>, <c>150</c> for <c>hnsw</c>, <c>int8_hnsw</c>, and
+	/// <c>int4_hnsw</c>. <c>0</c> always builds the graph. A positive value overrides the format default.
+	/// </para>
+	/// <para>
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>int4_hnsw</c>, and <c>bbq_hnsw</c> index types.
+	/// </para>
+	/// </summary>
+	public int? FlatIndexThreshold { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
@@ -161,6 +173,22 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor EfConstruction(int? value)
 	{
 		Instance.EfConstruction = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The segment document count threshold below which HNSW graph construction is skipped in favor of brute-force flat
+	/// search. <c>-1</c> (default) defers to format defaults: <c>300</c> for <c>bbq_hnsw</c>, <c>150</c> for <c>hnsw</c>, <c>int8_hnsw</c>, and
+	/// <c>int4_hnsw</c>. <c>0</c> always builds the graph. A positive value overrides the format default.
+	/// </para>
+	/// <para>
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>int4_hnsw</c>, and <c>bbq_hnsw</c> index types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor FlatIndexThreshold(int? value)
+	{
+		Instance.FlatIndexThreshold = value;
 		return this;
 	}
 

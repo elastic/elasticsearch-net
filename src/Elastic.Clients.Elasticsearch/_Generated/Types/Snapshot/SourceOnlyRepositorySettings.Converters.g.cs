@@ -23,96 +23,58 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
-public sealed partial class SourceOnlyRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings>
+public sealed partial class ISourceOnlyRepositorySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropDelegateType = System.Text.Json.JsonEncodedText.Encode("delegate_type"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumberOfSnapshots = System.Text.Json.JsonEncodedText.Encode("max_number_of_snapshots"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only"u8);
-	private static readonly System.Text.Json.JsonEncodedText PropReadOnly1 = System.Text.Json.JsonEncodedText.Encode("readonly"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("delegate_type");
 
-	public override Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propChunkSize = default;
-		LocalJsonValue<bool?> propCompress = default;
-		LocalJsonValue<string?> propDelegateType = default;
-		LocalJsonValue<int?> propMaxNumberOfSnapshots = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
-		LocalJsonValue<bool?> propReadOnly = default;
+		var readerSnapshot = reader;
+		string? discriminator = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propChunkSize.TryReadProperty(ref reader, options, PropChunkSize, null))
+			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
 			{
-				continue;
+				break;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDelegateType.TryReadProperty(ref reader, options, PropDelegateType, null))
-			{
-				continue;
-			}
-
-			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propMaxRestoreBytesPerSec.TryReadProperty(ref reader, options, PropMaxRestoreBytesPerSec, null))
-			{
-				continue;
-			}
-
-			if (propMaxSnapshotBytesPerSec.TryReadProperty(ref reader, options, PropMaxSnapshotBytesPerSec, null))
-			{
-				continue;
-			}
-
-			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)) || propReadOnly.TryReadProperty(ref reader, options, PropReadOnly1, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.SafeSkip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+			reader.SafeSkip();
 		}
 
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		reader = readerSnapshot;
+		return discriminator switch
 		{
-			ChunkSize = propChunkSize.Value,
-			Compress = propCompress.Value,
-			DelegateType = propDelegateType.Value,
-			MaxNumberOfSnapshots = propMaxNumberOfSnapshots.Value,
-			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value,
-			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value,
-			ReadOnly = propReadOnly.Value
+			"azure" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure>(options, null),
+			"fs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem>(options, null),
+			"gcs" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs>(options, null),
+			"s3" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3>(options, null),
+			"url" => reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl>(options, null),
+			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings)}'.")
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDelegateType, value.DelegateType, null, null);
-		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
-		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
-		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
+		switch (value.DelegateType)
+		{
+			case "azure":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure)value, null);
+				break;
+			case "fs":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem)value, null);
+				break;
+			case "gcs":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs)value, null);
+				break;
+			case "s3":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3)value, null);
+				break;
+			case "url":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl)value, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.DelegateType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings)}'.");
+		}
 	}
 }

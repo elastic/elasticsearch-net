@@ -95,6 +95,16 @@ public sealed partial class AttachmentProcessor
 
 	/// <summary>
 	/// <para>
+	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
+	/// If set to <c>-1</c>, there is no per-processor limit.
+	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxFieldBytes { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
@@ -278,6 +288,34 @@ public readonly partial struct AttachmentProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> IndexedCharsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.IndexedCharsField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
+	/// If set to <c>-1</c>, there is no per-processor limit.
+	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> MaxFieldBytes(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxFieldBytes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
+	/// If set to <c>-1</c>, there is no per-processor limit.
+	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor<TDocument> MaxFieldBytes(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxFieldBytes = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
@@ -549,6 +587,34 @@ public readonly partial struct AttachmentProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor IndexedCharsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.IndexedCharsField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
+	/// If set to <c>-1</c>, there is no per-processor limit.
+	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor MaxFieldBytes(Elastic.Clients.Elasticsearch.ByteSize? value)
+	{
+		Instance.MaxFieldBytes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum allowed size of the attachment <c>field</c> value in bytes: length of a string (if base64 in JSON,
+	/// checked before base64 decoding) or byte array length for binary (for example, CBOR).
+	/// If set to <c>-1</c>, there is no per-processor limit.
+	/// The node setting <c>ingest.attachment.max_field_size</c> also applies.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor MaxFieldBytes(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxFieldBytes = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 

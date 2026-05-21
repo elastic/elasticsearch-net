@@ -30,6 +30,8 @@ public enum OpenAITaskType
 	ChatCompletion,
 	[System.Runtime.Serialization.EnumMember(Value = "completion")]
 	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "embedding")]
+	Embedding,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

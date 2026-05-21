@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class QueryVectorBuilderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryVectorBuilder>
 {
+	private static readonly System.Text.Json.JsonEncodedText VariantEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding");
 	private static readonly System.Text.Json.JsonEncodedText VariantLookup = System.Text.Json.JsonEncodedText.Encode("lookup");
 	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
@@ -35,6 +36,14 @@ public sealed partial class QueryVectorBuilderConverter : System.Text.Json.Seria
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (reader.ValueTextEquals(VariantEmbedding))
+			{
+				variantType = VariantEmbedding.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Embedding>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantLookup))
 			{
 				variantType = VariantLookup.Value;
@@ -74,6 +83,9 @@ public sealed partial class QueryVectorBuilderConverter : System.Text.Json.Seria
 		switch (value.VariantType)
 		{
 			case null:
+				break;
+			case "embedding":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Embedding)value.Variant, null, null);
 				break;
 			case "lookup":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.LookupQueryVectorBuilder)value.Variant, null, null);
