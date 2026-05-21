@@ -32,6 +32,7 @@ public sealed partial class AttachmentProcessorConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexedChars = System.Text.Json.JsonEncodedText.Encode("indexed_chars"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropIndexedCharsField = System.Text.Json.JsonEncodedText.Encode("indexed_chars_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxFieldBytes = System.Text.Json.JsonEncodedText.Encode("max_field_bytes"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropRemoveBinary = System.Text.Json.JsonEncodedText.Encode("remove_binary"u8);
@@ -49,6 +50,7 @@ public sealed partial class AttachmentProcessorConverter : System.Text.Json.Seri
 		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<long?> propIndexedChars = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propIndexedCharsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxFieldBytes = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propProperties = default;
 		LocalJsonValue<bool?> propRemoveBinary = default;
@@ -88,6 +90,11 @@ public sealed partial class AttachmentProcessorConverter : System.Text.Json.Seri
 			}
 
 			if (propIndexedCharsField.TryReadProperty(ref reader, options, PropIndexedCharsField, null))
+			{
+				continue;
+			}
+
+			if (propMaxFieldBytes.TryReadProperty(ref reader, options, PropMaxFieldBytes, null))
 			{
 				continue;
 			}
@@ -141,6 +148,7 @@ public sealed partial class AttachmentProcessorConverter : System.Text.Json.Seri
 			IgnoreMissing = propIgnoreMissing.Value,
 			IndexedChars = propIndexedChars.Value,
 			IndexedCharsField = propIndexedCharsField.Value,
+			MaxFieldBytes = propMaxFieldBytes.Value,
 			OnFailure = propOnFailure.Value,
 			Properties = propProperties.Value,
 			RemoveBinary = propRemoveBinary.Value,
@@ -160,6 +168,7 @@ public sealed partial class AttachmentProcessorConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndexedChars, value.IndexedChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropIndexedCharsField, value.IndexedCharsField, null, null);
+		writer.WriteProperty(options, PropMaxFieldBytes, value.MaxFieldBytes, null, null);
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropRemoveBinary, value.RemoveBinary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

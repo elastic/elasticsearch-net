@@ -23,262 +23,73 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsConverter))]
-public sealed partial class SourceOnlyRepositorySettings
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.ISourceOnlyRepositorySettingsConverter))]
+public partial interface ISourceOnlyRepositorySettings
 {
-	public SourceOnlyRepositorySettings()
-	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
-	{
-		_ = sentinel;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.ByteSize? ChunkSize { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
-	public bool? Compress { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The delegated repository type. For valid values, refer to the <c>type</c> parameter.
-	/// Source repositories can use <c>settings</c> properties for its delegated repository type.
-	/// </para>
-	/// </summary>
-	public string? DelegateType { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
-	public int? MaxNumberOfSnapshots { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
-	public bool? ReadOnly { get; set; }
+	public string DelegateType { get; }
 }
 
-public readonly partial struct SourceOnlyRepositorySettingsDescriptor
+public readonly partial struct SourceOnlyRepositorySettingsFactory
 {
-	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Instance { get; init; }
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SourceOnlyRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings instance)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForAzure(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure value)
 	{
-		Instance = instance;
+		return value;
 	}
 
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SourceOnlyRepositorySettingsDescriptor()
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForAzure()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor.Build(null);
 	}
 
-	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor(instance);
-	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor descriptor) => descriptor.Instance;
-
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor ChunkSize(Elastic.Clients.Elasticsearch.ByteSize? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForAzure(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor>? action)
 	{
-		Instance.ChunkSize = value;
-		return this;
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor.Build(action);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForSharedFileSystem(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystem value)
 	{
-		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
-		return this;
+		return value;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor Compress(bool? value = true)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForSharedFileSystem(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor> action)
 	{
-		Instance.Compress = value;
-		return this;
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForSharedFileSystemDescriptor.Build(action);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The delegated repository type. For valid values, refer to the <c>type</c> parameter.
-	/// Source repositories can use <c>settings</c> properties for its delegated repository type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor DelegateType(string? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForGcs(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcs value)
 	{
-		Instance.DelegateType = value;
-		return this;
+		return value;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxNumberOfSnapshots(int? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForGcs(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor> action)
 	{
-		Instance.MaxNumberOfSnapshots = value;
-		return this;
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForGcsDescriptor.Build(action);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxRestoreBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForS3(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3 value)
 	{
-		Instance.MaxRestoreBytesPerSec = value;
-		return this;
+		return value;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForS3(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor> action)
 	{
-		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
-		return this;
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor.Build(action);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxSnapshotBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForReadOnlyUrl(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl value)
 	{
-		Instance.MaxSnapshotBytesPerSec = value;
-		return this;
+		return value;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	public Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings ForReadOnlyUrl(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor> action)
 	{
-		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor ReadOnly(bool? value = true)
-	{
-		Instance.ReadOnly = value;
-		return this;
+		return Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor.Build(action);
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings Build(System.Func<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory, Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
-		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
-		action.Invoke(builder);
-		return builder.Instance;
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory();
+		return action.Invoke(builder);
 	}
 }

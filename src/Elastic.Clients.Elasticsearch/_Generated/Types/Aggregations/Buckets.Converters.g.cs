@@ -30,8 +30,8 @@ public sealed partial class BucketsConverter<TBucket> : System.Text.Json.Seriali
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.IDictionary<string, TBucket>>(options, static System.Collections.Generic.IDictionary<string, TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, TBucket>(o, null, null)!)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.ICollection<TBucket>>(options, static System.Collections.Generic.ICollection<TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<TBucket>(o, null)!)),
+			1 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.IDictionary<string, TBucket>>(options, static System.Collections.Generic.IDictionary<string, TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, TBucket>(o, null, null)!)),
+			2 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.ICollection<TBucket>>(options, static System.Collections.Generic.ICollection<TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<TBucket>(o, null)!)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>)}")
 		};
 	}

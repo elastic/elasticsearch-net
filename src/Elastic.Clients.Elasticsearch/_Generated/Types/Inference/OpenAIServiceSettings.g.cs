@@ -57,7 +57,7 @@ public sealed partial class OpenAIServiceSettings
 
 	/// <summary>
 	/// <para>
-	/// The number of dimensions the resulting output embeddings should have.
+	/// For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
 	/// It is supported only in <c>text-embedding-3</c> and later models.
 	/// If it is not set, the OpenAI defined default for the model is used.
 	/// </para>
@@ -84,15 +84,15 @@ public sealed partial class OpenAIServiceSettings
 	/// <para>
 	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
 	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c>, it is set to <c>500</c>.
+	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm. Defaults to <c>dot_product</c>.
+	/// For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? Similarity { get; set; }
@@ -101,6 +101,8 @@ public sealed partial class OpenAIServiceSettings
 	/// <para>
 	/// The URL endpoint to use for the requests.
 	/// It can be changed for testing purposes.
+	/// Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
+	/// <c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
 	/// </para>
 	/// </summary>
 	public string? Url { get; set; }
@@ -143,7 +145,7 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The number of dimensions the resulting output embeddings should have.
+	/// For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
 	/// It is supported only in <c>text-embedding-3</c> and later models.
 	/// If it is not set, the OpenAI defined default for the model is used.
 	/// </para>
@@ -182,8 +184,8 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	/// <para>
 	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
 	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c>, it is set to <c>500</c>.
+	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
@@ -196,8 +198,8 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	/// <para>
 	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
 	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c>, it is set to <c>500</c>.
+	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit()
@@ -210,8 +212,8 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	/// <para>
 	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
 	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c>, it is set to <c>500</c>.
+	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
+	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
@@ -222,7 +224,7 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm. Defaults to <c>dot_product</c>.
+	/// For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? value)
@@ -235,6 +237,8 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	/// <para>
 	/// The URL endpoint to use for the requests.
 	/// It can be changed for testing purposes.
+	/// Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
+	/// <c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Url(string? value)

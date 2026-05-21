@@ -23,13 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
-public sealed partial class EmbeddingContentObjectContentsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents>
+public sealed partial class EmbeddingContentObjectItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
 
-	public override Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat?> propFormat = default;
@@ -62,7 +62,7 @@ public sealed partial class EmbeddingContentObjectContentsConverter : System.Tex
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Format = propFormat.Value,
 			Type = propType.Value,
@@ -70,7 +70,7 @@ public sealed partial class EmbeddingContentObjectContentsConverter : System.Tex
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat>(o, v));

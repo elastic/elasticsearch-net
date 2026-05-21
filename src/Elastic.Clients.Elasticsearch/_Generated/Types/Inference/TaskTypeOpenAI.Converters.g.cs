@@ -27,6 +27,7 @@ public sealed partial class TaskTypeOpenAIConverter : System.Text.Json.Serializa
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberEmbedding = System.Text.Json.JsonEncodedText.Encode("embedding"u8);
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,6 +40,11 @@ public sealed partial class TaskTypeOpenAIConverter : System.Text.Json.Serializa
 		if (reader.ValueTextEquals(MemberCompletion))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Embedding;
 		}
 
 		if (reader.ValueTextEquals(MemberTextEmbedding))
@@ -55,6 +61,11 @@ public sealed partial class TaskTypeOpenAIConverter : System.Text.Json.Serializa
 		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Completion;
+		}
+
+		if (string.Equals(value, MemberEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Embedding;
 		}
 
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -74,6 +85,9 @@ public sealed partial class TaskTypeOpenAIConverter : System.Text.Json.Serializa
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Completion:
 				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.Embedding:
+				writer.WriteStringValue(MemberEmbedding);
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);

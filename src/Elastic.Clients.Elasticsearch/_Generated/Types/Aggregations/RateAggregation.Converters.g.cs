@@ -53,7 +53,7 @@ public sealed partial class RateAggregationConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static object? (ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options) => reader.ReadUnionValue<string, int, double, bool>(options, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 1), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.MatchTokenTypes(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 4), static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.Match(ref r, o, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 2, static (ref System.Text.Json.Utf8JsonReader _reader, System.Text.Json.JsonSerializerOptions _options) => 3))), null, null, null, null)))
 			{
 				continue;
 			}

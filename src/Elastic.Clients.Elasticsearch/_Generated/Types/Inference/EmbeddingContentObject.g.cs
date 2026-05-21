@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class EmbeddingContentObject
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public EmbeddingContentObject(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents content)
+	public EmbeddingContentObject(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem> content)
 	{
 		Content = content;
 	}
@@ -49,8 +49,8 @@ public sealed partial class EmbeddingContentObject
 
 	/// <summary>
 	/// <para>
-	/// An object containing the input data for the model to embed
+	/// An object or an array of objects containing the input data for the model to embed
 	/// </para>
 	/// </summary>
-	public required Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectContents Content { get; set; }
+	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem> Content { get; set; }
 }

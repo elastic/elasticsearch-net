@@ -230,7 +230,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Id name)
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Ids name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
 		var request = builder.Instance;
@@ -238,7 +238,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse DeleteView(Elastic.Clients.Elasticsearch.Ids name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
 		action.Invoke(builder);
@@ -253,7 +253,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Ids name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
 		var request = builder.Instance;
@@ -261,7 +261,7 @@ public partial class EsqlNamespacedClient : Elastic.Clients.Elasticsearch.Namesp
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest, Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse, Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Id name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Esql.DeleteViewResponse> DeleteViewAsync(Elastic.Clients.Elasticsearch.Ids name, System.Action<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor(name);
 		action.Invoke(builder);

@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings settings)
+	public SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings settings)
 	{
 		Settings = settings;
 	}
@@ -47,7 +47,7 @@ public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public required Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
+	public required Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -83,7 +83,7 @@ public readonly partial struct SourceOnlyRepositoryDescriptor
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings value)
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
@@ -94,20 +94,9 @@ public readonly partial struct SourceOnlyRepositoryDescriptor
 	/// The repository settings.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings()
+	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Func<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory, Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings> action)
 	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor>? action)
-	{
-		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(action);
+		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsFactory.Build(action);
 		return this;
 	}
 
