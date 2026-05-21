@@ -46,8 +46,8 @@ public sealed partial class MultiSearchResponseItemConverter<TDocument> : System
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "took");
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.ErrorResponseBase>(options, null)),
+			1 => new Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchItem<TDocument>>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.ErrorResponseBase>(options, null)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>)}")
 		};
 	}

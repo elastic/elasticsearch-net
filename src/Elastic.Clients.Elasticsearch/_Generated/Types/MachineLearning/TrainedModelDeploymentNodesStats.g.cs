@@ -44,6 +44,8 @@ public sealed partial class TrainedModelDeploymentNodesStats
 		_ = sentinel;
 	}
 
+	public Elastic.Clients.Elasticsearch.ByteSize? AverageInferenceProcessMemoryRssBytes { get; set; }
+
 	/// <summary>
 	/// <para>
 	/// The average time for each inference call to complete on this node.

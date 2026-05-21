@@ -135,6 +135,11 @@ public sealed partial class SplitIndexRequestParameters : Elastic.Transport.Requ
 /// </item>
 /// <item>
 /// <para>
+/// The number of primary shards in the target index must be a divisor of the source index's <c>index.number_of_routing_shards</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
 /// </para>
 /// </item>
@@ -300,6 +305,11 @@ public sealed partial class SplitIndexRequest : Elastic.Clients.Elasticsearch.Re
 /// <item>
 /// <para>
 /// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a divisor of the source index's <c>index.number_of_routing_shards</c>.
 /// </para>
 /// </item>
 /// <item>
@@ -668,6 +678,11 @@ public readonly partial struct SplitIndexRequestDescriptor
 /// <item>
 /// <para>
 /// The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a divisor of the source index's <c>index.number_of_routing_shards</c>.
 /// </para>
 /// </item>
 /// <item>

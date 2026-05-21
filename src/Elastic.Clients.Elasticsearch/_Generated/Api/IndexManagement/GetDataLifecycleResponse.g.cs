@@ -38,4 +38,5 @@ public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Product
 	}
 
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> DataStreams { get; set; }
+	public required Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention GlobalRetention { get; set; }
 }

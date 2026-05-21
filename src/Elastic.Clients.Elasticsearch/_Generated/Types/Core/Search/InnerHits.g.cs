@@ -39,7 +39,8 @@ public sealed partial class InnerHits
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 	public bool? Explain { get; set; }
-	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
+	public Elastic.Clients.Elasticsearch.Fields? Field { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -141,15 +142,39 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Field(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		Instance.Fields = value;
+		Instance.Fields = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Fields = items;
 		return this;
 	}
 
@@ -428,15 +453,51 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Field(Elastic.Clients.Elasticsearch.Fields? value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Field<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Field = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		Instance.Fields = value;
+		Instance.Fields = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
+		}
+
+		Instance.Fields = items;
 		return this;
 	}
 
