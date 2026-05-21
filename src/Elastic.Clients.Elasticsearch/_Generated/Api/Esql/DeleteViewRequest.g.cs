@@ -39,7 +39,7 @@ public sealed partial class DeleteViewRequestParameters : Elastic.Transport.Requ
 public sealed partial class DeleteViewRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeleteViewRequest(Elastic.Clients.Elasticsearch.Id name) : base(r => r.Required("name", name))
+	public DeleteViewRequest(Elastic.Clients.Elasticsearch.Ids name) : base(r => r.Required("name", name))
 	{
 	}
 
@@ -66,7 +66,7 @@ public sealed partial class DeleteViewRequest : Elastic.Clients.Elasticsearch.Re
 	/// The view name to remove.
 	/// </para>
 	/// </summary>
-	public required Elastic.Clients.Elasticsearch.Id Name { get => P<Elastic.Clients.Elasticsearch.Id>("name"); set => PR("name", value); }
+	public required Elastic.Clients.Elasticsearch.Ids Name { get => P<Elastic.Clients.Elasticsearch.Ids>("name"); set => PR("name", value); }
 }
 
 /// <summary>
@@ -87,7 +87,7 @@ public readonly partial struct DeleteViewRequestDescriptor
 		Instance = instance;
 	}
 
-	public DeleteViewRequestDescriptor(Elastic.Clients.Elasticsearch.Id name)
+	public DeleteViewRequestDescriptor(Elastic.Clients.Elasticsearch.Ids name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Esql.DeleteViewRequest(name);
 	}
@@ -106,7 +106,7 @@ public readonly partial struct DeleteViewRequestDescriptor
 	/// The view name to remove.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id value)
+	public Elastic.Clients.Elasticsearch.Esql.DeleteViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Name = value;
 		return this;

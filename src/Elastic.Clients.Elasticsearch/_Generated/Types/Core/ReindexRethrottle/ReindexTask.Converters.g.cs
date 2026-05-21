@@ -49,7 +49,7 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 		LocalJsonValue<string> propNode = default;
 		LocalJsonValue<System.TimeSpan> propRunningTimeInNanos = default;
 		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ReindexStatus> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus> propStatus = default;
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

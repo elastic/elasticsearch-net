@@ -98,6 +98,7 @@ public sealed partial class CharFilterTypes
 	/// </para>
 	/// </summary>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> FilterTypes { get; set; }
+	public Elastic.Clients.Elasticsearch.Cluster.MultipleSynonymGraphFilter? MultipleSynonymGraphFilters { get; set; }
 
 	/// <summary>
 	/// <para>

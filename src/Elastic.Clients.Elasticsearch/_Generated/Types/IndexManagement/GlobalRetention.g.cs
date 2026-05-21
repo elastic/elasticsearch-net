@@ -23,20 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleResponseConverter))]
-public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GlobalRetentionConverter))]
+public sealed partial class GlobalRetention
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDataLifecycleResponse()
+	public GlobalRetention()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal GetDataLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GlobalRetention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> DataStreams { get; set; }
-	public required Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention GlobalRetention { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? DefaultRetention { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? MaxRetention { get; set; }
 }

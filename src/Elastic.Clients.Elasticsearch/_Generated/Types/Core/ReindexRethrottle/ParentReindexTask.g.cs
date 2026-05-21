@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.Core.ReindexRethrottle;
 public sealed partial class ParentReindexTask
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ParentReindexTask(string action, bool cancellable, bool cancelled, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.ReindexStatus status, string type)
+	public ParentReindexTask(string action, bool cancellable, bool cancelled, string description, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<string>> headers, long id, string node, System.TimeSpan runningTimeInNanos, System.DateTimeOffset startTimeInMillis, Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus status, string type)
 	{
 		Action = action;
 		Cancellable = cancellable;
@@ -62,6 +62,6 @@ public sealed partial class ParentReindexTask
 	public required string Node { get; set; }
 	public required System.TimeSpan RunningTimeInNanos { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
-	public required Elastic.Clients.Elasticsearch.ReindexStatus Status { get; set; }
+	public required Elastic.Clients.Elasticsearch.Core.ReindexRethrottle.ParentReindexStatus Status { get; set; }
 	public required string Type { get; set; }
 }

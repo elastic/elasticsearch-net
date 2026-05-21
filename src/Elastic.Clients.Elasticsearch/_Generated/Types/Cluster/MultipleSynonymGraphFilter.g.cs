@@ -21,22 +21,32 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch.Cluster;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleResponseConverter))]
-public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.MultipleSynonymGraphFilterConverter))]
+public sealed partial class MultipleSynonymGraphFilter
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDataLifecycleResponse()
+	public MultipleSynonymGraphFilter()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal GetDataLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal MultipleSynonymGraphFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> DataStreams { get; set; }
-	public required Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention GlobalRetention { get; set; }
+	/// <summary>
+	/// <para>
+	/// Number of analyzers across the cluster whose filter chain contains more than one synonym_graph filter.
+	/// </para>
+	/// </summary>
+	public int? AnalyzerCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Number of indices that contain at least one analyzer with more than one synonym_graph filter.
+	/// </para>
+	/// </summary>
+	public int? IndexCount { get; set; }
 }

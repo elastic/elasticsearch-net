@@ -30,8 +30,8 @@ public sealed partial class SourceConfigParamConverter : System.Text.Json.Serial
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam(reader.ReadValue<bool>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam(reader.ReadValue<Elastic.Clients.Elasticsearch.Fields>(options, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)))),
+			1 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam(reader.ReadValue<bool>(options, null)),
+			2 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam(reader.ReadValue<Elastic.Clients.Elasticsearch.Fields>(options, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)))),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam)}")
 		};
 	}

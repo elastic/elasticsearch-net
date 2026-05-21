@@ -21,22 +21,46 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement;
+namespace Elastic.Clients.Elasticsearch;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataLifecycleResponseConverter))]
-public sealed partial class GetDataLifecycleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InferenceStringConverter))]
+public sealed partial class InferenceString
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetDataLifecycleResponse()
+	public InferenceString(Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType type, string value)
+	{
+		Type = type;
+		Value = value;
+	}
+
+	public InferenceString()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal GetDataLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal InferenceString(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamWithLifecycle> DataStreams { get; set; }
-	public required Elastic.Clients.Elasticsearch.IndexManagement.GlobalRetention GlobalRetention { get; set; }
+	/// <summary>
+	/// <para>
+	/// The format of the data. If null, the default data format for the given type is used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.EmbeddingContentFormat? Format { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The type of data that the value represents.
+	/// </para>
+	/// </summary>
+	public required Elastic.Clients.Elasticsearch.Inference.EmbeddingContentType Type { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// String which may be raw text, or the string representation of some other data such as an image in base64.
+	/// </para>
+	/// </summary>
+	public required string Value { get; set; }
 }
