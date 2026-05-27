@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MutualInformationHeuristicConverter))]
 public sealed partial class MutualInformationHeuristic
 {
@@ -36,21 +37,14 @@ public sealed partial class MutualInformationHeuristic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="MutualInformationHeuristic.g.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic#background_is_superset']/*"/>
 	public bool? BackgroundIsSuperset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
+	/// <include file="MutualInformationHeuristic.g.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic#include_negatives']/*"/>
 	public bool? IncludeNegatives { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic']/*"/>
 public readonly partial struct MutualInformationHeuristicDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct MutualInformationHeuristicDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic instance) => new Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic(Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> if you defined a custom background filter that represents a different set of documents that you want to compare to.
-	/// </para>
-	/// </summary>
+	/// <include file="MutualInformationHeuristic.g.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic#background_is_superset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor BackgroundIsSuperset(bool? value = true)
 	{
 		Instance.BackgroundIsSuperset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>false</c> to filter out the terms that appear less often in the subset than in documents outside the subset.
-	/// </para>
-	/// </summary>
+	/// <include file="MutualInformationHeuristic.g.xml" path="doc/member[@key='_types.aggregations.MutualInformationHeuristic#include_negatives']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristicDescriptor IncludeNegatives(bool? value = true)
 	{
 		Instance.IncludeNegatives = value;

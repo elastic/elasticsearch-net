@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.SamplerAggregation#shard_size"><summary><para>
+Limits how many top-scoring documents are collected in the sample processed on each shard.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TruncateTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.TruncateTokenFilterConverter))]
 public sealed partial class TruncateTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class TruncateTokenFilter : Elastic.Clients.Elasticsearch.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TruncateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.TruncateTokenFilter#length']/*"/>
 	public int? Length { get; set; }
 
 	public string Type => "truncate";
@@ -48,6 +45,7 @@ public sealed partial class TruncateTokenFilter : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.TruncateTokenFilter']/*"/>
 public readonly partial struct TruncateTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter Instance { get; init; }
@@ -67,11 +65,7 @@ public readonly partial struct TruncateTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="TruncateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.TruncateTokenFilter#length']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor Length(int? value)
 	{
 		Instance.Length = value;

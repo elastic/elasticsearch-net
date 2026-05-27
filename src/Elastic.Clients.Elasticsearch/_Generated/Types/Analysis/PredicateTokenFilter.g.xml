@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.PredicateTokenFilter#script"><summary><para>
+Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
+</para></summary></member>
+</doc>

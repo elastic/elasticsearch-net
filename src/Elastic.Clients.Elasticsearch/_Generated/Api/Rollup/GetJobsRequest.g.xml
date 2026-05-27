@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.get_jobs.Request"><summary><para>
+Get rollup job information.
+Get the configuration, stats, and status of rollup jobs.
+</para>
+<para>
+NOTE: This API returns only active (both <c>STARTED</c> and <c>STOPPED</c>) jobs.
+If a job was created, ran for a while, then was deleted, the API does not return any details about it.
+For details about a historical rollup job, the rollup capabilities API may be more useful.
+</para></summary></member>
+  <member key="rollup.get_jobs.Request#id"><summary><para>
+Identifier for the rollup job.
+If it is <c>_all</c> or omitted, the API returns all rollup jobs.
+</para></summary></member>
+</doc>

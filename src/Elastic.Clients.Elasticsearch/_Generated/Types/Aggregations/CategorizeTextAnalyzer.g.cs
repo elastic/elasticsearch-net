@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CategorizeTextAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CategorizeTextAnalyzerConverter))]
 public sealed partial class CategorizeTextAnalyzer : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer>
 {

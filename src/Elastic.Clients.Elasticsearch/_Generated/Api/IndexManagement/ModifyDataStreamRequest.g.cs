@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 public sealed partial class ModifyDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update data streams.
-/// Performs one or more data stream modification actions in a single atomic operation.
-/// </para>
-/// </summary>
+/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ModifyDataStreamRequestConverter))]
 public sealed partial class ModifyDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>
 {
@@ -60,20 +58,12 @@ public sealed partial class ModifyDataStreamRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.modify_data_stream";
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request#actions']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> Actions { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update data streams.
-/// Performs one or more data stream modification actions in a single atomic operation.
-/// </para>
-/// </summary>
+/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 public readonly partial struct ModifyDataStreamRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest Instance { get; init; }
@@ -92,33 +82,21 @@ public readonly partial struct ModifyDataStreamRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction> value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(params Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction[] values)
 	{
 		Instance.Actions = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Actions to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor Actions(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamActionDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.IndexModifyDataStreamAction>();

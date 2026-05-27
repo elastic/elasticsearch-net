@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.VariableWidthHistogramAggregationConverter))]
 public sealed partial class VariableWidthHistogramAggregation
 {
@@ -36,38 +37,21 @@ public sealed partial class VariableWidthHistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#buckets']/*"/>
 	public int? Buckets { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
-	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#initial_buffer']/*"/>
 	public int? InitialBuffer { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets that the coordinating node will request from each shard.
-	/// Defaults to <c>buckets * 50</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation']/*"/>
 public readonly partial struct VariableWidthHistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation Instance { get; init; }
@@ -87,45 +71,28 @@ public readonly partial struct VariableWidthHistogramAggregationDescriptor<TDocu
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#buckets']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> Buckets(int? value)
 	{
 		Instance.Buckets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
-	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#initial_buffer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> InitialBuffer(int? value)
 	{
 		Instance.InitialBuffer = value;
@@ -150,12 +117,7 @@ public readonly partial struct VariableWidthHistogramAggregationDescriptor<TDocu
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets that the coordinating node will request from each shard.
-	/// Defaults to <c>buckets * 50</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
@@ -176,6 +138,7 @@ public readonly partial struct VariableWidthHistogramAggregationDescriptor<TDocu
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation']/*"/>
 public readonly partial struct VariableWidthHistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation Instance { get; init; }
@@ -195,45 +158,28 @@ public readonly partial struct VariableWidthHistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#buckets']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor Buckets(int? value)
 	{
 		Instance.Buckets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of individual documents that will be stored in memory on a shard before the initial bucketing algorithm is run.
-	/// Defaults to <c>min(10 * shard_size, 50000)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#initial_buffer']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor InitialBuffer(int? value)
 	{
 		Instance.InitialBuffer = value;
@@ -258,12 +204,7 @@ public readonly partial struct VariableWidthHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of buckets that the coordinating node will request from each shard.
-	/// Defaults to <c>buckets * 50</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VariableWidthHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.VariableWidthHistogramAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;

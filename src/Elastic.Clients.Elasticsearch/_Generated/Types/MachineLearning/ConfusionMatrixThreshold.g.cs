@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.ConfusionMatrixThreshold']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ConfusionMatrixThresholdConverter))]
 public sealed partial class ConfusionMatrixThreshold
 {
@@ -45,31 +46,15 @@ public sealed partial class ConfusionMatrixThreshold
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// False Negative
-	/// </para>
-	/// </summary>
+	/// <include file="ConfusionMatrixThreshold.g.xml" path="doc/member[@key='ml.evaluate_data_frame.ConfusionMatrixThreshold#fn']/*"/>
 	public required int FalseNegative { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// False Positive
-	/// </para>
-	/// </summary>
+	/// <include file="ConfusionMatrixThreshold.g.xml" path="doc/member[@key='ml.evaluate_data_frame.ConfusionMatrixThreshold#fp']/*"/>
 	public required int FalsePositive { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// True Negative
-	/// </para>
-	/// </summary>
+	/// <include file="ConfusionMatrixThreshold.g.xml" path="doc/member[@key='ml.evaluate_data_frame.ConfusionMatrixThreshold#tn']/*"/>
 	public required int TrueNegative { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// True Positive
-	/// </para>
-	/// </summary>
+	/// <include file="ConfusionMatrixThreshold.g.xml" path="doc/member[@key='ml.evaluate_data_frame.ConfusionMatrixThreshold#tp']/*"/>
 	public required int TruePositive { get; set; }
 }

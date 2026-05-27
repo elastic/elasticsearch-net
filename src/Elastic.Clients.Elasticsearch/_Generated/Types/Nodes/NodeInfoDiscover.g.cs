@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeInfoDiscover']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoDiscoverConverter))]
 public sealed partial class NodeInfoDiscover
 {
@@ -38,12 +39,6 @@ public sealed partial class NodeInfoDiscover
 
 	public System.Collections.Generic.ICollection<string>? SeedHosts { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? SeedProviders { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional or alternative settings
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Settings { get; set; }
 	public string? Type { get; set; }
 }

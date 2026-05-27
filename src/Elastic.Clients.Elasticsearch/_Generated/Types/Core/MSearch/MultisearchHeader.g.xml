@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.msearch.MultisearchHeader"><summary><para>
+Contains parameters used to limit or change the subsequent search body request.
+</para></summary></member>
+</doc>

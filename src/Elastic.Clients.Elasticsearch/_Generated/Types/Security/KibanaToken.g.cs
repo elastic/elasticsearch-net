@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enroll_kibana.KibanaToken']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.KibanaTokenConverter))]
 public sealed partial class KibanaToken
 {
@@ -43,18 +44,9 @@ public sealed partial class KibanaToken
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the bearer token for the <c>elastic/kibana</c> service account.
-	/// </para>
-	/// </summary>
+	/// <include file="KibanaToken.g.xml" path="doc/member[@key='security.enroll_kibana.KibanaToken#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value of the bearer token for the <c>elastic/kibana</c> service account.
-	/// Use this value to authenticate the service account with Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="KibanaToken.g.xml" path="doc/member[@key='security.enroll_kibana.KibanaToken#value']/*"/>
 	public required string Value { get; set; }
 }

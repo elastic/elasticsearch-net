@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ErrorResponseBase"><summary><para>
+The response returned by Elasticsearch when request execution did not succeed.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLogarithm']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionLogarithmConverter))]
 public sealed partial class RankFeatureFunctionLogarithm
 {
@@ -42,14 +43,11 @@ public sealed partial class RankFeatureFunctionLogarithm
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configurable scaling factor.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionLogarithm.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLogarithm#scaling_factor']/*"/>
 	public required float ScalingFactor { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLogarithm']/*"/>
 public readonly partial struct RankFeatureFunctionLogarithmDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm Instance { get; init; }
@@ -69,11 +67,7 @@ public readonly partial struct RankFeatureFunctionLogarithmDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Configurable scaling factor.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionLogarithm.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionLogarithm#scaling_factor']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor ScalingFactor(float value)
 	{
 		Instance.ScalingFactor = value;

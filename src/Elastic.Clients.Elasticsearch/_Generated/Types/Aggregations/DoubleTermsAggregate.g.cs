@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of a <c>terms</c> aggregation when the field is some kind of decimal number like a float, double, or distance.
-/// </para>
-/// </summary>
+/// <include file="DoubleTermsAggregate.g.xml" path="doc/member[@key='_types.aggregations.DoubleTermsAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DoubleTermsAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DoubleTermsAggregateConverter))]
 public sealed partial class DoubleTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

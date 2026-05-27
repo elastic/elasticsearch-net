@@ -23,129 +23,53 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 public sealed partial class MultiSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hit.matched_queries should be rendered as a map that includes
-	/// the name of the matched query associated with its score (true)
-	/// or as an array containing the name of the matched queries (false)
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#include_named_queries_score']/*"/>
 	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_searches']/*"/>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_shard_requests']/*"/>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#pre_filter_shard_size']/*"/>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value used to route search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run multiple searches.
-/// </para>
-/// <para>
-/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
-/// The structure is as follows:
-/// </para>
-/// <code>
-/// header\n
-/// body\n
-/// header\n
-/// body\n
-/// </code>
-/// <para>
-/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
-/// </para>
-/// <para>
-/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
-/// Each newline character may be preceded by a carriage return <c>\r</c>.
-/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
@@ -184,135 +108,53 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "msearch";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases to search.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hit.matched_queries should be rendered as a map that includes
-	/// the name of the matched query associated with its score (true)
-	/// or as an array containing the name of the matched queries (false)
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#include_named_queries_score']/*"/>
 	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_searches']/*"/>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_shard_requests']/*"/>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#pre_filter_shard_size']/*"/>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value used to route search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> Searches { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run multiple searches.
-/// </para>
-/// <para>
-/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
-/// The structure is as follows:
-/// </para>
-/// <code>
-/// header\n
-/// body\n
-/// header\n
-/// body\n
-/// </code>
-/// <para>
-/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
-/// </para>
-/// <para>
-/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
-/// Each newline character may be preceded by a carriage return <c>\r</c>.
-/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 public readonly partial struct MultiSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MultiSearchRequest Instance { get; init; }
@@ -338,55 +180,35 @@ public readonly partial struct MultiSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases to search.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -394,115 +216,70 @@ public readonly partial struct MultiSearchRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hit.matched_queries should be rendered as a map that includes
-	/// the name of the matched query associated with its score (true)
-	/// or as an array containing the name of the matched queries (false)
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#include_named_queries_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor IncludeNamedQueriesScore(bool? value = true)
 	{
 		Instance.IncludeNamedQueriesScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentSearches(long? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#pre_filter_shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor PreFilterShardSize(long? value)
 	{
 		Instance.PreFilterShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value used to route search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
@@ -577,29 +354,8 @@ public readonly partial struct MultiSearchRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run multiple searches.
-/// </para>
-/// <para>
-/// The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
-/// The structure is as follows:
-/// </para>
-/// <code>
-/// header\n
-/// body\n
-/// header\n
-/// body\n
-/// </code>
-/// <para>
-/// This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
-/// </para>
-/// <para>
-/// IMPORTANT: The final line of data must end with a newline character <c>\n</c>.
-/// Each newline character may be preceded by a carriage return <c>\r</c>.
-/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
-/// </para>
-/// </summary>
+/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch.Request']/*"/>
 public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MultiSearchRequest Instance { get; init; }
@@ -625,55 +381,35 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and index aliases to search.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -681,115 +417,70 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hit.matched_queries should be rendered as a map that includes
-	/// the name of the matched query associated with its score (true)
-	/// or as an array containing the name of the matched queries (false)
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#include_named_queries_score']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> IncludeNamedQueriesScore(bool? value = true)
 	{
 		Instance.IncludeNamedQueriesScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent searches the multi search API can execute.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentSearches(long? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#pre_filter_shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> PreFilterShardSize(long? value)
 	{
 		Instance.PreFilterShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom routing value used to route search operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether global term and document frequencies should be used when scoring returned documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchRequest.g.xml" path="doc/member[@key='_global.msearch.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;

@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 public sealed partial class DeleteSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
-	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete snapshots.
-/// </para>
-/// </summary>
+/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.DeleteSnapshotRequestConverter))]
 public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>
 {
@@ -74,44 +62,21 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "snapshot.delete";
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository to delete a snapshot from.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Repository { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of snapshot names to delete.
-	/// It also accepts wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#snapshot']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
-	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete snapshots.
-/// </para>
-/// </summary>
+/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 public readonly partial struct DeleteSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest Instance { get; init; }
@@ -136,48 +101,28 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the repository to delete a snapshot from.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Repository = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of snapshot names to delete.
-	/// It also accepts wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Snapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
-	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

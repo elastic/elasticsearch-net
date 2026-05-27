@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.query_api_keys.Request"><summary><para>
+Find API keys with a query.
+</para>
+<para>
+Get a paginated list of API keys and their information.
+You can optionally filter the results with a query.
+</para>
+<para>
+To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
+If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
+If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#aggregations"><summary><para>
+Any aggregations to run over the corpus of returned API keys.
+Aggregations and queries work together. Aggregations are computed only on the API keys that match the query.
+This supports only a subset of aggregation types, namely: <c>terms</c>, <c>range</c>, <c>date_range</c>, <c>missing</c>,
+<c>cardinality</c>, <c>value_count</c>, <c>composite</c>, <c>filter</c>, and <c>filters</c>.
+Additionally, aggregations only run over the same subset of fields that query works with.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#from"><summary><para>
+The starting document offset.
+It must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#query"><summary><para>
+A query to filter which API keys to return.
+If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
+The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
+<c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
+You can query the following public information associated with an API key: <c>id</c>, <c>type</c>, <c>name</c>,
+<c>creation</c>, <c>expiration</c>, <c>invalidated</c>, <c>invalidation</c>, <c>username</c>, <c>realm</c>, and <c>metadata</c>.
+</para>
+<para>
+NOTE: The queryable string values associated with API keys are internally mapped as keywords.
+Consequently, if no <c>analyzer</c> parameter is specified for a <c>match</c> query, then the provided match query string is interpreted as a single keyword value.
+Such a match query is hence equivalent to a <c>term</c> query.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#search_after"><summary><para>
+The search after definition.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#size"><summary><para>
+The number of hits to return.
+It must not be negative.
+The <c>size</c> parameter can be set to <c>0</c>, in which case no API key matches are returned, only the aggregation results.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#sort"><summary><para>
+The sort definition.
+Other than <c>id</c>, all public fields of an API key are eligible for sorting.
+In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#typed_keys"><summary><para>
+Determines whether aggregation names are prefixed by their respective types in the response.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#with_limited_by"><summary><para>
+Return the snapshot of the owner user's role descriptors associated with the API key.
+An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors (effectively limited by it).
+An API key cannot retrieve any API key’s limited-by role descriptors (including itself) unless it has <c>manage_api_key</c> or higher privileges.
+</para></summary></member>
+  <member key="security.query_api_keys.Request#with_profile_uid"><summary><para>
+Determines whether to also retrieve the profile UID for the API key owner principal.
+If it exists, the profile UID is returned under the <c>profile_uid</c> response field for each API key.
+</para></summary></member>
+</doc>

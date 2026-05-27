@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.FieldValueFactorScoreFunction#factor"><summary><para>
+Optional factor to multiply the field value with.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorScoreFunction#field"><summary><para>
+Field to be extracted from the document.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorScoreFunction#missing"><summary><para>
+Value used if the document doesn’t have that field.
+The modifier and factor are still applied to it as though it were read from the document.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorScoreFunction#modifier"><summary><para>
+Modifier to apply to the field value.
+</para></summary></member>
+</doc>

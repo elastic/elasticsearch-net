@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
 public sealed partial class PutGoogleaistudioRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Google AI Studio inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutGoogleaistudioRequestConverter))]
 public sealed partial class PutGoogleaistudioRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>
 {
@@ -74,57 +66,27 @@ public sealed partial class PutGoogleaistudioRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "inference.put_googleaistudio";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#googleaistudio_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id GoogleaistudioInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("googleaistudio_inference_id"); set => PR("googleaistudio_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>googleaistudio</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#service']/*"/>
 	public string Service => "googleaistudio";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>googleaistudio</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Google AI Studio inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_googleaistudio.Request']/*"/>
 public readonly partial struct PutGoogleaistudioRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest Instance { get; init; }
@@ -151,88 +113,56 @@ public readonly partial struct PutGoogleaistudioRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest(Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#googleaistudio_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor GoogleaistudioInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.GoogleaistudioInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>googleaistudio</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>googleaistudio</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioRequest.g.xml" path="doc/member[@key='inference.put_googleaistudio.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioServiceSettingsDescriptor.Build(action);

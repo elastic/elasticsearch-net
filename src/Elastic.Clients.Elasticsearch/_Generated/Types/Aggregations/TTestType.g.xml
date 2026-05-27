@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.TTestType#heteroscedastic"><summary><para>
+Performs two-sample unequal variance test.
+</para></summary></member>
+  <member key="_types.aggregations.TTestType#homoscedastic"><summary><para>
+Performs two-sample equal variance test.
+</para></summary></member>
+  <member key="_types.aggregations.TTestType#paired"><summary><para>
+Performs paired t-test.
+</para></summary></member>
+</doc>

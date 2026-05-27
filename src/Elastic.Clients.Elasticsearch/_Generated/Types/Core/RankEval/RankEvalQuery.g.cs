@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalQueryConverter))]
 public sealed partial class RankEvalQuery
 {
@@ -46,6 +47,7 @@ public sealed partial class RankEvalQuery
 	public int? Size { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalQuery']/*"/>
 public readonly partial struct RankEvalQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Instance { get; init; }
@@ -92,6 +94,7 @@ public readonly partial struct RankEvalQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalQuery']/*"/>
 public readonly partial struct RankEvalQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Instance { get; init; }

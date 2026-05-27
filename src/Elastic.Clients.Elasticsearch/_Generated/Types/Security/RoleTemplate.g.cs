@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleTemplate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleTemplateConverter))]
 public sealed partial class RoleTemplate
 {
@@ -46,6 +47,7 @@ public sealed partial class RoleTemplate
 	public required Elastic.Clients.Elasticsearch.Script Template { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleTemplate']/*"/>
 public readonly partial struct RoleTemplateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.RoleTemplate Instance { get; init; }

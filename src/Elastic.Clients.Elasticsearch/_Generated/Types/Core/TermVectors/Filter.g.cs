@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Filter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.Json.FilterConverter))]
 public sealed partial class Filter
 {
@@ -36,59 +37,29 @@ public sealed partial class Filter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore words which occur in more than this many docs.
-	/// Defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_doc_freq']/*"/>
 	public int? MaxDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of terms that must be returned per field.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_num_terms']/*"/>
 	public int? MaxNumTerms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore words with more than this frequency in the source doc.
-	/// It defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_term_freq']/*"/>
 	public int? MaxTermFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum word length above which words will be ignored.
-	/// Defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_word_length']/*"/>
 	public int? MaxWordLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore terms which do not occur in at least this many docs.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_doc_freq']/*"/>
 	public int? MinDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore words with less than this frequency in the source doc.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_term_freq']/*"/>
 	public int? MinTermFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum word length below which words will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_word_length']/*"/>
 	public int? MinWordLength { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Filter']/*"/>
 public readonly partial struct FilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.TermVectors.Filter Instance { get; init; }
@@ -108,80 +79,49 @@ public readonly partial struct FilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter instance) => new Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.TermVectors.Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Ignore words which occur in more than this many docs.
-	/// Defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MaxDocFreq(int? value)
 	{
 		Instance.MaxDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of terms that must be returned per field.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_num_terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MaxNumTerms(int? value)
 	{
 		Instance.MaxNumTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore words with more than this frequency in the source doc.
-	/// It defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MaxTermFreq(int? value)
 	{
 		Instance.MaxTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum word length above which words will be ignored.
-	/// Defaults to unbounded.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#max_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MaxWordLength(int? value)
 	{
 		Instance.MaxWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore terms which do not occur in at least this many docs.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MinDocFreq(int? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore words with less than this frequency in the source doc.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MinTermFreq(int? value)
 	{
 		Instance.MinTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum word length below which words will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='_global.termvectors.Filter#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;

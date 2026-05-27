@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterShardMetrics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterShardMetricsConverter))]
 public sealed partial class ClusterShardMetrics
 {
@@ -44,24 +45,12 @@ public sealed partial class ClusterShardMetrics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Mean number of shards in an index, counting only shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterShardMetrics.g.xml" path="doc/member[@key='cluster.stats.ClusterShardMetrics#avg']/*"/>
 	public required double Avg { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of shards in an index, counting only shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterShardMetrics.g.xml" path="doc/member[@key='cluster.stats.ClusterShardMetrics#max']/*"/>
 	public required double Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of shards in an index, counting only shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterShardMetrics.g.xml" path="doc/member[@key='cluster.stats.ClusterShardMetrics#min']/*"/>
 	public required double Min { get; set; }
 }

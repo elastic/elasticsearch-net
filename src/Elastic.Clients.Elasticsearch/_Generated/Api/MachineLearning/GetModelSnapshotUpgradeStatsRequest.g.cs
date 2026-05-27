@@ -23,43 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
 public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
-	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
-	/// no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job model snapshot upgrade usage info.
-/// </para>
-/// </summary>
+/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetModelSnapshotUpgradeStatsRequestConverter))]
 public sealed partial class GetModelSnapshotUpgradeStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>
 {
@@ -86,57 +59,18 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequest : Elastic.Client
 
 	internal override string OperationName => "ml.get_model_snapshot_upgrade_stats";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
-	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
-	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#snapshot_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
-	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
-	/// no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job model snapshot upgrade usage info.
-/// </para>
-/// </summary>
+/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request']/*"/>
 public readonly partial struct GetModelSnapshotUpgradeStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest Instance { get; init; }
@@ -161,57 +95,21 @@ public readonly partial struct GetModelSnapshotUpgradeStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
-	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
-	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no jobs that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
-	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
-	/// no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetModelSnapshotUpgradeStatsRequest.g.xml" path="doc/member[@key='ml.get_model_snapshot_upgrade_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;

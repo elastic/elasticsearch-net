@@ -37,10 +37,6 @@ public sealed partial class DeleteTrainedModelResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteTrainedModelResponse.g.xml" path="doc/member[@key='ml.delete_trained_model.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

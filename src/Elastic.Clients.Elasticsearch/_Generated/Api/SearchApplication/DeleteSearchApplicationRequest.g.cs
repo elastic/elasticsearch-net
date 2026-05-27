@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 public sealed partial class DeleteSearchApplicationRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a search application.
-/// </para>
-/// <para>
-/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-/// </para>
-/// </summary>
+/// <include file="DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.DeleteSearchApplicationRequestConverter))]
 public sealed partial class DeleteSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class DeleteSearchApplicationRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "search_application.delete";
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a search application.
-/// </para>
-/// <para>
-/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-/// </para>
-/// </summary>
+/// <include file="DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete.Request']/*"/>
 public readonly partial struct DeleteSearchApplicationRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct DeleteSearchApplicationRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.delete.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.BucketCorrelationFunction#count_correlation"><summary><para>
+The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
+</para></summary></member>
+</doc>

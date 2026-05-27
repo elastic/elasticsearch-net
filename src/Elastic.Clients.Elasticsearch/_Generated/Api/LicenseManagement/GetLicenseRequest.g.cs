@@ -23,38 +23,20 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get.Request']/*"/>
 public sealed partial class GetLicenseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
-	/// This parameter is deprecated and will always be set to true in 8.x.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#accept_enterprise']/*"/>
 	[System.Obsolete("Deprecated in '7.6.0'.")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get license information.
-/// </para>
-/// <para>
-/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
-/// </para>
-/// <para>
-/// info
-/// If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
-/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
-/// </para>
-/// </summary>
+/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.GetLicenseRequestConverter))]
 public sealed partial class GetLicenseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>
 {
@@ -76,36 +58,16 @@ public sealed partial class GetLicenseRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "license.get";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
-	/// This parameter is deprecated and will always be set to true in 8.x.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#accept_enterprise']/*"/>
 	[System.Obsolete("Deprecated in '7.6.0'.")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get license information.
-/// </para>
-/// <para>
-/// Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
-/// </para>
-/// <para>
-/// info
-/// If the master node is generating a new cluster state, the get license API may return a <c>404 Not Found</c> response.
-/// If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
-/// </para>
-/// </summary>
+/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.get.Request']/*"/>
 public readonly partial struct GetLicenseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest Instance { get; init; }
@@ -125,23 +87,14 @@ public readonly partial struct GetLicenseRequestDescriptor
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor descriptor) => descriptor.Instance;
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this parameter returns enterprise for Enterprise license types. If <c>false</c>, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
-	/// This parameter is deprecated and will always be set to true in 8.x.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#accept_enterprise']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor AcceptEnterprise(bool? value = true)
 	{
 		Instance.AcceptEnterprise = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetLicenseRequest.g.xml" path="doc/member[@key='license.get.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;

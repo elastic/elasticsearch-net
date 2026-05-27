@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalHitItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalHitItemConverter))]
 public sealed partial class RankEvalHitItem
 {

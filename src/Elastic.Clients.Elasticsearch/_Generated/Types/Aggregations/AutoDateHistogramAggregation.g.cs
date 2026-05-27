@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AutoDateHistogramAggregationConverter))]
 public sealed partial class AutoDateHistogramAggregation
 {
@@ -36,61 +37,31 @@ public sealed partial class AutoDateHistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#buckets']/*"/>
 	public int? Buckets { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum rounding interval.
-	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#minimum_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? MinimumInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#missing']/*"/>
 	public System.DateTimeOffset? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time zone specified as a ISO 8601 UTC offset.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#offset']/*"/>
 	public string? Offset { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time zone ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation']/*"/>
 public readonly partial struct AutoDateHistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Instance { get; init; }
@@ -110,80 +81,49 @@ public readonly partial struct AutoDateHistogramAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#buckets']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Buckets(int? value)
 	{
 		Instance.Buckets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum rounding interval.
-	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#minimum_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? value)
 	{
 		Instance.MinimumInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone specified as a ISO 8601 UTC offset.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> Offset(string? value)
 	{
 		Instance.Offset = value;
@@ -233,11 +173,7 @@ public readonly partial struct AutoDateHistogramAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -258,6 +194,7 @@ public readonly partial struct AutoDateHistogramAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation']/*"/>
 public readonly partial struct AutoDateHistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation Instance { get; init; }
@@ -277,80 +214,49 @@ public readonly partial struct AutoDateHistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The target number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#buckets']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Buckets(int? value)
 	{
 		Instance.Buckets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>key_as_string</c> in the response.
-	/// If no <c>format</c> is specified, the first date format specified in the field mapping is used.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum rounding interval.
-	/// This can make the collection process more efficient, as the aggregation will not attempt to round at any interval lower than <c>minimum_interval</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#minimum_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor MinimumInterval(Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? value)
 	{
 		Instance.MinimumInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Missing(System.DateTimeOffset? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone specified as a ISO 8601 UTC offset.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#offset']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor Offset(string? value)
 	{
 		Instance.Offset = value;
@@ -400,11 +306,7 @@ public readonly partial struct AutoDateHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone ID.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.AutoDateHistogramAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregationDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

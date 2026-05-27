@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.PinnedRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.PinnedRetrieverConverter))]
 public sealed partial class PinnedRetriever
 {
@@ -44,37 +45,22 @@ public sealed partial class PinnedRetriever
 
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SpecifiedDocument>? Docs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 	public System.Collections.Generic.ICollection<string>? Ids { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#_name']/*"/>
 	public string? Name { get; set; }
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.PinnedRetriever']/*"/>
 public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.PinnedRetriever Instance { get; init; }
@@ -118,33 +104,21 @@ public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -169,22 +143,14 @@ public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
@@ -197,22 +163,14 @@ public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
@@ -228,6 +186,7 @@ public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.PinnedRetriever']/*"/>
 public readonly partial struct PinnedRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.PinnedRetriever Instance { get; init; }
@@ -271,33 +230,21 @@ public readonly partial struct PinnedRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -310,11 +257,7 @@ public readonly partial struct PinnedRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -339,22 +282,14 @@ public readonly partial struct PinnedRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
@@ -367,33 +302,21 @@ public readonly partial struct PinnedRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner retriever.
-	/// </para>
-	/// </summary>
+	/// <include file="PinnedRetriever.g.xml" path="doc/member[@key='_types.PinnedRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);

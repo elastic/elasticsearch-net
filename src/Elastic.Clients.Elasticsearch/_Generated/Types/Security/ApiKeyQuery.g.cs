@@ -39,85 +39,16 @@ public sealed partial class ApiKeyQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? Bool { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery>("bool"); set => SetVariant("bool", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? Exists { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery>("exists"); set => SetVariant("exists", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? Ids { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery>("ids"); set => SetVariant("ids", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? Match { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery>("match"); set => SetVariant("match", value); }
-
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? MatchAll { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery>("match_all"); set => SetVariant("match_all", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery>("prefix"); set => SetVariant("prefix", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery>("range"); set => SetVariant("range", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? SimpleQueryString { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery>("simple_query_string"); set => SetVariant("simple_query_string", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? Term { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermQuery>("term"); set => SetVariant("term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery>("terms"); set => SetVariant("terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? Wildcard { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery>("wildcard"); set => SetVariant("wildcard", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery value) => new Elastic.Clients.Elasticsearch.Security.ApiKeyQuery { Bool = value };
@@ -174,284 +105,150 @@ public readonly partial struct ApiKeyQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
 		Instance.Bool = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Bool()
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
 		Instance.Exists = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Ids()
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
 	{
 		Instance.MatchAll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> MatchAll()
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
 	{
 		Instance.SimpleQueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument> Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<TDocument>.Build(action);
@@ -486,386 +283,204 @@ public readonly partial struct ApiKeyQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyQuery(Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery? value)
 	{
 		Instance.Bool = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Bool()
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Bool(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches documents matching boolean combinations of other queries.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Bool<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>>? action)
 	{
 		Instance.Bool = Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery? value)
 	{
 		Instance.Exists = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Exists(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an indexed value for a field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Exists<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>> action)
 	{
 		Instance.Exists = Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Ids()
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on their IDs.
-	/// This query uses document IDs stored in the <c>_id</c> field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Ids(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor>? action)
 	{
 		Instance.Ids = Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery? value)
 	{
 		Instance.Match = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Match(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that match a provided text, number, date or boolean value.
-	/// The provided text is analyzed before matching.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Match<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>> action)
 	{
 		Instance.Match = Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery? value)
 	{
 		Instance.MatchAll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor MatchAll()
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Matches all documents, giving them all a <c>_score</c> of 1.0.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor MatchAll(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor>? action)
 	{
 		Instance.MatchAll = Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain a specific prefix in a provided field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms within a provided range.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Range<T>(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery> action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery? value)
 	{
 		Instance.SimpleQueryString = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor SimpleQueryString(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents based on a provided query string, using a parser with a limited but fault-tolerant syntax.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor SimpleQueryString<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>> action)
 	{
 		Instance.SimpleQueryString = Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain an exact term in a provided field.
-	/// To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain one or more exact terms in a provided field.
-	/// To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>> action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery? value)
 	{
 		Instance.Wildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Wildcard(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns documents that contain terms matching a wildcard pattern.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor Wildcard<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>> action)
 	{
 		Instance.Wildcard = Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor<T>.Build(action);

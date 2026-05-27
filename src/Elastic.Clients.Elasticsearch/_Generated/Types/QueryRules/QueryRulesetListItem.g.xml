@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="query_rules.list_rulesets.QueryRulesetListItem#rule_criteria_types_counts"><summary><para>
+A map of criteria type (for example, <c>exact</c>) to the number of rules of that type.
+</para>
+<para>
+NOTE: The counts in <c>rule_criteria_types_counts</c> may be larger than the value of <c>rule_total_count</c> because a rule may have multiple criteria.
+</para></summary></member>
+  <member key="query_rules.list_rulesets.QueryRulesetListItem#rule_total_count"><summary><para>
+The number of rules associated with the ruleset.
+</para></summary></member>
+  <member key="query_rules.list_rulesets.QueryRulesetListItem#rule_type_counts"><summary><para>
+A map of rule type (for example, <c>pinned</c>) to the number of rules of that type.
+</para></summary></member>
+  <member key="query_rules.list_rulesets.QueryRulesetListItem#ruleset_id"><summary><para>
+A unique identifier for the ruleset.
+</para></summary></member>
+</doc>

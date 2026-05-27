@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ModelSnapshot']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ModelSnapshotConverter))]
 public sealed partial class ModelSnapshot
 {
@@ -47,73 +48,33 @@ public sealed partial class ModelSnapshot
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the job that the snapshot was created for.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#job_id']/*"/>
 	public required string JobId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp of the latest processed record.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#latest_record_time_stamp']/*"/>
 	public int? LatestRecordTimeStamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp of the latest bucket result.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#latest_result_time_stamp']/*"/>
 	public int? LatestResultTimeStamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum version required to be able to restore the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#min_version']/*"/>
 	public required string MinVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Summary information describing the model.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#model_size_stats']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelSizeStats? ModelSizeStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, this snapshot will not be deleted during automatic cleanup of snapshots older than model_snapshot_retention_days. However, this snapshot will be deleted when the job is deleted. The default value is false.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#retain']/*"/>
 	public required bool Retain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use only.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#snapshot_doc_count']/*"/>
 	public required long SnapshotDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A numerical character string that uniquely identifies the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#snapshot_id']/*"/>
 	public required string SnapshotId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The creation timestamp for the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="ModelSnapshot.g.xml" path="doc/member[@key='ml._types.ModelSnapshot#timestamp']/*"/>
 	public required long Timestamp { get; set; }
 }

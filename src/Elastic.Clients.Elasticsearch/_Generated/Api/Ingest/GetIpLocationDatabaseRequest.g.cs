@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="GetIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
 public sealed partial class GetIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="GetIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GetIpLocationDatabaseRequestConverter))]
 public sealed partial class GetIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>
 {
@@ -57,21 +56,12 @@ public sealed partial class GetIpLocationDatabaseRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "ingest.get_ip_location_database";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of database configuration IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all database configurations, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_ip_location_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ids? Id { get => P<Elastic.Clients.Elasticsearch.Ids?>("id"); set => PO("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="GetIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_ip_location_database.Request']/*"/>
 public readonly partial struct GetIpLocationDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest Instance { get; init; }
@@ -95,13 +85,7 @@ public readonly partial struct GetIpLocationDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of database configuration IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all database configurations, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.get_ip_location_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Id = value;

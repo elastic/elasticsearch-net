@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_data_lifecycle_stats.DataStreamStats#backing_indices_in_error"><summary><para>
+The count of the backing indices for the data stream.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle_stats.DataStreamStats#backing_indices_in_total"><summary><para>
+The count of the backing indices for the data stream that have encountered an error.
+</para></summary></member>
+  <member key="indices.get_data_lifecycle_stats.DataStreamStats#name"><summary><para>
+The name of the data stream.
+</para></summary></member>
+</doc>

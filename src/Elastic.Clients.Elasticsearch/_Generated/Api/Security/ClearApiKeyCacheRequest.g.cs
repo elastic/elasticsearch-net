@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ClearApiKeyCacheRequest.g.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
 public sealed partial class ClearApiKeyCacheRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear the API key cache.
-/// </para>
-/// <para>
-/// Evict a subset of all entries from the API key cache.
-/// The cache is also automatically cleared on state changes of the security index.
-/// </para>
-/// </summary>
+/// <include file="ClearApiKeyCacheRequest.g.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearApiKeyCacheRequestConverter))]
 public sealed partial class ClearApiKeyCacheRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>
 {
@@ -62,25 +57,12 @@ public sealed partial class ClearApiKeyCacheRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "security.clear_api_key_cache";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API key IDs to evict from the API key cache.
-	/// To evict all API keys, use <c>*</c>.
-	/// Does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearApiKeyCacheRequest.g.xml" path="doc/member[@key='security.clear_api_key_cache.Request#ids']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Ids { get => P<Elastic.Clients.Elasticsearch.Ids>("ids"); set => PR("ids", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the API key cache.
-/// </para>
-/// <para>
-/// Evict a subset of all entries from the API key cache.
-/// The cache is also automatically cleared on state changes of the security index.
-/// </para>
-/// </summary>
+/// <include file="ClearApiKeyCacheRequest.g.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_api_key_cache.Request']/*"/>
 public readonly partial struct ClearApiKeyCacheRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest Instance { get; init; }
@@ -105,13 +87,7 @@ public readonly partial struct ClearApiKeyCacheRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of API key IDs to evict from the API key cache.
-	/// To evict all API keys, use <c>*</c>.
-	/// Does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearApiKeyCacheRequest.g.xml" path="doc/member[@key='security.clear_api_key_cache.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor Ids(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Ids = value;

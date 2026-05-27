@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IngestTotal']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IngestTotalConverter))]
 public sealed partial class IngestTotal
 {
@@ -45,31 +46,15 @@ public sealed partial class IngestTotal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of documents ingested during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#count']/*"/>
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of documents currently being ingested.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#current']/*"/>
 	public required long Current { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of failed ingest operations during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#failed']/*"/>
 	public required long Failed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestTotal.g.xml" path="doc/member[@key='nodes._types.IngestTotal#time_in_millis']/*"/>
 	public required System.TimeSpan TimeInMillis { get; set; }
 }

@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
 public sealed partial class PutAlibabacloudRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an AlibabaCloud AI Search inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAlibabacloudRequestConverter))]
 public sealed partial class PutAlibabacloudRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>
 {
@@ -74,65 +66,30 @@ public sealed partial class PutAlibabacloudRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "inference.put_alibabacloud";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#alibabacloud_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AlibabacloudInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("alibabacloud_inference_id"); set => PR("alibabacloud_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>alibabacloud-ai-search</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#service']/*"/>
 	public string Service => "alibabacloud-ai-search";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an AlibabaCloud AI Search inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_alibabacloud.Request']/*"/>
 public readonly partial struct PutAlibabacloudRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest Instance { get; init; }
@@ -159,124 +116,77 @@ public readonly partial struct PutAlibabacloudRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest(Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#alibabacloud_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor AlibabacloudInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AlibabacloudInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AlibabaCloudServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAlibabacloudRequest.g.xml" path="doc/member[@key='inference.put_alibabacloud.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskSettingsDescriptor.Build(action);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelInferenceStats#cache_miss_count"><summary><para>
+The number of times the model was loaded for inference and was not retrieved from the cache.
+If this number is close to the <c>inference_count</c>, the cache is not being appropriately used.
+This can be solved by increasing the cache size or its time-to-live (TTL).
+Refer to general machine learning settings for the appropriate settings.
+</para></summary></member>
+  <member key="ml._types.TrainedModelInferenceStats#failure_count"><summary><para>
+The number of failures when using the model for inference.
+</para></summary></member>
+  <member key="ml._types.TrainedModelInferenceStats#inference_count"><summary><para>
+The total number of times the model has been called for inference.
+This is across all inference contexts, including all pipelines.
+</para></summary></member>
+  <member key="ml._types.TrainedModelInferenceStats#missing_all_fields_count"><summary><para>
+The number of inference calls where all the training features for the model were missing.
+</para></summary></member>
+  <member key="ml._types.TrainedModelInferenceStats#timestamp"><summary><para>
+The time when the statistics were last updated.
+</para></summary></member>
+</doc>

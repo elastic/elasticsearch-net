@@ -23,39 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
 public sealed partial class PutTrainedModelAliasRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies whether the alias gets reassigned to the specified trained
-	/// model if it is already assigned to a different model. If the alias is
-	/// already assigned and this parameter is false, the API returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#reassign']/*"/>
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a trained model alias.
-/// A trained model alias is a logical name used to reference a single trained
-/// model.
-/// You can use aliases instead of trained model identifiers to make it easier to
-/// reference your models. For example, you can use aliases in inference
-/// aggregations and processors.
-/// An alias must be unique and refer to only a single trained model. However,
-/// you can have multiple aliases for each trained model.
-/// If you use this API to update an alias such that it references a different
-/// trained model ID and the model uses a different type of data frame analytics,
-/// an error occurs. For example, this situation occurs if you have a trained
-/// model for regression analysis and a trained model for classification
-/// analysis; you cannot reassign an alias from one type of trained model to
-/// another.
-/// If you use this API to update an alias and there are very few input fields in
-/// common between the old and new trained models for the model alias, the API
-/// returns a warning.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelAliasRequestConverter))]
 public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestParameters>
 {
@@ -82,51 +59,18 @@ public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "ml.put_trained_model_alias";
 
-	/// <summary>
-	/// <para>
-	/// The alias to create or update. This value cannot end in numbers.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#model_alias']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name ModelAlias { get => P<Elastic.Clients.Elasticsearch.Name>("model_alias"); set => PR("model_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the trained model that the alias refers to.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the alias gets reassigned to the specified trained
-	/// model if it is already assigned to a different model. If the alias is
-	/// already assigned and this parameter is false, the API returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#reassign']/*"/>
 	public bool? Reassign { get => Q<bool?>("reassign"); set => Q("reassign", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a trained model alias.
-/// A trained model alias is a logical name used to reference a single trained
-/// model.
-/// You can use aliases instead of trained model identifiers to make it easier to
-/// reference your models. For example, you can use aliases in inference
-/// aggregations and processors.
-/// An alias must be unique and refer to only a single trained model. However,
-/// you can have multiple aliases for each trained model.
-/// If you use this API to update an alias such that it references a different
-/// trained model ID and the model uses a different type of data frame analytics,
-/// an error occurs. For example, this situation occurs if you have a trained
-/// model for regression analysis and a trained model for classification
-/// analysis; you cannot reassign an alias from one type of trained model to
-/// another.
-/// If you use this API to update an alias and there are very few input fields in
-/// common between the old and new trained models for the model alias, the API
-/// returns a warning.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_alias.Request']/*"/>
 public readonly partial struct PutTrainedModelAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest Instance { get; init; }
@@ -151,35 +95,21 @@ public readonly partial struct PutTrainedModelAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The alias to create or update. This value cannot end in numbers.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#model_alias']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor ModelAlias(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.ModelAlias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the trained model that the alias refers to.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the alias gets reassigned to the specified trained
-	/// model if it is already assigned to a different model. If the alias is
-	/// already assigned and this parameter is false, the API returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelAliasRequest.g.xml" path="doc/member[@key='ml.put_trained_model_alias.Request#reassign']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelAliasRequestDescriptor Reassign(bool? value = true)
 	{
 		Instance.Reassign = value;

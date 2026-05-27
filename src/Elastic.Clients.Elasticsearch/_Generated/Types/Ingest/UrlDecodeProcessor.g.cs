@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.UrlDecodeProcessorConverter))]
 public sealed partial class UrlDecodeProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class UrlDecodeProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor']/*"/>
 public readonly partial struct UrlDecodeProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Instance { get; init; }
@@ -121,100 +88,63 @@ public readonly partial struct UrlDecodeProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -227,36 +157,21 @@ public readonly partial struct UrlDecodeProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -272,6 +187,7 @@ public readonly partial struct UrlDecodeProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor']/*"/>
 public readonly partial struct UrlDecodeProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor Instance { get; init; }
@@ -291,100 +207,63 @@ public readonly partial struct UrlDecodeProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to decode.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -397,11 +276,7 @@ public readonly partial struct UrlDecodeProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -414,36 +289,21 @@ public readonly partial struct UrlDecodeProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the converted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="UrlDecodeProcessor.g.xml" path="doc/member[@key='ingest._types.UrlDecodeProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

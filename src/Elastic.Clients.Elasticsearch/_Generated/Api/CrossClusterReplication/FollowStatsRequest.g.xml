@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.follow_stats.Request"><summary><para>
+Get follower stats.
+</para>
+<para>
+Get cross-cluster replication follower stats.
+The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
+</para></summary></member>
+  <member key="ccr.follow_stats.Request#index"><summary><para>
+A comma-delimited list of index patterns.
+</para></summary></member>
+  <member key="ccr.follow_stats.Request#timeout"><summary><para>
+The period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

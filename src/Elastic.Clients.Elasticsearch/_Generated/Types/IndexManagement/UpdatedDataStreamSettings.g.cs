@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.UpdatedDataStreamSettingsConverter))]
 public sealed partial class UpdatedDataStreamSettings
 {
@@ -46,47 +47,21 @@ public sealed partial class UpdatedDataStreamSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the settings were successfully applied to the data stream (or would have been, if running in <c>dry_run</c>
-	/// mode), it is <c>true</c>. If an error occurred, it is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#applied_to_data_stream']/*"/>
 	public required bool AppliedToDataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that are effective on this data stream, taking into account the settings from the matching index
-	/// template and the settings specific to this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#effective_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings EffectiveSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A message explaining why the settings could not be applied to the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#error']/*"/>
 	public string? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about whether and where each setting was applied.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#index_settings_results']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingResults IndexSettingsResults { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The data stream name.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The settings that are specfic to this data stream that will override any settings from the matching index template.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdatedDataStreamSettings.g.xml" path="doc/member[@key='indices.put_data_stream_settings.UpdatedDataStreamSettings#settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GeotileGridAggregation#bounds"><summary><para>
+A bounding box to filter the geo-points or geo-shapes in each bucket.
+</para></summary></member>
+  <member key="_types.aggregations.GeotileGridAggregation#field"><summary><para>
+Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
+If the field contains an array, <c>geotile_grid</c> aggregates all array values.
+</para></summary></member>
+  <member key="_types.aggregations.GeotileGridAggregation#precision"><summary><para>
+Integer zoom of the key used to define cells/buckets in the results.
+Values outside of the range [0,29] will be rejected.
+</para></summary></member>
+  <member key="_types.aggregations.GeotileGridAggregation#shard_size"><summary><para>
+Allows for more accurate counting of the top cells returned in the final result the aggregation.
+Defaults to returning <c>max(10,(size x number-of-shards))</c> buckets from each shard.
+</para></summary></member>
+  <member key="_types.aggregations.GeotileGridAggregation#size"><summary><para>
+The maximum number of buckets to return.
+</para></summary></member>
+</doc>

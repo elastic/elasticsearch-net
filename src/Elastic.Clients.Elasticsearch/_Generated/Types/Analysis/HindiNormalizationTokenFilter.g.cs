@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HindiNormalizationTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.HindiNormalizationTokenFilterConverter))]
 public sealed partial class HindiNormalizationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class HindiNormalizationTokenFilter : Elastic.Clients.Elas
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.HindiNormalizationTokenFilter']/*"/>
 public readonly partial struct HindiNormalizationTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter Instance { get; init; }

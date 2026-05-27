@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a behavioral analytics collection.
-/// The associated data stream is also deleted.
-/// </para>
-/// </summary>
+/// <include file="DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.DeleteBehavioralAnalyticsRequestConverter))]
 public sealed partial class DeleteBehavioralAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>
 {
@@ -59,20 +57,12 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : Elastic.Clients.E
 
 	internal override string OperationName => "search_application.delete_behavioral_analytics";
 
-	/// <summary>
-	/// <para>
-	/// The name of the analytics collection to be deleted
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a behavioral analytics collection.
-/// The associated data stream is also deleted.
-/// </para>
-/// </summary>
+/// <include file="DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request']/*"/>
 public readonly partial struct DeleteBehavioralAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest Instance { get; init; }
@@ -97,11 +87,7 @@ public readonly partial struct DeleteBehavioralAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the analytics collection to be deleted
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.delete_behavioral_analytics.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;

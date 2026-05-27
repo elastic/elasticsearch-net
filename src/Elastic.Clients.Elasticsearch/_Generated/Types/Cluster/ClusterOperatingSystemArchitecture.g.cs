@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemArchitecture']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterOperatingSystemArchitectureConverter))]
 public sealed partial class ClusterOperatingSystemArchitecture
 {
@@ -43,17 +44,9 @@ public sealed partial class ClusterOperatingSystemArchitecture
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of an architecture used by one or more selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystemArchitecture.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemArchitecture#arch']/*"/>
 	public required string Arch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of selected nodes using the architecture.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterOperatingSystemArchitecture.g.xml" path="doc/member[@key='cluster.stats.ClusterOperatingSystemArchitecture#count']/*"/>
 	public required int Count { get; set; }
 }

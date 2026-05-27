@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleVertexAITaskSettingsConverter))]
 public sealed partial class GoogleVertexAITaskSettings
 {
@@ -36,21 +37,14 @@ public sealed partial class GoogleVertexAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#auto_truncate']/*"/>
 	public bool? AutoTruncate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of the top N documents that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#top_n']/*"/>
 	public int? TopN { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings']/*"/>
 public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, truncate inputs longer than the maximum token length automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#auto_truncate']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor AutoTruncate(bool? value = true)
 	{
 		Instance.AutoTruncate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>rerank</c> task, the number of the top N documents that should be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAITaskSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAITaskSettings#top_n']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor TopN(int? value)
 	{
 		Instance.TopN = value;

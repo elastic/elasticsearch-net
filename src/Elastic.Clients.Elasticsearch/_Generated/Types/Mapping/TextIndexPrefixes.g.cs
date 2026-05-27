@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TextIndexPrefixes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.TextIndexPrefixesConverter))]
 public sealed partial class TextIndexPrefixes
 {
@@ -47,6 +48,7 @@ public sealed partial class TextIndexPrefixes
 	public required int MinChars { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TextIndexPrefixes']/*"/>
 public readonly partial struct TextIndexPrefixesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes Instance { get; init; }

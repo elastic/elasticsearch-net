@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ThaiTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ThaiTokenizerConverter))]
 public sealed partial class ThaiTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -41,6 +42,7 @@ public sealed partial class ThaiTokenizer : Elastic.Clients.Elasticsearch.Analys
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.ThaiTokenizer']/*"/>
 public readonly partial struct ThaiTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.ThaiTokenizer Instance { get; init; }

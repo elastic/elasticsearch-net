@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
 public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear the archived repositories metering.
-/// Clear the archived repositories metering information in the cluster.
-/// </para>
-/// </summary>
+/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ClearRepositoriesMeteringArchiveRequestConverter))]
 public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>
 {
@@ -59,27 +57,15 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Cl
 
 	internal override string OperationName => "nodes.clear_repositories_metering_archive";
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum <c>archive_version</c> to be cleared from the archive.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request#max_archive_version']/*"/>
 	public required long MaxArchiveVersion { get => P<long>("max_archive_version"); set => PR("max_archive_version", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request#node_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the archived repositories metering.
-/// Clear the archived repositories metering information in the cluster.
-/// </para>
-/// </summary>
+/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request']/*"/>
 public readonly partial struct ClearRepositoriesMeteringArchiveRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest Instance { get; init; }
@@ -104,22 +90,14 @@ public readonly partial struct ClearRepositoriesMeteringArchiveRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum <c>archive_version</c> to be cleared from the archive.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request#max_archive_version']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor MaxArchiveVersion(long value)
 	{
 		Instance.MaxArchiveVersion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearRepositoriesMeteringArchiveRequest.g.xml" path="doc/member[@key='nodes.clear_repositories_metering_archive.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds value)
 	{
 		Instance.NodeId = value;

@@ -39,47 +39,11 @@ public sealed partial class FieldSuggester
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? Completion { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>("completion"); set => SetVariant("completion", value); }
-
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? Phrase { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester>("phrase"); set => SetVariant("phrase", value); }
-
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? Term { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.TermSuggester>("term"); set => SetVariant("term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Prefix used to search for suggestions.
-	/// </para>
-	/// </summary>
 	public string? Prefix { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A prefix expressed as a regular expression.
-	/// </para>
-	/// </summary>
 	public string? Regex { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The text to use as input for the suggester.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
 	public string? Text { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester value) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester { Completion = value };
@@ -124,100 +88,54 @@ public readonly partial struct FieldSuggesterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? value)
 	{
 		Instance.Completion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Completion(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>> action)
 	{
 		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? value)
 	{
 		Instance.Phrase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Phrase(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>> action)
 	{
 		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Term(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prefix used to search for suggestions.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A prefix expressed as a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Regex(string? value)
 	{
 		Instance.Regex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text to use as input for the suggester.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor<TDocument> Text(string? value)
 	{
 		Instance.Text = value;
@@ -252,133 +170,72 @@ public readonly partial struct FieldSuggesterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester? value)
 	{
 		Instance.Completion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor> action)
 	{
 		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides auto-complete/search-as-you-type functionality.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Completion<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<T>> action)
 	{
 		Instance.Completion = Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester? value)
 	{
 		Instance.Phrase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor> action)
 	{
 		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides access to word alternatives on a per token basis within a certain string distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Phrase<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<T>> action)
 	{
 		Instance.Phrase = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggesterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester? value)
 	{
 		Instance.Term = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Suggests terms based on edit distance.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Term<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<T>> action)
 	{
 		Instance.Term = Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Prefix used to search for suggestions.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Prefix(string? value)
 	{
 		Instance.Prefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A prefix expressed as a regular expression.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Regex(string? value)
 	{
 		Instance.Regex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text to use as input for the suggester.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldSuggesterDescriptor Text(string? value)
 	{
 		Instance.Text = value;

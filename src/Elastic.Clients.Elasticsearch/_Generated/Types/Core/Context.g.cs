@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-/// <summary>
-/// <para>
-/// Text or location that we want similar documents for or a lookup to a document's field for the text.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="Context.g.xml" path="doc/member[@key='_global.search._types.Context']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Context']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ContextConverter))]
 public sealed partial class Context : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 {

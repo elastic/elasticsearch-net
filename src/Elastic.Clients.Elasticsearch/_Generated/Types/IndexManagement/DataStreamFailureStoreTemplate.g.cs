@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Template equivalent of DataStreamFailureStore that allows nullable values.
-/// </para>
-/// </summary>
+/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamFailureStoreTemplateConverter))]
 public sealed partial class DataStreamFailureStoreTemplate
 {
@@ -41,28 +38,15 @@ public sealed partial class DataStreamFailureStoreTemplate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns the failure store on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream failure store
-	/// that's disabled (enabled: <c>false</c>) will redirect no new failed indices to the failure store; however, it will
-	/// not remove any existing data from the failure store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it specifies the lifecycle configuration for the failure store of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate? Lifecycle { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Template equivalent of DataStreamFailureStore that allows nullable values.
-/// </para>
-/// </summary>
+/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate']/*"/>
 public readonly partial struct DataStreamFailureStoreTemplateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate Instance { get; init; }
@@ -82,46 +66,28 @@ public readonly partial struct DataStreamFailureStoreTemplateDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplate(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns the failure store on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream failure store
-	/// that's disabled (enabled: <c>false</c>) will redirect no new failed indices to the failure store; however, it will
-	/// not remove any existing data from the failure store.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it specifies the lifecycle configuration for the failure store of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate? value)
 	{
 		Instance.Lifecycle = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it specifies the lifecycle configuration for the failure store of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor Lifecycle()
 	{
 		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it specifies the lifecycle configuration for the failure store of this data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamFailureStoreTemplate.g.xml" path="doc/member[@key='indices._types.DataStreamFailureStoreTemplate#lifecycle']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreTemplateDescriptor Lifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor>? action)
 	{
 		Instance.Lifecycle = Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor.Build(action);

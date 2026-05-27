@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Pass through configuration options
-/// </para>
-/// </summary>
+/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PassThroughInferenceOptionsConverter))]
 public sealed partial class PassThroughInferenceOptions
 {
@@ -41,27 +38,16 @@ public sealed partial class PassThroughInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Pass through configuration options
-/// </para>
-/// </summary>
+/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions']/*"/>
 public readonly partial struct PassThroughInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions Instance { get; init; }
@@ -81,33 +67,21 @@ public readonly partial struct PassThroughInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
+	/// <include file="PassThroughInferenceOptions.g.xml" path="doc/member[@key='ml._types.PassThroughInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

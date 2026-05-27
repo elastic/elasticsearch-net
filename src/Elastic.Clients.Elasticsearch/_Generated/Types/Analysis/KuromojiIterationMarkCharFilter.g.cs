@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiIterationMarkCharFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KuromojiIterationMarkCharFilterConverter))]
 public sealed partial class KuromojiIterationMarkCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
@@ -51,6 +52,7 @@ public sealed partial class KuromojiIterationMarkCharFilter : Elastic.Clients.El
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiIterationMarkCharFilter']/*"/>
 public readonly partial struct KuromojiIterationMarkCharFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter Instance { get; init; }

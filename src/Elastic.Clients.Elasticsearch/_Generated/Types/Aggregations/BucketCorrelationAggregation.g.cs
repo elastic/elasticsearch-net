@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
-/// </para>
-/// </summary>
+/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketCorrelationAggregationConverter))]
 public sealed partial class BucketCorrelationAggregation
 {
@@ -47,26 +44,15 @@ public sealed partial class BucketCorrelationAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The correlation function to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation#function']/*"/>
 	public required Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Function { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// A sibling pipeline aggregation which executes a correlation function on the configured sibling multi-bucket aggregation.
-/// </para>
-/// </summary>
+/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation']/*"/>
 public readonly partial struct BucketCorrelationAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation Instance { get; init; }
@@ -86,33 +72,21 @@ public readonly partial struct BucketCorrelationAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The correlation function to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation#function']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor Function(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction value)
 	{
 		Instance.Function = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The correlation function to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationAggregation.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationAggregation#function']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregationDescriptor Function(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor> action)
 	{
 		Instance.Function = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor.Build(action);

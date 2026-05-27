@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 public sealed partial class EqlGetRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period for which the search and its results are stored on the cluster.
-	/// Defaults to the keep_alive value set by the search’s EQL search API request.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// Timeout duration to wait for the request to finish.
-	/// Defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async EQL search results.
-/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
-/// </para>
-/// </summary>
+/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.EqlGetRequestConverter))]
 public sealed partial class EqlGetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>
 {
@@ -74,36 +62,18 @@ public sealed partial class EqlGetRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "eql.get";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period for which the search and its results are stored on the cluster.
-	/// Defaults to the keep_alive value set by the search’s EQL search API request.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// Timeout duration to wait for the request to finish.
-	/// Defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async EQL search results.
-/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
-/// </para>
-/// </summary>
+/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get.Request']/*"/>
 public readonly partial struct EqlGetRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Eql.EqlGetRequest Instance { get; init; }
@@ -128,35 +98,21 @@ public readonly partial struct EqlGetRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlGetRequest(Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period for which the search and its results are stored on the cluster.
-	/// Defaults to the keep_alive value set by the search’s EQL search API request.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Timeout duration to wait for the request to finish.
-	/// Defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="EqlGetRequest.g.xml" path="doc/member[@key='eql.get.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

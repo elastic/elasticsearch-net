@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search.Request"><summary><para>
+Run a search.
+</para>
+<para>
+Get search hits that match the query defined in the request.
+You can provide search queries using the <c>q</c> query string parameter or the request body.
+If both are specified, only the query parameter is used.
+</para>
+<para>
+If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
+To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
+</para>
+<para>
+<strong>Search slicing</strong>
+</para>
+<para>
+When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
+By default the splitting is done first on the shards, then locally on each shard.
+The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
+</para>
+<para>
+For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
+</para>
+<para>
+IMPORTANT: The same point-in-time ID should be used for all slices.
+If different PIT IDs are used, slices can overlap and miss documents.
+This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
+</para></summary></member>
+  <member key="_global.search.Request#_source"><summary><para>
+The source fields that are returned for matching documents.
+These fields are returned in the <c>hits._source</c> property of the search response.
+If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
+Otherwise, it defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_global.search.Request#_source_excludes"><summary><para>
+A comma-separated list of source fields to exclude from the response.
+You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
+If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+</para></summary></member>
+  <member key="_global.search.Request#_source_includes"><summary><para>
+A comma-separated list of source fields to include in the response.
+If this parameter is specified, only these source fields are returned.
+You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
+If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
+</para></summary></member>
+  <member key="_global.search.Request#aggregations"><summary><para>
+Defines the aggregations that are run as part of the search request.
+</para></summary></member>
+  <member key="_global.search.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+</para></summary></member>
+  <member key="_global.search.Request#allow_partial_search_results"><summary><para>
+If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
+If <c>false</c>, it returns an error with no partial results.
+</para>
+<para>
+To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
+</para></summary></member>
+  <member key="_global.search.Request#analyze_wildcard"><summary><para>
+If <c>true</c>, wildcard and prefix queries are analyzed.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.search.Request#analyzer"><summary><para>
+The analyzer to use for the query string.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.search.Request#batched_reduce_size"><summary><para>
+The number of shard results that should be reduced at once on the coordinating node.
+If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
+</para></summary></member>
+  <member key="_global.search.Request#ccs_minimize_roundtrips"><summary><para>
+If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
+</para></summary></member>
+  <member key="_global.search.Request#collapse"><summary><para>
+Collapses search results the values of the specified field.
+</para></summary></member>
+  <member key="_global.search.Request#default_operator"><summary><para>
+The default operator for the query string query: <c>and</c> or <c>or</c>.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.search.Request#df"><summary><para>
+The field to use as a default when no field prefix is given in the query string.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.search.Request#docvalue_fields"><summary><para>
+An array of wildcard (<c>*</c>) field patterns.
+The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+</para></summary></member>
+  <member key="_global.search.Request#expand_wildcards"><summary><para>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_global.search.Request#explain"><summary><para>
+If <c>true</c>, the request returns detailed information about score computation as part of a hit.
+</para></summary></member>
+  <member key="_global.search.Request#ext"><summary><para>
+Configuration of search extensions defined by Elasticsearch plugins.
+</para></summary></member>
+  <member key="_global.search.Request#fields"><summary><para>
+An array of wildcard (<c>*</c>) field patterns.
+The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+</para></summary></member>
+  <member key="_global.search.Request#force_synthetic_source"><summary><para>
+Should this request force synthetic _source?
+Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
+Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+</para></summary></member>
+  <member key="_global.search.Request#from"><summary><para>
+The starting document offset, which must be non-negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> parameter.
+</para></summary></member>
+  <member key="_global.search.Request#highlight"><summary><para>
+Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
+</para></summary></member>
+  <member key="_global.search.Request#ignore_throttled"><summary><para>
+If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
+</para></summary></member>
+  <member key="_global.search.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="_global.search.Request#include_named_queries_score"><summary><para>
+If <c>true</c>, the response includes the score contribution from any named queries.
+</para>
+<para>
+This functionality reruns each named query on every hit in a search response.
+Typically, this adds a small overhead to a request.
+However, using computationally expensive named queries on a large number of hits may add significant overhead.
+</para></summary></member>
+  <member key="_global.search.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases to search.
+It supports wildcards (<c>*</c>).
+To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="_global.search.Request#indices_boost"><summary><para>
+Boost the <c>_score</c> of documents from specified indices.
+The boost value is the factor by which scores are multiplied.
+A boost value greater than <c>1.0</c> increases the score.
+A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+</para></summary></member>
+  <member key="_global.search.Request#knn"><summary><para>
+The approximate kNN search to run.
+</para></summary></member>
+  <member key="_global.search.Request#lenient"><summary><para>
+If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.search.Request#max_concurrent_shard_requests"><summary><para>
+The number of concurrent shard requests per node that the search runs concurrently.
+This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
+</para></summary></member>
+  <member key="_global.search.Request#min_compatible_shard_node"><summary><para>
+The minimum version of the node that can handle the request
+Any handling node with a lower version will fail the request.
+</para></summary></member>
+  <member key="_global.search.Request#min_score"><summary><para>
+The minimum <c>_score</c> for matching documents.
+Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
+</para></summary></member>
+  <member key="_global.search.Request#pit"><summary><para>
+Limit the search to a point in time (PIT).
+If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+</para></summary></member>
+  <member key="_global.search.Request#post_filter"><summary><para>
+Use the <c>post_filter</c> parameter to filter search results.
+The search hits are filtered after the aggregations are calculated.
+A post filter has no impact on the aggregation results.
+</para></summary></member>
+  <member key="_global.search.Request#pre_filter_shard_size"><summary><para>
+A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
+This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
+When unspecified, the pre-filter phase is executed if any of these conditions is met:
+</para>
+<list type="bullet">
+<item>
+<para>
+The request targets more than 128 shards.
+</para>
+</item>
+<item>
+<para>
+The request targets one or more read-only index.
+</para>
+</item>
+<item>
+<para>
+The primary sort of the query targets an indexed field.
+</para>
+</item>
+</list></summary></member>
+  <member key="_global.search.Request#preference"><summary><para>
+The nodes and shards used for the search.
+By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>_only_local</c> to run the search only on shards on the local node;
+</para>
+</item>
+<item>
+<para>
+<c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
+</para>
+</item>
+<item>
+<para>
+<c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
+</para>
+</item>
+<item>
+<para>
+<c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
+</para>
+</item>
+<item>
+<para>
+<c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
+</para>
+</item>
+<item>
+<para>
+<c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
+</para>
+</item>
+</list></summary></member>
+  <member key="_global.search.Request#profile"><summary><para>
+Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
+NOTE: This is a debugging tool and adds significant overhead to search execution.
+</para></summary></member>
+  <member key="_global.search.Request#q"><summary><para>
+A query in the Lucene query string syntax.
+Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
+</para>
+<para>
+IMPORTANT: This parameter overrides the query parameter in the request body.
+If both parameters are specified, documents matching the query request body parameter are not returned.
+</para></summary></member>
+  <member key="_global.search.Request#query"><summary><para>
+The search definition using the Query DSL.
+</para></summary></member>
+  <member key="_global.search.Request#rank"><summary><para>
+The Reciprocal Rank Fusion (RRF) to use.
+</para></summary></member>
+  <member key="_global.search.Request#request_cache"><summary><para>
+If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
+It defaults to index level settings.
+</para></summary></member>
+  <member key="_global.search.Request#rescore"><summary><para>
+Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
+</para></summary></member>
+  <member key="_global.search.Request#rest_total_hits_as_int"><summary><para>
+Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
+</para></summary></member>
+  <member key="_global.search.Request#retriever"><summary><para>
+A retriever is a specification to describe top documents returned from a search.
+A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
+</para></summary></member>
+  <member key="_global.search.Request#routing"><summary><para>
+A custom value that is used to route operations to a specific shard.
+</para></summary></member>
+  <member key="_global.search.Request#runtime_mappings"><summary><para>
+One or more runtime fields in the search request.
+These fields take precedence over mapped fields with the same name.
+</para></summary></member>
+  <member key="_global.search.Request#script_fields"><summary><para>
+Retrieve a script evaluation (based on different fields) for each hit.
+</para></summary></member>
+  <member key="_global.search.Request#scroll"><summary><para>
+The period to retain the search context for scrolling.
+By default, this value cannot exceed <c>1d</c> (24 hours).
+You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
+</para></summary></member>
+  <member key="_global.search.Request#search_after"><summary><para>
+Used to retrieve the next page of hits using a set of sort values from the previous page.
+</para></summary></member>
+  <member key="_global.search.Request#search_type"><summary><para>
+Indicates how distributed term frequencies are calculated for relevance scoring.
+</para></summary></member>
+  <member key="_global.search.Request#seq_no_primary_term"><summary><para>
+If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
+</para></summary></member>
+  <member key="_global.search.Request#size"><summary><para>
+The number of hits to return, which must not be negative.
+By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
+To page through more hits, use the <c>search_after</c> property.
+</para></summary></member>
+  <member key="_global.search.Request#slice"><summary><para>
+Split a scrolled search into multiple slices that can be consumed independently.
+</para></summary></member>
+  <member key="_global.search.Request#sort"><summary><para>
+A comma-separated list of &lt;field>:&lt;direction> pairs.
+</para></summary></member>
+  <member key="_global.search.Request#stats"><summary><para>
+The stats groups to associate with the search.
+Each group maintains a statistics aggregation for its associated searches.
+You can retrieve these stats using the indices stats API.
+</para></summary></member>
+  <member key="_global.search.Request#stored_fields"><summary><para>
+A comma-separated list of stored fields to return as part of a hit.
+If no fields are specified, no stored fields are included in the response.
+If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
+You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+</para></summary></member>
+  <member key="_global.search.Request#suggest"><summary><para>
+Defines a suggester that provides similar looking terms based on a provided text.
+</para></summary></member>
+  <member key="_global.search.Request#suggest_field"><summary><para>
+The field to use for suggestions.
+</para></summary></member>
+  <member key="_global.search.Request#suggest_mode"><summary><para>
+The suggest mode.
+This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+</para></summary></member>
+  <member key="_global.search.Request#suggest_size"><summary><para>
+The number of suggestions to return.
+This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+</para></summary></member>
+  <member key="_global.search.Request#suggest_text"><summary><para>
+The source text for which the suggestions should be returned.
+This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
+</para></summary></member>
+  <member key="_global.search.Request#terminate_after"><summary><para>
+The maximum number of documents to collect for each shard.
+If a query reaches this limit, Elasticsearch terminates the query early.
+Elasticsearch collects documents before sorting.
+</para>
+<para>
+IMPORTANT: Use with caution.
+Elasticsearch applies this property to each shard handling the request.
+When possible, let Elasticsearch perform early termination automatically.
+Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
+</para>
+<para>
+If set to <c>0</c> (default), the query does not terminate early.
+</para></summary></member>
+  <member key="_global.search.Request#timeout"><summary><para>
+The period of time to wait for a response from each shard.
+If no response is received before the timeout expires, the request fails and returns an error.
+Defaults to no timeout.
+</para></summary></member>
+  <member key="_global.search.Request#track_scores"><summary><para>
+If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
+</para></summary></member>
+  <member key="_global.search.Request#track_total_hits"><summary><para>
+Number of hits matching the query to count accurately.
+If <c>true</c>, the exact number of hits is returned at the cost of some performance.
+If <c>false</c>, the  response does not include the total number of hits matching the query.
+</para></summary></member>
+  <member key="_global.search.Request#typed_keys"><summary><para>
+If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
+</para></summary></member>
+  <member key="_global.search.Request#version"><summary><para>
+If <c>true</c>, the request returns the document version as part of a hit.
+</para></summary></member>
+</doc>

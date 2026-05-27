@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IoStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IoStatsConverter))]
 public sealed partial class IoStats
 {
@@ -36,18 +37,9 @@ public sealed partial class IoStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of disk metrics for each device that is backing an Elasticsearch data path.
-	/// These disk metrics are probed periodically and averages between the last probe and the current probe are computed.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStats.g.xml" path="doc/member[@key='nodes._types.IoStats#devices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.IoStatDevice>? Devices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sum of the disk metrics for all devices that back an Elasticsearch data path.
-	/// </para>
-	/// </summary>
+	/// <include file="IoStats.g.xml" path="doc/member[@key='nodes._types.IoStats#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.IoStatDevice? Total { get; set; }
 }

@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
 public sealed partial class GetMemoryStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout
-	/// expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request
-	/// fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get machine learning memory usage info.
-/// Get information about how machine learning jobs and trained models are using memory,
-/// on each node, both within the JVM heap, and natively, outside of the JVM.
-/// </para>
-/// </summary>
+/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetMemoryStatsRequestConverter))]
 public sealed partial class GetMemoryStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestParameters>
 {
@@ -74,38 +61,18 @@ public sealed partial class GetMemoryStatsRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.get_memory_stats";
 
-	/// <summary>
-	/// <para>
-	/// The names of particular nodes in the cluster to target. For example, <c>nodeId1,nodeId2</c> or
-	/// <c>ml:true</c>
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? NodeId { get => P<Elastic.Clients.Elasticsearch.Id?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout
-	/// expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request
-	/// fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get machine learning memory usage info.
-/// Get information about how machine learning jobs and trained models are using memory,
-/// on each node, both within the JVM heap, and natively, outside of the JVM.
-/// </para>
-/// </summary>
+/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_memory_stats.Request']/*"/>
 public readonly partial struct GetMemoryStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest Instance { get; init; }
@@ -129,36 +96,21 @@ public readonly partial struct GetMemoryStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The names of particular nodes in the cluster to target. For example, <c>nodeId1,nodeId2</c> or
-	/// <c>ml:true</c>
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout
-	/// expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request
-	/// fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMemoryStatsRequest.g.xml" path="doc/member[@key='ml.get_memory_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetMemoryStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

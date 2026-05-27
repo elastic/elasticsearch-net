@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.SummaryInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SummaryInfoConverter))]
 public sealed partial class SummaryInfo
 {
@@ -43,17 +44,9 @@ public sealed partial class SummaryInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A collection of statistics that summarise the results of the read operations in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="SummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.SummaryInfo#read']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo Read { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of statistics that summarise the results of the write operations in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="SummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.SummaryInfo#write']/*"/>
 	public required Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo Write { get; set; }
 }

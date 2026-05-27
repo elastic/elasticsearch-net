@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.segments.Request"><summary><para>
+Get index segments.
+Get low-level information about the Lucene segments in index shards.
+For data streams, the API returns information about the stream's backing indices.
+</para></summary></member>
+  <member key="indices.segments.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</para></summary></member>
+  <member key="indices.segments.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.segments.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="indices.segments.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and aliases used to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.segments.Request#verbose"><summary><para>
+If <c>true</c>, the request returns a verbose response.
+</para></summary></member>
+</doc>

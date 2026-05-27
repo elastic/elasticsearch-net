@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.AddAction#alias"><summary><para>
+Alias for the action.
+Index alias names support date math.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#aliases"><summary><para>
+Aliases for the action.
+Index alias names support date math.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#filter"><summary><para>
+Query used to limit documents the alias can access.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#index"><summary><para>
+Data stream or index for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#index_routing"><summary><para>
+Value used to route indexing operations to a specific shard.
+If specified, this overwrites the <c>routing</c> value for indexing operations.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#indices"><summary><para>
+Data streams or indices for the action.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#is_hidden"><summary><para>
+If <c>true</c>, the alias is hidden.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#is_write_index"><summary><para>
+If <c>true</c>, sets the write index or data stream for the alias.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#must_exist"><summary><para>
+If <c>true</c>, the alias must exist to perform the action.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#routing"><summary><para>
+Value used to route indexing and search operations to a specific shard.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+  <member key="indices.update_aliases.AddAction#search_routing"><summary><para>
+Value used to route search operations to a specific shard.
+If specified, this overwrites the <c>routing</c> value for search operations.
+Data stream aliases don’t support this parameter.
+</para></summary></member>
+</doc>

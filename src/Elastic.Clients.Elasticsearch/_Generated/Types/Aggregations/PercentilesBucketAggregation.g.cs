@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.PercentilesBucketAggregationConverter))]
 public sealed partial class PercentilesBucketAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class PercentilesBucketAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of percentiles to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#percents']/*"/>
 	public System.Collections.Generic.ICollection<double>? Percents { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation']/*"/>
 public readonly partial struct PercentilesBucketAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation Instance { get; init; }
@@ -85,56 +70,35 @@ public readonly partial struct PercentilesBucketAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of percentiles to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#percents']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(System.Collections.Generic.ICollection<double>? value)
 	{
 		Instance.Percents = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of percentiles to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="PercentilesBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.PercentilesBucketAggregation#percents']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregationDescriptor Percents(params double[] values)
 	{
 		Instance.Percents = [.. values];

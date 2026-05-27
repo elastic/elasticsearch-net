@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoolQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.BoolQueryConverter))]
 public partial class BoolQuery
 {
@@ -36,55 +37,27 @@ public partial class BoolQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Must { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? MustNot { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Should { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoolQuery']/*"/>
 public readonly partial struct BoolQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Instance { get; init; }
@@ -104,50 +77,28 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -160,44 +111,28 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Must = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Must = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Must(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -210,36 +145,21 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.MustNot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.MustNot = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> MustNot(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -258,33 +178,21 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Should = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Should = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor<TDocument> Should(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -311,6 +219,7 @@ public readonly partial struct BoolQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoolQuery']/*"/>
 public readonly partial struct BoolQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery Instance { get; init; }
@@ -330,50 +239,28 @@ public readonly partial struct BoolQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -386,12 +273,7 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents.
-	/// However, unlike <c>must</c>, the score of the query will be ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -404,44 +286,28 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number or percentage of <c>should</c> clauses returned documents must match.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Must = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Must = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -454,11 +320,7 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must appear in matching documents and will contribute to the score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Must<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -471,36 +333,21 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.MustNot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.MustNot = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -513,12 +360,7 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) must not appear in the matching documents.
-	/// Because scoring is ignored, a score of <c>0</c> is returned for all documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#must_not']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor MustNot<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -537,33 +379,21 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Should = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Should = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -576,11 +406,7 @@ public readonly partial struct BoolQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The clause (query) should appear in the matching document.
-	/// </para>
-	/// </summary>
+	/// <include file="BoolQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoolQuery#should']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor Should<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DeepSeekServiceSettingsConverter))]
 public sealed partial class DeepSeekServiceSettings
 {
@@ -43,36 +44,17 @@ public sealed partial class DeepSeekServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your DeepSeek account.
-	/// You can find or create your DeepSeek API keys on the DeepSeek API key page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, the name of the model to use for the inference task.
-	/// </para>
-	/// <para>
-	/// For the available <c>completion</c> and <c>chat_completion</c> models, refer to the <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek Models &amp; Pricing docs</a>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests. Defaults to <c>https://api.deepseek.com/chat/completions</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings']/*"/>
 public readonly partial struct DeepSeekServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings Instance { get; init; }
@@ -92,41 +74,21 @@ public readonly partial struct DeepSeekServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettings(Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your DeepSeek account.
-	/// You can find or create your DeepSeek API keys on the DeepSeek API key page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or <c>chat_completion</c> task, the name of the model to use for the inference task.
-	/// </para>
-	/// <para>
-	/// For the available <c>completion</c> and <c>chat_completion</c> models, refer to the <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek Models &amp; Pricing docs</a>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests. Defaults to <c>https://api.deepseek.com/chat/completions</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeepSeekServiceSettings.g.xml" path="doc/member[@key='inference._types.DeepSeekServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.DeepSeekServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

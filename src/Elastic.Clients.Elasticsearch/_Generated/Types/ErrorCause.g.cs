@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Cause and details about a request failure. This class defines the properties common to all error types.
-/// Additional details are also provided, that depend on the error type.
-/// </para>
-/// </summary>
+/// <include file="ErrorCause.g.xml" path="doc/member[@key='_types.ErrorCause']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ErrorCause']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ErrorCauseConverter))]
 public sealed partial class ErrorCause
 {
@@ -49,34 +45,16 @@ public sealed partial class ErrorCause
 	}
 
 	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional details about the error
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A human-readable explanation of the error, in English.
-	/// </para>
-	/// </summary>
+	/// <include file="ErrorCause.g.xml" path="doc/member[@key='_types.ErrorCause#reason']/*"/>
 	public string? Reason { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The server stack trace. Present only if the <c>error_trace=true</c> parameter was sent with the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ErrorCause.g.xml" path="doc/member[@key='_types.ErrorCause#stack_trace']/*"/>
 	public string? StackTrace { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of error
-	/// </para>
-	/// </summary>
+	/// <include file="ErrorCause.g.xml" path="doc/member[@key='_types.ErrorCause#type']/*"/>
 	public required string Type { get; set; }
 }

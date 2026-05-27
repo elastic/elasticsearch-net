@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.get_pipeline.Request"><summary><para>
+Get pipelines.
+</para>
+<para>
+Get information about one or more ingest pipelines.
+This API returns a local reference of the pipeline.
+</para></summary></member>
+  <member key="ingest.get_pipeline.Request#id"><summary><para>
+Comma-separated list of pipeline IDs to retrieve.
+Wildcard (<c>*</c>) expressions are supported.
+To get all ingest pipelines, omit this parameter or use <c>*</c>.
+</para></summary></member>
+  <member key="ingest.get_pipeline.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ingest.get_pipeline.Request#summary"><summary><para>
+Return pipelines without their definitions
+</para></summary></member>
+</doc>

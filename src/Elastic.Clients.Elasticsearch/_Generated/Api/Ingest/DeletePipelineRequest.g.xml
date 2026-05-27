@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest.delete_pipeline.Request"><summary><para>
+Delete pipelines.
+Delete one or more ingest pipelines.
+</para></summary></member>
+  <member key="ingest.delete_pipeline.Request#id"><summary><para>
+Pipeline ID or wildcard expression of pipeline IDs used to limit the request.
+To delete all ingest pipelines in a cluster, use a value of <c>*</c>.
+</para></summary></member>
+  <member key="ingest.delete_pipeline.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="ingest.delete_pipeline.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

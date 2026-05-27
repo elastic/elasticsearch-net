@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ParentAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ParentAggregationConverter))]
 public sealed partial class ParentAggregation
 {
@@ -36,14 +37,11 @@ public sealed partial class ParentAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The child type that should be selected.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentAggregation.g.xml" path="doc/member[@key='_types.aggregations.ParentAggregation#type']/*"/>
 	public string? Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ParentAggregation']/*"/>
 public readonly partial struct ParentAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct ParentAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ParentAggregation(Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The child type that should be selected.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentAggregation.g.xml" path="doc/member[@key='_types.aggregations.ParentAggregation#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ParentAggregationDescriptor Type(string? value)
 	{
 		Instance.Type = value;

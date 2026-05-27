@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.AppendProcessor#allow_duplicates"><summary><para>
+If <c>false</c>, the processor does not append values already present in the field.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#field"><summary><para>
+The field to be appended to.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#media_type"><summary><para>
+The media type for encoding <c>value</c>.
+Applies only when value is a template snippet.
+Must be one of <c>application/json</c>, <c>text/plain</c>, or <c>application/x-www-form-urlencoded</c>.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.AppendProcessor#value"><summary><para>
+The value to be appended. Supports template snippets.
+</para></summary></member>
+</doc>

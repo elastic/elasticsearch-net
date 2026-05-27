@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_azureopenai.Request"><summary><para>
+Create an Azure OpenAI inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+</para>
+<para>
+The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+</para>
+<list type="bullet">
+<item>
+<para>
+<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+</para>
+</item>
+<item>
+<para>
+<a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+</para>
+</item>
+</list>
+<para>
+The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#azureopenai_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#chunking_settings"><summary><para>
+The chunking configuration object.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>azureopenai</c>.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>azureopenai</c> service.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#task_settings"><summary><para>
+Settings to configure the inference task.
+These settings are specific to the task type you specified.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
+</para></summary></member>
+  <member key="inference.put_azureopenai.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.FieldSecurity']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.FieldSecurityConverter))]
 public sealed partial class FieldSecurity
 {
@@ -40,6 +41,7 @@ public sealed partial class FieldSecurity
 	public Elastic.Clients.Elasticsearch.Fields? Grant { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.FieldSecurity']/*"/>
 public readonly partial struct FieldSecurityDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.FieldSecurity Instance { get; init; }
@@ -97,6 +99,7 @@ public readonly partial struct FieldSecurityDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.FieldSecurity']/*"/>
 public readonly partial struct FieldSecurityDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.FieldSecurity Instance { get; init; }

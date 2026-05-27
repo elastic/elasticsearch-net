@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of the <c>significant_terms</c> aggregation on an unmapped field. <c>buckets</c> is always empty.
-/// </para>
-/// </summary>
+/// <include file="UnmappedSignificantTermsAggregate.g.xml" path="doc/member[@key='_types.aggregations.UnmappedSignificantTermsAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.UnmappedSignificantTermsAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.UnmappedSignificantTermsAggregateConverter))]
 public sealed partial class UnmappedSignificantTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

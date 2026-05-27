@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.delete_behavioral_analytics.Request"><summary><para>
+Delete a behavioral analytics collection.
+The associated data stream is also deleted.
+</para></summary></member>
+  <member key="search_application.delete_behavioral_analytics.Request#name"><summary><para>
+The name of the analytics collection to be deleted
+</para></summary></member>
+</doc>

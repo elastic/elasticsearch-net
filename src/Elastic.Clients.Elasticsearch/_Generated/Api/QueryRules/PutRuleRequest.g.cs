@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
 public sealed partial class PutRuleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create or update a query rule.
-/// Create or update a query rule within a query ruleset.
-/// </para>
-/// <para>
-/// IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
-/// It is advised to use one or the other in query rulesets, to avoid errors.
-/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
-/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
-/// </para>
-/// </summary>
+/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.PutRuleRequestConverter))]
 public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestParameters>
 {
@@ -74,57 +66,25 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "query_rules.put_rule";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#actions']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#criteria']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of rule.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a query rule.
-/// Create or update a query rule within a query ruleset.
-/// </para>
-/// <para>
-/// IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
-/// It is advised to use one or the other in query rulesets, to avoid errors.
-/// Additionally, pinned queries have a maximum limit of 100 pinned hits.
-/// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
-/// </para>
-/// </summary>
+/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.put_rule.Request']/*"/>
 public readonly partial struct PutRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest Instance { get; init; }
@@ -151,94 +111,56 @@ public readonly partial struct PutRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Actions()
 	{
 		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor>? action)
 	{
 		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> value)
 	{
 		Instance.Criteria = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria(params Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria[] values)
 	{
 		Instance.Criteria = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Criteria(params System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>();
@@ -257,11 +179,7 @@ public readonly partial struct PutRuleRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of rule.
-	/// </para>
-	/// </summary>
+	/// <include file="PutRuleRequest.g.xml" path="doc/member[@key='query_rules.put_rule.Request#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType value)
 	{
 		Instance.Type = value;

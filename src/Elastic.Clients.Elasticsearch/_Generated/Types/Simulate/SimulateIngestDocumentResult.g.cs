@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Simulate;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='simulate.ingest.SimulateIngestDocumentResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.Json.SimulateIngestDocumentResultConverter))]
 public sealed partial class SimulateIngestDocumentResult
 {

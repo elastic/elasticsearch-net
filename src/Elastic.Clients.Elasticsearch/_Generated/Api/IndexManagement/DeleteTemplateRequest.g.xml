@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_template.Request"><summary><para>
+Delete a legacy index template.
+IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+</para></summary></member>
+  <member key="indices.delete_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.delete_template.Request#name"><summary><para>
+The name of the legacy index template to delete.
+Wildcard (<c>*</c>) expressions are supported.
+</para></summary></member>
+  <member key="indices.delete_template.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

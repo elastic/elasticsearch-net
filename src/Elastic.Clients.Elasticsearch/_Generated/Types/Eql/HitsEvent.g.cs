@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql._types.HitsEvent']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.HitsEventConverterFactory))]
 public sealed partial class HitsEvent<TEvent>
 {
@@ -46,31 +47,15 @@ public sealed partial class HitsEvent<TEvent>
 
 	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the event. This ID is only unique within the index.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsEvent.g.xml" path="doc/member[@key='eql._types.HitsEvent#_id']/*"/>
 	public required string Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index containing the event.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsEvent.g.xml" path="doc/member[@key='eql._types.HitsEvent#_index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> for events in a timespan-constrained sequence that do not meet a given condition.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsEvent.g.xml" path="doc/member[@key='eql._types.HitsEvent#missing']/*"/>
 	public bool? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Original JSON body passed for the event at index time.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsEvent.g.xml" path="doc/member[@key='eql._types.HitsEvent#_source']/*"/>
 	public required TEvent Source { get; set; }
 }

@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a lifecycle policy.
-/// If the specified policy exists, it is replaced and the policy version is incremented.
-/// </para>
-/// <para>
-/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
-/// </para>
-/// </summary>
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.PutLifecycleRequestConverter))]
 public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>
 {
@@ -75,38 +62,21 @@ public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ilm.put_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#policy']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("policy"); set => PR("policy", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? Policy { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a lifecycle policy.
-/// If the specified policy exists, it is replaced and the policy version is incremented.
-/// </para>
-/// <para>
-/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
-/// </para>
-/// </summary>
+/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.put_lifecycle.Request']/*"/>
 public readonly partial struct PutLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest Instance { get; init; }
@@ -131,45 +101,35 @@ public readonly partial struct PutLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Policy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy? value)
 	{
 		Instance.Policy = value;
 		return this;
 	}
 
+	/// <include file="PutLifecycleRequest.g.xml" path="doc/member[@key='ilm.put_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor Policy(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor> action)
 	{
 		Instance.Policy = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor.Build(action);

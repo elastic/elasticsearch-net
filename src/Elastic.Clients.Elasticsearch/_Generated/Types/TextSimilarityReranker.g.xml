@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.TextSimilarityReranker#_name"><summary><para>
+Retriever name.
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#field"><summary><para>
+The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#filter"><summary><para>
+Query to filter the documents that can match.
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#inference_id"><summary><para>
+Unique identifier of the inference endpoint created using the inference API.
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#inference_text"><summary><para>
+The text snippet used as the basis for similarity comparison
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#min_score"><summary><para>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#rank_window_size"><summary><para>
+This value determines how many documents we will consider from the nested retriever.
+</para></summary></member>
+  <member key="_types.TextSimilarityReranker#retriever"><summary><para>
+The nested retriever which will produce the first-level results, that will later be used for reranking.
+</para></summary></member>
+</doc>

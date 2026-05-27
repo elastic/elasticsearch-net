@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsStatsProgress#phase"><summary><para>
+Defines the phase of the data frame analytics job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsProgress#progress_percent"><summary><para>
+The progress that the data frame analytics job has made expressed in percentage.
+</para></summary></member>
+</doc>

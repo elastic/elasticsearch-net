@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 public sealed partial class DeleteAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete auto-follow patterns.
-/// </para>
-/// <para>
-/// Delete a collection of cross-cluster replication auto-follow patterns.
-/// </para>
-/// </summary>
+/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.DeleteAutoFollowPatternRequestConverter))]
 public sealed partial class DeleteAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class DeleteAutoFollowPatternRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "ccr.delete_auto_follow_pattern";
 
-	/// <summary>
-	/// <para>
-	/// The auto-follow pattern collection to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete auto-follow patterns.
-/// </para>
-/// <para>
-/// Delete a collection of cross-cluster replication auto-follow patterns.
-/// </para>
-/// </summary>
+/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request']/*"/>
 public readonly partial struct DeleteAutoFollowPatternRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest Instance { get; init; }
@@ -118,24 +92,14 @@ public readonly partial struct DeleteAutoFollowPatternRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The auto-follow pattern collection to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.delete_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.DeleteAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsDestination#index"><summary><para>
+Defines the destination index to store the results of the data frame analytics job.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsDestination#results_field"><summary><para>
+Defines the name of the field in which to store the results of the analysis. Defaults to <c>ml</c>.
+</para></summary></member>
+</doc>

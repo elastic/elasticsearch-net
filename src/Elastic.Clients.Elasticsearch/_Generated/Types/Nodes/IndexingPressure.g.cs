@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IndexingPressure']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IndexingPressureConverter))]
 public sealed partial class IndexingPressure
 {
@@ -36,10 +37,6 @@ public sealed partial class IndexingPressure
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for memory consumption from indexing load.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressure.g.xml" path="doc/member[@key='nodes._types.IndexingPressure#memory']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory? Memory { get; set; }
 }

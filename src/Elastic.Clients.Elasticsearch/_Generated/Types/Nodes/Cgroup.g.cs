@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Cgroup']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.CgroupConverter))]
 public sealed partial class Cgroup
 {
@@ -36,24 +37,12 @@ public sealed partial class Cgroup
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about <c>cpu</c> control group for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Cgroup.g.xml" path="doc/member[@key='nodes._types.Cgroup#cpu']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.CgroupCpu? Cpu { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about <c>cpuacct</c> control group for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Cgroup.g.xml" path="doc/member[@key='nodes._types.Cgroup#cpuacct']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.CpuAcct? Cpuacct { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the memory control group for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Cgroup.g.xml" path="doc/member[@key='nodes._types.Cgroup#memory']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.CgroupMemory? Memory { get; set; }
 }

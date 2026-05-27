@@ -23,37 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
 public sealed partial class UpdateCrossClusterApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update a cross-cluster API key.
-/// </para>
-/// <para>
-/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
-/// Users can only update API keys that they created.
-/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user's credentials are required.
-/// </para>
-/// <para>
-/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// This API supports updates to an API key's access scope, metadata, and expiration.
-/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
-/// </para>
-/// <para>
-/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
-/// </para>
-/// </summary>
+/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UpdateCrossClusterApiKeyRequestConverter))]
 public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>
 {
@@ -87,69 +64,21 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.El
 
 	internal override string OperationName => "security.update_cross_cluster_api_key";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the cross-cluster API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public required Elastic.Clients.Elasticsearch.Security.Access Access { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a cross-cluster API key.
-/// </para>
-/// <para>
-/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
-/// Users can only update API keys that they created.
-/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user's credentials are required.
-/// </para>
-/// <para>
-/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// This API supports updates to an API key's access scope, metadata, and expiration.
-/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
-/// </para>
-/// <para>
-/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
-/// </para>
-/// </summary>
+/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
 public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest Instance { get; init; }
@@ -176,121 +105,63 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the cross-cluster API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Access(Elastic.Clients.Elasticsearch.Security.Access value)
 	{
 		Instance.Access = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Access()
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Access<T>(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -360,33 +231,8 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update a cross-cluster API key.
-/// </para>
-/// <para>
-/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_security</c> cluster privilege.
-/// Users can only update API keys that they created.
-/// To update another user's API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
-/// To update an API key, the owner user's credentials are required.
-/// </para>
-/// <para>
-/// It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// This API supports updates to an API key's access scope, metadata, and expiration.
-/// The owner user's information, such as the <c>username</c> and <c>realm</c>, is also updated automatically on every call.
-/// </para>
-/// <para>
-/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
-/// </para>
-/// </summary>
+/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request']/*"/>
 public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest Instance { get; init; }
@@ -413,107 +259,56 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor<TDocume
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the cross-cluster API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Access(Elastic.Clients.Elasticsearch.Security.Access value)
 	{
 		Instance.Access = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Access()
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access to be granted to this API key.
-	/// The access is composed of permissions for cross cluster search and cross cluster replication.
-	/// At least one of them must be specified.
-	/// When specified, the new access assignment fully replaces the previously assigned access.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#access']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this information fully replaces metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateCrossClusterApiKeyRequest.g.xml" path="doc/member[@key='security.update_cross_cluster_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

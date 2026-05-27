@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterProcessCpu']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterProcessCpuConverter))]
 public sealed partial class ClusterProcessCpu
 {
@@ -42,11 +43,6 @@ public sealed partial class ClusterProcessCpu
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Percentage of CPU used across all selected nodes.
-	/// Returns <c>-1</c> if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcessCpu.g.xml" path="doc/member[@key='cluster.stats.ClusterProcessCpu#percent']/*"/>
 	public required int Percent { get; set; }
 }

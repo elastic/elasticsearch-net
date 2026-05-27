@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamVisibility']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamVisibilityConverter))]
 public sealed partial class DataStreamVisibility
 {
@@ -40,6 +41,7 @@ public sealed partial class DataStreamVisibility
 	public bool? Hidden { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamVisibility']/*"/>
 public readonly partial struct DataStreamVisibilityDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility Instance { get; init; }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceClass']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TotalFeatureImportanceClassConverter))]
 public sealed partial class TotalFeatureImportanceClass
 {
@@ -43,17 +44,9 @@ public sealed partial class TotalFeatureImportanceClass
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The target class value. Could be a string, boolean, or number.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportanceClass.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceClass#class_name']/*"/>
 	public required string ClassName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collection of feature importance statistics related to the training data set for this particular feature.
-	/// </para>
-	/// </summary>
+	/// <include file="TotalFeatureImportanceClass.g.xml" path="doc/member[@key='ml._types.TotalFeatureImportanceClass#importance']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportanceStatistics> Importance { get; set; }
 }

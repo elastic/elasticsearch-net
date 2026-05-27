@@ -23,66 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 public sealed partial class GetTransformStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no transforms that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If this parameter is false, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of transforms to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#size']/*"/>
 	public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the stats
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get transform stats.
-/// </para>
-/// <para>
-/// Get usage information for transforms.
-/// </para>
-/// </summary>
+/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.GetTransformStatsRequestConverter))]
 public sealed partial class GetTransformStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestParameters>
 {
@@ -109,74 +68,24 @@ public sealed partial class GetTransformStatsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "transform.get_transform_stats";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. It can be a transform identifier or a
-	/// wildcard expression. You can get information for all transforms by using
-	/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
-	/// <c>&lt;transform_id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names TransformId { get => P<Elastic.Clients.Elasticsearch.Names>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no transforms that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If this parameter is false, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of transforms to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#size']/*"/>
 	public long? Size { get => Q<long?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the stats
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get transform stats.
-/// </para>
-/// <para>
-/// Get usage information for transforms.
-/// </para>
-/// </summary>
+/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Request']/*"/>
 public readonly partial struct GetTransformStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest Instance { get; init; }
@@ -201,79 +110,35 @@ public readonly partial struct GetTransformStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. It can be a transform identifier or a
-	/// wildcard expression. You can get information for all transforms by using
-	/// <c>_all</c>, by specifying <c>*</c> as the <c>&lt;transform_id></c>, or by omitting the
-	/// <c>&lt;transform_id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request:
-	/// </para>
-	/// <list type="number">
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are no transforms that match.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains the _all string or no identifiers and there are no matches.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Contains wildcard expressions and there are only partial matches.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// If this parameter is false, the request returns a 404 status code when
-	/// there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor From(long? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of transforms to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Size(long? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the time to wait for the stats
-	/// </para>
-	/// </summary>
+	/// <include file="GetTransformStatsRequest.g.xml" path="doc/member[@key='transform.get_transform_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

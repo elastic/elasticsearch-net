@@ -39,61 +39,13 @@ public sealed partial class Retriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetriever? Knn { get => GetVariant<Elastic.Clients.Elasticsearch.KnnRetriever>("knn"); set => SetVariant("knn", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.LinearRetriever? Linear { get => GetVariant<Elastic.Clients.Elasticsearch.LinearRetriever>("linear"); set => SetVariant("linear", value); }
-
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.PinnedRetriever? Pinned { get => GetVariant<Elastic.Clients.Elasticsearch.PinnedRetriever>("pinned"); set => SetVariant("pinned", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RescorerRetriever? Rescorer { get => GetVariant<Elastic.Clients.Elasticsearch.RescorerRetriever>("rescorer"); set => SetVariant("rescorer", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RRFRetriever? Rrf { get => GetVariant<Elastic.Clients.Elasticsearch.RRFRetriever>("rrf"); set => SetVariant("rrf", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RuleRetriever? Rule { get => GetVariant<Elastic.Clients.Elasticsearch.RuleRetriever>("rule"); set => SetVariant("rule", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.StandardRetriever? Standard { get => GetVariant<Elastic.Clients.Elasticsearch.StandardRetriever>("standard"); set => SetVariant("standard", value); }
-
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityReranker? TextSimilarityReranker { get => GetVariant<Elastic.Clients.Elasticsearch.TextSimilarityReranker>("text_similarity_reranker"); set => SetVariant("text_similarity_reranker", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.KnnRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Knn = value };
@@ -143,200 +95,108 @@ public readonly partial struct RetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Knn(Elastic.Clients.Elasticsearch.KnnRetriever? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.LinearRetriever? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear()
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Pinned(Elastic.Clients.Elasticsearch.PinnedRetriever? value)
 	{
 		Instance.Pinned = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Pinned(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rescorer(Elastic.Clients.Elasticsearch.RescorerRetriever? value)
 	{
 		Instance.Rescorer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rescorer(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rrf(Elastic.Clients.Elasticsearch.RRFRetriever? value)
 	{
 		Instance.Rrf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rule(Elastic.Clients.Elasticsearch.RuleRetriever? value)
 	{
 		Instance.Rule = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rule(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard(Elastic.Clients.Elasticsearch.StandardRetriever? value)
 	{
 		Instance.Standard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard()
 	{
 		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Standard(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>>? action)
 	{
 		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker? value)
 	{
 		Instance.TextSimilarityReranker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> TextSimilarityReranker(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>> action)
 	{
 		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument>.Build(action);
@@ -371,289 +231,156 @@ public readonly partial struct RetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RetrieverDescriptor(Elastic.Clients.Elasticsearch.Retriever instance) => new Elastic.Clients.Elasticsearch.RetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn(Elastic.Clients.Elasticsearch.KnnRetriever? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality  of a knn search.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(Elastic.Clients.Elasticsearch.LinearRetriever? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear()
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear<T>(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned(Elastic.Clients.Elasticsearch.PinnedRetriever? value)
 	{
 		Instance.Pinned = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pinned retriever applies pinned documents to the underlying retriever.
-	/// This retriever will rewrite to a PinnedQueryBuilder.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned<T>(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<T>> action)
 	{
 		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer(Elastic.Clients.Elasticsearch.RescorerRetriever? value)
 	{
 		Instance.Rescorer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor> action)
 	{
 		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that re-scores only the results produced by its child retriever.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer<T>(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<T>> action)
 	{
 		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf(Elastic.Clients.Elasticsearch.RRFRetriever? value)
 	{
 		Instance.Rrf = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor> action)
 	{
 		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rrf<T>(System.Action<Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<T>> action)
 	{
 		Instance.Rrf = Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule(Elastic.Clients.Elasticsearch.RuleRetriever? value)
 	{
 		Instance.Rule = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor> action)
 	{
 		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a rule query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rule<T>(System.Action<Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<T>> action)
 	{
 		Instance.Rule = Elastic.Clients.Elasticsearch.RuleRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard(Elastic.Clients.Elasticsearch.StandardRetriever? value)
 	{
 		Instance.Standard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard()
 	{
 		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor>? action)
 	{
 		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that replaces the functionality of a traditional query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Standard<T>(System.Action<Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<T>>? action)
 	{
 		Instance.Standard = Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker(Elastic.Clients.Elasticsearch.TextSimilarityReranker? value)
 	{
 		Instance.TextSimilarityReranker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor> action)
 	{
 		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever that reranks the top documents based on a reranking model using the InferenceAPI
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor TextSimilarityReranker<T>(System.Action<Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<T>> action)
 	{
 		Instance.TextSimilarityReranker = Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<T>.Build(action);

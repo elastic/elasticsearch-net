@@ -23,349 +23,107 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 public sealed partial class SearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
-	/// If <c>false</c>, it returns an error with no partial results.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#batched_reduce_size']/*"/>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for the query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the score contribution from any named queries.
-	/// </para>
-	/// <para>
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#include_named_queries_score']/*"/>
 	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node that the search runs concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#max_concurrent_shard_requests']/*"/>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_compatible_shard_node']/*"/>
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
-	/// <summary>
-	/// <para>
-	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
-	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
-	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The request targets more than 128 shards.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The request targets one or more read-only index.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The primary sort of the query targets an indexed field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pre_filter_shard_size']/*"/>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: This parameter overrides the query parameter in the request body.
-	/// If both parameters are specified, documents matching the query request body parameter are not returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// It defaults to index level settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how distributed term frequencies are calculated for relevance scoring.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
-	/// <summary>
-	/// <para>
-	/// The suggest mode.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of suggestions to return.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_size']/*"/>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_text']/*"/>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run a search.
-/// </para>
-/// <para>
-/// Get search hits that match the query defined in the request.
-/// You can provide search queries using the <c>q</c> query string parameter or the request body.
-/// If both are specified, only the query parameter is used.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
-/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
-/// </para>
-/// <para>
-/// <strong>Search slicing</strong>
-/// </para>
-/// <para>
-/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
-/// By default the splitting is done first on the shards, then locally on each shard.
-/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
-/// </para>
-/// <para>
-/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
-/// </para>
-/// <para>
-/// IMPORTANT: The same point-in-time ID should be used for all slices.
-/// If different PIT IDs are used, slices can overlap and miss documents.
-/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
-/// </para>
-/// </summary>
+/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SearchRequestConverter))]
 public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchRequestParameters>
 {
@@ -391,633 +149,208 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 
 	internal override string OperationName => "search";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
-	/// If <c>false</c>, it returns an error with no partial results.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_partial_search_results']/*"/>
 	public bool? AllowPartialSearchResults { get => Q<bool?>("allow_partial_search_results"); set => Q("allow_partial_search_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#batched_reduce_size']/*"/>
 	public long? BatchedReduceSize { get => Q<long?>("batched_reduce_size"); set => Q("batched_reduce_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for the query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#force_synthetic_source']/*"/>
 	public bool? ForceSyntheticSource { get => Q<bool?>("force_synthetic_source"); set => Q("force_synthetic_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the score contribution from any named queries.
-	/// </para>
-	/// <para>
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#include_named_queries_score']/*"/>
 	public bool? IncludeNamedQueriesScore { get => Q<bool?>("include_named_queries_score"); set => Q("include_named_queries_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node that the search runs concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#max_concurrent_shard_requests']/*"/>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
 
-	/// <summary>
-	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_compatible_shard_node']/*"/>
 	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
-	/// <summary>
-	/// <para>
-	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
-	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
-	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The request targets more than 128 shards.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The request targets one or more read-only index.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The primary sort of the query targets an indexed field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pre_filter_shard_size']/*"/>
 	public long? PreFilterShardSize { get => Q<long?>("pre_filter_shard_size"); set => Q("pre_filter_shard_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: This parameter overrides the query parameter in the request body.
-	/// If both parameters are specified, documents matching the query request body parameter are not returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// It defaults to index level settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how distributed term frequencies are calculated for relevance scoring.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? SuggestField { get => Q<Elastic.Clients.Elasticsearch.Field?>("suggest_field"); set => Q("suggest_field", value); }
 
-	/// <summary>
-	/// <para>
-	/// The suggest mode.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get => Q<Elastic.Clients.Elasticsearch.SuggestMode?>("suggest_mode"); set => Q("suggest_mode", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of suggestions to return.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_size']/*"/>
 	public long? SuggestSize { get => Q<long?>("suggest_size"); set => Q("suggest_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_text']/*"/>
 	public string? SuggestText { get => Q<string?>("suggest_text"); set => Q("suggest_text", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Ext { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_score']/*"/>
 	public double? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.Rank? Rank { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.Retriever? Retriever { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#seq_no_primary_term']/*"/>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#timeout']/*"/>
 	public string? Timeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_scores']/*"/>
 	public bool? TrackScores { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#version']/*"/>
 	public bool? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run a search.
-/// </para>
-/// <para>
-/// Get search hits that match the query defined in the request.
-/// You can provide search queries using the <c>q</c> query string parameter or the request body.
-/// If both are specified, only the query parameter is used.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
-/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
-/// </para>
-/// <para>
-/// <strong>Search slicing</strong>
-/// </para>
-/// <para>
-/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
-/// By default the splitting is done first on the shards, then locally on each shard.
-/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
-/// </para>
-/// <para>
-/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
-/// </para>
-/// <para>
-/// IMPORTANT: The same point-in-time ID should be used for all slices.
-/// If different PIT IDs are used, slices can overlap and miss documents.
-/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
-/// </para>
-/// </summary>
+/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 public readonly partial struct SearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchRequest Instance { get; init; }
@@ -1041,151 +374,84 @@ public readonly partial struct SearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchRequestDescriptor(Elastic.Clients.Elasticsearch.SearchRequest instance) => new Elastic.Clients.Elasticsearch.SearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchRequest(Elastic.Clients.Elasticsearch.SearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
-	/// If <c>false</c>, it returns an error with no partial results.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#batched_reduce_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor BatchedReduceSize(long? value)
 	{
 		Instance.BatchedReduceSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for the query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#force_synthetic_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ForceSyntheticSource(bool? value = true)
 	{
 		Instance.ForceSyntheticSource = value;
@@ -1193,390 +459,196 @@ public readonly partial struct SearchRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the score contribution from any named queries.
-	/// </para>
-	/// <para>
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#include_named_queries_score']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IncludeNamedQueriesScore(bool? value = true)
 	{
 		Instance.IncludeNamedQueriesScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node that the search runs concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_compatible_shard_node']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MinCompatibleShardNode(string? value)
 	{
 		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
-	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
-	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The request targets more than 128 shards.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The request targets one or more read-only index.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The primary sort of the query targets an indexed field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pre_filter_shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor PreFilterShardSize(long? value)
 	{
 		Instance.PreFilterShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: This parameter overrides the query parameter in the request body.
-	/// If both parameters are specified, documents matching the query request body parameter are not returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// It defaults to index level settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how distributed term frequencies are calculated for relevance scoring.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SuggestField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SuggestField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The suggest mode.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of suggestions to return.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SuggestSize(long? value)
 	{
 		Instance.SuggestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_text']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SuggestText(string? value)
 	{
 		Instance.SuggestText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -1604,69 +676,42 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1679,12 +724,7 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1697,44 +737,28 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -1748,36 +772,21 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1790,12 +799,7 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -1808,88 +812,49 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -1903,33 +868,21 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1942,11 +895,7 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Knn<T>(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -1959,175 +908,105 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor PostFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rank(Elastic.Clients.Elasticsearch.Rank? value)
 	{
 		Instance.Rank = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
 	{
 		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -2140,11 +1019,7 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Rescore<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -2157,84 +1032,49 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -2283,33 +1123,21 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -2330,112 +1158,70 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2448,11 +1234,7 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2465,223 +1247,119 @@ public readonly partial struct SearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Suggest<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;
@@ -2749,36 +1427,8 @@ public readonly partial struct SearchRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run a search.
-/// </para>
-/// <para>
-/// Get search hits that match the query defined in the request.
-/// You can provide search queries using the <c>q</c> query string parameter or the request body.
-/// If both are specified, only the query parameter is used.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the read index privilege for the target data stream, index, or alias. For cross-cluster search, refer to the documentation about configuring CCS privileges.
-/// To search a point in time (PIT) for an alias, you must have the <c>read</c> index privilege for the alias's data streams or indices.
-/// </para>
-/// <para>
-/// <strong>Search slicing</strong>
-/// </para>
-/// <para>
-/// When paging through a large number of documents, it can be helpful to split the search into multiple slices to consume them independently with the <c>slice</c> and <c>pit</c> properties.
-/// By default the splitting is done first on the shards, then locally on each shard.
-/// The local splitting partitions the shard into contiguous ranges based on Lucene document IDs.
-/// </para>
-/// <para>
-/// For instance if the number of shards is equal to 2 and you request 4 slices, the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
-/// </para>
-/// <para>
-/// IMPORTANT: The same point-in-time ID should be used for all slices.
-/// If different PIT IDs are used, slices can overlap and miss documents.
-/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
-/// </para>
-/// </summary>
+/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search.Request']/*"/>
 public readonly partial struct SearchRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SearchRequest Instance { get; init; }
@@ -2802,151 +1452,84 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchRequest instance) => new Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchRequest(Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and there are shard request timeouts or shard failures, the request returns partial results.
-	/// If <c>false</c>, it returns an error with no partial results.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>search.default_allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#allow_partial_search_results']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
 		Instance.AllowPartialSearchResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard results that should be reduced at once on the coordinating node.
-	/// If the potential number of shards in the request can be large, this value should be used as a protection mechanism to reduce the memory overhead per search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#batched_reduce_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> BatchedReduceSize(long? value)
 	{
 		Instance.BatchedReduceSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips between the coordinating node and the remote clusters are minimized when running cross-cluster search (CCS) requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for the query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should this request force synthetic _source?
-	/// Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
-	/// Fetches with this enabled will be slower the enabling synthetic source natively in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#force_synthetic_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ForceSyntheticSource(bool? value = true)
 	{
 		Instance.ForceSyntheticSource = value;
@@ -2954,379 +1537,189 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded or aliased indices will be ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes the score contribution from any named queries.
-	/// </para>
-	/// <para>
-	/// This functionality reruns each named query on every hit in a search response.
-	/// Typically, this adds a small overhead to a request.
-	/// However, using computationally expensive named queries on a large number of hits may add significant overhead.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#include_named_queries_score']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IncludeNamedQueriesScore(bool? value = true)
 	{
 		Instance.IncludeNamedQueriesScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of concurrent shard requests per node that the search runs concurrently.
-	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#max_concurrent_shard_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum version of the node that can handle the request
-	/// Any handling node with a lower version will fail the request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_compatible_shard_node']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? value)
 	{
 		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
-	/// Valid values are:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.
-	/// This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).
-	/// When unspecified, the pre-filter phase is executed if any of these conditions is met:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The request targets more than 128 shards.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The request targets one or more read-only index.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The primary sort of the query targets an indexed field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pre_filter_shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> PreFilterShardSize(long? value)
 	{
 		Instance.PreFilterShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// Query parameter searches do not support the full Elasticsearch Query DSL but are handy for testing.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: This parameter overrides the query parameter in the request body.
-	/// If both parameters are specified, documents matching the query request body parameter are not returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the caching of search results is enabled for requests where <c>size</c> is <c>0</c>.
-	/// It defaults to index level settings.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether <c>hits.total</c> should be rendered as an integer or an object in the rest search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// By default, this value cannot exceed <c>1d</c> (24 hours).
-	/// You can change this limit by using the <c>search.max_keep_alive</c> cluster-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how distributed term frequencies are calculated for relevance scoring.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SuggestField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use for suggestions.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SuggestField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.SuggestField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The suggest mode.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of suggestions to return.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SuggestSize(long? value)
 	{
 		Instance.SuggestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source text for which the suggestions should be returned.
-	/// This parameter can be used only when the <c>suggest_field</c> and <c>suggest_text</c> query string parameters are specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest_text']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SuggestText(string? value)
 	{
 		Instance.SuggestText = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, aggregation and suggester names are be prefixed by their respective types in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -3347,58 +1740,35 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -3411,44 +1781,28 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Ext = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext()
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration of search extensions defined by Elasticsearch plugins.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#ext']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Ext(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Ext = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -3462,36 +1816,21 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -3504,77 +1843,42 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
 	{
 		Instance.IndicesBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost()
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#indices_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
 	{
 		Instance.IndicesBoost = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble.Build(action);
@@ -3588,33 +1892,21 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
 	{
 		Instance.Knn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
 	{
 		Instance.Knn = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate kNN search to run.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#knn']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.KnnSearch>();
@@ -3627,151 +1919,91 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
 	{
 		Instance.Pit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#pit']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
 	{
 		Instance.Pit = Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Rank? value)
 	{
 		Instance.Rank = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rank']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
 	{
 		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -3784,60 +2016,35 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -3872,33 +2079,21 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieve a script evaluation (based on different fields) for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -3919,101 +2114,63 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -4026,198 +2183,105 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#suggest']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Timeout(string? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequest.g.xml" path="doc/member[@key='_global.search.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;

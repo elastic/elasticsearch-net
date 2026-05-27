@@ -37,66 +37,29 @@ public sealed partial class AsyncSearchStatusResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about clusters involved in the cross-cluster search.
-	/// It is not shown for local-only searches.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#_clusters']/*"/>
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the async search completed, this field shows the status code of the search.
-	/// For example, <c>200</c> indicates that the async search was successfully completed.
-	/// <c>503</c> indicates that the async search was completed with an error.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#completion_status']/*"/>
 	public int? CompletionStatus { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates when the async search completed.
-	/// It is present only when the search has completed.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#completion_time']/*"/>
 	public System.DateTimeOffset? CompletionTime { get; set; }
 	public System.DateTimeOffset? CompletionTimeInMillis { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates when the async search will expire.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#expiration_time']/*"/>
 	public System.DateTimeOffset? ExpirationTime { get; set; }
 	public required System.DateTimeOffset ExpirationTimeInMillis { get; set; }
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When the query is no longer running, this property indicates whether the search failed or was successfully completed on all shards.
-	/// While the query is running, <c>is_partial</c> is always set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#is_partial']/*"/>
 	public required bool IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether the search is still running or has completed.
-	/// </para>
-	/// <para>
-	/// info
-	/// If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#is_running']/*"/>
 	public required bool IsRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards that have run the query so far.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearchStatusResponse.g.xml" path="doc/member[@key='async_search.status.Response#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }

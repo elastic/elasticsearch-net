@@ -23,95 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 public sealed partial class TermVectorsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get term vector information.
-/// </para>
-/// <para>
-/// Get information and statistics about terms in the fields of a particular document.
-/// </para>
-/// <para>
-/// You can retrieve term vectors for documents stored in the index or for artificial documents passed in the body of the request.
-/// You can specify the fields you are interested in through the <c>fields</c> parameter or by adding the fields to the request body.
-/// For example:
-/// </para>
-/// <code>
-/// GET /my-index-000001/_termvectors/1?fields=message
-/// </code>
-/// <para>
-/// Fields can be specified using wildcards, similar to the multi match query.
-/// </para>
-/// <para>
-/// Term vectors are real-time by default, not near real-time.
-/// This can be changed by setting <c>realtime</c> parameter to <c>false</c>.
-/// </para>
-/// <para>
-/// You can request three types of values: <em>term information</em>, <em>term statistics</em>, and <em>field statistics</em>.
-/// By default, all term information and field statistics are returned for all fields but term statistics are excluded.
-/// </para>
-/// <para>
-/// <strong>Term information</strong>
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// term frequency in the field (always returned)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// term positions (<c>positions: true</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// start and end offsets (<c>offsets: true</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// term payloads (<c>payloads: true</c>), as base64 encoded bytes
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If the requested information wasn't stored in the index, it will be computed on the fly if possible.
-/// Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
-/// </para>
-/// <para>
-/// warn
-/// Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
-/// </para>
-/// <para>
-/// <strong>Behaviour</strong>
-/// </para>
-/// <para>
-/// The term and field statistics are not accurate.
-/// Deleted documents are not taken into account.
-/// The information is only retrieved for the shard the requested document resides in.
-/// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
-/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
-/// Use <c>routing</c> only to hit a particular shard.
-/// </para>
-/// </summary>
+/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TermVectorsRequestConverterFactory))]
 public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TermVectorsRequestParameters>
 {
@@ -143,228 +67,57 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 
 	internal override string OperationName => "termvectors";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
 
-	/// <summary>
-	/// <para>
-	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#doc']/*"/>
 	public TDocument? Doc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The document count (how many documents contain this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#field_statistics']/*"/>
 	public bool? FieldStatistics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filter terms based on their tf-idf scores.
-	/// This could be useful in order find out a good characteristic vector of a document.
-	/// This feature works in a similar manner to the second phase of the More Like This Query.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#offsets']/*"/>
 	public bool? Offsets { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#payloads']/*"/>
 	public bool? Payloads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Override the default per-field analyzer.
-	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
-	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#per_field_analyzer']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#positions']/*"/>
 	public bool? Positions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The total term frequency (how often a term occurs in all documents).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The document frequency (the number of documents containing the current term).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// By default these values are not returned since term statistics can have a serious performance impact.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#term_statistics']/*"/>
 	public bool? TermStatistics { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#version']/*"/>
 	public long? Version { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get term vector information.
-/// </para>
-/// <para>
-/// Get information and statistics about terms in the fields of a particular document.
-/// </para>
-/// <para>
-/// You can retrieve term vectors for documents stored in the index or for artificial documents passed in the body of the request.
-/// You can specify the fields you are interested in through the <c>fields</c> parameter or by adding the fields to the request body.
-/// For example:
-/// </para>
-/// <code>
-/// GET /my-index-000001/_termvectors/1?fields=message
-/// </code>
-/// <para>
-/// Fields can be specified using wildcards, similar to the multi match query.
-/// </para>
-/// <para>
-/// Term vectors are real-time by default, not near real-time.
-/// This can be changed by setting <c>realtime</c> parameter to <c>false</c>.
-/// </para>
-/// <para>
-/// You can request three types of values: <em>term information</em>, <em>term statistics</em>, and <em>field statistics</em>.
-/// By default, all term information and field statistics are returned for all fields but term statistics are excluded.
-/// </para>
-/// <para>
-/// <strong>Term information</strong>
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// term frequency in the field (always returned)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// term positions (<c>positions: true</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// start and end offsets (<c>offsets: true</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// term payloads (<c>payloads: true</c>), as base64 encoded bytes
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If the requested information wasn't stored in the index, it will be computed on the fly if possible.
-/// Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
-/// </para>
-/// <para>
-/// warn
-/// Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
-/// </para>
-/// <para>
-/// <strong>Behaviour</strong>
-/// </para>
-/// <para>
-/// The term and field statistics are not accurate.
-/// Deleted documents are not taken into account.
-/// The information is only retrieved for the shard the requested document resides in.
-/// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
-/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
-/// Use <c>routing</c> only to hit a particular shard.
-/// </para>
-/// </summary>
+/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.termvectors.Request']/*"/>
 public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> Instance { get; init; }
@@ -393,208 +146,112 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument> instance) => new Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TermVectorsRequest<TDocument>(Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the index that contains the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#realtime']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Realtime(bool? value = true)
 	{
 		Instance.Realtime = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#doc']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Doc(TDocument? value)
 	{
 		Instance.Doc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The document count (how many documents contain this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#field_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? value = true)
 	{
 		Instance.FieldStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter terms based on their tf-idf scores.
-	/// This could be useful in order find out a good characteristic vector of a document.
-	/// This feature works in a similar manner to the second phase of the More Like This Query.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter terms based on their tf-idf scores.
-	/// This could be useful in order find out a good characteristic vector of a document.
-	/// This feature works in a similar manner to the second phase of the More Like This Query.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Filter()
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter terms based on their tf-idf scores.
-	/// This could be useful in order find out a good characteristic vector of a document.
-	/// This feature works in a similar manner to the second phase of the More Like This Query.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor>? action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#offsets']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Offsets(bool? value = true)
 	{
 		Instance.Offsets = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#payloads']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Payloads(bool? value = true)
 	{
 		Instance.Payloads = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Override the default per-field analyzer.
-	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
-	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? value)
 	{
 		Instance.PerFieldAnalyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Override the default per-field analyzer.
-	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
-	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer()
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Override the default per-field analyzer.
-	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
-	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#per_field_analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> PerFieldAnalyzer(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>>? action)
 	{
 		Instance.PerFieldAnalyzer = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldString<TDocument>.Build(action);
@@ -615,70 +272,35 @@ public readonly partial struct TermVectorsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#positions']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Positions(bool? value = true)
 	{
 		Instance.Positions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The total term frequency (how often a term occurs in all documents).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The document frequency (the number of documents containing the current term).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// By default these values are not returned since term statistics can have a serious performance impact.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#term_statistics']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> TermStatistics(bool? value = true)
 	{
 		Instance.TermStatistics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> Version(long? value)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
+	/// <include file="TermVectorsRequest.g.xml" path="doc/member[@key='_global.termvectors.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.TermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
 		Instance.VersionType = value;

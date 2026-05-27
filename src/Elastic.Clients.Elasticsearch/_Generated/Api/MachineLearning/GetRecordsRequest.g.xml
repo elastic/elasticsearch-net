@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_records.Request"><summary><para>
+Get anomaly records for an anomaly detection job.
+Records contain the detailed analytical results. They describe the anomalous
+activity that has been identified in the input data based on the detector
+configuration.
+There can be many anomaly records depending on the characteristics and size
+of the input data. In practice, there are often too many to be able to
+manually process them. The machine learning features therefore perform a
+sophisticated aggregation of the anomaly records into buckets.
+The number of record results depends on the number of anomalies found in each
+bucket, which relates to the number of time series being modeled and the
+number of detectors.
+</para></summary></member>
+  <member key="ml.get_records.Request#desc"><summary><para>
+Refer to the description for the <c>desc</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_records.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_records.Request#exclude_interim"><summary><para>
+Refer to the description for the <c>exclude_interim</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_records.Request#from"><summary><para>
+Skips the specified number of records.
+</para></summary></member>
+  <member key="ml.get_records.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.get_records.Request#record_score"><summary><para>
+Refer to the description for the <c>record_score</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_records.Request#size"><summary><para>
+Specifies the maximum number of records to obtain.
+</para></summary></member>
+  <member key="ml.get_records.Request#sort"><summary><para>
+Refer to the description for the <c>sort</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_records.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+</doc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.CompositeGeoTileGridAggregation#field"><summary><para>
+Either <c>field</c> or <c>script</c> must be present
+</para></summary></member>
+  <member key="_types.aggregations.CompositeGeoTileGridAggregation#script"><summary><para>
+Either <c>field</c> or <c>script</c> must be present
+</para></summary></member>
+</doc>

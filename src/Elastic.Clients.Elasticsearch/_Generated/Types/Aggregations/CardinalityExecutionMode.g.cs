@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CardinalityExecutionModeConverter))]
 public enum CardinalityExecutionMode
 {
-	/// <summary>
-	/// <para>
-	/// Run the aggregation by using field values directly.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityExecutionMode.g.xml" path="doc/member[@key='_types.aggregations.CardinalityExecutionMode#direct']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "direct")]
 	Direct,
-	/// <summary>
-	/// <para>
-	/// Run the aggregation by using global ordinals of the field and resolving those values after finishing a shard.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityExecutionMode.g.xml" path="doc/member[@key='_types.aggregations.CardinalityExecutionMode#global_ordinals']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "global_ordinals")]
 	GlobalOrdinals,
-	/// <summary>
-	/// <para>
-	/// Heuristic-based mode, default in Elasticsearch 8.3 and earlier.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityExecutionMode.g.xml" path="doc/member[@key='_types.aggregations.CardinalityExecutionMode#save_memory_heuristic']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "save_memory_heuristic")]
 	SaveMemoryHeuristic,
-	/// <summary>
-	/// <para>
-	/// Heuristic-based mode, default in Elasticsearch 8.4 and later.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityExecutionMode.g.xml" path="doc/member[@key='_types.aggregations.CardinalityExecutionMode#save_time_heuristic']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "save_time_heuristic")]
 	SaveTimeHeuristic,
-	/// <summary>
-	/// <para>
-	/// Run the aggregation by using segment ordinal values and resolving those values after each segment.
-	/// </para>
-	/// </summary>
+	/// <include file="CardinalityExecutionMode.g.xml" path="doc/member[@key='_types.aggregations.CardinalityExecutionMode#segment_ordinals']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "segment_ordinals")]
 	SegmentOrdinals
 }

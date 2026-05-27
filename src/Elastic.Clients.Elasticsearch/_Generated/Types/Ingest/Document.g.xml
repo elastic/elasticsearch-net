@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.Document#_id"><summary><para>
+Unique identifier for the document.
+This ID must be unique within the <c>_index</c>.
+</para></summary></member>
+  <member key="ingest._types.Document#_index"><summary><para>
+Name of the index containing the document.
+</para></summary></member>
+  <member key="ingest._types.Document#_source"><summary><para>
+JSON body for the document.
+</para></summary></member>
+</doc>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_jinaai.Response#chunking_settings"><summary><para>
+Chunking configuration object
+</para></summary></member>
+  <member key="inference.put_jinaai.Response#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.put_jinaai.Response#service"><summary><para>
+The service type
+</para></summary></member>
+  <member key="inference.put_jinaai.Response#service_settings"><summary><para>
+Settings specific to the service
+</para></summary></member>
+  <member key="inference.put_jinaai.Response#task_settings"><summary><para>
+Task settings specific to the service and task type
+</para></summary></member>
+  <member key="inference.put_jinaai.Response#task_type"><summary><para>
+The task type
+</para></summary></member>
+</doc>

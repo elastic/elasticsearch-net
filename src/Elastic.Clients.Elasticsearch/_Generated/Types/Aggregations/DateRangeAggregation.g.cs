@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.DateRangeAggregationConverter))]
 public sealed partial class DateRangeAggregation
 {
@@ -36,43 +37,23 @@ public sealed partial class DateRangeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>from</c> and <c>to</c> in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? Ranges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time zone used to convert dates from another time zone to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation']/*"/>
 public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation Instance { get; init; }
@@ -92,78 +73,49 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>from</c> and <c>to</c> in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>();
@@ -176,11 +128,7 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone used to convert dates from another time zone to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -201,6 +149,7 @@ public readonly partial struct DateRangeAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation']/*"/>
 public readonly partial struct DateRangeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation Instance { get; init; }
@@ -220,78 +169,49 @@ public readonly partial struct DateRangeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date format used to format <c>from</c> and <c>to</c> in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of date ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpressionDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.DateRangeExpression>();
@@ -304,11 +224,7 @@ public readonly partial struct DateRangeAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time zone used to convert dates from another time zone to UTC.
-	/// </para>
-	/// </summary>
+	/// <include file="DateRangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.DateRangeAggregation#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

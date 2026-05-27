@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsAnalyze']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsAnalyzeConverter))]
 public sealed partial class SettingsAnalyze
 {
@@ -39,6 +40,7 @@ public sealed partial class SettingsAnalyze
 	public int? MaxTokenCount { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsAnalyze']/*"/>
 public readonly partial struct SettingsAnalyzeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze Instance { get; init; }

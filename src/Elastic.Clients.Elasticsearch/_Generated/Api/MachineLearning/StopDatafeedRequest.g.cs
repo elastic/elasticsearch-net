@@ -23,17 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
 public sealed partial class StopDatafeedRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Stop datafeeds.
-/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
-/// multiple times throughout its lifecycle.
-/// </para>
-/// </summary>
+/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StopDatafeedRequestConverter))]
 public sealed partial class StopDatafeedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestParameters>
 {
@@ -60,44 +57,21 @@ public sealed partial class StopDatafeedRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ml.stop_datafeed";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
-	/// list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
-	/// the identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#datafeed_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id DatafeedId { get => P<Elastic.Clients.Elasticsearch.Id>("datafeed_id"); set => PR("datafeed_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>force</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#force']/*"/>
 	public bool? Force { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Stop datafeeds.
-/// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
-/// multiple times throughout its lifecycle.
-/// </para>
-/// </summary>
+/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.stop_datafeed.Request']/*"/>
 public readonly partial struct StopDatafeedRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest Instance { get; init; }
@@ -122,46 +96,28 @@ public readonly partial struct StopDatafeedRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest(Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated
-	/// list of datafeeds or a wildcard expression. You can close all datafeeds by using <c>_all</c> or by specifying <c>*</c> as
-	/// the identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#datafeed_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor DatafeedId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.DatafeedId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>allow_no_match</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>force</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>timeout</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="StopDatafeedRequest.g.xml" path="doc/member[@key='ml.stop_datafeed.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

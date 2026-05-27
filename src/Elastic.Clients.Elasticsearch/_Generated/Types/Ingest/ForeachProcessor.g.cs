@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ForeachProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.ForeachProcessorConverter))]
 public sealed partial class ForeachProcessor
 {
@@ -43,65 +44,32 @@ public sealed partial class ForeachProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing array or object values.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ingest.Processor Processor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ForeachProcessor']/*"/>
 public readonly partial struct ForeachProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor Instance { get; init; }
@@ -121,100 +89,63 @@ public readonly partial struct ForeachProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing array or object values.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing array or object values.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -227,34 +158,21 @@ public readonly partial struct ForeachProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Processor(Elastic.Clients.Elasticsearch.Ingest.Processor value)
 	{
 		Instance.Processor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Processor(System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> action)
 	{
 		Instance.Processor = Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -270,6 +188,7 @@ public readonly partial struct ForeachProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.ForeachProcessor']/*"/>
 public readonly partial struct ForeachProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor Instance { get; init; }
@@ -289,100 +208,63 @@ public readonly partial struct ForeachProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing array or object values.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing array or object values.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor silently exits without changing the document if the <c>field</c> is <c>null</c> or missing.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -395,11 +277,7 @@ public readonly partial struct ForeachProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -412,45 +290,28 @@ public readonly partial struct ForeachProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Processor(Elastic.Clients.Elasticsearch.Ingest.Processor value)
 	{
 		Instance.Processor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Processor(System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> action)
 	{
 		Instance.Processor = Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ingest processor to run on each element.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#processor']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Processor<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>> action)
 	{
 		Instance.Processor = Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="ForeachProcessor.g.xml" path="doc/member[@key='ingest._types.ForeachProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

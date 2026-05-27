@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AnthropicServiceSettingsConverter))]
 public sealed partial class AnthropicServiceSettings
 {
@@ -43,30 +44,17 @@ public sealed partial class AnthropicServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for the Anthropic API.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Anthropic documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Anthropic.
-	/// By default, the <c>anthropic</c> service sets the number of requests allowed per minute to 50.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings']/*"/>
 public readonly partial struct AnthropicServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings Instance { get; init; }
@@ -86,59 +74,35 @@ public readonly partial struct AnthropicServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings(Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for the Anthropic API.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Anthropic documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Anthropic.
-	/// By default, the <c>anthropic</c> service sets the number of requests allowed per minute to 50.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Anthropic.
-	/// By default, the <c>anthropic</c> service sets the number of requests allowed per minute to 50.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Anthropic.
-	/// By default, the <c>anthropic</c> service sets the number of requests allowed per minute to 50.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicServiceSettings.g.xml" path="doc/member[@key='inference._types.AnthropicServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Mapping Limit Settings
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="MappingLimitSettings.g.xml" path="doc/member[@key='indices._types.MappingLimitSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsConverter))]
 public sealed partial class MappingLimitSettings
 {
@@ -53,12 +49,8 @@ public sealed partial class MappingLimitSettings
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Mapping Limit Settings
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="MappingLimitSettings.g.xml" path="doc/member[@key='indices._types.MappingLimitSettings']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettings']/*"/>
 public readonly partial struct MappingLimitSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Instance { get; init; }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.DataStreamLifecycle"><summary><para>
+Data stream lifecycle denotes that a data stream is managed by the data stream lifecycle and contains the configuration.
+</para></summary></member>
+  <member key="indices._types.DataStreamLifecycle#data_retention"><summary><para>
+If defined, every document added to this data stream will be stored at least for this time frame.
+Any time after this duration the document could be deleted.
+When empty, every document in this data stream will be stored indefinitely.
+</para></summary></member>
+  <member key="indices._types.DataStreamLifecycle#downsampling"><summary><para>
+The list of downsampling rounds to execute as part of this downsampling configuration
+</para></summary></member>
+  <member key="indices._types.DataStreamLifecycle#effective_retention"><summary><para>
+The least amount of time data should be kept by elasticsearch.
+</para></summary></member>
+  <member key="indices._types.DataStreamLifecycle#enabled"><summary><para>
+If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+</para></summary></member>
+  <member key="indices._types.DataStreamLifecycle#retention_determined_by"><summary><para>
+Configuration source that can influence the retention of a data stream.
+</para></summary></member>
+</doc>

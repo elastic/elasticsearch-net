@@ -39,70 +39,15 @@ public sealed partial class ApiKeyAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? Cardinality { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation>("cardinality"); set => SetVariant("cardinality", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? Composite { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>("composite"); set => SetVariant("composite", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? DateRange { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation>("date_range"); set => SetVariant("date_range", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? Filter { get => GetVariant<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>("filter"); set => SetVariant("filter", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? Filters { get => GetVariant<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation>("filters"); set => SetVariant("filters", value); }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation? Missing { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation>("missing"); set => SetVariant("missing", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? Range { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation>("range"); set => SetVariant("range", value); }
-
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation>("terms"); set => SetVariant("terms", value); }
-
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? ValueCount { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation>("value_count"); set => SetVariant("value_count", value); }
-
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? Aggregations { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
@@ -154,157 +99,84 @@ public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
 	{
 		Instance.Cardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality()
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
 	{
 		Instance.Composite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite()
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
 	{
 		Instance.DateRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange()
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Filters(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument>.Build(action);
@@ -329,135 +201,72 @@ public readonly partial struct ApiKeyAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range()
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms()
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
 	{
 		Instance.ValueCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount()
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<TDocument>.Build(action);
@@ -531,213 +340,114 @@ public readonly partial struct ApiKeyAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation instance) => new Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation(Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation? value)
 	{
 		Instance.Cardinality = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality()
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that calculates an approximate count of distinct values.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Cardinality<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>>? action)
 	{
 		Instance.Cardinality = Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation? value)
 	{
 		Instance.Composite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite()
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation that creates composite buckets from different sources.
-	/// Unlike the other multi-bucket aggregations, you can use the <c>composite</c> aggregation to paginate <em>all</em> buckets from a multi-level aggregation efficiently.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Composite<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>>? action)
 	{
 		Instance.Composite = Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange(Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregation? value)
 	{
 		Instance.DateRange = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange()
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of date ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor DateRange<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>>? action)
 	{
 		Instance.DateRange = Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter(Elastic.Clients.Elasticsearch.Security.ApiKeyQuery? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single bucket aggregation that narrows the set of documents to those that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.Security.ApiKeyQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters(Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation? value)
 	{
 		Instance.Filters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters()
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket aggregation where each bucket contains the documents that match a query.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Filters<T>(System.Action<Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<T>>? action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<T>.Build(action);
@@ -768,180 +478,96 @@ public readonly partial struct ApiKeyAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation? value)
 	{
 		Instance.Range = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range()
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation that enables the user to define a set of ranges - each representing a bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>>? action)
 	{
 		Instance.Range = Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation? value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms()
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A multi-bucket value source based aggregation where buckets are dynamically built - one per unique value.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Terms<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>>? action)
 	{
 		Instance.Terms = Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount(Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregation? value)
 	{
 		Instance.ValueCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount()
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single-value metrics aggregation that counts the number of values that are extracted from the aggregated documents.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor ValueCount<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>>? action)
 	{
 		Instance.ValueCount = Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for this aggregation.
-	/// Only applies to bucket aggregations.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyAggregationDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringApiKeyAggregation<T>.Build(action);

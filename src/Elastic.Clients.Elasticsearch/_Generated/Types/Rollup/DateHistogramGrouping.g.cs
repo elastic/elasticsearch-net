@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.DateHistogramGroupingConverter))]
 public sealed partial class DateHistogramGrouping
 {
@@ -42,50 +43,25 @@ public sealed partial class DateHistogramGrouping
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? CalendarInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How long to wait before rolling up new documents.
-	/// By default, the indexer attempts to roll up all data that is available.
-	/// However, it is not uncommon for data to arrive out of order.
-	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
-	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Delay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? FixedInterval { get; set; }
 	public string? Format { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? Interval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines what <c>time_zone</c> the rollup documents are stored as.
-	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
-	/// By default, rollup documents are stored in <c>UTC</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping']/*"/>
 public readonly partial struct DateHistogramGroupingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Instance { get; init; }
@@ -105,59 +81,35 @@ public readonly partial struct DateHistogramGroupingDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> CalendarInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How long to wait before rolling up new documents.
-	/// By default, the indexer attempts to roll up all data that is available.
-	/// However, it is not uncommon for data to arrive out of order.
-	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
-	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Delay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.FixedInterval = value;
@@ -176,13 +128,7 @@ public readonly partial struct DateHistogramGroupingDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what <c>time_zone</c> the rollup documents are stored as.
-	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
-	/// By default, rollup documents are stored in <c>UTC</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -198,6 +144,7 @@ public readonly partial struct DateHistogramGroupingDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping']/*"/>
 public readonly partial struct DateHistogramGroupingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping Instance { get; init; }
@@ -217,59 +164,35 @@ public readonly partial struct DateHistogramGroupingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.DateHistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor CalendarInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How long to wait before rolling up new documents.
-	/// By default, the indexer attempts to roll up all data that is available.
-	/// However, it is not uncommon for data to arrive out of order.
-	/// The indexer is unable to deal with data that arrives after a time-span has been rolled up.
-	/// You need to specify a delay that matches the longest period of time you expect out-of-order data to arrive.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Delay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Delay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field that is to be rolled up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The interval of time buckets to be generated when rolling up.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor FixedInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.FixedInterval = value;
@@ -288,13 +211,7 @@ public readonly partial struct DateHistogramGroupingDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines what <c>time_zone</c> the rollup documents are stored as.
-	/// Unlike raw data, which can shift timezones on the fly, rolled documents have to be stored with a specific timezone.
-	/// By default, rollup documents are stored in <c>UTC</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DateHistogramGrouping.g.xml" path="doc/member[@key='rollup._types.DateHistogramGrouping#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.DateHistogramGroupingDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonBedrockTaskSettingsConverter))]
 public sealed partial class AmazonBedrockTaskSettings
 {
@@ -36,41 +37,20 @@ public sealed partial class AmazonBedrockTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it sets the maximum number for the output tokens to be generated.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#max_new_tokens']/*"/>
 	public int? MaxNewTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
-	/// At temperature 0.0 the model is most deterministic, at temperature 1.0 most random.
-	/// It should not be used if <c>top_p</c> or <c>top_k</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#temperature']/*"/>
 	public float? Temperature { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it limits samples to the top-K most likely words, balancing coherence and variability.
-	/// It is only available for anthropic, cohere, and mistral providers.
-	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#top_k']/*"/>
 	public float? TopK { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
-	/// Top-p uses nucleus sampling to select top tokens whose sum of likelihoods does not exceed a certain value, ensuring both variety and coherence.
-	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#top_p']/*"/>
 	public float? TopP { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings']/*"/>
 public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings Instance { get; init; }
@@ -90,50 +70,28 @@ public readonly partial struct AmazonBedrockTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettings(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it sets the maximum number for the output tokens to be generated.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#max_new_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor MaxNewTokens(int? value)
 	{
 		Instance.MaxNewTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is a number between 0.0 and 1.0 that controls the apparent creativity of the results.
-	/// At temperature 0.0 the model is most deterministic, at temperature 1.0 most random.
-	/// It should not be used if <c>top_p</c> or <c>top_k</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#temperature']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor Temperature(float? value)
 	{
 		Instance.Temperature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it limits samples to the top-K most likely words, balancing coherence and variability.
-	/// It is only available for anthropic, cohere, and mistral providers.
-	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#top_k']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor TopK(float? value)
 	{
 		Instance.TopK = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is a number in the range of 0.0 to 1.0, to eliminate low-probability tokens.
-	/// Top-p uses nucleus sampling to select top tokens whose sum of likelihoods does not exceed a certain value, ensuring both variety and coherence.
-	/// It is an alternative to <c>temperature</c>; it should not be used if <c>temperature</c> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockTaskSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockTaskSettings#top_p']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskSettingsDescriptor TopP(float? value)
 	{
 		Instance.TopP = value;

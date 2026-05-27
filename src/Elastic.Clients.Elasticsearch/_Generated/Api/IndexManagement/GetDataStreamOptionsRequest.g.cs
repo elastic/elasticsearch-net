@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 public sealed partial class GetDataStreamOptionsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream options.
-/// </para>
-/// <para>
-/// Get the data stream options configuration of one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetDataStreamOptionsRequestConverter))]
 public sealed partial class GetDataStreamOptionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>
 {
@@ -76,40 +62,18 @@ public sealed partial class GetDataStreamOptionsRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "indices.get_data_stream_options";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream options.
-/// </para>
-/// <para>
-/// Get the data stream options configuration of one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 public readonly partial struct GetDataStreamOptionsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest Instance { get; init; }
@@ -134,50 +98,28 @@ public readonly partial struct GetDataStreamOptionsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.info.NodeProcessInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeProcessInfoConverter))]
 public sealed partial class NodeProcessInfo
 {
@@ -44,24 +45,12 @@ public sealed partial class NodeProcessInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Process identifier (PID)
-	/// </para>
-	/// </summary>
+	/// <include file="NodeProcessInfo.g.xml" path="doc/member[@key='nodes.info.NodeProcessInfo#id']/*"/>
 	public required long Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the process address space has been successfully locked in memory
-	/// </para>
-	/// </summary>
+	/// <include file="NodeProcessInfo.g.xml" path="doc/member[@key='nodes.info.NodeProcessInfo#mlockall']/*"/>
 	public required bool Mlockall { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refresh interval for the process statistics
-	/// </para>
-	/// </summary>
+	/// <include file="NodeProcessInfo.g.xml" path="doc/member[@key='nodes.info.NodeProcessInfo#refresh_interval_in_millis']/*"/>
 	public required System.TimeSpan RefreshIntervalInMillis { get; set; }
 }

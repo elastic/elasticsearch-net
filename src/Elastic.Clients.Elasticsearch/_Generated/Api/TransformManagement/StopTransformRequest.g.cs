@@ -23,63 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 public sealed partial class StopTransformRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no transforms that match;
-	/// contains the <c>_all</c> string or no identifiers and there are no matches; contains wildcard expressions and there
-	/// are only partial matches.
-	/// </para>
-	/// <para>
-	/// If it is true, the API returns a successful acknowledgement message when there are no matches. When there are
-	/// only partial matches, the API stops the appropriate transforms.
-	/// </para>
-	/// <para>
-	/// If it is false, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API forcefully stops the transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response when <c>wait_for_completion</c> is <c>true</c>. If no response is received before the
-	/// timeout expires, the request returns a timeout exception. However, the request continues processing and
-	/// eventually moves the transform to a STOPPED state.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the transform does not completely stop until the current checkpoint is completed. If it is false,
-	/// the transform stops as soon as possible.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_checkpoint']/*"/>
 	public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API blocks until the indexer state completely stops. If it is false, the API returns
-	/// immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop transforms.
-/// Stops one or more transforms.
-/// </para>
-/// </summary>
+/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.StopTransformRequestConverter))]
 public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestParameters>
 {
@@ -106,69 +71,27 @@ public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "transform.stop_transform";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. To stop multiple transforms, use a comma-separated list or a wildcard expression.
-	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#transform_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name TransformId { get => P<Elastic.Clients.Elasticsearch.Name>("transform_id"); set => PR("transform_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no transforms that match;
-	/// contains the <c>_all</c> string or no identifiers and there are no matches; contains wildcard expressions and there
-	/// are only partial matches.
-	/// </para>
-	/// <para>
-	/// If it is true, the API returns a successful acknowledgement message when there are no matches. When there are
-	/// only partial matches, the API stops the appropriate transforms.
-	/// </para>
-	/// <para>
-	/// If it is false, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#allow_no_match']/*"/>
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API forcefully stops the transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#force']/*"/>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response when <c>wait_for_completion</c> is <c>true</c>. If no response is received before the
-	/// timeout expires, the request returns a timeout exception. However, the request continues processing and
-	/// eventually moves the transform to a STOPPED state.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the transform does not completely stop until the current checkpoint is completed. If it is false,
-	/// the transform stops as soon as possible.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_checkpoint']/*"/>
 	public bool? WaitForCheckpoint { get => Q<bool?>("wait_for_checkpoint"); set => Q("wait_for_checkpoint", value); }
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API blocks until the indexer state completely stops. If it is false, the API returns
-	/// immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop transforms.
-/// Stops one or more transforms.
-/// </para>
-/// </summary>
+/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.stop_transform.Request']/*"/>
 public readonly partial struct StopTransformRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest Instance { get; init; }
@@ -193,80 +116,42 @@ public readonly partial struct StopTransformRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the transform. To stop multiple transforms, use a comma-separated list or a wildcard expression.
-	/// To stop all transforms, use <c>_all</c> or <c>*</c> as the identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#transform_id']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.TransformId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies what to do when the request: contains wildcard expressions and there are no transforms that match;
-	/// contains the <c>_all</c> string or no identifiers and there are no matches; contains wildcard expressions and there
-	/// are only partial matches.
-	/// </para>
-	/// <para>
-	/// If it is true, the API returns a successful acknowledgement message when there are no matches. When there are
-	/// only partial matches, the API stops the appropriate transforms.
-	/// </para>
-	/// <para>
-	/// If it is false, the request returns a 404 status code when there are no matches or only partial matches.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#allow_no_match']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor AllowNoMatch(bool? value = true)
 	{
 		Instance.AllowNoMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API forcefully stops the transforms.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#force']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Force(bool? value = true)
 	{
 		Instance.Force = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response when <c>wait_for_completion</c> is <c>true</c>. If no response is received before the
-	/// timeout expires, the request returns a timeout exception. However, the request continues processing and
-	/// eventually moves the transform to a STOPPED state.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the transform does not completely stop until the current checkpoint is completed. If it is false,
-	/// the transform stops as soon as possible.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_checkpoint']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor WaitForCheckpoint(bool? value = true)
 	{
 		Instance.WaitForCheckpoint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If it is true, the API blocks until the indexer state completely stops. If it is false, the API returns
-	/// immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopTransformRequest.g.xml" path="doc/member[@key='transform.stop_transform.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

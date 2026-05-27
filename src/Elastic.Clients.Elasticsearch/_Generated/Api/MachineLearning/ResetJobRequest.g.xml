@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.reset_job.Request"><summary><para>
+Reset an anomaly detection job.
+All model state and results are deleted. The job is ready to start over as if
+it had just been created.
+It is not currently possible to reset multiple jobs using wildcards or a
+comma separated list.
+</para></summary></member>
+  <member key="ml.reset_job.Request#delete_user_annotations"><summary><para>
+Specifies whether annotations that have been added by the
+user should be deleted along with any auto-generated annotations when the job is
+reset.
+</para></summary></member>
+  <member key="ml.reset_job.Request#job_id"><summary><para>
+The ID of the job to reset.
+</para></summary></member>
+  <member key="ml.reset_job.Request#wait_for_completion"><summary><para>
+Should this request wait until the operation has completed before
+returning.
+</para></summary></member>
+</doc>

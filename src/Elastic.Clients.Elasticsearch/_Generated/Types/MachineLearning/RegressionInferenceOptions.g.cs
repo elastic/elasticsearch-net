@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RegressionInferenceOptionsConverter))]
 public sealed partial class RegressionInferenceOptions
 {
@@ -36,21 +37,14 @@ public sealed partial class RegressionInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#num_top_feature_importance_values']/*"/>
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions']/*"/>
 public readonly partial struct RegressionInferenceOptionsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions Instance { get; init; }
@@ -70,33 +64,21 @@ public readonly partial struct RegressionInferenceOptionsDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ResultsField = value;
@@ -117,6 +99,7 @@ public readonly partial struct RegressionInferenceOptionsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions']/*"/>
 public readonly partial struct RegressionInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions Instance { get; init; }
@@ -136,33 +119,21 @@ public readonly partial struct RegressionInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="RegressionInferenceOptions.g.xml" path="doc/member[@key='ml._types.RegressionInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ResultsField = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoPolygonQueryConverter))]
 public sealed partial class GeoPolygonQuery
 {
@@ -43,14 +44,7 @@ public sealed partial class GeoPolygonQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPolygonQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
@@ -59,6 +53,7 @@ public sealed partial class GeoPolygonQuery
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? ValidationMethod { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery']/*"/>
 public readonly partial struct GeoPolygonQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery Instance { get; init; }
@@ -78,14 +73,7 @@ public readonly partial struct GeoPolygonQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPolygonQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -143,6 +131,7 @@ public readonly partial struct GeoPolygonQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery']/*"/>
 public readonly partial struct GeoPolygonQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery Instance { get; init; }
@@ -162,14 +151,7 @@ public readonly partial struct GeoPolygonQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery(Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPolygonQuery.g.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

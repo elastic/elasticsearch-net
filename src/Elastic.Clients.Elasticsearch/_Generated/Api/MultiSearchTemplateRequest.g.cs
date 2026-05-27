@@ -23,64 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 public sealed partial class MultiSearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent searches the API can run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#max_concurrent_searches']/*"/>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
-	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run multiple templated searches.
-/// </para>
-/// <para>
-/// Run multiple templated searches with a single request.
-/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
-/// For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index": "my-index" }
-/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
-/// { "index": "my-other-index" }
-/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
-/// 
-/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
-/// </code>
-/// </summary>
+/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 public partial class MultiSearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
@@ -119,72 +83,28 @@ public partial class MultiSearchTemplateRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "msearch_template";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent searches the API can run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#max_concurrent_searches']/*"/>
 	public long? MaxConcurrentSearches { get => Q<long?>("max_concurrent_searches"); set => Q("max_concurrent_searches", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
-	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.SearchTemplateRequestItem> SearchTemplates { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run multiple templated searches.
-/// </para>
-/// <para>
-/// Run multiple templated searches with a single request.
-/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
-/// For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index": "my-index" }
-/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
-/// { "index": "my-other-index" }
-/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
-/// 
-/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
-/// </code>
-/// </summary>
+/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 public readonly partial struct MultiSearchTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Instance { get; init; }
@@ -210,69 +130,42 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent searches the API can run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#max_concurrent_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor MaxConcurrentSearches(long? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
-	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
@@ -347,25 +240,8 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run multiple templated searches.
-/// </para>
-/// <para>
-/// Run multiple templated searches with a single request.
-/// If you are providing a text file or text input to <c>curl</c>, use the <c>--data-binary</c> flag instead of <c>-d</c> to preserve newlines.
-/// For example:
-/// </para>
-/// <code>
-/// $ cat requests
-/// { "index": "my-index" }
-/// { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
-/// { "index": "my-other-index" }
-/// { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
-/// 
-/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
-/// </code>
-/// </summary>
+/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.msearch_template.Request']/*"/>
 public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest Instance { get; init; }
@@ -391,69 +267,42 @@ public readonly partial struct MultiSearchTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MultiSearchTemplateRequest(Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, network round-trips are minimized for cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent searches the API can run.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#max_concurrent_searches']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> MaxConcurrentSearches(long? value)
 	{
 		Instance.MaxConcurrentSearches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response returns <c>hits.total</c> as an integer.
-	/// If <c>false</c>, it returns <c>hits.total</c> as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiSearchTemplateRequest.g.xml" path="doc/member[@key='_global.msearch_template.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.MultiSearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;

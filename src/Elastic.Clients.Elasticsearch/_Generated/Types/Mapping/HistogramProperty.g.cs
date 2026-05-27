@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.HistogramProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.HistogramPropertyConverter))]
 public sealed partial class HistogramProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -41,11 +42,7 @@ public sealed partial class HistogramProperty : Elastic.Clients.Elasticsearch.Ma
 	public int? IgnoreAbove { get; set; }
 	public bool? IgnoreMalformed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
@@ -53,6 +50,7 @@ public sealed partial class HistogramProperty : Elastic.Clients.Elasticsearch.Ma
 	public string Type => "histogram";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.HistogramProperty']/*"/>
 public readonly partial struct HistogramPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.HistogramProperty Instance { get; init; }
@@ -102,33 +100,21 @@ public readonly partial struct HistogramPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -174,6 +160,7 @@ public readonly partial struct HistogramPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.HistogramProperty']/*"/>
 public readonly partial struct HistogramPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.HistogramProperty Instance { get; init; }
@@ -229,33 +216,21 @@ public readonly partial struct HistogramPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="HistogramProperty.g.xml" path="doc/member[@key='_types.mapping.HistogramProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.HistogramPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

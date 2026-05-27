@@ -26,33 +26,16 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeoShapeRelationConverter))]
 public enum GeoShapeRelation
 {
-	/// <summary>
-	/// <para>
-	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field contains the query geometry.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeRelation.g.xml" path="doc/member[@key='_types.GeoShapeRelation#contains']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "contains")]
 	Contains,
-	/// <summary>
-	/// <para>
-	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field has nothing in common with the query geometry.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeRelation.g.xml" path="doc/member[@key='_types.GeoShapeRelation#disjoint']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "disjoint")]
 	Disjoint,
-	/// <summary>
-	/// <para>
-	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field intersects the query geometry.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeRelation.g.xml" path="doc/member[@key='_types.GeoShapeRelation#intersects']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "intersects")]
 	Intersects,
-	/// <summary>
-	/// <para>
-	/// Return all documents whose <c>geo_shape</c> or <c>geo_point</c> field is within the query geometry.
-	/// Line geometries are not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeRelation.g.xml" path="doc/member[@key='_types.GeoShapeRelation#within']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "within")]
 	Within
 }

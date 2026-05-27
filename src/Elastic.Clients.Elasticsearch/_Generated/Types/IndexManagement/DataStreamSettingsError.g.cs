@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.DataStreamSettingsError']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamSettingsErrorConverter))]
 public sealed partial class DataStreamSettingsError
 {
@@ -43,11 +44,7 @@ public sealed partial class DataStreamSettingsError
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A message explaining why the settings could not be applied to specific indices.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamSettingsError.g.xml" path="doc/member[@key='indices.put_data_stream_settings.DataStreamSettingsError#error']/*"/>
 	public required string Error { get; set; }
 	public required string Index { get; set; }
 }

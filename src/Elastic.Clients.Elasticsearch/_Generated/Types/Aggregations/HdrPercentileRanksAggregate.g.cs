@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HdrPercentileRanksAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.HdrPercentileRanksAggregateConverter))]
 public sealed partial class HdrPercentileRanksAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

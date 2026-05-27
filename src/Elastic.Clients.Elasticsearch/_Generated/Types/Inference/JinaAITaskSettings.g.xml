@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.JinaAITaskSettings#return_documents"><summary><para>
+For a <c>rerank</c> task, return the doc text within the results.
+</para></summary></member>
+  <member key="inference._types.JinaAITaskSettings#task"><summary><para>
+For a <c>text_embedding</c> task, the task passed to the model.
+Valid values are:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>classification</c>: Use it for embeddings passed through a text classifier.
+</para>
+</item>
+<item>
+<para>
+<c>clustering</c>: Use it for the embeddings run through a clustering algorithm.
+</para>
+</item>
+<item>
+<para>
+<c>ingest</c>: Use it for storing document embeddings in a vector database.
+</para>
+</item>
+<item>
+<para>
+<c>search</c>: Use it for storing embeddings of search queries run against a vector database to find relevant documents.
+</para>
+</item>
+</list></summary></member>
+  <member key="inference._types.JinaAITaskSettings#top_n"><summary><para>
+For a <c>rerank</c> task, the number of most relevant documents to return.
+It defaults to the number of the documents.
+If this inference endpoint is used in a <c>text_similarity_reranker</c> retriever query and <c>top_n</c> is set, it must be greater than or equal to <c>rank_window_size</c> in the query.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.SnapshotPolicyStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.SnapshotPolicyStatsConverter))]
 public sealed partial class SnapshotPolicyStats
 {

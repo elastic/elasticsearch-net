@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Template equivalent of FailureStoreLifecycle that allows nullable values.
-/// </para>
-/// </summary>
+/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FailureStoreLifecycleTemplateConverter))]
 public sealed partial class FailureStoreLifecycleTemplate
 {
@@ -41,29 +38,15 @@ public sealed partial class FailureStoreLifecycleTemplate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate#enabled']/*"/>
 	public bool? Enabled { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Template equivalent of FailureStoreLifecycle that allows nullable values.
-/// </para>
-/// </summary>
+/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate']/*"/>
 public readonly partial struct FailureStoreLifecycleTemplateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate Instance { get; init; }
@@ -83,25 +66,14 @@ public readonly partial struct FailureStoreLifecycleTemplateDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate instance) => new Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplate(Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.DataRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="FailureStoreLifecycleTemplate.g.xml" path="doc/member[@key='indices._types.FailureStoreLifecycleTemplate#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.FailureStoreLifecycleTemplateDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;

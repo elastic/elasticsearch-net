@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanContainingQueryConverter))]
 public sealed partial class SpanContainingQuery
 {
@@ -43,34 +44,18 @@ public sealed partial class SpanContainingQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery']/*"/>
 public readonly partial struct SpanContainingQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery Instance { get; init; }
@@ -90,62 +75,35 @@ public readonly partial struct SpanContainingQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Big = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Little = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor<TDocument> Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
@@ -167,6 +125,7 @@ public readonly partial struct SpanContainingQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery']/*"/>
 public readonly partial struct SpanContainingQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery Instance { get; init; }
@@ -186,86 +145,49 @@ public readonly partial struct SpanContainingQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Big = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Big<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Little = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>big</c> that contain matches from <c>little</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanContainingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanContainingQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanContainingQueryDescriptor Little<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);

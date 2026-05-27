@@ -23,33 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// A geo bounding box. It can be represented in various ways:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// as 4 top/bottom/left/right coordinates
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as 2 top_left / bottom_right points
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as 2 top_right / bottom_left points
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// as a WKT bounding box
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GeoBounds.g.xml" path="doc/member[@key='_types.GeoBounds']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.GeoBounds']/*"/>
 public sealed partial class GeoBounds : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoBounds.Kind>
 {
 	public enum Kind

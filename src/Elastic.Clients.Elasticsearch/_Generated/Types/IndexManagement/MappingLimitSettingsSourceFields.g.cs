@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsSourceFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsSourceFieldsConverter))]
 public sealed partial class MappingLimitSettingsSourceFields
 {
@@ -45,6 +46,7 @@ public sealed partial class MappingLimitSettingsSourceFields
 	public required Elastic.Clients.Elasticsearch.IndexManagement.SourceMode Mode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.MappingLimitSettingsSourceFields']/*"/>
 public readonly partial struct MappingLimitSettingsSourceFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields Instance { get; init; }

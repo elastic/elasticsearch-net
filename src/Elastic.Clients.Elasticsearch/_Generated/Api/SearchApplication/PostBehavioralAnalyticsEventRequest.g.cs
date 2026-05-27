@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 public sealed partial class PostBehavioralAnalyticsEventRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether the response type has to include more details
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#debug']/*"/>
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a behavioral analytics collection event.
-/// </para>
-/// </summary>
+/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PostBehavioralAnalyticsEventRequestConverter))]
 public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>
 {
@@ -71,34 +66,19 @@ public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Client
 
 	internal override string OperationName => "search_application.post_behavioral_analytics_event";
 
-	/// <summary>
-	/// <para>
-	/// The name of the behavioral analytics collection.
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#collection_name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name CollectionName { get => P<Elastic.Clients.Elasticsearch.Name>("collection_name"); set => PR("collection_name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analytics event type.
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#event_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.SearchApplication.EventType EventType { get => P<Elastic.Clients.Elasticsearch.SearchApplication.EventType>("event_type"); set => PR("event_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether the response type has to include more details
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#debug']/*"/>
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 	public required object Payload { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a behavioral analytics collection event.
-/// </para>
-/// </summary>
+/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request']/*"/>
 public readonly partial struct PostBehavioralAnalyticsEventRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest Instance { get; init; }
@@ -125,33 +105,21 @@ public readonly partial struct PostBehavioralAnalyticsEventRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the behavioral analytics collection.
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#collection_name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor CollectionName(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.CollectionName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analytics event type.
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#event_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor EventType(Elastic.Clients.Elasticsearch.SearchApplication.EventType value)
 	{
 		Instance.EventType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the response type has to include more details
-	/// </para>
-	/// </summary>
+	/// <include file="PostBehavioralAnalyticsEventRequest.g.xml" path="doc/member[@key='search_application.post_behavioral_analytics_event.Request#debug']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor Debug(bool? value = true)
 	{
 		Instance.Debug = value;

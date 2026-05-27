@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Processor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ProcessorConverter))]
 public sealed partial class Processor
 {
@@ -36,31 +37,15 @@ public sealed partial class Processor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of documents transformed by the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#count']/*"/>
 	public long? Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of documents currently being transformed by the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#current']/*"/>
 	public long? Current { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of failed operations for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#failed']/*"/>
 	public long? Failed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time, in milliseconds, spent by the processor transforming documents.
-	/// </para>
-	/// </summary>
+	/// <include file="Processor.g.xml" path="doc/member[@key='nodes._types.Processor#time_in_millis']/*"/>
 	public System.TimeSpan? TimeInMillis { get; set; }
 }

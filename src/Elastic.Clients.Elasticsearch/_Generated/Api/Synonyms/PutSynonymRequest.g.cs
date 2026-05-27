@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
+/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
 public sealed partial class PutSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create or update a synonym set.
-/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-/// If you need to manage more synonym rules, you can create multiple synonym sets.
-/// </para>
-/// <para>
-/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-/// </para>
-/// </summary>
+/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.PutSynonymRequestConverter))]
 public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>
 {
@@ -71,32 +64,15 @@ public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "synonyms.put_synonym";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonyms set to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#synonyms_set']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> SynonymsSet { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a synonym set.
-/// Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
-/// If you need to manage more synonym rules, you can create multiple synonym sets.
-/// </para>
-/// <para>
-/// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
-/// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
-/// </para>
-/// </summary>
+/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='synonyms.put_synonym.Request']/*"/>
 public readonly partial struct PutSynonymRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest Instance { get; init; }
@@ -123,44 +99,28 @@ public readonly partial struct PutSynonymRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the synonyms set to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#synonyms_set']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> value)
 	{
 		Instance.SynonymsSet = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#synonyms_set']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet(params Elastic.Clients.Elasticsearch.Synonyms.SynonymRule[] values)
 	{
 		Instance.SynonymsSet = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The synonym rules definitions for the synonyms set.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSynonymRequest.g.xml" path="doc/member[@key='synonyms.put_synonym.Request#synonyms_set']/*"/>
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor SynonymsSet(params System.Action<Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>();

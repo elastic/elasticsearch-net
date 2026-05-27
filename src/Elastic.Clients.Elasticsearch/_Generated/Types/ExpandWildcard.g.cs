@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ExpandWildcardConverter))]
 public enum ExpandWildcard
 {
-	/// <summary>
-	/// <para>
-	/// Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </summary>
+	/// <include file="ExpandWildcard.g.xml" path="doc/member[@key='_types.ExpandWildcard#all']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "all")]
 	All,
-	/// <summary>
-	/// <para>
-	/// Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </summary>
+	/// <include file="ExpandWildcard.g.xml" path="doc/member[@key='_types.ExpandWildcard#closed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "closed")]
 	Closed,
-	/// <summary>
-	/// <para>
-	/// Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or <c>both</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExpandWildcard.g.xml" path="doc/member[@key='_types.ExpandWildcard#hidden']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "hidden")]
 	Hidden,
-	/// <summary>
-	/// <para>
-	/// Wildcard expressions are not accepted.
-	/// </para>
-	/// </summary>
+	/// <include file="ExpandWildcard.g.xml" path="doc/member[@key='_types.ExpandWildcard#none']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "none")]
 	None,
-	/// <summary>
-	/// <para>
-	/// Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="ExpandWildcard.g.xml" path="doc/member[@key='_types.ExpandWildcard#open']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "open")]
 	Open
 }

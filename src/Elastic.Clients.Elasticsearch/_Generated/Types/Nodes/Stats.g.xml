@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Stats#adaptive_selection"><summary><para>
+Statistics about adaptive replica selection.
+</para></summary></member>
+  <member key="nodes._types.Stats#attributes"><summary><para>
+Contains a list of attributes for the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#breakers"><summary><para>
+Statistics about the field data circuit breaker.
+</para></summary></member>
+  <member key="nodes._types.Stats#discovery"><summary><para>
+Contains node discovery statistics for the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#fs"><summary><para>
+File system information, data path, free disk space, read/write stats.
+</para></summary></member>
+  <member key="nodes._types.Stats#host"><summary><para>
+Network host for the node, based on the network host setting.
+</para></summary></member>
+  <member key="nodes._types.Stats#http"><summary><para>
+HTTP connection information.
+</para></summary></member>
+  <member key="nodes._types.Stats#indexing_pressure"><summary><para>
+Contains indexing pressure statistics for the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#indices"><summary><para>
+Indices stats about size, document count, indexing and deletion times, search times, field cache size, merges and flushes.
+</para></summary></member>
+  <member key="nodes._types.Stats#ingest"><summary><para>
+Statistics about ingest preprocessing.
+</para></summary></member>
+  <member key="nodes._types.Stats#ip"><summary><para>
+IP address and port for the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#jvm"><summary><para>
+JVM stats, memory pool information, garbage collection, buffer pools, number of loaded/unloaded classes.
+</para></summary></member>
+  <member key="nodes._types.Stats#name"><summary><para>
+Human-readable identifier for the node.
+Based on the node name setting.
+</para></summary></member>
+  <member key="nodes._types.Stats#os"><summary><para>
+Operating system stats, load average, mem, swap.
+</para></summary></member>
+  <member key="nodes._types.Stats#process"><summary><para>
+Process statistics, memory consumption, cpu usage, open file descriptors.
+</para></summary></member>
+  <member key="nodes._types.Stats#roles"><summary><para>
+Roles assigned to the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#script"><summary><para>
+Contains script statistics for the node.
+</para></summary></member>
+  <member key="nodes._types.Stats#thread_pool"><summary><para>
+Statistics about each thread pool, including current size, queue and rejected tasks.
+</para></summary></member>
+  <member key="nodes._types.Stats#transport"><summary><para>
+Transport statistics about sent and received bytes in cluster communication.
+</para></summary></member>
+  <member key="nodes._types.Stats#transport_address"><summary><para>
+Host and port for the transport layer, used for internal communication between nodes in a cluster.
+</para></summary></member>
+</doc>

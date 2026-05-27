@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.NodePackagingType']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.NodePackagingTypeConverter))]
 public sealed partial class NodePackagingType
 {
@@ -44,24 +45,12 @@ public sealed partial class NodePackagingType
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of selected nodes using the distribution flavor and file type.
-	/// </para>
-	/// </summary>
+	/// <include file="NodePackagingType.g.xml" path="doc/member[@key='cluster.stats.NodePackagingType#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Type of Elasticsearch distribution. This is always <c>default</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NodePackagingType.g.xml" path="doc/member[@key='cluster.stats.NodePackagingType#flavor']/*"/>
 	public required string Flavor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// File type (such as <c>tar</c> or <c>zip</c>) used for the distribution package.
-	/// </para>
-	/// </summary>
+	/// <include file="NodePackagingType.g.xml" path="doc/member[@key='cluster.stats.NodePackagingType#type']/*"/>
 	public required string Type { get; set; }
 }

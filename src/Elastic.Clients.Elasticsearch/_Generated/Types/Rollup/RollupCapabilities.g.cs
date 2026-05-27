@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.RollupCapabilities']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.RollupCapabilitiesConverter))]
 public sealed partial class RollupCapabilities
 {
@@ -42,10 +43,6 @@ public sealed partial class RollupCapabilities
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// There can be multiple, independent jobs configured for a single index or index pattern. Each of these jobs may have different configurations, so the API returns a list of all the various configurations available.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupCapabilities.g.xml" path="doc/member[@key='rollup.get_rollup_caps.RollupCapabilities#rollup_jobs']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Rollup.RollupCapabilitySummary> RollupJobs { get; set; }
 }

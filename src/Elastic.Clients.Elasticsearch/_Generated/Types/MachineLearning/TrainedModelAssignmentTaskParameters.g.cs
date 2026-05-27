@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelAssignmentTaskParametersConverter))]
 public sealed partial class TrainedModelAssignmentTaskParameters
 {
@@ -50,55 +51,27 @@ public sealed partial class TrainedModelAssignmentTaskParameters
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the trained model cache.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#cache_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? CacheSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the trained model deployment.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#deployment_id']/*"/>
 	public required string DeploymentId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size of the trained model in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#model_bytes']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize ModelBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of allocations this model is assigned across ML nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#number_of_allocations']/*"/>
 	public required int NumberOfAllocations { get; set; }
 	public required Elastic.Clients.Elasticsearch.ByteSize PerAllocationMemoryBytes { get; set; }
 	public required Elastic.Clients.Elasticsearch.ByteSize PerDeploymentMemoryBytes { get; set; }
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of inference requests are allowed in the queue at a time.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#queue_capacity']/*"/>
 	public required int QueueCapacity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of threads per allocation.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignmentTaskParameters.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignmentTaskParameters#threads_per_allocation']/*"/>
 	public required int ThreadsPerAllocation { get; set; }
 }

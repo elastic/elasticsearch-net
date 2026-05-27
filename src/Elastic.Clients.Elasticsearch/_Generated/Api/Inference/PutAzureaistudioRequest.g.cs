@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
 public sealed partial class PutAzureaistudioRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Azure AI studio inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAzureaistudioRequestConverter))]
 public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>
 {
@@ -74,65 +66,30 @@ public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "inference.put_azureaistudio";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#azureaistudio_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AzureaistudioInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("azureaistudio_inference_id"); set => PR("azureaistudio_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>azureaistudio</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#service']/*"/>
 	public string Service => "azureaistudio";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Azure AI studio inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureaistudio.Request']/*"/>
 public readonly partial struct PutAzureaistudioRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest Instance { get; init; }
@@ -159,124 +116,77 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest(Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#azureaistudio_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor AzureaistudioInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AzureaistudioInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureaistudioRequest.g.xml" path="doc/member[@key='inference.put_azureaistudio.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor.Build(action);

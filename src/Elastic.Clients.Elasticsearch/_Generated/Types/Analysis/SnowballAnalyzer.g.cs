@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SnowballAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SnowballAnalyzerConverter))]
 public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -50,6 +51,7 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SnowballAnalyzer']/*"/>
 public readonly partial struct SnowballAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzer Instance { get; init; }

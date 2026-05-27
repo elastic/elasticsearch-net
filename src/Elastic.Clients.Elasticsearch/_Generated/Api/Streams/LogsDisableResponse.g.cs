@@ -37,10 +37,6 @@ public sealed partial class LogsDisableResponse : Elastic.Transport.Products.Ela
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableResponse.g.xml" path="doc/member[@key='streams.logs_disable.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ClearCachedPrivilegesRequest.g.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
 public sealed partial class ClearCachedPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear the privileges cache.
-/// </para>
-/// <para>
-/// Evict privileges from the native application privilege cache.
-/// The cache is also automatically cleared for applications that have their privileges updated.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedPrivilegesRequest.g.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearCachedPrivilegesRequestConverter))]
 public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>
 {
@@ -62,25 +57,12 @@ public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "security.clear_cached_privileges";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of applications.
-	/// To clear all applications, use an asterism (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedPrivilegesRequest.g.xml" path="doc/member[@key='security.clear_cached_privileges.Request#application']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the privileges cache.
-/// </para>
-/// <para>
-/// Evict privileges from the native application privilege cache.
-/// The cache is also automatically cleared for applications that have their privileges updated.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedPrivilegesRequest.g.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_privileges.Request']/*"/>
 public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest Instance { get; init; }
@@ -105,13 +87,7 @@ public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of applications.
-	/// To clear all applications, use an asterism (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedPrivilegesRequest.g.xml" path="doc/member[@key='security.clear_cached_privileges.Request#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Application = value;

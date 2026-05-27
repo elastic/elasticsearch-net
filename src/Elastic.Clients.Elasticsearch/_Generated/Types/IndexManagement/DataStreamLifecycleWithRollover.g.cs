@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-/// <summary>
-/// <para>
-/// Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,
-/// if asked.
-/// </para>
-/// </summary>
+/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamLifecycleWithRolloverConverter))]
 public sealed partial class DataStreamLifecycleWithRollover
 {
@@ -42,60 +38,27 @@ public sealed partial class DataStreamLifecycleWithRollover
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#downsampling']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? Downsampling { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The least amount of time data should be kept by elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#effective_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? EffectiveRetention { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configuration source that can influence the retention of a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#retention_determined_by']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? RetentionDeterminedBy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
-	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
-	/// The contents of this field are subject to change.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? Rollover { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Data stream lifecycle with rollover can be used to display the configuration including the default rollover conditions,
-/// if asked.
-/// </para>
-/// </summary>
+/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover']/*"/>
 public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover Instance { get; init; }
@@ -115,46 +78,28 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If defined, every document added to this data stream will be stored at least for this time frame.
-	/// Any time after this duration the document could be deleted.
-	/// When empty, every document in this data stream will be stored indefinitely.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#data_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.DataRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? value)
 	{
 		Instance.Downsampling = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
 		Instance.Downsampling = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The list of downsampling rounds to execute as part of this downsampling configuration
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#downsampling']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Downsampling(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
@@ -167,73 +112,42 @@ public readonly partial struct DataStreamLifecycleWithRolloverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The least amount of time data should be kept by elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#effective_retention']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor EffectiveRetention(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.EffectiveRetention = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
-	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configuration source that can influence the retention of a data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#retention_determined_by']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor RetentionDeterminedBy(Elastic.Clients.Elasticsearch.IndexManagement.RetentionSource? value)
 	{
 		Instance.RetentionDeterminedBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
-	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
-	/// The contents of this field are subject to change.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? value)
 	{
 		Instance.Rollover = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
-	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
-	/// The contents of this field are subject to change.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover()
 	{
 		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
-	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
-	/// The contents of this field are subject to change.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamLifecycleWithRollover.g.xml" path="doc/member[@key='indices._types.DataStreamLifecycleWithRollover#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRolloverDescriptor Rollover(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor>? action)
 	{
 		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor.Build(action);

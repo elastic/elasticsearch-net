@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
 public sealed partial class DeleteVotingConfigExclusionsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to wait for all excluded nodes to be removed from the
-	/// cluster before clearing the voting configuration exclusions list.
-	/// Defaults to true, meaning that all excluded nodes must be removed from
-	/// the cluster before this API takes any action. If set to false then the
-	/// voting configuration exclusions list is cleared even if some excluded
-	/// nodes are still in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#wait_for_removal']/*"/>
 	public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear cluster voting config exclusions.
-/// Remove master-eligible nodes from the voting configuration exclusion list.
-/// </para>
-/// </summary>
+/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.DeleteVotingConfigExclusionsRequestConverter))]
 public sealed partial class DeleteVotingConfigExclusionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters>
 {
@@ -72,32 +57,15 @@ public sealed partial class DeleteVotingConfigExclusionsRequest : Elastic.Client
 
 	internal override string OperationName => "cluster.delete_voting_config_exclusions";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to wait for all excluded nodes to be removed from the
-	/// cluster before clearing the voting configuration exclusions list.
-	/// Defaults to true, meaning that all excluded nodes must be removed from
-	/// the cluster before this API takes any action. If set to false then the
-	/// voting configuration exclusions list is cleared even if some excluded
-	/// nodes are still in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#wait_for_removal']/*"/>
 	public bool? WaitForRemoval { get => Q<bool?>("wait_for_removal"); set => Q("wait_for_removal", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear cluster voting config exclusions.
-/// Remove master-eligible nodes from the voting configuration exclusion list.
-/// </para>
-/// </summary>
+/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request']/*"/>
 public readonly partial struct DeleteVotingConfigExclusionsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest Instance { get; init; }
@@ -116,27 +84,14 @@ public readonly partial struct DeleteVotingConfigExclusionsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether to wait for all excluded nodes to be removed from the
-	/// cluster before clearing the voting configuration exclusions list.
-	/// Defaults to true, meaning that all excluded nodes must be removed from
-	/// the cluster before this API takes any action. If set to false then the
-	/// voting configuration exclusions list is cleared even if some excluded
-	/// nodes are still in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteVotingConfigExclusionsRequest.g.xml" path="doc/member[@key='cluster.delete_voting_config_exclusions.Request#wait_for_removal']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor WaitForRemoval(bool? value = true)
 	{
 		Instance.WaitForRemoval = value;

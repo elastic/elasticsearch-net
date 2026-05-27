@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Definition']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DefinitionConverter))]
 public sealed partial class Definition
 {
@@ -42,21 +43,14 @@ public sealed partial class Definition
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#preprocessors']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? Preprocessors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#trained_model']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel TrainedModel { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Definition']/*"/>
 public readonly partial struct DefinitionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Definition Instance { get; init; }
@@ -76,33 +70,21 @@ public readonly partial struct DefinitionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Definition instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Definition(Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#preprocessors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>? value)
 	{
 		Instance.Preprocessors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#preprocessors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(params Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor[] values)
 	{
 		Instance.Preprocessors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collection of preprocessors
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#preprocessors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor Preprocessors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PreprocessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.Preprocessor>();
@@ -115,33 +97,21 @@ public readonly partial struct DefinitionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#trained_model']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel value)
 	{
 		Instance.TrainedModel = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#trained_model']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel()
 	{
 		Instance.TrainedModel = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="Definition.g.xml" path="doc/member[@key='ml.put_trained_model.Definition#trained_model']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor TrainedModel(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor>? action)
 	{
 		Instance.TrainedModel = Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDescriptor.Build(action);

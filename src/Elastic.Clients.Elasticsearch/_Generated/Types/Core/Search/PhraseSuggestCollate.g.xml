@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.PhraseSuggestCollate#params"><summary><para>
+Parameters to use if the query is templated.
+</para></summary></member>
+  <member key="_global.search._types.PhraseSuggestCollate#prune"><summary><para>
+Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
+</para></summary></member>
+  <member key="_global.search._types.PhraseSuggestCollate#query"><summary><para>
+A collate query that is run once for every suggestion.
+</para></summary></member>
+</doc>

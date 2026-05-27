@@ -37,108 +37,47 @@ public sealed partial class ReindexResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of scroll responses that were pulled back by the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#batches']/*"/>
 	public long? Batches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully created.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#created']/*"/>
 	public long? Created { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#deleted']/*"/>
 	public long? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If there were any unrecoverable errors during the process, it is an array of those failures.
-	/// If this array is not empty, the request ended because of those failures.
-	/// Reindex is implemented using batches and any failure causes the entire process to end but all failures in the current batch are collected into the array.
-	/// You can use the <c>conflicts</c> option to prevent the reindex from ending on version conflicts.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#failures']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.BulkIndexByScrollFailure>? Failures { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were ignored because the script used for the reindex returned a <c>noop</c> value for <c>ctx.op</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#noops']/*"/>
 	public long? Noops { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of requests per second effectively run during the reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of retries attempted by reindex.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Retries? Retries { get; set; }
 	public int? SliceId { get; set; }
 	public Elastic.Clients.Elasticsearch.TaskId? Task { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds the request slept to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#throttled_millis']/*"/>
 	public System.DateTimeOffset? ThrottledMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This field should always be equal to zero in a reindex response.
-	/// It has meaning only when using the task API, where it indicates the next time (in milliseconds since epoch) that a throttled request will be run again in order to conform to <c>requests_per_second</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#throttled_until_millis']/*"/>
 	public System.DateTimeOffset? ThrottledUntilMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If any of the requests that ran during the reindex timed out, it is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#timed_out']/*"/>
 	public bool? TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total milliseconds the entire operation took.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#took']/*"/>
 	public System.TimeSpan? Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully processed.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#total']/*"/>
 	public long? Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents that were successfully updated.
-	/// That is to say, a document with the same ID already existed before the reindex updated it.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#updated']/*"/>
 	public long? Updated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of version conflicts that occurred.
-	/// </para>
-	/// </summary>
+	/// <include file="ReindexResponse.g.xml" path="doc/member[@key='_global.reindex.Response#version_conflicts']/*"/>
 	public long? VersionConflicts { get; set; }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.revert_model_snapshot.Request"><summary><para>
+Revert to a snapshot.
+The machine learning features react quickly to anomalous input, learning new
+behaviors in data. Highly anomalous input increases the variance in the
+models whilst the system learns whether this is a new step-change in behavior
+or a one-off event. In the case where this anomalous input is known to be a
+one-off, then it might be appropriate to reset the model state to a time
+before this event. For example, you might consider reverting to a saved
+snapshot after Black Friday or a critical system failure.
+</para></summary></member>
+  <member key="ml.revert_model_snapshot.Request#delete_intervening_results"><summary><para>
+Refer to the description for the <c>delete_intervening_results</c> query parameter.
+</para></summary></member>
+  <member key="ml.revert_model_snapshot.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.revert_model_snapshot.Request#snapshot_id"><summary><para>
+You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
+snapshot means the anomaly detection job starts learning a new model from
+scratch when it is started.
+</para></summary></member>
+</doc>

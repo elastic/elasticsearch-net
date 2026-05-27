@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SearchIdle']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SearchIdleConverter))]
 public sealed partial class SearchIdle
 {
@@ -39,6 +40,7 @@ public sealed partial class SearchIdle
 	public Elastic.Clients.Elasticsearch.Duration? After { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SearchIdle']/*"/>
 public readonly partial struct SearchIdleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Instance { get; init; }

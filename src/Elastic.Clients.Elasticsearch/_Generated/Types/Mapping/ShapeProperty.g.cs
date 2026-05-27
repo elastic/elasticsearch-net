@@ -23,13 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-/// <summary>
-/// <para>
-/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
-/// rectangles and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ShapePropertyConverter))]
 public sealed partial class ShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -52,11 +47,7 @@ public sealed partial class ShapeProperty : Elastic.Clients.Elasticsearch.Mappin
 	public bool? IgnoreMalformed { get; set; }
 	public bool? IgnoreZValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -66,13 +57,8 @@ public sealed partial class ShapeProperty : Elastic.Clients.Elasticsearch.Mappin
 	public string Type => "shape";
 }
 
-/// <summary>
-/// <para>
-/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
-/// rectangles and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
 public readonly partial struct ShapePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ShapeProperty Instance { get; init; }
@@ -152,33 +138,21 @@ public readonly partial struct ShapePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -236,13 +210,8 @@ public readonly partial struct ShapePropertyDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
-/// rectangles and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ShapeProperty']/*"/>
 public readonly partial struct ShapePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ShapeProperty Instance { get; init; }
@@ -328,33 +297,21 @@ public readonly partial struct ShapePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="ShapeProperty.g.xml" path="doc/member[@key='_types.mapping.ShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ShapePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

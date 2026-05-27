@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.FieldCaps;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.field_caps.FieldCapability']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.FieldCaps.Json.FieldCapabilityConverter))]
 public sealed partial class FieldCapability
 {
@@ -44,84 +45,37 @@ public sealed partial class FieldCapability
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether this field can be aggregated on all indices.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#aggregatable']/*"/>
 	public required bool Aggregatable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of indices where this field has the same type family, or null if all indices have the same type family for the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Merged metadata across all indices as a map of string keys to arrays of values. A value length of 1 indicates that all indices had the same value for this key, while a length of 2 or more indicates that not all indices had the same value for this key.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#meta']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether this field is registered as a metadata field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#metadata_field']/*"/>
 	public bool? MetadataField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of indices where this field is present if these indices
-	/// don’t have the same <c>time_series_metric</c> value for this field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#metric_conflicts_indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? MetricConflictsIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_aggregatable_indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? NonAggregatableIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If this list is present in response then some indices have the
-	/// field marked as a dimension and other indices, the ones in this list, do not.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_dimension_indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? NonDimensionIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The list of indices where this field is not searchable, or null if all indices have the same definition for the field.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#non_searchable_indices']/*"/>
 	public System.Collections.Generic.ICollection<string>? NonSearchableIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether this field is indexed for search on all indices.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#searchable']/*"/>
 	public required bool Searchable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether this field is used as a time series dimension.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#time_series_dimension']/*"/>
 	public bool? TimeSeriesDimension { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains metric type if this fields is used as a time series
-	/// metrics, absent if the field is not used as metric.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldCapability.g.xml" path="doc/member[@key='_global.field_caps.FieldCapability#time_series_metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 	public required string Type { get; set; }
 }

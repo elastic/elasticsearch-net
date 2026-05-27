@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InputConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InputConfigConverter))]
 public sealed partial class InputConfig
 {
@@ -47,6 +48,7 @@ public sealed partial class InputConfig
 	public required string OutputField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InputConfig']/*"/>
 public readonly partial struct InputConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InputConfig Instance { get; init; }

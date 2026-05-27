@@ -23,17 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
 public sealed partial class PutFilterRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a filter.
-/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
-/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
-/// </para>
-/// </summary>
+/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutFilterRequestConverter))]
 public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestParameters>
 {
@@ -60,36 +57,18 @@ public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "ml.put_filter";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#filter_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id FilterId { get => P<Elastic.Clients.Elasticsearch.Id>("filter_id"); set => PR("filter_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A description of the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
-	/// Up to 10000 items are allowed in each filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#items']/*"/>
 	public System.Collections.Generic.ICollection<string>? Items { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a filter.
-/// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
-/// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
-/// </para>
-/// </summary>
+/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_filter.Request']/*"/>
 public readonly partial struct PutFilterRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest Instance { get; init; }
@@ -114,46 +93,28 @@ public readonly partial struct PutFilterRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#filter_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor FilterId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.FilterId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
-	/// Up to 10000 items are allowed in each filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Items = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
-	/// Up to 10000 items are allowed in each filter.
-	/// </para>
-	/// </summary>
+	/// <include file="PutFilterRequest.g.xml" path="doc/member[@key='ml.put_filter.Request#items']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutFilterRequestDescriptor Items(params string[] values)
 	{
 		Instance.Items = [.. values];

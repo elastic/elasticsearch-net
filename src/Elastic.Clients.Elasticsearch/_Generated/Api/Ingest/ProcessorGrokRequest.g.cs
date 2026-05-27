@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="ProcessorGrokRequest.g.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
 public sealed partial class ProcessorGrokRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Run a grok processor.
-/// Extract structured fields out of a single text field within a document.
-/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-/// </para>
-/// </summary>
+/// <include file="ProcessorGrokRequest.g.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.ProcessorGrokRequestConverter))]
 public sealed partial class ProcessorGrokRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class ProcessorGrokRequest : Elastic.Clients.Elasticsearch
 	internal override string OperationName => "ingest.processor_grok";
 }
 
-/// <summary>
-/// <para>
-/// Run a grok processor.
-/// Extract structured fields out of a single text field within a document.
-/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-/// </para>
-/// </summary>
+/// <include file="ProcessorGrokRequest.g.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.processor_grok.Request']/*"/>
 public readonly partial struct ProcessorGrokRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest Instance { get; init; }

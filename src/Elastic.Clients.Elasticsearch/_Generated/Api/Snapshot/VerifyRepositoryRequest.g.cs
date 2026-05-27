@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 public sealed partial class VerifyRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Verify a snapshot repository.
-/// Check for common misconfigurations in a snapshot repository.
-/// </para>
-/// </summary>
+/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.VerifyRepositoryRequestConverter))]
 public sealed partial class VerifyRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>
 {
@@ -76,38 +62,18 @@ public sealed partial class VerifyRepositoryRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "snapshot.verify_repository";
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to verify.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Verify a snapshot repository.
-/// Check for common misconfigurations in a snapshot repository.
-/// </para>
-/// </summary>
+/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 public readonly partial struct VerifyRepositoryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest Instance { get; init; }
@@ -132,37 +98,21 @@ public readonly partial struct VerifyRepositoryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to verify.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

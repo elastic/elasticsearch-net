@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingBlocks']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSettingBlocksConverter))]
 public sealed partial class IndexSettingBlocks
 {
@@ -43,6 +44,7 @@ public sealed partial class IndexSettingBlocks
 	public bool? Write { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSettingBlocks']/*"/>
 public readonly partial struct IndexSettingBlocksDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks Instance { get; init; }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiReadingFormTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KuromojiReadingFormTokenFilterConverter))]
 public sealed partial class KuromojiReadingFormTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -48,6 +49,7 @@ public sealed partial class KuromojiReadingFormTokenFilter : Elastic.Clients.Ela
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KuromojiReadingFormTokenFilter']/*"/>
 public readonly partial struct KuromojiReadingFormTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KuromojiReadingFormTokenFilter Instance { get; init; }

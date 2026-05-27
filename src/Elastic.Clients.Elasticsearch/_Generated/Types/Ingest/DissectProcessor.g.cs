@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DissectProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DissectProcessorConverter))]
 public sealed partial class DissectProcessor
 {
@@ -43,72 +44,35 @@ public sealed partial class DissectProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character(s) that separate the appended fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#append_separator']/*"/>
 	public string? AppendSeparator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to dissect.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The pattern to apply to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#pattern']/*"/>
 	public required string Pattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DissectProcessor']/*"/>
 public readonly partial struct DissectProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DissectProcessor Instance { get; init; }
@@ -128,111 +92,70 @@ public readonly partial struct DissectProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DissectProcessor(Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The character(s) that separate the appended fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#append_separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> AppendSeparator(string? value)
 	{
 		Instance.AppendSeparator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to dissect.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to dissect.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -245,23 +168,14 @@ public readonly partial struct DissectProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pattern to apply to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -277,6 +191,7 @@ public readonly partial struct DissectProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.DissectProcessor']/*"/>
 public readonly partial struct DissectProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DissectProcessor Instance { get; init; }
@@ -296,111 +211,70 @@ public readonly partial struct DissectProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DissectProcessor(Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The character(s) that separate the appended fields.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#append_separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor AppendSeparator(string? value)
 	{
 		Instance.AppendSeparator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to dissect.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to dissect.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist or is <c>null</c>, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -413,11 +287,7 @@ public readonly partial struct DissectProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -430,23 +300,14 @@ public readonly partial struct DissectProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The pattern to apply to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="DissectProcessor.g.xml" path="doc/member[@key='ingest._types.DissectProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

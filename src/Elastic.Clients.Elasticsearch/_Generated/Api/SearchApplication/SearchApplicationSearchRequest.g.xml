@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.search.Request"><summary><para>
+Run a search application search.
+Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+Unspecified template parameters are assigned their default values if applicable.
+</para></summary></member>
+  <member key="search_application.search.Request#name"><summary><para>
+The name of the search application to be searched.
+</para></summary></member>
+  <member key="search_application.search.Request#params"><summary><para>
+Query parameters specific to this request, which will override any defaults specified in the template.
+</para></summary></member>
+  <member key="search_application.search.Request#typed_keys"><summary><para>
+Determines whether aggregation names are prefixed by their respective types in the response.
+</para></summary></member>
+</doc>

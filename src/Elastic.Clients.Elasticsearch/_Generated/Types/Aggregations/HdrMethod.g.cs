@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HdrMethod']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.HdrMethodConverter))]
 public sealed partial class HdrMethod
 {
@@ -36,14 +37,11 @@ public sealed partial class HdrMethod
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the resolution of values for the histogram in number of significant digits.
-	/// </para>
-	/// </summary>
+	/// <include file="HdrMethod.g.xml" path="doc/member[@key='_types.aggregations.HdrMethod#number_of_significant_value_digits']/*"/>
 	public int? NumberOfSignificantValueDigits { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.HdrMethod']/*"/>
 public readonly partial struct HdrMethodDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.HdrMethod Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct HdrMethodDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(Elastic.Clients.Elasticsearch.Aggregations.HdrMethod instance) => new Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.HdrMethod(Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the resolution of values for the histogram in number of significant digits.
-	/// </para>
-	/// </summary>
+	/// <include file="HdrMethod.g.xml" path="doc/member[@key='_types.aggregations.HdrMethod#number_of_significant_value_digits']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethodDescriptor NumberOfSignificantValueDigits(int? value)
 	{
 		Instance.NumberOfSignificantValueDigits = value;

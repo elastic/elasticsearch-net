@@ -37,10 +37,6 @@ public sealed partial class ResetJobResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetJobResponse.g.xml" path="doc/member[@key='ml.reset_job.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.put_role.Response#role"><summary><para>
+When an existing role is updated, <c>created</c> is set to <c>false</c>.
+</para></summary></member>
+</doc>

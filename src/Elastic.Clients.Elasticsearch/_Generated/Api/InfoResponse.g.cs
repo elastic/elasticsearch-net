@@ -37,26 +37,14 @@ public sealed partial class InfoResponse : Elastic.Transport.Products.Elasticsea
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The responding cluster's name.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#cluster_name']/*"/>
 	public required string ClusterName { get; set; }
 	public required string ClusterUuid { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The responding node's name.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#name']/*"/>
 	public required string Name { get; set; }
 	public required string Tagline { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The running version of Elasticsearch.
-	/// </para>
-	/// </summary>
+	/// <include file="InfoResponse.g.xml" path="doc/member[@key='_global.info.Response#version']/*"/>
 	public required Elastic.Clients.Elasticsearch.ElasticsearchVersionInfo Version { get; set; }
 }

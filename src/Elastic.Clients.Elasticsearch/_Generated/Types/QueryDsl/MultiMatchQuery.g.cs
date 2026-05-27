@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MultiMatchQueryConverter))]
 public sealed partial class MultiMatchQuery
 {
@@ -42,134 +43,62 @@ public sealed partial class MultiMatchQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	[System.Obsolete("Deprecated in '7.3.0'.")]
 	public double? CutoffFrequency { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The fields to be queried.
-	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_rewrite']/*"/>
 	public string? FuzzyRewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_transpositions']/*"/>
 	public bool? FuzzyTranspositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#lenient']/*"/>
 	public bool? Lenient { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#max_expansions']/*"/>
 	public int? MaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#slop']/*"/>
 	public int? Slop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores for each per-term blended query and scores across groups are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#tie_breaker']/*"/>
 	public double? TieBreaker { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How <c>the</c> multi_match query is executed internally.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? Type { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery']/*"/>
 public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery Instance { get; init; }
@@ -189,36 +118,21 @@ public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -232,135 +146,84 @@ public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to be queried.
-	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to be queried.
-	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
@@ -373,44 +236,28 @@ public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores for each per-term blended query and scores across groups are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How <c>the</c> multi_match query is executed internally.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? value)
 	{
 		Instance.Type = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;
@@ -426,6 +273,7 @@ public readonly partial struct MultiMatchQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery']/*"/>
 public readonly partial struct MultiMatchQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery Instance { get; init; }
@@ -445,36 +293,21 @@ public readonly partial struct MultiMatchQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -488,135 +321,84 @@ public readonly partial struct MultiMatchQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to be queried.
-	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to be queried.
-	/// Defaults to the <c>index.query.default_field</c> index settings, which in turn defaults to <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// Can be applied to the term subqueries constructed for all terms but the final term.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;
@@ -629,44 +411,28 @@ public readonly partial struct MultiMatchQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions allowed between matching tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Slop(int? value)
 	{
 		Instance.Slop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how scores for each per-term blended query and scores across groups are combined.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How <c>the</c> multi_match query is executed internally.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor Type(Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType? value)
 	{
 		Instance.Type = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiMatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MultiMatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;

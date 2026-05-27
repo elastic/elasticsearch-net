@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.put_transform.Request"><summary><para>
+Create a transform.
+Creates a transform.
+</para>
+<para>
+A transform copies data from source indices, transforms it, and persists it into an entity-centric destination index. You can also think of the destination index as a two-dimensional tabular data structure (known as
+a data frame). The ID for each document in the data frame is generated from a hash of the entity, so there is a
+unique row per entity.
+</para>
+<para>
+You must choose either the latest or pivot method for your transform; you cannot use both in a single transform. If
+you choose to use the pivot method for your transform, the entities are defined by the set of <c>group_by</c> fields in
+the pivot object. If you choose to use the latest method, the entities are defined by the <c>unique_key</c> field values
+in the latest object.
+</para>
+<para>
+You must have <c>create_index</c>, <c>index</c>, and <c>read</c> privileges on the destination index and <c>read</c> and
+<c>view_index_metadata</c> privileges on the source indices. When Elasticsearch security features are enabled, the
+transform remembers which roles the user that created it had at the time of creation and uses those same roles. If
+those roles do not have the required privileges on the source and destination indices, the transform fails when it
+attempts unauthorized operations.
+</para>
+<para>
+NOTE: You must use Kibana or this API to create a transform. Do not add a transform directly into any
+<c>.transform-internal*</c> indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
+not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
+give users any privileges on <c>.data-frame-internal*</c> indices.
+</para></summary></member>
+  <member key="transform.put_transform.Request#_meta"><summary><para>
+Defines optional transform metadata.
+</para></summary></member>
+  <member key="transform.put_transform.Request#defer_validation"><summary><para>
+When the transform is created, a series of validations occur to ensure its success. For example, there is a
+check for the existence of the source indices and a check that the destination index is not part of the source
+index pattern. You can use this parameter to skip the checks, for example when the source index does not exist
+until after the transform is created. The validations are always run when you start the transform, however, with
+the exception of privilege checks.
+</para></summary></member>
+  <member key="transform.put_transform.Request#description"><summary><para>
+Free text description of the transform.
+</para></summary></member>
+  <member key="transform.put_transform.Request#dest"><summary><para>
+The destination for the transform.
+</para></summary></member>
+  <member key="transform.put_transform.Request#frequency"><summary><para>
+The interval between checks for changes in the source indices when the transform is running continuously. Also
+determines the retry interval in the event of transient failures while the transform is searching or indexing.
+The minimum value is <c>1s</c> and the maximum is <c>1h</c>.
+</para></summary></member>
+  <member key="transform.put_transform.Request#latest"><summary><para>
+The latest method transforms the data by finding the latest document for each unique key.
+</para></summary></member>
+  <member key="transform.put_transform.Request#pivot"><summary><para>
+The pivot method transforms the data by aggregating and grouping it. These objects define the group by fields
+and the aggregation to reduce the data.
+</para></summary></member>
+  <member key="transform.put_transform.Request#retention_policy"><summary><para>
+Defines a retention policy for the transform. Data that meets the defined criteria is deleted from the
+destination index.
+</para></summary></member>
+  <member key="transform.put_transform.Request#settings"><summary><para>
+Defines optional transform settings.
+</para></summary></member>
+  <member key="transform.put_transform.Request#source"><summary><para>
+The source of the data for the transform.
+</para></summary></member>
+  <member key="transform.put_transform.Request#sync"><summary><para>
+Defines the properties transforms require to run continuously.
+</para></summary></member>
+  <member key="transform.put_transform.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="transform.put_transform.Request#transform_id"><summary><para>
+Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters.
+</para></summary></member>
+</doc>

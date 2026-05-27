@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.field_usage_stats.Request"><summary><para>
+Get field usage stats.
+Get field usage information for each shard and field of an index.
+Field usage statistics are automatically captured when queries are running on a cluster.
+A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
+</para>
+<para>
+The response body reports the per-shard usage count of the data structures that back the fields in the index.
+A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#fields"><summary><para>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#ignore_unavailable"><summary><para>
+If <c>true</c>, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="indices.field_usage_stats.Request#index"><summary><para>
+Comma-separated list or wildcard expression of index names used to limit the request.
+</para></summary></member>
+</doc>

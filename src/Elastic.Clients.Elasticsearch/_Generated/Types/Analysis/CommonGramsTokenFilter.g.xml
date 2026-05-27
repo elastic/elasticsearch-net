@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.CommonGramsTokenFilter#common_words"><summary><para>
+A list of tokens. The filter generates bigrams for these tokens.
+Either this or the <c>common_words_path</c> parameter is required.
+</para></summary></member>
+  <member key="_types.analysis.CommonGramsTokenFilter#common_words_path"><summary><para>
+Path to a file containing a list of tokens. The filter generates bigrams for these tokens.
+This path must be absolute or relative to the <c>config</c> location. The file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+Either this or the <c>common_words</c> parameter is required.
+</para></summary></member>
+  <member key="_types.analysis.CommonGramsTokenFilter#ignore_case"><summary><para>
+If <c>true</c>, matches for common words matching are case-insensitive. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.CommonGramsTokenFilter#query_mode"><summary><para>
+If <c>true</c>, the filter excludes the following tokens from the output:
+</para>
+<list type="bullet">
+<item>
+<para>
+Unigrams for common words
+</para>
+</item>
+<item>
+<para>
+Unigrams for terms followed by common words
+Defaults to <c>false</c>. We recommend enabling this parameter for search analyzers.
+</para>
+</item>
+</list></summary></member>
+</doc>

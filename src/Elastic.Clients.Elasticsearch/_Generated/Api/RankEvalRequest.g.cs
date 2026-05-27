@@ -23,45 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 public sealed partial class RankEvalRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#search_type']/*"/>
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 }
 
-/// <summary>
-/// <para>
-/// Evaluate ranked search results.
-/// </para>
-/// <para>
-/// Evaluate the quality of ranked search results over a set of typical search queries.
-/// </para>
-/// </summary>
+/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RankEvalRequestConverter))]
 public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RankEvalRequestParameters>
 {
@@ -101,66 +81,30 @@ public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "rank_eval";
 
-	/// <summary>
-	/// <para>
-	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#search_type']/*"/>
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? Metric { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> Requests { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Evaluate ranked search results.
-/// </para>
-/// <para>
-/// Evaluate the quality of ranked search results over a set of typical search queries.
-/// </para>
-/// </summary>
+/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 public readonly partial struct RankEvalRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RankEvalRequest Instance { get; init; }
@@ -186,134 +130,84 @@ public readonly partial struct RankEvalRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(Elastic.Clients.Elasticsearch.RankEvalRequest instance) => new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor SearchType(string? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric()
 	{
 		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Metric(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor>? action)
 	{
 		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
 		Instance.Requests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem[] values)
 	{
 		Instance.Requests = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();
@@ -326,11 +220,7 @@ public readonly partial struct RankEvalRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor Requests<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();
@@ -399,14 +289,8 @@ public readonly partial struct RankEvalRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Evaluate ranked search results.
-/// </para>
-/// <para>
-/// Evaluate the quality of ranked search results over a set of typical search queries.
-/// </para>
-/// </summary>
+/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.Request']/*"/>
 public readonly partial struct RankEvalRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.RankEvalRequest Instance { get; init; }
@@ -432,134 +316,84 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.RankEvalRequest instance) => new Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A  comma-separated list of data streams, indices, and index aliases used to limit the request.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, missing or closed indices are not included in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Search operation type
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> SearchType(string? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric()
 	{
 		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definition of the evaluation metric to calculate.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Metric(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor>? action)
 	{
 		Instance.Metric = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> value)
 	{
 		Instance.Requests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(params Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem[] values)
 	{
 		Instance.Requests = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A set of typical search requests, together with their provided ratings.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequest.g.xml" path="doc/member[@key='_global.rank_eval.Request#requests']/*"/>
 	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> Requests(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>();

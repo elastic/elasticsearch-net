@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ExtendedMemoryStatsConverter))]
 public sealed partial class ExtendedMemoryStats
 {
@@ -36,52 +37,27 @@ public sealed partial class ExtendedMemoryStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the amount of physical memory has been overridden using the <c>es</c>.<c>total_memory_bytes</c> system property then this reports the overridden value in bytes.
-	/// Otherwise it reports the same value as <c>total_in_bytes</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#adjusted_total_in_bytes']/*"/>
 	public long? AdjustedTotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of free physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Percentage of free memory.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#free_percent']/*"/>
 	public int? FreePercent { get; set; }
 	public string? Resident { get; set; }
 	public long? ResidentInBytes { get; set; }
 	public string? Share { get; set; }
 	public long? ShareInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 	public string? TotalVirtual { get; set; }
 	public long? TotalVirtualInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of used physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Percentage of used memory.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedMemoryStats.g.xml" path="doc/member[@key='nodes._types.ExtendedMemoryStats#used_percent']/*"/>
 	public int? UsedPercent { get; set; }
 }

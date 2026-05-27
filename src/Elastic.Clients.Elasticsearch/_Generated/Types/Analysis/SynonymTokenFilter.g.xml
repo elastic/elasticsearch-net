@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.SynonymTokenFilter#expand"><summary><para>
+Expands definitions for equivalent synonym rules. Defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#format"><summary><para>
+Sets the synonym rules format.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#lenient"><summary><para>
+If <c>true</c> ignores errors while parsing the synonym rules. It is important to note that only those synonym rules which cannot get parsed are ignored. Defaults to the value of the <c>updateable</c> setting.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#synonyms"><summary><para>
+Used to define inline synonyms.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#synonyms_path"><summary><para>
+Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#synonyms_set"><summary><para>
+Provide a synonym set created via Synonyms Management APIs.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#tokenizer"><summary><para>
+Controls the tokenizers that will be used to tokenize the synonym, this parameter is for backwards compatibility for indices that created before 6.0.
+</para></summary></member>
+  <member key="_types.analysis.SynonymTokenFilter#updateable"><summary><para>
+If <c>true</c> allows reloading search analyzers to pick up changes to synonym files. Only to be used for search analyzers. Defaults to <c>false</c>.
+</para></summary></member>
+</doc>

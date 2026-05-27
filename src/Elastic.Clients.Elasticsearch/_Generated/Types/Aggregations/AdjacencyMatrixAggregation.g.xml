@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.AdjacencyMatrixAggregation#filters"><summary><para>
+Filters used to create buckets.
+At least one filter is required.
+</para></summary></member>
+  <member key="_types.aggregations.AdjacencyMatrixAggregation#separator"><summary><para>
+Separator used to concatenate filter names. Defaults to &amp;.
+</para></summary></member>
+</doc>

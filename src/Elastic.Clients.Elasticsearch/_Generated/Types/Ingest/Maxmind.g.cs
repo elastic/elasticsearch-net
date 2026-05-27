@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Maxmind']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.MaxmindConverter))]
 public sealed partial class Maxmind
 {
@@ -45,6 +46,7 @@ public sealed partial class Maxmind
 	public required Elastic.Clients.Elasticsearch.Id AccountId { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Maxmind']/*"/>
 public readonly partial struct MaxmindDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.Maxmind Instance { get; init; }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.get_auto_follow_pattern.AutoFollowPatternSummary#follow_index_pattern"><summary><para>
+The name of follower index.
+</para></summary></member>
+  <member key="ccr.get_auto_follow_pattern.AutoFollowPatternSummary#leader_index_exclusion_patterns"><summary><para>
+An array of simple index patterns that can be used to exclude indices from being auto-followed.
+</para></summary></member>
+  <member key="ccr.get_auto_follow_pattern.AutoFollowPatternSummary#leader_index_patterns"><summary><para>
+An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
+</para></summary></member>
+  <member key="ccr.get_auto_follow_pattern.AutoFollowPatternSummary#max_outstanding_read_requests"><summary><para>
+The maximum number of outstanding reads requests from the remote cluster.
+</para></summary></member>
+  <member key="ccr.get_auto_follow_pattern.AutoFollowPatternSummary#remote_cluster"><summary><para>
+The remote cluster containing the leader indices to match against.
+</para></summary></member>
+</doc>

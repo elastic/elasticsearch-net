@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 public sealed partial class AnalyzeIndexRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get tokens from text analysis.
-/// The analyze API performs analysis on a text string and returns the resulting tokens.
-/// </para>
-/// <para>
-/// Generating excessive amount of tokens may cause a node to run out of memory.
-/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
-/// If more than this limit of tokens gets generated, an error occurs.
-/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
-/// </para>
-/// </summary>
+/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.AnalyzeIndexRequestConverter))]
 public sealed partial class AnalyzeIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>
 {
@@ -64,95 +56,39 @@ public sealed partial class AnalyzeIndexRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "indices.analyze";
 
-	/// <summary>
-	/// <para>
-	/// Index used to derive the analyzer.
-	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
-	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the analyzer that should be applied to the provided <c>text</c>.
-	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#attributes']/*"/>
 	public System.Collections.Generic.ICollection<string>? Attributes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? CharFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes token attributes and additional details.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Normalizer to use to convert text into a single token.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#normalizer']/*"/>
 	public string? Normalizer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#text']/*"/>
 	public System.Collections.Generic.ICollection<string>? Text { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Tokenizer to use to convert text into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenizer? Tokenizer { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get tokens from text analysis.
-/// The analyze API performs analysis on a text string and returns the resulting tokens.
-/// </para>
-/// <para>
-/// Generating excessive amount of tokens may cause a node to run out of memory.
-/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
-/// If more than this limit of tokens gets generated, an error occurs.
-/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
-/// </para>
-/// </summary>
+/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 public readonly partial struct AnalyzeIndexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Instance { get; init; }
@@ -176,80 +112,49 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Index used to derive the analyzer.
-	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
-	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the analyzer that should be applied to the provided <c>text</c>.
-	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#attributes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Attributes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#attributes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Attributes(params string[] values)
 	{
 		Instance.Attributes = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? value)
 	{
 		Instance.CharFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
 	{
 		Instance.CharFilter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
@@ -262,70 +167,42 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes token attributes and additional details.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
@@ -338,57 +215,35 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Normalizer to use to convert text into a single token.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#normalizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Normalizer(string? value)
 	{
 		Instance.Normalizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Text = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Text(params string[] values)
 	{
 		Instance.Text = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenizer to use to convert text into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? value)
 	{
 		Instance.Tokenizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenizer to use to convert text into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
 		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);
@@ -456,18 +311,8 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get tokens from text analysis.
-/// The analyze API performs analysis on a text string and returns the resulting tokens.
-/// </para>
-/// <para>
-/// Generating excessive amount of tokens may cause a node to run out of memory.
-/// The <c>index.analyze.max_token_count</c> setting enables you to limit the number of tokens that can be produced.
-/// If more than this limit of tokens gets generated, an error occurs.
-/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
-/// </para>
-/// </summary>
+/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest Instance { get; init; }
@@ -491,80 +336,49 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Index used to derive the analyzer.
-	/// If specified, the <c>analyzer</c> or field parameter overrides this value.
-	/// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the analyzer that should be applied to the provided <c>text</c>.
-	/// This could be a built-in analyzer, or an analyzer that’s been configured in the index.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#attributes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Attributes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token attributes used to filter the output of the <c>explain</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#attributes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Attributes(params string[] values)
 	{
 		Instance.Attributes = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? value)
 	{
 		Instance.CharFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params Elastic.Clients.Elasticsearch.Analysis.ICharFilter[] values)
 	{
 		Instance.CharFilter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of character filters used to preprocess characters before the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#char_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> CharFilter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>();
@@ -577,70 +391,42 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes token attributes and additional details.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field used to derive the analyzer.
-	/// To use this parameter, you must specify an index.
-	/// If specified, the <c>analyzer</c> parameter overrides this value.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of token filters used to apply after the tokenizer.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Filter(params System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>();
@@ -653,57 +439,35 @@ public readonly partial struct AnalyzeIndexRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Normalizer to use to convert text into a single token.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#normalizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Normalizer(string? value)
 	{
 		Instance.Normalizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Text = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text to analyze.
-	/// If an array of strings is provided, it is analyzed as a multi-value field.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#text']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Text(params string[] values)
 	{
 		Instance.Text = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenizer to use to convert text into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer? value)
 	{
 		Instance.Tokenizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tokenizer to use to convert text into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument> Tokenizer(System.Func<Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory, Elastic.Clients.Elasticsearch.Analysis.ITokenizer> action)
 	{
 		Instance.Tokenizer = Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.Build(action);

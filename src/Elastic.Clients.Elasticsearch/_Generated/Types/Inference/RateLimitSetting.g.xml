@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.RateLimitSetting#requests_per_minute"><summary><para>
+The number of requests allowed per minute.
+</para></summary></member>
+</doc>

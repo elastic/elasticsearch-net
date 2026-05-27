@@ -37,45 +37,21 @@ public sealed partial class PutGoogleaistudioResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutGoogleaistudioResponse.g.xml" path="doc/member[@key='inference.put_googleaistudio.Response#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleAIStudio TaskType { get; set; }
 }

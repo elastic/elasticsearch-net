@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// DISK
-/// </para>
-/// </summary>
+/// <include file="DiskIndicator.g.xml" path="doc/member[@key='_global.health_report.DiskIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.DiskIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.DiskIndicatorConverter))]
 public sealed partial class DiskIndicator
 {

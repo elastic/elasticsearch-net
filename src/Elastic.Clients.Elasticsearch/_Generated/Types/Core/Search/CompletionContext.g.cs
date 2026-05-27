@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionContext']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.CompletionContextConverter))]
 public sealed partial class CompletionContext
 {
@@ -42,47 +43,23 @@ public sealed partial class CompletionContext
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The factor by which the score of the suggestion should be boosted.
-	/// The score is computed by multiplying the boost with the suggestion weight.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#boost']/*"/>
 	public double? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value of the category to filter/boost on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#context']/*"/>
 	public required Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of precision values at which neighboring geohashes should be taken into account.
-	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to generating neighbors for index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#neighbours']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? Neighbours { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The precision of the geohash to encode the query geo point.
-	/// Can be specified as a distance value (<c>5m</c>, <c>10km</c>, etc.), or as a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether the category value should be treated as a prefix or not.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#prefix']/*"/>
 	public bool? Prefix { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionContext']/*"/>
 public readonly partial struct CompletionContextDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionContext Instance { get; init; }
@@ -102,73 +79,42 @@ public readonly partial struct CompletionContextDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionContext instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The factor by which the score of the suggestion should be boosted.
-	/// The score is computed by multiplying the boost with the suggestion weight.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Boost(double? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value of the category to filter/boost on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#context']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Context(Elastic.Clients.Elasticsearch.Core.Search.Context value)
 	{
 		Instance.Context = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value of the category to filter/boost on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#context']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Context(System.Func<Elastic.Clients.Elasticsearch.Core.Search.ContextFactory, Elastic.Clients.Elasticsearch.Core.Search.Context> action)
 	{
 		Instance.Context = Elastic.Clients.Elasticsearch.Core.Search.ContextFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of precision values at which neighboring geohashes should be taken into account.
-	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to generating neighbors for index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#neighbours']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? value)
 	{
 		Instance.Neighbours = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of precision values at which neighboring geohashes should be taken into account.
-	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to generating neighbors for index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#neighbours']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(params Elastic.Clients.Elasticsearch.GeohashPrecision[] values)
 	{
 		Instance.Neighbours = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of precision values at which neighboring geohashes should be taken into account.
-	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to generating neighbors for index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#neighbours']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(params System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.GeohashPrecision>();
@@ -181,37 +127,21 @@ public readonly partial struct CompletionContextDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The precision of the geohash to encode the query geo point.
-	/// Can be specified as a distance value (<c>5m</c>, <c>10km</c>, etc.), or as a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The precision of the geohash to encode the query geo point.
-	/// Can be specified as a distance value (<c>5m</c>, <c>10km</c>, etc.), or as a raw geohash precision (<c>1</c>..<c>12</c>).
-	/// Defaults to index time precision level.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the category value should be treated as a prefix or not.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionContext.g.xml" path="doc/member[@key='_global.search._types.CompletionContext#prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Prefix(bool? value = true)
 	{
 		Instance.Prefix = value;

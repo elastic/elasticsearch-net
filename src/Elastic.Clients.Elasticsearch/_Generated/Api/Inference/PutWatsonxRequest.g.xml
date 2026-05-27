@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_watsonx.Request"><summary><para>
+Create a Watsonx inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+</para></summary></member>
+  <member key="inference.put_watsonx.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>watsonxai</c>.
+</para></summary></member>
+  <member key="inference.put_watsonx.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
+</para></summary></member>
+  <member key="inference.put_watsonx.Request#task_type"><summary><para>
+The task type.
+The only valid task type for the model to perform is <c>text_embedding</c>.
+</para></summary></member>
+  <member key="inference.put_watsonx.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+  <member key="inference.put_watsonx.Request#watsonx_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+</doc>

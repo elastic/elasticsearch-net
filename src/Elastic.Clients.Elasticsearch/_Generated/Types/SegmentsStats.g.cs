@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SegmentsStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SegmentsStatsConverter))]
 public sealed partial class SegmentsStats
 {
@@ -54,166 +55,72 @@ public sealed partial class SegmentsStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of segments across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for doc values across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#doc_values_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? DocValuesMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#doc_values_memory_in_bytes']/*"/>
 	public required long DocValuesMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This object is not populated by the cluster stats API.
-	/// To get information on segment files, use the node stats API.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#file_sizes']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> FileSizes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used by fixed bit sets across all shards assigned to selected nodes.
-	/// Fixed bit sets are used for nested object field types and type filters for join fields.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#fixed_bit_set']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? FixedBitSet { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#fixed_bit_set_memory_in_bytes']/*"/>
 	public required long FixedBitSetMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used by all index writers across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#index_writer_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? IndexWriterMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#index_writer_memory_in_bytes']/*"/>
 	public required long IndexWriterMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Unix timestamp, in milliseconds, of the most recently retried indexing request.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#max_unsafe_auto_id_timestamp']/*"/>
 	public required long MaxUnsafeAutoIdTimestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for segments across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#memory_in_bytes']/*"/>
 	public required long MemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for normalization factors across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#norms_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? NormsMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#norms_memory_in_bytes']/*"/>
 	public required long NormsMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for points across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#points_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? PointsMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#points_memory_in_bytes']/*"/>
 	public required long PointsMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for stored fields across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#stored_fields_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? StoredFieldsMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#stored_fields_memory_in_bytes']/*"/>
 	public required long StoredFieldsMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for terms across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#terms_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TermsMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#terms_memory_in_bytes']/*"/>
 	public required long TermsMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for term vectors across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#term_vectors_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? TermVectorsMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#term_vectors_memory_in_bytes']/*"/>
 	public required long TermVectorsMemoryInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used by all version maps across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#version_map_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? VersionMapMemory { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="SegmentsStats.g.xml" path="doc/member[@key='_types.SegmentsStats#version_map_memory_in_bytes']/*"/>
 	public required long VersionMapMemoryInBytes { get; set; }
 }

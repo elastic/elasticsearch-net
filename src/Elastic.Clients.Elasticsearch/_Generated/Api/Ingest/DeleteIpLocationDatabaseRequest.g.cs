@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
 public sealed partial class DeleteIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DeleteIpLocationDatabaseRequestConverter))]
 public sealed partial class DeleteIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>
 {
@@ -75,37 +62,18 @@ public sealed partial class DeleteIpLocationDatabaseRequest : Elastic.Clients.El
 
 	internal override string OperationName => "ingest.delete_ip_location_database";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of IP location database configurations.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids Id { get => P<Elastic.Clients.Elasticsearch.Ids>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete IP geolocation database configurations.
-/// </para>
-/// </summary>
+/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request']/*"/>
 public readonly partial struct DeleteIpLocationDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest Instance { get; init; }
@@ -130,37 +98,21 @@ public readonly partial struct DeleteIpLocationDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of IP location database configurations.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.delete_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

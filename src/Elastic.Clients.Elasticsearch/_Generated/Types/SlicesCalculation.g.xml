@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.SlicesCalculation#auto"><summary><para>
+Let Elasticsearch choose a reasonable number for most data streams and indices.
+</para></summary></member>
+</doc>

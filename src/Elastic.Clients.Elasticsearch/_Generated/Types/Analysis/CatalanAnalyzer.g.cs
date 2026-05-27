@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CatalanAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CatalanAnalyzerConverter))]
 public sealed partial class CatalanAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -43,6 +44,7 @@ public sealed partial class CatalanAnalyzer : Elastic.Clients.Elasticsearch.Anal
 	public string Type => "catalan";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.CatalanAnalyzer']/*"/>
 public readonly partial struct CatalanAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.CatalanAnalyzer Instance { get; init; }

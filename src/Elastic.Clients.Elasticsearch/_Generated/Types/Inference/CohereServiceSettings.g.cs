@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CohereServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CohereServiceSettingsConverter))]
 public sealed partial class CohereServiceSettings
 {
@@ -42,75 +43,23 @@ public sealed partial class CohereServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Cohere account.
-	/// You can find or create your Cohere API keys on the Cohere API key settings page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
-	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
-	/// Use <c>float</c> for the default float embeddings.
-	/// Use <c>int8</c> for signed int8 embeddings.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#embedding_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType? EmbeddingType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c>, <c>rerank</c>, or <c>text_embedding</c> task, the name of the model to use for the inference task.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For the available <c>completion</c> models, refer to the <a href="https://docs.cohere.com/docs/models#command">Cohere command docs</a>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For the available <c>rerank</c> models, refer to the <a href="https://docs.cohere.com/reference/rerank-1">Cohere rerank docs</a>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For the available <c>text_embedding</c> models, refer to <a href="https://docs.cohere.com/reference/embed">Cohere embed docs</a>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value for a text embedding task is <c>embed-english-v2.0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#model_id']/*"/>
 	public string? ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Cohere.
-	/// By default, the <c>cohere</c> service sets the number of requests allowed per minute to 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The similarity measure.
-	/// If the <c>embedding_type</c> is <c>float</c>, the default value is <c>dot_product</c>.
-	/// If the <c>embedding_type</c> is <c>int8</c> or <c>byte</c>, the default value is <c>cosine</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType? Similarity { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CohereServiceSettings']/*"/>
 public readonly partial struct CohereServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings Instance { get; init; }
@@ -130,112 +79,49 @@ public readonly partial struct CohereServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CohereServiceSettings(Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Cohere account.
-	/// You can find or create your Cohere API keys on the Cohere API key settings page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
-	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
-	/// Use <c>float</c> for the default float embeddings.
-	/// Use <c>int8</c> for signed int8 embeddings.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#embedding_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor EmbeddingType(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType? value)
 	{
 		Instance.EmbeddingType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c>, <c>rerank</c>, or <c>text_embedding</c> task, the name of the model to use for the inference task.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For the available <c>completion</c> models, refer to the <a href="https://docs.cohere.com/docs/models#command">Cohere command docs</a>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For the available <c>rerank</c> models, refer to the <a href="https://docs.cohere.com/reference/rerank-1">Cohere rerank docs</a>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For the available <c>text_embedding</c> models, refer to <a href="https://docs.cohere.com/reference/embed">Cohere embed docs</a>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The default value for a text embedding task is <c>embed-english-v2.0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Cohere.
-	/// By default, the <c>cohere</c> service sets the number of requests allowed per minute to 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Cohere.
-	/// By default, the <c>cohere</c> service sets the number of requests allowed per minute to 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Cohere.
-	/// By default, the <c>cohere</c> service sets the number of requests allowed per minute to 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The similarity measure.
-	/// If the <c>embedding_type</c> is <c>float</c>, the default value is <c>dot_product</c>.
-	/// If the <c>embedding_type</c> is <c>int8</c> or <c>byte</c>, the default value is <c>cosine</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CohereServiceSettings.g.xml" path="doc/member[@key='inference._types.CohereServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType? value)
 	{
 		Instance.Similarity = value;

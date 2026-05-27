@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ClearCachedRolesRequest.g.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
 public sealed partial class ClearCachedRolesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear the roles cache.
-/// </para>
-/// <para>
-/// Evict roles from the native role cache.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedRolesRequest.g.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearCachedRolesRequestConverter))]
 public sealed partial class ClearCachedRolesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>
 {
@@ -61,24 +57,12 @@ public sealed partial class ClearCachedRolesRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "security.clear_cached_roles";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of roles to evict from the role cache.
-	/// To evict all roles, use an asterisk (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRolesRequest.g.xml" path="doc/member[@key='security.clear_cached_roles.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear the roles cache.
-/// </para>
-/// <para>
-/// Evict roles from the native role cache.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedRolesRequest.g.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_roles.Request']/*"/>
 public readonly partial struct ClearCachedRolesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest Instance { get; init; }
@@ -103,13 +87,7 @@ public readonly partial struct ClearCachedRolesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of roles to evict from the role cache.
-	/// To evict all roles, use an asterisk (<c>*</c>).
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedRolesRequest.g.xml" path="doc/member[@key='security.clear_cached_roles.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.TextEmbeddingByteResult"><summary><para>
+The text embedding result object for byte representation
+</para></summary></member>
+</doc>

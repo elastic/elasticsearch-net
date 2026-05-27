@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.Column']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.ColumnConverter))]
 public sealed partial class Column
 {

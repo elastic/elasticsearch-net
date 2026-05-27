@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_alias.Request"><summary><para>
+Get aliases.
+Retrieves information for one or more data stream or index aliases.
+</para></summary></member>
+  <member key="indices.get_alias.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</para></summary></member>
+  <member key="indices.get_alias.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.get_alias.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="indices.get_alias.Request#index"><summary><para>
+Comma-separated list of data streams or indices used to limit the request.
+Supports wildcards (<c>*</c>).
+To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.get_alias.Request#local"><summary><para>
+If <c>true</c>, the request retrieves information from the local node only.
+</para></summary></member>
+  <member key="indices.get_alias.Request#name"><summary><para>
+Comma-separated list of aliases to retrieve.
+Supports wildcards (<c>*</c>).
+To retrieve all aliases, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+</doc>

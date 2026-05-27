@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.WriteSummaryInfoConverter))]
 public sealed partial class WriteSummaryInfo
 {
@@ -48,52 +49,24 @@ public sealed partial class WriteSummaryInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of write operations performed in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total elapsed time spent on writing blobs in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_elapsed']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total elapsed time spent on writing blobs in the test, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_elapsed_nanos']/*"/>
 	public required System.TimeSpan TotalElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total size of all the blobs written in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_size']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total size of all the blobs written in the test, in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_size_bytes']/*"/>
 	public required long TotalSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_throttled']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting due to the <c>max_snapshot_bytes_per_sec</c> throttle, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="WriteSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.WriteSummaryInfo#total_throttled_nanos']/*"/>
 	public required long TotalThrottledNanos { get; set; }
 }

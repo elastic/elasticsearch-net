@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SoraniNormalizationTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SoraniNormalizationTokenFilterConverter))]
 public sealed partial class SoraniNormalizationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class SoraniNormalizationTokenFilter : Elastic.Clients.Ela
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SoraniNormalizationTokenFilter']/*"/>
 public readonly partial struct SoraniNormalizationTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter Instance { get; init; }

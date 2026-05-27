@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="synonyms.get_synonym.Request"><summary><para>
+Get a synonym set.
+</para></summary></member>
+  <member key="synonyms.get_synonym.Request#from"><summary><para>
+The starting offset for query rules to retrieve.
+</para></summary></member>
+  <member key="synonyms.get_synonym.Request#id"><summary><para>
+The synonyms set identifier to retrieve.
+</para></summary></member>
+  <member key="synonyms.get_synonym.Request#size"><summary><para>
+The max number of query rules to retrieve.
+</para></summary></member>
+</doc>

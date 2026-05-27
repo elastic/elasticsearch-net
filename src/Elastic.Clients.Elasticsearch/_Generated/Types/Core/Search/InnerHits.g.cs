@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.InnerHits']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.InnerHitsConverter))]
 public sealed partial class InnerHits
 {
@@ -41,38 +42,20 @@ public sealed partial class InnerHits
 	public bool? Explain { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Inner hit starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#from']/*"/>
 	public int? From { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 	public bool? IgnoreUnmapped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name for the particular inner hit definition in the response.
-	/// Useful when a search request contains multiple inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of hits to return per <c>inner_hits</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
@@ -80,6 +63,7 @@ public sealed partial class InnerHits
 	public bool? Version { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.InnerHits']/*"/>
 public readonly partial struct InnerHitsDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.InnerHits Instance { get; init; }
@@ -153,11 +137,7 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner hit starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
@@ -182,12 +162,7 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name for the particular inner hit definition in the response.
-	/// Useful when a search request contains multiple inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
@@ -246,47 +221,28 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of hits to return per <c>inner_hits</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -349,6 +305,7 @@ public readonly partial struct InnerHitsDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.InnerHits']/*"/>
 public readonly partial struct InnerHitsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.InnerHits Instance { get; init; }
@@ -440,11 +397,7 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inner hit starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor From(int? value)
 	{
 		Instance.From = value;
@@ -475,12 +428,7 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name for the particular inner hit definition in the response.
-	/// Useful when a search request contains multiple inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
@@ -545,47 +493,28 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of hits to return per <c>inner_hits</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -598,12 +527,7 @@ public readonly partial struct InnerHitsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How the inner hits should be sorted per <c>inner_hits</c>.
-	/// By default, inner hits are sorted by score.
-	/// </para>
-	/// </summary>
+	/// <include file="InnerHits.g.xml" path="doc/member[@key='_global.search._types.InnerHits#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

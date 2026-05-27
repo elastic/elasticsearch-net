@@ -40,11 +40,7 @@ public sealed partial class OidcPrepareAuthenticationResponse : Elastic.Transpor
 	public required string Nonce { get; set; }
 	public required string Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A URI that points to the authorization endpoint of the OpenID Connect Provider with all the parameters of the authentication request as HTTP GET parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationResponse.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Response#redirect']/*"/>
 	public required string Redirect { get; set; }
 	public required string State { get; set; }
 }

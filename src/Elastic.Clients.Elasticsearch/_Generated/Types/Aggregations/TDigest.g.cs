@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TDigest']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TDigestConverter))]
 public sealed partial class TDigest
 {
@@ -36,22 +37,14 @@ public sealed partial class TDigest
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
-	/// </para>
-	/// </summary>
+	/// <include file="TDigest.g.xml" path="doc/member[@key='_types.aggregations.TDigest#compression']/*"/>
 	public int? Compression { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
-	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
-	/// </para>
-	/// </summary>
+	/// <include file="TDigest.g.xml" path="doc/member[@key='_types.aggregations.TDigest#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? ExecutionHint { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TDigest']/*"/>
 public readonly partial struct TDigestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TDigest Instance { get; init; }
@@ -71,23 +64,14 @@ public readonly partial struct TDigestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TDigest instance) => new Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TDigest(Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the maximum number of nodes used by the underlying TDigest algorithm to <c>20 * compression</c>, enabling control of memory usage and approximation error.
-	/// </para>
-	/// </summary>
+	/// <include file="TDigest.g.xml" path="doc/member[@key='_types.aggregations.TDigest#compression']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor Compression(int? value)
 	{
 		Instance.Compression = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
-	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
-	/// </para>
-	/// </summary>
+	/// <include file="TDigest.g.xml" path="doc/member[@key='_types.aggregations.TDigest#execution_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TDigestDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
 	{
 		Instance.ExecutionHint = value;

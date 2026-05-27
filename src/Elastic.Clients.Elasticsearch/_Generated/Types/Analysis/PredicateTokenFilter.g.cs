@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.PredicateTokenFilterConverter))]
 public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -42,11 +43,7 @@ public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
-	/// </para>
-	/// </summary>
+	/// <include file="PredicateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
 	public string Type => "predicate_token_filter";
@@ -54,6 +51,7 @@ public sealed partial class PredicateTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter']/*"/>
 public readonly partial struct PredicateTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter Instance { get; init; }
@@ -73,33 +71,21 @@ public readonly partial struct PredicateTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
-	/// </para>
-	/// </summary>
+	/// <include file="PredicateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
-	/// </para>
-	/// </summary>
+	/// <include file="PredicateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
-	/// </para>
-	/// </summary>
+	/// <include file="PredicateTokenFilter.g.xml" path="doc/member[@key='_types.analysis.PredicateTokenFilter#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilterDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

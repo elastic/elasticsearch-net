@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleVertexAIServiceSettingsConverter))]
 public sealed partial class GoogleVertexAIServiceSettings
 {
@@ -45,45 +46,23 @@ public sealed partial class GoogleVertexAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the location to use for the inference task.
-	/// Refer to the Google documentation for the list of supported locations.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#location']/*"/>
 	public required string Location { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the project to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#project_id']/*"/>
 	public required string ProjectId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A valid service account in JSON format for the Google Vertex AI API.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#service_account_json']/*"/>
 	public required string ServiceAccountJson { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings']/*"/>
 public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings Instance { get; init; }
@@ -103,82 +82,49 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the location to use for the inference task.
-	/// Refer to the Google documentation for the list of supported locations.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#location']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Location(string value)
 	{
 		Instance.Location = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the project to use for the inference task.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#project_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ProjectId(string value)
 	{
 		Instance.ProjectId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Google Vertex AI.
-	/// By default, the <c>googlevertexai</c> service sets the number of requests allowed per minute to 30.000.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid service account in JSON format for the Google Vertex AI API.
-	/// </para>
-	/// </summary>
+	/// <include file="GoogleVertexAIServiceSettings.g.xml" path="doc/member[@key='inference._types.GoogleVertexAIServiceSettings#service_account_json']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ServiceAccountJson(string value)
 	{
 		Instance.ServiceAccountJson = value;

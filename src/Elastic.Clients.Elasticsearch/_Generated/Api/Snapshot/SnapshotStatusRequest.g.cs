@@ -23,50 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 public sealed partial class SnapshotStatusRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
-	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the snapshot status.
-/// Get a detailed description of the current state for each shard participating in the snapshot.
-/// </para>
-/// <para>
-/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
-/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
-/// </para>
-/// <para>
-/// If you omit the <c>&lt;snapshot></c> request path parameter, the request retrieves information only for currently running snapshots.
-/// This usage is preferred.
-/// If needed, you can specify <c>&lt;repository></c> and <c>&lt;snapshot></c> to retrieve information for specific snapshots, even if they're not currently running.
-/// </para>
-/// <para>
-/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
-/// The API requires a read from the repository for each shard in each snapshot.
-/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
-/// </para>
-/// <para>
-/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
-/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
-/// </para>
-/// </summary>
+/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SnapshotStatusRequestConverter))]
 public sealed partial class SnapshotStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>
 {
@@ -96,65 +65,21 @@ public sealed partial class SnapshotStatusRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "snapshot.status";
 
-	/// <summary>
-	/// <para>
-	/// The snapshot repository name used to limit the request.
-	/// It supports wildcards (<c>*</c>) if <c>&lt;snapshot></c> isn't specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Repository { get => P<Elastic.Clients.Elasticsearch.Name?>("repository"); set => PO("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of snapshots to retrieve status for.
-	/// The default is currently running snapshots.
-	/// Wildcards (<c>*</c>) are not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Snapshot { get => P<Elastic.Clients.Elasticsearch.Names?>("snapshot"); set => PO("snapshot", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
-	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the snapshot status.
-/// Get a detailed description of the current state for each shard participating in the snapshot.
-/// </para>
-/// <para>
-/// Note that this API should be used only to obtain detailed shard-level information for ongoing snapshots.
-/// If this detail is not needed or you want to obtain information about one or more existing snapshots, use the get snapshot API.
-/// </para>
-/// <para>
-/// If you omit the <c>&lt;snapshot></c> request path parameter, the request retrieves information only for currently running snapshots.
-/// This usage is preferred.
-/// If needed, you can specify <c>&lt;repository></c> and <c>&lt;snapshot></c> to retrieve information for specific snapshots, even if they're not currently running.
-/// </para>
-/// <para>
-/// WARNING: Using the API to return the status of any snapshots other than currently running snapshots can be expensive.
-/// The API requires a read from the repository for each shard in each snapshot.
-/// For example, if you have 100 snapshots with 1,000 shards each, an API request that includes all snapshots will require 100,000 reads (100 snapshots x 1,000 shards).
-/// </para>
-/// <para>
-/// Depending on the latency of your storage, such requests can take an extremely long time to return results.
-/// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
-/// </para>
-/// </summary>
+/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 public readonly partial struct SnapshotStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest Instance { get; init; }
@@ -183,50 +108,28 @@ public readonly partial struct SnapshotStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The snapshot repository name used to limit the request.
-	/// It supports wildcards (<c>*</c>) if <c>&lt;snapshot></c> isn't specified.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Repository = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of snapshots to retrieve status for.
-	/// The default is currently running snapshots.
-	/// Wildcards (<c>*</c>) are not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Snapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error for any snapshots that are unavailable.
-	/// If <c>true</c>, the request ignores snapshots that are unavailable, such as those that are corrupted or temporarily cannot be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

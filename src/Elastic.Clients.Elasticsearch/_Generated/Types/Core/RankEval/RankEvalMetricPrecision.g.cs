@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Precision at K (P@k)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricPrecisionConverter))]
 public sealed partial class RankEvalMetricPrecision
 {
@@ -42,34 +38,18 @@ public sealed partial class RankEvalMetricPrecision
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#ignore_unlabeled']/*"/>
 	public bool? IgnoreUnlabeled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#relevant_rating_threshold']/*"/>
 	public int? RelevantRatingThreshold { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Precision at K (P@k)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision']/*"/>
 public readonly partial struct RankEvalMetricPrecisionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision Instance { get; init; }
@@ -89,33 +69,21 @@ public readonly partial struct RankEvalMetricPrecisionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Controls how unlabeled documents in the search results are counted. If set to true, unlabeled documents are ignored and neither count as relevant or irrelevant. Set to false (the default), they are treated as irrelevant.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#ignore_unlabeled']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor IgnoreUnlabeled(bool? value = true)
 	{
 		Instance.IgnoreUnlabeled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#k']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricPrecision.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricPrecision#relevant_rating_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionDescriptor RelevantRatingThreshold(int? value)
 	{
 		Instance.RelevantRatingThreshold = value;

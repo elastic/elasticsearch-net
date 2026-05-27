@@ -37,11 +37,6 @@ public sealed partial class PutUserResponse : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A successful call returns a JSON structure that shows whether the user has been created or updated.
-	/// When an existing user is updated, <c>created</c> is set to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutUserResponse.g.xml" path="doc/member[@key='security.put_user.Response#created']/*"/>
 	public required bool Created { get; set; }
 }

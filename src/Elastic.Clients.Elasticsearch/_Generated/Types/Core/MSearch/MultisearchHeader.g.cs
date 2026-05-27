@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
-/// <summary>
-/// <para>
-/// Contains parameters used to limit or change the subsequent search body request.
-/// </para>
-/// </summary>
+/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearch.Json.MultisearchHeaderConverter))]
 public sealed partial class MultisearchHeader
 {
@@ -54,11 +51,8 @@ public sealed partial class MultisearchHeader
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Contains parameters used to limit or change the subsequent search body request.
-/// </para>
-/// </summary>
+/// <include file="MultisearchHeader.g.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.msearch.MultisearchHeader']/*"/>
 public readonly partial struct MultisearchHeaderDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Instance { get; init; }

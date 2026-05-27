@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="license.post_start_basic.Request"><summary><para>
+Start a basic license.
+</para>
+<para>
+Start an indefinite basic license, which gives access to all the basic features.
+</para>
+<para>
+NOTE: In order to start a basic license, you must not currently have a basic license.
+</para>
+<para>
+If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
+You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
+</para>
+<para>
+To check the status of your basic license, use the get basic license API.
+</para></summary></member>
+  <member key="license.post_start_basic.Request#acknowledge"><summary><para>
+Whether the user has acknowledged acknowledge messages
+</para></summary></member>
+  <member key="license.post_start_basic.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="license.post_start_basic.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -41,85 +41,24 @@ public partial class ScrollResponse<TDocument> : Elastic.Transport.Products.Elas
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The returned documents and metadata.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#hits']/*"/>
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search and its search context.
-	/// You can use this scroll ID with the scroll API to retrieve the next batch of search results for the request.
-	/// This property is returned only if the <c>scroll</c> query parameter is specified in the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#_scroll_id']/*"/>
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A count of shards used for the request.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request timed out before completion; returned results may be partial or empty.
-	/// </para>
-	/// </summary>
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#timed_out']/*"/>
 	public required bool TimedOut { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of milliseconds it took Elasticsearch to run the request.
-	/// This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
-	/// It includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Communication time between the coordinating node and data nodes
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Time the request spends in the search thread pool, queued for execution
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Actual run time
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// It does not include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Time needed to send the request to Elasticsearch
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Time needed to serialize the JSON response
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Time needed to send the response to a client
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="ScrollResponse.g.xml" path="doc/member[@key='_global.scroll.Response#took']/*"/>
 	public required long Took { get; set; }
 }

@@ -40,10 +40,6 @@ public sealed partial class NodesStatsResponse : Elastic.Transport.Products.Elas
 	public string? ClusterName { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Stats> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the number of nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesStatsResponse.g.xml" path="doc/member[@key='nodes.stats.Response#_nodes']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 }

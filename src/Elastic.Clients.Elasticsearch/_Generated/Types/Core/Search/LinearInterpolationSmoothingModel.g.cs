@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LinearInterpolationSmoothingModel']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.LinearInterpolationSmoothingModelConverter))]
 public sealed partial class LinearInterpolationSmoothingModel
 {
@@ -49,6 +50,7 @@ public sealed partial class LinearInterpolationSmoothingModel
 	public required double UnigramLambda { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.LinearInterpolationSmoothingModel']/*"/>
 public readonly partial struct LinearInterpolationSmoothingModelDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel Instance { get; init; }

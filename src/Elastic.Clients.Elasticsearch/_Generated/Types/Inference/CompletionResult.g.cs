@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The completion result object
-/// </para>
-/// </summary>
+/// <include file="CompletionResult.g.xml" path="doc/member[@key='inference._types.CompletionResult']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionResultConverter))]
 public sealed partial class CompletionResult
 {

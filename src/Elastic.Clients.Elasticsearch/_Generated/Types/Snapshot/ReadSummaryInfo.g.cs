@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.ReadSummaryInfoConverter))]
 public sealed partial class ReadSummaryInfo
 {
@@ -52,80 +53,36 @@ public sealed partial class ReadSummaryInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of read operations performed in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time spent waiting for the first byte of any read request to be received.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#max_wait']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration MaxWait { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time spent waiting for the first byte of any read request to be received, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#max_wait_nanos']/*"/>
 	public required System.TimeSpan MaxWaitNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total elapsed time spent on reading blobs in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_elapsed']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration TotalElapsed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total elapsed time spent on reading blobs in the test, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_elapsed_nanos']/*"/>
 	public required System.TimeSpan TotalElapsedNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total size of all the blobs or partial blobs read in the test.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_size']/*"/>
 	public required Elastic.Clients.Elasticsearch.ByteSize TotalSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total size of all the blobs or partial blobs read in the test, in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_size_bytes']/*"/>
 	public required long TotalSizeBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_throttled']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration TotalThrottled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting due to the <c>max_restore_bytes_per_sec</c> or <c>indices.recovery.max_bytes_per_sec</c> throttles, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_throttled_nanos']/*"/>
 	public required System.TimeSpan TotalThrottledNanos { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting for the first byte of each read request to be received.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_wait']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration TotalWait { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total time spent waiting for the first byte of each read request to be received, in nanoseconds.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadSummaryInfo.g.xml" path="doc/member[@key='snapshot.repository_analyze.ReadSummaryInfo#total_wait_nanos']/*"/>
 	public required System.TimeSpan TotalWaitNanos { get; set; }
 }

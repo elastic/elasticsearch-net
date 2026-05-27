@@ -23,47 +23,26 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 public sealed partial class GetAliasRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '8.12.0'.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get aliases.
-/// Retrieves information for one or more data stream or index aliases.
-/// </para>
-/// </summary>
+/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetAliasRequestConverter))]
 public sealed partial class GetAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>
 {
@@ -97,63 +76,28 @@ public sealed partial class GetAliasRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "indices.get_alias";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to retrieve.
-	/// Supports wildcards (<c>*</c>).
-	/// To retrieve all aliases, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '8.12.0'.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get aliases.
-/// Retrieves information for one or more data stream or index aliases.
-/// </para>
-/// </summary>
+/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 public readonly partial struct GetAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest Instance { get; init; }
@@ -187,75 +131,42 @@ public readonly partial struct GetAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to retrieve.
-	/// Supports wildcards (<c>*</c>).
-	/// To retrieve all aliases, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -263,11 +174,7 @@ public readonly partial struct GetAliasRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '8.12.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
@@ -335,12 +242,8 @@ public readonly partial struct GetAliasRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get aliases.
-/// Retrieves information for one or more data stream or index aliases.
-/// </para>
-/// </summary>
+/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 public readonly partial struct GetAliasRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest Instance { get; init; }
@@ -374,75 +277,42 @@ public readonly partial struct GetAliasRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to retrieve.
-	/// Supports wildcards (<c>*</c>).
-	/// To retrieve all aliases, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
-	/// This behavior applies even if the request targets other open indices.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -450,11 +320,7 @@ public readonly partial struct GetAliasRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '8.12.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> Local(bool? value = true)
 	{
 		Instance.Local = value;

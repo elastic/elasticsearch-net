@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SlicedScroll']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SlicedScrollConverter))]
 public sealed partial class SlicedScroll
 {
@@ -48,6 +49,7 @@ public sealed partial class SlicedScroll
 	public required int Max { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SlicedScroll']/*"/>
 public readonly partial struct SlicedScrollDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SlicedScroll Instance { get; init; }
@@ -100,6 +102,7 @@ public readonly partial struct SlicedScrollDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SlicedScroll']/*"/>
 public readonly partial struct SlicedScrollDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SlicedScroll Instance { get; init; }

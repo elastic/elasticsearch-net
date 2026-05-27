@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.completion.Request"><summary><para>
+Perform completion inference on the service
+</para></summary></member>
+  <member key="inference.completion.Request#inference_id"><summary><para>
+The inference Id
+</para></summary></member>
+  <member key="inference.completion.Request#input"><summary><para>
+Inference input.
+Either a string or an array of strings.
+</para></summary></member>
+  <member key="inference.completion.Request#task_settings"><summary><para>
+Optional task settings
+</para></summary></member>
+  <member key="inference.completion.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

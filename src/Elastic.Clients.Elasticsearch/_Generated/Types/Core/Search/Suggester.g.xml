@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.Suggester#text"><summary><para>
+Global suggest text, to avoid repetition when the same text is used in several suggesters
+</para></summary></member>
+</doc>

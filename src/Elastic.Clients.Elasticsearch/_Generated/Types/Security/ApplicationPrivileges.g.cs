@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ApplicationPrivileges']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApplicationPrivilegesConverter))]
 public sealed partial class ApplicationPrivileges
 {
@@ -44,28 +45,17 @@ public sealed partial class ApplicationPrivileges
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the application to which this entry applies.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#application']/*"/>
 	public required string Application { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#privileges']/*"/>
 	public required System.Collections.Generic.ICollection<string> Privileges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#resources']/*"/>
 	public required System.Collections.Generic.ICollection<string> Resources { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.ApplicationPrivileges']/*"/>
 public readonly partial struct ApplicationPrivilegesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges Instance { get; init; }
@@ -85,55 +75,35 @@ public readonly partial struct ApplicationPrivilegesDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the application to which this entry applies.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Application(string value)
 	{
 		Instance.Application = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Privileges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of strings, where each element is the name of an application privilege or action.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Privileges(params string[] values)
 	{
 		Instance.Privileges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#resources']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Resources = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list resources to which the privileges are applied.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivileges.g.xml" path="doc/member[@key='security._types.ApplicationPrivileges#resources']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor Resources(params string[] values)
 	{
 		Instance.Resources = [.. values];

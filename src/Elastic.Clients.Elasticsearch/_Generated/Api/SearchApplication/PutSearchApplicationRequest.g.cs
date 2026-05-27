@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 public sealed partial class PutSearchApplicationRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a search application.
-/// </para>
-/// </summary>
+/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PutSearchApplicationRequestConverter))]
 public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>
 {
@@ -71,27 +66,16 @@ public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "search_application.put";
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 	public required Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters SearchApplication { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a search application.
-/// </para>
-/// </summary>
+/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.put.Request']/*"/>
 public readonly partial struct PutSearchApplicationRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest Instance { get; init; }
@@ -118,22 +102,14 @@ public readonly partial struct PutSearchApplicationRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the search application to be created or updated.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this request cannot replace or update existing Search Applications.
-	/// </para>
-	/// </summary>
+	/// <include file="PutSearchApplicationRequest.g.xml" path="doc/member[@key='search_application.put.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor Create(bool? value = true)
 	{
 		Instance.Create = value;

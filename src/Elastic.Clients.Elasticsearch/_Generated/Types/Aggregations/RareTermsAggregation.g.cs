@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RareTermsAggregationConverter))]
 public sealed partial class RareTermsAggregation
 {
@@ -36,52 +37,27 @@ public sealed partial class RareTermsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be excluded from the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be included in the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents a term should appear in.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#max_doc_count']/*"/>
 	public long? MaxDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The precision of the internal CuckooFilters.
-	/// Smaller precision leads to better approximation, but higher memory usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#precision']/*"/>
 	public double? Precision { get; set; }
 	public string? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation']/*"/>
 public readonly partial struct RareTermsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Instance { get; init; }
@@ -101,79 +77,49 @@ public readonly partial struct RareTermsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be excluded from the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be included in the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents a term should appear in.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#max_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> MaxDocCount(long? value)
 	{
 		Instance.MaxDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The precision of the internal CuckooFilters.
-	/// Smaller precision leads to better approximation, but higher memory usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor<TDocument> Precision(double? value)
 	{
 		Instance.Precision = value;
@@ -200,6 +146,7 @@ public readonly partial struct RareTermsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation']/*"/>
 public readonly partial struct RareTermsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation Instance { get; init; }
@@ -219,79 +166,49 @@ public readonly partial struct RareTermsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be excluded from the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Exclude(Elastic.Clients.Elasticsearch.Aggregations.TermsExclude? value)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to return rare terms.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Terms that should be included in the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#include']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Include(Elastic.Clients.Elasticsearch.Aggregations.TermsInclude? value)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents a term should appear in.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#max_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor MaxDocCount(long? value)
 	{
 		Instance.MaxDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The precision of the internal CuckooFilters.
-	/// Smaller precision leads to better approximation, but higher memory usage.
-	/// </para>
-	/// </summary>
+	/// <include file="RareTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.RareTermsAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RareTermsAggregationDescriptor Precision(double? value)
 	{
 		Instance.Precision = value;

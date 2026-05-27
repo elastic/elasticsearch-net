@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_trained_model.Request"><summary><para>
+Delete an unreferenced trained model.
+</para>
+<para>
+The request deletes a trained inference model that is not referenced by an ingest pipeline.
+</para></summary></member>
+  <member key="ml.delete_trained_model.Request#force"><summary><para>
+Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
+</para></summary></member>
+  <member key="ml.delete_trained_model.Request#model_id"><summary><para>
+The unique identifier of the trained model.
+</para></summary></member>
+  <member key="ml.delete_trained_model.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Recall at K (R@k)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricRecallConverter))]
 public sealed partial class RankEvalMetricRecall
 {
@@ -42,27 +38,15 @@ public sealed partial class RankEvalMetricRecall
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall#relevant_rating_threshold']/*"/>
 	public int? RelevantRatingThreshold { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Recall at K (R@k)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall']/*"/>
 public readonly partial struct RankEvalMetricRecallDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall Instance { get; init; }
@@ -82,22 +66,14 @@ public readonly partial struct RankEvalMetricRecallDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall#k']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the rating threshold above which documents are considered to be "relevant".
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricRecall.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricRecall#relevant_rating_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor RelevantRatingThreshold(int? value)
 	{
 		Instance.RelevantRatingThreshold = value;

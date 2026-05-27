@@ -23,40 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 public sealed partial class StopSlmRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop snapshot lifecycle management.
-/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
-/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
-/// Stopping SLM does not stop any snapshots that are in progress.
-/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
-/// </para>
-/// <para>
-/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
-/// Use the get snapshot lifecycle management status API to see if SLM is running.
-/// </para>
-/// </summary>
+/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.StopSlmRequestConverter))]
 public sealed partial class StopSlmRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>
 {
@@ -78,38 +57,15 @@ public sealed partial class StopSlmRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "slm.stop";
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop snapshot lifecycle management.
-/// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
-/// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
-/// Stopping SLM does not stop any snapshots that are in progress.
-/// You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
-/// </para>
-/// <para>
-/// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
-/// Use the get snapshot lifecycle management status API to see if SLM is running.
-/// </para>
-/// </summary>
+/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.stop.Request']/*"/>
 public readonly partial struct StopSlmRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest Instance { get; init; }
@@ -128,26 +84,14 @@ public readonly partial struct StopSlmRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="StopSlmRequest.g.xml" path="doc/member[@key='slm.stop.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

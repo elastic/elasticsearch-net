@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The text embedding result object for byte representation
-/// </para>
-/// </summary>
+/// <include file="TextEmbeddingByteResult.g.xml" path="doc/member[@key='inference._types.TextEmbeddingByteResult']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.TextEmbeddingByteResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.TextEmbeddingByteResultConverter))]
 public sealed partial class TextEmbeddingByteResult
 {

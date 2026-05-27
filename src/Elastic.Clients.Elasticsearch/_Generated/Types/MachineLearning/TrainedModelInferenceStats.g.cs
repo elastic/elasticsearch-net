@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelInferenceStatsConverter))]
 public sealed partial class TrainedModelInferenceStats
 {
@@ -46,42 +47,18 @@ public sealed partial class TrainedModelInferenceStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of times the model was loaded for inference and was not retrieved from the cache.
-	/// If this number is close to the <c>inference_count</c>, the cache is not being appropriately used.
-	/// This can be solved by increasing the cache size or its time-to-live (TTL).
-	/// Refer to general machine learning settings for the appropriate settings.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelInferenceStats.g.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats#cache_miss_count']/*"/>
 	public required int CacheMissCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of failures when using the model for inference.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelInferenceStats.g.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats#failure_count']/*"/>
 	public required int FailureCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of times the model has been called for inference.
-	/// This is across all inference contexts, including all pipelines.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelInferenceStats.g.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats#inference_count']/*"/>
 	public required int InferenceCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of inference calls where all the training features for the model were missing.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelInferenceStats.g.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats#missing_all_fields_count']/*"/>
 	public required int MissingAllFieldsCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time when the statistics were last updated.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelInferenceStats.g.xml" path="doc/member[@key='ml._types.TrainedModelInferenceStats#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 }

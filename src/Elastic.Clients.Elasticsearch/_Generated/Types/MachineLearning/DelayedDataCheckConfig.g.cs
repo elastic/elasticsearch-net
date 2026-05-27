@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DelayedDataCheckConfigConverter))]
 public sealed partial class DelayedDataCheckConfig
 {
@@ -42,23 +43,14 @@ public sealed partial class DelayedDataCheckConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The window of time that is searched for late data. This window of time ends with the latest finalized bucket.
-	/// It defaults to null, which causes an appropriate <c>check_window</c> to be calculated when the real-time datafeed runs.
-	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DelayedDataCheckConfig.g.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig#check_window']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? CheckWindow { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed periodically checks for delayed data.
-	/// </para>
-	/// </summary>
+	/// <include file="DelayedDataCheckConfig.g.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig#enabled']/*"/>
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig']/*"/>
 public readonly partial struct DelayedDataCheckConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig Instance { get; init; }
@@ -78,24 +70,14 @@ public readonly partial struct DelayedDataCheckConfigDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The window of time that is searched for late data. This window of time ends with the latest finalized bucket.
-	/// It defaults to null, which causes an appropriate <c>check_window</c> to be calculated when the real-time datafeed runs.
-	/// In particular, the default <c>check_window</c> span calculation is based on the maximum of <c>2h</c> or <c>8 * bucket_span</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DelayedDataCheckConfig.g.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig#check_window']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor CheckWindow(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.CheckWindow = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the datafeed periodically checks for delayed data.
-	/// </para>
-	/// </summary>
+	/// <include file="DelayedDataCheckConfig.g.xml" path="doc/member[@key='ml._types.DelayedDataCheckConfig#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor Enabled(bool value = true)
 	{
 		Instance.Enabled = value;

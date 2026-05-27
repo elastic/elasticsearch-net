@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.health.Request"><summary><para>
+Get the cluster health status.
+</para>
+<para>
+You can also use the API to get the health status of only specified data streams and indices.
+For data streams, the API retrieves the health status of the stream’s backing indices.
+</para>
+<para>
+The cluster health status is: green, yellow or red.
+On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
+The index level status is controlled by the worst shard status.
+</para>
+<para>
+One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
+The cluster status is controlled by the worst index status.
+</para></summary></member>
+  <member key="cluster.health.Request#expand_wildcards"><summary><para>
+Whether to expand wildcard expression to concrete indices that are open, closed or both.
+</para></summary></member>
+  <member key="cluster.health.Request#index"><summary><para>
+Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (<c>*</c>) are supported. To target all data streams and indices in a cluster, omit this parameter or use _all or <c>*</c>.
+</para></summary></member>
+  <member key="cluster.health.Request#level"><summary><para>
+Can be one of cluster, indices or shards. Controls the details level of the health information returned.
+</para></summary></member>
+  <member key="cluster.health.Request#local"><summary><para>
+If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+</para></summary></member>
+  <member key="cluster.health.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="cluster.health.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_active_shards"><summary><para>
+A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_events"><summary><para>
+Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_no_initializing_shards"><summary><para>
+A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_no_relocating_shards"><summary><para>
+A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_nodes"><summary><para>
+The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
+</para></summary></member>
+  <member key="cluster.health.Request#wait_for_status"><summary><para>
+One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
+</para></summary></member>
+</doc>

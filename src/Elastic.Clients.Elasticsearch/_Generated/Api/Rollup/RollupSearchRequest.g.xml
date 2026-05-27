@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup.rollup_search.Request"><summary><para>
+Search rolled-up data.
+The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+</para>
+<para>
+The request body supports a subset of features from the regular search API.
+The following functionality is not available:
+</para>
+<para>
+<c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+<c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+</para>
+<para>
+<strong>Searching both historical rollup and non-rollup data</strong>
+</para>
+<para>
+The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+This is done by simply adding the live indices to the URI. For example:
+</para>
+<code>
+GET sensor-1,sensor_rollup/_rollup_search
+{
+  "size": 0,
+  "aggregations": {
+     "max_temperature": {
+      "max": {
+        "field": "temperature"
+      }
+    }
+  }
+}
+</code>
+<para>
+The rollup search endpoint does two things when the search runs:
+</para>
+<list type="bullet">
+<item>
+<para>
+The original request is sent to the non-rollup index unaltered.
+</para>
+</item>
+<item>
+<para>
+A rewritten version of the original request is sent to the rollup index.
+</para>
+</item>
+</list>
+<para>
+When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+</para></summary></member>
+  <member key="rollup.rollup_search.Request#aggregations"><summary><para>
+Specifies aggregations.
+</para></summary></member>
+  <member key="rollup.rollup_search.Request#index"><summary><para>
+A comma-separated list of data streams and indices used to limit the request.
+This parameter has the following rules:
+</para>
+<list type="bullet">
+<item>
+<para>
+At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
+</para>
+</item>
+<item>
+<para>
+Multiple non-rollup indices may be specified.
+</para>
+</item>
+<item>
+<para>
+Only one rollup index may be specified. If more than one are supplied, an exception occurs.
+</para>
+</item>
+<item>
+<para>
+Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
+</para>
+</item>
+</list></summary></member>
+  <member key="rollup.rollup_search.Request#query"><summary><para>
+Specifies a DSL query that is subject to some limitations.
+</para></summary></member>
+  <member key="rollup.rollup_search.Request#rest_total_hits_as_int"><summary><para>
+Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+</para></summary></member>
+  <member key="rollup.rollup_search.Request#size"><summary><para>
+Must be zero if set, as rollups work on pre-aggregated data.
+</para></summary></member>
+  <member key="rollup.rollup_search.Request#typed_keys"><summary><para>
+Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+</para></summary></member>
+</doc>

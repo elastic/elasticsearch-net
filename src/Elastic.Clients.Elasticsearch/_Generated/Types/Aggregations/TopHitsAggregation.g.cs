@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TopHitsAggregationConverter))]
 public sealed partial class TopHitsAggregation
 {
@@ -36,116 +37,54 @@ public sealed partial class TopHitsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#seq_no_primary_term']/*"/>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of top matching hits to return per bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#track_scores']/*"/>
 	public bool? TrackScores { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#version']/*"/>
 	public bool? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation']/*"/>
 public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Instance { get; init; }
@@ -165,33 +104,21 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -204,69 +131,42 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -279,45 +179,28 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -342,33 +225,21 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -389,58 +260,35 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of top matching hits to return per bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -453,66 +301,42 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;
@@ -533,6 +357,7 @@ public readonly partial struct TopHitsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation']/*"/>
 public readonly partial struct TopHitsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation Instance { get; init; }
@@ -552,33 +377,21 @@ public readonly partial struct TopHitsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregation(Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.DocvalueFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.DocvalueFields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -591,11 +404,7 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Fields for which to return doc values.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#docvalue_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -608,69 +417,42 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score computation as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
 		Instance.Fields = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -683,12 +465,7 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of wildcard (*) patterns. The request returns values for field names
-	/// matching these patterns in the hits.fields property of the response.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
@@ -701,56 +478,35 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Starting document offset.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#highlight']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -775,33 +531,21 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? value)
 	{
 		Instance.ScriptFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields()
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the result of one or more script evaluations for each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#script_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor ScriptFields(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField>? action)
 	{
 		Instance.ScriptFields = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.Build(action);
@@ -822,58 +566,35 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns sequence number and primary term of the last modification of each hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#seq_no_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor SeqNoPrimaryTerm(bool? value = true)
 	{
 		Instance.SeqNoPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of top matching hits to return per bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -886,12 +607,7 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort order of the top matching hits.
-	/// By default, the hits are sorted by the score of the main query.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -904,77 +620,49 @@ public readonly partial struct TopHitsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Selects the fields of the source that are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns values for the specified stored fields (fields that use the <c>store</c> mapping option).
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, calculates and returns document scores, even if the scores are not used for sorting.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#track_scores']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor TrackScores(bool? value = true)
 	{
 		Instance.TrackScores = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="TopHitsAggregation.g.xml" path="doc/member[@key='_types.aggregations.TopHitsAggregation#version']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregationDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;

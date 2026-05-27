@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="GetRepositoriesMeteringInfoRequest.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
 public sealed partial class GetRepositoriesMeteringInfoRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get cluster repositories metering.
-/// Get repositories metering information for a cluster.
-/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
-/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
-/// </para>
-/// </summary>
+/// <include file="GetRepositoriesMeteringInfoRequest.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.GetRepositoriesMeteringInfoRequestConverter))]
 public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>
 {
@@ -61,23 +57,12 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients
 
 	internal override string OperationName => "nodes.get_repositories_metering_info";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// For more information about the nodes selective options, refer to the node specification documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRepositoriesMeteringInfoRequest.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request#node_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.NodeIds NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds>("node_id"); set => PR("node_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster repositories metering.
-/// Get repositories metering information for a cluster.
-/// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
-/// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
-/// </para>
-/// </summary>
+/// <include file="GetRepositoriesMeteringInfoRequest.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request']/*"/>
 public readonly partial struct GetRepositoriesMeteringInfoRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest Instance { get; init; }
@@ -102,12 +87,7 @@ public readonly partial struct GetRepositoriesMeteringInfoRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest(Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// For more information about the nodes selective options, refer to the node specification documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRepositoriesMeteringInfoRequest.g.xml" path="doc/member[@key='nodes.get_repositories_metering_info.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds value)
 	{
 		Instance.NodeId = value;

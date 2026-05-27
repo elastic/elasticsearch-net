@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.delete_user.Response#found"><summary><para>
+If the user is successfully deleted, the request returns <c>{"found": true}</c>.
+Otherwise, <c>found</c> is set to <c>false</c>.
+</para></summary></member>
+</doc>

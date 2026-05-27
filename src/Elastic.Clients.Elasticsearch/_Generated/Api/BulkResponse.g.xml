@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.bulk.Response#errors"><summary><para>
+If <c>true</c>, one or more of the operations in the bulk request did not complete successfully.
+</para></summary></member>
+  <member key="_global.bulk.Response#items"><summary><para>
+The result of each operation in the bulk request, in the order they were submitted.
+</para></summary></member>
+  <member key="_global.bulk.Response#took"><summary><para>
+The length of time, in milliseconds, it took to process the bulk request.
+</para></summary></member>
+</doc>

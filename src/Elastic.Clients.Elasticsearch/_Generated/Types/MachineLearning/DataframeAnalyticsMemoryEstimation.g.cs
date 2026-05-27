@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsMemoryEstimation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsMemoryEstimationConverter))]
 public sealed partial class DataframeAnalyticsMemoryEstimation
 {
@@ -43,17 +44,9 @@ public sealed partial class DataframeAnalyticsMemoryEstimation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Estimated memory usage under the assumption that overflowing to disk is allowed during data frame analytics. expected_memory_with_disk is usually smaller than expected_memory_without_disk as using disk allows to limit the main memory needed to perform data frame analytics.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsMemoryEstimation.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsMemoryEstimation#expected_memory_with_disk']/*"/>
 	public required string ExpectedMemoryWithDisk { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Estimated memory usage under the assumption that the whole data frame analytics should happen in memory (i.e. without overflowing to disk).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsMemoryEstimation.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsMemoryEstimation#expected_memory_without_disk']/*"/>
 	public required string ExpectedMemoryWithoutDisk { get; set; }
 }

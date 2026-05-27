@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketCorrelationFunctionConverter))]
 public sealed partial class BucketCorrelationFunction
 {
@@ -42,14 +43,11 @@ public sealed partial class BucketCorrelationFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunction.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunction#count_correlation']/*"/>
 	public required Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation CountCorrelation { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunction']/*"/>
 public readonly partial struct BucketCorrelationFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct BucketCorrelationFunctionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction instance) => new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunction(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunction.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunction#count_correlation']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor CountCorrelation(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelation value)
 	{
 		Instance.CountCorrelation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-	/// </para>
-	/// </summary>
+	/// <include file="BucketCorrelationFunction.g.xml" path="doc/member[@key='_types.aggregations.BucketCorrelationFunction#count_correlation']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionDescriptor CountCorrelation(System.Action<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor> action)
 	{
 		Instance.CountCorrelation = Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationDescriptor.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StandardRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.StandardRetrieverConverter))]
 public sealed partial class StandardRetriever
 {
@@ -36,63 +37,32 @@ public sealed partial class StandardRetriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#_name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#terminate_after']/*"/>
 	public int? TerminateAfter { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StandardRetriever']/*"/>
 public readonly partial struct StandardRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.StandardRetriever Instance { get; init; }
@@ -112,55 +82,35 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.StandardRetriever instance) => new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -173,99 +123,63 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -278,11 +192,7 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> TerminateAfter(int? value)
 	{
 		Instance.TerminateAfter = value;
@@ -303,6 +213,7 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.StandardRetriever']/*"/>
 public readonly partial struct StandardRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.StandardRetriever Instance { get; init; }
@@ -322,66 +233,42 @@ public readonly partial struct StandardRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor(Elastic.Clients.Elasticsearch.StandardRetriever instance) => new Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.StandardRetriever(Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses the top documents by a specified key into a single top document per key.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#collapse']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -394,11 +281,7 @@ public readonly partial struct StandardRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -411,110 +294,70 @@ public readonly partial struct StandardRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a query to retrieve a set of top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#query']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a search after object parameter used for pagination.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -527,11 +370,7 @@ public readonly partial struct StandardRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that that specifies the order of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -544,11 +383,7 @@ public readonly partial struct StandardRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of documents to collect for each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="StandardRetriever.g.xml" path="doc/member[@key='_types.StandardRetriever#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor TerminateAfter(int? value)
 	{
 		Instance.TerminateAfter = value;

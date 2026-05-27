@@ -37,17 +37,9 @@ public sealed partial class GetRulesetResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rules associated with the query ruleset.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRulesetResponse.g.xml" path="doc/member[@key='query_rules.get_ruleset.Response#rules']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRule> Rules { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the ruleset.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRulesetResponse.g.xml" path="doc/member[@key='query_rules.get_ruleset.Response#ruleset_id']/*"/>
 	public required string RulesetId { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StandardAnalyzerConverter))]
 public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -42,6 +43,7 @@ public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	public string Type => "standard";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardAnalyzer']/*"/>
 public readonly partial struct StandardAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer Instance { get; init; }

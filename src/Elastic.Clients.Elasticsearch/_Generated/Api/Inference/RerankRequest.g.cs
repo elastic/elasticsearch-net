@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
 public sealed partial class RerankRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform reranking inference on the service
-/// </para>
-/// </summary>
+/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RerankRequestConverter))]
 public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>
 {
@@ -72,53 +67,24 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "inference.rerank";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query input.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#query']/*"/>
 	public required string Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request.
-	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform reranking inference on the service
-/// </para>
-/// </summary>
+/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.rerank.Request']/*"/>
 public readonly partial struct RerankRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RerankRequest Instance { get; init; }
@@ -145,77 +111,42 @@ public readonly partial struct RerankRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.RerankRequest instance) => new Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.RerankRequest(Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// info
-	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query input.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request.
-	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="RerankRequest.g.xml" path="doc/member[@key='inference.rerank.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

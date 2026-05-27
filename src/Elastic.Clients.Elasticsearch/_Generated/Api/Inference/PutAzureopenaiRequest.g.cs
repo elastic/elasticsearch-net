@@ -23,42 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
 public sealed partial class PutAzureopenaiRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Azure OpenAI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
-/// </para>
-/// <para>
-/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
-/// </para>
-/// </summary>
+/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAzureopenaiRequestConverter))]
 public sealed partial class PutAzureopenaiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>
 {
@@ -92,84 +66,30 @@ public sealed partial class PutAzureopenaiRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "inference.put_azureopenai";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#azureopenai_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AzureopenaiInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("azureopenai_inference_id"); set => PR("azureopenai_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>azureopenai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#service']/*"/>
 	public string Service => "azureopenai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>azureopenai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Azure OpenAI inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
-/// </para>
-/// <para>
-/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
-/// </para>
-/// </summary>
+/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_azureopenai.Request']/*"/>
 public readonly partial struct PutAzureopenaiRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest Instance { get; init; }
@@ -196,125 +116,77 @@ public readonly partial struct PutAzureopenaiRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest(Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#azureopenai_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor AzureopenaiInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AzureopenaiInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// NOTE: The <c>chat_completion</c> task type only supports streaming and only through the _stream API.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>azureopenai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AzureOpenAIServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>azureopenai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AzureOpenAiServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAzureopenaiRequest.g.xml" path="doc/member[@key='inference.put_azureopenai.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AzureOpenAiTaskSettingsDescriptor.Build(action);

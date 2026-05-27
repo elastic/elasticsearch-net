@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SamplerAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SamplerAggregationConverter))]
 public sealed partial class SamplerAggregation
 {
@@ -36,14 +37,11 @@ public sealed partial class SamplerAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.SamplerAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SamplerAggregation']/*"/>
 public readonly partial struct SamplerAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct SamplerAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.SamplerAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;

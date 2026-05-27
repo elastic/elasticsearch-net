@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TrimProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.TrimProcessorConverter))]
 public sealed partial class TrimProcessor
 {
@@ -42,66 +43,32 @@ public sealed partial class TrimProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to trim whitespace from.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the trimmed value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TrimProcessor']/*"/>
 public readonly partial struct TrimProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.TrimProcessor Instance { get; init; }
@@ -121,100 +88,63 @@ public readonly partial struct TrimProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.TrimProcessor(Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to trim whitespace from.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to trim whitespace from.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -227,36 +157,21 @@ public readonly partial struct TrimProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the trimmed value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the trimmed value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -272,6 +187,7 @@ public readonly partial struct TrimProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.TrimProcessor']/*"/>
 public readonly partial struct TrimProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.TrimProcessor Instance { get; init; }
@@ -291,100 +207,63 @@ public readonly partial struct TrimProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.TrimProcessor(Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to trim whitespace from.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string-valued field to trim whitespace from.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -397,11 +276,7 @@ public readonly partial struct TrimProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -414,36 +289,21 @@ public readonly partial struct TrimProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the trimmed value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the trimmed value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="TrimProcessor.g.xml" path="doc/member[@key='ingest._types.TrimProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

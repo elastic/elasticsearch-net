@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelAssignment']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelAssignmentConverter))]
 public sealed partial class TrainedModelAssignment
 {
@@ -47,27 +48,15 @@ public sealed partial class TrainedModelAssignment
 
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The overall assignment state.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignment.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignment#assignment_state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAssignmentState AssignmentState { get; set; }
 	public int? MaxAssignedAllocations { get; set; }
 	public string? Reason { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The allocation state for each node.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignment.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignment#routing_table']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> RoutingTable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp when the deployment started.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelAssignment.g.xml" path="doc/member[@key='ml._types.TrainedModelAssignment#start_time']/*"/>
 	public required System.DateTimeOffset StartTime { get; set; }
 	public required Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentTaskParameters TaskParameters { get; set; }
 }

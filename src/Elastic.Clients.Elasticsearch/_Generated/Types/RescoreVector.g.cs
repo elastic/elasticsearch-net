@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RescoreVector']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RescoreVectorConverter))]
 public sealed partial class RescoreVector
 {
@@ -42,14 +43,11 @@ public sealed partial class RescoreVector
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Applies the specified oversample factor to k on the approximate kNN search
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreVector.g.xml" path="doc/member[@key='_types.RescoreVector#oversample']/*"/>
 	public required float Oversample { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RescoreVector']/*"/>
 public readonly partial struct RescoreVectorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RescoreVector Instance { get; init; }
@@ -69,11 +67,7 @@ public readonly partial struct RescoreVectorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.RescoreVectorDescriptor(Elastic.Clients.Elasticsearch.RescoreVector instance) => new Elastic.Clients.Elasticsearch.RescoreVectorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.RescoreVector(Elastic.Clients.Elasticsearch.RescoreVectorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Applies the specified oversample factor to k on the approximate kNN search
-	/// </para>
-	/// </summary>
+	/// <include file="RescoreVector.g.xml" path="doc/member[@key='_types.RescoreVector#oversample']/*"/>
 	public Elastic.Clients.Elasticsearch.RescoreVectorDescriptor Oversample(float value)
 	{
 		Instance.Oversample = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CompositeSubField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.CompositeSubFieldConverter))]
 public sealed partial class CompositeSubField
 {
@@ -45,6 +46,7 @@ public sealed partial class CompositeSubField
 	public required Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.CompositeSubField']/*"/>
 public readonly partial struct CompositeSubFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.CompositeSubField Instance { get; init; }

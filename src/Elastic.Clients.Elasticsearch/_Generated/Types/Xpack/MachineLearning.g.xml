@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="xpack.usage.MachineLearning#jobs"><summary><para>
+Job usage statistics. The <c>_all</c> entry is always present and gathers statistics for all jobs.
+</para></summary></member>
+</doc>

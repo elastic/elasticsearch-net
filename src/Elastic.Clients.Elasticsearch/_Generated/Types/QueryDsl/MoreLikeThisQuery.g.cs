@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MoreLikeThisQueryConverter))]
 public sealed partial class MoreLikeThisQuery
 {
@@ -42,132 +43,60 @@ public sealed partial class MoreLikeThisQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer that is used to analyze the free form text.
-	/// Defaults to the analyzer associated with the first field in fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Each term in the formed query could be further boosted by their tf-idf score.
-	/// This sets the boost factor to use when using this feature.
-	/// Defaults to deactivated (0).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost_terms']/*"/>
 	public double? BoostTerms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fail_on_unsupported_field']/*"/>
 	public bool? FailOnUnsupportedField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to fetch and analyze the text from.
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the input documents should also be included in the search results returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#include']/*"/>
 	public bool? Include { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> Like { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum document frequency above which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_doc_freq']/*"/>
 	public int? MaxDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of query terms that can be selected.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_query_terms']/*"/>
 	public int? MaxQueryTerms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum word length above which the terms are ignored.
-	/// Defaults to unbounded (<c>0</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_word_length']/*"/>
 	public int? MaxWordLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum document frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_doc_freq']/*"/>
 	public int? MinDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum term frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_term_freq']/*"/>
 	public int? MinTermFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum word length below which the terms are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_word_length']/*"/>
 	public int? MinWordLength { get; set; }
 	public string? QueryName { get; set; }
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#stop_words']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? StopWords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? Unlike { get; set; }
 	public long? Version { get; set; }
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery']/*"/>
 public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery Instance { get; init; }
@@ -187,118 +116,70 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer that is used to analyze the free form text.
-	/// Defaults to the analyzer associated with the first field in fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Each term in the formed query could be further boosted by their tf-idf score.
-	/// This sets the boost factor to use when using this feature.
-	/// Defaults to deactivated (0).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost_terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> BoostTerms(double? value)
 	{
 		Instance.BoostTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fail_on_unsupported_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> FailOnUnsupportedField(bool? value = true)
 	{
 		Instance.FailOnUnsupportedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to fetch and analyze the text from.
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to fetch and analyze the text from.
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the input documents should also be included in the search results returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Include(bool? value = true)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> value)
 	{
 		Instance.Like = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Like = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
@@ -311,78 +192,49 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum document frequency above which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MaxDocFreq(int? value)
 	{
 		Instance.MaxDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of query terms that can be selected.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_query_terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MaxQueryTerms(int? value)
 	{
 		Instance.MaxQueryTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum word length above which the terms are ignored.
-	/// Defaults to unbounded (<c>0</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MaxWordLength(int? value)
 	{
 		Instance.MaxWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum document frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MinDocFreq(int? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum term frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MinTermFreq(int? value)
 	{
 		Instance.MinTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum word length below which the terms are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
@@ -401,45 +253,28 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#stop_words']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.StopWords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? value)
 	{
 		Instance.Unlike = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Unlike = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
@@ -473,6 +308,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery']/*"/>
 public readonly partial struct MoreLikeThisQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery Instance { get; init; }
@@ -492,118 +328,70 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQuery(Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer that is used to analyze the free form text.
-	/// Defaults to the analyzer associated with the first field in fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Each term in the formed query could be further boosted by their tf-idf score.
-	/// This sets the boost factor to use when using this feature.
-	/// Defaults to deactivated (0).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#boost_terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor BoostTerms(double? value)
 	{
 		Instance.BoostTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether the query should fail (throw an exception) if any of the specified fields are not of the supported types (<c>text</c> or <c>keyword</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fail_on_unsupported_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor FailOnUnsupportedField(bool? value = true)
 	{
 		Instance.FailOnUnsupportedField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to fetch and analyze the text from.
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to fetch and analyze the text from.
-	/// Defaults to the <c>index.query.default_field</c> index setting, which has a default value of <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether the input documents should also be included in the search results returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#include']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Include(bool? value = true)
 	{
 		Instance.Include = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> value)
 	{
 		Instance.Like = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Like = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
@@ -616,11 +404,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies free form text and/or a single or multiple documents for which you want to find similar documents.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#like']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Like<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
@@ -633,78 +417,49 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum document frequency above which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MaxDocFreq(int? value)
 	{
 		Instance.MaxDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of query terms that can be selected.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_query_terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MaxQueryTerms(int? value)
 	{
 		Instance.MaxQueryTerms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum word length above which the terms are ignored.
-	/// Defaults to unbounded (<c>0</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#max_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MaxWordLength(int? value)
 	{
 		Instance.MaxWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum document frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MinDocFreq(int? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// After the disjunctive query has been formed, this parameter controls the number of terms that must match.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum term frequency below which the terms are ignored from the input document.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MinTermFreq(int? value)
 	{
 		Instance.MinTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum word length below which the terms are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
@@ -723,45 +478,28 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#stop_words']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.StopWords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? value)
 	{
 		Instance.Unlike = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(params Elastic.Clients.Elasticsearch.QueryDsl.Like[] values)
 	{
 		Instance.Unlike = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();
@@ -774,11 +512,7 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used in combination with <c>like</c> to exclude documents that match a set of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MoreLikeThisQuery.g.xml" path="doc/member[@key='_types.query_dsl.MoreLikeThisQuery#unlike']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor Unlike<T>(params System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<T>, Elastic.Clients.Elasticsearch.QueryDsl.Like>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Like>();

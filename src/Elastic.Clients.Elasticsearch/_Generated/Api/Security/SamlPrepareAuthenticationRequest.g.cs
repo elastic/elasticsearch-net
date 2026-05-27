@@ -23,31 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
 public sealed partial class SamlPrepareAuthenticationRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Prepare SAML authentication.
-/// </para>
-/// <para>
-/// Create a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string based on the configuration of the respective SAML realm in Elasticsearch.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// This API returns a URL pointing to the SAML Identity Provider.
-/// You can use the URL to redirect the browser of the user in order to continue the authentication process.
-/// The URL includes a single parameter named <c>SAMLRequest</c>, which contains a SAML Authentication request that is deflated and Base64 encoded.
-/// If the configuration dictates that SAML authentication requests should be signed, the URL has two extra parameters named <c>SigAlg</c> and <c>Signature</c>.
-/// These parameters contain the algorithm used for the signature and the signature value itself.
-/// It also returns a random string that uniquely identifies this SAML Authentication request.
-/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
-/// </para>
-/// </summary>
+/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlPrepareAuthenticationRequestConverter))]
 public sealed partial class SamlPrepareAuthenticationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>
 {
@@ -69,52 +52,18 @@ public sealed partial class SamlPrepareAuthenticationRequest : Elastic.Clients.E
 
 	internal override string OperationName => "security.saml_prepare_authentication";
 
-	/// <summary>
-	/// <para>
-	/// The Assertion Consumer Service URL that matches the one of the SAML realms in Elasticsearch.
-	/// The realm is used to generate the authentication request. You must specify either this parameter or the <c>realm</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#acs']/*"/>
 	public string? Acs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch for which the configuration is used to generate the authentication request.
-	/// You must specify either this parameter or the <c>acs</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#realm']/*"/>
 	public string? Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A string that will be included in the redirect URL that this API returns as the <c>RelayState</c> query parameter.
-	/// If the Authentication Request is signed, this value is used as part of the signature computation.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#relay_state']/*"/>
 	public string? RelayState { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Prepare SAML authentication.
-/// </para>
-/// <para>
-/// Create a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string based on the configuration of the respective SAML realm in Elasticsearch.
-/// </para>
-/// <para>
-/// NOTE: This API is intended for use by custom web applications other than Kibana.
-/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
-/// </para>
-/// <para>
-/// This API returns a URL pointing to the SAML Identity Provider.
-/// You can use the URL to redirect the browser of the user in order to continue the authentication process.
-/// The URL includes a single parameter named <c>SAMLRequest</c>, which contains a SAML Authentication request that is deflated and Base64 encoded.
-/// If the configuration dictates that SAML authentication requests should be signed, the URL has two extra parameters named <c>SigAlg</c> and <c>Signature</c>.
-/// These parameters contain the algorithm used for the signature and the signature value itself.
-/// It also returns a random string that uniquely identifies this SAML Authentication request.
-/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
-/// </para>
-/// </summary>
+/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.saml_prepare_authentication.Request']/*"/>
 public readonly partial struct SamlPrepareAuthenticationRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Instance { get; init; }
@@ -133,36 +82,21 @@ public readonly partial struct SamlPrepareAuthenticationRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The Assertion Consumer Service URL that matches the one of the SAML realms in Elasticsearch.
-	/// The realm is used to generate the authentication request. You must specify either this parameter or the <c>realm</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#acs']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Acs(string? value)
 	{
 		Instance.Acs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the SAML realm in Elasticsearch for which the configuration is used to generate the authentication request.
-	/// You must specify either this parameter or the <c>acs</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#realm']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor Realm(string? value)
 	{
 		Instance.Realm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A string that will be included in the redirect URL that this API returns as the <c>RelayState</c> query parameter.
-	/// If the Authentication Request is signed, this value is used as part of the signature computation.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.saml_prepare_authentication.Request#relay_state']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor RelayState(string? value)
 	{
 		Instance.RelayState = value;

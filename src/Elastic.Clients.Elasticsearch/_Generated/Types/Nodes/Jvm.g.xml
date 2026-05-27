@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.Jvm#buffer_pools"><summary><para>
+Contains statistics about JVM buffer pools for the node.
+</para></summary></member>
+  <member key="nodes._types.Jvm#classes"><summary><para>
+Contains statistics about classes loaded by JVM for the node.
+</para></summary></member>
+  <member key="nodes._types.Jvm#gc"><summary><para>
+Contains statistics about JVM garbage collectors for the node.
+</para></summary></member>
+  <member key="nodes._types.Jvm#mem"><summary><para>
+Contains JVM memory usage statistics for the node.
+</para></summary></member>
+  <member key="nodes._types.Jvm#threads"><summary><para>
+Contains statistics about JVM thread usage for the node.
+</para></summary></member>
+  <member key="nodes._types.Jvm#timestamp"><summary><para>
+Last time JVM statistics were refreshed.
+</para></summary></member>
+  <member key="nodes._types.Jvm#uptime"><summary><para>
+Human-readable JVM uptime.
+Only returned if the <c>human</c> query parameter is <c>true</c>.
+</para></summary></member>
+  <member key="nodes._types.Jvm#uptime_in_millis"><summary><para>
+JVM uptime in milliseconds.
+</para></summary></member>
+</doc>

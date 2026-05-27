@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.SetSecurityUserProcessorConverter))]
 public sealed partial class SetSecurityUserProcessor
 {
@@ -42,58 +43,29 @@ public sealed partial class SetSecurityUserProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls what user related properties are added to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#properties']/*"/>
 	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor']/*"/>
 public readonly partial struct SetSecurityUserProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Instance { get; init; }
@@ -113,89 +85,56 @@ public readonly partial struct SetSecurityUserProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -208,34 +147,21 @@ public readonly partial struct SetSecurityUserProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what user related properties are added to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what user related properties are added to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -251,6 +177,7 @@ public readonly partial struct SetSecurityUserProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor']/*"/>
 public readonly partial struct SetSecurityUserProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor Instance { get; init; }
@@ -270,89 +197,56 @@ public readonly partial struct SetSecurityUserProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to store the user information into.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -365,11 +259,7 @@ public readonly partial struct SetSecurityUserProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -382,34 +272,21 @@ public readonly partial struct SetSecurityUserProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what user related properties are added to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what user related properties are added to the field.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SetSecurityUserProcessor.g.xml" path="doc/member[@key='ingest._types.SetSecurityUserProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

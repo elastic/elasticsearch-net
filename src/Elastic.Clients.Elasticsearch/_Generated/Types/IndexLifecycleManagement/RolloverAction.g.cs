@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.RolloverAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.RolloverActionConverter))]
 public sealed partial class RolloverAction
 {
@@ -48,6 +49,7 @@ public sealed partial class RolloverAction
 	public Elastic.Clients.Elasticsearch.ByteSize? MinSize { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.RolloverAction']/*"/>
 public readonly partial struct RolloverActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction Instance { get; init; }

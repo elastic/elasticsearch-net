@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
 public sealed partial class PutAmazonsagemakerRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an Amazon SageMaker inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>amazon_sagemaker</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAmazonsagemakerRequestConverter))]
 public sealed partial class PutAmazonsagemakerRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestParameters>
 {
@@ -74,66 +66,30 @@ public sealed partial class PutAmazonsagemakerRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "inference.put_amazonsagemaker";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#amazonsagemaker_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id AmazonsagemakerInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("amazonsagemaker_inference_id"); set => PR("amazonsagemaker_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>amazon_sagemaker</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#service']/*"/>
 	public string Service => "amazon_sagemaker";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>amazon_sagemaker</c> service and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an Amazon SageMaker inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>amazon_sagemaker</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request']/*"/>
 public readonly partial struct PutAmazonsagemakerRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequest Instance { get; init; }
@@ -160,126 +116,77 @@ public readonly partial struct PutAmazonsagemakerRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequest(Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#amazonsagemaker_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor AmazonsagemakerInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.AmazonsagemakerInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskTypeAmazonSageMaker value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>amazon_sagemaker</c> service and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model.
-	/// These settings are specific to the <c>amazon_sagemaker</c> service and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerServiceSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettings? value)
 	{
 		Instance.TaskSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor TaskSettings()
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type and <c>service_settings.api</c> you specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAmazonsagemakerRequest.g.xml" path="doc/member[@key='inference.put_amazonsagemaker.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutAmazonsagemakerRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor>? action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.AmazonSageMakerTaskSettingsDescriptor.Build(action);

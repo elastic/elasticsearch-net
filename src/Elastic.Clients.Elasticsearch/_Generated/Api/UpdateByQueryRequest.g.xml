@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.update_by_query.Request"><summary><para>
+Update documents.
+Updates documents that match the specified query.
+If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
+</para>
+<para>
+If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>read</c>
+</para>
+</item>
+<item>
+<para>
+<c>index</c> or <c>write</c>
+</para>
+</item>
+</list>
+<para>
+You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
+</para>
+<para>
+When you submit an update by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and updates matching documents using internal versioning.
+When the versions match, the document is updated and the version number is incremented.
+If a document changes between the time that the snapshot is taken and the update operation is processed, it results in a version conflict and the operation fails.
+You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
+Note that if you opt to count version conflicts, the operation could attempt to update more documents from the source than <c>max_docs</c> until it has successfully updated <c>max_docs</c> documents or it has gone through every document in the source query.
+</para>
+<para>
+NOTE: Documents with a version equal to 0 cannot be updated using update by query because internal versioning does not support 0 as a valid version number.
+</para>
+<para>
+While processing an update by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents.
+A bulk update request is performed for each batch of matching documents.
+Any query or update failures cause the update by query request to fail and the failures are shown in the response.
+Any update requests that completed successfully still stick, they are not rolled back.
+</para>
+<para>
+<strong>Throttling update requests</strong>
+</para>
+<para>
+To control the rate at which update by query issues batches of update operations, you can set <c>requests_per_second</c> to any positive decimal number.
+This pads each batch with a wait time to throttle the rate.
+Set <c>requests_per_second</c> to <c>-1</c> to turn off throttling.
+</para>
+<para>
+Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
+The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+By default the batch size is 1000, so if <c>requests_per_second</c> is set to <c>500</c>:
+</para>
+<code>
+target_time = 1000 / 500 per second = 2 seconds
+wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+</code>
+<para>
+Since the batch is issued as a single _bulk request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
+This is "bursty" instead of "smooth".
+</para>
+<para>
+<strong>Slicing</strong>
+</para>
+<para>
+Update by query supports sliced scroll to parallelize the update process.
+This can improve efficiency and provide a convenient way to break the request down into smaller parts.
+</para>
+<para>
+Setting <c>slices</c> to <c>auto</c> chooses a reasonable number for most data streams and indices.
+This setting will use one slice per shard, up to a certain limit.
+If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+</para>
+<para>
+Adding <c>slices</c> to <c>_update_by_query</c> just automates the manual process of creating sub-requests, which means it has some quirks:
+</para>
+<list type="bullet">
+<item>
+<para>
+You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
+</para>
+</item>
+<item>
+<para>
+Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+</para>
+</item>
+<item>
+<para>
+These sub-requests are individually addressable for things like cancellation and rethrottling.
+</para>
+</item>
+<item>
+<para>
+Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+</para>
+</item>
+<item>
+<para>
+Canceling the request with slices will cancel each sub-request.
+</para>
+</item>
+<item>
+<para>
+Due to the nature of slices each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+</para>
+</item>
+<item>
+<para>
+Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with slices are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being updated.
+</para>
+</item>
+<item>
+<para>
+Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
+</para>
+</item>
+</list>
+<para>
+If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
+</para>
+<list type="bullet">
+<item>
+<para>
+Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many slices hurts performance. Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+</para>
+</item>
+<item>
+<para>
+Update performance scales linearly across available resources with the number of slices.
+</para>
+</item>
+</list>
+<para>
+Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
+</para>
+<para>
+<strong>Update the document source</strong>
+</para>
+<para>
+Update by query supports scripts to update the document source.
+As with the update API, you can set <c>ctx.op</c> to change the operation that is performed.
+</para>
+<para>
+Set <c>ctx.op = "noop"</c> if your script decides that it doesn't have to make any changes.
+The update by query operation skips updating the document and increments the <c>noop</c> counter.
+</para>
+<para>
+Set <c>ctx.op = "delete"</c> if your script decides that the document should be deleted.
+The update by query operation deletes the document and increments the <c>deleted</c> counter.
+</para>
+<para>
+Update by query supports only <c>index</c>, <c>noop</c>, and <c>delete</c>.
+Setting <c>ctx.op</c> to anything else is an error.
+Setting any other field in <c>ctx</c> is an error.
+This API enables you to only modify the source of matching documents; you cannot move them.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#analyze_wildcard"><summary><para>
+If <c>true</c>, wildcard and prefix queries are analyzed.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#analyzer"><summary><para>
+The analyzer to use for the query string.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#conflicts"><summary><para>
+The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#default_operator"><summary><para>
+The default operator for query string query: <c>and</c> or <c>or</c>.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#df"><summary><para>
+The field to use as default where no field prefix is given in the query string.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#expand_wildcards"><summary><para>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#from"><summary><para>
+Skips the specified number of documents.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#index"><summary><para>
+A comma-separated list of data streams, indices, and aliases to search.
+It supports wildcards (<c>*</c>).
+To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#lenient"><summary><para>
+If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+This parameter can be used only when the <c>q</c> query string parameter is specified.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#max_docs"><summary><para>
+The maximum number of documents to update.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#pipeline"><summary><para>
+The ID of the pipeline to use to preprocess incoming documents.
+If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
+If a final pipeline is configured it will always run, regardless of the value of this parameter.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#preference"><summary><para>
+The node or shard the operation should be performed on.
+It is random by default.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#q"><summary><para>
+A query in the Lucene query string syntax.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#query"><summary><para>
+The documents to update using the Query DSL.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#refresh"><summary><para>
+If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
+This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#request_cache"><summary><para>
+If <c>true</c>, the request cache is used for this request.
+It defaults to the index-level setting.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#requests_per_second"><summary><para>
+The throttle for this request in sub-requests per second.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#routing"><summary><para>
+A custom value used to route operations to a specific shard.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#script"><summary><para>
+The script to run to update the document source or metadata when updating.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#scroll"><summary><para>
+The period to retain the search context for scrolling.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#scroll_size"><summary><para>
+The size of the scroll request that powers the operation.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#search_timeout"><summary><para>
+An explicit timeout for each search request.
+By default, there is no timeout.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#search_type"><summary><para>
+The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#slice"><summary><para>
+Slice the request manually using the provided slice ID and total number of slices.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#slices"><summary><para>
+The number of slices this task should be divided into.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#sort"><summary><para>
+A comma-separated list of &lt;field>:&lt;direction> pairs.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#stats"><summary><para>
+The specific <c>tag</c> of the request for logging and statistical purposes.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#terminate_after"><summary><para>
+The maximum number of documents to collect for each shard.
+If a query reaches this limit, Elasticsearch terminates the query early.
+Elasticsearch collects documents before sorting.
+</para>
+<para>
+IMPORTANT: Use with caution.
+Elasticsearch applies this parameter to each shard handling the request.
+When possible, let Elasticsearch perform early termination automatically.
+Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#timeout"><summary><para>
+The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
+By default, it is one minute.
+This guarantees Elasticsearch waits for at least the timeout before failing.
+The actual wait time could be longer, particularly when multiple waits occur.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#version"><summary><para>
+If <c>true</c>, returns the document version as part of a hit.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#version_type"><summary><para>
+Should the document increment the version number (internal) on hit or not (reindex)
+</para></summary></member>
+  <member key="_global.update_by_query.Request#wait_for_active_shards"><summary><para>
+The number of shard copies that must be active before proceeding with the operation.
+Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
+Both work exactly the way they work in the bulk API.
+</para></summary></member>
+  <member key="_global.update_by_query.Request#wait_for_completion"><summary><para>
+If <c>true</c>, the request blocks until the operation is complete.
+If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
+Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+</para></summary></member>
+</doc>

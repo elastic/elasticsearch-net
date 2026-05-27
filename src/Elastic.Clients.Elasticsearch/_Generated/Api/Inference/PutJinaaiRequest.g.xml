@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_jinaai.Request"><summary><para>
+Create an JinaAI inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+</para>
+<para>
+To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#chunking_settings"><summary><para>
+The chunking configuration object.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#jinaai_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>jinaai</c>.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>jinaai</c> service.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#task_settings"><summary><para>
+Settings to configure the inference task.
+These settings are specific to the task type you specified.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+</para></summary></member>
+  <member key="inference.put_jinaai.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

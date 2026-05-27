@@ -23,17 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
 public sealed partial class DeleteRuleRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete a query rule.
-/// Delete a query rule within a query ruleset.
-/// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
-/// </para>
-/// </summary>
+/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.DeleteRuleRequestConverter))]
 public sealed partial class DeleteRuleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestParameters>
 {
@@ -60,28 +57,15 @@ public sealed partial class DeleteRuleRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "query_rules.delete_rule";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get => P<Elastic.Clients.Elasticsearch.Id>("rule_id"); set => PR("rule_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request#ruleset_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RulesetId { get => P<Elastic.Clients.Elasticsearch.Id>("ruleset_id"); set => PR("ruleset_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a query rule.
-/// Delete a query rule within a query ruleset.
-/// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
-/// </para>
-/// </summary>
+/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.delete_rule.Request']/*"/>
 public readonly partial struct DeleteRuleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest Instance { get; init; }
@@ -106,22 +90,14 @@ public readonly partial struct DeleteRuleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequest(Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query rule within the specified ruleset to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query ruleset containing the rule to delete
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRuleRequest.g.xml" path="doc/member[@key='query_rules.delete_rule.Request#ruleset_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.DeleteRuleRequestDescriptor RulesetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RulesetId = value;

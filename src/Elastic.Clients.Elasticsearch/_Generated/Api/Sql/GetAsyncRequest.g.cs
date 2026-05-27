@@ -23,51 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
 public sealed partial class GetAsyncRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The separator for CSV results.
-	/// The API supports this parameter only for CSV responses.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
-	/// If you specify both, the API uses this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#format']/*"/>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// The retention period for the search and its results.
-	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async SQL search results.
-/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.GetAsyncRequestConverter))]
 public sealed partial class GetAsyncRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>
 {
@@ -94,56 +68,24 @@ public sealed partial class GetAsyncRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "sql.get_async";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The separator for CSV results.
-	/// The API supports this parameter only for CSV responses.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
-	/// If you specify both, the API uses this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#format']/*"/>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// The retention period for the search and its results.
-	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get async SQL search results.
-/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async.Request']/*"/>
 public readonly partial struct GetAsyncRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest Instance { get; init; }
@@ -168,60 +110,35 @@ public readonly partial struct GetAsyncRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest instance) => new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The separator for CSV results.
-	/// The API supports this parameter only for CSV responses.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#delimiter']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format for the response.
-	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
-	/// If you specify both, the API uses this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The retention period for the search and its results.
-	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#keep_alive']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.KeepAlive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for complete results.
-	/// It defaults to no timeout, meaning the request waits for complete search results.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncRequest.g.xml" path="doc/member[@key='sql.get_async.Request#wait_for_completion_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.WaitForCompletionTimeout = value;

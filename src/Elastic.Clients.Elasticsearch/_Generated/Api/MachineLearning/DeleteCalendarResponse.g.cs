@@ -37,10 +37,6 @@ public sealed partial class DeleteCalendarResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarResponse.g.xml" path="doc/member[@key='ml.delete_calendar.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

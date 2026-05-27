@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.DocumentRating#_id"><summary><para>
+The document ID.
+</para></summary></member>
+  <member key="_global.rank_eval.DocumentRating#_index"><summary><para>
+The document’s index. For data streams, this should be the document’s backing index.
+</para></summary></member>
+  <member key="_global.rank_eval.DocumentRating#rating"><summary><para>
+The document’s relevance with regard to this search request.
+</para></summary></member>
+</doc>

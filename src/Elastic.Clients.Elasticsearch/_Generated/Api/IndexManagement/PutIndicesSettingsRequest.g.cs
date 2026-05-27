@@ -23,137 +23,37 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 public sealed partial class PutIndicesSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index
-	/// alias, or <c>_all</c> value targets only missing or closed indices. This
-	/// behavior applies even if the request targets other open indices. For
-	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
-	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, existing index settings remain unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#preserve_existing']/*"/>
 	public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to close and reopen the index to apply non-dynamic settings.
-	/// If set to <c>true</c> the indices to which the settings are being applied
-	/// will be closed temporarily and then reopened in order to apply the changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#reopen']/*"/>
 	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update index settings.
-/// Changes dynamic index settings in real time.
-/// For data streams, index setting changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
-/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
-/// </para>
-/// <para>
-/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
-/// </para>
-/// <code>
-/// {
-///   "number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can use an <c>index</c> setting object:
-/// </para>
-/// <code>
-/// {
-///   "index": {
-///     "number_of_replicas": 1
-///   }
-/// }
-/// </code>
-/// <para>
-/// Or you can use dot annotation:
-/// </para>
-/// <code>
-/// {
-///   "index.number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
-/// </para>
-/// <code>
-/// {
-///   "settings": {
-///     "index": {
-///       "number_of_replicas": 1
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// NOTE: You can only define new analyzers on closed indices.
-/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
-/// You cannot close the write index of a data stream.
-/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
-/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
-/// This affects searches and any new data added to the stream after the rollover.
-/// However, it does not affect the data stream's backing indices or their existing data.
-/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
-/// </para>
-/// </summary>
+/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutIndicesSettingsRequestConverter))]
 public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>
 {
@@ -193,145 +93,37 @@ public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elastics
 
 	internal override string OperationName => "indices.put_settings";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit
-	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
-	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index
-	/// alias, or <c>_all</c> value targets only missing or closed indices. This
-	/// behavior applies even if the request targets other open indices. For
-	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
-	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, existing index settings remain unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#preserve_existing']/*"/>
 	public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to close and reopen the index to apply non-dynamic settings.
-	/// If set to <c>true</c> the indices to which the settings are being applied
-	/// will be closed temporarily and then reopened in order to apply the changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#reopen']/*"/>
 	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update index settings.
-/// Changes dynamic index settings in real time.
-/// For data streams, index setting changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
-/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
-/// </para>
-/// <para>
-/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
-/// </para>
-/// <code>
-/// {
-///   "number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can use an <c>index</c> setting object:
-/// </para>
-/// <code>
-/// {
-///   "index": {
-///     "number_of_replicas": 1
-///   }
-/// }
-/// </code>
-/// <para>
-/// Or you can use dot annotation:
-/// </para>
-/// <code>
-/// {
-///   "index.number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
-/// </para>
-/// <code>
-/// {
-///   "settings": {
-///     "index": {
-///       "number_of_replicas": 1
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// NOTE: You can only define new analyzers on closed indices.
-/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
-/// You cannot close the write index of a data stream.
-/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
-/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
-/// This affects searches and any new data added to the stream after the rollover.
-/// However, it does not affect the data stream's backing indices or their existing data.
-/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
-/// </para>
-/// </summary>
+/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 public readonly partial struct PutIndicesSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Instance { get; init; }
@@ -357,127 +149,70 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit
-	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
-	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index
-	/// alias, or <c>_all</c> value targets only missing or closed indices. This
-	/// behavior applies even if the request targets other open indices. For
-	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
-	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, existing index settings remain unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#preserve_existing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor PreserveExisting(bool? value = true)
 	{
 		Instance.PreserveExisting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to close and reopen the index to apply non-dynamic settings.
-	/// If set to <c>true</c> the indices to which the settings are being applied
-	/// will be closed temporarily and then reopened in order to apply the changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#reopen']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Reopen(bool? value = true)
 	{
 		Instance.Reopen = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -564,66 +299,8 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update index settings.
-/// Changes dynamic index settings in real time.
-/// For data streams, index setting changes are applied to all backing indices by default.
-/// </para>
-/// <para>
-/// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
-/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
-/// </para>
-/// <para>
-/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
-/// </para>
-/// <code>
-/// {
-///   "number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can use an <c>index</c> setting object:
-/// </para>
-/// <code>
-/// {
-///   "index": {
-///     "number_of_replicas": 1
-///   }
-/// }
-/// </code>
-/// <para>
-/// Or you can use dot annotation:
-/// </para>
-/// <code>
-/// {
-///   "index.number_of_replicas": 1
-/// }
-/// </code>
-/// <para>
-/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
-/// </para>
-/// <code>
-/// {
-///   "settings": {
-///     "index": {
-///       "number_of_replicas": 1
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// NOTE: You can only define new analyzers on closed indices.
-/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
-/// You cannot close the write index of a data stream.
-/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
-/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
-/// This affects searches and any new data added to the stream after the rollover.
-/// However, it does not affect the data stream's backing indices or their existing data.
-/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
-/// </para>
-/// </summary>
+/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 public readonly partial struct PutIndicesSettingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Instance { get; init; }
@@ -649,127 +326,70 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit
-	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
-	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if any wildcard expression, index
-	/// alias, or <c>_all</c> value targets only missing or closed indices. This
-	/// behavior applies even if the request targets other open indices. For
-	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
-	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target
-	/// data streams, this argument determines whether wildcard expressions match
-	/// hidden data streams. Supports comma-separated values, such as
-	/// <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, existing index settings remain unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#preserve_existing']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> PreserveExisting(bool? value = true)
 	{
 		Instance.PreserveExisting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to close and reopen the index to apply non-dynamic settings.
-	/// If set to <c>true</c> the indices to which the settings are being applied
-	/// will be closed temporarily and then reopened in order to apply the changes.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#reopen']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Reopen(bool? value = true)
 	{
 		Instance.Reopen = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

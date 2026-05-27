@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.MatchQueryConverter))]
 public sealed partial class MatchQuery
 {
@@ -49,105 +50,51 @@ public sealed partial class MatchQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public bool? AutoGenerateSynonymsPhraseQuery { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	[System.Obsolete("Deprecated in '7.3.0'.")]
 	public double? CutoffFrequency { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_rewrite']/*"/>
 	public string? FuzzyRewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_transpositions']/*"/>
 	public bool? FuzzyTranspositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#lenient']/*"/>
 	public bool? Lenient { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#max_expansions']/*"/>
 	public int? MaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? Operator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#query']/*"/>
 	public required object Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? ZeroTermsQuery { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchQuery']/*"/>
 public readonly partial struct MatchQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery Instance { get; init; }
@@ -167,36 +114,21 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -222,110 +154,70 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> Query(object value)
 	{
 		Instance.Query = value;
@@ -338,11 +230,7 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor<TDocument> ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;
@@ -358,6 +246,7 @@ public readonly partial struct MatchQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.MatchQuery']/*"/>
 public readonly partial struct MatchQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery Instance { get; init; }
@@ -377,36 +266,21 @@ public readonly partial struct MatchQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery(Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to convert the text in the query value into tokens.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, match phrase queries are automatically created for multi-term synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#auto_generate_synonyms_phrase_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)
 	{
 		Instance.AutoGenerateSynonymsPhraseQuery = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -432,110 +306,70 @@ public readonly partial struct MatchQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor FuzzyRewrite(string? value)
 	{
 		Instance.FuzzyRewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#fuzzy_transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor FuzzyTranspositions(bool? value = true)
 	{
 		Instance.FuzzyTranspositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based errors, such as providing a text query value for a numeric field, are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of terms to which the query will expand.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of clauses that must match for a document to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boolean logic used to interpret text in the query value.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Operator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.Operator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged for fuzzy matching.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text, number, boolean value or date you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor Query(object value)
 	{
 		Instance.Query = value;
@@ -548,11 +382,7 @@ public readonly partial struct MatchQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether no documents are returned if the <c>analyzer</c> removes all tokens, such as when using a <c>stop</c> filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MatchQuery.g.xml" path="doc/member[@key='_types.query_dsl.MatchQuery#zero_terms_query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor ZeroTermsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery? value)
 	{
 		Instance.ZeroTermsQuery = value;

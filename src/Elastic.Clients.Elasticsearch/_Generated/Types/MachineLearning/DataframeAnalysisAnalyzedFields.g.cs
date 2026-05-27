@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisAnalyzedFieldsConverter))]
 public sealed partial class DataframeAnalysisAnalyzedFields
 {
@@ -43,21 +44,14 @@ public sealed partial class DataframeAnalysisAnalyzedFields
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#excludes']/*"/>
 	public required System.Collections.Generic.ICollection<string> Excludes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#includes']/*"/>
 	public required System.Collections.Generic.ICollection<string> Includes { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields']/*"/>
 public readonly partial struct DataframeAnalysisAnalyzedFieldsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields Instance { get; init; }
@@ -77,44 +71,28 @@ public readonly partial struct DataframeAnalysisAnalyzedFieldsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Excludes(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Excludes(params string[] values)
 	{
 		Instance.Excludes = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Includes(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Includes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of strings that defines the fields that will be excluded from the analysis. You do not need to add fields with unsupported data types to excludes, these fields are excluded from the analysis automatically.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisAnalyzedFields.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisAnalyzedFields#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor Includes(params string[] values)
 	{
 		Instance.Includes = [.. values];

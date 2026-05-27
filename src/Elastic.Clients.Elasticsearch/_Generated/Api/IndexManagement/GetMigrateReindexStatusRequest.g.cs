@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 public sealed partial class GetMigrateReindexStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the migration reindexing status.
-/// </para>
-/// <para>
-/// Get the status of a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetMigrateReindexStatusRequestConverter))]
 public sealed partial class GetMigrateReindexStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class GetMigrateReindexStatusRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "indices.get_migrate_reindex_status";
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the migration reindexing status.
-/// </para>
-/// <para>
-/// Get the status of a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 public readonly partial struct GetMigrateReindexStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct GetMigrateReindexStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
@@ -168,14 +150,8 @@ public readonly partial struct GetMigrateReindexStatusRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get the migration reindexing status.
-/// </para>
-/// <para>
-/// Get the status of a migration reindex attempt for a data stream or index.
-/// </para>
-/// </summary>
+/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 public readonly partial struct GetMigrateReindexStatusRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest Instance { get; init; }
@@ -199,11 +175,7 @@ public readonly partial struct GetMigrateReindexStatusRequestDescriptor<TDocumen
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The index or data stream name.
-	/// </para>
-	/// </summary>
+	/// <include file="GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;

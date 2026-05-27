@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_role.QueryRole']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.QueryRoleConverter))]
 public sealed partial class QueryRole
 {
@@ -42,84 +43,37 @@ public sealed partial class QueryRole
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of application privilege entries
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#applications']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges>? Applications { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster privileges. These privileges define the cluster level actions that API keys are able to execute.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#cluster']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional description of the role descriptor
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#global']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>? Global { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions entries.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndicesPrivileges>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional meta-data. Within the metadata object, keys that begin with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#metadata']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the role.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster permissions for remote clusters.
-	/// NOTE: This is limited a subset of the cluster permissions.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#remote_cluster']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges>? RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices permissions for remote clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#remote_indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges>? RemoteIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Restriction for when the role descriptor is allowed to be effective.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#restriction']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.Restriction? Restriction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of users that the API keys can impersonate.
-	/// NOTE: In Elastic Cloud Serverless, the run-as feature is disabled.
-	/// For API compatibility, you can still specify an empty <c>run_as</c> field, but a non-empty list will be rejected.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRole.g.xml" path="doc/member[@key='security.query_role.QueryRole#run_as']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? RunAs { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? Sort { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? TransientMetadata { get; set; }

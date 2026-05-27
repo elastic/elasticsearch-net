@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
 public sealed partial class ForecastRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Predict future behavior of a time series.
-/// </para>
-/// <para>
-/// Forecasts are not supported for jobs that perform population analysis; an
-/// error occurs if you try to create a forecast for a job that has an
-/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
-/// based on historical data.
-/// </para>
-/// </summary>
+/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ForecastRequestConverter))]
 public sealed partial class ForecastRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>
 {
@@ -64,47 +57,21 @@ public sealed partial class ForecastRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "ml.forecast";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. The job must be open when you
-	/// create a forecast; otherwise, an error occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>duration</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#duration']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Duration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>expires_in</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#expires_in']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ExpiresIn { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>max_model_memory</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#max_model_memory']/*"/>
 	public string? MaxModelMemory { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Predict future behavior of a time series.
-/// </para>
-/// <para>
-/// Forecasts are not supported for jobs that perform population analysis; an
-/// error occurs if you try to create a forecast for a job that has an
-/// <c>over_field_name</c> in its configuration. Forcasts predict future behavior
-/// based on historical data.
-/// </para>
-/// </summary>
+/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.forecast.Request']/*"/>
 public readonly partial struct ForecastRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest Instance { get; init; }
@@ -129,45 +96,28 @@ public readonly partial struct ForecastRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job. The job must be open when you
-	/// create a forecast; otherwise, an error occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>duration</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#duration']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor Duration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Duration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>expires_in</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#expires_in']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor ExpiresIn(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ExpiresIn = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>max_model_memory</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ForecastRequest.g.xml" path="doc/member[@key='ml.forecast.Request#max_model_memory']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestDescriptor MaxModelMemory(string? value)
 	{
 		Instance.MaxModelMemory = value;

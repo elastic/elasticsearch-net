@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MissingAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MissingAggregationConverter))]
 public sealed partial class MissingAggregation
 {
@@ -36,15 +37,12 @@ public sealed partial class MissingAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MissingAggregation.g.xml" path="doc/member[@key='_types.aggregations.MissingAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public object? Missing { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MissingAggregation']/*"/>
 public readonly partial struct MissingAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation Instance { get; init; }
@@ -64,22 +62,14 @@ public readonly partial struct MissingAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MissingAggregation.g.xml" path="doc/member[@key='_types.aggregations.MissingAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MissingAggregation.g.xml" path="doc/member[@key='_types.aggregations.MissingAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -106,6 +96,7 @@ public readonly partial struct MissingAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MissingAggregation']/*"/>
 public readonly partial struct MissingAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation Instance { get; init; }
@@ -125,22 +116,14 @@ public readonly partial struct MissingAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MissingAggregation(Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MissingAggregation.g.xml" path="doc/member[@key='_types.aggregations.MissingAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="MissingAggregation.g.xml" path="doc/member[@key='_types.aggregations.MissingAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;

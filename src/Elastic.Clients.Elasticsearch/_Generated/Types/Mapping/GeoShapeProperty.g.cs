@@ -23,13 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-/// <summary>
-/// <para>
-/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
-/// and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.GeoShapePropertyConverter))]
 public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -53,11 +48,7 @@ public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Map
 	public bool? IgnoreZValue { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? Orientation { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
@@ -68,13 +59,8 @@ public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Map
 	public string Type => "geo_shape";
 }
 
-/// <summary>
-/// <para>
-/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
-/// and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
 public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Instance { get; init; }
@@ -160,33 +146,21 @@ public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -250,13 +224,8 @@ public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
-/// and polygons.
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty']/*"/>
 public readonly partial struct GeoShapePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty Instance { get; init; }
@@ -348,33 +317,21 @@ public readonly partial struct GeoShapePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoShapeProperty.g.xml" path="doc/member[@key='_types.mapping.GeoShapeProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

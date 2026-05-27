@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="streams.status.LogsStatus#enabled"><summary><para>
+If true, the logs stream feature is enabled.
+</para></summary></member>
+</doc>

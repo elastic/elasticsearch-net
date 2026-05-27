@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="GetAsyncStatusRequest.g.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
 public sealed partial class GetAsyncStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the async SQL search status.
-/// Get the current status of an async SQL search or a stored synchronous SQL search.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncStatusRequest.g.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.GetAsyncStatusRequestConverter))]
 public sealed partial class GetAsyncStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestParameters>
 {
@@ -59,20 +57,12 @@ public sealed partial class GetAsyncStatusRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "sql.get_async_status";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusRequest.g.xml" path="doc/member[@key='sql.get_async_status.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the async SQL search status.
-/// Get the current status of an async SQL search or a stored synchronous SQL search.
-/// </para>
-/// </summary>
+/// <include file="GetAsyncStatusRequest.g.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.get_async_status.Request']/*"/>
 public readonly partial struct GetAsyncStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest Instance { get; init; }
@@ -97,11 +87,7 @@ public readonly partial struct GetAsyncStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest instance) => new Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetAsyncStatusRequest.g.xml" path="doc/member[@key='sql.get_async_status.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

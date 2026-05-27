@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.PrefixQueryConverter))]
 public sealed partial class PrefixQuery
 {
@@ -49,41 +50,22 @@ public sealed partial class PrefixQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#case_insensitive']/*"/>
 	public bool? CaseInsensitive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#rewrite']/*"/>
 	public string? Rewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#value']/*"/>
 	public required string Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery']/*"/>
 public readonly partial struct PrefixQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Instance { get; init; }
@@ -103,26 +85,14 @@ public readonly partial struct PrefixQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -147,22 +117,14 @@ public readonly partial struct PrefixQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor<TDocument> Value(string value)
 	{
 		Instance.Value = value;
@@ -178,6 +140,7 @@ public readonly partial struct PrefixQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery']/*"/>
 public readonly partial struct PrefixQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery Instance { get; init; }
@@ -197,26 +160,14 @@ public readonly partial struct PrefixQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows ASCII case insensitive matching of the value with the indexed field values when set to <c>true</c>.
-	/// Default is <c>false</c> which means the case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -241,22 +192,14 @@ public readonly partial struct PrefixQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Beginning characters of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="PrefixQuery.g.xml" path="doc/member[@key='_types.query_dsl.PrefixQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor Value(string value)
 	{
 		Instance.Value = value;

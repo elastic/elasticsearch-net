@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.RuleCondition#applies_to"><summary><para>
+Specifies the result property to which the condition applies. If your detector uses <c>lat_long</c>, <c>metric</c>, <c>rare</c>, or <c>freq_rare</c> functions, you can only specify conditions that apply to time.
+</para></summary></member>
+  <member key="ml._types.RuleCondition#operator"><summary><para>
+Specifies the condition operator. The available options are greater than, greater than or equals, less than, and less than or equals.
+</para></summary></member>
+  <member key="ml._types.RuleCondition#value"><summary><para>
+The value that is compared against the <c>applies_to</c> field using the operator.
+</para></summary></member>
+</doc>

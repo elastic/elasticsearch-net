@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='text_structure._types.TopHit']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.TopHitConverter))]
 public sealed partial class TopHit
 {

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoLineAggregationConverter))]
 public sealed partial class GeoLineAggregation
 {
@@ -42,44 +43,23 @@ public sealed partial class GeoLineAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, returns an additional array of the sort values in the feature properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#include_sort']/*"/>
 	public bool? IncludeSort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public required Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Point { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of the line represented in the aggregation.
-	/// Valid sizes are between 1 and 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The order in which the line is sorted (ascending or descending).
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort_order']/*"/>
 	public Elastic.Clients.Elasticsearch.SortOrder? SortOrder { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation']/*"/>
 public readonly partial struct GeoLineAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation Instance { get; init; }
@@ -99,80 +79,49 @@ public readonly partial struct GeoLineAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, returns an additional array of the sort values in the feature properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#include_sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> IncludeSort(bool? value = true)
 	{
 		Instance.IncludeSort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint value)
 	{
 		Instance.Point = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Point(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>> action)
 	{
 		Instance.Point = Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of the line represented in the aggregation.
-	/// Valid sizes are between 1 and 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Sort(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The order in which the line is sorted (ascending or descending).
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort_order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> SortOrder(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
 		Instance.SortOrder = value;
@@ -188,6 +137,7 @@ public readonly partial struct GeoLineAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation']/*"/>
 public readonly partial struct GeoLineAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation Instance { get; init; }
@@ -207,103 +157,63 @@ public readonly partial struct GeoLineAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When <c>true</c>, returns an additional array of the sort values in the feature properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#include_sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor IncludeSort(bool? value = true)
 	{
 		Instance.IncludeSort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Point(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint value)
 	{
 		Instance.Point = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Point(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor> action)
 	{
 		Instance.Point = Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#point']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Point<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<T>> action)
 	{
 		Instance.Point = Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum length of the line represented in the aggregation.
-	/// Valid sizes are between 1 and 10000.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Sort(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the numeric field to use as the sort key for ordering the points.
-	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Sort<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<T>> action)
 	{
 		Instance.Sort = Elastic.Clients.Elasticsearch.Aggregations.GeoLineSortDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The order in which the line is sorted (ascending or descending).
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLineAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoLineAggregation#sort_order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor SortOrder(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
 		Instance.SortOrder = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.NormalizeAggregationConverter))]
 public sealed partial class NormalizeAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class NormalizeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The specific method to apply.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? Method { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation']/*"/>
 public readonly partial struct NormalizeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation Instance { get; init; }
@@ -85,45 +70,28 @@ public readonly partial struct NormalizeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregation(Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific method to apply.
-	/// </para>
-	/// </summary>
+	/// <include file="NormalizeAggregation.g.xml" path="doc/member[@key='_types.aggregations.NormalizeAggregation#method']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.NormalizeAggregationDescriptor Method(Elastic.Clients.Elasticsearch.Aggregations.NormalizeMethod? value)
 	{
 		Instance.Method = value;

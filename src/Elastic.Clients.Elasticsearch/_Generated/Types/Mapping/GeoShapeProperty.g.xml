@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.mapping.GeoShapeProperty"><summary><para>
+The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
+and polygons.
+</para><para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para></summary></member>
+  <member key="_types.mapping.GeoShapeProperty#meta"><summary><para>
+Metadata about the field.
+</para></summary></member>
+</doc>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_index_template.Request"><summary><para>
+Get index templates.
+Get information about one or more index templates.
+</para></summary></member>
+  <member key="indices.get_index_template.Request#flat_settings"><summary><para>
+If true, returns settings in flat format.
+</para></summary></member>
+  <member key="indices.get_index_template.Request#include_defaults"><summary><para>
+If true, returns all relevant default configurations for the index template.
+</para></summary></member>
+  <member key="indices.get_index_template.Request#local"><summary><para>
+If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+</para></summary></member>
+  <member key="indices.get_index_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.get_index_template.Request#name"><summary><para>
+Name of index template to retrieve. Wildcard (*) expressions are supported.
+</para></summary></member>
+</doc>

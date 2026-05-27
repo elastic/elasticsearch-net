@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityBoolean']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityBooleanConverter))]
 public sealed partial class SettingsSimilarityBoolean : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -39,6 +40,7 @@ public sealed partial class SettingsSimilarityBoolean : Elastic.Clients.Elastics
 	public string Type => "boolean";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityBoolean']/*"/>
 public readonly partial struct SettingsSimilarityBooleanDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBoolean Instance { get; init; }

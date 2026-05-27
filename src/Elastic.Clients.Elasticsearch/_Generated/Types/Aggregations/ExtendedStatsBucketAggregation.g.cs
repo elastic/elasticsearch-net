@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ExtendedStatsBucketAggregationConverter))]
 public sealed partial class ExtendedStatsBucketAggregation
 {
@@ -36,36 +37,20 @@ public sealed partial class ExtendedStatsBucketAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of standard deviations above/below the mean to display.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#sigma']/*"/>
 	public double? Sigma { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation']/*"/>
 public readonly partial struct ExtendedStatsBucketAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation Instance { get; init; }
@@ -85,45 +70,28 @@ public readonly partial struct ExtendedStatsBucketAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of standard deviations above/below the mean to display.
-	/// </para>
-	/// </summary>
+	/// <include file="ExtendedStatsBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.ExtendedStatsBucketAggregation#sigma']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregationDescriptor Sigma(double? value)
 	{
 		Instance.Sigma = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ComponentTemplateNodeConverter))]
 public sealed partial class ComponentTemplateNode
 {
@@ -48,6 +49,7 @@ public sealed partial class ComponentTemplateNode
 	public long? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }
@@ -131,6 +133,7 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 public readonly partial struct ComponentTemplateNodeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.FileSystem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.FileSystemConverter))]
 public sealed partial class FileSystem
 {
@@ -36,32 +37,15 @@ public sealed partial class FileSystem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of all file stores.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystem.g.xml" path="doc/member[@key='nodes._types.FileSystem#data']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? Data { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains I/O statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystem.g.xml" path="doc/member[@key='nodes._types.FileSystem#io_stats']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.IoStats? IoStats { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Last time the file stores statistics were refreshed.
-	/// Recorded in milliseconds since the Unix Epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystem.g.xml" path="doc/member[@key='nodes._types.FileSystem#timestamp']/*"/>
 	public long? Timestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for all file stores of the node.
-	/// </para>
-	/// </summary>
+	/// <include file="FileSystem.g.xml" path="doc/member[@key='nodes._types.FileSystem#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.FileSystemTotal? Total { get; set; }
 }

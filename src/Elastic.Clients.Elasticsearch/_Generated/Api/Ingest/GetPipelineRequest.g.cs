@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
 public sealed partial class GetPipelineRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return pipelines without their definitions
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#summary']/*"/>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get pipelines.
-/// </para>
-/// <para>
-/// Get information about one or more ingest pipelines.
-/// This API returns a local reference of the pipeline.
-/// </para>
-/// </summary>
+/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GetPipelineRequestConverter))]
 public sealed partial class GetPipelineRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>
 {
@@ -75,40 +61,18 @@ public sealed partial class GetPipelineRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "ingest.get_pipeline";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of pipeline IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all ingest pipelines, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return pipelines without their definitions
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#summary']/*"/>
 	public bool? Summary { get => Q<bool?>("summary"); set => Q("summary", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get pipelines.
-/// </para>
-/// <para>
-/// Get information about one or more ingest pipelines.
-/// This API returns a local reference of the pipeline.
-/// </para>
-/// </summary>
+/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.get_pipeline.Request']/*"/>
 public readonly partial struct GetPipelineRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest Instance { get; init; }
@@ -132,36 +96,21 @@ public readonly partial struct GetPipelineRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of pipeline IDs to retrieve.
-	/// Wildcard (<c>*</c>) expressions are supported.
-	/// To get all ingest pipelines, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return pipelines without their definitions
-	/// </para>
-	/// </summary>
+	/// <include file="GetPipelineRequest.g.xml" path="doc/member[@key='ingest.get_pipeline.Request#summary']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor Summary(bool? value = true)
 	{
 		Instance.Summary = value;

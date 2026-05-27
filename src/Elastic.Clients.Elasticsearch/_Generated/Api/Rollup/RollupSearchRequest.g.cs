@@ -23,77 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 public sealed partial class RollupSearchRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Search rolled-up data.
-/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-/// </para>
-/// <para>
-/// The request body supports a subset of features from the regular search API.
-/// The following functionality is not available:
-/// </para>
-/// <para>
-/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-/// </para>
-/// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-/// </para>
-/// </summary>
+/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.RollupSearchRequestConverter))]
 public partial class RollupSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>
 {
@@ -120,126 +62,27 @@ public partial class RollupSearchRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "rollup.rollup_search";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices used to limit the request.
-	/// This parameter has the following rules:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Multiple non-rollup indices may be specified.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Must be zero if set, as rollups work on pre-aggregated data.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#size']/*"/>
 	public int? Size { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Search rolled-up data.
-/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-/// </para>
-/// <para>
-/// The request body supports a subset of features from the regular search API.
-/// The following functionality is not available:
-/// </para>
-/// <para>
-/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-/// </para>
-/// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-/// </para>
-/// </summary>
+/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 public readonly partial struct RollupSearchRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Instance { get; init; }
@@ -264,100 +107,49 @@ public readonly partial struct RollupSearchRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices used to limit the request.
-	/// This parameter has the following rules:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Multiple non-rollup indices may be specified.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -385,44 +177,28 @@ public readonly partial struct RollupSearchRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Must be zero if set, as rollups work on pre-aggregated data.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
@@ -485,60 +261,8 @@ public readonly partial struct RollupSearchRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Search rolled-up data.
-/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
-/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
-/// </para>
-/// <para>
-/// The request body supports a subset of features from the regular search API.
-/// The following functionality is not available:
-/// </para>
-/// <para>
-/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
-/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
-/// </para>
-/// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
-/// </para>
-/// </summary>
+/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.rollup_search.Request']/*"/>
 public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Instance { get; init; }
@@ -562,89 +286,42 @@ public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices used to limit the request.
-	/// This parameter has the following rules:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Multiple non-rollup indices may be specified.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -665,33 +342,21 @@ public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a DSL query that is subject to some limitations.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Must be zero if set, as rollups work on pre-aggregated data.
-	/// </para>
-	/// </summary>
+	/// <include file="RollupSearchRequest.g.xml" path="doc/member[@key='rollup.rollup_search.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;

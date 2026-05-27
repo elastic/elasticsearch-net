@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.Configuration']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.SlmConfigurationConverter))]
 public sealed partial class SlmConfiguration
 {
@@ -36,51 +37,26 @@ public sealed partial class SlmConfiguration
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
-	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#feature_states']/*"/>
 	public System.Collections.Generic.ICollection<string>? FeatureStates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the current global state is included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#include_global_state']/*"/>
 	public bool? IncludeGlobalState { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.
-	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#partial']/*"/>
 	public bool? Partial { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.Configuration']/*"/>
 public readonly partial struct SlmConfigurationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration Instance { get; init; }
@@ -100,91 +76,56 @@ public readonly partial struct SlmConfigurationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
-	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#feature_states']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.FeatureStates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of feature states to be included in this snapshot. A list of features available for inclusion in the snapshot and their descriptions be can be retrieved using the get features API.
-	/// Each feature state includes one or more system indices containing data necessary for the function of that feature. Providing an empty array will include no feature states in the snapshot, regardless of the value of include_global_state. By default, all available feature states will be included in the snapshot if include_global_state is true, or no feature states if include_global_state is false.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#feature_states']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor FeatureStates(params string[] values)
 	{
 		Instance.FeatureStates = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the snapshot fails if any data stream or index in indices is missing or closed. If true, the snapshot ignores missing or closed data streams and indices.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the current global state is included in the snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#include_global_state']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor IncludeGlobalState(bool? value = true)
 	{
 		Instance.IncludeGlobalState = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices to include in the snapshot. Multi-index syntax is supported.
-	/// By default, a snapshot includes all data streams and indices in the cluster. If this argument is provided, the snapshot only includes the specified data streams and clusters.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Attaches arbitrary metadata to the snapshot, such as a record of who took the snapshot, why it was taken, or any other useful data. Metadata must be less than 1024 bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -198,11 +139,7 @@ public readonly partial struct SlmConfigurationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If false, the entire snapshot will fail if one or more indices included in the snapshot do not have all primary shards available.
-	/// </para>
-	/// </summary>
+	/// <include file="SlmConfiguration.g.xml" path="doc/member[@key='slm._types.Configuration#partial']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor Partial(bool? value = true)
 	{
 		Instance.Partial = value;

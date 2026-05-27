@@ -37,45 +37,21 @@ public sealed partial class PutElserResponse : Elastic.Transport.Products.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserResponse.g.xml" path="doc/member[@key='inference.put_elser.Response#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeELSER TaskType { get; set; }
 }

@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 public sealed partial class GetBehavioralAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get behavioral analytics collections.
-/// </para>
-/// </summary>
+/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.GetBehavioralAnalyticsRequestConverter))]
 public sealed partial class GetBehavioralAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>
 {
@@ -57,19 +56,12 @@ public sealed partial class GetBehavioralAnalyticsRequest : Elastic.Clients.Elas
 
 	internal override string OperationName => "search_application.get_behavioral_analytics";
 
-	/// <summary>
-	/// <para>
-	/// A list of analytics collections to limit the returned information
-	/// </para>
-	/// </summary>
+	/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request#name']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? Name { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>?>("name"); set => PO("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get behavioral analytics collections.
-/// </para>
-/// </summary>
+/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request']/*"/>
 public readonly partial struct GetBehavioralAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest Instance { get; init; }
@@ -93,22 +85,14 @@ public readonly partial struct GetBehavioralAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of analytics collections to limit the returned information
-	/// </para>
-	/// </summary>
+	/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of analytics collections to limit the returned information
-	/// </para>
-	/// </summary>
+	/// <include file="GetBehavioralAnalyticsRequest.g.xml" path="doc/member[@key='search_application.get_behavioral_analytics.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor Name(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.Name = [.. values];

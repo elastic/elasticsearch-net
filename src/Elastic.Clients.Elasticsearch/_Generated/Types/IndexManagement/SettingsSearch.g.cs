@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSearch']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSearchConverter))]
 public sealed partial class SettingsSearch
 {
@@ -40,6 +41,7 @@ public sealed partial class SettingsSearch
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogSettings? Slowlog { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSearch']/*"/>
 public readonly partial struct SettingsSearchDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch Instance { get; init; }

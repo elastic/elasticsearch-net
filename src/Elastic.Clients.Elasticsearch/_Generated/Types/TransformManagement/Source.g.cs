@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Source']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SourceConverter))]
 public sealed partial class Source
 {
@@ -42,32 +43,17 @@ public sealed partial class Source
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
-	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
-	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
-	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Source']/*"/>
 public readonly partial struct SourceDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Source Instance { get; init; }
@@ -87,72 +73,42 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Source instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
-	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
-	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
-	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -196,6 +152,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Source']/*"/>
 public readonly partial struct SourceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Source Instance { get; init; }
@@ -215,95 +172,56 @@ public readonly partial struct SourceDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Source instance) => new Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Source(Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The source indices for the transform. It can be a single index, an index pattern (for example, <c>"my-index-*""</c>), an
-	/// array of indices (for example, <c>["my-index-000001", "my-index-000002"]</c>), or an array of index patterns (for
-	/// example, <c>["my-index-*", "my-other-index-*"]</c>. For remote indices use the syntax <c>"remote_name:index_name"</c>. If
-	/// any indices are in remote clusters then the master node and at least one transform node must have the <c>remote_cluster_client</c> node role.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#index']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Definitions of search-time runtime fields that can be used by the transform. For search runtime fields all data
-	/// nodes, including remote nodes, must be 7.12 or later.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='transform._types.Source#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);

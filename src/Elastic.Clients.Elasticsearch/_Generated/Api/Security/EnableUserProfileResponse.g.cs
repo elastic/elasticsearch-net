@@ -37,10 +37,6 @@ public sealed partial class EnableUserProfileResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserProfileResponse.g.xml" path="doc/member[@key='security.enable_user_profile.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

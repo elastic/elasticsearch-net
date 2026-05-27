@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.stream_completion.Request"><summary><para>
+Perform streaming inference.
+Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+This API works only with the completion task type.
+</para>
+<para>
+IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+</para>
+<para>
+This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+</para></summary></member>
+  <member key="inference.stream_completion.Request#inference_id"><summary><para>
+The unique identifier for the inference endpoint.
+</para></summary></member>
+  <member key="inference.stream_completion.Request#input"><summary><para>
+The text on which you want to perform the inference task.
+It can be a single string or an array.
+</para>
+<para>
+NOTE: Inference endpoints for the completion task type currently only support a single string as input.
+</para></summary></member>
+  <member key="inference.stream_completion.Request#task_settings"><summary><para>
+Optional task settings
+</para></summary></member>
+  <member key="inference.stream_completion.Request#timeout"><summary><para>
+The amount of time to wait for the inference request to complete.
+</para></summary></member>
+</doc>

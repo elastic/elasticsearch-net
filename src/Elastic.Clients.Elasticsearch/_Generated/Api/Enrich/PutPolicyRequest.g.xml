@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="enrich.put_policy.Request"><summary><para>
+Create an enrich policy.
+Creates an enrich policy.
+</para></summary></member>
+  <member key="enrich.put_policy.Request#geo_match"><summary><para>
+Matches enrich data to incoming documents based on a <c>geo_shape</c> query.
+</para></summary></member>
+  <member key="enrich.put_policy.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="enrich.put_policy.Request#match"><summary><para>
+Matches enrich data to incoming documents based on a <c>term</c> query.
+</para></summary></member>
+  <member key="enrich.put_policy.Request#name"><summary><para>
+Name of the enrich policy to create or update.
+</para></summary></member>
+  <member key="enrich.put_policy.Request#range"><summary><para>
+Matches a number, date, or IP address in incoming documents to a range in the enrich index based on a <c>term</c> query.
+</para></summary></member>
+</doc>

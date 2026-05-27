@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_mapping.Request"><summary><para>
+Update field mappings.
+Add new fields to an existing data stream or index.
+You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
+For data streams, these changes are applied to all backing indices by default.
+</para>
+<para>
+<strong>Add multi-fields to an existing field</strong>
+</para>
+<para>
+Multi-fields let you index the same field in different ways.
+You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
+WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
+You can populate the new multi-field with the update by query API.
+</para>
+<para>
+<strong>Change supported mapping parameters for an existing field</strong>
+</para>
+<para>
+The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
+For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+</para>
+<para>
+<strong>Change the mapping of an existing field</strong>
+</para>
+<para>
+Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
+Changing an existing field could invalidate data that's already indexed.
+</para>
+<para>
+If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
+If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+</para>
+<para>
+<strong>Rename a field</strong>
+</para>
+<para>
+Renaming a field would invalidate data already indexed under the old field name.
+Instead, add an alias field to create an alternate field name.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#_field_names"><summary><para>
+Control whether field names are enabled for the index.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#_meta"><summary><para>
+A mapping type can have custom meta data associated with it. These are
+not used at all by Elasticsearch, but can be used to store
+application-specific metadata.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#_routing"><summary><para>
+Enable making a routing value required on indexed documents.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#_source"><summary><para>
+Control whether the _source field is enabled on the index.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#date_detection"><summary><para>
+Controls whether dynamic date detection is enabled.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#dynamic"><summary><para>
+Controls whether new fields are added dynamically.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#dynamic_date_formats"><summary><para>
+If date detection is enabled then new string fields are checked
+against 'dynamic_date_formats' and if the value matches then
+a new date field is added instead of string.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#dynamic_templates"><summary><para>
+Specify dynamic templates for the mapping.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#expand_wildcards"><summary><para>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <c>open,hidden</c>.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a missing or closed index.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#index"><summary><para>
+A comma-separated list of index names the mapping should be added to (supports wildcards).
+Use <c>_all</c> or omit to add the mapping on all indices.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#numeric_detection"><summary><para>
+Automatically map strings into numeric data types for all fields.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#properties"><summary><para>
+Mapping for a field. For new fields, this mapping can include:
+</para>
+<list type="bullet">
+<item>
+<para>
+Field name
+</para>
+</item>
+<item>
+<para>
+Field data type
+</para>
+</item>
+<item>
+<para>
+Mapping parameters
+</para>
+</item>
+</list></summary></member>
+  <member key="indices.put_mapping.Request#runtime"><summary><para>
+Mapping of runtime fields for the index.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.put_mapping.Request#write_index_only"><summary><para>
+If <c>true</c>, the mappings are applied only to the current write index for the target.
+</para></summary></member>
+</doc>

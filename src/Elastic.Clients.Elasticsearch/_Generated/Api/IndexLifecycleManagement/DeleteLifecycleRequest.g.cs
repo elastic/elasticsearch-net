@@ -23,29 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 public sealed partial class DeleteLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a lifecycle policy.
-/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-/// </para>
-/// </summary>
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.DeleteLifecycleRequestConverter))]
 public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>
 {
@@ -72,34 +62,18 @@ public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "ilm.delete_lifecycle";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#policy']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("policy"); set => PR("policy", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a lifecycle policy.
-/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-/// </para>
-/// </summary>
+/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.delete_lifecycle.Request']/*"/>
 public readonly partial struct DeleteLifecycleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest Instance { get; init; }
@@ -124,33 +98,21 @@ public readonly partial struct DeleteLifecycleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the policy.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#policy']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteLifecycleRequest.g.xml" path="doc/member[@key='ilm.delete_lifecycle.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

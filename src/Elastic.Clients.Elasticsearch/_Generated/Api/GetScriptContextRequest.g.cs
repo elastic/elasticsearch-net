@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 public sealed partial class GetScriptContextRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get script contexts.
-/// </para>
-/// <para>
-/// Get a list of supported script contexts and their methods.
-/// </para>
-/// </summary>
+/// <include file="GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetScriptContextRequestConverter))]
 public sealed partial class GetScriptContextRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetScriptContextRequest : Elastic.Clients.Elasticsea
 	internal override string OperationName => "get_script_context";
 }
 
-/// <summary>
-/// <para>
-/// Get script contexts.
-/// </para>
-/// <para>
-/// Get a list of supported script contexts and their methods.
-/// </para>
-/// </summary>
+/// <include file="GetScriptContextRequest.g.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_context.Request']/*"/>
 public readonly partial struct GetScriptContextRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GetScriptContextRequest Instance { get; init; }

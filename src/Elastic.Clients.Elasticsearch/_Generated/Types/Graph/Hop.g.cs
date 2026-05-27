@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.Hop']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.HopConverter))]
 public sealed partial class Hop
 {
@@ -43,28 +44,17 @@ public sealed partial class Hop
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.Hop? Connections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> Vertices { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.Hop']/*"/>
 public readonly partial struct HopDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Graph.Hop Instance { get; init; }
@@ -84,77 +74,49 @@ public readonly partial struct HopDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Graph.Hop instance) => new Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
 	{
 		Instance.Connections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> value)
 	{
 		Instance.Vertices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
@@ -176,6 +138,7 @@ public readonly partial struct HopDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='graph._types.Hop']/*"/>
 public readonly partial struct HopDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Graph.Hop Instance { get; init; }
@@ -195,99 +158,63 @@ public readonly partial struct HopDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.HopDescriptor(Elastic.Clients.Elasticsearch.Graph.Hop instance) => new Elastic.Clients.Elasticsearch.Graph.HopDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.Hop(Elastic.Clients.Elasticsearch.Graph.HopDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections(Elastic.Clients.Elasticsearch.Graph.Hop? value)
 	{
 		Instance.Connections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies one or more fields from which you want to extract terms that are associated with the specified vertices.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#connections']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Connections<T>(System.Action<Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>> action)
 	{
 		Instance.Connections = Elastic.Clients.Elasticsearch.Graph.HopDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional guiding query that constrains the Graph API as it explores connected terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> value)
 	{
 		Instance.Vertices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(params Elastic.Clients.Elasticsearch.Graph.VertexDefinition[] values)
 	{
 		Instance.Vertices = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();
@@ -300,11 +227,7 @@ public readonly partial struct HopDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains the fields you are interested in.
-	/// </para>
-	/// </summary>
+	/// <include file="Hop.g.xml" path="doc/member[@key='graph._types.Hop#vertices']/*"/>
 	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Vertices<T>(params System.Action<Elastic.Clients.Elasticsearch.Graph.VertexDefinitionDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>();

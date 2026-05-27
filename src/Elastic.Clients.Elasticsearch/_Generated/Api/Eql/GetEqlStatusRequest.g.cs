@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
+/// <include file="GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 public sealed partial class GetEqlStatusRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the async EQL status.
-/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
-/// </para>
-/// </summary>
+/// <include file="GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.Json.GetEqlStatusRequestConverter))]
 public sealed partial class GetEqlStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>
 {
@@ -59,20 +57,12 @@ public sealed partial class GetEqlStatusRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "eql.get_status";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the async EQL status.
-/// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
-/// </para>
-/// </summary>
+/// <include file="GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='eql.get_status.Request']/*"/>
 public readonly partial struct GetEqlStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest Instance { get; init; }
@@ -97,11 +87,7 @@ public readonly partial struct GetEqlStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest instance) => new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="GetEqlStatusRequest.g.xml" path="doc/member[@key='eql.get_status.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

@@ -23,111 +23,49 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 public sealed partial class ExplainRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// The query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 }
 
-/// <summary>
-/// <para>
-/// Explain a document match result.
-/// Get information about why a specific document matches, or doesn't match, a query.
-/// It computes a score explanation for a query and a specific document.
-/// </para>
-/// </summary>
+/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ExplainRequestConverter))]
 public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ExplainRequestParameters>
 {
@@ -154,131 +92,54 @@ public sealed partial class ExplainRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "explain";
 
-	/// <summary>
-	/// <para>
-	/// The document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Index names that are used to limit the request.
-	/// Only a single index name can be provided to this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// The query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? Source { get => Q<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam?>("_source"); set => Q("_source", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Explain a document match result.
-/// Get information about why a specific document matches, or doesn't match, a query.
-/// It computes a score explanation for a query and a specific document.
-/// </para>
-/// </summary>
+/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 public readonly partial struct ExplainRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.ExplainRequest Instance { get; init; }
@@ -303,259 +164,154 @@ public readonly partial struct ExplainRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.ExplainRequestDescriptor(Elastic.Clients.Elasticsearch.ExplainRequest instance) => new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ExplainRequest(Elastic.Clients.Elasticsearch.ExplainRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index names that are used to limit the request.
-	/// Only a single index name can be provided to this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -618,13 +374,8 @@ public readonly partial struct ExplainRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Explain a document match result.
-/// Get information about why a specific document matches, or doesn't match, a query.
-/// It computes a score explanation for a query and a specific document.
-/// </para>
-/// </summary>
+/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.explain.Request']/*"/>
 public readonly partial struct ExplainRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.ExplainRequest Instance { get; init; }
@@ -669,237 +420,140 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ExplainRequest instance) => new Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.ExplainRequest(Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Index names that are used to limit the request.
-	/// Only a single index name can be provided to this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>True</c> or <c>false</c> to return the <c>_source</c> field or not or a list of fields to return.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to exclude from the response.
-	/// You can also use this parameter to exclude fields from the subset specified in <c>_source_includes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of source fields to include in the response.
-	/// If this parameter is specified, only these source fields are returned.
-	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
-	/// If the <c>_source</c> parameter is <c>false</c>, this parameter is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#stored_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.StoredFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search definition using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="ExplainRequest.g.xml" path="doc/member[@key='_global.explain.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.ExplainRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);

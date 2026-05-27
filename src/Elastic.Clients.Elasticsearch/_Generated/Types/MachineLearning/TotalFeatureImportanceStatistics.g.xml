@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TotalFeatureImportanceStatistics#max"><summary><para>
+The maximum importance value across all the training data for this feature.
+</para></summary></member>
+  <member key="ml._types.TotalFeatureImportanceStatistics#mean_magnitude"><summary><para>
+The average magnitude of this feature across all the training data. This value is the average of the absolute values of the importance for this feature.
+</para></summary></member>
+  <member key="ml._types.TotalFeatureImportanceStatistics#min"><summary><para>
+The minimum importance value across all the training data for this feature.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.PrivilegesCheck']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PrivilegesCheckConverter))]
 public sealed partial class PrivilegesCheck
 {
@@ -38,15 +39,12 @@ public sealed partial class PrivilegesCheck
 
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck>? Application { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="PrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges_user_profile.PrivilegesCheck#cluster']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? Cluster { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilegesCheck>? Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.PrivilegesCheck']/*"/>
 public readonly partial struct PrivilegesCheckDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Instance { get; init; }
@@ -90,22 +88,14 @@ public readonly partial struct PrivilegesCheckDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="PrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges_user_profile.PrivilegesCheck#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ClusterPrivilege>? value)
 	{
 		Instance.Cluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the cluster privileges that you want to check.
-	/// </para>
-	/// </summary>
+	/// <include file="PrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges_user_profile.PrivilegesCheck#cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor Cluster(params Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[] values)
 	{
 		Instance.Cluster = [.. values];

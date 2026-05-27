@@ -23,29 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 public sealed partial class DeleteDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data streams.
-/// Deletes one or more data streams and their backing indices.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DeleteDataStreamRequestConverter))]
 public sealed partial class DeleteDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>
 {
@@ -72,34 +62,18 @@ public sealed partial class DeleteDataStreamRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.delete_data_stream";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to delete. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete data streams.
-/// Deletes one or more data streams and their backing indices.
-/// </para>
-/// </summary>
+/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 public readonly partial struct DeleteDataStreamRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest Instance { get; init; }
@@ -124,44 +98,28 @@ public readonly partial struct DeleteDataStreamRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams to delete. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match. Supports comma-separated values,such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

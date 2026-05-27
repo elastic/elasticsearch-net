@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// Configuration options when storing the inference endpoint
-/// </para>
-/// </summary>
+/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceEndpoint']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceEndpointConverter))]
 public sealed partial class InferenceEndpoint
 {
@@ -48,40 +45,21 @@ public sealed partial class InferenceEndpoint
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Configuration options when storing the inference endpoint
-/// </para>
-/// </summary>
+/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.InferenceEndpoint']/*"/>
 public readonly partial struct InferenceEndpointDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint Instance { get; init; }
@@ -101,66 +79,42 @@ public readonly partial struct InferenceEndpointDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint(Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Chunking configuration object
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#service']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor Service(string value)
 	{
 		Instance.Service = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ServiceSettings(object value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceEndpoint.g.xml" path="doc/member[@key='inference._types.InferenceEndpoint#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

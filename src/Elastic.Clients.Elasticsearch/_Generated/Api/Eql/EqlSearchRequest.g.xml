@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="eql.search.Request"><summary><para>
+Get EQL search results.
+Returns search results for an Event Query Language (EQL) query.
+EQL assumes each document in a data stream or index corresponds to an event.
+</para></summary></member>
+  <member key="eql.search.Request#allow_no_indices"><summary><para>
+Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+(This includes <c>_all</c> string or when no indices have been specified)
+</para></summary></member>
+  <member key="eql.search.Request#allow_partial_search_results"><summary><para>
+Allow query execution also in case of shard failures.
+If true, the query will keep running and will return results based on the available shards.
+For sequences, the behavior can be further refined using allow_partial_sequence_results
+</para></summary></member>
+  <member key="eql.search.Request#allow_partial_sequence_results"><summary><para>
+This flag applies only to sequences and has effect only if allow_partial_search_results=true.
+If true, the sequence query will return results based on the available shards, ignoring the others.
+If false, the sequence query will return successfully, but will always have empty results.
+</para></summary></member>
+  <member key="eql.search.Request#ccs_minimize_roundtrips"><summary><para>
+Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution
+</para></summary></member>
+  <member key="eql.search.Request#event_category_field"><summary><para>
+Field containing the event classification, such as process, file, or network.
+</para></summary></member>
+  <member key="eql.search.Request#expand_wildcards"><summary><para>
+Whether to expand wildcard expression to concrete indices that are open, closed or both.
+</para></summary></member>
+  <member key="eql.search.Request#fetch_size"><summary><para>
+Maximum number of events to search at a time for sequence queries.
+</para></summary></member>
+  <member key="eql.search.Request#fields"><summary><para>
+Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+</para></summary></member>
+  <member key="eql.search.Request#filter"><summary><para>
+Query, written in Query DSL, used to filter the events on which the EQL query runs.
+</para></summary></member>
+  <member key="eql.search.Request#ignore_unavailable"><summary><para>
+If true, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="eql.search.Request#index"><summary><para>
+Comma-separated list of index names to scope the operation
+</para></summary></member>
+  <member key="eql.search.Request#max_samples_per_key"><summary><para>
+By default, the response of a sample query contains up to <c>10</c> samples, with one sample per unique set of join keys. Use the <c>size</c>
+parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
+<c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
+</para></summary></member>
+  <member key="eql.search.Request#query"><summary><para>
+EQL query you wish to run.
+</para></summary></member>
+  <member key="eql.search.Request#size"><summary><para>
+For basic queries, the maximum number of matching events to return. Defaults to 10
+</para></summary></member>
+  <member key="eql.search.Request#tiebreaker_field"><summary><para>
+Field used to sort hits with the same timestamp in ascending order
+</para></summary></member>
+  <member key="eql.search.Request#timestamp_field"><summary><para>
+Field containing event timestamp.
+</para></summary></member>
+</doc>

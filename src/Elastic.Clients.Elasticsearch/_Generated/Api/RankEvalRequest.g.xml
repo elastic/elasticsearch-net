@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.Request"><summary><para>
+Evaluate ranked search results.
+</para>
+<para>
+Evaluate the quality of ranked search results over a set of typical search queries.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#allow_no_indices"><summary><para>
+If <c>false</c>, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#expand_wildcards"><summary><para>
+Whether to expand wildcard expression to concrete indices that are open, closed or both.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#ignore_unavailable"><summary><para>
+If <c>true</c>, missing or closed indices are not included in the response.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#index"><summary><para>
+A  comma-separated list of data streams, indices, and index aliases used to limit the request.
+Wildcard (<c>*</c>) expressions are supported.
+To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#metric"><summary><para>
+Definition of the evaluation metric to calculate.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#requests"><summary><para>
+A set of typical search requests, together with their provided ratings.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#search_type"><summary><para>
+Search operation type
+</para></summary></member>
+</doc>

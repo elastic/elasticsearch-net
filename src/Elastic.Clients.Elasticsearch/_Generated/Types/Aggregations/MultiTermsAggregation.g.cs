@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MultiTermsAggregationConverter))]
 public sealed partial class MultiTermsAggregation
 {
@@ -42,65 +43,32 @@ public sealed partial class MultiTermsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the strategy for data collection.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? CollectMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#min_doc_count']/*"/>
 	public long? MinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket on each shard for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_min_doc_count']/*"/>
 	public long? ShardMinDocCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Calculates the doc count error on per term basis.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#show_term_doc_count_error']/*"/>
 	public bool? ShowTermDocCountError { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of term buckets should be returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> Terms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation']/*"/>
 public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation Instance { get; init; }
@@ -120,58 +88,35 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the strategy for data collection.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? value)
 	{
 		Instance.CollectMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<TDocument>.Build(action);
@@ -192,78 +137,49 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket on each shard for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the doc count error on per term basis.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#show_term_doc_count_error']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> ShowTermDocCountError(bool? value = true)
 	{
 		Instance.ShowTermDocCountError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of term buckets should be returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms(params Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup[] values)
 	{
 		Instance.Terms = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor<TDocument> Terms(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>();
@@ -285,6 +201,7 @@ public readonly partial struct MultiTermsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation']/*"/>
 public readonly partial struct MultiTermsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation Instance { get; init; }
@@ -304,70 +221,42 @@ public readonly partial struct MultiTermsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregation(Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the strategy for data collection.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#collect_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor CollectMode(Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? value)
 	{
 		Instance.CollectMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor MinDocCount(long? value)
 	{
 		Instance.MinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order()
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the sort order of the buckets.
-	/// Defaults to sorting by descending document count.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Order<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>>? action)
 	{
 		Instance.Order = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfFieldSortOrder<T>.Build(action);
@@ -388,78 +277,49 @@ public readonly partial struct MultiTermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum number of documents in a bucket on each shard for it to be returned.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_min_doc_count']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor ShardMinDocCount(long? value)
 	{
 		Instance.ShardMinDocCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidate terms produced by each shard.
-	/// By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Calculates the doc count error on per term basis.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#show_term_doc_count_error']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor ShowTermDocCountError(bool? value = true)
 	{
 		Instance.ShowTermDocCountError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of term buckets should be returned out of the overall terms list.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup> value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms(params Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup[] values)
 	{
 		Instance.Terms = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>();
@@ -472,11 +332,7 @@ public readonly partial struct MultiTermsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to generate sets of terms.
-	/// </para>
-	/// </summary>
+	/// <include file="MultiTermsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MultiTermsAggregation#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregationDescriptor Terms<T>(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookupDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.MultiTermLookup>();

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices._types.TranslogDurability#async"><summary><para>
+fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes
+since the last automatic commit will be discarded.
+</para></summary></member>
+  <member key="indices._types.TranslogDurability#request"><summary><para>
+(default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
+will already have been committed to disk.
+</para></summary></member>
+</doc>

@@ -23,22 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
 public sealed partial class NodesUsageRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get feature usage information.
-/// </para>
-/// </summary>
+/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodesUsageRequestConverter))]
 public sealed partial class NodesUsageRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>
 {
@@ -72,36 +66,18 @@ public sealed partial class NodesUsageRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "nodes.usage";
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names to limit the returned information.
-	/// Use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get feature usage information.
-/// </para>
-/// </summary>
+/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.usage.Request']/*"/>
 public readonly partial struct NodesUsageRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest Instance { get; init; }
@@ -135,36 +111,21 @@ public readonly partial struct NodesUsageRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest instance) => new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Limits the information returned to the specific metrics.
-	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#metric']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
 	{
 		Instance.Metric = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of node IDs or names to limit the returned information.
-	/// Use <c>_local</c> to return information from the node you're connecting to, leave empty to get information from all nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NodesUsageRequest.g.xml" path="doc/member[@key='nodes.usage.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

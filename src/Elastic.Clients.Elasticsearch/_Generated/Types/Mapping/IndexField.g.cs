@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IndexField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.IndexFieldConverter))]
 public sealed partial class IndexField
 {
@@ -45,6 +46,7 @@ public sealed partial class IndexField
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.IndexField']/*"/>
 public readonly partial struct IndexFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.IndexField Instance { get; init; }

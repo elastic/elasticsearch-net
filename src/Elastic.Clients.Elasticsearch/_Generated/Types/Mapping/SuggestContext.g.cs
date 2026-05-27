@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SuggestContext']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SuggestContextConverter))]
 public sealed partial class SuggestContext
 {
@@ -49,6 +50,7 @@ public sealed partial class SuggestContext
 	public required string Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SuggestContext']/*"/>
 public readonly partial struct SuggestContextDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SuggestContext Instance { get; init; }
@@ -107,6 +109,7 @@ public readonly partial struct SuggestContextDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SuggestContext']/*"/>
 public readonly partial struct SuggestContextDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SuggestContext Instance { get; init; }

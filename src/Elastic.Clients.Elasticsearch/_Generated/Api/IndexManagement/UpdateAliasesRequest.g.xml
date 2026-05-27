@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.update_aliases.Request"><summary><para>
+Create or update an alias.
+Adds a data stream or index to an alias.
+</para></summary></member>
+  <member key="indices.update_aliases.Request#actions"><summary><para>
+Actions to perform.
+</para></summary></member>
+  <member key="indices.update_aliases.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.update_aliases.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.IndexManagement.IndicesNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.IndexManagement.IndicesNamespacedClient> class for mocking.
 	/// </summary>
 	protected IndicesNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	{
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor();
@@ -61,6 +65,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexName? index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(index);
@@ -69,6 +75,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(index);
@@ -78,6 +86,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
@@ -86,6 +96,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
@@ -95,6 +107,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse Analyze<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(index);
@@ -104,12 +118,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor();
@@ -118,6 +136,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor();
@@ -127,6 +147,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(index);
@@ -135,6 +157,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor(index);
@@ -144,6 +168,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
@@ -152,6 +178,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>();
@@ -161,6 +189,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/AnalyzeIndexRequest.g.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor<TDocument>(index);
@@ -170,12 +200,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(indices);
@@ -184,6 +218,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(indices);
@@ -193,6 +229,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>();
@@ -201,6 +239,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>();
@@ -210,6 +250,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(indices);
@@ -219,12 +261,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync(Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(indices);
@@ -233,6 +279,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor(indices);
@@ -242,6 +290,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>();
@@ -250,6 +300,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>();
@@ -259,6 +311,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CancelMigrateReindexRequest.g.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.cancel_migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestDescriptor<TDocument>(indices);
@@ -268,12 +322,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CancelMigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor();
@@ -282,6 +340,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor();
@@ -291,6 +351,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(indices);
@@ -299,6 +361,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(indices);
@@ -308,6 +372,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
@@ -316,6 +382,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
@@ -325,6 +393,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>(indices);
@@ -334,12 +404,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor();
@@ -348,6 +422,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor();
@@ -357,6 +433,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(indices);
@@ -365,6 +443,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor(indices);
@@ -374,6 +454,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
@@ -382,6 +464,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>();
@@ -391,6 +475,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ClearCacheRequest.g.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clear_cache.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestDescriptor<TDocument>(indices);
@@ -400,12 +486,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequest, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheResponse, Elastic.Clients.Elasticsearch.IndexManagement.ClearCacheRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse Clone(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(index, target);
@@ -414,6 +504,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(index, target);
@@ -423,6 +515,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>(index, target);
@@ -432,12 +526,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(index, target);
@@ -446,6 +544,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor(index, target);
@@ -455,6 +555,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloneIndexRequest.g.xml" path="doc/member[@key='indices.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestDescriptor<TDocument>(index, target);
@@ -464,12 +566,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close(Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor(indices);
@@ -478,6 +584,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor(indices);
@@ -487,6 +595,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>();
@@ -495,6 +605,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>();
@@ -504,6 +616,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>(indices);
@@ -513,12 +627,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor(indices);
@@ -527,6 +645,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor(indices);
@@ -536,6 +656,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>();
@@ -544,6 +666,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>();
@@ -553,6 +677,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CloseIndexRequest.g.xml" path="doc/member[@key='indices.close.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.close.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestDescriptor<TDocument>(indices);
@@ -562,12 +688,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CloseIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(index);
@@ -576,6 +706,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(index);
@@ -585,6 +717,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>();
@@ -593,6 +727,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>();
@@ -602,6 +738,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse Create<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>(index);
@@ -611,12 +749,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(index);
@@ -625,6 +767,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(index);
@@ -634,6 +778,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>();
@@ -642,6 +788,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>();
@@ -651,6 +799,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateIndexRequest.g.xml" path="doc/member[@key='indices.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>(index);
@@ -660,12 +810,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(name);
@@ -674,6 +828,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(name);
@@ -683,12 +839,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(name);
@@ -697,6 +857,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(name);
@@ -706,12 +868,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse CreateFrom(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(source, dest);
@@ -720,6 +886,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse CreateFrom(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(source, dest);
@@ -729,6 +897,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse CreateFrom<TDocument>(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>(source, dest);
@@ -738,12 +908,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse> CreateFromAsync(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse> CreateFromAsync(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(source, dest);
@@ -752,6 +926,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse> CreateFromAsync(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor(source, dest);
@@ -761,6 +937,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/CreateFromRequest.g.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.create_from.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse> CreateFromAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument>(source, dest);
@@ -770,12 +948,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromResponse, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor();
@@ -784,6 +966,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor();
@@ -793,6 +977,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats(Elastic.Clients.Elasticsearch.IndexName? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(name);
@@ -801,6 +987,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats(Elastic.Clients.Elasticsearch.IndexName? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(name);
@@ -810,6 +998,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
@@ -818,6 +1008,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
@@ -827,6 +1019,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse DataStreamsStats<TDocument>(Elastic.Clients.Elasticsearch.IndexName? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(name);
@@ -836,12 +1030,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor();
@@ -850,6 +1048,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor();
@@ -859,6 +1059,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync(Elastic.Clients.Elasticsearch.IndexName? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(name);
@@ -867,6 +1069,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync(Elastic.Clients.Elasticsearch.IndexName? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(name);
@@ -876,6 +1080,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
@@ -884,6 +1090,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>();
@@ -893,6 +1101,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse> DataStreamsStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(name);
@@ -902,12 +1112,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete(Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor(indices);
@@ -916,6 +1130,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor(indices);
@@ -925,6 +1141,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>();
@@ -933,6 +1151,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>();
@@ -942,6 +1162,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>(indices);
@@ -951,12 +1173,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor(indices);
@@ -965,6 +1191,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor(indices);
@@ -974,6 +1202,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>();
@@ -982,6 +1212,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>();
@@ -991,6 +1223,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexRequest.g.xml" path="doc/member[@key='indices.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestDescriptor<TDocument>(indices);
@@ -1000,12 +1234,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(indices, name);
@@ -1014,6 +1252,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(indices, name);
@@ -1023,6 +1263,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(indices, name);
@@ -1032,12 +1274,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(indices, name);
@@ -1046,6 +1292,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor(indices, name);
@@ -1055,6 +1303,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteAliasRequest.g.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestDescriptor<TDocument>(indices, name);
@@ -1064,12 +1314,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(name);
@@ -1078,6 +1332,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(name);
@@ -1087,12 +1343,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(name);
@@ -1101,6 +1361,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataLifecycleRequest.g.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor(name);
@@ -1110,12 +1372,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(name);
@@ -1124,6 +1390,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(name);
@@ -1133,12 +1401,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(name);
@@ -1147,6 +1419,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamRequest.g.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestDescriptor(name);
@@ -1156,12 +1430,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
@@ -1170,6 +1448,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse DeleteDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
@@ -1179,12 +1459,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
@@ -1193,6 +1477,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse> DeleteDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestDescriptor(name);
@@ -1202,12 +1488,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor(name);
@@ -1216,6 +1506,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor(name);
@@ -1225,12 +1517,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor(name);
@@ -1239,6 +1535,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteIndexTemplateRequest.g.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestDescriptor(name);
@@ -1248,12 +1546,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -1263,6 +1565,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor> action)
 	{
@@ -1273,12 +1577,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -1288,6 +1596,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DeleteTemplateRequest.g.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.delete_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -1298,12 +1608,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(indices);
@@ -1312,6 +1626,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(indices);
@@ -1321,6 +1637,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>();
@@ -1329,6 +1647,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>();
@@ -1338,6 +1658,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>(indices);
@@ -1347,12 +1669,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(indices);
@@ -1361,6 +1687,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(indices);
@@ -1370,6 +1698,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>();
@@ -1378,6 +1708,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>();
@@ -1387,6 +1719,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>(indices);
@@ -1396,12 +1730,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse Downsample(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse Downsample(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(index, targetIndex);
@@ -1410,6 +1748,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse Downsample(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(index, targetIndex);
@@ -1419,6 +1759,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(index, targetIndex);
@@ -1428,12 +1770,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse> DownsampleAsync(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse> DownsampleAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(index, targetIndex);
@@ -1442,6 +1788,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse> DownsampleAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(index, targetIndex);
@@ -1451,6 +1799,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/DownsampleRequest.g.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.downsample.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(index, targetIndex);
@@ -1460,12 +1810,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(indices);
@@ -1474,6 +1828,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(indices);
@@ -1483,6 +1839,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>();
@@ -1491,6 +1849,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>();
@@ -1500,6 +1860,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>(indices);
@@ -1509,12 +1871,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(indices);
@@ -1523,6 +1889,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(indices);
@@ -1532,6 +1900,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>();
@@ -1540,6 +1910,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>();
@@ -1549,6 +1921,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>(indices);
@@ -1558,12 +1932,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(name);
@@ -1572,6 +1950,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(name);
@@ -1581,6 +1961,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(indices, name);
@@ -1589,6 +1971,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(indices, name);
@@ -1598,6 +1982,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(name);
@@ -1607,6 +1993,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(indices, name);
@@ -1616,12 +2004,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(name);
@@ -1630,6 +2022,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(name);
@@ -1639,6 +2033,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(indices, name);
@@ -1647,6 +2043,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(indices, name);
@@ -1656,6 +2054,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(name);
@@ -1665,6 +2065,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(indices, name);
@@ -1674,12 +2076,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(name);
@@ -1688,6 +2094,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(name);
@@ -1697,12 +2105,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(name);
@@ -1711,6 +2123,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsIndexTemplateRequest.g.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestDescriptor(name);
@@ -1720,12 +2134,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor(name);
@@ -1734,6 +2152,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor(name);
@@ -1743,12 +2163,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor(name);
@@ -1757,6 +2181,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExistsTemplateRequest.g.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.exists_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestDescriptor(name);
@@ -1766,12 +2192,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExistsTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(indices);
@@ -1780,6 +2210,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(indices);
@@ -1789,6 +2221,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>();
@@ -1797,6 +2231,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>();
@@ -1806,6 +2242,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
@@ -1815,12 +2253,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(indices);
@@ -1829,6 +2271,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor(indices);
@@ -1838,6 +2282,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>();
@@ -1846,6 +2292,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>();
@@ -1855,6 +2303,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ExplainDataLifecycleRequest.g.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.explain_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument>(indices);
@@ -1864,12 +2314,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(indices);
@@ -1878,6 +2332,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(indices);
@@ -1887,6 +2343,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>();
@@ -1895,6 +2353,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>();
@@ -1904,6 +2364,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse FieldUsageStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(indices);
@@ -1913,12 +2375,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(indices);
@@ -1927,6 +2393,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor(indices);
@@ -1936,6 +2404,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>();
@@ -1944,6 +2414,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>();
@@ -1953,6 +2425,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FieldUsageStatsRequest.g.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.field_usage_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestDescriptor<TDocument>(indices);
@@ -1962,12 +2436,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.FieldUsageStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor();
@@ -1976,6 +2454,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor();
@@ -1985,6 +2465,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(indices);
@@ -1993,6 +2475,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(indices);
@@ -2002,6 +2486,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
@@ -2010,6 +2496,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
@@ -2019,6 +2507,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(indices);
@@ -2028,12 +2518,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor();
@@ -2042,6 +2536,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor();
@@ -2051,6 +2547,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(indices);
@@ -2059,6 +2557,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor(indices);
@@ -2068,6 +2568,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
@@ -2076,6 +2578,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>();
@@ -2085,6 +2589,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/FlushRequest.g.xml" path="doc/member[@key='indices.flush.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.flush.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestDescriptor<TDocument>(indices);
@@ -2094,12 +2600,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.FlushRequest, Elastic.Clients.Elasticsearch.IndexManagement.FlushResponse, Elastic.Clients.Elasticsearch.IndexManagement.FlushRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor();
@@ -2108,6 +2618,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor();
@@ -2117,6 +2629,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(indices);
@@ -2125,6 +2639,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(indices);
@@ -2134,6 +2650,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
@@ -2142,6 +2660,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
@@ -2151,6 +2671,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(indices);
@@ -2160,12 +2682,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor();
@@ -2174,6 +2700,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor();
@@ -2183,6 +2711,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(indices);
@@ -2191,6 +2721,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(indices);
@@ -2200,6 +2732,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
@@ -2208,6 +2742,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>();
@@ -2217,6 +2753,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(indices);
@@ -2226,12 +2764,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeResponse, Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(indices);
@@ -2240,6 +2782,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(indices);
@@ -2249,6 +2793,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>();
@@ -2257,6 +2803,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>();
@@ -2266,6 +2814,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(indices);
@@ -2275,12 +2825,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(indices);
@@ -2289,6 +2843,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor(indices);
@@ -2298,6 +2854,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>();
@@ -2306,6 +2864,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>();
@@ -2315,6 +2875,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexRequest.g.xml" path="doc/member[@key='indices.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestDescriptor<TDocument>(indices);
@@ -2324,12 +2886,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor();
@@ -2338,6 +2904,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor();
@@ -2347,6 +2915,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(name);
@@ -2355,6 +2925,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(name);
@@ -2364,6 +2936,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices, name);
@@ -2372,6 +2946,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices, name);
@@ -2381,6 +2957,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices);
@@ -2389,6 +2967,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices);
@@ -2398,6 +2978,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
@@ -2406,6 +2988,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
@@ -2415,6 +2999,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(name);
@@ -2424,6 +3010,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(indices, name);
@@ -2433,6 +3021,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(indices);
@@ -2442,12 +3032,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor();
@@ -2456,6 +3050,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor();
@@ -2465,6 +3061,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(name);
@@ -2473,6 +3071,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(name);
@@ -2482,6 +3082,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices, name);
@@ -2490,6 +3092,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices, name);
@@ -2499,6 +3103,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices);
@@ -2507,6 +3113,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor(indices);
@@ -2516,6 +3124,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
@@ -2524,6 +3134,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>();
@@ -2533,6 +3145,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(name);
@@ -2542,6 +3156,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(indices, name);
@@ -2551,6 +3167,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetAliasRequest.g.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument>(indices);
@@ -2560,12 +3178,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(name);
@@ -2574,6 +3196,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(name);
@@ -2583,12 +3207,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(name);
@@ -2597,6 +3225,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestDescriptor(name);
@@ -2606,12 +3236,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse GetDataLifecycleStats(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse GetDataLifecycleStats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor();
@@ -2620,6 +3254,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse GetDataLifecycleStats(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor();
@@ -2629,12 +3265,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor();
@@ -2643,6 +3283,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataLifecycleStatsRequest.g.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_lifecycle_stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestDescriptor();
@@ -2652,12 +3294,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataLifecycleStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse GetDataStream(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse GetDataStream()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor();
@@ -2666,6 +3312,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse GetDataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor();
@@ -2675,6 +3323,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse GetDataStream(Elastic.Clients.Elasticsearch.DataStreamNames? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor(name);
@@ -2683,6 +3333,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse GetDataStream(Elastic.Clients.Elasticsearch.DataStreamNames? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor(name);
@@ -2692,12 +3344,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse> GetDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse> GetDataStreamAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor();
@@ -2706,6 +3362,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse> GetDataStreamAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor();
@@ -2715,6 +3373,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse> GetDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor(name);
@@ -2723,6 +3383,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamRequest.g.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse> GetDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestDescriptor(name);
@@ -2732,12 +3394,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
@@ -2746,6 +3412,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
@@ -2755,12 +3423,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
@@ -2769,6 +3441,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse> GetDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestDescriptor(name);
@@ -2778,12 +3452,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings(Elastic.Clients.Elasticsearch.Indices name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(name);
@@ -2792,6 +3470,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(name);
@@ -2801,6 +3481,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>();
@@ -2809,6 +3491,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>();
@@ -2818,6 +3502,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse GetDataStreamSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>(name);
@@ -2827,12 +3513,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(name);
@@ -2841,6 +3531,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor(name);
@@ -2850,6 +3542,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>();
@@ -2858,6 +3552,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>();
@@ -2867,6 +3563,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse> GetDataStreamSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestDescriptor<TDocument>(name);
@@ -2876,12 +3574,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(fields);
@@ -2890,6 +3592,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(fields);
@@ -2899,6 +3603,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(indices, fields);
@@ -2907,6 +3613,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(indices, fields);
@@ -2916,6 +3624,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(fields);
@@ -2925,6 +3635,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(indices, fields);
@@ -2934,12 +3646,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(fields);
@@ -2948,6 +3664,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(fields);
@@ -2957,6 +3675,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(indices, fields);
@@ -2965,6 +3685,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor(indices, fields);
@@ -2974,6 +3696,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(fields);
@@ -2983,6 +3707,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetFieldMappingRequest.g.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_field_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument>(indices, fields);
@@ -2992,12 +3718,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse GetIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse GetIndexTemplate()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor();
@@ -3006,6 +3736,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse GetIndexTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor();
@@ -3015,6 +3747,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse GetIndexTemplate(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(name);
@@ -3023,6 +3757,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse GetIndexTemplate(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(name);
@@ -3032,12 +3768,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse> GetIndexTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor();
@@ -3046,6 +3786,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse> GetIndexTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor();
@@ -3055,6 +3797,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(name);
@@ -3063,6 +3807,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndexTemplateRequest.g.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor(name);
@@ -3072,12 +3818,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping(Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor();
@@ -3086,6 +3836,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor();
@@ -3095,6 +3847,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor(indices);
@@ -3103,6 +3857,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor(indices);
@@ -3112,6 +3868,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
@@ -3120,6 +3878,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
@@ -3129,6 +3889,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>(indices);
@@ -3138,12 +3900,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor();
@@ -3152,6 +3918,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor();
@@ -3161,6 +3929,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor(indices);
@@ -3169,6 +3939,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor(indices);
@@ -3178,6 +3950,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
@@ -3186,6 +3960,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>();
@@ -3195,6 +3971,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMappingRequest.g.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestDescriptor<TDocument>(indices);
@@ -3204,12 +3982,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(indices);
@@ -3218,6 +4000,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(indices);
@@ -3227,6 +4011,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>();
@@ -3235,6 +4021,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>();
@@ -3244,6 +4032,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
@@ -3253,12 +4043,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(indices);
@@ -3267,6 +4061,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor(indices);
@@ -3276,6 +4072,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>();
@@ -3284,6 +4082,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>();
@@ -3293,6 +4093,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetMigrateReindexStatusRequest.g.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_migrate_reindex_status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
@@ -3302,12 +4104,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor();
@@ -3316,6 +4122,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor();
@@ -3325,6 +4133,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices);
@@ -3333,6 +4143,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices);
@@ -3342,6 +4154,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices, name);
@@ -3350,6 +4164,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices, name);
@@ -3359,6 +4175,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(name);
@@ -3367,6 +4185,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(name);
@@ -3376,6 +4196,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
@@ -3384,6 +4206,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
@@ -3393,6 +4217,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(indices);
@@ -3402,6 +4228,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
@@ -3411,6 +4239,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(name);
@@ -3420,12 +4250,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor();
@@ -3434,6 +4268,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor();
@@ -3443,6 +4279,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices);
@@ -3451,6 +4289,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices);
@@ -3460,6 +4300,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices, name);
@@ -3468,6 +4310,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(indices, name);
@@ -3477,6 +4321,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(name);
@@ -3485,6 +4331,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(name);
@@ -3494,6 +4342,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
@@ -3502,6 +4352,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>();
@@ -3511,6 +4363,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(indices);
@@ -3520,6 +4374,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(indices, name);
@@ -3529,6 +4385,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(name);
@@ -3538,12 +4396,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate()
 	{
@@ -3553,6 +4415,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action)
 	{
@@ -3563,6 +4427,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name)
 	{
@@ -3572,6 +4438,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action)
 	{
@@ -3582,12 +4450,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -3597,6 +4469,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -3607,6 +4481,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -3616,6 +4492,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/GetTemplateRequest.g.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.get_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -3626,12 +4504,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse MigrateReindex(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse MigrateReindex(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor();
@@ -3641,12 +4523,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse> MigrateReindexAsync(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateReindexRequest.g.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_reindex.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse> MigrateReindexAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestDescriptor();
@@ -3656,12 +4542,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(name);
@@ -3670,6 +4560,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(name);
@@ -3679,6 +4571,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>();
@@ -3687,6 +4581,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>();
@@ -3696,6 +4592,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse MigrateToDataStream<TDocument>(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(name);
@@ -3705,12 +4603,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(name);
@@ -3719,6 +4621,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor(name);
@@ -3728,6 +4632,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>();
@@ -3736,6 +4642,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>();
@@ -3745,6 +4653,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/MigrateToDataStreamRequest.g.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.migrate_to_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse> MigrateToDataStreamAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestDescriptor<TDocument>(name);
@@ -3754,12 +4664,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.MigrateToDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse ModifyDataStream(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse ModifyDataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor();
@@ -3769,12 +4683,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse> ModifyDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ModifyDataStreamRequest.g.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.modify_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse> ModifyDataStreamAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestDescriptor();
@@ -3784,12 +4702,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.ModifyDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(indices);
@@ -3798,6 +4720,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(indices);
@@ -3807,6 +4731,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>();
@@ -3815,6 +4741,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>();
@@ -3824,6 +4752,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>(indices);
@@ -3833,12 +4763,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync(Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(indices);
@@ -3847,6 +4781,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor(indices);
@@ -3856,6 +4792,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>();
@@ -3864,6 +4802,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>();
@@ -3873,6 +4813,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/OpenIndexRequest.g.xml" path="doc/member[@key='indices.open.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.open.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestDescriptor<TDocument>(indices);
@@ -3882,12 +4824,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.OpenIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(name);
@@ -3896,6 +4842,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(name);
@@ -3905,6 +4853,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>();
@@ -3913,6 +4863,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>();
@@ -3922,6 +4874,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse PromoteDataStream<TDocument>(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(name);
@@ -3931,12 +4885,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(name);
@@ -3945,6 +4903,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor(name);
@@ -3954,6 +4914,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>();
@@ -3962,6 +4924,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>();
@@ -3971,6 +4935,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PromoteDataStreamRequest.g.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.promote_data_stream.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse> PromoteDataStreamAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestDescriptor<TDocument>(name);
@@ -3980,12 +4946,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(indices, name);
@@ -3994,6 +4964,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(indices, name);
@@ -4003,6 +4975,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(indices, name);
@@ -4012,12 +4986,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(indices, name);
@@ -4026,6 +5004,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor(indices, name);
@@ -4035,6 +5015,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutAliasRequest.g.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_alias.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestDescriptor<TDocument>(indices, name);
@@ -4044,12 +5026,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(name);
@@ -4058,6 +5044,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(name);
@@ -4067,12 +5055,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(name);
@@ -4081,6 +5073,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataLifecycleRequest.g.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_lifecycle.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(name);
@@ -4090,12 +5084,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
@@ -4104,6 +5102,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
@@ -4113,12 +5113,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
@@ -4127,6 +5131,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse> PutDataStreamOptionsAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(name);
@@ -4136,12 +5142,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings(Elastic.Clients.Elasticsearch.Indices name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(name);
@@ -4150,6 +5160,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(name);
@@ -4159,6 +5171,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>();
@@ -4167,6 +5181,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>();
@@ -4176,6 +5192,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse PutDataStreamSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>(name);
@@ -4185,12 +5203,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(name);
@@ -4199,6 +5221,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(name);
@@ -4208,6 +5232,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>();
@@ -4216,6 +5242,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>();
@@ -4225,6 +5253,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse> PutDataStreamSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>(name);
@@ -4234,12 +5264,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(name);
@@ -4248,6 +5282,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(name);
@@ -4257,6 +5293,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse PutIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>(name);
@@ -4266,12 +5304,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(name);
@@ -4280,6 +5322,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor(name);
@@ -4289,6 +5333,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndexTemplateRequest.g.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestDescriptor<TDocument>(name);
@@ -4298,12 +5344,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(indices);
@@ -4312,6 +5362,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(indices);
@@ -4321,6 +5373,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>();
@@ -4329,6 +5383,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>();
@@ -4338,6 +5394,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse PutMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>(indices);
@@ -4347,12 +5405,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(indices);
@@ -4361,6 +5423,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor(indices);
@@ -4370,6 +5434,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>();
@@ -4378,6 +5444,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>();
@@ -4387,6 +5455,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutMappingRequest.g.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_mapping.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse> PutMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument>(indices);
@@ -4396,12 +5466,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor();
@@ -4411,6 +5485,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(indices);
@@ -4419,6 +5495,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(indices);
@@ -4428,6 +5506,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>();
@@ -4437,6 +5517,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse PutSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(indices);
@@ -4446,12 +5528,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor();
@@ -4461,6 +5547,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(indices);
@@ -4469,6 +5557,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(indices);
@@ -4478,6 +5568,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>();
@@ -4487,6 +5579,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutIndicesSettingsRequest.g.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_settings.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(indices);
@@ -4496,12 +5590,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -4511,6 +5609,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor> action)
 	{
@@ -4521,6 +5621,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>> action)
 	{
@@ -4531,12 +5633,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -4546,6 +5652,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -4556,6 +5664,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/PutTemplateRequest.g.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.put_template.Request']/*"/>
 	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
@@ -4566,12 +5676,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor();
@@ -4580,6 +5694,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor();
@@ -4589,6 +5705,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(indices);
@@ -4597,6 +5715,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(indices);
@@ -4606,6 +5726,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
@@ -4614,6 +5736,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
@@ -4623,6 +5747,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(indices);
@@ -4632,12 +5758,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync(Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor();
@@ -4646,6 +5776,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor();
@@ -4655,6 +5787,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(indices);
@@ -4663,6 +5797,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor(indices);
@@ -4672,6 +5808,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
@@ -4680,6 +5818,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>();
@@ -4689,6 +5829,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RecoveryRequest.g.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.recovery.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestDescriptor<TDocument>(indices);
@@ -4698,12 +5840,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequest, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryResponse, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor();
@@ -4712,6 +5858,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor();
@@ -4721,6 +5869,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(indices);
@@ -4729,6 +5879,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(indices);
@@ -4738,6 +5890,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
@@ -4746,6 +5900,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
@@ -4755,6 +5911,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>(indices);
@@ -4764,12 +5922,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor();
@@ -4778,6 +5940,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor();
@@ -4787,6 +5951,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(indices);
@@ -4795,6 +5961,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(indices);
@@ -4804,6 +5972,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
@@ -4812,6 +5982,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>();
@@ -4821,6 +5993,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>(indices);
@@ -4830,12 +6004,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest, Elastic.Clients.Elasticsearch.IndexManagement.RefreshResponse, Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(indices);
@@ -4844,6 +6022,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(indices);
@@ -4853,6 +6033,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>();
@@ -4861,6 +6043,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>();
@@ -4870,6 +6054,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
@@ -4879,12 +6065,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(indices);
@@ -4893,6 +6083,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(indices);
@@ -4902,6 +6094,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>();
@@ -4910,6 +6104,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>();
@@ -4919,6 +6115,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ReloadSearchAnalyzersRequest.g.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.reload_search_analyzers.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>(indices);
@@ -4928,12 +6126,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor();
@@ -4942,6 +6144,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor();
@@ -4951,6 +6155,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(name);
@@ -4959,6 +6165,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(name);
@@ -4968,12 +6176,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse> ResolveClusterAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor();
@@ -4982,6 +6194,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse> ResolveClusterAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor();
@@ -4991,6 +6205,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(name);
@@ -4999,6 +6215,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveClusterRequest.g.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_cluster.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(name);
@@ -5008,12 +6226,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse ResolveIndex(Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse ResolveIndex(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(name);
@@ -5022,6 +6244,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse ResolveIndex(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(name);
@@ -5031,12 +6255,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse> ResolveIndexAsync(Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse> ResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(name);
@@ -5045,6 +6273,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ResolveIndexRequest.g.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.resolve_index.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse> ResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor(name);
@@ -5054,12 +6284,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias);
@@ -5068,6 +6302,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias);
@@ -5077,6 +6313,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias, newIndex);
@@ -5085,6 +6323,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias, newIndex);
@@ -5094,6 +6334,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(alias);
@@ -5103,6 +6345,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(alias, newIndex);
@@ -5112,12 +6356,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias);
@@ -5126,6 +6374,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias);
@@ -5135,6 +6385,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias, newIndex);
@@ -5143,6 +6395,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor(alias, newIndex);
@@ -5152,6 +6406,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(alias);
@@ -5161,6 +6417,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/RolloverRequest.g.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.rollover.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor<TDocument>(alias, newIndex);
@@ -5170,12 +6428,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest, Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse, Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor();
@@ -5184,6 +6446,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor();
@@ -5193,6 +6457,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(indices);
@@ -5201,6 +6467,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(indices);
@@ -5210,6 +6478,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
@@ -5218,6 +6488,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
@@ -5227,6 +6499,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(indices);
@@ -5236,12 +6510,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync(Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor();
@@ -5250,6 +6528,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor();
@@ -5259,6 +6539,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(indices);
@@ -5267,6 +6549,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor(indices);
@@ -5276,6 +6560,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
@@ -5284,6 +6570,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>();
@@ -5293,6 +6581,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SegmentsRequest.g.xml" path="doc/member[@key='indices.segments.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.segments.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument>(indices);
@@ -5302,12 +6592,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsResponse, Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor();
@@ -5316,6 +6610,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor();
@@ -5325,6 +6621,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(indices);
@@ -5333,6 +6631,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(indices);
@@ -5342,6 +6642,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
@@ -5350,6 +6652,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
@@ -5359,6 +6663,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(indices);
@@ -5368,12 +6674,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor();
@@ -5382,6 +6692,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor();
@@ -5391,6 +6703,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(indices);
@@ -5399,6 +6713,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor(indices);
@@ -5408,6 +6724,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
@@ -5416,6 +6734,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>();
@@ -5425,6 +6745,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShardStoresRequest.g.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shard_stores.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestDescriptor<TDocument>(indices);
@@ -5434,12 +6756,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse Shrink(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(index, target);
@@ -5448,6 +6774,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(index, target);
@@ -5457,6 +6785,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>(index, target);
@@ -5466,12 +6796,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(index, target);
@@ -5480,6 +6814,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(index, target);
@@ -5489,6 +6825,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ShrinkIndexRequest.g.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.shrink.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>(index, target);
@@ -5498,12 +6836,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(name);
@@ -5512,6 +6854,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(name);
@@ -5521,6 +6865,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse SimulateIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(name);
@@ -5530,12 +6876,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(name);
@@ -5544,6 +6894,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(name);
@@ -5553,6 +6905,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(name);
@@ -5562,12 +6916,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor();
@@ -5576,6 +6934,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor();
@@ -5585,6 +6945,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate(Elastic.Clients.Elasticsearch.Name? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(name);
@@ -5593,6 +6955,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(name);
@@ -5602,6 +6966,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
@@ -5610,6 +6976,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
@@ -5619,6 +6987,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse SimulateTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>(name);
@@ -5628,12 +6998,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor();
@@ -5642,6 +7016,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor();
@@ -5651,6 +7027,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(name);
@@ -5659,6 +7037,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor(name);
@@ -5668,6 +7048,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
@@ -5676,6 +7058,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>();
@@ -5685,6 +7069,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SimulateTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.simulate_template.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestDescriptor<TDocument>(name);
@@ -5694,12 +7080,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse Split(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(index, target);
@@ -5708,6 +7098,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(index, target);
@@ -5717,6 +7109,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>(index, target);
@@ -5726,12 +7120,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(index, target);
@@ -5740,6 +7138,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor(index, target);
@@ -5749,6 +7149,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/SplitIndexRequest.g.xml" path="doc/member[@key='indices.split.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.split.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestDescriptor<TDocument>(index, target);
@@ -5758,12 +7160,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequest, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexResponse, Elastic.Clients.Elasticsearch.IndexManagement.SplitIndexRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor();
@@ -5772,6 +7178,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor();
@@ -5781,6 +7189,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(metric);
@@ -5789,6 +7199,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(metric);
@@ -5798,6 +7210,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices);
@@ -5806,6 +7220,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices);
@@ -5815,6 +7231,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices, metric);
@@ -5823,6 +7241,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices, metric);
@@ -5832,6 +7252,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5840,6 +7262,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5849,6 +7273,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(metric);
@@ -5858,6 +7284,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(indices);
@@ -5867,6 +7295,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(indices, metric);
@@ -5876,12 +7306,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor();
@@ -5890,6 +7324,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor();
@@ -5899,6 +7335,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(metric);
@@ -5907,6 +7345,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(metric);
@@ -5916,6 +7356,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices);
@@ -5924,6 +7366,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices);
@@ -5933,6 +7377,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices, metric);
@@ -5941,6 +7387,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor(indices, metric);
@@ -5950,6 +7398,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5958,6 +7408,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>();
@@ -5967,6 +7419,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(metric);
@@ -5976,6 +7430,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(indices);
@@ -5985,6 +7441,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/IndicesStatsRequest.g.xml" path="doc/member[@key='indices.stats.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.stats.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument>(indices, metric);
@@ -5994,12 +7452,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor();
@@ -6008,6 +7470,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor();
@@ -6017,6 +7481,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
@@ -6025,6 +7491,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse UpdateAliases<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
@@ -6034,12 +7502,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync(Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor();
@@ -6048,6 +7520,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor();
@@ -6057,6 +7531,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
@@ -6065,6 +7541,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/UpdateAliasesRequest.g.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.update_aliases.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestDescriptor<TDocument>();
@@ -6074,12 +7552,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequest, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesResponse, Elastic.Clients.Elasticsearch.IndexManagement.UpdateAliasesRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor();
@@ -6088,6 +7570,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor();
@@ -6097,6 +7581,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
@@ -6105,6 +7591,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
@@ -6114,6 +7602,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery<TDocument>()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
@@ -6122,6 +7612,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
@@ -6131,6 +7623,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse ValidateQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(indices);
@@ -6140,12 +7634,16 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync(Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor();
@@ -6154,6 +7652,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor();
@@ -6163,6 +7663,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
@@ -6171,6 +7673,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor(indices);
@@ -6180,6 +7684,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
@@ -6188,6 +7694,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>();
@@ -6197,6 +7705,8 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequest, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse, Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/IndexManagement/ValidateQueryRequest.g.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='indices.validate_query.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse> ValidateQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument>(indices);

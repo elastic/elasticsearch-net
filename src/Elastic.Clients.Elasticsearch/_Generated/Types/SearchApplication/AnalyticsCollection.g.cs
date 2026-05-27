@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.AnalyticsCollection']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.AnalyticsCollectionConverter))]
 public sealed partial class AnalyticsCollection
 {
@@ -42,10 +43,6 @@ public sealed partial class AnalyticsCollection
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Data stream for the collection.
-	/// </para>
-	/// </summary>
+	/// <include file="AnalyticsCollection.g.xml" path="doc/member[@key='search_application._types.AnalyticsCollection#event_data_stream']/*"/>
 	public required Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; set; }
 }

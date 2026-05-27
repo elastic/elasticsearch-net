@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.StandardTokenizerConverter))]
 public sealed partial class StandardTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -43,6 +44,7 @@ public sealed partial class StandardTokenizer : Elastic.Clients.Elasticsearch.An
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.StandardTokenizer']/*"/>
 public readonly partial struct StandardTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.StandardTokenizer Instance { get; init; }

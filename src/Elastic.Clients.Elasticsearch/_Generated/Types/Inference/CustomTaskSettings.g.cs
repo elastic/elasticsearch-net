@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CustomTaskSettingsConverter))]
 public sealed partial class CustomTaskSettings
 {
@@ -36,23 +37,11 @@ public sealed partial class CustomTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies parameters that are required to run the custom service. The parameters depend on the model your custom service uses.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "task_settings":{
-	///   "parameters":{
-	///     "input_type":"query",
-	///     "return_token":true
-	///   }
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomTaskSettings.g.xml" path="doc/member[@key='inference._types.CustomTaskSettings#parameters']/*"/>
 	public object? Parameters { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CustomTaskSettings']/*"/>
 public readonly partial struct CustomTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings Instance { get; init; }
@@ -72,20 +61,7 @@ public readonly partial struct CustomTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings(Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies parameters that are required to run the custom service. The parameters depend on the model your custom service uses.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "task_settings":{
-	///   "parameters":{
-	///     "input_type":"query",
-	///     "return_token":true
-	///   }
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="CustomTaskSettings.g.xml" path="doc/member[@key='inference._types.CustomTaskSettings#parameters']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CustomTaskSettingsDescriptor Parameters(object? value)
 	{
 		Instance.Parameters = value;

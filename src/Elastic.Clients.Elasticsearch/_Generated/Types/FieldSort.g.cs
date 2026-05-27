@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.FieldSort']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.FieldSortConverter))]
 public sealed partial class FieldSort
 {
@@ -52,6 +53,7 @@ public sealed partial class FieldSort
 	public Elastic.Clients.Elasticsearch.Mapping.FieldType? UnmappedType { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.FieldSort']/*"/>
 public readonly partial struct FieldSortDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.FieldSort Instance { get; init; }
@@ -140,6 +142,7 @@ public readonly partial struct FieldSortDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.FieldSort']/*"/>
 public readonly partial struct FieldSortDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.FieldSort Instance { get; init; }

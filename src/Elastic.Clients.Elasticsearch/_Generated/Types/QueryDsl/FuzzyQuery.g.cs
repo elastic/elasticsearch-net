@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FuzzyQueryConverter))]
 public sealed partial class FuzzyQuery
 {
@@ -49,61 +50,31 @@ public sealed partial class FuzzyQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.Fuzziness? Fuzziness { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of variations created.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#max_expansions']/*"/>
 	public int? MaxExpansions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#rewrite']/*"/>
 	public string? Rewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#transpositions']/*"/>
 	public bool? Transpositions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#value']/*"/>
 	public required object Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery']/*"/>
 public readonly partial struct FuzzyQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Instance { get; init; }
@@ -123,14 +94,7 @@ public readonly partial struct FuzzyQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -149,44 +113,28 @@ public readonly partial struct FuzzyQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of variations created.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
@@ -199,33 +147,21 @@ public readonly partial struct FuzzyQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Transpositions(bool? value = true)
 	{
 		Instance.Transpositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor<TDocument> Value(object value)
 	{
 		Instance.Value = value;
@@ -241,6 +177,7 @@ public readonly partial struct FuzzyQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery']/*"/>
 public readonly partial struct FuzzyQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery Instance { get; init; }
@@ -260,14 +197,7 @@ public readonly partial struct FuzzyQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQuery(Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -286,44 +216,28 @@ public readonly partial struct FuzzyQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness? value)
 	{
 		Instance.Fuzziness = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum edit distance allowed for matching.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#fuzziness']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Fuzziness(System.Func<Elastic.Clients.Elasticsearch.FuzzinessFactory, Elastic.Clients.Elasticsearch.Fuzziness> action)
 	{
 		Instance.Fuzziness = Elastic.Clients.Elasticsearch.FuzzinessFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of variations created.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#max_expansions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor MaxExpansions(int? value)
 	{
 		Instance.MaxExpansions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
@@ -336,33 +250,21 @@ public readonly partial struct FuzzyQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of beginning characters left unchanged when creating expansions.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether edits include transpositions of two adjacent characters (for example <c>ab</c> to <c>ba</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#transpositions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Transpositions(bool? value = true)
 	{
 		Instance.Transpositions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Term you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="FuzzyQuery.g.xml" path="doc/member[@key='_types.query_dsl.FuzzyQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FuzzyQueryDescriptor Value(object value)
 	{
 		Instance.Value = value;

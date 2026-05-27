@@ -23,29 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
 public sealed partial class ListRulesetsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The offset from the first result to fetch.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of results to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get all query rulesets.
-/// Get summarized information about the query rulesets.
-/// </para>
-/// </summary>
+/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.ListRulesetsRequestConverter))]
 public sealed partial class ListRulesetsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>
 {
@@ -67,27 +57,15 @@ public sealed partial class ListRulesetsRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "query_rules.list_rulesets";
 
-	/// <summary>
-	/// <para>
-	/// The offset from the first result to fetch.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of results to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get all query rulesets.
-/// Get summarized information about the query rulesets.
-/// </para>
-/// </summary>
+/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.list_rulesets.Request']/*"/>
 public readonly partial struct ListRulesetsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest Instance { get; init; }
@@ -106,22 +84,14 @@ public readonly partial struct ListRulesetsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The offset from the first result to fetch.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of results to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRulesetsRequest.g.xml" path="doc/member[@key='query_rules.list_rulesets.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

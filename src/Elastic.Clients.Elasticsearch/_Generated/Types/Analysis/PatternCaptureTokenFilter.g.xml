@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.PatternCaptureTokenFilter#patterns"><summary><para>
+A list of regular expressions to match.
+</para></summary></member>
+  <member key="_types.analysis.PatternCaptureTokenFilter#preserve_original"><summary><para>
+If set to <c>true</c> (the default) it will emit the original token.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.FrequencyEncodingPreprocessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FrequencyEncodingPreprocessorConverter))]
 public sealed partial class FrequencyEncodingPreprocessor
 {
@@ -49,6 +50,7 @@ public sealed partial class FrequencyEncodingPreprocessor
 	public required System.Collections.Generic.IDictionary<string, double> FrequencyMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.FrequencyEncodingPreprocessor']/*"/>
 public readonly partial struct FrequencyEncodingPreprocessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.FrequencyEncodingPreprocessor Instance { get; init; }

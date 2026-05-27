@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Process']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ProcessConverter))]
 public sealed partial class Process
 {
@@ -36,39 +37,18 @@ public sealed partial class Process
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains CPU statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Process.g.xml" path="doc/member[@key='nodes._types.Process#cpu']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.Cpu? Cpu { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of file descriptors allowed on the system, or <c>-1</c> if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="Process.g.xml" path="doc/member[@key='nodes._types.Process#max_file_descriptors']/*"/>
 	public int? MaxFileDescriptors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains virtual memory statistics for the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Process.g.xml" path="doc/member[@key='nodes._types.Process#mem']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.MemoryStats? Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of opened file descriptors associated with the current or <c>-1</c> if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="Process.g.xml" path="doc/member[@key='nodes._types.Process#open_file_descriptors']/*"/>
 	public int? OpenFileDescriptors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Last time the statistics were refreshed.
-	/// Recorded in milliseconds since the Unix Epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="Process.g.xml" path="doc/member[@key='nodes._types.Process#timestamp']/*"/>
 	public long? Timestamp { get; set; }
 }

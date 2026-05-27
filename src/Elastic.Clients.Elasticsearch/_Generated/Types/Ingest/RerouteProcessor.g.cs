@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RerouteProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.RerouteProcessorConverter))]
 public sealed partial class RerouteProcessor
 {
@@ -36,84 +37,32 @@ public sealed partial class RerouteProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#dataset']/*"/>
 	public System.Collections.Generic.ICollection<string>? Dataset { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#destination']/*"/>
 	public string? Destination { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#namespace']/*"/>
 	public System.Collections.Generic.ICollection<string>? Namespace { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RerouteProcessor']/*"/>
 public readonly partial struct RerouteProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Instance { get; init; }
@@ -133,160 +82,77 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#dataset']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Dataset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#dataset']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Dataset(params string[] values)
 	{
 		Instance.Dataset = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#destination']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Destination(string? value)
 	{
 		Instance.Destination = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Namespace(params string[] values)
 	{
 		Instance.Namespace = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -299,12 +165,7 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
@@ -325,6 +186,7 @@ public readonly partial struct RerouteProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.RerouteProcessor']/*"/>
 public readonly partial struct RerouteProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor Instance { get; init; }
@@ -344,160 +206,77 @@ public readonly partial struct RerouteProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#dataset']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Dataset = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the dataset part of the data stream name.
-	/// In addition to the criteria for index names, cannot contain - and must be no longer than 100 characters.
-	/// Example values are nginx.access and nginx.error.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;dataset> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.dataset}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#dataset']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Dataset(params string[] values)
 	{
 		Instance.Dataset = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A static value for the target. Can’t be set when the dataset or namespace option is set.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#destination']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Destination(string? value)
 	{
 		Instance.Destination = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field references or a static value for the namespace part of the data stream name. See the criteria for
-	/// index names for allowed characters. Must be no longer than 100 characters.
-	/// </para>
-	/// <para>
-	/// Supports field references with a mustache-like syntax (denoted as {{double}} or {{{triple}}} curly braces).
-	/// When resolving field references, the processor replaces invalid characters with _. Uses the &lt;namespace> part
-	/// of the index name as a fallback if all field references resolve to a null, missing, or non-string value.
-	/// </para>
-	/// <para>
-	/// default {{data_stream.namespace}}
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Namespace(params string[] values)
 	{
 		Instance.Namespace = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -510,11 +289,7 @@ public readonly partial struct RerouteProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -527,12 +302,7 @@ public readonly partial struct RerouteProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="RerouteProcessor.g.xml" path="doc/member[@key='ingest._types.RerouteProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;

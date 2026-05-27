@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RuleQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RuleQueryConverter))]
 public sealed partial class RuleQuery
 {
@@ -43,14 +44,7 @@ public sealed partial class RuleQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleQuery.g.xml" path="doc/member[@key='_types.query_dsl.RuleQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required object MatchCriteria { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
@@ -59,6 +53,7 @@ public sealed partial class RuleQuery
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? RulesetIds { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RuleQuery']/*"/>
 public readonly partial struct RuleQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery Instance { get; init; }
@@ -78,14 +73,7 @@ public readonly partial struct RuleQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery(Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleQuery.g.xml" path="doc/member[@key='_types.query_dsl.RuleQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -143,6 +131,7 @@ public readonly partial struct RuleQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RuleQuery']/*"/>
 public readonly partial struct RuleQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery Instance { get; init; }
@@ -162,14 +151,7 @@ public readonly partial struct RuleQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery(Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RuleQuery.g.xml" path="doc/member[@key='_types.query_dsl.RuleQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

@@ -37,17 +37,9 @@ public sealed partial class CreateSnapshotResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Equals <c>true</c> if the snapshot was accepted. Present when the request had <c>wait_for_completion</c> set to <c>false</c>
-	/// </para>
-	/// </summary>
+	/// <include file="CreateSnapshotResponse.g.xml" path="doc/member[@key='snapshot.create.Response#accepted']/*"/>
 	public bool? Accepted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Snapshot information. Present when the request had <c>wait_for_completion</c> set to <c>true</c>
-	/// </para>
-	/// </summary>
+	/// <include file="CreateSnapshotResponse.g.xml" path="doc/member[@key='snapshot.create.Response#snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo? Snapshot { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.DutchAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.DutchAnalyzerConverter))]
 public sealed partial class DutchAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -43,6 +44,7 @@ public sealed partial class DutchAnalyzer : Elastic.Clients.Elasticsearch.Analys
 	public string Type => "dutch";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.DutchAnalyzer']/*"/>
 public readonly partial struct DutchAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.DutchAnalyzer Instance { get; init; }

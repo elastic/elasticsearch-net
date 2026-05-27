@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CsvProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.CsvProcessorConverter))]
 public sealed partial class CsvProcessor
 {
@@ -43,95 +44,44 @@ public sealed partial class CsvProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used to fill empty fields.
-	/// Empty fields are skipped if this is not provided.
-	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#empty_value']/*"/>
 	public object? EmptyValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Quote used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#quote']/*"/>
 	public string? Quote { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Separator used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#separator']/*"/>
 	public string? Separator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The array of fields to assign extracted values to.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#target_fields']/*"/>
 	public required Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Trim whitespaces in unquoted fields.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#trim']/*"/>
 	public bool? Trim { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CsvProcessor']/*"/>
 public readonly partial struct CsvProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Instance { get; init; }
@@ -151,113 +101,70 @@ public readonly partial struct CsvProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to fill empty fields.
-	/// Empty fields are skipped if this is not provided.
-	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#empty_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> EmptyValue(object? value)
 	{
 		Instance.EmptyValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -270,67 +177,42 @@ public readonly partial struct CsvProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Quote used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#quote']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Quote(string? value)
 	{
 		Instance.Quote = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Separator used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Separator(string? value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The array of fields to assign extracted values to.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#target_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.TargetFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The array of fields to assign extracted values to.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#target_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> TargetFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.TargetFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trim whitespaces in unquoted fields.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#trim']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Trim(bool? value = true)
 	{
 		Instance.Trim = value;
@@ -346,6 +228,7 @@ public readonly partial struct CsvProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.CsvProcessor']/*"/>
 public readonly partial struct CsvProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Instance { get; init; }
@@ -365,113 +248,70 @@ public readonly partial struct CsvProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used to fill empty fields.
-	/// Empty fields are skipped if this is not provided.
-	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#empty_value']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor EmptyValue(object? value)
 	{
 		Instance.EmptyValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -484,11 +324,7 @@ public readonly partial struct CsvProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -501,67 +337,42 @@ public readonly partial struct CsvProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Quote used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#quote']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Quote(string? value)
 	{
 		Instance.Quote = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Separator used in CSV, has to be single character string.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Separator(string? value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The array of fields to assign extracted values to.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#target_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
 		Instance.TargetFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The array of fields to assign extracted values to.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#target_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor TargetFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.TargetFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Trim whitespaces in unquoted fields.
-	/// </para>
-	/// </summary>
+	/// <include file="CsvProcessor.g.xml" path="doc/member[@key='ingest._types.CsvProcessor#trim']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Trim(bool? value = true)
 	{
 		Instance.Trim = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KStemTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KStemTokenFilterConverter))]
 public sealed partial class KStemTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class KStemTokenFilter : Elastic.Clients.Elasticsearch.Ana
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.KStemTokenFilter']/*"/>
 public readonly partial struct KStemTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter Instance { get; init; }

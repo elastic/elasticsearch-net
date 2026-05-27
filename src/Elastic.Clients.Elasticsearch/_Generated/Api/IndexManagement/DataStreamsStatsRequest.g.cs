@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 public sealed partial class DataStreamsStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream stats.
-/// </para>
-/// <para>
-/// Get statistics for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamsStatsRequestConverter))]
 public sealed partial class DataStreamsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>
 {
@@ -67,32 +58,15 @@ public sealed partial class DataStreamsStatsRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.data_streams_stats";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Name { get => P<Elastic.Clients.Elasticsearch.IndexName?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get data stream stats.
-/// </para>
-/// <para>
-/// Get statistics for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 public readonly partial struct DataStreamsStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest Instance { get; init; }
@@ -116,37 +90,21 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -214,14 +172,8 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get data stream stats.
-/// </para>
-/// <para>
-/// Get statistics for one or more data streams.
-/// </para>
-/// </summary>
+/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.Request']/*"/>
 public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest Instance { get; init; }
@@ -245,37 +197,21 @@ public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Wildcard expressions (<c>*</c>) are supported.
-	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsRequest.g.xml" path="doc/member[@key='indices.data_streams_stats.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];

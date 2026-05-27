@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// REPOSITORY_INTEGRITY
-/// </para>
-/// </summary>
+/// <include file="RepositoryIntegrityIndicator.g.xml" path="doc/member[@key='_global.health_report.RepositoryIntegrityIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.RepositoryIntegrityIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.RepositoryIntegrityIndicatorConverter))]
 public sealed partial class RepositoryIntegrityIndicator
 {

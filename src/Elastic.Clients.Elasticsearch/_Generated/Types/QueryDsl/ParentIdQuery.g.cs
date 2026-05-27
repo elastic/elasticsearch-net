@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ParentIdQueryConverter))]
 public sealed partial class ParentIdQuery
 {
@@ -36,39 +37,21 @@ public sealed partial class ParentIdQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// ID of the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the child relationship mapped for the <c>join</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#type']/*"/>
 	public string? Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery']/*"/>
 public readonly partial struct ParentIdQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery Instance { get; init; }
@@ -88,36 +71,21 @@ public readonly partial struct ParentIdQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQuery(Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// ID of the parent document.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped <c>type</c> and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
@@ -130,11 +98,7 @@ public readonly partial struct ParentIdQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the child relationship mapped for the <c>join</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="ParentIdQuery.g.xml" path="doc/member[@key='_types.query_dsl.ParentIdQuery#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ParentIdQueryDescriptor Type(string? value)
 	{
 		Instance.Type = value;

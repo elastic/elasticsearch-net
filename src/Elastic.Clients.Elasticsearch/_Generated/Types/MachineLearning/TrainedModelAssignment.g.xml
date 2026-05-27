@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelAssignment#assignment_state"><summary><para>
+The overall assignment state.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignment#routing_table"><summary><para>
+The allocation state for each node.
+</para></summary></member>
+  <member key="ml._types.TrainedModelAssignment#start_time"><summary><para>
+The timestamp when the deployment started.
+</para></summary></member>
+</doc>

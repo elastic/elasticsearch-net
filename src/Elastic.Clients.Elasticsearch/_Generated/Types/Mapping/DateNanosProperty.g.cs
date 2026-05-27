@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateNanosProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DateNanosPropertyConverter))]
 public sealed partial class DateNanosProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class DateNanosProperty : Elastic.Clients.Elasticsearch.Ma
 	public bool? IgnoreMalformed { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public System.DateTimeOffset? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -63,6 +60,7 @@ public sealed partial class DateNanosProperty : Elastic.Clients.Elasticsearch.Ma
 	public string Type => "date_nanos";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateNanosProperty']/*"/>
 public readonly partial struct DateNanosPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty Instance { get; init; }
@@ -148,33 +146,21 @@ public readonly partial struct DateNanosPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -262,6 +248,7 @@ public readonly partial struct DateNanosPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateNanosProperty']/*"/>
 public readonly partial struct DateNanosPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty Instance { get; init; }
@@ -353,33 +340,21 @@ public readonly partial struct DateNanosPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateNanosProperty.g.xml" path="doc/member[@key='_types.mapping.DateNanosProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

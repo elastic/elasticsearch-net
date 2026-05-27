@@ -23,34 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 public sealed partial class DeleteRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete snapshot repositories.
-/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
-/// The snapshots themselves are left untouched and in place.
-/// </para>
-/// </summary>
+/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.DeleteRepositoryRequestConverter))]
 public sealed partial class DeleteRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>
 {
@@ -77,40 +62,18 @@ public sealed partial class DeleteRepositoryRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "snapshot.delete_repository";
 
-	/// <summary>
-	/// <para>
-	/// The ame of the snapshot repositories to unregister.
-	/// Wildcard (<c>*</c>) patterns are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete snapshot repositories.
-/// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
-/// The snapshots themselves are left untouched and in place.
-/// </para>
-/// </summary>
+/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 public readonly partial struct DeleteRepositoryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest Instance { get; init; }
@@ -135,38 +98,21 @@ public readonly partial struct DeleteRepositoryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ame of the snapshot repositories to unregister.
-	/// Wildcard (<c>*</c>) patterns are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

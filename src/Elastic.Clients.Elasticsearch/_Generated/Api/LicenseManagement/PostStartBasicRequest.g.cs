@@ -23,48 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
+/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
 public sealed partial class PostStartBasicRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start a basic license.
-/// </para>
-/// <para>
-/// Start an indefinite basic license, which gives access to all the basic features.
-/// </para>
-/// <para>
-/// NOTE: In order to start a basic license, you must not currently have a basic license.
-/// </para>
-/// <para>
-/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
-/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
-/// </para>
-/// <para>
-/// To check the status of your basic license, use the get basic license API.
-/// </para>
-/// </summary>
+/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.Json.PostStartBasicRequestConverter))]
 public sealed partial class PostStartBasicRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>
 {
@@ -86,46 +60,18 @@ public sealed partial class PostStartBasicRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "license.post_start_basic";
 
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#acknowledge']/*"/>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start a basic license.
-/// </para>
-/// <para>
-/// Start an indefinite basic license, which gives access to all the basic features.
-/// </para>
-/// <para>
-/// NOTE: In order to start a basic license, you must not currently have a basic license.
-/// </para>
-/// <para>
-/// If the basic license does not support all of the features that are available with your current license, however, you are notified in the response.
-/// You must then re-submit the API request with the <c>acknowledge</c> parameter set to <c>true</c>.
-/// </para>
-/// <para>
-/// To check the status of your basic license, use the get basic license API.
-/// </para>
-/// </summary>
+/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='license.post_start_basic.Request']/*"/>
 public readonly partial struct PostStartBasicRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest Instance { get; init; }
@@ -144,33 +90,21 @@ public readonly partial struct PostStartBasicRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Whether the user has acknowledged acknowledge messages
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#acknowledge']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor Acknowledge(bool? value = true)
 	{
 		Instance.Acknowledge = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PostStartBasicRequest.g.xml" path="doc/member[@key='license.post_start_basic.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

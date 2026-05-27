@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Weighted average aggregation result. <c>value</c> is missing if the weight was set to zero.
-/// </para>
-/// </summary>
+/// <include file="WeightedAverageAggregate.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.WeightedAverageAggregateConverter))]
 public sealed partial class WeightedAverageAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -51,12 +48,7 @@ public sealed partial class WeightedAverageAggregate : Elastic.Clients.Elasticse
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "weighted_avg";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageAggregate.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="searchable_snapshots.stats.Request"><summary><para>
+Get searchable snapshot statistics.
+</para></summary></member>
+  <member key="searchable_snapshots.stats.Request#index"><summary><para>
+A comma-separated list of data streams and indices to retrieve statistics for.
+</para></summary></member>
+  <member key="searchable_snapshots.stats.Request#level"><summary><para>
+Return stats aggregated at cluster, index or shard level
+</para></summary></member>
+</doc>

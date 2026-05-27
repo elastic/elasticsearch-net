@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 public sealed partial class GetScriptLanguagesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get script languages.
-/// </para>
-/// <para>
-/// Get a list of available script types, languages, and contexts.
-/// </para>
-/// </summary>
+/// <include file="GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetScriptLanguagesRequestConverter))]
 public sealed partial class GetScriptLanguagesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetScriptLanguagesRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetScriptLanguagesRequest : Elastic.Clients.Elastics
 	internal override string OperationName => "get_script_languages";
 }
 
-/// <summary>
-/// <para>
-/// Get script languages.
-/// </para>
-/// <para>
-/// Get a list of available script types, languages, and contexts.
-/// </para>
-/// </summary>
+/// <include file="GetScriptLanguagesRequest.g.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.get_script_languages.Request']/*"/>
 public readonly partial struct GetScriptLanguagesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.GetScriptLanguagesRequest Instance { get; init; }

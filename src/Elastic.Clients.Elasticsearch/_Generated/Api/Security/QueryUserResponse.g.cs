@@ -37,24 +37,12 @@ public sealed partial class QueryUserResponse : Elastic.Transport.Products.Elast
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of users returned in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserResponse.g.xml" path="doc/member[@key='security.query_user.Response#count']/*"/>
 	public required int Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of users found.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserResponse.g.xml" path="doc/member[@key='security.query_user.Response#total']/*"/>
 	public required int Total { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of users that match the query.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserResponse.g.xml" path="doc/member[@key='security.query_user.Response#users']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.QueryUser> Users { get; set; }
 }

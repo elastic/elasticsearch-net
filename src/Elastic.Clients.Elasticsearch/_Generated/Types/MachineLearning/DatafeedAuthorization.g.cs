@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DatafeedAuthorization']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DatafeedAuthorizationConverter))]
 public sealed partial class DatafeedAuthorization
 {
@@ -36,24 +37,12 @@ public sealed partial class DatafeedAuthorization
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If an API key was used for the most recent update to the datafeed, its name and identifier are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedAuthorization.g.xml" path="doc/member[@key='ml._types.DatafeedAuthorization#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ApiKeyAuthorization? ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a user ID was used for the most recent update to the datafeed, its roles at the time of the update are listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedAuthorization.g.xml" path="doc/member[@key='ml._types.DatafeedAuthorization#roles']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If a service account was used for the most recent update to the datafeed, the account name is listed in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="DatafeedAuthorization.g.xml" path="doc/member[@key='ml._types.DatafeedAuthorization#service_account']/*"/>
 	public string? ServiceAccount { get; set; }
 }

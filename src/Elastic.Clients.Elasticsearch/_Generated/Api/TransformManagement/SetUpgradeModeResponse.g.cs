@@ -37,10 +37,6 @@ public sealed partial class SetUpgradeModeResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="SetUpgradeModeResponse.g.xml" path="doc/member[@key='transform.set_upgrade_mode.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
 public sealed partial class UpdateTrainedModelDeploymentRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update a trained model deployment.
-/// </para>
-/// </summary>
+/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateTrainedModelDeploymentRequestConverter))]
 public sealed partial class UpdateTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestParameters>
 {
@@ -58,41 +57,18 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : Elastic.Client
 
 	internal override string OperationName => "ml.update_trained_model_deployment";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of model allocations on each node where the model is deployed.
-	/// All allocations on a node share the same copy of the model in memory but use
-	/// a separate set of threads to evaluate the model.
-	/// Increasing this value generally increases the throughput.
-	/// If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#number_of_allocations']/*"/>
 	public int? NumberOfAllocations { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a trained model deployment.
-/// </para>
-/// </summary>
+/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request']/*"/>
 public readonly partial struct UpdateTrainedModelDeploymentRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest Instance { get; init; }
@@ -117,54 +93,28 @@ public readonly partial struct UpdateTrainedModelDeploymentRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model. Currently, only PyTorch models are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? value)
 	{
 		Instance.AdaptiveAllocations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Adaptive allocations configuration. When enabled, the number of allocations
-	/// is set based on the current load.
-	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#adaptive_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> action)
 	{
 		Instance.AdaptiveAllocations = Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of model allocations on each node where the model is deployed.
-	/// All allocations on a node share the same copy of the model in memory but use
-	/// a separate set of threads to evaluate the model.
-	/// Increasing this value generally increases the throughput.
-	/// If this setting is greater than the number of hardware threads
-	/// it will automatically be changed to a value less than the number of hardware threads.
-	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateTrainedModelDeploymentRequest.g.xml" path="doc/member[@key='ml.update_trained_model_deployment.Request#number_of_allocations']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? value)
 	{
 		Instance.NumberOfAllocations = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UniqueTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.UniqueTokenFilterConverter))]
 public sealed partial class UniqueTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class UniqueTokenFilter : Elastic.Clients.Elasticsearch.An
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UniqueTokenFilter.g.xml" path="doc/member[@key='_types.analysis.UniqueTokenFilter#only_on_same_position']/*"/>
 	public bool? OnlyOnSamePosition { get; set; }
 
 	public string Type => "unique";
@@ -48,6 +45,7 @@ public sealed partial class UniqueTokenFilter : Elastic.Clients.Elasticsearch.An
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UniqueTokenFilter']/*"/>
 public readonly partial struct UniqueTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter Instance { get; init; }
@@ -67,11 +65,7 @@ public readonly partial struct UniqueTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UniqueTokenFilter.g.xml" path="doc/member[@key='_types.analysis.UniqueTokenFilter#only_on_same_position']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? value = true)
 	{
 		Instance.OnlyOnSamePosition = value;

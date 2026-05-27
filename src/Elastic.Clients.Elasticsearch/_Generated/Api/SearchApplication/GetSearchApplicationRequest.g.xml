@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.get.Request"><summary><para>
+Get search application details.
+</para></summary></member>
+  <member key="search_application.get.Request#name"><summary><para>
+The name of the search application
+</para></summary></member>
+</doc>

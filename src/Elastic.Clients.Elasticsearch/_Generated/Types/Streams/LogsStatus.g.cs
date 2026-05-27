@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Streams;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.status.LogsStatus']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsStatusConverter))]
 public sealed partial class LogsStatus
 {
@@ -42,10 +43,6 @@ public sealed partial class LogsStatus
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the logs stream feature is enabled.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsStatus.g.xml" path="doc/member[@key='streams.status.LogsStatus#enabled']/*"/>
 	public required bool Enabled { get; set; }
 }

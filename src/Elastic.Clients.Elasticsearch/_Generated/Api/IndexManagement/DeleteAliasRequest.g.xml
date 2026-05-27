@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_alias.Request"><summary><para>
+Delete an alias.
+Removes a data stream or index from an alias.
+</para></summary></member>
+  <member key="indices.delete_alias.Request#index"><summary><para>
+Comma-separated list of data streams or indices used to limit the request.
+Supports wildcards (<c>*</c>).
+</para></summary></member>
+  <member key="indices.delete_alias.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.delete_alias.Request#name"><summary><para>
+Comma-separated list of aliases to remove.
+Supports wildcards (<c>*</c>). To remove all aliases, use <c>*</c> or <c>_all</c>.
+</para></summary></member>
+  <member key="indices.delete_alias.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Ensemble']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.EnsembleConverter))]
 public sealed partial class Ensemble
 {
@@ -49,6 +50,7 @@ public sealed partial class Ensemble
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel> TrainedModels { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.Ensemble']/*"/>
 public readonly partial struct EnsembleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Ensemble Instance { get; init; }

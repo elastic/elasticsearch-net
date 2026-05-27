@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TermsAggregationCollectModeConverter))]
 public enum TermsAggregationCollectMode
 {
-	/// <summary>
-	/// <para>
-	/// Caches the set of documents that fall into the uppermost buckets for subsequent replay.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregationCollectMode.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregationCollectMode#breadth_first']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "breadth_first")]
 	BreadthFirst,
-	/// <summary>
-	/// <para>
-	/// Expands all branches of the aggregation tree in one depth-first pass, before any pruning occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsAggregationCollectMode.g.xml" path="doc/member[@key='_types.aggregations.TermsAggregationCollectMode#depth_first']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "depth_first")]
 	DepthFirst
 }

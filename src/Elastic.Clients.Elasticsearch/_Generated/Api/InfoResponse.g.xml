@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.info.Response#cluster_name"><summary><para>
+The responding cluster's name.
+</para></summary></member>
+  <member key="_global.info.Response#name"><summary><para>
+The responding node's name.
+</para></summary></member>
+  <member key="_global.info.Response#version"><summary><para>
+The running version of Elasticsearch.
+</para></summary></member>
+</doc>

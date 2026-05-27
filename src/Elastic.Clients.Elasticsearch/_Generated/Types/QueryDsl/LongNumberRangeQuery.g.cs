@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.LongNumberRangeQueryConverter))]
 public sealed partial class LongNumberRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
@@ -42,58 +43,32 @@ public sealed partial class LongNumberRangeQuery : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public long? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gt']/*"/>
 	public long? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gte']/*"/>
 	public long? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lt']/*"/>
 	public long? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lte']/*"/>
 	public long? Lte { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	public long? To { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "long_number";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery']/*"/>
 public readonly partial struct LongNumberRangeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery Instance { get; init; }
@@ -113,14 +88,7 @@ public readonly partial struct LongNumberRangeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -145,44 +113,28 @@ public readonly partial struct LongNumberRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Gt(long? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Gte(long? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Lt(long? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Lte(long? value)
 	{
 		Instance.Lte = value;
@@ -195,11 +147,7 @@ public readonly partial struct LongNumberRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
@@ -221,6 +169,7 @@ public readonly partial struct LongNumberRangeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery']/*"/>
 public readonly partial struct LongNumberRangeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery Instance { get; init; }
@@ -240,14 +189,7 @@ public readonly partial struct LongNumberRangeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -272,44 +214,28 @@ public readonly partial struct LongNumberRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Gt(long? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Gte(long? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Lt(long? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Lte(long? value)
 	{
 		Instance.Lte = value;
@@ -322,11 +248,7 @@ public readonly partial struct LongNumberRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="LongNumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.LongNumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.LongNumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;

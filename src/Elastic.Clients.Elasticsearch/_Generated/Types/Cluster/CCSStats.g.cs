@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.CCSStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CCSStatsConverter))]
 public sealed partial class CCSStats
 {
@@ -42,26 +43,12 @@ public sealed partial class CCSStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains remote cluster settings and metrics collected from them.
-	/// The keys are cluster names, and the values are per-cluster data.
-	/// Only present if <c>include_remotes</c> option is set to true.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSStats.g.xml" path="doc/member[@key='cluster.stats.CCSStats#clusters']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>? Clusters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about ES|QL cross-cluster query usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSStats.g.xml" path="doc/member[@key='cluster.stats.CCSStats#_esql']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats? Esql { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Information about cross-cluster search usage.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSStats.g.xml" path="doc/member[@key='cluster.stats.CCSStats#_search']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats Search { get; set; }
 }

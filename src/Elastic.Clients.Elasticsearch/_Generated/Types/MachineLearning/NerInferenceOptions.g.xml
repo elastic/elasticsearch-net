@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.NerInferenceOptions"><summary><para>
+Named entity recognition options
+</para></summary></member>
+  <member key="ml._types.NerInferenceOptions#classification_labels"><summary><para>
+The token classification labels. Must be IOB formatted tags
+</para></summary></member>
+  <member key="ml._types.NerInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.NerInferenceOptions#tokenization"><summary><para>
+The tokenization options
+</para></summary></member>
+</doc>

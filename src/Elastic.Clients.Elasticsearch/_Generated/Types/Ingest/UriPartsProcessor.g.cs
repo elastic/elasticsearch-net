@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UriPartsProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.UriPartsProcessorConverter))]
 public sealed partial class UriPartsProcessor
 {
@@ -42,80 +43,38 @@ public sealed partial class UriPartsProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing the URI string.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor copies the unparsed URI to <c>&lt;target_field>.original</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#keep_original']/*"/>
 	public bool? KeepOriginal { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor removes the <c>field</c> after parsing the URI string.
-	/// If parsing fails, the processor does not remove the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#remove_if_successful']/*"/>
 	public bool? RemoveIfSuccessful { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Output field for the URI object.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UriPartsProcessor']/*"/>
 public readonly partial struct UriPartsProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor Instance { get; init; }
@@ -135,111 +94,70 @@ public readonly partial struct UriPartsProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the URI string.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the URI string.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor copies the unparsed URI to <c>&lt;target_field>.original</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#keep_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> KeepOriginal(bool? value = true)
 	{
 		Instance.KeepOriginal = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -252,46 +170,28 @@ public readonly partial struct UriPartsProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor removes the <c>field</c> after parsing the URI string.
-	/// If parsing fails, the processor does not remove the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#remove_if_successful']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> RemoveIfSuccessful(bool? value = true)
 	{
 		Instance.RemoveIfSuccessful = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the URI object.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the URI object.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -307,6 +207,7 @@ public readonly partial struct UriPartsProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.UriPartsProcessor']/*"/>
 public readonly partial struct UriPartsProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor Instance { get; init; }
@@ -326,111 +227,70 @@ public readonly partial struct UriPartsProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the URI string.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing the URI string.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor copies the unparsed URI to <c>&lt;target_field>.original</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#keep_original']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor KeepOriginal(bool? value = true)
 	{
 		Instance.KeepOriginal = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -443,11 +303,7 @@ public readonly partial struct UriPartsProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -460,46 +316,28 @@ public readonly partial struct UriPartsProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the processor removes the <c>field</c> after parsing the URI string.
-	/// If parsing fails, the processor does not remove the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#remove_if_successful']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor RemoveIfSuccessful(bool? value = true)
 	{
 		Instance.RemoveIfSuccessful = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the URI object.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Output field for the URI object.
-	/// </para>
-	/// </summary>
+	/// <include file="UriPartsProcessor.g.xml" path="doc/member[@key='ingest._types.UriPartsProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

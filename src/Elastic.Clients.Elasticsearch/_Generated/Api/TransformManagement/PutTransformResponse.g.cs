@@ -37,10 +37,6 @@ public sealed partial class PutTransformResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTransformResponse.g.xml" path="doc/member[@key='transform.put_transform.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

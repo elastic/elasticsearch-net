@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Snapshot.SnapshotNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Snapshot.SnapshotNamespacedClient> class for mocking.
 	/// </summary>
 	protected SnapshotNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	{
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse CleanupRepository(Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse CleanupRepository(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(name);
@@ -52,6 +54,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse CleanupRepository(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(name);
@@ -61,12 +65,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(name);
@@ -75,6 +83,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse> CleanupRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(name);
@@ -84,12 +94,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse Clone(Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse Clone(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
@@ -98,6 +112,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse Clone(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
@@ -107,12 +123,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse> CloneAsync(Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse> CloneAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
@@ -121,6 +141,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CloneSnapshotRequest.g.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.clone.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse> CloneAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, Elastic.Clients.Elasticsearch.Name targetSnapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor(repository, snapshot, targetSnapshot);
@@ -130,12 +152,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse Create(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse Create(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor(repository, snapshot);
@@ -144,6 +170,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse Create(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor(repository, snapshot);
@@ -153,12 +181,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse> CreateAsync(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse> CreateAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor(repository, snapshot);
@@ -167,6 +199,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateSnapshotRequest.g.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse> CreateAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor(repository, snapshot);
@@ -176,12 +210,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse CreateRepository(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse CreateRepository(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(name);
@@ -190,6 +228,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse CreateRepository(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(name);
@@ -199,12 +239,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse> CreateRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse> CreateRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(name);
@@ -213,6 +257,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse> CreateRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(name);
@@ -222,12 +268,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
@@ -236,6 +286,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
@@ -245,12 +297,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
@@ -259,6 +315,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteSnapshotRequest.g.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
@@ -268,12 +326,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse DeleteRepository(Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse DeleteRepository(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(name);
@@ -282,6 +344,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse DeleteRepository(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(name);
@@ -291,12 +355,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse> DeleteRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse> DeleteRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(name);
@@ -305,6 +373,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/DeleteRepositoryRequest.g.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.delete_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse> DeleteRepositoryAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestDescriptor(name);
@@ -314,12 +384,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Get(Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Get(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor(repository, snapshot);
@@ -328,6 +402,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Get(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor(repository, snapshot);
@@ -337,12 +413,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse> GetAsync(Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse> GetAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor(repository, snapshot);
@@ -351,6 +431,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetSnapshotRequest.g.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse> GetAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor(repository, snapshot);
@@ -360,12 +442,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor();
@@ -374,6 +460,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor();
@@ -383,6 +471,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
@@ -391,6 +481,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse GetRepository(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
@@ -400,12 +492,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor();
@@ -414,6 +510,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor();
@@ -423,6 +521,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
@@ -431,6 +531,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/GetRepositoryRequest.g.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.get_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse> GetRepositoryAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(name);
@@ -440,12 +542,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse RepositoryAnalyze(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse RepositoryAnalyze(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(name);
@@ -454,6 +560,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse RepositoryAnalyze(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(name);
@@ -463,12 +571,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse> RepositoryAnalyzeAsync(Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse> RepositoryAnalyzeAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(name);
@@ -477,6 +589,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryAnalyzeRequest.g.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_analyze.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse> RepositoryAnalyzeAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor(name);
@@ -486,12 +600,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(Elastic.Clients.Elasticsearch.Names name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(name);
@@ -500,6 +618,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse RepositoryVerifyIntegrity(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(name);
@@ -509,12 +629,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(name);
@@ -523,6 +647,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RepositoryVerifyIntegrityRequest.g.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.repository_verify_integrity.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse> RepositoryVerifyIntegrityAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestDescriptor(name);
@@ -532,12 +658,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityResponse, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse Restore(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(repository, snapshot);
@@ -546,6 +676,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse Restore(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(repository, snapshot);
@@ -555,6 +687,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse Restore<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>(repository, snapshot);
@@ -564,12 +698,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(repository, snapshot);
@@ -578,6 +716,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse> RestoreAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor(repository, snapshot);
@@ -587,6 +727,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/RestoreRequest.g.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.restore.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse> RestoreAsync<TDocument>(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor<TDocument>(repository, snapshot);
@@ -596,12 +738,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest, Elastic.Clients.Elasticsearch.Snapshot.RestoreResponse, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor();
@@ -610,6 +756,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor();
@@ -619,6 +767,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
@@ -627,6 +777,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
@@ -636,6 +788,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
@@ -644,6 +798,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse Status(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
@@ -653,12 +809,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor();
@@ -667,6 +827,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor();
@@ -676,6 +838,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
@@ -684,6 +848,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository);
@@ -693,6 +859,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
@@ -701,6 +869,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/SnapshotStatusRequest.g.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.status.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse> StatusAsync(Elastic.Clients.Elasticsearch.Name? repository, Elastic.Clients.Elasticsearch.Names? snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestDescriptor(repository, snapshot);
@@ -710,12 +880,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequest, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusResponse, Elastic.Clients.Elasticsearch.Snapshot.SnapshotStatusRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse VerifyRepository(Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse VerifyRepository(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(name);
@@ -724,6 +898,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse VerifyRepository(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(name);
@@ -733,12 +909,16 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse> VerifyRepositoryAsync(Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse> VerifyRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(name);
@@ -747,6 +927,8 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequest, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse, Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Snapshot/VerifyRepositoryRequest.g.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='snapshot.verify_repository.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryResponse> VerifyRepositoryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.VerifyRepositoryRequestDescriptor(name);

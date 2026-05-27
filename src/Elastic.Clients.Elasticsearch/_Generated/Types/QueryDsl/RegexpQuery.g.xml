@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.RegexpQuery#boost"><summary><para>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</para></summary></member>
+  <member key="_types.query_dsl.RegexpQuery#case_insensitive"><summary><para>
+Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
+When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
+</para></summary></member>
+  <member key="_types.query_dsl.RegexpQuery#flags"><summary><para>
+Enables optional operators for the regular expression.
+</para></summary></member>
+  <member key="_types.query_dsl.RegexpQuery#max_determinized_states"><summary><para>
+Maximum number of automaton states required for the query.
+</para></summary></member>
+  <member key="_types.query_dsl.RegexpQuery#rewrite"><summary><para>
+Method used to rewrite the query.
+</para></summary></member>
+  <member key="_types.query_dsl.RegexpQuery#value"><summary><para>
+Regular expression for terms you wish to find in the provided field.
+</para></summary></member>
+</doc>

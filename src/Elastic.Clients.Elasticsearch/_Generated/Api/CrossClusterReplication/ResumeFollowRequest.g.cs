@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 public sealed partial class ResumeFollowRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Resume a follower.
-/// Resume a cross-cluster replication follower index that was paused.
-/// The follower index could have been paused with the pause follower API.
-/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
-/// When this API returns, the follower index will resume fetching operations from the leader index.
-/// </para>
-/// </summary>
+/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ResumeFollowRequestConverter))]
 public sealed partial class ResumeFollowRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestParameters>
 {
@@ -68,18 +59,10 @@ public sealed partial class ResumeFollowRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "ccr.resume_follow";
 
-	/// <summary>
-	/// <para>
-	/// Name of the follow index to resume following
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public long? MaxOutstandingReadRequests { get; set; }
 	public long? MaxOutstandingWriteRequests { get; set; }
@@ -93,15 +76,8 @@ public sealed partial class ResumeFollowRequest : Elastic.Clients.Elasticsearch.
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Resume a follower.
-/// Resume a cross-cluster replication follower index that was paused.
-/// The follower index could have been paused with the pause follower API.
-/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
-/// When this API returns, the follower index will resume fetching operations from the leader index.
-/// </para>
-/// </summary>
+/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 public readonly partial struct ResumeFollowRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest Instance { get; init; }
@@ -126,22 +102,14 @@ public readonly partial struct ResumeFollowRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the follow index to resume following
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -264,15 +232,8 @@ public readonly partial struct ResumeFollowRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Resume a follower.
-/// Resume a cross-cluster replication follower index that was paused.
-/// The follower index could have been paused with the pause follower API.
-/// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
-/// When this API returns, the follower index will resume fetching operations from the leader index.
-/// </para>
-/// </summary>
+/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.resume_follow.Request']/*"/>
 public readonly partial struct ResumeFollowRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest Instance { get; init; }
@@ -296,22 +257,14 @@ public readonly partial struct ResumeFollowRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the follow index to resume following
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResumeFollowRequest.g.xml" path="doc/member[@key='ccr.resume_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

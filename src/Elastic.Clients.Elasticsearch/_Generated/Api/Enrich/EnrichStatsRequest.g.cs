@@ -23,22 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
+/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
 public sealed partial class EnrichStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get enrich stats.
-/// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
-/// </para>
-/// </summary>
+/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.EnrichStatsRequestConverter))]
 public sealed partial class EnrichStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestParameters>
 {
@@ -60,20 +54,12 @@ public sealed partial class EnrichStatsRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "enrich.stats";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get enrich stats.
-/// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
-/// </para>
-/// </summary>
+/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='enrich.stats.Request']/*"/>
 public readonly partial struct EnrichStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest Instance { get; init; }
@@ -92,11 +78,7 @@ public readonly partial struct EnrichStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest instance) => new Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichStatsRequest.g.xml" path="doc/member[@key='enrich.stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

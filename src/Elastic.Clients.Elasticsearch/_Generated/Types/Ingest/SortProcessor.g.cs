@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SortProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.SortProcessorConverter))]
 public sealed partial class SortProcessor
 {
@@ -42,67 +43,32 @@ public sealed partial class SortProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to be sorted.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#if']/*"/>
 	public string? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort order to use.
-	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#order']/*"/>
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the sorted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SortProcessor']/*"/>
 public readonly partial struct SortProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SortProcessor Instance { get; init; }
@@ -122,89 +88,56 @@ public readonly partial struct SortProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SortProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SortProcessor(Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be sorted.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be sorted.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -217,48 +150,28 @@ public readonly partial struct SortProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order to use.
-	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the sorted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the sorted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -274,6 +187,7 @@ public readonly partial struct SortProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.SortProcessor']/*"/>
 public readonly partial struct SortProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.SortProcessor Instance { get; init; }
@@ -293,89 +207,56 @@ public readonly partial struct SortProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.SortProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SortProcessor(Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be sorted.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to be sorted.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -388,11 +269,7 @@ public readonly partial struct SortProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -405,48 +282,28 @@ public readonly partial struct SortProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort order to use.
-	/// Accepts <c>"asc"</c> or <c>"desc"</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#order']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor Order(Elastic.Clients.Elasticsearch.SortOrder? value)
 	{
 		Instance.Order = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the sorted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to assign the sorted value to.
-	/// By default, the field is updated in-place.
-	/// </para>
-	/// </summary>
+	/// <include file="SortProcessor.g.xml" path="doc/member[@key='ingest._types.SortProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

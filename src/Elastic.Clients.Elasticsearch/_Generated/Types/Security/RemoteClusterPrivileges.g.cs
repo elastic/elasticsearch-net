@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-/// <summary>
-/// <para>
-/// The subset of cluster level privileges that can be defined for remote clusters.
-/// </para>
-/// </summary>
+/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RemoteClusterPrivilegesConverter))]
 public sealed partial class RemoteClusterPrivileges
 {
@@ -48,26 +45,15 @@ public sealed partial class RemoteClusterPrivileges
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster aliases to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges#clusters']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Clusters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges#privileges']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> Privileges { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The subset of cluster level privileges that can be defined for remote clusters.
-/// </para>
-/// </summary>
+/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges']/*"/>
 public readonly partial struct RemoteClusterPrivilegesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges Instance { get; init; }
@@ -87,33 +73,21 @@ public readonly partial struct RemoteClusterPrivilegesDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges instance) => new Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of cluster aliases to which the permissions in this entry apply.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges#clusters']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Clusters(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Clusters = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege> value)
 	{
 		Instance.Privileges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The cluster level privileges that owners of the role have on the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoteClusterPrivileges.g.xml" path="doc/member[@key='security._types.RemoteClusterPrivileges#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor Privileges(params Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilege[] values)
 	{
 		Instance.Privileges = [.. values];

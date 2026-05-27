@@ -37,24 +37,12 @@ public sealed partial class BulkDeleteRoleResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of deleted roles
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleResponse.g.xml" path="doc/member[@key='security.bulk_delete_role.Response#deleted']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Deleted { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Present if any deletes resulted in errors
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleResponse.g.xml" path="doc/member[@key='security.bulk_delete_role.Response#errors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.BulkError? Errors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of roles that could not be found
-	/// </para>
-	/// </summary>
+	/// <include file="BulkDeleteRoleResponse.g.xml" path="doc/member[@key='security.bulk_delete_role.Response#not_found']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? NotFound { get; set; }
 }

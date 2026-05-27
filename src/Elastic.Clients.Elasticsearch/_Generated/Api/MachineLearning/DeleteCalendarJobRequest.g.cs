@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
 public sealed partial class DeleteCalendarJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete anomaly jobs from a calendar.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteCalendarJobRequestConverter))]
 public sealed partial class DeleteCalendarJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestParameters>
 {
@@ -58,27 +57,15 @@ public sealed partial class DeleteCalendarJobRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.delete_calendar_job";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a
-	/// comma-separated list of jobs or groups.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Ids JobId { get => P<Elastic.Clients.Elasticsearch.Ids>("job_id"); set => PR("job_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete anomaly jobs from a calendar.
-/// </para>
-/// </summary>
+/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_calendar_job.Request']/*"/>
 public readonly partial struct DeleteCalendarJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest Instance { get; init; }
@@ -103,23 +90,14 @@ public readonly partial struct DeleteCalendarJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a
-	/// comma-separated list of jobs or groups.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteCalendarJobRequest.g.xml" path="doc/member[@key='ml.delete_calendar_job.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteCalendarJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Ids value)
 	{
 		Instance.JobId = value;

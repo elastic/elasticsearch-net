@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Discounted cumulative gain (DCG)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricDiscountedCumulativeGainConverter))]
 public sealed partial class RankEvalMetricDiscountedCumulativeGain
 {
@@ -42,27 +38,15 @@ public sealed partial class RankEvalMetricDiscountedCumulativeGain
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If set to true, this metric will calculate the Normalized DCG.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain#normalize']/*"/>
 	public bool? Normalize { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Discounted cumulative gain (DCG)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_discounted_cumulative_gain_dcg">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
+/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain']/*"/>
 public readonly partial struct RankEvalMetricDiscountedCumulativeGainDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain Instance { get; init; }
@@ -82,22 +66,14 @@ public readonly partial struct RankEvalMetricDiscountedCumulativeGainDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGain(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain#k']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to true, this metric will calculate the Normalized DCG.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalMetricDiscountedCumulativeGain.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalMetricDiscountedCumulativeGain#normalize']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricDiscountedCumulativeGainDescriptor Normalize(bool? value = true)
 	{
 		Instance.Normalize = value;

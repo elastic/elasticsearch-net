@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IngestStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IngestStatsConverter))]
 public sealed partial class IngestStats
 {
@@ -48,57 +49,24 @@ public sealed partial class IngestStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of documents ingested during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#count']/*"/>
 	public required long Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of documents currently being ingested.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#current']/*"/>
 	public required long Current { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of failed ingest operations during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#failed']/*"/>
 	public required long Failed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes of all documents ingested by the pipeline.
-	/// This field is only present on pipelines which are the first to process a document.
-	/// Thus, it is not present on pipelines which only serve as a final pipeline after a default pipeline, a pipeline run after a reroute processor, or pipelines in pipeline processors.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#ingested_as_first_pipeline_in_bytes']/*"/>
 	public required long IngestedAsFirstPipelineInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of ingest processors.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#processors']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.KeyedProcessor>> Processors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of bytes of all documents produced by the pipeline.
-	/// This field is only present on pipelines which are the first to process a document.
-	/// Thus, it is not present on pipelines which only serve as a final pipeline after a default pipeline, a pipeline run after a reroute processor, or pipelines in pipeline processors.
-	/// In situations where there are subsequent pipelines, the value represents the size of the document after all pipelines have run.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#produced_as_first_pipeline_in_bytes']/*"/>
 	public required long ProducedAsFirstPipelineInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total time, in milliseconds, spent preprocessing ingest documents during the lifetime of this node.
-	/// </para>
-	/// </summary>
+	/// <include file="IngestStats.g.xml" path="doc/member[@key='nodes._types.IngestStats#time_in_millis']/*"/>
 	public required System.TimeSpan TimeInMillis { get; set; }
 }

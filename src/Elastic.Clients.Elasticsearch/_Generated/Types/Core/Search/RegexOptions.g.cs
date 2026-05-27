@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.RegexOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.RegexOptionsConverter))]
 public sealed partial class RegexOptions
 {
@@ -36,21 +37,14 @@ public sealed partial class RegexOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional operators for the regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexOptions.g.xml" path="doc/member[@key='_global.search._types.RegexOptions#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<int, string>? Flags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexOptions.g.xml" path="doc/member[@key='_global.search._types.RegexOptions#max_determinized_states']/*"/>
 	public int? MaxDeterminizedStates { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.RegexOptions']/*"/>
 public readonly partial struct RegexOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.RegexOptions Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct RegexOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions instance) => new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.RegexOptions(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Optional operators for the regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexOptions.g.xml" path="doc/member[@key='_global.search._types.RegexOptions#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor Flags(Elastic.Clients.Elasticsearch.Union<int, string>? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexOptions.g.xml" path="doc/member[@key='_global.search._types.RegexOptions#max_determinized_states']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor MaxDeterminizedStates(int? value)
 	{
 		Instance.MaxDeterminizedStates = value;

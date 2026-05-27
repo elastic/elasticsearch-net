@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsSummaryConverter))]
 public sealed partial class DataframeAnalyticsSummary
 {
@@ -49,11 +50,7 @@ public sealed partial class DataframeAnalyticsSummary
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The security privileges that the job uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the job, this property is omitted.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsSummary.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsSummary#authorization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsAuthorization? Authorization { get; set; }
 	public System.DateTimeOffset? CreateTime { get; set; }
 	public string? Description { get; set; }

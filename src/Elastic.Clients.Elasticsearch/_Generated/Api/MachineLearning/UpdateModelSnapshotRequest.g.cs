@@ -23,16 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
 public sealed partial class UpdateModelSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update a snapshot.
-/// Updates certain properties of a snapshot.
-/// </para>
-/// </summary>
+/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateModelSnapshotRequestConverter))]
 public sealed partial class UpdateModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>
 {
@@ -59,43 +57,21 @@ public sealed partial class UpdateModelSnapshotRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "ml.update_model_snapshot";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#snapshot_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// A description of the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this snapshot will not be deleted during automatic cleanup of
-	/// snapshots older than <c>model_snapshot_retention_days</c>. However, this
-	/// snapshot will be deleted when the job is deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#retain']/*"/>
 	public bool? Retain { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a snapshot.
-/// Updates certain properties of a snapshot.
-/// </para>
-/// </summary>
+/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.update_model_snapshot.Request']/*"/>
 public readonly partial struct UpdateModelSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest Instance { get; init; }
@@ -120,46 +96,28 @@ public readonly partial struct UpdateModelSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the model snapshot.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, this snapshot will not be deleted during automatic cleanup of
-	/// snapshots older than <c>model_snapshot_retention_days</c>. However, this
-	/// snapshot will be deleted when the job is deleted.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateModelSnapshotRequest.g.xml" path="doc/member[@key='ml.update_model_snapshot.Request#retain']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestDescriptor Retain(bool? value = true)
 	{
 		Instance.Retain = value;

@@ -23,32 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="AsyncQueryDeleteRequest.g.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
 public sealed partial class AsyncQueryDeleteRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete an async ES|QL query.
-/// If the query is still running, it is cancelled.
-/// Otherwise, the stored results are deleted.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The authenticated user that submitted the original query request
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Users with the <c>cancel_task</c> cluster privilege
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="AsyncQueryDeleteRequest.g.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.AsyncQueryDeleteRequestConverter))]
 public sealed partial class AsyncQueryDeleteRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestParameters>
 {
@@ -75,38 +57,12 @@ public sealed partial class AsyncQueryDeleteRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "esql.async_query_delete";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryDeleteRequest.g.xml" path="doc/member[@key='esql.async_query_delete.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an async ES|QL query.
-/// If the query is still running, it is cancelled.
-/// Otherwise, the stored results are deleted.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a query:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The authenticated user that submitted the original query request
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Users with the <c>cancel_task</c> cluster privilege
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="AsyncQueryDeleteRequest.g.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.async_query_delete.Request']/*"/>
 public readonly partial struct AsyncQueryDeleteRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest Instance { get; init; }
@@ -131,13 +87,7 @@ public readonly partial struct AsyncQueryDeleteRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest instance) => new Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequest(Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the query.
-	/// A query ID is provided in the ES|QL async query API response for a query that does not complete in the designated time.
-	/// A query ID is also provided when the request was submitted with the <c>keep_on_completion</c> parameter set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncQueryDeleteRequest.g.xml" path="doc/member[@key='esql.async_query_delete.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryDeleteRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

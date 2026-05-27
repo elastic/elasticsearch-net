@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RegexpQueryConverter))]
 public sealed partial class RegexpQuery
 {
@@ -49,55 +50,28 @@ public sealed partial class RegexpQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#case_insensitive']/*"/>
 	public bool? CaseInsensitive { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Enables optional operators for the regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#flags']/*"/>
 	public string? Flags { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#max_determinized_states']/*"/>
 	public int? MaxDeterminizedStates { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#rewrite']/*"/>
 	public string? Rewrite { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Regular expression for terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#value']/*"/>
 	public required string Value { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery']/*"/>
 public readonly partial struct RegexpQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery Instance { get; init; }
@@ -117,26 +91,14 @@ public readonly partial struct RegexpQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -155,22 +117,14 @@ public readonly partial struct RegexpQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables optional operators for the regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> Flags(string? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#max_determinized_states']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> MaxDeterminizedStates(int? value)
 	{
 		Instance.MaxDeterminizedStates = value;
@@ -183,22 +137,14 @@ public readonly partial struct RegexpQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regular expression for terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor<TDocument> Value(string value)
 	{
 		Instance.Value = value;
@@ -214,6 +160,7 @@ public readonly partial struct RegexpQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery']/*"/>
 public readonly partial struct RegexpQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery Instance { get; init; }
@@ -233,26 +180,14 @@ public readonly partial struct RegexpQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery(Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Allows case insensitive matching of the regular expression value with the indexed field values when set to <c>true</c>.
-	/// When <c>false</c>, case sensitivity of matching depends on the underlying field’s mapping.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#case_insensitive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor CaseInsensitive(bool? value = true)
 	{
 		Instance.CaseInsensitive = value;
@@ -271,22 +206,14 @@ public readonly partial struct RegexpQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables optional operators for the regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#flags']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor Flags(string? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of automaton states required for the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#max_determinized_states']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor MaxDeterminizedStates(int? value)
 	{
 		Instance.MaxDeterminizedStates = value;
@@ -299,22 +226,14 @@ public readonly partial struct RegexpQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Method used to rewrite the query.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#rewrite']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor Rewrite(string? value)
 	{
 		Instance.Rewrite = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Regular expression for terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="RegexpQuery.g.xml" path="doc/member[@key='_types.query_dsl.RegexpQuery#value']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RegexpQueryDescriptor Value(string value)
 	{
 		Instance.Value = value;

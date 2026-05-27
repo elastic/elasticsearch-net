@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks._types.TaskInfos']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.TaskInfosConverter))]
 public sealed partial class TaskInfos : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
 {

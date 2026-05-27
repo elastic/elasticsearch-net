@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ExistsQueryConverter))]
 public sealed partial class ExistsQuery
 {
@@ -42,25 +43,15 @@ public sealed partial class ExistsQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery']/*"/>
 public readonly partial struct ExistsQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Instance { get; init; }
@@ -80,36 +71,21 @@ public readonly partial struct ExistsQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -131,6 +107,7 @@ public readonly partial struct ExistsQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery']/*"/>
 public readonly partial struct ExistsQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery Instance { get; init; }
@@ -150,36 +127,21 @@ public readonly partial struct ExistsQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the field you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsQuery.g.xml" path="doc/member[@key='_types.query_dsl.ExistsQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;

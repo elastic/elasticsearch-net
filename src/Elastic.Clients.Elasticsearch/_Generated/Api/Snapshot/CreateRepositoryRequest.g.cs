@@ -23,48 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 public sealed partial class CreateRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
-	/// If <c>false</c>, this verification is skipped.
-	/// You can also perform this verification with the verify snapshot repository API.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#verify']/*"/>
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a snapshot repository.
-/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
-/// To register a snapshot repository, the cluster's global metadata must be writeable.
-/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
-/// </para>
-/// <para>
-/// Several options for this API can be specified using a query parameter or a request body parameter.
-/// If both parameters are specified, only the query parameter is used.
-/// </para>
-/// </summary>
+/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CreateRepositoryRequestConverter))]
 public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>
 {
@@ -98,54 +72,22 @@ public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "snapshot.create_repository";
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to register or update.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
-	/// If <c>false</c>, this verification is skipped.
-	/// You can also perform this verification with the verify snapshot repository API.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#verify']/*"/>
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 	public required Elastic.Clients.Elasticsearch.Snapshot.IRepository Repository { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update a snapshot repository.
-/// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
-/// To register a snapshot repository, the cluster's global metadata must be writeable.
-/// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
-/// </para>
-/// <para>
-/// Several options for this API can be specified using a query parameter or a request body parameter.
-/// If both parameters are specified, only the query parameter is used.
-/// </para>
-/// </summary>
+/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.create_repository.Request']/*"/>
 public readonly partial struct CreateRepositoryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest Instance { get; init; }
@@ -172,50 +114,28 @@ public readonly partial struct CreateRepositoryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to register or update.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request verifies the repository is functional on all master and data nodes in the cluster.
-	/// If <c>false</c>, this verification is skipped.
-	/// You can also perform this verification with the verify snapshot repository API.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateRepositoryRequest.g.xml" path="doc/member[@key='snapshot.create_repository.Request#verify']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestDescriptor Verify(bool? value = true)
 	{
 		Instance.Verify = value;

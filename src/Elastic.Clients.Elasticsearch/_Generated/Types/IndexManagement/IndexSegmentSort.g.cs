@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSegmentSort']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexSegmentSortConverter))]
 public sealed partial class IndexSegmentSort
 {
@@ -42,6 +43,7 @@ public sealed partial class IndexSegmentSort
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>? Order { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSegmentSort']/*"/>
 public readonly partial struct IndexSegmentSortDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort Instance { get; init; }
@@ -123,6 +125,7 @@ public readonly partial struct IndexSegmentSortDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexSegmentSort']/*"/>
 public readonly partial struct IndexSegmentSortDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexSegmentSort Instance { get; init; }

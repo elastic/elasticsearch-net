@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='text_structure.test_grok_pattern.MatchedText']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.MatchedTextConverter))]
 public sealed partial class MatchedText
 {

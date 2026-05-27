@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security._types.RoleTemplateScript']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.RoleTemplateScriptConverter))]
 public sealed partial class RoleTemplateScript
 {
@@ -36,27 +37,14 @@ public sealed partial class RoleTemplateScript
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The <c>id</c> for a stored script.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleTemplateScript.g.xml" path="doc/member[@key='security._types.RoleTemplateScript#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the language the script is written in.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleTemplateScript.g.xml" path="doc/member[@key='security._types.RoleTemplateScript#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
 	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies any named parameters that are passed into the script as variables.
-	/// Use parameters instead of hard-coded values to decrease compile time.
-	/// </para>
-	/// </summary>
+	/// <include file="RoleTemplateScript.g.xml" path="doc/member[@key='security._types.RoleTemplateScript#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.QueryDsl.Query>? Source { get; set; }
 }

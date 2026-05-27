@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 public sealed partial class CompletionRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform completion inference on the service
-/// </para>
-/// </summary>
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionRequestConverter))]
 public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>
 {
@@ -71,41 +66,21 @@ public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "inference.completion";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Optional task settings
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform completion inference on the service
-/// </para>
-/// </summary>
+/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.completion.Request']/*"/>
 public readonly partial struct CompletionRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CompletionRequest Instance { get; init; }
@@ -132,57 +107,35 @@ public readonly partial struct CompletionRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.CompletionRequest instance) => new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CompletionRequest(Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional task settings
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionRequest.g.xml" path="doc/member[@key='inference.completion.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelConfigInput#field_names"><summary><para>
+An array of input field names for the model.
+</para></summary></member>
+</doc>

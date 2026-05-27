@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.CalendarEvent#calendar_id"><summary><para>
+A string that uniquely identifies a calendar.
+</para></summary></member>
+  <member key="ml._types.CalendarEvent#description"><summary><para>
+A description of the scheduled event.
+</para></summary></member>
+  <member key="ml._types.CalendarEvent#end_time"><summary><para>
+The timestamp for the end of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+</para></summary></member>
+  <member key="ml._types.CalendarEvent#start_time"><summary><para>
+The timestamp for the beginning of the scheduled event in milliseconds since the epoch or ISO 8601 format.
+</para></summary></member>
+</doc>

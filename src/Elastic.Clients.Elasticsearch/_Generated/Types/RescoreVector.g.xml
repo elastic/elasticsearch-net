@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RescoreVector#oversample"><summary><para>
+Applies the specified oversample factor to k on the approximate kNN search
+</para></summary></member>
+</doc>

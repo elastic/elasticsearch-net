@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.NumberRangeQueryConverter))]
 public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
@@ -42,58 +43,32 @@ public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.Que
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public double? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.Number? Gt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.Number? Gte { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.Number? Lt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.Number? Lte { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
 	public double? To { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "number";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery']/*"/>
 public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Instance { get; init; }
@@ -113,14 +88,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -145,44 +113,28 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Gte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Lte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lte = value;
@@ -195,11 +147,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
@@ -221,6 +169,7 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery']/*"/>
 public readonly partial struct NumberRangeQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Instance { get; init; }
@@ -240,14 +189,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -272,44 +214,28 @@ public readonly partial struct NumberRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Greater than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#gte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Gte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Gte = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lt']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lt(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Less than or equal to.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#lte']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Lte(Elastic.Clients.Elasticsearch.Number? value)
 	{
 		Instance.Lte = value;
@@ -322,11 +248,7 @@ public readonly partial struct NumberRangeQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates how the range query matches values for <c>range</c> fields.
-	/// </para>
-	/// </summary>
+	/// <include file="NumberRangeQuery.g.xml" path="doc/member[@key='_types.query_dsl.NumberRangeQuery#relation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.SearchApplicationTemplateConverter))]
 public sealed partial class SearchApplicationTemplate
 {
@@ -42,14 +43,11 @@ public sealed partial class SearchApplicationTemplate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The associated mustache template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationTemplate.g.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate']/*"/>
 public readonly partial struct SearchApplicationTemplateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate Instance { get; init; }
@@ -69,33 +67,21 @@ public readonly partial struct SearchApplicationTemplateDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate instance) => new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The associated mustache template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationTemplate.g.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate#script']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The associated mustache template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationTemplate.g.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate#script']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The associated mustache template.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplicationTemplate.g.xml" path="doc/member[@key='search_application._types.SearchApplicationTemplate#script']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplateDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

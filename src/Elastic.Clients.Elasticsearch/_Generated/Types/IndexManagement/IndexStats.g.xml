@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.stats.IndexStats#completion"><summary><para>
+Contains statistics about completions across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#docs"><summary><para>
+Contains statistics about documents across all primary shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#fielddata"><summary><para>
+Contains statistics about the field data cache across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#flush"><summary><para>
+Contains statistics about flush operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#get"><summary><para>
+Contains statistics about get operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#indexing"><summary><para>
+Contains statistics about indexing operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#indices"><summary><para>
+Contains statistics about indices operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#merges"><summary><para>
+Contains statistics about merge operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#query_cache"><summary><para>
+Contains statistics about the query cache across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#recovery"><summary><para>
+Contains statistics about recovery operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#refresh"><summary><para>
+Contains statistics about refresh operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#request_cache"><summary><para>
+Contains statistics about the request cache across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#search"><summary><para>
+Contains statistics about search operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#segments"><summary><para>
+Contains statistics about segments across all shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#store"><summary><para>
+Contains statistics about the size of shards assigned to the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#translog"><summary><para>
+Contains statistics about transaction log operations for the node.
+</para></summary></member>
+  <member key="indices.stats.IndexStats#warmer"><summary><para>
+Contains statistics about index warming operations for the node.
+</para></summary></member>
+</doc>

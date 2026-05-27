@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TopMetricsValueConverter))]
 public sealed partial class TopMetricsValue
 {
@@ -42,14 +43,11 @@ public sealed partial class TopMetricsValue
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field to return as a metric.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue']/*"/>
 public readonly partial struct TopMetricsValueDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct TopMetricsValueDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field to return as a metric.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field to return as a metric.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -100,6 +90,7 @@ public readonly partial struct TopMetricsValueDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue']/*"/>
 public readonly partial struct TopMetricsValueDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue Instance { get; init; }
@@ -119,22 +110,14 @@ public readonly partial struct TopMetricsValueDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue instance) => new Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue(Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field to return as a metric.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field to return as a metric.
-	/// </para>
-	/// </summary>
+	/// <include file="TopMetricsValue.g.xml" path="doc/member[@key='_types.aggregations.TopMetricsValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValueDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
