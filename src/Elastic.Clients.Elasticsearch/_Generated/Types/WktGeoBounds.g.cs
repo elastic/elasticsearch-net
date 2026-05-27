@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.WktGeoBounds']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.WktGeoBoundsConverter))]
 public sealed partial class WktGeoBounds
 {
@@ -45,6 +46,7 @@ public sealed partial class WktGeoBounds
 	public required string Wkt { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.WktGeoBounds']/*"/>
 public readonly partial struct WktGeoBoundsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.WktGeoBounds Instance { get; init; }

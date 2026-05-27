@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='tasks._types.TaskInfo']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.Json.TaskInfoConverter))]
 public sealed partial class TaskInfo
 {
@@ -53,14 +54,7 @@ public sealed partial class TaskInfo
 	public required bool Cancellable { get; set; }
 	public bool? Cancelled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Human readable text that identifies the particular request that the task is performing.
-	/// For example, it might identify the search request being performed by a search task.
-	/// Other kinds of tasks have different descriptions, like <c>_reindex</c> which has the source and the destination, or <c>_bulk</c> which just has the number of requests and the destination indices.
-	/// Many requests will have only an empty description because more detailed information about the request is not easily available or particularly helpful in identifying the request.
-	/// </para>
-	/// </summary>
+	/// <include file="TaskInfo.g.xml" path="doc/member[@key='tasks._types.TaskInfo#description']/*"/>
 	public string? Description { get; set; }
 	public required System.Collections.Generic.IReadOnlyDictionary<string, string> Headers { get; set; }
 	public required long Id { get; set; }
@@ -70,14 +64,7 @@ public sealed partial class TaskInfo
 	public required System.TimeSpan RunningTimeInNanos { get; set; }
 	public required System.DateTimeOffset StartTimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The internal status of the task, which varies from task to task.
-	/// The format also varies.
-	/// While the goal is to keep the status for a particular task consistent from version to version, this is not always possible because sometimes the implementation changes.
-	/// Fields might be removed from the status for a particular request so any parsing you do of the status might break in minor releases.
-	/// </para>
-	/// </summary>
+	/// <include file="TaskInfo.g.xml" path="doc/member[@key='tasks._types.TaskInfo#status']/*"/>
 	public object? Status { get; set; }
 	public required string Type { get; set; }
 }

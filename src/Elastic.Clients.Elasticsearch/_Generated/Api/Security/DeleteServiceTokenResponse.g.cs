@@ -37,11 +37,6 @@ public sealed partial class DeleteServiceTokenResponse : Elastic.Transport.Produ
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the service account token is successfully deleted, the request returns <c>{"found": true}</c>.
-	/// Otherwise, the response will have status code 404 and <c>found</c> is set to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteServiceTokenResponse.g.xml" path="doc/member[@key='security.delete_service_token.Response#found']/*"/>
 	public required bool Found { get; set; }
 }

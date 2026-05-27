@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Fill mask inference options
-/// </para>
-/// </summary>
+/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FillMaskInferenceOptionsConverter))]
 public sealed partial class FillMaskInferenceOptions
 {
@@ -41,45 +38,22 @@ public sealed partial class FillMaskInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string/token which will be removed from incoming documents and replaced with the inference prediction(s).
-	/// In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer
-	/// has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.
-	/// However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,
-	/// otherwise the request will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#mask_token']/*"/>
 	public string? MaskToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Fill mask inference options
-/// </para>
-/// </summary>
+/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions']/*"/>
 public readonly partial struct FillMaskInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions Instance { get; init; }
@@ -99,59 +73,35 @@ public readonly partial struct FillMaskInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The string/token which will be removed from incoming documents and replaced with the inference prediction(s).
-	/// In a response, this field contains the mask token for the specified model/tokenizer. Each model and tokenizer
-	/// has a predefined mask token which cannot be changed. Thus, it is recommended not to set this value in requests.
-	/// However, if this field is present in a request, its value must match the predefined value for that model/tokenizer,
-	/// otherwise the request will fail.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#mask_token']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor MaskToken(string? value)
 	{
 		Instance.MaskToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="FillMaskInferenceOptions.g.xml" path="doc/member[@key='ml._types.FillMaskInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanWithinQueryConverter))]
 public sealed partial class SpanWithinQuery
 {
@@ -43,34 +44,18 @@ public sealed partial class SpanWithinQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Big { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Little { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery']/*"/>
 public readonly partial struct SpanWithinQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Instance { get; init; }
@@ -90,62 +75,35 @@ public readonly partial struct SpanWithinQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Big = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Little = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor<TDocument> Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>.Build(action);
@@ -167,6 +125,7 @@ public readonly partial struct SpanWithinQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery']/*"/>
 public readonly partial struct SpanWithinQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery Instance { get; init; }
@@ -186,86 +145,49 @@ public readonly partial struct SpanWithinQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Big = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#big']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Big<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Big = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little(Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery value)
 	{
 		Instance.Little = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be any span query.
-	/// Matching spans from <c>little</c> that are enclosed within <c>big</c> are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanWithinQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanWithinQuery#little']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanWithinQueryDescriptor Little<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>> action)
 	{
 		Instance.Little = Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>.Build(action);

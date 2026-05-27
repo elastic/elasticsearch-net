@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="async_search.get.Request"><summary><para>
+Get async search results.
+</para>
+<para>
+Retrieve the results of a previously submitted asynchronous search request.
+If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+</para></summary></member>
+  <member key="async_search.get.Request#id"><summary><para>
+A unique identifier for the async search.
+</para></summary></member>
+  <member key="async_search.get.Request#keep_alive"><summary><para>
+The length of time that the async search should be available in the cluster.
+When not specified, the <c>keep_alive</c> set with the corresponding submit async request will be used.
+Otherwise, it is possible to override the value and extend the validity of the request.
+When this period expires, the search, if still running, is cancelled.
+If the search is completed, its saved results are deleted.
+</para></summary></member>
+  <member key="async_search.get.Request#return_intermediate_results"><summary><para>
+Specifies whether the response should contain intermediate results if the query is still running when the wait_for_completion_timeout
+expires or if no wait_for_completion_timeout is specified.
+If true and the search is still running, the search response
+will include any hits and partial aggregations that are available.
+If false and the search is still running, the search response will not include any hits (but possibly include
+total hits) nor will include any partial aggregations.
+When not specified, the intermediate results are returned for running queries.
+</para></summary></member>
+  <member key="async_search.get.Request#typed_keys"><summary><para>
+Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+</para></summary></member>
+  <member key="async_search.get.Request#wait_for_completion_timeout"><summary><para>
+Specifies to wait for the search to be completed up until the provided timeout.
+Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
+By default no timeout is set meaning that the currently available results will be returned without any additional wait.
+</para></summary></member>
+</doc>

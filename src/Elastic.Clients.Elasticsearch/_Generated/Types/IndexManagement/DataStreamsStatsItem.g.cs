@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamsStatsItemConverter))]
 public sealed partial class DataStreamsStatsItem
 {
@@ -45,43 +46,18 @@ public sealed partial class DataStreamsStatsItem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Current number of backing indices for the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsItem.g.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem#backing_indices']/*"/>
 	public required int BackingIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsItem.g.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem#data_stream']/*"/>
 	public required string DataStream { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The data stream’s highest <c>@timestamp</c> value, converted to milliseconds since the Unix epoch.
-	/// NOTE: This timestamp is provided as a best effort.
-	/// The data stream may contain <c>@timestamp</c> values higher than this if one or more of the following conditions are met:
-	/// The stream contains closed backing indices;
-	/// Backing indices with a lower generation contain higher <c>@timestamp</c> values.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsItem.g.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem#maximum_timestamp']/*"/>
 	public required System.DateTimeOffset MaximumTimestamp { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size of all shards for the data stream’s backing indices.
-	/// This parameter is only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsItem.g.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem#store_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? StoreSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total size, in bytes, of all shards for the data stream’s backing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamsStatsItem.g.xml" path="doc/member[@key='indices.data_streams_stats.DataStreamsStatsItem#store_size_bytes']/*"/>
 	public required long StoreSizeBytes { get; set; }
 }

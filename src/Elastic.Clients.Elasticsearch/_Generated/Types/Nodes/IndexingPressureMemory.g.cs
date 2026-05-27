@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.IndexingPressureMemory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.IndexingPressureMemoryConverter))]
 public sealed partial class IndexingPressureMemory
 {
@@ -36,33 +37,15 @@ public sealed partial class IndexingPressureMemory
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for current indexing load.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='nodes._types.IndexingPressureMemory#current']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Current { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configured memory limit for the indexing requests.
-	/// Replica requests have an automatic limit that is 1.5x this value.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='nodes._types.IndexingPressureMemory#limit']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? Limit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Configured memory limit, in bytes, for the indexing requests.
-	/// Replica requests have an automatic limit that is 1.5x this value.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='nodes._types.IndexingPressureMemory#limit_in_bytes']/*"/>
 	public long? LimitInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics for the cumulative indexing load since the node started.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingPressureMemory.g.xml" path="doc/member[@key='nodes._types.IndexingPressureMemory#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Nodes.PressureMemory? Total { get; set; }
 }

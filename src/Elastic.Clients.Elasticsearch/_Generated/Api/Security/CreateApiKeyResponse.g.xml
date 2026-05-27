@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.create_api_key.Response#api_key"><summary><para>
+Generated API key.
+</para></summary></member>
+  <member key="security.create_api_key.Response#encoded"><summary><para>
+API key credentials which is the base64-encoding of
+the UTF-8 representation of <c>id</c> and <c>api_key</c> joined
+by a colon (<c>:</c>).
+</para></summary></member>
+  <member key="security.create_api_key.Response#expiration"><summary><para>
+Expiration in milliseconds for the API key.
+</para></summary></member>
+  <member key="security.create_api_key.Response#id"><summary><para>
+Unique ID for this API key.
+</para></summary></member>
+  <member key="security.create_api_key.Response#name"><summary><para>
+Specifies the name for this API key.
+</para></summary></member>
+</doc>

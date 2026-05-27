@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.PipelineConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PipelineConfigConverter))]
 public sealed partial class PipelineConfig
 {
@@ -42,25 +43,12 @@ public sealed partial class PipelineConfig
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the ingest pipeline.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineConfig.g.xml" path="doc/member[@key='ingest._types.PipelineConfig#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Processors used to perform transformations on documents before indexing.
-	/// Processors run sequentially in the order specified.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineConfig.g.xml" path="doc/member[@key='ingest._types.PipelineConfig#processors']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.Processor> Processors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Version number used by external systems to track ingest pipelines.
-	/// </para>
-	/// </summary>
+	/// <include file="PipelineConfig.g.xml" path="doc/member[@key='ingest._types.PipelineConfig#version']/*"/>
 	public long? Version { get; set; }
 }

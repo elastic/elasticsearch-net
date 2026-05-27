@@ -23,32 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_token.Request']/*"/>
 public sealed partial class GetTokenRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a token.
-/// </para>
-/// <para>
-/// Create a bearer token for access without requiring basic authentication.
-/// The tokens are created by the Elasticsearch Token Service, which is automatically enabled when you configure TLS on the HTTP interface.
-/// Alternatively, you can explicitly enable the <c>xpack.security.authc.token.enabled</c> setting.
-/// When you are running in production mode, a bootstrap check prevents you from enabling the token service unless you also enable TLS on the HTTP interface.
-/// </para>
-/// <para>
-/// The get token API takes the same parameters as a typical OAuth 2.0 token API except for the use of a JSON request body.
-/// </para>
-/// <para>
-/// A successful get token API call returns a JSON structure that contains the access token, the amount of time (seconds) that the token expires in, the type, and the scope if available.
-/// </para>
-/// <para>
-/// The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
-/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
-/// </para>
-/// </summary>
+/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_token.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetTokenRequestConverter))]
 public sealed partial class GetTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>
 {
@@ -70,81 +52,27 @@ public sealed partial class GetTokenRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "security.get_token";
 
-	/// <summary>
-	/// <para>
-	/// The type of grant.
-	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? GrantType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The base64 encoded kerberos ticket.
-	/// If you specify the <c>_kerberos</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#kerberos_ticket']/*"/>
 	public string? KerberosTicket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The string that was returned when you created the token, which enables you to extend its life.
-	/// If you specify the <c>refresh_token</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#refresh_token']/*"/>
 	public string? RefreshToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The scope of the token.
-	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#scope']/*"/>
 	public string? Scope { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The username that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get a token.
-/// </para>
-/// <para>
-/// Create a bearer token for access without requiring basic authentication.
-/// The tokens are created by the Elasticsearch Token Service, which is automatically enabled when you configure TLS on the HTTP interface.
-/// Alternatively, you can explicitly enable the <c>xpack.security.authc.token.enabled</c> setting.
-/// When you are running in production mode, a bootstrap check prevents you from enabling the token service unless you also enable TLS on the HTTP interface.
-/// </para>
-/// <para>
-/// The get token API takes the same parameters as a typical OAuth 2.0 token API except for the use of a JSON request body.
-/// </para>
-/// <para>
-/// A successful get token API call returns a JSON structure that contains the access token, the amount of time (seconds) that the token expires in, the type, and the scope if available.
-/// </para>
-/// <para>
-/// The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
-/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
-/// </para>
-/// </summary>
+/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_token.Request']/*"/>
 public readonly partial struct GetTokenRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetTokenRequest Instance { get; init; }
@@ -163,76 +91,42 @@ public readonly partial struct GetTokenRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetTokenRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The type of grant.
-	/// Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#grant_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? value)
 	{
 		Instance.GrantType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The base64 encoded kerberos ticket.
-	/// If you specify the <c>_kerberos</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#kerberos_ticket']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor KerberosTicket(string? value)
 	{
 		Instance.KerberosTicket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The user's password.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The string that was returned when you created the token, which enables you to extend its life.
-	/// If you specify the <c>refresh_token</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#refresh_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor RefreshToken(string? value)
 	{
 		Instance.RefreshToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The scope of the token.
-	/// Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#scope']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Scope(string? value)
 	{
 		Instance.Scope = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username that identifies the user.
-	/// If you specify the <c>password</c> grant type, this parameter is required.
-	/// This parameter is not valid with any other supported grant type.
-	/// </para>
-	/// </summary>
+	/// <include file="GetTokenRequest.g.xml" path="doc/member[@key='security.get_token.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;

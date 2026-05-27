@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MinBucketAggregationConverter))]
 public sealed partial class MinBucketAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class MinBucketAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation']/*"/>
 public readonly partial struct MinBucketAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation Instance { get; init; }
@@ -78,34 +67,21 @@ public readonly partial struct MinBucketAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="MinBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.MinBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MinBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;

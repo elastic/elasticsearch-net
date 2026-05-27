@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.change_password.Request']/*"/>
 public sealed partial class ChangePasswordRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Change passwords.
-/// </para>
-/// <para>
-/// Change the passwords of users in the native realm and built-in users.
-/// </para>
-/// </summary>
+/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.change_password.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ChangePasswordRequestConverter))]
 public sealed partial class ChangePasswordRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>
 {
@@ -66,47 +58,21 @@ public sealed partial class ChangePasswordRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.change_password";
 
-	/// <summary>
-	/// <para>
-	/// The user whose password you want to change. If you do not specify this
-	/// parameter, the password is changed for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get => P<Elastic.Clients.Elasticsearch.Username?>("username"); set => PO("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// The new password value. Passwords must be at least 6 characters long.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#password']/*"/>
 	public string? Password { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A hash of the new password value. This must be produced using the same
-	/// hashing algorithm as has been configured for password storage. For more details,
-	/// see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c>
-	/// setting.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#password_hash']/*"/>
 	public string? PasswordHash { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Change passwords.
-/// </para>
-/// <para>
-/// Change the passwords of users in the native realm and built-in users.
-/// </para>
-/// </summary>
+/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.change_password.Request']/*"/>
 public readonly partial struct ChangePasswordRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Instance { get; init; }
@@ -130,48 +96,28 @@ public readonly partial struct ChangePasswordRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest instance) => new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The user whose password you want to change. If you do not specify this
-	/// parameter, the password is changed for the current user.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The new password value. Passwords must be at least 6 characters long.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#password']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor Password(string? value)
 	{
 		Instance.Password = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A hash of the new password value. This must be produced using the same
-	/// hashing algorithm as has been configured for password storage. For more details,
-	/// see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c>
-	/// setting.
-	/// </para>
-	/// </summary>
+	/// <include file="ChangePasswordRequest.g.xml" path="doc/member[@key='security.change_password.Request#password_hash']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor PasswordHash(string? value)
 	{
 		Instance.PasswordHash = value;

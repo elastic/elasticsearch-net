@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TextEmbeddingInferenceOptions"><summary><para>
+Text embedding inference options
+</para></summary></member>
+  <member key="ml._types.TextEmbeddingInferenceOptions#embedding_size"><summary><para>
+The number of dimensions in the embedding output
+</para></summary></member>
+  <member key="ml._types.TextEmbeddingInferenceOptions#results_field"><summary><para>
+The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+</para></summary></member>
+  <member key="ml._types.TextEmbeddingInferenceOptions#tokenization"><summary><para>
+The tokenization options
+</para></summary></member>
+</doc>

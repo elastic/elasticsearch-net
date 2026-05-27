@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.GapPolicy#insert_zeros"><summary><para>
+Replace missing values with a zero (0) and pipeline aggregation computation will proceed as normal.
+</para></summary></member>
+  <member key="_types.aggregations.GapPolicy#keep_values"><summary><para>
+Similar to skip, except if the metric provides a non-null, non-NaN value this value is used,
+otherwise the empty bucket is skipped.
+</para></summary></member>
+  <member key="_types.aggregations.GapPolicy#skip"><summary><para>
+Treats missing data as if the bucket does not exist. It will skip the bucket and
+continue calculating using the next available value.
+</para></summary></member>
+</doc>

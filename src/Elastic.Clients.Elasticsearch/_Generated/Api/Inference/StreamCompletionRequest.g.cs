@@ -23,31 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
 public sealed partial class StreamCompletionRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform streaming completion inference on the service.
-/// </para>
-/// <para>
-/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-/// This API works only with the completion task type.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
-/// </para>
-/// </summary>
+/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.StreamCompletionRequestConverter))]
 public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>
 {
@@ -85,54 +70,21 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform streaming completion inference on the service.
-/// </para>
-/// <para>
-/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-/// This API works only with the completion task type.
-/// </para>
-/// <para>
-/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
-/// </para>
-/// <para>
-/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
-/// </para>
-/// </summary>
+/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.stream_completion.Request']/*"/>
 public readonly partial struct StreamCompletionRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest Instance { get; init; }
@@ -159,63 +111,35 @@ public readonly partial struct StreamCompletionRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest instance) => new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The text on which you want to perform the inference task.
-	/// It can be a single string or an array.
-	/// </para>
-	/// <para>
-	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamCompletionRequest.g.xml" path="doc/member[@key='inference.stream_completion.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

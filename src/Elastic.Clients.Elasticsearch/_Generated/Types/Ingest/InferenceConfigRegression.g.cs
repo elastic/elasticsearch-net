@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InferenceConfigRegressionConverter))]
 public sealed partial class InferenceConfigRegression
 {
@@ -36,21 +37,14 @@ public sealed partial class InferenceConfigRegression
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#num_top_feature_importance_values']/*"/>
 	public int? NumTopFeatureImportanceValues { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? ResultsField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression']/*"/>
 public readonly partial struct InferenceConfigRegressionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Instance { get; init; }
@@ -70,33 +64,21 @@ public readonly partial struct InferenceConfigRegressionDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor<TDocument> ResultsField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.ResultsField = value;
@@ -117,6 +99,7 @@ public readonly partial struct InferenceConfigRegressionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression']/*"/>
 public readonly partial struct InferenceConfigRegressionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression Instance { get; init; }
@@ -136,33 +119,21 @@ public readonly partial struct InferenceConfigRegressionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegression(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of feature importance values per document.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#num_top_feature_importance_values']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor NumTopFeatureImportanceValues(int? value)
 	{
 		Instance.NumTopFeatureImportanceValues = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor ResultsField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction.
-	/// </para>
-	/// </summary>
+	/// <include file="InferenceConfigRegression.g.xml" path="doc/member[@key='ingest._types.InferenceConfigRegression#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfigRegressionDescriptor ResultsField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.ResultsField = value;

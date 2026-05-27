@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityLmj']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityLmjConverter))]
 public sealed partial class SettingsSimilarityLmj : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
@@ -41,6 +42,7 @@ public sealed partial class SettingsSimilarityLmj : Elastic.Clients.Elasticsearc
 	public string Type => "LMJelinekMercer";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SettingsSimilarityLmj']/*"/>
 public readonly partial struct SettingsSimilarityLmjDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj Instance { get; init; }

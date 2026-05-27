@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Filter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FilterConverter))]
 public sealed partial class Filter
 {
@@ -43,24 +44,12 @@ public sealed partial class Filter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the filter.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='ml._types.Filter#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a filter.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='ml._types.Filter#filter_id']/*"/>
 	public required string FilterId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of strings which is the filter item list.
-	/// </para>
-	/// </summary>
+	/// <include file="Filter.g.xml" path="doc/member[@key='ml._types.Filter#items']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Items { get; set; }
 }

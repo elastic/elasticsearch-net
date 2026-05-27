@@ -48,15 +48,6 @@ public sealed partial class GeoGridQuery
 	public string? Geohash { get => GetVariant<string>("geohash"); set => SetVariant("geohash", value); }
 	public string? Geohex { get => GetVariant<string>("geohex"); set => SetVariant("geohex", value); }
 	public string? Geotile { get => GetVariant<string>("geotile"); set => SetVariant("geotile", value); }
-
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public string? QueryName { get; set; }
@@ -117,14 +108,6 @@ public readonly partial struct GeoGridQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -195,14 +178,6 @@ public readonly partial struct GeoGridQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.GeoGridQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

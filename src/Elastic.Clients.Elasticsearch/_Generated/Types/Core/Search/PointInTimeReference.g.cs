@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PointInTimeReference']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PointInTimeReferenceConverter))]
 public sealed partial class PointInTimeReference
 {
@@ -46,6 +47,7 @@ public sealed partial class PointInTimeReference
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PointInTimeReference']/*"/>
 public readonly partial struct PointInTimeReferenceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference Instance { get; init; }

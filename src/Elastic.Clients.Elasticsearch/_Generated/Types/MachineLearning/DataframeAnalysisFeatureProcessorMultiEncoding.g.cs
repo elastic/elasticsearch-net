@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorMultiEncoding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisFeatureProcessorMultiEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 {
@@ -42,14 +43,11 @@ public sealed partial class DataframeAnalysisFeatureProcessorMultiEncoding
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ordered array of custom processors to execute. Must be more than 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorMultiEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorMultiEncoding#processors']/*"/>
 	public required System.Collections.Generic.ICollection<int> Processors { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorMultiEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorMultiEncodingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct DataframeAnalysisFeatureProcessorMultiEncodingDes
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncoding(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ordered array of custom processors to execute. Must be more than 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorMultiEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorMultiEncoding#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors(System.Collections.Generic.ICollection<int> value)
 	{
 		Instance.Processors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ordered array of custom processors to execute. Must be more than 1.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorMultiEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorMultiEncoding#processors']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorMultiEncodingDescriptor Processors(params int[] values)
 	{
 		Instance.Processors = [.. values];

@@ -23,55 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 public sealed partial class ExistsAliasRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check aliases.
-/// </para>
-/// <para>
-/// Check if one or more data stream or index aliases exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ExistsAliasRequestConverter))]
 public sealed partial class ExistsAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestParameters>
 {
@@ -103,68 +73,27 @@ public sealed partial class ExistsAliasRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "indices.exists_alias";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request. Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to check. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check aliases.
-/// </para>
-/// <para>
-/// Check if one or more data stream or index aliases exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 public readonly partial struct ExistsAliasRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest Instance { get; init; }
@@ -194,90 +123,49 @@ public readonly partial struct ExistsAliasRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request. Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to check. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -340,14 +228,8 @@ public readonly partial struct ExistsAliasRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Check aliases.
-/// </para>
-/// <para>
-/// Check if one or more data stream or index aliases exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists_alias.Request']/*"/>
 public readonly partial struct ExistsAliasRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest Instance { get; init; }
@@ -377,90 +259,49 @@ public readonly partial struct ExistsAliasRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams or indices used to limit the request. Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of aliases to check. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsAliasRequest.g.xml" path="doc/member[@key='indices.exists_alias.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.FieldMetric']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.FieldMetricConverter))]
 public sealed partial class FieldMetric
 {
@@ -43,21 +44,14 @@ public sealed partial class FieldMetric
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#metrics']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.FieldMetric']/*"/>
 public readonly partial struct FieldMetricDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.FieldMetric Instance { get; init; }
@@ -77,44 +71,28 @@ public readonly partial struct FieldMetricDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance) => new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Rollup.Metric[] values)
 	{
 		Instance.Metrics = [.. values];
@@ -130,6 +108,7 @@ public readonly partial struct FieldMetricDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup._types.FieldMetric']/*"/>
 public readonly partial struct FieldMetricDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.FieldMetric Instance { get; init; }
@@ -149,44 +128,28 @@ public readonly partial struct FieldMetricDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance) => new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> value)
 	{
 		Instance.Metrics = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of metrics to collect for the field. At least one metric must be configured.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldMetric.g.xml" path="doc/member[@key='rollup._types.FieldMetric#metrics']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(params Elastic.Clients.Elasticsearch.Rollup.Metric[] values)
 	{
 		Instance.Metrics = [.. values];

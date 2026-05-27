@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.DiversifyRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DiversifyRetrieverConverter))]
 public sealed partial class DiversifyRetriever
 {
@@ -44,84 +45,41 @@ public sealed partial class DiversifyRetriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The document field on which to diversify results on.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#field']/*"/>
 	public required string Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the trade-off between relevance and diversity for MMR. A value of 0.0 focuses solely on diversity, while a value of 1.0 focuses solely on relevance. Required for MMR
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#lambda']/*"/>
 	public float? Lambda { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#_name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query vector used for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
 	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// a dense vector query vector builder to use instead of a static query_vector
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from the nested retriever to consider for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#rank_window_size']/*"/>
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public required Elastic.Clients.Elasticsearch.Retriever Retriever { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents to return after diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The diversification strategy to apply.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes Type { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.DiversifyRetriever']/*"/>
 public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.DiversifyRetriever Instance { get; init; }
@@ -141,44 +99,28 @@ public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.DiversifyRetriever instance) => new Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DiversifyRetriever(Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document field on which to diversify results on.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#field']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -191,132 +133,84 @@ public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the trade-off between relevance and diversity for MMR. A value of 0.0 focuses solely on diversity, while a value of 1.0 focuses solely on relevance. Required for MMR
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#lambda']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Lambda(float? value)
 	{
 		Instance.Lambda = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector used for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector used for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// a dense vector query vector builder to use instead of a static query_vector
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// a dense vector query vector builder to use instead of a static query_vector
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from the nested retriever to consider for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents to return after diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#size']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The diversification strategy to apply.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#type']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes value)
 	{
 		Instance.Type = value;
@@ -332,6 +226,7 @@ public readonly partial struct DiversifyRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.DiversifyRetriever']/*"/>
 public readonly partial struct DiversifyRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.DiversifyRetriever Instance { get; init; }
@@ -351,44 +246,28 @@ public readonly partial struct DiversifyRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor(Elastic.Clients.Elasticsearch.DiversifyRetriever instance) => new Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DiversifyRetriever(Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The document field on which to diversify results on.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#field']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -401,11 +280,7 @@ public readonly partial struct DiversifyRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -418,143 +293,91 @@ public readonly partial struct DiversifyRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the trade-off between relevance and diversity for MMR. A value of 0.0 focuses solely on diversity, while a value of 1.0 focuses solely on relevance. Required for MMR
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#lambda']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Lambda(float? value)
 	{
 		Instance.Lambda = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector used for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector used for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// a dense vector query vector builder to use instead of a static query_vector
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// a dense vector query vector builder to use instead of a static query_vector
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents from the nested retriever to consider for diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever value)
 	{
 		Instance.Retriever = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The nested retriever whose results will be diversified.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#retriever']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
 	{
 		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of top documents to return after diversification.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#size']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The diversification strategy to apply.
-	/// </para>
-	/// </summary>
+	/// <include file="DiversifyRetriever.g.xml" path="doc/member[@key='_types.DiversifyRetriever#type']/*"/>
 	public Elastic.Clients.Elasticsearch.DiversifyRetrieverDescriptor Type(Elastic.Clients.Elasticsearch.DiversifyRetrieverTypes value)
 	{
 		Instance.Type = value;

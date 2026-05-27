@@ -26,9 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Tasks;
 public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
-	/// <para>
-	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Tasks.TasksNamespacedClient"/> class for mocking.
-	/// </para>
+	/// Initializes a new instance of the <cref:Elastic.Clients.Elasticsearch.Tasks.TasksNamespacedClient> class for mocking.
 	/// </summary>
 	protected TasksNamespacedClient() : base()
 	{
@@ -38,12 +36,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 	{
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.Tasks.CancelRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
@@ -52,6 +54,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
@@ -61,6 +65,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
@@ -69,6 +75,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.CancelResponse Cancel(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
@@ -78,12 +86,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.Tasks.CancelRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
@@ -92,6 +104,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor();
@@ -101,6 +115,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
@@ -109,6 +125,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/CancelRequest.g.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.cancel.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.CancelResponse> CancelAsync(Elastic.Clients.Elasticsearch.TaskId? taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.CancelRequestDescriptor(taskId);
@@ -118,12 +136,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.CancelRequest, Elastic.Clients.Elasticsearch.Tasks.CancelResponse, Elastic.Clients.Elasticsearch.Tasks.CancelRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Get(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
@@ -132,6 +154,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse Get(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
@@ -141,12 +165,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
@@ -155,6 +183,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/GetTasksRequest.g.xml" path="doc/member[@key='tasks.get.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.get.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse> GetAsync(Elastic.Clients.Elasticsearch.Id taskId, System.Action<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestDescriptor(taskId);
@@ -164,12 +194,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.GetTasksRequest, Elastic.Clients.Elasticsearch.Tasks.GetTasksResponse, Elastic.Clients.Elasticsearch.Tasks.GetTasksRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List(Elastic.Clients.Elasticsearch.Tasks.ListRequest request)
 	{
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
@@ -178,6 +212,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual Elastic.Clients.Elasticsearch.Tasks.ListResponse List(System.Action<Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
@@ -187,12 +223,16 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.Tasks.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();
@@ -201,6 +241,8 @@ public partial class TasksNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Tasks.ListRequest, Elastic.Clients.Elasticsearch.Tasks.ListResponse, Elastic.Clients.Elasticsearch.Tasks.ListRequestParameters>(request, cancellationToken);
 	}
 
+	/// <include file="../Api/Tasks/ListRequest.g.xml" path="doc/member[@key='tasks.list.Request']/*"/>
+	/// <include file="../SpecReferences.xml" path="doc/member[@key='tasks.list.Request']/*"/>
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Tasks.ListResponse> ListAsync(System.Action<Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Tasks.ListRequestDescriptor();

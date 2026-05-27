@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.UriPartsProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#field"><summary><para>
+Field containing the URI string.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#keep_original"><summary><para>
+If <c>true</c>, the processor copies the unparsed URI to <c>&lt;target_field>.original</c>.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#remove_if_successful"><summary><para>
+If <c>true</c>, the processor removes the <c>field</c> after parsing the URI string.
+If parsing fails, the processor does not remove the <c>field</c>.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.UriPartsProcessor#target_field"><summary><para>
+Output field for the URI object.
+</para></summary></member>
+</doc>

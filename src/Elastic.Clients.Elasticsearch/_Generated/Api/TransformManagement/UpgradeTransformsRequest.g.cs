@@ -23,46 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 public sealed partial class UpgradeTransformsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// When true, the request checks for updates but does not run them.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
-	/// returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Upgrade all transforms.
-/// </para>
-/// <para>
-/// Transforms are compatible across minor versions and between supported major versions.
-/// However, over time, the format of transform configuration information may change.
-/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-/// It also cleans up the internal data structures that store the transform state and checkpoints.
-/// The upgrade does not affect the source and destination indices.
-/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-/// </para>
-/// <para>
-/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-/// Resolve the issue then re-run the process again.
-/// A summary is returned when the upgrade is finished.
-/// </para>
-/// <para>
-/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-/// You may want to perform a recent cluster backup prior to the upgrade.
-/// </para>
-/// </summary>
+/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.UpgradeTransformsRequestConverter))]
 public sealed partial class UpgradeTransformsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>
 {
@@ -84,44 +57,15 @@ public sealed partial class UpgradeTransformsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "transform.upgrade_transforms";
 
-	/// <summary>
-	/// <para>
-	/// When true, the request checks for updates but does not run them.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
-	/// returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Upgrade all transforms.
-/// </para>
-/// <para>
-/// Transforms are compatible across minor versions and between supported major versions.
-/// However, over time, the format of transform configuration information may change.
-/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
-/// It also cleans up the internal data structures that store the transform state and checkpoints.
-/// The upgrade does not affect the source and destination indices.
-/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
-/// </para>
-/// <para>
-/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
-/// Resolve the issue then re-run the process again.
-/// A summary is returned when the upgrade is finished.
-/// </para>
-/// <para>
-/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
-/// You may want to perform a recent cluster backup prior to the upgrade.
-/// </para>
-/// </summary>
+/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.upgrade_transforms.Request']/*"/>
 public readonly partial struct UpgradeTransformsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest Instance { get; init; }
@@ -140,23 +84,14 @@ public readonly partial struct UpgradeTransformsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// When true, the request checks for updates but does not run them.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
-	/// returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="UpgradeTransformsRequest.g.xml" path="doc/member[@key='transform.upgrade_transforms.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

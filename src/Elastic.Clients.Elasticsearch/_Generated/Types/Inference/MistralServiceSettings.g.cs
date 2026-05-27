@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.MistralServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.MistralServiceSettingsConverter))]
 public sealed partial class MistralServiceSettings
 {
@@ -43,42 +44,20 @@ public sealed partial class MistralServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Mistral account.
-	/// You can find your Mistral API keys or you can create a new one on the API Keys page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#max_input_tokens']/*"/>
 	public int? MaxInputTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available models.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#model']/*"/>
 	public required string Model { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Mistral API.
-	/// By default, the <c>mistral</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.MistralServiceSettings']/*"/>
 public readonly partial struct MistralServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings Instance { get; init; }
@@ -98,75 +77,42 @@ public readonly partial struct MistralServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings(Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your Mistral account.
-	/// You can find your Mistral API keys or you can create a new one on the API Keys page.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#max_input_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor MaxInputTokens(int? value)
 	{
 		Instance.MaxInputTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available models.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#model']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor Model(string value)
 	{
 		Instance.Model = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Mistral API.
-	/// By default, the <c>mistral</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Mistral API.
-	/// By default, the <c>mistral</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Mistral API.
-	/// By default, the <c>mistral</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="MistralServiceSettings.g.xml" path="doc/member[@key='inference._types.MistralServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);

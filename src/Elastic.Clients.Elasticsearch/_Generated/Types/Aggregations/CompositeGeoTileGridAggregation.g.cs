@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeGeoTileGridAggregationConverter))]
 public sealed partial class CompositeGeoTileGridAggregation
 {
@@ -38,26 +39,19 @@ public sealed partial class CompositeGeoTileGridAggregation
 
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 	public int? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation']/*"/>
 public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Instance { get; init; }
@@ -89,22 +83,14 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocume
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -135,33 +121,21 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocume
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -188,6 +162,7 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor<TDocume
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation']/*"/>
 public readonly partial struct CompositeGeoTileGridAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation Instance { get; init; }
@@ -219,22 +194,14 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -265,33 +232,21 @@ public readonly partial struct CompositeGeoTileGridAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeGeoTileGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeGeoTileGridAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

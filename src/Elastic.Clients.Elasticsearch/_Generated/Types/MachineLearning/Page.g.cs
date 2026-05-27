@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Page']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PageConverter))]
 public sealed partial class Page
 {
@@ -36,21 +37,14 @@ public sealed partial class Page
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of items.
-	/// </para>
-	/// </summary>
+	/// <include file="Page.g.xml" path="doc/member[@key='ml._types.Page#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of items to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="Page.g.xml" path="doc/member[@key='ml._types.Page#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Page']/*"/>
 public readonly partial struct PageDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Page Instance { get; init; }
@@ -70,22 +64,14 @@ public readonly partial struct PageDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.Page instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.Page(Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of items.
-	/// </para>
-	/// </summary>
+	/// <include file="Page.g.xml" path="doc/member[@key='ml._types.Page#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of items to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="Page.g.xml" path="doc/member[@key='ml._types.Page#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor Size(int? value)
 	{
 		Instance.Size = value;

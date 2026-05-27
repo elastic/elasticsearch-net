@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsForS3Converter))]
 public sealed partial class SourceOnlyRepositorySettingsForS3 : Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings
 {
@@ -42,150 +43,55 @@ public sealed partial class SourceOnlyRepositorySettingsForS3 : Elastic.Clients.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within its bucket.
-	/// It defaults to an empty string, meaning that the repository is at the root of the bucket.
-	/// The value of this setting should not start or end with a forward slash (<c>/</c>).
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set base_path when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments may share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#base_path']/*"/>
 	public string? BasePath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the S3 bucket to use for snapshots.
-	/// The bucket name must adhere to Amazon's S3 bucket naming rules.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#bucket']/*"/>
 	public required string Bucket { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum threshold below which the chunk is uploaded using a single request.
-	/// Beyond this threshold, the S3 repository will use the AWS Multipart Upload API to split the chunk into several parts, each of <c>buffer_size</c> length, and to upload each part in its own request.
-	/// Note that setting a buffer size lower than 5mb is not allowed since it will prevent the use of the Multipart API and may result in upload errors.
-	/// It is also not possible to set a buffer size greater than 5gb as it is the maximum upload size allowed by S3.
-	/// Defaults to <c>100mb</c> or 5% of JVM heap, whichever is smaller.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? BufferSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The S3 repository supports all S3 canned ACLs: <c>private</c>, <c>public-read</c>, <c>public-read-write</c>, <c>authenticated-read</c>, <c>log-delivery-write</c>, <c>bucket-owner-read</c>, <c>bucket-owner-full-control</c>.
-	/// You could specify a canned ACL using the <c>canned_acl</c> setting.
-	/// When the S3 repository creates buckets and objects, it adds the canned ACL into the buckets and objects.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#canned_acl']/*"/>
 	public string? CannedAcl { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the S3 client to use to connect to S3.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#client']/*"/>
 	public string? Client { get; set; }
 
 	public string DelegateType => "s3";
 
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 1000, used for <c>DeleteObjects</c> requests.
-	/// Defaults to 1000 which is the maximum number supported by the  AWS DeleteObjects API.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#delete_objects_max_size']/*"/>
 	public int? DeleteObjectsMaxSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The time to wait before trying again if an attempt to read a linearizable register fails.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#get_register_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? GetRegisterRetryDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of parts that Elasticsearch will write during a multipart upload of a single object.
-	/// Files which are larger than <c>buffer_size × max_multipart_parts</c> will be chunked into several smaller objects.
-	/// Elasticsearch may also split a file across multiple objects to satisfy other constraints such as the <c>chunk_size</c> limit.
-	/// Defaults to <c>10000</c> which is the maximum number of parts in a multipart upload in AWS S3.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#max_multipart_parts']/*"/>
 	public int? MaxMultipartParts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of possibly-dangling multipart uploads to clean up in each batch of snapshot deletions.
-	/// Defaults to 1000 which is the maximum number supported by the AWS ListMultipartUploads API.
-	/// If set to <c>0</c>, Elasticsearch will not attempt to clean up dangling multipart uploads.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#max_multipart_upload_cleanup_size']/*"/>
 	public int? MaxMultipartUploadCleanupSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#readonly']/*"/>
 	public bool? Readonly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, files are encrypted on server side using an AES256 algorithm.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#server_side_encryption']/*"/>
 	public bool? ServerSideEncryption { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The S3 storage class for objects written to the repository.
-	/// Values may be <c>standard</c>, <c>reduced_redundancy</c>, <c>standard_ia</c>, <c>onezone_ia</c>, and <c>intelligent_tiering</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#storage_class']/*"/>
 	public string? StorageClass { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The delay before the first retry and the amount the delay is incremented by on each subsequent retry.
-	/// The default is 50ms and the minimum is 0ms.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.delay_increment']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledDeleteRetryDelayIncrement { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The upper bound on how long the delays between retries will grow to.
-	/// The default is 5s and the minimum is 0ms.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.maximum_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ThrottledDeleteRetryMaximumDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number times to retry a throttled snapshot deletion.
-	/// The default is 10 and the minimum value is 0 which will disable retries altogether.
-	/// Note that if retries are enabled in the Azure client, each of these retries comprises that many client-level retries.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.maximum_number_of_retries']/*"/>
 	public int? ThrottledDeleteRetryMaximumNumberOfRetries { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3']/*"/>
 public readonly partial struct SourceOnlyRepositorySettingsForS3Descriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3 Instance { get; init; }
@@ -205,216 +111,112 @@ public readonly partial struct SourceOnlyRepositorySettingsForS3Descriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3 instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within its bucket.
-	/// It defaults to an empty string, meaning that the repository is at the root of the bucket.
-	/// The value of this setting should not start or end with a forward slash (<c>/</c>).
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set base_path when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments may share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#base_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor BasePath(string? value)
 	{
 		Instance.BasePath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the S3 bucket to use for snapshots.
-	/// The bucket name must adhere to Amazon's S3 bucket naming rules.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#bucket']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor Bucket(string value)
 	{
 		Instance.Bucket = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum threshold below which the chunk is uploaded using a single request.
-	/// Beyond this threshold, the S3 repository will use the AWS Multipart Upload API to split the chunk into several parts, each of <c>buffer_size</c> length, and to upload each part in its own request.
-	/// Note that setting a buffer size lower than 5mb is not allowed since it will prevent the use of the Multipart API and may result in upload errors.
-	/// It is also not possible to set a buffer size greater than 5gb as it is the maximum upload size allowed by S3.
-	/// Defaults to <c>100mb</c> or 5% of JVM heap, whichever is smaller.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor BufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.BufferSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum threshold below which the chunk is uploaded using a single request.
-	/// Beyond this threshold, the S3 repository will use the AWS Multipart Upload API to split the chunk into several parts, each of <c>buffer_size</c> length, and to upload each part in its own request.
-	/// Note that setting a buffer size lower than 5mb is not allowed since it will prevent the use of the Multipart API and may result in upload errors.
-	/// It is also not possible to set a buffer size greater than 5gb as it is the maximum upload size allowed by S3.
-	/// Defaults to <c>100mb</c> or 5% of JVM heap, whichever is smaller.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor BufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.BufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The S3 repository supports all S3 canned ACLs: <c>private</c>, <c>public-read</c>, <c>public-read-write</c>, <c>authenticated-read</c>, <c>log-delivery-write</c>, <c>bucket-owner-read</c>, <c>bucket-owner-full-control</c>.
-	/// You could specify a canned ACL using the <c>canned_acl</c> setting.
-	/// When the S3 repository creates buckets and objects, it adds the canned ACL into the buckets and objects.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#canned_acl']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor CannedAcl(string? value)
 	{
 		Instance.CannedAcl = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the S3 client to use to connect to S3.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#client']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor Client(string? value)
 	{
 		Instance.Client = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 1000, used for <c>DeleteObjects</c> requests.
-	/// Defaults to 1000 which is the maximum number supported by the  AWS DeleteObjects API.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#delete_objects_max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor DeleteObjectsMaxSize(int? value)
 	{
 		Instance.DeleteObjectsMaxSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The time to wait before trying again if an attempt to read a linearizable register fails.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#get_register_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor GetRegisterRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.GetRegisterRetryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of parts that Elasticsearch will write during a multipart upload of a single object.
-	/// Files which are larger than <c>buffer_size × max_multipart_parts</c> will be chunked into several smaller objects.
-	/// Elasticsearch may also split a file across multiple objects to satisfy other constraints such as the <c>chunk_size</c> limit.
-	/// Defaults to <c>10000</c> which is the maximum number of parts in a multipart upload in AWS S3.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#max_multipart_parts']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor MaxMultipartParts(int? value)
 	{
 		Instance.MaxMultipartParts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of possibly-dangling multipart uploads to clean up in each batch of snapshot deletions.
-	/// Defaults to 1000 which is the maximum number supported by the AWS ListMultipartUploads API.
-	/// If set to <c>0</c>, Elasticsearch will not attempt to clean up dangling multipart uploads.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#max_multipart_upload_cleanup_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor MaxMultipartUploadCleanupSize(int? value)
 	{
 		Instance.MaxMultipartUploadCleanupSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// </para>
-	/// <para>
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor Readonly(bool? value = true)
 	{
 		Instance.Readonly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, files are encrypted on server side using an AES256 algorithm.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#server_side_encryption']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor ServerSideEncryption(bool? value = true)
 	{
 		Instance.ServerSideEncryption = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The S3 storage class for objects written to the repository.
-	/// Values may be <c>standard</c>, <c>reduced_redundancy</c>, <c>standard_ia</c>, <c>onezone_ia</c>, and <c>intelligent_tiering</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#storage_class']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor StorageClass(string? value)
 	{
 		Instance.StorageClass = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The delay before the first retry and the amount the delay is incremented by on each subsequent retry.
-	/// The default is 50ms and the minimum is 0ms.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.delay_increment']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor ThrottledDeleteRetryDelayIncrement(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ThrottledDeleteRetryDelayIncrement = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The upper bound on how long the delays between retries will grow to.
-	/// The default is 5s and the minimum is 0ms.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.maximum_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor ThrottledDeleteRetryMaximumDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ThrottledDeleteRetryMaximumDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number times to retry a throttled snapshot deletion.
-	/// The default is 10 and the minimum value is 0 which will disable retries altogether.
-	/// Note that if retries are enabled in the Azure client, each of these retries comprises that many client-level retries.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForS3.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForS3#throttled_delete_retry.maximum_number_of_retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForS3Descriptor ThrottledDeleteRetryMaximumNumberOfRetries(int? value)
 	{
 		Instance.ThrottledDeleteRetryMaximumNumberOfRetries = value;

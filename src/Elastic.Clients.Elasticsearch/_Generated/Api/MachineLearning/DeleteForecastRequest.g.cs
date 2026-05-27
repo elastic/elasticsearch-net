@@ -23,39 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
 public sealed partial class DeleteForecastRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies whether an error occurs when there are no forecasts. In
-	/// particular, if this parameter is set to <c>false</c> and there are no
-	/// forecasts associated with the job, attempts to delete all forecasts
-	/// return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#allow_no_forecasts']/*"/>
 	public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for the completion of the delete
-	/// operation. When this period of time elapses, the API fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete forecasts from a job.
-/// </para>
-/// <para>
-/// By default, forecasts are retained for 14 days. You can specify a
-/// different retention period with the <c>expires_in</c> parameter in the forecast
-/// jobs API. The delete forecast API enables you to delete one or more
-/// forecasts before they expire.
-/// </para>
-/// </summary>
+/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteForecastRequestConverter))]
 public sealed partial class DeleteForecastRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestParameters>
 {
@@ -87,53 +67,21 @@ public sealed partial class DeleteForecastRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "ml.delete_forecast";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of forecast identifiers. If you do not specify
-	/// this optional parameter or if you specify <c>_all</c> or <c>*</c> the API deletes
-	/// all forecasts from the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#forecast_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? ForecastId { get => P<Elastic.Clients.Elasticsearch.Id?>("forecast_id"); set => PO("forecast_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether an error occurs when there are no forecasts. In
-	/// particular, if this parameter is set to <c>false</c> and there are no
-	/// forecasts associated with the job, attempts to delete all forecasts
-	/// return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#allow_no_forecasts']/*"/>
 	public bool? AllowNoForecasts { get => Q<bool?>("allow_no_forecasts"); set => Q("allow_no_forecasts", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for the completion of the delete
-	/// operation. When this period of time elapses, the API fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete forecasts from a job.
-/// </para>
-/// <para>
-/// By default, forecasts are retained for 14 days. You can specify a
-/// different retention period with the <c>expires_in</c> parameter in the forecast
-/// jobs API. The delete forecast API enables you to delete one or more
-/// forecasts before they expire.
-/// </para>
-/// </summary>
+/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_forecast.Request']/*"/>
 public readonly partial struct DeleteForecastRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest Instance { get; init; }
@@ -163,51 +111,28 @@ public readonly partial struct DeleteForecastRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of forecast identifiers. If you do not specify
-	/// this optional parameter or if you specify <c>_all</c> or <c>*</c> the API deletes
-	/// all forecasts from the job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#forecast_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor ForecastId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.ForecastId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether an error occurs when there are no forecasts. In
-	/// particular, if this parameter is set to <c>false</c> and there are no
-	/// forecasts associated with the job, attempts to delete all forecasts
-	/// return an error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#allow_no_forecasts']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor AllowNoForecasts(bool? value = true)
 	{
 		Instance.AllowNoForecasts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the period of time to wait for the completion of the delete
-	/// operation. When this period of time elapses, the API fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteForecastRequest.g.xml" path="doc/member[@key='ml.delete_forecast.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteForecastRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

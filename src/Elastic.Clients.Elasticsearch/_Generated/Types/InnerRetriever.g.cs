@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InnerRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InnerRetrieverConverter))]
 public sealed partial class InnerRetriever
 {
@@ -49,6 +50,7 @@ public sealed partial class InnerRetriever
 	public required float Weight { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InnerRetriever']/*"/>
 public readonly partial struct InnerRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.InnerRetriever Instance { get; init; }
@@ -101,6 +103,7 @@ public readonly partial struct InnerRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.InnerRetriever']/*"/>
 public readonly partial struct InnerRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.InnerRetriever Instance { get; init; }

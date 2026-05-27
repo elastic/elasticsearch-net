@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="rollup._types.TermsGrouping#fields"><summary><para>
+The set of fields that you wish to collect terms for.
+This array can contain fields that are both keyword and numerics.
+Order does not matter.
+</para></summary></member>
+</doc>

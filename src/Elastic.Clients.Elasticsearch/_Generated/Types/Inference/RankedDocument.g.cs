@@ -23,14 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The rerank result object representing a single ranked document
-/// id: the original index of the document in the request
-/// relevance_score: the relevance_score of the document relative to the query
-/// text: Optional, the text of the document, if requested
-/// </para>
-/// </summary>
+/// <include file="RankedDocument.g.xml" path="doc/member[@key='inference._types.RankedDocument']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.RankedDocument']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RankedDocumentConverter))]
 public sealed partial class RankedDocument
 {

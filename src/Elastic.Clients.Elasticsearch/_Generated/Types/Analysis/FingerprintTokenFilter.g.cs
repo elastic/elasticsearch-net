@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FingerprintTokenFilterConverter))]
 public sealed partial class FingerprintTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,18 +37,10 @@ public sealed partial class FingerprintTokenFilter : Elastic.Clients.Elasticsear
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintTokenFilter.g.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter#max_output_size']/*"/>
 	public int? MaxOutputSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Character to use to concatenate the token stream input. Defaults to a space.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintTokenFilter.g.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter#separator']/*"/>
 	public string? Separator { get; set; }
 
 	public string Type => "fingerprint";
@@ -55,6 +48,7 @@ public sealed partial class FingerprintTokenFilter : Elastic.Clients.Elasticsear
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter']/*"/>
 public readonly partial struct FingerprintTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter Instance { get; init; }
@@ -74,22 +68,14 @@ public readonly partial struct FingerprintTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintTokenFilter.g.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter#max_output_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor MaxOutputSize(int? value)
 	{
 		Instance.MaxOutputSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Character to use to concatenate the token stream input. Defaults to a space.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintTokenFilter.g.xml" path="doc/member[@key='_types.analysis.FingerprintTokenFilter#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor Separator(string? value)
 	{
 		Instance.Separator = value;

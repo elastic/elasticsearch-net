@@ -23,35 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 public sealed partial class DeleteScriptRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a script or search template.
-/// </para>
-/// <para>
-/// Deletes a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DeleteScriptRequestConverter))]
 public sealed partial class DeleteScriptRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DeleteScriptRequestParameters>
 {
@@ -78,40 +62,18 @@ public sealed partial class DeleteScriptRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "delete_script";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete a script or search template.
-/// </para>
-/// <para>
-/// Deletes a stored script or search template.
-/// </para>
-/// </summary>
+/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_script.Request']/*"/>
 public readonly partial struct DeleteScriptRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.DeleteScriptRequest Instance { get; init; }
@@ -136,37 +98,21 @@ public readonly partial struct DeleteScriptRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteScriptRequest instance) => new Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DeleteScriptRequest(Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the stored script or search template.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteScriptRequest.g.xml" path="doc/member[@key='_global.delete_script.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

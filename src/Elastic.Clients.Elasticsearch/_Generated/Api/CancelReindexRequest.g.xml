@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.cancel_reindex.Request"><summary><para>
+Cancel a reindex task.
+</para>
+<para>
+Cancel an ongoing reindex task. If <c>wait_for_completion</c> is <c>true</c> (the default),
+the response contains the final task state after cancellation.
+If <c>wait_for_completion</c> is <c>false</c>, the response contains only <c>acknowledged: true</c>.
+</para></summary></member>
+  <member key="_global.cancel_reindex.Request#task_id"><summary><para>
+The ID of the reindex task to cancel.
+</para></summary></member>
+  <member key="_global.cancel_reindex.Request#wait_for_completion"><summary><para>
+If <c>true</c> (the default), the request blocks until the cancellation is complete and returns the final task state.
+If <c>false</c>, the request returns immediately with <c>acknowledged: true</c>.
+</para></summary></member>
+</doc>

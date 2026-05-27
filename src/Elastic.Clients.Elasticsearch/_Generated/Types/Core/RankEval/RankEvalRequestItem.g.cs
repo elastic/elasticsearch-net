@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalRequestItemConverter))]
 public sealed partial class RankEvalRequestItem
 {
@@ -43,42 +44,23 @@ public sealed partial class RankEvalRequestItem
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search request’s ID, used to group result details later.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> Ratings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? Request { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search template Id
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#template_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? TemplateId { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem']/*"/>
 public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Instance { get; init; }
@@ -98,44 +80,28 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The search request’s ID, used to group result details later.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -149,33 +115,21 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
 		Instance.Ratings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(params Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating[] values)
 	{
 		Instance.Ratings = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Ratings(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>();
@@ -188,33 +142,21 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? value)
 	{
 		Instance.Request = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> Request(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>> action)
 	{
 		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template Id
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#template_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor<TDocument> TemplateId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.TemplateId = value;
@@ -230,6 +172,7 @@ public readonly partial struct RankEvalRequestItemDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem']/*"/>
 public readonly partial struct RankEvalRequestItemDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem Instance { get; init; }
@@ -249,44 +192,28 @@ public readonly partial struct RankEvalRequestItemDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The search request’s ID, used to group result details later.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -300,33 +227,21 @@ public readonly partial struct RankEvalRequestItemDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating> value)
 	{
 		Instance.Ratings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(params Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating[] values)
 	{
 		Instance.Ratings = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// List of document ratings
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#ratings']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Ratings(params System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRatingDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.RankEval.DocumentRating>();
@@ -339,44 +254,28 @@ public readonly partial struct RankEvalRequestItemDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery? value)
 	{
 		Instance.Request = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor> action)
 	{
 		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query being evaluated.
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor Request<T>(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<T>> action)
 	{
 		Instance.Request = Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search template Id
-	/// </para>
-	/// </summary>
+	/// <include file="RankEvalRequestItem.g.xml" path="doc/member[@key='_global.rank_eval.RankEvalRequestItem#template_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItemDescriptor TemplateId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.TemplateId = value;

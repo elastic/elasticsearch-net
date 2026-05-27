@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.JvmClasses']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.JvmClassesConverter))]
 public sealed partial class JvmClasses
 {
@@ -36,24 +37,12 @@ public sealed partial class JvmClasses
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of classes currently loaded by JVM.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmClasses.g.xml" path="doc/member[@key='nodes._types.JvmClasses#current_loaded_count']/*"/>
 	public long? CurrentLoadedCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of classes loaded since the JVM started.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmClasses.g.xml" path="doc/member[@key='nodes._types.JvmClasses#total_loaded_count']/*"/>
 	public long? TotalLoadedCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of classes unloaded since the JVM started.
-	/// </para>
-	/// </summary>
+	/// <include file="JvmClasses.g.xml" path="doc/member[@key='nodes._types.JvmClasses#total_unloaded_count']/*"/>
 	public long? TotalUnloadedCount { get; set; }
 }

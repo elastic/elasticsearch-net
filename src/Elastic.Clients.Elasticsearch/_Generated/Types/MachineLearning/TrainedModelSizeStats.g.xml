@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelSizeStats#model_size_bytes"><summary><para>
+The size of the model in bytes.
+</para></summary></member>
+  <member key="ml._types.TrainedModelSizeStats#required_native_memory_bytes"><summary><para>
+The amount of memory required to load the model in bytes.
+</para></summary></member>
+</doc>

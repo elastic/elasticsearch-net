@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.AggregateOutput']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AggregateOutputConverter))]
 public sealed partial class AggregateOutput
 {
@@ -42,6 +43,7 @@ public sealed partial class AggregateOutput
 	public Elastic.Clients.Elasticsearch.MachineLearning.Weights? WeightedSum { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.AggregateOutput']/*"/>
 public readonly partial struct AggregateOutputDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Instance { get; init; }

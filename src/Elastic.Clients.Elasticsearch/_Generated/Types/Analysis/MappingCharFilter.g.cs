@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MappingCharFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.MappingCharFilterConverter))]
 public sealed partial class MappingCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
@@ -44,6 +45,7 @@ public sealed partial class MappingCharFilter : Elastic.Clients.Elasticsearch.An
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.MappingCharFilter']/*"/>
 public readonly partial struct MappingCharFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter Instance { get; init; }

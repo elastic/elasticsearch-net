@@ -26,42 +26,19 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.JobStateConverter))]
 public enum JobState
 {
-	/// <summary>
-	/// <para>
-	/// The job finished successfully with its model state persisted. The job must be opened before it can accept further data.
-	/// </para>
-	/// </summary>
+	/// <include file="JobState.g.xml" path="doc/member[@key='ml._types.JobState#closed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "closed")]
 	Closed,
-	/// <summary>
-	/// <para>
-	/// The job close action is in progress and has not yet completed. A closing job cannot accept further data.
-	/// </para>
-	/// </summary>
+	/// <include file="JobState.g.xml" path="doc/member[@key='ml._types.JobState#closing']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "closing")]
 	Closing,
-	/// <summary>
-	/// <para>
-	/// The job did not finish successfully due to an error.
-	/// This situation can occur due to invalid input data, a fatal error occurring during the analysis, or an external interaction such as the process being killed by the Linux out of memory (OOM) killer.
-	/// If the job had irrevocably failed, it must be force closed and then deleted.
-	/// If the datafeed can be corrected, the job can be closed and then re-opened.
-	/// </para>
-	/// </summary>
+	/// <include file="JobState.g.xml" path="doc/member[@key='ml._types.JobState#failed']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "failed")]
 	Failed,
-	/// <summary>
-	/// <para>
-	/// The job is available to receive and process data.
-	/// </para>
-	/// </summary>
+	/// <include file="JobState.g.xml" path="doc/member[@key='ml._types.JobState#opened']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "opened")]
 	Opened,
-	/// <summary>
-	/// <para>
-	/// The job open action is in progress and has not yet completed.
-	/// </para>
-	/// </summary>
+	/// <include file="JobState.g.xml" path="doc/member[@key='ml._types.JobState#opening']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "opening")]
 	Opening
 }

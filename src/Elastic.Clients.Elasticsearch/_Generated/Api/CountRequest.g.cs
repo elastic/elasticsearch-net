@@ -23,151 +23,56 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 public sealed partial class CountRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> value that documents must have to be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#min_score']/*"/>
 	public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, it is random.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// The query in Lucene query string syntax. This parameter cannot be used with a request body.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 }
 
-/// <summary>
-/// <para>
-/// Count search results.
-/// </para>
-/// <para>
-/// Get the number of documents matching a query.
-/// </para>
-/// <para>
-/// The query can be provided either by using a simple query string as a parameter, or by defining Query DSL within the request body.
-/// The query is optional. When no query is provided, the API uses <c>match_all</c> to count all the documents.
-/// </para>
-/// <para>
-/// The count API supports multi-target syntax. You can run a single count API search across multiple data streams and indices.
-/// </para>
-/// <para>
-/// The operation is broadcast across all shards.
-/// For each shard ID group, a replica is chosen and the search is run against it.
-/// This means that replicas increase the scalability of the count.
-/// </para>
-/// </summary>
+/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CountRequestConverter))]
 public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CountRequestParameters>
 {
@@ -193,180 +98,61 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 
 	internal override string OperationName => "count";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> value that documents must have to be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#min_score']/*"/>
 	public double? MinScore { get => Q<double?>("min_score"); set => Q("min_score", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, it is random.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// The query in Lucene query string syntax. This parameter cannot be used with a request body.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Count search results.
-/// </para>
-/// <para>
-/// Get the number of documents matching a query.
-/// </para>
-/// <para>
-/// The query can be provided either by using a simple query string as a parameter, or by defining Query DSL within the request body.
-/// The query is optional. When no query is provided, the API uses <c>match_all</c> to count all the documents.
-/// </para>
-/// <para>
-/// The count API supports multi-target syntax. You can run a single count API search across multiple data streams and indices.
-/// </para>
-/// <para>
-/// The operation is broadcast across all shards.
-/// For each shard ID group, a replica is chosen and the search is run against it.
-/// This means that replicas increase the scalability of the count.
-/// </para>
-/// </summary>
+/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 public readonly partial struct CountRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CountRequest Instance { get; init; }
@@ -390,103 +176,56 @@ public readonly partial struct CountRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CountRequestDescriptor(Elastic.Clients.Elasticsearch.CountRequest instance) => new Elastic.Clients.Elasticsearch.CountRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CountRequest(Elastic.Clients.Elasticsearch.CountRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -494,154 +233,84 @@ public readonly partial struct CountRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> value that documents must have to be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, it is random.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query in Lucene query string syntax. This parameter cannot be used with a request body.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -709,26 +378,8 @@ public readonly partial struct CountRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Count search results.
-/// </para>
-/// <para>
-/// Get the number of documents matching a query.
-/// </para>
-/// <para>
-/// The query can be provided either by using a simple query string as a parameter, or by defining Query DSL within the request body.
-/// The query is optional. When no query is provided, the API uses <c>match_all</c> to count all the documents.
-/// </para>
-/// <para>
-/// The count API supports multi-target syntax. You can run a single count API search across multiple data streams and indices.
-/// </para>
-/// <para>
-/// The operation is broadcast across all shards.
-/// For each shard ID group, a replica is chosen and the search is run against it.
-/// This means that replicas increase the scalability of the count.
-/// </para>
-/// </summary>
+/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.count.Request']/*"/>
 public readonly partial struct CountRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CountRequest Instance { get; init; }
@@ -752,103 +403,56 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CountRequest instance) => new Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CountRequest(Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as a default when no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -856,142 +460,77 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, concrete, expanded, or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum <c>_score</c> value that documents must have to be included in the result.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> MinScore(double? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// By default, it is random.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query in Lucene query string syntax. This parameter cannot be used with a request body.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the search query using Query DSL. A request body query cannot be used
-	/// with the <c>q</c> query string parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="CountRequest.g.xml" path="doc/member[@key='_global.count.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.CountRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);

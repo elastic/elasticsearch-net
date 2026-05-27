@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
 public sealed partial class PutWatsonxRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Watsonx inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
-/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
-/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-/// </para>
-/// </summary>
+/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutWatsonxRequestConverter))]
 public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>
 {
@@ -76,61 +66,27 @@ public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "inference.put_watsonx";
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#watsonx_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id WatsonxInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("watsonx_inference_id"); set => PR("watsonx_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>watsonxai</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#service']/*"/>
 	public string Service => "watsonxai";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Watsonx inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
-/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
-/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-/// </para>
-/// </summary>
+/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_watsonx.Request']/*"/>
 public readonly partial struct PutWatsonxRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest Instance { get; init; }
@@ -157,94 +113,56 @@ public readonly partial struct PutWatsonxRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest(Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#watsonx_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor WatsonxInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.WatsonxInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutWatsonxRequest.g.xml" path="doc/member[@key='inference.put_watsonx.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor.Build(action);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.has_privileges.ApplicationPrivilegesCheck#application"><summary><para>
+The name of the application.
+</para></summary></member>
+  <member key="security.has_privileges.ApplicationPrivilegesCheck#privileges"><summary><para>
+A list of the privileges that you want to check for the specified resources.
+It may be either application privilege names or the names of actions that are granted by those privileges
+</para></summary></member>
+  <member key="security.has_privileges.ApplicationPrivilegesCheck#resources"><summary><para>
+A list of resource names against which the privileges should be checked.
+</para></summary></member>
+</doc>

@@ -37,24 +37,12 @@ public sealed partial class SamlInvalidateResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of tokens that were invalidated as part of this logout.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateResponse.g.xml" path="doc/member[@key='security.saml_invalidate.Response#invalidated']/*"/>
 	public required int Invalidated { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The realm name of the SAML realm in Elasticsearch that authenticated the user.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateResponse.g.xml" path="doc/member[@key='security.saml_invalidate.Response#realm']/*"/>
 	public required string Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A SAML logout response as a parameter so that the user can be redirected back to the SAML IdP.
-	/// </para>
-	/// </summary>
+	/// <include file="SamlInvalidateResponse.g.xml" path="doc/member[@key='security.saml_invalidate.Response#redirect']/*"/>
 	public required string Redirect { get; set; }
 }

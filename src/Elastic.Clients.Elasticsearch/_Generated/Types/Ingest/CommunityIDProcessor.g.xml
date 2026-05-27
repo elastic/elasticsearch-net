@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.CommunityIDProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#destination_ip"><summary><para>
+Field containing the destination IP address.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#destination_port"><summary><para>
+Field containing the destination port.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#iana_number"><summary><para>
+Field containing the IANA number.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#icmp_code"><summary><para>
+Field containing the ICMP code.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#icmp_type"><summary><para>
+Field containing the ICMP type.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#ignore_missing"><summary><para>
+If true and any required fields are missing, the processor quietly exits
+without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#seed"><summary><para>
+Seed for the community ID hash. Must be between 0 and 65535 (inclusive). The
+seed can prevent hash collisions between network domains, such as a staging
+and production network that use the same addressing scheme.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#source_ip"><summary><para>
+Field containing the source IP address.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#source_port"><summary><para>
+Field containing the source port.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#target_field"><summary><para>
+Output field for the community ID.
+</para></summary></member>
+  <member key="ingest._types.CommunityIDProcessor#transport"><summary><para>
+Field containing the transport protocol name or number. Used only when the
+iana_number field is not present. The following protocol names are currently
+supported: eigrp, gre, icmp, icmpv6, igmp, ipv6-icmp, ospf, pim, sctp, tcp, udp
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RandomScoreFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RandomScoreFunctionConverter))]
 public sealed partial class RandomScoreFunction
 {
@@ -40,6 +41,7 @@ public sealed partial class RandomScoreFunction
 	public Elastic.Clients.Elasticsearch.Union<long, string>? Seed { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RandomScoreFunction']/*"/>
 public readonly partial struct RandomScoreFunctionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Instance { get; init; }
@@ -91,6 +93,7 @@ public readonly partial struct RandomScoreFunctionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RandomScoreFunction']/*"/>
 public readonly partial struct RandomScoreFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Instance { get; init; }

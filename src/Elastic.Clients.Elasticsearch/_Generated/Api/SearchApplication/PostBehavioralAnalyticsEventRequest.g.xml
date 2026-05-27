@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.post_behavioral_analytics_event.Request"><summary><para>
+Create a behavioral analytics collection event.
+</para></summary></member>
+  <member key="search_application.post_behavioral_analytics_event.Request#collection_name"><summary><para>
+The name of the behavioral analytics collection.
+</para></summary></member>
+  <member key="search_application.post_behavioral_analytics_event.Request#debug"><summary><para>
+Whether the response type has to include more details
+</para></summary></member>
+  <member key="search_application.post_behavioral_analytics_event.Request#event_type"><summary><para>
+The analytics event type.
+</para></summary></member>
+</doc>

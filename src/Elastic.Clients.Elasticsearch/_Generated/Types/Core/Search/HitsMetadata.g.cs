@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.HitsMetadata']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.HitsMetadataConverterFactory))]
 public sealed partial class HitsMetadata<T>
 {
@@ -45,10 +46,6 @@ public sealed partial class HitsMetadata<T>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Hit<T>> Hits { get; set; }
 	public double? MaxScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total hit count information, present only if <c>track_total_hits</c> wasn't <c>false</c> in the search request.
-	/// </para>
-	/// </summary>
+	/// <include file="HitsMetadata.g.xml" path="doc/member[@key='_global.search._types.HitsMetadata#total']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Core.Search.TotalHits, long>? Total { get; set; }
 }

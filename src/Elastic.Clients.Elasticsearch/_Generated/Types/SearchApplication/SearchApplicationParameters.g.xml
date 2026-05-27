@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application._types.SearchApplicationParameters#analytics_collection_name"><summary><para>
+Analytics collection associated to the Search Application.
+</para></summary></member>
+  <member key="search_application._types.SearchApplicationParameters#indices"><summary><para>
+Indices that are part of the Search Application.
+</para></summary></member>
+  <member key="search_application._types.SearchApplicationParameters#template"><summary><para>
+Search template to use on search operations.
+</para></summary></member>
+</doc>

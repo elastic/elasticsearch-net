@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.NumericDecayFunctionConverter))]
 public sealed partial class NumericDecayFunction : Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction
 {
@@ -45,17 +46,14 @@ public sealed partial class NumericDecayFunction : Elastic.Clients.Elasticsearch
 
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="NumericDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? MultiValueMode { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?> Placement { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.Type => "numeric";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction']/*"/>
 public readonly partial struct NumericDecayFunctionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Instance { get; init; }
@@ -87,11 +85,7 @@ public readonly partial struct NumericDecayFunctionDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="NumericDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor<TDocument> MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
 		Instance.MultiValueMode = value;
@@ -125,6 +119,7 @@ public readonly partial struct NumericDecayFunctionDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction']/*"/>
 public readonly partial struct NumericDecayFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Instance { get; init; }
@@ -156,11 +151,7 @@ public readonly partial struct NumericDecayFunctionDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines how the distance is calculated when a field used for computing the decay contains multiple values.
-	/// </para>
-	/// </summary>
+	/// <include file="NumericDecayFunction.g.xml" path="doc/member[@key='_types.query_dsl.NumericDecayFunction#multi_value_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionDescriptor MultiValueMode(Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? value)
 	{
 		Instance.MultiValueMode = value;

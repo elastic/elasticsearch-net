@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.delete_trained_model_alias.Request"><summary><para>
+Delete a trained model alias.
+</para>
+<para>
+This API deletes an existing model alias that refers to a trained model. If
+the model alias is missing or refers to a model other than the one identified
+by the <c>model_id</c>, this API returns an error.
+</para></summary></member>
+  <member key="ml.delete_trained_model_alias.Request#model_alias"><summary><para>
+The model alias to delete.
+</para></summary></member>
+  <member key="ml.delete_trained_model_alias.Request#model_id"><summary><para>
+The trained model ID to which the model alias refers.
+</para></summary></member>
+</doc>

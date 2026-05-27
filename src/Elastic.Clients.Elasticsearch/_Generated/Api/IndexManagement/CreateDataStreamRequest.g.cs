@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 public sealed partial class CreateDataStreamRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a data stream.
-/// </para>
-/// <para>
-/// You must have a matching index template with data stream enabled.
-/// </para>
-/// </summary>
+/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateDataStreamRequestConverter))]
 public sealed partial class CreateDataStreamRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestParameters>
 {
@@ -74,41 +62,18 @@ public sealed partial class CreateDataStreamRequest : Elastic.Clients.Elasticsea
 
 	internal override string OperationName => "indices.create_data_stream";
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream, which must meet the following criteria:
-	/// Lowercase only;
-	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>#</c>, <c>:</c>, or a space character;
-	/// Cannot start with <c>-</c>, <c>_</c>, <c>+</c>, or <c>.ds-</c>;
-	/// Cannot be <c>.</c> or <c>..</c>;
-	/// Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamName Name { get => P<Elastic.Clients.Elasticsearch.DataStreamName>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a data stream.
-/// </para>
-/// <para>
-/// You must have a matching index template with data stream enabled.
-/// </para>
-/// </summary>
+/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.create_data_stream.Request']/*"/>
 public readonly partial struct CreateDataStreamRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest Instance { get; init; }
@@ -133,38 +98,21 @@ public readonly partial struct CreateDataStreamRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequest(Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the data stream, which must meet the following criteria:
-	/// Lowercase only;
-	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c>,</c>, <c>#</c>, <c>:</c>, or a space character;
-	/// Cannot start with <c>-</c>, <c>_</c>, <c>+</c>, or <c>.ds-</c>;
-	/// Cannot be <c>.</c> or <c>..</c>;
-	/// Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamName value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="CreateDataStreamRequest.g.xml" path="doc/member[@key='indices.create_data_stream.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateDataStreamRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

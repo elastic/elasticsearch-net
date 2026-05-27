@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="AuthenticateRequest.g.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
 public sealed partial class AuthenticateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Authenticate a user.
-/// </para>
-/// <para>
-/// Authenticates a user and returns information about the authenticated user.
-/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-/// If the user cannot be authenticated, this API returns a 401 status code.
-/// </para>
-/// </summary>
+/// <include file="AuthenticateRequest.g.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AuthenticateRequestConverter))]
 public sealed partial class AuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>
 {
@@ -60,17 +53,8 @@ public sealed partial class AuthenticateRequest : Elastic.Clients.Elasticsearch.
 	internal override string OperationName => "security.authenticate";
 }
 
-/// <summary>
-/// <para>
-/// Authenticate a user.
-/// </para>
-/// <para>
-/// Authenticates a user and returns information about the authenticated user.
-/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-/// If the user cannot be authenticated, this API returns a 401 status code.
-/// </para>
-/// </summary>
+/// <include file="AuthenticateRequest.g.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.authenticate.Request']/*"/>
 public readonly partial struct AuthenticateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.AuthenticateRequest Instance { get; init; }

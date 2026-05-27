@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.StepKey']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.StepKeyConverter))]
 public sealed partial class StepKey
 {
@@ -42,22 +43,15 @@ public sealed partial class StepKey
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional action to which the index will be moved.
-	/// </para>
-	/// </summary>
+	/// <include file="StepKey.g.xml" path="doc/member[@key='ilm.move_to_step.StepKey#action']/*"/>
 	public string? Action { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The optional step name to which the index will be moved.
-	/// </para>
-	/// </summary>
+	/// <include file="StepKey.g.xml" path="doc/member[@key='ilm.move_to_step.StepKey#name']/*"/>
 	public string? Name { get; set; }
 	public required string Phase { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.move_to_step.StepKey']/*"/>
 public readonly partial struct StepKeyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct StepKeyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The optional action to which the index will be moved.
-	/// </para>
-	/// </summary>
+	/// <include file="StepKey.g.xml" path="doc/member[@key='ilm.move_to_step.StepKey#action']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor Action(string? value)
 	{
 		Instance.Action = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The optional step name to which the index will be moved.
-	/// </para>
-	/// </summary>
+	/// <include file="StepKey.g.xml" path="doc/member[@key='ilm.move_to_step.StepKey#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor Name(string? value)
 	{
 		Instance.Name = value;

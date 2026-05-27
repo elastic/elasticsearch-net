@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.recovery.RecoveryStage#DONE"><summary><para>
+Complete.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryStage#FINALIZE"><summary><para>
+Cleanup.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryStage#INDEX"><summary><para>
+Reading index metadata and copying bytes from source to destination.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryStage#INIT"><summary><para>
+Recovery has not started.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryStage#TRANSLOG"><summary><para>
+Replaying the transaction log.
+</para></summary></member>
+  <member key="indices.recovery.RecoveryStage#VERIFY_INDEX"><summary><para>
+Verifying the integrity of the index.
+</para></summary></member>
+</doc>

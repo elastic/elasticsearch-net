@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.ReverseNestedAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ReverseNestedAggregateConverter))]
 public sealed partial class ReverseNestedAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -42,11 +43,6 @@ public sealed partial class ReverseNestedAggregate : Elastic.Clients.Elasticsear
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Nested aggregations
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public required long DocCount { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }

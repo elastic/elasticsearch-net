@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// A list of tools that the model can call.
-/// </para>
-/// </summary>
+/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionTool']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionToolConverter))]
 public sealed partial class CompletionTool
 {
@@ -48,26 +45,15 @@ public sealed partial class CompletionTool
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The function definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool#function']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction Function { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of tool.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool#type']/*"/>
 	public required string Type { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// A list of tools that the model can call.
-/// </para>
-/// </summary>
+/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.CompletionTool']/*"/>
 public readonly partial struct CompletionToolDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.CompletionTool Instance { get; init; }
@@ -87,33 +73,21 @@ public readonly partial struct CompletionToolDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor(Elastic.Clients.Elasticsearch.Inference.CompletionTool instance) => new Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CompletionTool(Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The function definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool#function']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor Function(Elastic.Clients.Elasticsearch.Inference.CompletionToolFunction value)
 	{
 		Instance.Function = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The function definition.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool#function']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor Function(System.Action<Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor> action)
 	{
 		Instance.Function = Elastic.Clients.Elasticsearch.Inference.CompletionToolFunctionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of tool.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionTool.g.xml" path="doc/member[@key='inference._types.CompletionTool#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor Type(string value)
 	{
 		Instance.Type = value;

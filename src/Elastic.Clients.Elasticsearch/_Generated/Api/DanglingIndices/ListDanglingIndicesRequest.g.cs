@@ -23,22 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
+/// <include file="ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 public sealed partial class ListDanglingIndicesRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the dangling indices.
-/// </para>
-/// <para>
-/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-/// </para>
-/// <para>
-/// Use this API to list dangling indices, which you can then import or delete.
-/// </para>
-/// </summary>
+/// <include file="ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.Json.ListDanglingIndicesRequestConverter))]
 public sealed partial class ListDanglingIndicesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequestParameters>
 {
@@ -61,18 +53,8 @@ public sealed partial class ListDanglingIndicesRequest : Elastic.Clients.Elastic
 	internal override string OperationName => "dangling_indices.list_dangling_indices";
 }
 
-/// <summary>
-/// <para>
-/// Get the dangling indices.
-/// </para>
-/// <para>
-/// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
-/// For example, this can happen if you delete more than <c>cluster.indices.tombstones.size</c> indices while an Elasticsearch node is offline.
-/// </para>
-/// <para>
-/// Use this API to list dangling indices, which you can then import or delete.
-/// </para>
-/// </summary>
+/// <include file="ListDanglingIndicesRequest.g.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='dangling_indices.list_dangling_indices.Request']/*"/>
 public readonly partial struct ListDanglingIndicesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesRequest Instance { get; init; }

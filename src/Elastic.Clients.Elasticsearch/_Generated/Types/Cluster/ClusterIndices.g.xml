@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterIndices#analysis"><summary><para>
+Contains statistics about analyzers and analyzer components used in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#completion"><summary><para>
+Contains statistics about memory used for completion in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#count"><summary><para>
+Total number of indices with shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#dense_vector"><summary><para>
+Contains statistics about indexed dense vector
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#docs"><summary><para>
+Contains counts for documents in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#fielddata"><summary><para>
+Contains statistics about the field data cache of selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#mappings"><summary><para>
+Contains statistics about field mappings in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#query_cache"><summary><para>
+Contains statistics about the query cache of selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#search"><summary><para>
+Holds a snapshot of the search usage statistics.
+Used to hold the stats for a single node that's part of a ClusterStatsNodeResponse, as well as to
+accumulate stats for the entire cluster and return them as part of the ClusterStatsResponse.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#segments"><summary><para>
+Contains statistics about segments in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#shards"><summary><para>
+Contains statistics about indices with shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#sparse_vector"><summary><para>
+Contains statistics about indexed sparse vector
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#store"><summary><para>
+Contains statistics about the size of shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndices#versions"><summary><para>
+Contains statistics about analyzers and analyzer components used in selected nodes.
+</para></summary></member>
+</doc>

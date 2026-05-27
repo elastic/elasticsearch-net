@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Actions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ActionsConverter))]
 public sealed partial class Actions
 {
@@ -36,99 +37,48 @@ public sealed partial class Actions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#allocate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? Allocate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#delete']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? Delete { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#downsample']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? Downsample { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#forcemerge']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? Forcemerge { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The freeze action is a noop in 8.x
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#freeze']/*"/>
 	[System.Obsolete("Deprecated in '7.0.0'.")]
 	public Elastic.Clients.Elasticsearch.EmptyObject? Freeze { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#migrate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? Migrate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.EmptyObject? Readonly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? Rollover { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#searchable_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? SearchableSnapshot { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#set_priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? SetPriority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#shrink']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? Shrink { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#unfollow']/*"/>
 	public Elastic.Clients.Elasticsearch.EmptyObject? Unfollow { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#wait_for_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? WaitForSnapshot { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Actions']/*"/>
 public readonly partial struct ActionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions Instance { get; init; }
@@ -148,110 +98,70 @@ public readonly partial struct ActionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#allocate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction? value)
 	{
 		Instance.Allocate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#allocate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate()
 	{
 		Instance.Allocate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#allocate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Allocate(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor>? action)
 	{
 		Instance.Allocate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#delete']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction? value)
 	{
 		Instance.Delete = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#delete']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete()
 	{
 		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#delete']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Delete(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor>? action)
 	{
 		Instance.Delete = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#downsample']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Downsample(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction? value)
 	{
 		Instance.Downsample = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#downsample']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Downsample(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor> action)
 	{
 		Instance.Downsample = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#forcemerge']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Forcemerge(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction? value)
 	{
 		Instance.Forcemerge = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#forcemerge']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Forcemerge(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor> action)
 	{
 		Instance.Forcemerge = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor.Build(action);
@@ -259,11 +169,7 @@ public readonly partial struct ActionsDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.0.0'.")]
-	/// <summary>
-	/// <para>
-	/// The freeze action is a noop in 8.x
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#freeze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Freeze = value;
@@ -271,11 +177,7 @@ public readonly partial struct ActionsDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.0.0'.")]
-	/// <summary>
-	/// <para>
-	/// The freeze action is a noop in 8.x
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#freeze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze()
 	{
 		Instance.Freeze = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
@@ -283,253 +185,161 @@ public readonly partial struct ActionsDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.0.0'.")]
-	/// <summary>
-	/// <para>
-	/// The freeze action is a noop in 8.x
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#freeze']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Freeze(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Freeze = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#migrate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction? value)
 	{
 		Instance.Migrate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#migrate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate()
 	{
 		Instance.Migrate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#migrate']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Migrate(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor>? action)
 	{
 		Instance.Migrate = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Readonly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly()
 	{
 		Instance.Readonly = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Readonly(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Readonly = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction? value)
 	{
 		Instance.Rollover = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover()
 	{
 		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#rollover']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Rollover(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor>? action)
 	{
 		Instance.Rollover = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#searchable_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SearchableSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction? value)
 	{
 		Instance.SearchableSnapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#searchable_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SearchableSnapshot(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor> action)
 	{
 		Instance.SearchableSnapshot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#set_priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction? value)
 	{
 		Instance.SetPriority = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#set_priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority()
 	{
 		Instance.SetPriority = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#set_priority']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor SetPriority(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor>? action)
 	{
 		Instance.SetPriority = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#shrink']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction? value)
 	{
 		Instance.Shrink = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#shrink']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink()
 	{
 		Instance.Shrink = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#shrink']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Shrink(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor>? action)
 	{
 		Instance.Shrink = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#unfollow']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow(Elastic.Clients.Elasticsearch.EmptyObject? value)
 	{
 		Instance.Unfollow = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#unfollow']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow()
 	{
 		Instance.Unfollow = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: hot, warm, cold, frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#unfollow']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor Unfollow(System.Action<Elastic.Clients.Elasticsearch.EmptyObjectDescriptor>? action)
 	{
 		Instance.Unfollow = Elastic.Clients.Elasticsearch.EmptyObjectDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#wait_for_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor WaitForSnapshot(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction? value)
 	{
 		Instance.WaitForSnapshot = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Phases allowed: delete.
-	/// </para>
-	/// </summary>
+	/// <include file="Actions.g.xml" path="doc/member[@key='ilm._types.Actions#wait_for_snapshot']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor WaitForSnapshot(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor> action)
 	{
 		Instance.WaitForSnapshot = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor.Build(action);

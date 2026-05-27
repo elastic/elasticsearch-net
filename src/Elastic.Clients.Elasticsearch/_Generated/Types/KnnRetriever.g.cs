@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.KnnRetrieverConverter))]
 public sealed partial class KnnRetriever
 {
@@ -44,84 +45,41 @@ public sealed partial class KnnRetriever
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#field']/*"/>
 	public required string Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbors to return as top hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#k']/*"/>
 	public required int K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#_name']/*"/>
 	public string? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbor candidates to consider per shard.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
 	public required int NumCandidates { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity required for a document to be considered a match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#similarity']/*"/>
 	public float? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#visit_percentage']/*"/>
 	public float? VisitPercentage { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnRetriever']/*"/>
 public readonly partial struct KnnRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.KnnRetriever Instance { get; init; }
@@ -141,44 +99,28 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.KnnRetriever instance) => new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -191,132 +133,84 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbors to return as top hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#k']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> K(int value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbor candidates to consider per shard.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> NumCandidates(int value)
 	{
 		Instance.NumCandidates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
 	{
 		Instance.RescoreVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
 	{
 		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity required for a document to be considered a match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Similarity(float? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#visit_percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> VisitPercentage(float? value)
 	{
 		Instance.VisitPercentage = value;
@@ -332,6 +226,7 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnRetriever']/*"/>
 public readonly partial struct KnnRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.KnnRetriever Instance { get; init; }
@@ -351,44 +246,28 @@ public readonly partial struct KnnRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor(Elastic.Clients.Elasticsearch.KnnRetriever instance) => new Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.KnnRetriever(Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -401,11 +280,7 @@ public readonly partial struct KnnRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -418,132 +293,84 @@ public readonly partial struct KnnRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbors to return as top hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#k']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor K(int value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of nearest neighbor candidates to consider per shard.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#num_candidates']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor NumCandidates(int value)
 	{
 		Instance.NumCandidates = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query vector. Must have the same number of dimensions as the vector field you are searching against. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a model to build a query vector.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
 	{
 		Instance.RescoreVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
 	{
 		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity required for a document to be considered a match.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Similarity(float? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnRetriever.g.xml" path="doc/member[@key='_types.KnnRetriever#visit_percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor VisitPercentage(float? value)
 	{
 		Instance.VisitPercentage = value;

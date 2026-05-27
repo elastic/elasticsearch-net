@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SimplePatternSplitTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SimplePatternSplitTokenizerConverter))]
 public sealed partial class SimplePatternSplitTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -43,6 +44,7 @@ public sealed partial class SimplePatternSplitTokenizer : Elastic.Clients.Elasti
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SimplePatternSplitTokenizer']/*"/>
 public readonly partial struct SimplePatternSplitTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SimplePatternSplitTokenizer Instance { get; init; }

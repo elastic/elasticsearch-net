@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="sql.translate.Request"><summary><para>
+Translate SQL into Elasticsearch queries.
+</para>
+<para>
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
+</para></summary></member>
+  <member key="sql.translate.Request#fetch_size"><summary><para>
+The maximum number of rows (or entries) to return in one response.
+</para></summary></member>
+  <member key="sql.translate.Request#filter"><summary><para>
+The Elasticsearch query DSL for additional filtering.
+</para></summary></member>
+  <member key="sql.translate.Request#query"><summary><para>
+The SQL query to run.
+</para></summary></member>
+  <member key="sql.translate.Request#time_zone"><summary><para>
+The ISO-8601 time zone ID for the search.
+</para></summary></member>
+</doc>

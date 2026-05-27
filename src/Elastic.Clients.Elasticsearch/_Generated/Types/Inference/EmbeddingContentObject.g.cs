@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// A wrapper object which contains the fields required to specify multimodal inputs
-/// </para>
-/// </summary>
+/// <include file="EmbeddingContentObject.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObject']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.EmbeddingContentObject']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.EmbeddingContentObjectConverter))]
 public sealed partial class EmbeddingContentObject
 {
@@ -47,10 +44,6 @@ public sealed partial class EmbeddingContentObject
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An object or an array of objects containing the input data for the model to embed
-	/// </para>
-	/// </summary>
+	/// <include file="EmbeddingContentObject.g.xml" path="doc/member[@key='inference._types.EmbeddingContentObject#content']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.EmbeddingContentObjectItem> Content { get; set; }
 }

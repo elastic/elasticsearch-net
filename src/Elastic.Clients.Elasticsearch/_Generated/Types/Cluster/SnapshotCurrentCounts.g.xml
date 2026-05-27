@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.SnapshotCurrentCounts#cleanups"><summary><para>
+Cleanups in progress, not counted in concurrent_operations as they are not concurrent
+</para></summary></member>
+  <member key="cluster.stats.SnapshotCurrentCounts#concurrent_operations"><summary><para>
+Sum of snapshots and snapshot_deletions
+</para></summary></member>
+  <member key="cluster.stats.SnapshotCurrentCounts#shard_snapshots"><summary><para>
+Incomplete shard snapshots
+</para></summary></member>
+  <member key="cluster.stats.SnapshotCurrentCounts#snapshot_deletions"><summary><para>
+Snapshots deletions in progress
+</para></summary></member>
+  <member key="cluster.stats.SnapshotCurrentCounts#snapshots"><summary><para>
+Snapshots currently in progress
+</para></summary></member>
+</doc>

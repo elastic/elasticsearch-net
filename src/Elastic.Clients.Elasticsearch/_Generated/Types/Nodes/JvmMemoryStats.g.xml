@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="nodes._types.JvmMemoryStats#heap_committed_in_bytes"><summary><para>
+Amount of memory, in bytes, available for use by the heap.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#heap_max"><summary><para>
+Maximum amount of memory, available for use by the heap.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#heap_max_in_bytes"><summary><para>
+Maximum amount of memory, in bytes, available for use by the heap.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#heap_used_in_bytes"><summary><para>
+Memory, in bytes, currently in use by the heap.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#heap_used_percent"><summary><para>
+Percentage of memory currently in use by the heap.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#non_heap_committed_in_bytes"><summary><para>
+Amount of non-heap memory available, in bytes.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#non_heap_used_in_bytes"><summary><para>
+Non-heap memory used, in bytes.
+</para></summary></member>
+  <member key="nodes._types.JvmMemoryStats#pools"><summary><para>
+Contains statistics about heap memory usage for the node.
+</para></summary></member>
+</doc>

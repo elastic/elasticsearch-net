@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.put_filter.Request"><summary><para>
+Create a filter.
+</para>
+<para>
+A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
+Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
+</para></summary></member>
+  <member key="ml.put_filter.Request#description"><summary><para>
+A description of the filter.
+</para></summary></member>
+  <member key="ml.put_filter.Request#filter_id"><summary><para>
+A string that uniquely identifies a filter.
+</para></summary></member>
+  <member key="ml.put_filter.Request#items"><summary><para>
+The items of the filter. A wildcard <c>*</c> can be used at the beginning or the end of an item.
+Up to 10000 items are allowed in each filter.
+</para></summary></member>
+</doc>

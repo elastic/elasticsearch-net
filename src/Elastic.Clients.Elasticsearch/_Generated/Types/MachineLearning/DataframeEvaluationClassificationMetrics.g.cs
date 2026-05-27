@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationClassificationMetricsConverter))]
 public sealed partial class DataframeEvaluationClassificationMetrics
 {
@@ -36,42 +37,23 @@ public sealed partial class DataframeEvaluationClassificationMetrics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#accuracy']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Accuracy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? AucRoc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Multiclass confusion matrix.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#multiclass_confusion_matrix']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? MulticlassConfusionMatrix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#precision']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#recall']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Recall { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics']/*"/>
 public readonly partial struct DataframeEvaluationClassificationMetricsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics Instance { get; init; }
@@ -91,33 +73,21 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#accuracy']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Accuracy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#accuracy']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy()
 	{
 		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Accuracy of predictions (per-class and overall).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#accuracy']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Accuracy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Accuracy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -131,66 +101,42 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRoc? value)
 	{
 		Instance.AucRoc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc()
 	{
 		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve. It is calculated for a specific class (provided as "class_name") treated as positive.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor AucRoc(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor>? action)
 	{
 		Instance.AucRoc = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsAucRocDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multiclass confusion matrix.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#multiclass_confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.MulticlassConfusionMatrix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multiclass confusion matrix.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#multiclass_confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix()
 	{
 		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Multiclass confusion matrix.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#multiclass_confusion_matrix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MulticlassConfusionMatrix(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.MulticlassConfusionMatrix = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -204,33 +150,21 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision()
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Precision of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Precision(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Precision = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -244,33 +178,21 @@ public readonly partial struct DataframeEvaluationClassificationMetricsDescripto
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Recall = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall()
 	{
 		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Recall of predictions (per-class and average).
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationClassificationMetrics.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationClassificationMetrics#recall']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor Recall(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Recall = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

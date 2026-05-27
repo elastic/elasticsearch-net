@@ -23,381 +23,94 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 public sealed partial class DeleteByQueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// What to do if delete by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
-	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
-	/// Unlike the delete API, it does not support <c>wait_for</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// Defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll_size']/*"/>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The explicit timeout for each search request.
-	/// It defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period each deletion request waits for active shards.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#version']/*"/>
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete documents.
-/// </para>
-/// <para>
-/// Deletes documents that match the specified query.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>delete</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
-/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
-/// A bulk delete request is performed for each batch of matching documents.
-/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
-/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
-/// Any delete requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// <strong>Throttling delete requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Delete by query supports sliced scroll to parallelize the delete process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with slices only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with <c>slices</c> will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Delete performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Cancel a delete by query operation</strong>
-/// </para>
-/// <para>
-/// Any delete by query can be canceled using the task cancel API. For example:
-/// </para>
-/// <code>
-/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
-/// </code>
-/// <para>
-/// The task ID can be found by using the get tasks API.
-/// </para>
-/// <para>
-/// Cancellation should happen quickly but might take a few seconds.
-/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
-/// </para>
-/// </summary>
+/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DeleteByQueryRequestConverter))]
 public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>
 {
@@ -424,416 +137,105 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "delete_by_query";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// What to do if delete by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get => Q<Elastic.Clients.Elasticsearch.Conflicts?>("conflicts"); set => Q("conflicts", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
-	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
-	/// Unlike the delete API, it does not support <c>wait_for</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// Defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll_size']/*"/>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// The explicit timeout for each search request.
-	/// It defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period each deletion request waits for active shards.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#version']/*"/>
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#max_docs']/*"/>
 	public long? MaxDocs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Delete documents.
-/// </para>
-/// <para>
-/// Deletes documents that match the specified query.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>delete</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
-/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
-/// A bulk delete request is performed for each batch of matching documents.
-/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
-/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
-/// Any delete requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// <strong>Throttling delete requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Delete by query supports sliced scroll to parallelize the delete process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with slices only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with <c>slices</c> will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Delete performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Cancel a delete by query operation</strong>
-/// </para>
-/// <para>
-/// Any delete by query can be canceled using the task cancel API. For example:
-/// </para>
-/// <code>
-/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
-/// </code>
-/// <para>
-/// The task ID can be found by using the get tasks API.
-/// </para>
-/// <para>
-/// Cancellation should happen quickly but might take a few seconds.
-/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
-/// </para>
-/// </summary>
+/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 public readonly partial struct DeleteByQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.DeleteByQueryRequest Instance { get; init; }
@@ -858,486 +260,287 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteByQueryRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequest(Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// What to do if delete by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
 		Instance.Conflicts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor From(long? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
-	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
-	/// Unlike the delete API, it does not support <c>wait_for</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// Defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor ScrollSize(long? value)
 	{
 		Instance.ScrollSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The explicit timeout for each search request.
-	/// It defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.SearchTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? value)
 	{
 		Instance.Slices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
 		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period each deletion request waits for active shards.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#max_docs']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor MaxDocs(long? value)
 	{
 		Instance.MaxDocs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1350,11 +553,7 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1423,158 +622,8 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Delete documents.
-/// </para>
-/// <para>
-/// Deletes documents that match the specified query.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>delete</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// When you submit a delete by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and deletes matching documents using internal versioning.
-/// If a document changes between the time that the snapshot is taken and the delete operation is processed, it results in a version conflict and the delete operation fails.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be deleted using delete by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing a delete by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents to delete.
-/// A bulk delete request is performed for each batch of matching documents.
-/// If a search or bulk request is rejected, the requests are retried up to 10 times, with exponential back off.
-/// If the maximum retry limit is reached, processing halts and all failed requests are returned in the response.
-/// Any delete requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts the operation could attempt to delete more documents from the source than <c>max_docs</c> until it has successfully deleted <c>max_docs documents</c>, or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// <strong>Throttling delete requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which delete by query issues batches of delete operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to disable throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single <c>_bulk</c> request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Delete by query supports sliced scroll to parallelize the delete process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> lets Elasticsearch choose the number of slices to use.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// Adding slices to the delete by query operation creates sub-requests which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with slices only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with <c>slices</c> will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of <c>slices</c> each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the earlier point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being deleted.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many <c>slices</c> hurts performance. Setting <c>slices</c> higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Delete performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or delete performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Cancel a delete by query operation</strong>
-/// </para>
-/// <para>
-/// Any delete by query can be canceled using the task cancel API. For example:
-/// </para>
-/// <code>
-/// POST _tasks/r1A2WoRbTwKZ516z6NEs5A:36619/_cancel
-/// </code>
-/// <para>
-/// The task ID can be found by using the get tasks API.
-/// </para>
-/// <para>
-/// Cancellation should happen quickly but might take a few seconds.
-/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
-/// </para>
-/// </summary>
+/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query.Request']/*"/>
 public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.DeleteByQueryRequest Instance { get; init; }
@@ -1598,464 +647,273 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.DeleteByQueryRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRequest(Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// What to do if delete by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
 		Instance.Conflicts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> From(long? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
-	/// This is different than the delete API's <c>refresh</c> parameter, which causes just the shard that received the delete request to be refreshed.
-	/// Unlike the delete API, it does not support <c>wait_for</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// Defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> ScrollSize(long? value)
 	{
 		Instance.ScrollSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The explicit timeout for each search request.
-	/// It defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.SearchTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? value)
 	{
 		Instance.Slices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
 		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period each deletion request waits for active shards.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> value controls how long each write request waits for unavailable shards to become available.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task. Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>. When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to delete.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#max_docs']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> MaxDocs(long? value)
 	{
 		Instance.MaxDocs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to delete specified with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A sort object that specifies the order of deleted documents.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRequest.g.xml" path="doc/member[@key='_global.delete_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

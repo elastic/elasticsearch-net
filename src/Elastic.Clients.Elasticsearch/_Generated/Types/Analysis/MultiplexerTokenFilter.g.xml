@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.MultiplexerTokenFilter#filters"><summary><para>
+A list of token filters to apply to incoming tokens.
+</para></summary></member>
+  <member key="_types.analysis.MultiplexerTokenFilter#preserve_original"><summary><para>
+If <c>true</c> (the default) then emit the original token in addition to the filtered tokens.
+</para></summary></member>
+</doc>

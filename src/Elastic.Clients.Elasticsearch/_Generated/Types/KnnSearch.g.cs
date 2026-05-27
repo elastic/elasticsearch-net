@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnSearch']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.KnnSearchConverter))]
 public sealed partial class KnnSearch
 {
@@ -42,85 +43,42 @@ public sealed partial class KnnSearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Boost value to apply to kNN scores
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The final number of nearest neighbors to return as top hits
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#k']/*"/>
 	public int? K { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of nearest neighbor candidates to consider per shard
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#num_candidates']/*"/>
 	public int? NumCandidates { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
 	public System.Collections.Generic.ICollection<float>? QueryVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilder { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity for a vector to be considered a match
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#similarity']/*"/>
 	public float? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#visit_percentage']/*"/>
 	public float? VisitPercentage { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnSearch']/*"/>
 public readonly partial struct KnnSearchDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.KnnSearch Instance { get; init; }
@@ -140,66 +98,42 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(Elastic.Clients.Elasticsearch.KnnSearch instance) => new Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.KnnSearch(Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Boost value to apply to kNN scores
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -212,55 +146,35 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The final number of nearest neighbors to return as top hits
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#k']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of nearest neighbor candidates to consider per shard
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#num_candidates']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
@@ -273,88 +187,56 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
 	{
 		Instance.RescoreVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
 	{
 		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity for a vector to be considered a match
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Similarity(float? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#visit_percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> VisitPercentage(float? value)
 	{
 		Instance.VisitPercentage = value;
@@ -370,6 +252,7 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.KnnSearch']/*"/>
 public readonly partial struct KnnSearchDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.KnnSearch Instance { get; init; }
@@ -389,66 +272,42 @@ public readonly partial struct KnnSearchDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.KnnSearchDescriptor(Elastic.Clients.Elasticsearch.KnnSearch instance) => new Elastic.Clients.Elasticsearch.KnnSearchDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.KnnSearch(Elastic.Clients.Elasticsearch.KnnSearchDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Boost value to apply to kNN scores
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the vector field to search against
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#field']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -461,11 +320,7 @@ public readonly partial struct KnnSearchDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filters for the kNN search query
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -478,66 +333,42 @@ public readonly partial struct KnnSearchDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The final number of nearest neighbors to return as top hits
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#k']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor K(int? value)
 	{
 		Instance.K = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of nearest neighbor candidates to consider per shard
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#num_candidates']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor NumCandidates(int? value)
 	{
 		Instance.NumCandidates = value;
@@ -550,88 +381,56 @@ public readonly partial struct KnnSearchDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(System.Collections.Generic.ICollection<float>? value)
 	{
 		Instance.QueryVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVector(params float[] values)
 	{
 		Instance.QueryVector = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVectorBuilder(Elastic.Clients.Elasticsearch.QueryVectorBuilder? value)
 	{
 		Instance.QueryVectorBuilder = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query vector builder. You must provide a query_vector_builder or query_vector, but not both.
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#query_vector_builder']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor QueryVectorBuilder(System.Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> action)
 	{
 		Instance.QueryVectorBuilder = Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
 	{
 		Instance.RescoreVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
 	{
 		Instance.RescoreVector = Elastic.Clients.Elasticsearch.RescoreVectorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum similarity for a vector to be considered a match
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Similarity(float? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
-	/// </para>
-	/// </summary>
+	/// <include file="KnnSearch.g.xml" path="doc/member[@key='_types.KnnSearch#visit_percentage']/*"/>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor VisitPercentage(float? value)
 	{
 		Instance.VisitPercentage = value;

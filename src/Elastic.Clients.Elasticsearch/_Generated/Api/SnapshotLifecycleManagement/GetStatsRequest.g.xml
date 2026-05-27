@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="slm.get_stats.Request"><summary><para>
+Get snapshot lifecycle management statistics.
+</para>
+<para>
+Get global and policy-level statistics about actions taken by snapshot lifecycle management.
+</para></summary></member>
+  <member key="slm.get_stats.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="slm.get_stats.Request#timeout"><summary><para>
+Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

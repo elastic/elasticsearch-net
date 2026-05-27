@@ -26,20 +26,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.TranslogDurabilityConverter))]
 public enum TranslogDurability
 {
-	/// <summary>
-	/// <para>
-	/// fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes
-	/// since the last automatic commit will be discarded.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslogDurability.g.xml" path="doc/member[@key='indices._types.TranslogDurability#async']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "async")]
 	Async,
-	/// <summary>
-	/// <para>
-	/// (default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
-	/// will already have been committed to disk.
-	/// </para>
-	/// </summary>
+	/// <include file="TranslogDurability.g.xml" path="doc/member[@key='indices._types.TranslogDurability#request']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "request")]
 	Request
 }

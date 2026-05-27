@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="search_application.delete.Request"><summary><para>
+Delete a search application.
+</para>
+<para>
+Remove a search application and its associated alias. Indices attached to the search application are not removed.
+</para></summary></member>
+  <member key="search_application.delete.Request#name"><summary><para>
+The name of the search application to delete.
+</para></summary></member>
+</doc>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_settings.Request"><summary><para>
+Get security index settings.
+</para>
+<para>
+Get the user-configurable settings for the security internal index (<c>.security</c> and associated indices).
+Only a subset of the index settings — those that are user-configurable—will be shown.
+This includes:
+</para>
+<list type="bullet">
+<item>
+<para>
+<c>index.auto_expand_replicas</c>
+</para>
+</item>
+<item>
+<para>
+<c>index.number_of_replicas</c>
+</para>
+</item>
+</list></summary></member>
+  <member key="security.get_settings.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

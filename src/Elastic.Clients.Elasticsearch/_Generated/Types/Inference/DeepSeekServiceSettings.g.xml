@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.DeepSeekServiceSettings#api_key"><summary><para>
+A valid API key for your DeepSeek account.
+You can find or create your DeepSeek API keys on the DeepSeek API key page.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.DeepSeekServiceSettings#model_id"><summary><para>
+For a <c>completion</c> or <c>chat_completion</c> task, the name of the model to use for the inference task.
+</para>
+<para>
+For the available <c>completion</c> and <c>chat_completion</c> models, refer to the <a href="https://api-docs.deepseek.com/quick_start/pricing">DeepSeek Models &amp; Pricing docs</a>.
+</para></summary></member>
+  <member key="inference._types.DeepSeekServiceSettings#url"><summary><para>
+The URL endpoint to use for the requests. Defaults to <c>https://api.deepseek.com/chat/completions</c>.
+</para></summary></member>
+</doc>

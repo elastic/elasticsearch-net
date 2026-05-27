@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.ClusterIndicesShards"><summary><para>
+Contains statistics about shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShards#index"><summary><para>
+Contains statistics about shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShards#primaries"><summary><para>
+Number of primary shards assigned to selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShards#replication"><summary><para>
+Ratio of replica shards to primary shards across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.ClusterIndicesShards#total"><summary><para>
+Total number of shards assigned to selected nodes.
+</para></summary></member>
+</doc>

@@ -23,38 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 public sealed partial class ListRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Starting offset.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a max number of results to get.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get search applications.
-/// </para>
-/// <para>
-/// Get information about search applications.
-/// </para>
-/// </summary>
+/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.ListRequestConverter))]
 public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>
 {
@@ -76,36 +60,18 @@ public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests
 
 	internal override string OperationName => "search_application.list";
 
-	/// <summary>
-	/// <para>
-	/// Starting offset.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a max number of results to get.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get search applications.
-/// </para>
-/// <para>
-/// Get information about search applications.
-/// </para>
-/// </summary>
+/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application.list.Request']/*"/>
 public readonly partial struct ListRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchApplication.ListRequest Instance { get; init; }
@@ -124,33 +90,21 @@ public readonly partial struct ListRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest instance) => new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchApplication.ListRequest(Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Starting offset.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a max number of results to get.
-	/// </para>
-	/// </summary>
+	/// <include file="ListRequest.g.xml" path="doc/member[@key='search_application.list.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;

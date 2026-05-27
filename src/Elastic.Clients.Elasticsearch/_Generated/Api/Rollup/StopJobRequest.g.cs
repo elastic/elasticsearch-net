@@ -23,47 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 public sealed partial class StopJobRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
-	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
-	/// NOTE: Even if a timeout occurs, the stop request is still processing and eventually moves the job to STOPPED.
-	/// The timeout simply means the API call itself timed out while waiting for the status change.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c>, causes the API to block until the indexer state completely stops.
-	/// If set to <c>false</c>, the API returns immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop rollup jobs.
-/// </para>
-/// <para>
-/// If you try to stop a job that does not exist, an exception occurs.
-/// If you try to stop a job that is already stopped, nothing happens.
-/// </para>
-/// <para>
-/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-/// </para>
-/// <code>
-/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-/// </code>
-/// <para>
-/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-/// </para>
-/// </summary>
+/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.StopJobRequestConverter))]
 public sealed partial class StopJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.StopJobRequestParameters>
 {
@@ -90,52 +62,18 @@ public sealed partial class StopJobRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "rollup.stop_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
-	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
-	/// NOTE: Even if a timeout occurs, the stop request is still processing and eventually moves the job to STOPPED.
-	/// The timeout simply means the API call itself timed out while waiting for the status change.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c>, causes the API to block until the indexer state completely stops.
-	/// If set to <c>false</c>, the API returns immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Stop rollup jobs.
-/// </para>
-/// <para>
-/// If you try to stop a job that does not exist, an exception occurs.
-/// If you try to stop a job that is already stopped, nothing happens.
-/// </para>
-/// <para>
-/// Since only a stopped job can be deleted, it can be useful to block the API until the indexer has fully stopped.
-/// This is accomplished with the <c>wait_for_completion</c> query parameter, and optionally a timeout. For example:
-/// </para>
-/// <code>
-/// POST _rollup/job/sensor/_stop?wait_for_completion=true&amp;timeout=10s
-/// </code>
-/// <para>
-/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
-/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
-/// </para>
-/// </summary>
+/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.stop_job.Request']/*"/>
 public readonly partial struct StopJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.StopJobRequest Instance { get; init; }
@@ -160,37 +98,21 @@ public readonly partial struct StopJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.StopJobRequest(Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>wait_for_completion</c> is <c>true</c>, the API blocks for (at maximum) the specified duration while waiting for the job to stop.
-	/// If more than <c>timeout</c> time has passed, the API throws a timeout exception.
-	/// NOTE: Even if a timeout occurs, the stop request is still processing and eventually moves the job to STOPPED.
-	/// The timeout simply means the API call itself timed out while waiting for the status change.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If set to <c>true</c>, causes the API to block until the indexer state completely stops.
-	/// If set to <c>false</c>, the API returns immediately and the indexer is stopped asynchronously in the background.
-	/// </para>
-	/// </summary>
+	/// <include file="StopJobRequest.g.xml" path="doc/member[@key='rollup.stop_job.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

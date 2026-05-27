@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GrantApiKeyConverter))]
 public sealed partial class GrantApiKey
 {
@@ -42,33 +43,18 @@ public sealed partial class GrantApiKey
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#expiration']/*"/>
 	public string? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 	public required Elastic.Clients.Elasticsearch.Name Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? RoleDescriptors { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey']/*"/>
 public readonly partial struct GrantApiKeyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.GrantApiKey Instance { get; init; }
@@ -88,50 +74,28 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Expiration(string? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -151,39 +115,21 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();
@@ -205,6 +151,7 @@ public readonly partial struct GrantApiKeyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey']/*"/>
 public readonly partial struct GrantApiKeyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GrantApiKey Instance { get; init; }
@@ -224,50 +171,28 @@ public readonly partial struct GrantApiKeyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKey instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Expiration(string? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports nested data structure.
-	/// Within the <c>metadata</c> object, keys beginning with <c>_</c> are reserved for system usage.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -287,39 +212,21 @@ public readonly partial struct GrantApiKeyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>[] values)
 	{
 		Instance.RoleDescriptors = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();
@@ -332,13 +239,7 @@ public readonly partial struct GrantApiKeyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors for this API key.
-	/// When it is not specified or is an empty array, the API key has a point in time snapshot of permissions of the specified user or access token.
-	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the permissions of the user or access token.
-	/// </para>
-	/// </summary>
+	/// <include file="GrantApiKey.g.xml" path="doc/member[@key='security.grant_api_key.GrantApiKey#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor RoleDescriptors<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>();

@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SnapshotStateConverter))]
 public enum SnapshotState
 {
-	/// <summary>
-	/// <para>
-	/// The snapshot failed.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotState.g.xml" path="doc/member[@key='snapshot._types.SnapshotState#FAILED']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "FAILED")]
 	Failed,
-	/// <summary>
-	/// <para>
-	/// The snapshot process has started.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotState.g.xml" path="doc/member[@key='snapshot._types.SnapshotState#IN_PROGRESS']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "IN_PROGRESS")]
 	InProgress,
-	/// <summary>
-	/// <para>
-	/// The snapshot is incompatible with the current version of the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotState.g.xml" path="doc/member[@key='snapshot._types.SnapshotState#INCOMPATIBLE']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "INCOMPATIBLE")]
 	Incompatible,
-	/// <summary>
-	/// <para>
-	/// The snapshot was partially successful.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotState.g.xml" path="doc/member[@key='snapshot._types.SnapshotState#PARTIAL']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "PARTIAL")]
 	Partial,
-	/// <summary>
-	/// <para>
-	/// The snapshot process completed successfully.
-	/// </para>
-	/// </summary>
+	/// <include file="SnapshotState.g.xml" path="doc/member[@key='snapshot._types.SnapshotState#SUCCESS']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "SUCCESS")]
 	Success
 }

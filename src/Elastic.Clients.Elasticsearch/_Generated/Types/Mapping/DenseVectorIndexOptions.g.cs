@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DenseVectorIndexOptionsConverter))]
 public sealed partial class DenseVectorIndexOptions
 {
@@ -42,83 +43,29 @@ public sealed partial class DenseVectorIndexOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
-	/// <c>1.0</c> or exactly <c>0</c>. When the value is <c>0</c>, this indicates that dynamic quantiles should be calculated for
-	/// optimized quantization. When between <c>0.90</c> and <c>1.0</c>, this value restricts the values used when calculating
-	/// the quantization thresholds.
-	/// </para>
-	/// <para>
-	/// For example, a value of <c>0.95</c> will only use the middle <c>95%</c> of the values when calculating the quantization
-	/// thresholds (e.g. the highest and lowest <c>2.5%</c> of values will be ignored).
-	/// </para>
-	/// <para>
-	/// Defaults to <c>1/(dims + 1)</c> for <c>int8</c> quantized vectors and <c>0</c> for <c>int4</c> for dynamic quantile calculation.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#confidence_interval']/*"/>
 	public float? ConfidenceInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#ef_construction']/*"/>
 	public int? EfConstruction { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The segment document count threshold below which HNSW graph construction is skipped in favor of brute-force flat
-	/// search. <c>-1</c> (default) defers to format defaults: <c>300</c> for <c>bbq_hnsw</c>, <c>150</c> for <c>hnsw</c>, <c>int8_hnsw</c>, and
-	/// <c>int4_hnsw</c>. <c>0</c> always builds the graph. A positive value overrides the format default.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>int4_hnsw</c>, and <c>bbq_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#flat_index_threshold']/*"/>
 	public int? FlatIndexThreshold { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of neighbors each node will be connected to in the HNSW graph.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#m']/*"/>
 	public int? M { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>true</c> if vector rescoring should be done on-disk
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#on_disk_rescore']/*"/>
 	public bool? OnDiskRescore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? RescoreVector { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of kNN algorithm to use.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions']/*"/>
 public readonly partial struct DenseVectorIndexOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Instance { get; init; }
@@ -138,115 +85,56 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The confidence interval to use when quantizing the vectors. Can be any value between and including <c>0.90</c> and
-	/// <c>1.0</c> or exactly <c>0</c>. When the value is <c>0</c>, this indicates that dynamic quantiles should be calculated for
-	/// optimized quantization. When between <c>0.90</c> and <c>1.0</c>, this value restricts the values used when calculating
-	/// the quantization thresholds.
-	/// </para>
-	/// <para>
-	/// For example, a value of <c>0.95</c> will only use the middle <c>95%</c> of the values when calculating the quantization
-	/// thresholds (e.g. the highest and lowest <c>2.5%</c> of values will be ignored).
-	/// </para>
-	/// <para>
-	/// Defaults to <c>1/(dims + 1)</c> for <c>int8</c> quantized vectors and <c>0</c> for <c>int4</c> for dynamic quantile calculation.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>int8_hnsw</c>, <c>int4_hnsw</c>, <c>int8_flat</c>, and <c>int4_flat</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#confidence_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor ConfidenceInterval(float? value)
 	{
 		Instance.ConfidenceInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#ef_construction']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor EfConstruction(int? value)
 	{
 		Instance.EfConstruction = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The segment document count threshold below which HNSW graph construction is skipped in favor of brute-force flat
-	/// search. <c>-1</c> (default) defers to format defaults: <c>300</c> for <c>bbq_hnsw</c>, <c>150</c> for <c>hnsw</c>, <c>int8_hnsw</c>, and
-	/// <c>int4_hnsw</c>. <c>0</c> always builds the graph. A positive value overrides the format default.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>int4_hnsw</c>, and <c>bbq_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#flat_index_threshold']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor FlatIndexThreshold(int? value)
 	{
 		Instance.FlatIndexThreshold = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of neighbors each node will be connected to in the HNSW graph.
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#m']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor M(int? value)
 	{
 		Instance.M = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>true</c> if vector rescoring should be done on-disk
-	/// </para>
-	/// <para>
-	/// Only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#on_disk_rescore']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor OnDiskRescore(bool? value = true)
 	{
 		Instance.OnDiskRescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? value)
 	{
 		Instance.RescoreVector = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#rescore_vector']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor> action)
 	{
 		Instance.RescoreVector = Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of kNN algorithm to use.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptions.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptions#type']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor Type(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType value)
 	{
 		Instance.Type = value;

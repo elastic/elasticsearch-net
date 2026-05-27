@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='search_application._types.SearchApplication']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.SearchApplicationConverter))]
 public sealed partial class SearchApplication
 {
@@ -44,38 +45,18 @@ public sealed partial class SearchApplication
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analytics collection associated to the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplication.g.xml" path="doc/member[@key='search_application._types.SearchApplication#analytics_collection_name']/*"/>
 	public string? AnalyticsCollectionName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indices that are part of the Search Application.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplication.g.xml" path="doc/member[@key='search_application._types.SearchApplication#indices']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search Application name
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplication.g.xml" path="doc/member[@key='search_application._types.SearchApplication#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Search template to use on search operations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplication.g.xml" path="doc/member[@key='search_application._types.SearchApplication#template']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate? Template { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Last time the Search Application was updated.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchApplication.g.xml" path="doc/member[@key='search_application._types.SearchApplication#updated_at_millis']/*"/>
 	public required System.DateTimeOffset UpdatedAtMillis { get; set; }
 }

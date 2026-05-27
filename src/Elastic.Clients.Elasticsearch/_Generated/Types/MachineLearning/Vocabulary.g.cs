@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Vocabulary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.VocabularyConverter))]
 public sealed partial class Vocabulary
 {
@@ -45,6 +46,7 @@ public sealed partial class Vocabulary
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.Vocabulary']/*"/>
 public readonly partial struct VocabularyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Instance { get; init; }

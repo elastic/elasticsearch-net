@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.TransportHistogram']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.TransportHistogramConverter))]
 public sealed partial class TransportHistogram
 {
@@ -36,25 +37,12 @@ public sealed partial class TransportHistogram
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of times a transport thread took a period of time within the bounds of this bucket to handle an inbound message.
-	/// </para>
-	/// </summary>
+	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#count']/*"/>
 	public long? Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inclusive lower bound of the bucket in milliseconds. May be omitted on the first bucket if this bucket has no lower bound.
-	/// </para>
-	/// </summary>
+	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#ge_millis']/*"/>
 	public long? GeMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The exclusive upper bound of the bucket in milliseconds.
-	/// May be omitted on the last bucket if this bucket has no upper bound.
-	/// </para>
-	/// </summary>
+	/// <include file="TransportHistogram.g.xml" path="doc/member[@key='nodes._types.TransportHistogram#lt_millis']/*"/>
 	public long? LtMillis { get; set; }
 }

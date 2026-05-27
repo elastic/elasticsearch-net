@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference.put_ai21.Request"><summary><para>
+Create a AI21 inference endpoint.
+</para>
+<para>
+Create an inference endpoint to perform an inference task with the <c>ai21</c> service.
+</para></summary></member>
+  <member key="inference.put_ai21.Request#ai21_inference_id"><summary><para>
+The unique identifier of the inference endpoint.
+</para></summary></member>
+  <member key="inference.put_ai21.Request#service"><summary><para>
+The type of service supported for the specified task type. In this case, <c>ai21</c>.
+</para></summary></member>
+  <member key="inference.put_ai21.Request#service_settings"><summary><para>
+Settings used to install the inference model. These settings are specific to the <c>ai21</c> service.
+</para></summary></member>
+  <member key="inference.put_ai21.Request#task_type"><summary><para>
+The type of the inference task that the model will perform.
+</para></summary></member>
+  <member key="inference.put_ai21.Request#timeout"><summary><para>
+Specifies the amount of time to wait for the inference endpoint to be created.
+</para></summary></member>
+</doc>

@@ -37,10 +37,6 @@ public sealed partial class DeleteDatafeedResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteDatafeedResponse.g.xml" path="doc/member[@key='ml.delete_datafeed.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

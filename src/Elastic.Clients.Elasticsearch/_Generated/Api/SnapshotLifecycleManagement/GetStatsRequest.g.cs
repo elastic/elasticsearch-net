@@ -23,31 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 public sealed partial class GetStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get snapshot lifecycle management statistics.
-/// </para>
-/// <para>
-/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
-/// </para>
-/// </summary>
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.GetStatsRequestConverter))]
 public sealed partial class GetStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>
 {
@@ -69,29 +57,15 @@ public sealed partial class GetStatsRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "slm.get_stats";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get snapshot lifecycle management statistics.
-/// </para>
-/// <para>
-/// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
-/// </para>
-/// </summary>
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm.get_stats.Request']/*"/>
 public readonly partial struct GetStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest Instance { get; init; }
@@ -110,22 +84,14 @@ public readonly partial struct GetStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='slm.get_stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

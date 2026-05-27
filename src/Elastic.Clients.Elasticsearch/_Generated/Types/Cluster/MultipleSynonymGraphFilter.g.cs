@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.MultipleSynonymGraphFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.MultipleSynonymGraphFilterConverter))]
 public sealed partial class MultipleSynonymGraphFilter
 {
@@ -36,17 +37,9 @@ public sealed partial class MultipleSynonymGraphFilter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of analyzers across the cluster whose filter chain contains more than one synonym_graph filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultipleSynonymGraphFilter.g.xml" path="doc/member[@key='cluster.stats.MultipleSynonymGraphFilter#analyzer_count']/*"/>
 	public int? AnalyzerCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of indices that contain at least one analyzer with more than one synonym_graph filter.
-	/// </para>
-	/// </summary>
+	/// <include file="MultipleSynonymGraphFilter.g.xml" path="doc/member[@key='cluster.stats.MultipleSynonymGraphFilter#index_count']/*"/>
 	public int? IndexCount { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsHuber']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionMetricsHuberConverter))]
 public sealed partial class DataframeEvaluationRegressionMetricsHuber
 {
@@ -36,14 +37,11 @@ public sealed partial class DataframeEvaluationRegressionMetricsHuber
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetricsHuber.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsHuber#delta']/*"/>
 	public double? Delta { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsHuber']/*"/>
 public readonly partial struct DataframeEvaluationRegressionMetricsHuberDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct DataframeEvaluationRegressionMetricsHuberDescript
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Approximates 1/2 (prediction - actual)2 for values much less than delta and approximates a straight line with slope delta for values much larger than delta. Defaults to 1. Delta needs to be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeEvaluationRegressionMetricsHuber.g.xml" path="doc/member[@key='ml._types.DataframeEvaluationRegressionMetricsHuber#delta']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor Delta(double? value)
 	{
 		Instance.Delta = value;

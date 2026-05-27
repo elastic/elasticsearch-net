@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.MemoryStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.MemoryStatsConverter))]
 public sealed partial class MemoryStats
 {
@@ -36,38 +37,21 @@ public sealed partial class MemoryStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the amount of physical memory has been overridden using the <c>es</c>.<c>total_memory_bytes</c> system property then this reports the overridden value in bytes.
-	/// Otherwise it reports the same value as <c>total_in_bytes</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#adjusted_total_in_bytes']/*"/>
 	public long? AdjustedTotalInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of free physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#free_in_bytes']/*"/>
 	public long? FreeInBytes { get; set; }
 	public string? Resident { get; set; }
 	public long? ResidentInBytes { get; set; }
 	public string? Share { get; set; }
 	public long? ShareInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#total_in_bytes']/*"/>
 	public long? TotalInBytes { get; set; }
 	public string? TotalVirtual { get; set; }
 	public long? TotalVirtualInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Amount of used physical memory in bytes.
-	/// </para>
-	/// </summary>
+	/// <include file="MemoryStats.g.xml" path="doc/member[@key='nodes._types.MemoryStats#used_in_bytes']/*"/>
 	public long? UsedInBytes { get; set; }
 }

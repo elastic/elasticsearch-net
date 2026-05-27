@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SpecifiedDocument']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SpecifiedDocumentConverter))]
 public sealed partial class SpecifiedDocument
 {
@@ -46,6 +47,7 @@ public sealed partial class SpecifiedDocument
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.SpecifiedDocument']/*"/>
 public readonly partial struct SpecifiedDocumentDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SpecifiedDocument Instance { get; init; }

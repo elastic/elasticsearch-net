@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RandomSamplerAggregationConverter))]
 public sealed partial class RandomSamplerAggregation
 {
@@ -42,31 +43,17 @@ public sealed partial class RandomSamplerAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The probability that a document will be included in the aggregated data.
-	/// Must be greater than 0, less than 0.5, or exactly 1.
-	/// The lower the probability, the fewer documents are matched.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#probability']/*"/>
 	public required double Probability { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The seed to generate the random sampling of documents.
-	/// When a seed is provided, the random subset of documents is the same between calls.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#seed']/*"/>
 	public int? Seed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When combined with seed, setting shard_seed ensures 100% consistent sampling over shards where data is exactly the same.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#shard_seed']/*"/>
 	public int? ShardSeed { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation']/*"/>
 public readonly partial struct RandomSamplerAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Instance { get; init; }
@@ -86,36 +73,21 @@ public readonly partial struct RandomSamplerAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The probability that a document will be included in the aggregated data.
-	/// Must be greater than 0, less than 0.5, or exactly 1.
-	/// The lower the probability, the fewer documents are matched.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#probability']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor Probability(double value)
 	{
 		Instance.Probability = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The seed to generate the random sampling of documents.
-	/// When a seed is provided, the random subset of documents is the same between calls.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#seed']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor Seed(int? value)
 	{
 		Instance.Seed = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When combined with seed, setting shard_seed ensures 100% consistent sampling over shards where data is exactly the same.
-	/// </para>
-	/// </summary>
+	/// <include file="RandomSamplerAggregation.g.xml" path="doc/member[@key='_types.aggregations.RandomSamplerAggregation#shard_seed']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationDescriptor ShardSeed(int? value)
 	{
 		Instance.ShardSeed = value;

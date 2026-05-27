@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.upgrade_transforms.Response#needs_update"><summary><para>
+The number of transforms that need to be upgraded.
+</para></summary></member>
+  <member key="transform.upgrade_transforms.Response#no_action"><summary><para>
+The number of transforms that don’t require upgrading.
+</para></summary></member>
+  <member key="transform.upgrade_transforms.Response#updated"><summary><para>
+The number of transforms that have been upgraded.
+</para></summary></member>
+</doc>

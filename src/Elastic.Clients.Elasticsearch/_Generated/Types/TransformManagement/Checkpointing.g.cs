@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform.get_transform_stats.Checkpointing']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.CheckpointingConverter))]
 public sealed partial class Checkpointing
 {

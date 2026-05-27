@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Phase']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.PhaseConverter))]
 public sealed partial class Phase
 {
@@ -40,6 +41,7 @@ public sealed partial class Phase
 	public Elastic.Clients.Elasticsearch.Duration? MinAge { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Phase']/*"/>
 public readonly partial struct PhaseDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase Instance { get; init; }

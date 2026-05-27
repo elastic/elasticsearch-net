@@ -23,49 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 public sealed partial class PutDataStreamSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the settings on any data streams or indices. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream settings.
-/// </para>
-/// <para>
-/// NOTE: Available in 8.19. Not available in earlier versions.
-/// </para>
-/// <para>
-/// This API can be used to override settings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
-/// only certain settings are allowed. If possible, the setting change is applied to all
-/// backing indices. Otherwise, it will be applied when the data stream is next rolled over.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataStreamSettingsRequestConverter))]
 public sealed partial class PutDataStreamSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>
 {
@@ -99,55 +72,22 @@ public sealed partial class PutDataStreamSettingsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "indices.put_data_stream_settings";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Name { get => P<Elastic.Clients.Elasticsearch.Indices>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the settings on any data streams or indices. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#dry_run']/*"/>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream settings.
-/// </para>
-/// <para>
-/// NOTE: Available in 8.19. Not available in earlier versions.
-/// </para>
-/// <para>
-/// This API can be used to override settings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
-/// only certain settings are allowed. If possible, the setting change is applied to all
-/// backing indices. Otherwise, it will be applied when the data stream is next rolled over.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 public readonly partial struct PutDataStreamSettingsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest Instance { get; init; }
@@ -174,49 +114,28 @@ public readonly partial struct PutDataStreamSettingsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the settings on any data streams or indices. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -303,20 +222,8 @@ public readonly partial struct PutDataStreamSettingsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update data stream settings.
-/// </para>
-/// <para>
-/// NOTE: Available in 8.19. Not available in earlier versions.
-/// </para>
-/// <para>
-/// This API can be used to override settings on specific data streams. These overrides will take precedence over what
-/// is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
-/// only certain settings are allowed. If possible, the setting change is applied to all
-/// backing indices. Otherwise, it will be applied when the data stream is next rolled over.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_settings.Request']/*"/>
 public readonly partial struct PutDataStreamSettingsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest Instance { get; init; }
@@ -344,49 +251,28 @@ public readonly partial struct PutDataStreamSettingsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams or data stream patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request does not actually change the settings on any data streams or indices. Instead, it
-	/// simulates changing the settings and reports back to the user what would have happened had these settings
-	/// actually been applied.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#dry_run']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument> DryRun(bool? value = true)
 	{
 		Instance.DryRun = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response. If no response is received before the
-	/// timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamSettingsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_settings.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonPoints']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoPolygonPointsConverter))]
 public sealed partial class GeoPolygonPoints
 {
@@ -45,6 +46,7 @@ public sealed partial class GeoPolygonPoints
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> Points { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.GeoPolygonPoints']/*"/>
 public readonly partial struct GeoPolygonPointsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonPoints Instance { get; init; }

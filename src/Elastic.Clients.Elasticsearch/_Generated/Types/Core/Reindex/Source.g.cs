@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.Source']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Reindex.Json.SourceConverter))]
 public sealed partial class Source
 {
@@ -42,81 +43,34 @@ public sealed partial class Source
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream, index, or alias you are copying from.
-	/// It accepts a comma-separated list to reindex from multiple sources.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A remote instance of Elasticsearch that you want to index from.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? Remote { get; set; }
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of documents to index per batch.
-	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	[System.Obsolete("Deprecated in '7.6.0'.")]
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? SourceFields { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.Source']/*"/>
 public readonly partial struct SourceDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Reindex.Source Instance { get; init; }
@@ -136,74 +90,42 @@ public readonly partial struct SourceDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Reindex.Source instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream, index, or alias you are copying from.
-	/// It accepts a comma-separated list to reindex from multiple sources.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A remote instance of Elasticsearch that you want to index from.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? value)
 	{
 		Instance.Remote = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A remote instance of Elasticsearch that you want to index from.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Remote(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor> action)
 	{
 		Instance.Remote = Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor.Build(action);
@@ -256,34 +178,21 @@ public readonly partial struct SourceDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of documents to index per batch.
-	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
@@ -291,17 +200,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
@@ -309,17 +208,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -327,17 +216,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -350,24 +229,14 @@ public readonly partial struct SourceDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.SourceFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceFields(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
@@ -383,6 +252,7 @@ public readonly partial struct SourceDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.reindex.Source']/*"/>
 public readonly partial struct SourceDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Reindex.Source Instance { get; init; }
@@ -402,85 +272,49 @@ public readonly partial struct SourceDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.Source instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the data stream, index, or alias you are copying from.
-	/// It accepts a comma-separated list to reindex from multiple sources.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to reindex, which is defined with Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A remote instance of Elasticsearch that you want to index from.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Remote(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource? value)
 	{
 		Instance.Remote = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A remote instance of Elasticsearch that you want to index from.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#remote']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Remote(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor> action)
 	{
 		Instance.Remote = Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor.Build(action);
@@ -553,45 +387,28 @@ public readonly partial struct SourceDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of documents to index per batch.
-	/// Use it when you are indexing from remote to ensure that the batches fit within the on-heap buffer, which defaults to a maximum size of 100 MB.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the reindex request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
@@ -599,17 +416,7 @@ public readonly partial struct SourceDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
@@ -617,17 +424,7 @@ public readonly partial struct SourceDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
@@ -635,17 +432,7 @@ public readonly partial struct SourceDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -659,17 +446,7 @@ public readonly partial struct SourceDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.6.0'.")]
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs to sort by before indexing.
-	/// Use it in conjunction with <c>max_docs</c> to control what documents are reindexed.
-	/// </para>
-	/// <para>
-	/// WARNING: Sort in reindex is deprecated.
-	/// Sorting in reindex was never guaranteed to index documents in order and prevents further development of reindex such as resilience and performance improvements.
-	/// If used in combination with <c>max_docs</c>, consider using a query filter instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -682,36 +459,21 @@ public readonly partial struct SourceDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.SourceFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, reindex all source fields.
-	/// Set it to a list to reindex select fields.
-	/// </para>
-	/// </summary>
+	/// <include file="Source.g.xml" path="doc/member[@key='_global.reindex.Source#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceFields<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.SourceFields = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>.Build(action);

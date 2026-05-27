@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes.usage.NodeUsage']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeUsageConverter))]
 public sealed partial class NodeUsage
 {
@@ -45,32 +46,15 @@ public sealed partial class NodeUsage
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of times search aggregations have been called on this node since the last restart.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#aggregations']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, object> Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of times each REST endpoint has been called on this node since the last restart.
-	/// Note that the REST endpoint names are not considered stable.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#rest_actions']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> RestActions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for when the collection of these statistics started.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#since']/*"/>
 	public required System.DateTimeOffset Since { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The timestamp for when these statistics were collected.
-	/// </para>
-	/// </summary>
+	/// <include file="NodeUsage.g.xml" path="doc/member[@key='nodes.usage.NodeUsage#timestamp']/*"/>
 	public required System.DateTimeOffset Timestamp { get; set; }
 }

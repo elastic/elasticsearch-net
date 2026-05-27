@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Zero shot classification configuration options
-/// </para>
-/// </summary>
+/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ZeroShotClassificationInferenceOptionsConverter))]
 public sealed partial class ZeroShotClassificationInferenceOptions
 {
@@ -47,55 +44,27 @@ public sealed partial class ZeroShotClassificationInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#classification_labels']/*"/>
 	public required System.Collections.Generic.ICollection<string> ClassificationLabels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Hypothesis template used when tokenizing labels for prediction
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#hypothesis_template']/*"/>
 	public string? HypothesisTemplate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#labels']/*"/>
 	public System.Collections.Generic.ICollection<string>? Labels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if more than one true label exists.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#multi_label']/*"/>
 	public bool? MultiLabel { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Zero shot classification configuration options
-/// </para>
-/// </summary>
+/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions']/*"/>
 public readonly partial struct ZeroShotClassificationInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions Instance { get; init; }
@@ -115,101 +84,63 @@ public readonly partial struct ZeroShotClassificationInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.ClassificationLabels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The zero shot classification labels indicating entailment, neutral, and contradiction
-	/// Must contain exactly and only entailment, neutral, and contradiction
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Hypothesis template used when tokenizing labels for prediction
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#hypothesis_template']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor HypothesisTemplate(string? value)
 	{
 		Instance.HypothesisTemplate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Labels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The labels to predict.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Labels(params string[] values)
 	{
 		Instance.Labels = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates if more than one true label exists.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#multi_label']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor MultiLabel(bool? value = true)
 	{
 		Instance.MultiLabel = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="ZeroShotClassificationInferenceOptions.g.xml" path="doc/member[@key='ml._types.ZeroShotClassificationInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ZeroShotClassificationInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

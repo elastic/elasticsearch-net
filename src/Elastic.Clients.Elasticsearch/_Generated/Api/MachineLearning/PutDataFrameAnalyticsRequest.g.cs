@@ -23,26 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
 public sealed partial class PutDataFrameAnalyticsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create a data frame analytics job.
-/// </para>
-/// <para>
-/// This API creates a data frame analytics job that performs an analysis on the
-/// source indices and stores the outcome in a destination index.
-/// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
-/// </para>
-/// <para>
-/// If the destination index does not exist, it is created automatically when you start the job.
-/// </para>
-/// <para>
-/// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
-/// </para>
-/// </summary>
+/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutDataFrameAnalyticsRequestConverter))]
 public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestParameters>
 {
@@ -78,134 +66,39 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "ml.put_data_frame_analytics";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node. If
-	/// set to <c>false</c> and a machine learning node with capacity to run the job
-	/// cannot be immediately found, the API returns an error. If set to <c>true</c>,
-	/// the API does not return an error; the job waits in the <c>starting</c> state
-	/// until sufficient machine learning node capacity is available. This
-	/// behavior is also affected by the cluster-wide
-	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#allow_lazy_start']/*"/>
 	public bool? AllowLazyStart { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Analysis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? AnalyzedFields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination Dest { get; set; }
 	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#max_num_threads']/*"/>
 	public int? MaxNumThreads { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#model_memory_limit']/*"/>
 	public string? ModelMemoryLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource Source { get; set; }
 	public string? Version { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a data frame analytics job.
-/// </para>
-/// <para>
-/// This API creates a data frame analytics job that performs an analysis on the
-/// source indices and stores the outcome in a destination index.
-/// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
-/// </para>
-/// <para>
-/// If the destination index does not exist, it is created automatically when you start the job.
-/// </para>
-/// <para>
-/// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
-/// </para>
-/// </summary>
+/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
 public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Instance { get; init; }
@@ -232,228 +125,84 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node. If
-	/// set to <c>false</c> and a machine learning node with capacity to run the job
-	/// cannot be immediately found, the API returns an error. If set to <c>true</c>,
-	/// the API does not return an error; the job waits in the <c>starting</c> state
-	/// until sufficient machine learning node capacity is available. This
-	/// behavior is also affected by the cluster-wide
-	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#allow_lazy_start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AllowLazyStart(bool? value = true)
 	{
 		Instance.AllowLazyStart = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
 		Instance.Analysis = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> action)
 	{
 		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Analysis<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>> action)
 	{
 		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
 		Instance.AnalyzedFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields()
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor> action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Dest<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>> action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<T>.Build(action);
@@ -492,14 +241,7 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#max_num_threads']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor MaxNumThreads(int? value)
 	{
 		Instance.MaxNumThreads = value;
@@ -531,48 +273,28 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#model_memory_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor ModelMemoryLimit(string? value)
 	{
 		Instance.ModelMemoryLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<T>.Build(action);
@@ -641,22 +363,8 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Create a data frame analytics job.
-/// </para>
-/// <para>
-/// This API creates a data frame analytics job that performs an analysis on the
-/// source indices and stores the outcome in a destination index.
-/// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
-/// </para>
-/// <para>
-/// If the destination index does not exist, it is created automatically when you start the job.
-/// </para>
-/// <para>
-/// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
-/// </para>
-/// </summary>
+/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request']/*"/>
 public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest Instance { get; init; }
@@ -683,204 +391,70 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the data frame analytics job. This identifier can contain
-	/// lowercase alphanumeric characters (a-z and 0-9), hyphens, and
-	/// underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies whether this job can start when there is insufficient machine
-	/// learning node capacity for it to be immediately assigned to a node. If
-	/// set to <c>false</c> and a machine learning node with capacity to run the job
-	/// cannot be immediately found, the API returns an error. If set to <c>true</c>,
-	/// the API does not return an error; the job waits in the <c>starting</c> state
-	/// until sufficient machine learning node capacity is available. This
-	/// behavior is also affected by the cluster-wide
-	/// <c>xpack.ml.max_lazy_ml_nodes</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#allow_lazy_start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AllowLazyStart(bool? value = true)
 	{
 		Instance.AllowLazyStart = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value)
 	{
 		Instance.Analysis = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analysis configuration, which contains the information necessary to
-	/// perform one of the following types of analysis: classification, outlier
-	/// detection, or regression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analysis']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Analysis(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> action)
 	{
 		Instance.Analysis = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFields? value)
 	{
 		Instance.AnalyzedFields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields()
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#analyzed_fields']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A description of the job.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#description']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestination value)
 	{
 		Instance.Dest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The destination configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#dest']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>> action)
 	{
 		Instance.Dest = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsDestinationDescriptor<TDocument>.Build(action);
@@ -919,14 +493,7 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of threads to be used by the analysis. Using more
-	/// threads may decrease the time necessary to complete the analysis at the
-	/// cost of using more CPU. Note that the process may use additional threads
-	/// for operational functionality other than the analysis itself.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#max_num_threads']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> MaxNumThreads(int? value)
 	{
 		Instance.MaxNumThreads = value;
@@ -958,37 +525,21 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The approximate maximum amount of memory resources that are permitted for
-	/// analytical processing. If your <c>elasticsearch.yml</c> file contains an
-	/// <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try
-	/// to create data frame analytics jobs that have <c>model_memory_limit</c> values
-	/// greater than that setting.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#model_memory_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> ModelMemoryLimit(string? value)
 	{
 		Instance.ModelMemoryLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The configuration of how to source the analysis data.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataFrameAnalyticsRequest.g.xml" path="doc/member[@key='ml.put_data_frame_analytics.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument>.Build(action);

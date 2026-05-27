@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.Response#details"><summary><para>
+The details section contains one entry for every query in the original requests section, keyed by the search request id
+</para></summary></member>
+  <member key="_global.rank_eval.Response#metric_score"><summary><para>
+The overall evaluation quality calculated by the defined metric
+</para></summary></member>
+</doc>

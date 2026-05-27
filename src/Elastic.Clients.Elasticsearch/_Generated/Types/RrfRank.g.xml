@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RrfRank#rank_constant"><summary><para>
+How much influence documents in individual result sets per query have over the final ranked result set
+</para></summary></member>
+  <member key="_types.RrfRank#rank_window_size"><summary><para>
+Size of the individual result sets per query
+</para></summary></member>
+</doc>

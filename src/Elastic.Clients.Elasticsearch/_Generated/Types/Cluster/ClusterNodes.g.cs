@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterNodes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterNodesConverter))]
 public sealed partial class ClusterNodes
 {
@@ -53,76 +54,35 @@ public sealed partial class ClusterNodes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Contains counts for nodes selected by the request’s node filters.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#count']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the discovery types used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#discovery_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> DiscoveryTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about file stores by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#fs']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Fs { get; set; }
 	public required Elastic.Clients.Elasticsearch.Cluster.IndexingPressure IndexingPressure { get; set; }
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Ingest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the Java Virtual Machines (JVMs) used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#jvm']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Jvm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the transport and HTTP networks used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#network_types']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes NetworkTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the operating systems used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#os']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem Os { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about Elasticsearch distributions installed on selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#packaging_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.NodePackagingType> PackagingTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about installed plugins and modules by selected nodes.
-	/// If no plugins or modules are installed, this array is empty.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#plugins']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats> Plugins { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about processes used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#process']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Process { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of Elasticsearch versions used on selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterNodes.g.xml" path="doc/member[@key='cluster.stats.ClusterNodes#versions']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> Versions { get; set; }
 }

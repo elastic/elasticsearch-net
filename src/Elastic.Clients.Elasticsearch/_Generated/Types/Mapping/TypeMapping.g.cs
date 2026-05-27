@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TypeMapping']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.TypeMappingConverter))]
 public sealed partial class TypeMapping
 {
@@ -55,6 +56,7 @@ public sealed partial class TypeMapping
 	public Elastic.Clients.Elasticsearch.Mapping.Subobjects? Subobjects { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TypeMapping']/*"/>
 public readonly partial struct TypeMappingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping Instance { get; init; }
@@ -321,6 +323,7 @@ public readonly partial struct TypeMappingDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.TypeMapping']/*"/>
 public readonly partial struct TypeMappingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.TypeMapping Instance { get; init; }

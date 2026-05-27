@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 public sealed partial class DeleteByQueryRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To disable throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle a delete by query operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular delete by query operation.
-/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DeleteByQueryRethrottleRequestConverter))]
 public sealed partial class DeleteByQueryRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestParameters>
 {
@@ -69,31 +59,15 @@ public sealed partial class DeleteByQueryRethrottleRequest : Elastic.Clients.Ela
 
 	internal override string OperationName => "delete_by_query_rethrottle";
 
-	/// <summary>
-	/// <para>
-	/// The ID for the task.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.TaskId TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To disable throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
-/// <summary>
-/// <para>
-/// Throttle a delete by query operation.
-/// </para>
-/// <para>
-/// Change the number of requests per second for a particular delete by query operation.
-/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
-/// </para>
-/// </summary>
+/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request']/*"/>
 public readonly partial struct DeleteByQueryRethrottleRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest Instance { get; init; }
@@ -118,23 +92,14 @@ public readonly partial struct DeleteByQueryRethrottleRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequest(Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID for the task.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// To disable throttling, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteByQueryRethrottleRequest.g.xml" path="doc/member[@key='_global.delete_by_query_rethrottle.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRethrottleRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;

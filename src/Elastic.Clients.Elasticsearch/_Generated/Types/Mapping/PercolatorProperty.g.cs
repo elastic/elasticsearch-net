@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PercolatorProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.PercolatorPropertyConverter))]
 public sealed partial class PercolatorProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -40,11 +41,7 @@ public sealed partial class PercolatorProperty : Elastic.Clients.Elasticsearch.M
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
@@ -52,6 +49,7 @@ public sealed partial class PercolatorProperty : Elastic.Clients.Elasticsearch.M
 	public string Type => "percolator";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PercolatorProperty']/*"/>
 public readonly partial struct PercolatorPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty Instance { get; init; }
@@ -95,33 +93,21 @@ public readonly partial struct PercolatorPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -167,6 +153,7 @@ public readonly partial struct PercolatorPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.PercolatorProperty']/*"/>
 public readonly partial struct PercolatorPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty Instance { get; init; }
@@ -216,33 +203,21 @@ public readonly partial struct PercolatorPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="PercolatorProperty.g.xml" path="doc/member[@key='_types.mapping.PercolatorProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

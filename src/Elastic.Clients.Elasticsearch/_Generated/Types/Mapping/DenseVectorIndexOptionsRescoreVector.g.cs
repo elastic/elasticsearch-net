@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsRescoreVector']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DenseVectorIndexOptionsRescoreVectorConverter))]
 public sealed partial class DenseVectorIndexOptionsRescoreVector
 {
@@ -42,18 +43,11 @@ public sealed partial class DenseVectorIndexOptionsRescoreVector
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The oversampling factor to use when searching for the nearest neighbor. This is only applicable to the quantized formats: <c>bbq_*</c>, <c>int4_*</c>, and <c>int8_*</c>.
-	/// When provided, <c>oversample * k</c> vectors will be gathered and then their scores will be re-computed with the original vectors.
-	/// </para>
-	/// <para>
-	/// valid values are between <c>1.0</c> and <c>10.0</c> (inclusive), or <c>0</c> exactly to disable oversampling.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsRescoreVector.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsRescoreVector#oversample']/*"/>
 	public required float Oversample { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsRescoreVector']/*"/>
 public readonly partial struct DenseVectorIndexOptionsRescoreVectorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector Instance { get; init; }
@@ -73,15 +67,7 @@ public readonly partial struct DenseVectorIndexOptionsRescoreVectorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector instance) => new Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The oversampling factor to use when searching for the nearest neighbor. This is only applicable to the quantized formats: <c>bbq_*</c>, <c>int4_*</c>, and <c>int8_*</c>.
-	/// When provided, <c>oversample * k</c> vectors will be gathered and then their scores will be re-computed with the original vectors.
-	/// </para>
-	/// <para>
-	/// valid values are between <c>1.0</c> and <c>10.0</c> (inclusive), or <c>0</c> exactly to disable oversampling.
-	/// </para>
-	/// </summary>
+	/// <include file="DenseVectorIndexOptionsRescoreVector.g.xml" path="doc/member[@key='_types.mapping.DenseVectorIndexOptionsRescoreVector#oversample']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor Oversample(float value)
 	{
 		Instance.Oversample = value;

@@ -23,32 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
 public sealed partial class PutIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response indicates that it was not completely acknowledged.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an IP geolocation database configuration.
-/// </para>
-/// </summary>
+/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PutIpLocationDatabaseRequestConverter))]
 public sealed partial class PutIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>
 {
@@ -82,38 +69,19 @@ public sealed partial class PutIpLocationDatabaseRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "ingest.put_ip_location_database";
 
-	/// <summary>
-	/// <para>
-	/// The database configuration identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response indicates that it was not completely acknowledged.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public required Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration Configuration { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update an IP geolocation database configuration.
-/// </para>
-/// </summary>
+/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest.put_ip_location_database.Request']/*"/>
 public readonly partial struct PutIpLocationDatabaseRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest Instance { get; init; }
@@ -140,37 +108,21 @@ public readonly partial struct PutIpLocationDatabaseRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The database configuration identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response indicates that it was not completely acknowledged.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
+	/// <include file="PutIpLocationDatabaseRequest.g.xml" path="doc/member[@key='ingest.put_ip_location_database.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

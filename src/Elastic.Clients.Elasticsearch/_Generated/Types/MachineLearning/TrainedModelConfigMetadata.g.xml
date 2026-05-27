@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.TrainedModelConfigMetadata#feature_importance_baseline"><summary><para>
+An object that contains the baseline for feature importance values. For regression analysis, it is a single value. For classification analysis, there is a value for each class.
+</para></summary></member>
+  <member key="ml._types.TrainedModelConfigMetadata#hyperparameters"><summary><para>
+List of the available hyperparameters optimized during the fine_parameter_tuning phase as well as specified by the user.
+</para></summary></member>
+  <member key="ml._types.TrainedModelConfigMetadata#total_feature_importance"><summary><para>
+An array of the total feature importance for each feature used from the training data set. This array of objects is returned if data frame analytics trained the model and the request includes total_feature_importance in the include request parameter.
+</para></summary></member>
+</doc>

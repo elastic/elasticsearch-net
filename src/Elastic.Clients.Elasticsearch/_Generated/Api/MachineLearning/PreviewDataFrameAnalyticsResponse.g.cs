@@ -37,10 +37,6 @@ public sealed partial class PreviewDataFrameAnalyticsResponse : Elastic.Transpor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of objects that contain feature name and value pairs. The features have been processed and indicate what will be sent to the model for training.
-	/// </para>
-	/// </summary>
+	/// <include file="PreviewDataFrameAnalyticsResponse.g.xml" path="doc/member[@key='ml.preview_data_frame_analytics.Response#feature_values']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, string>> FeatureValues { get; set; }
 }

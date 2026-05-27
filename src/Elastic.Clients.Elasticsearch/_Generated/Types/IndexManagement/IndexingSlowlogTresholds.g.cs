@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexingSlowlogTresholdsConverter))]
 public sealed partial class IndexingSlowlogTresholds
 {
@@ -36,15 +37,11 @@ public sealed partial class IndexingSlowlogTresholds
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
-	/// Log and the thresholds are configured in the same way as the search slowlog.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingSlowlogTresholds.g.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? Index { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds']/*"/>
 public readonly partial struct IndexingSlowlogTresholdsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds Instance { get; init; }
@@ -64,36 +61,21 @@ public readonly partial struct IndexingSlowlogTresholdsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholds(Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
-	/// Log and the thresholds are configured in the same way as the search slowlog.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingSlowlogTresholds.g.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index(Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevels? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
-	/// Log and the thresholds are configured in the same way as the search slowlog.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingSlowlogTresholds.g.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index()
 	{
 		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The indexing slow log, similar in functionality to the search slow log. The log file name ends with <c>_index_indexing_slowlog.json</c>.
-	/// Log and the thresholds are configured in the same way as the search slowlog.
-	/// </para>
-	/// </summary>
+	/// <include file="IndexingSlowlogTresholds.g.xml" path="doc/member[@key='indices._types.IndexingSlowlogTresholds#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexingSlowlogTresholdsDescriptor Index(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor>? action)
 	{
 		Instance.Index = Elastic.Clients.Elasticsearch.IndexManagement.SlowlogTresholdLevelsDescriptor.Build(action);

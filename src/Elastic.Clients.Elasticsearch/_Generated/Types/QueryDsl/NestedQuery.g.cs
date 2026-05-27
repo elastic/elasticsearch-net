@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NestedQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.NestedQueryConverter))]
 public sealed partial class NestedQuery
 {
@@ -43,53 +44,27 @@ public sealed partial class NestedQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#ignore_unmapped']/*"/>
 	public bool? IgnoreUnmapped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.InnerHits? InnerHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#path']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Path { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How scores for matching child objects affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? ScoreMode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NestedQuery']/*"/>
 public readonly partial struct NestedQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Instance { get; init; }
@@ -109,102 +84,63 @@ public readonly partial struct NestedQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -217,11 +153,7 @@ public readonly partial struct NestedQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How scores for matching child objects affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor<TDocument> ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
 		Instance.ScoreMode = value;
@@ -237,6 +169,7 @@ public readonly partial struct NestedQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.NestedQuery']/*"/>
 public readonly partial struct NestedQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery Instance { get; init; }
@@ -256,124 +189,77 @@ public readonly partial struct NestedQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.NestedQuery(Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether to ignore an unmapped path and not return any documents instead of an error.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#ignore_unmapped']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor IgnoreUnmapped(bool? value = true)
 	{
 		Instance.IgnoreUnmapped = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits(Elastic.Clients.Elasticsearch.Core.Search.InnerHits? value)
 	{
 		Instance.InnerHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits()
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, each search hit will contain inner hits.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#inner_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor InnerHits<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>>? action)
 	{
 		Instance.InnerHits = Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Path(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the nested object you wish to search.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#path']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Path = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query you wish to run on nested objects in the path.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -386,11 +272,7 @@ public readonly partial struct NestedQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How scores for matching child objects affect the root parent document’s relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="NestedQuery.g.xml" path="doc/member[@key='_types.query_dsl.NestedQuery#score_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NestedQueryDescriptor ScoreMode(Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? value)
 	{
 		Instance.ScoreMode = value;

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.KeywordProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.KeywordPropertyConverter))]
 public sealed partial class KeywordProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -46,11 +47,7 @@ public sealed partial class KeywordProperty : Elastic.Clients.Elasticsearch.Mapp
 	public bool? Index { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public string? Normalizer { get; set; }
 	public bool? Norms { get; set; }
@@ -63,16 +60,13 @@ public sealed partial class KeywordProperty : Elastic.Clients.Elasticsearch.Mapp
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#time_series_dimension']/*"/>
 	public bool? TimeSeriesDimension { get; set; }
 
 	public string Type => "keyword";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.KeywordProperty']/*"/>
 public readonly partial struct KeywordPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.KeywordProperty Instance { get; init; }
@@ -158,33 +152,21 @@ public readonly partial struct KeywordPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -276,11 +258,7 @@ public readonly partial struct KeywordPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor<TDocument> TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;
@@ -301,6 +279,7 @@ public readonly partial struct KeywordPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.KeywordProperty']/*"/>
 public readonly partial struct KeywordPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.KeywordProperty Instance { get; init; }
@@ -392,33 +371,21 @@ public readonly partial struct KeywordPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -516,11 +483,7 @@ public readonly partial struct KeywordPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
-	/// </para>
-	/// </summary>
+	/// <include file="KeywordProperty.g.xml" path="doc/member[@key='_types.mapping.KeywordProperty#time_series_dimension']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.KeywordPropertyDescriptor TimeSeriesDimension(bool? value = true)
 	{
 		Instance.TimeSeriesDimension = value;

@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
 public sealed partial class SparseEmbeddingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Perform sparse embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingRequestConverter))]
 public sealed partial class SparseEmbeddingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>
 {
@@ -71,41 +66,21 @@ public sealed partial class SparseEmbeddingRequest : Elastic.Clients.Elasticsear
 
 	internal override string OperationName => "inference.sparse_embedding";
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id InferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("inference_id"); set => PR("inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#input']/*"/>
 	public required System.Collections.Generic.ICollection<string> Input { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Perform sparse embedding inference on the service.
-/// </para>
-/// </summary>
+/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.sparse_embedding.Request']/*"/>
 public readonly partial struct SparseEmbeddingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest Instance { get; init; }
@@ -132,57 +107,35 @@ public readonly partial struct SparseEmbeddingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest instance) => new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest(Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor Input(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Input = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#input']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingRequest.g.xml" path="doc/member[@key='inference.sparse_embedding.Request#task_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor TaskSettings(object? value)
 	{
 		Instance.TaskSettings = value;

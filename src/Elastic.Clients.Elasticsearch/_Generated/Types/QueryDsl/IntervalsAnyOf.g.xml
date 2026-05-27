@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.IntervalsAnyOf#filter"><summary><para>
+Rule used to filter returned intervals.
+</para></summary></member>
+  <member key="_types.query_dsl.IntervalsAnyOf#intervals"><summary><para>
+An array of rules to match.
+</para></summary></member>
+</doc>

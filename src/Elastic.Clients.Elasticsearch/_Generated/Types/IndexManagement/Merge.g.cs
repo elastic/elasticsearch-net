@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Merge']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MergeConverter))]
 public sealed partial class Merge
 {
@@ -39,6 +40,7 @@ public sealed partial class Merge
 	public Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler? Scheduler { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.Merge']/*"/>
 public readonly partial struct MergeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.Merge Instance { get; init; }

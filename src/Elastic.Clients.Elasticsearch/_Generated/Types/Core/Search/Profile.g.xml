@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.Profile#request"><summary><para>
+When profiling is enabled, the original query source and target indices from the coordinating request.
+</para></summary></member>
+</doc>

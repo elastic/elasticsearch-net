@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
 public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Create part of a trained model definition.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelDefinitionPartRequestConverter))]
 public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>
 {
@@ -67,48 +66,24 @@ public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clien
 
 	internal override string OperationName => "ml.put_trained_model_definition_part";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The definition part number. When the definition is loaded for inference the definition parts are streamed in the
-	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#part']/*"/>
 	public required int Part { get => P<int>("part"); set => PR("part", value); }
 
-	/// <summary>
-	/// <para>
-	/// The definition part for the model. Must be a base64 encoded string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#definition']/*"/>
 	public required string Definition { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total uncompressed definition length in bytes. Not base64 encoded.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#total_definition_length']/*"/>
 	public required long TotalDefinitionLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of parts that will be uploaded. Must be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#total_parts']/*"/>
 	public required int TotalParts { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create part of a trained model definition.
-/// </para>
-/// </summary>
+/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request']/*"/>
 public readonly partial struct PutTrainedModelDefinitionPartRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Instance { get; init; }
@@ -135,56 +110,35 @@ public readonly partial struct PutTrainedModelDefinitionPartRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition part number. When the definition is loaded for inference the definition parts are streamed in the
-	/// order of their part number. The first part must be <c>0</c> and the final part must be <c>total_parts - 1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#part']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Part(int value)
 	{
 		Instance.Part = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The definition part for the model. Must be a base64 encoded string.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#definition']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor Definition(string value)
 	{
 		Instance.Definition = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total uncompressed definition length in bytes. Not base64 encoded.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#total_definition_length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor TotalDefinitionLength(long value)
 	{
 		Instance.TotalDefinitionLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The total number of parts that will be uploaded. Must be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="PutTrainedModelDefinitionPartRequest.g.xml" path="doc/member[@key='ml.put_trained_model_definition_part.Request#total_parts']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestDescriptor TotalParts(int value)
 	{
 		Instance.TotalParts = value;

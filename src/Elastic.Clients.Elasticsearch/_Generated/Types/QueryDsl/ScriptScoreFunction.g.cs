@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ScriptScoreFunctionConverter))]
 public sealed partial class ScriptScoreFunction
 {
@@ -42,14 +43,11 @@ public sealed partial class ScriptScoreFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction']/*"/>
 public readonly partial struct ScriptScoreFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction Instance { get; init; }
@@ -69,33 +67,21 @@ public readonly partial struct ScriptScoreFunctionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A script that computes a score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreFunction#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

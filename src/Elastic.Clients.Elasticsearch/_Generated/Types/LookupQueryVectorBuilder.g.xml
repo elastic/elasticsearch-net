@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.LookupQueryVectorBuilder#id"><summary><para>
+The ID of the document to fetch the vector from
+</para></summary></member>
+  <member key="_types.LookupQueryVectorBuilder#index"><summary><para>
+The name of the index to fetch the document from
+</para></summary></member>
+  <member key="_types.LookupQueryVectorBuilder#path"><summary><para>
+The name of the field containing the vector
+</para></summary></member>
+  <member key="_types.LookupQueryVectorBuilder#routing"><summary><para>
+The routing value to use when fetching the document
+</para></summary></member>
+</doc>

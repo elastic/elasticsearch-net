@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-/// <summary>
-/// <para>
-/// A reference to a field with formatting instructions on how to return the value
-/// </para>
-/// </summary>
+/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FieldAndFormatConverter))]
 public sealed partial class FieldAndFormat
 {
@@ -47,27 +44,16 @@ public sealed partial class FieldAndFormat
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The format in which the values are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#format']/*"/>
 	public string? Format { get; set; }
 	public bool? IncludeUnmapped { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// A reference to a field with formatting instructions on how to return the value
-/// </para>
-/// </summary>
+/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
 public readonly partial struct FieldAndFormatDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Instance { get; init; }
@@ -87,33 +73,21 @@ public readonly partial struct FieldAndFormatDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format in which the values are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> Format(string? value)
 	{
 		Instance.Format = value;
@@ -135,11 +109,8 @@ public readonly partial struct FieldAndFormatDescriptor<TDocument>
 	}
 }
 
-/// <summary>
-/// <para>
-/// A reference to a field with formatting instructions on how to return the value
-/// </para>
-/// </summary>
+/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat']/*"/>
 public readonly partial struct FieldAndFormatDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Instance { get; init; }
@@ -159,33 +130,21 @@ public readonly partial struct FieldAndFormatDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A wildcard pattern. The request returns values for field names matching this pattern.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The format in which the values are returned.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldAndFormat.g.xml" path="doc/member[@key='_types.query_dsl.FieldAndFormat#format']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor Format(string? value)
 	{
 		Instance.Format = value;

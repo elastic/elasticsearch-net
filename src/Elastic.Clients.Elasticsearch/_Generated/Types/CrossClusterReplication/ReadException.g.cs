@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr._types.ReadException']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ReadExceptionConverter))]
 public sealed partial class ReadException
 {
@@ -44,24 +45,12 @@ public sealed partial class ReadException
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The exception that caused the read to fail.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadException.g.xml" path="doc/member[@key='ccr._types.ReadException#exception']/*"/>
 	public required Elastic.Clients.Elasticsearch.ErrorCause Exception { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The starting sequence number of the batch requested from the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadException.g.xml" path="doc/member[@key='ccr._types.ReadException#from_seq_no']/*"/>
 	public required long FromSeqNo { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of times the batch has been retried.
-	/// </para>
-	/// </summary>
+	/// <include file="ReadException.g.xml" path="doc/member[@key='ccr._types.ReadException#retries']/*"/>
 	public required int Retries { get; set; }
 }

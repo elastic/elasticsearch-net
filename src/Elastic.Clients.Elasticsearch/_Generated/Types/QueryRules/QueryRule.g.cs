@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules._types.QueryRule']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.QueryRuleConverter))]
 public sealed partial class QueryRule
 {
@@ -45,40 +46,21 @@ public sealed partial class QueryRule
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#actions']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions Actions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#criteria']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> Criteria { get; set; }
 	public int? Priority { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#rule_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id RuleId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of rule.
-	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
-	/// <c>exclude</c> will exclude specific documents from search results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#type']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType Type { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules._types.QueryRule']/*"/>
 public readonly partial struct QueryRuleDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryRules.QueryRule Instance { get; init; }
@@ -98,72 +80,42 @@ public readonly partial struct QueryRuleDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(Elastic.Clients.Elasticsearch.QueryRules.QueryRule instance) => new Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.QueryRule(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions value)
 	{
 		Instance.Actions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions()
 	{
 		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The actions to take when the rule is matched.
-	/// The format of this action depends on the rule type.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#actions']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Actions(System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor>? action)
 	{
 		Instance.Actions = Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> value)
 	{
 		Instance.Criteria = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(params Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria[] values)
 	{
 		Instance.Criteria = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The criteria that must be met for the rule to be applied.
-	/// If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#criteria']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Criteria(params System.Action<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>();
@@ -182,24 +134,14 @@ public readonly partial struct QueryRuleDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the rule.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#rule_id']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor RuleId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.RuleId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of rule.
-	/// <c>pinned</c> will identify and pin specific documents to the top of search results.
-	/// <c>exclude</c> will exclude specific documents from search results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRule.g.xml" path="doc/member[@key='query_rules._types.QueryRule#type']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryRules.QueryRuleDescriptor Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType value)
 	{
 		Instance.Type = value;

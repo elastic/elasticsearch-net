@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='async_search._types.AsyncSearch']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.AsyncSearch.Json.AsyncSearchConverterFactory))]
 public partial class AsyncSearch<TDocument>
 {
@@ -45,34 +46,20 @@ public partial class AsyncSearch<TDocument>
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Partial aggregations results, coming from the shards that have already completed running the query.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearch.g.xml" path="doc/member[@key='async_search._types.AsyncSearch#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public Elastic.Clients.Elasticsearch.ClusterStatistics? Clusters { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public required Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> HitsMetadata { get; set; }
 	public double? MaxScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how many reductions of the results have been performed.
-	/// If this number increases compared to the last retrieved results for a get asynch search request, you can expect additional results included in the search response.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearch.g.xml" path="doc/member[@key='async_search._types.AsyncSearch#num_reduce_phases']/*"/>
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.Profile? Profile { get; set; }
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates how many shards have run the query.
-	/// Note that in order for shard results to be included in the search response, they need to be reduced first.
-	/// </para>
-	/// </summary>
+	/// <include file="AsyncSearch.g.xml" path="doc/member[@key='async_search._types.AsyncSearch#_shards']/*"/>
 	public required Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }

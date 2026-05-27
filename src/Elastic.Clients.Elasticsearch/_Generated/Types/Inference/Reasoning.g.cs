@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-/// <summary>
-/// <para>
-/// The reasoning configuration to use for the completion request.
-/// Currently supported only for <c>elastic</c> provider.
-/// </para>
-/// </summary>
+/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.Reasoning']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ReasoningConverter))]
 public sealed partial class Reasoning
 {
@@ -42,50 +38,21 @@ public sealed partial class Reasoning
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The level of effort the model should put into reasoning.
-	/// This is a hint that guides the model in how much effort to put into reasoning,
-	/// with <c>xhigh</c> being the most effort and <c>none</c> being no effort.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#effort']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningEffort? Effort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to enable reasoning with default settings.
-	/// This is a shortcut for enabling reasoning without having to specify the other parameters.
-	/// If <c>enabled</c> is set to <c>true</c>, then reasoning at the <c>medium</c> effort level is enabled.
-	/// Ignored if <c>effort</c> is specified,
-	/// in which case that parameter will control the reasoning process instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether to exclude reasoning information from the response.
-	/// If <c>true</c>, the response will not include any reasoning details.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#exclude']/*"/>
 	public bool? Exclude { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The level of detail included in the reasoning summary returned in the response.
-	/// This is a hint on how much detail to include in the summary of the reasoning that is returned in the response,
-	/// with <c>auto</c> being the default level of detail, <c>concise</c> being less detail, and <c>detailed</c> being more detail.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#summary']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningSummary? Summary { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// The reasoning configuration to use for the completion request.
-/// Currently supported only for <c>elastic</c> provider.
-/// </para>
-/// </summary>
+/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.Reasoning']/*"/>
 public readonly partial struct ReasoningDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.Reasoning Instance { get; init; }
@@ -105,53 +72,28 @@ public readonly partial struct ReasoningDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor(Elastic.Clients.Elasticsearch.Inference.Reasoning instance) => new Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.Reasoning(Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The level of effort the model should put into reasoning.
-	/// This is a hint that guides the model in how much effort to put into reasoning,
-	/// with <c>xhigh</c> being the most effort and <c>none</c> being no effort.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#effort']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor Effort(Elastic.Clients.Elasticsearch.Inference.ReasoningEffort? value)
 	{
 		Instance.Effort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to enable reasoning with default settings.
-	/// This is a shortcut for enabling reasoning without having to specify the other parameters.
-	/// If <c>enabled</c> is set to <c>true</c>, then reasoning at the <c>medium</c> effort level is enabled.
-	/// Ignored if <c>effort</c> is specified,
-	/// in which case that parameter will control the reasoning process instead.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to exclude reasoning information from the response.
-	/// If <c>true</c>, the response will not include any reasoning details.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#exclude']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor Exclude(bool? value = true)
 	{
 		Instance.Exclude = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The level of detail included in the reasoning summary returned in the response.
-	/// This is a hint on how much detail to include in the summary of the reasoning that is returned in the response,
-	/// with <c>auto</c> being the default level of detail, <c>concise</c> being less detail, and <c>detailed</c> being more detail.
-	/// </para>
-	/// </summary>
+	/// <include file="Reasoning.g.xml" path="doc/member[@key='inference._types.Reasoning#summary']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.ReasoningDescriptor Summary(Elastic.Clients.Elasticsearch.Inference.ReasoningSummary? value)
 	{
 		Instance.Summary = value;

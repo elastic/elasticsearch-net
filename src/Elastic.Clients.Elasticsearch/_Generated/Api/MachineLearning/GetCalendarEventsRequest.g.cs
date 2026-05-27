@@ -23,49 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
 public sealed partial class GetCalendarEventsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps earlier than this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#end']/*"/>
 	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of events.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? JobId { get => Q<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => Q("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of events to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps after this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get info about events in calendars.
-/// </para>
-/// </summary>
+/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetCalendarEventsRequestConverter))]
 public sealed partial class GetCalendarEventsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestParameters>
 {
@@ -92,54 +71,27 @@ public sealed partial class GetCalendarEventsRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.get_calendar_events";
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#calendar_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id CalendarId { get => P<Elastic.Clients.Elasticsearch.Id>("calendar_id"); set => PR("calendar_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps earlier than this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#end']/*"/>
 	public System.DateTimeOffset? End { get => Q<System.DateTimeOffset?>("end"); set => Q("end", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of events.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? JobId { get => Q<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => Q("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of events to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps after this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#start']/*"/>
 	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get info about events in calendars.
-/// </para>
-/// </summary>
+/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_calendar_events.Request']/*"/>
 public readonly partial struct GetCalendarEventsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest Instance { get; init; }
@@ -164,66 +116,42 @@ public readonly partial struct GetCalendarEventsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using <c>_all</c> or <c>*</c> or by omitting the calendar identifier.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#calendar_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor CalendarId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.CalendarId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps earlier than this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#end']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor End(System.DateTimeOffset? value)
 	{
 		Instance.End = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of events.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events for a specific anomaly detection job identifier or job group. It must be used with a calendar identifier of <c>_all</c> or <c>*</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of events to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies to get events with timestamps after this time.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCalendarEventsRequest.g.xml" path="doc/member[@key='ml.get_calendar_events.Request#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCalendarEventsRequestDescriptor Start(System.DateTimeOffset? value)
 	{
 		Instance.Start = value;

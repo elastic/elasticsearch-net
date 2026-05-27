@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr._types.FollowIndexStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.FollowIndexStatsConverter))]
 public sealed partial class FollowIndexStats
 {
@@ -43,17 +44,9 @@ public sealed partial class FollowIndexStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowIndexStats.g.xml" path="doc/member[@key='ccr._types.FollowIndexStats#index']/*"/>
 	public required string Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of shard-level following task statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="FollowIndexStats.g.xml" path="doc/member[@key='ccr._types.FollowIndexStats#shards']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats> Shards { get; set; }
 }

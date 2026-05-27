@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SourceFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SourceFilterConverter))]
 public sealed partial class SourceFilter
 {
@@ -36,32 +37,17 @@ public sealed partial class SourceFilter
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, vector fields are excluded from the returned source.
-	/// </para>
-	/// <para>
-	/// This option takes precedence over <c>includes</c>: any vector field will
-	/// remain excluded even if it matches an <c>includes</c> rule.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#exclude_vectors']/*"/>
 	public bool? ExcludeVectors { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SourceFilter']/*"/>
 public readonly partial struct SourceFilterDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Instance { get; init; }
@@ -81,59 +67,35 @@ public readonly partial struct SourceFilterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, vector fields are excluded from the returned source.
-	/// </para>
-	/// <para>
-	/// This option takes precedence over <c>includes</c>: any vector field will
-	/// remain excluded even if it matches an <c>includes</c> rule.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#exclude_vectors']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> ExcludeVectors(bool? value = true)
 	{
 		Instance.ExcludeVectors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Includes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Includes = value;
@@ -154,6 +116,7 @@ public readonly partial struct SourceFilterDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SourceFilter']/*"/>
 public readonly partial struct SourceFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.SourceFilter Instance { get; init; }
@@ -173,59 +136,35 @@ public readonly partial struct SourceFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to exclude from the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, vector fields are excluded from the returned source.
-	/// </para>
-	/// <para>
-	/// This option takes precedence over <c>includes</c>: any vector field will
-	/// remain excluded even if it matches an <c>includes</c> rule.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#exclude_vectors']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor ExcludeVectors(bool? value = true)
 	{
 		Instance.ExcludeVectors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Includes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of fields to include in the returned source.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFilter.g.xml" path="doc/member[@key='_global.search._types.SourceFilter#includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Includes = value;

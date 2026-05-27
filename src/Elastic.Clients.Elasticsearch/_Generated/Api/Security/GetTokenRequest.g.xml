@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.get_token.Request"><summary><para>
+Get a token.
+</para>
+<para>
+Create a bearer token for access without requiring basic authentication.
+The tokens are created by the Elasticsearch Token Service, which is automatically enabled when you configure TLS on the HTTP interface.
+Alternatively, you can explicitly enable the <c>xpack.security.authc.token.enabled</c> setting.
+When you are running in production mode, a bootstrap check prevents you from enabling the token service unless you also enable TLS on the HTTP interface.
+</para>
+<para>
+The get token API takes the same parameters as a typical OAuth 2.0 token API except for the use of a JSON request body.
+</para>
+<para>
+A successful get token API call returns a JSON structure that contains the access token, the amount of time (seconds) that the token expires in, the type, and the scope if available.
+</para>
+<para>
+The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
+That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
+If you want to invalidate a token immediately, you can do so by using the invalidate token API.
+</para></summary></member>
+  <member key="security.get_token.Request#grant_type"><summary><para>
+The type of grant.
+Supported grant types are: <c>password</c>, <c>_kerberos</c>, <c>client_credentials</c>, and <c>refresh_token</c>.
+</para></summary></member>
+  <member key="security.get_token.Request#kerberos_ticket"><summary><para>
+The base64 encoded kerberos ticket.
+If you specify the <c>_kerberos</c> grant type, this parameter is required.
+This parameter is not valid with any other supported grant type.
+</para></summary></member>
+  <member key="security.get_token.Request#password"><summary><para>
+The user's password.
+If you specify the <c>password</c> grant type, this parameter is required.
+This parameter is not valid with any other supported grant type.
+</para></summary></member>
+  <member key="security.get_token.Request#refresh_token"><summary><para>
+The string that was returned when you created the token, which enables you to extend its life.
+If you specify the <c>refresh_token</c> grant type, this parameter is required.
+This parameter is not valid with any other supported grant type.
+</para></summary></member>
+  <member key="security.get_token.Request#scope"><summary><para>
+The scope of the token.
+Currently tokens are only issued for a scope of FULL regardless of the value sent with the request.
+</para></summary></member>
+  <member key="security.get_token.Request#username"><summary><para>
+The username that identifies the user.
+If you specify the <c>password</c> grant type, this parameter is required.
+This parameter is not valid with any other supported grant type.
+</para></summary></member>
+</doc>

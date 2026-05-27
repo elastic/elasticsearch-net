@@ -23,68 +23,31 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 public sealed partial class ExistsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check indices.
-/// </para>
-/// <para>
-/// Check if one or more indices, index aliases, or data streams exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ExistsRequestConverter))]
 public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestParameters>
 {
@@ -111,73 +74,30 @@ public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Reques
 
 	internal override string OperationName => "indices.exists";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#local']/*"/>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
-/// <summary>
-/// <para>
-/// Check indices.
-/// </para>
-/// <para>
-/// Check if one or more indices, index aliases, or data streams exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 public readonly partial struct ExistsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest Instance { get; init; }
@@ -202,99 +122,56 @@ public readonly partial struct ExistsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
@@ -357,14 +234,8 @@ public readonly partial struct ExistsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Check indices.
-/// </para>
-/// <para>
-/// Check if one or more indices, index aliases, or data streams exist.
-/// </para>
-/// </summary>
+/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.exists.Request']/*"/>
 public readonly partial struct ExistsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest Instance { get; init; }
@@ -388,99 +259,56 @@ public readonly partial struct ExistsRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequest(Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases. Supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, return all default settings in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
+	/// <include file="ExistsRequest.g.xml" path="doc/member[@key='indices.exists.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExistsRequestDescriptor<TDocument> Local(bool? value = true)
 	{
 		Instance.Local = value;

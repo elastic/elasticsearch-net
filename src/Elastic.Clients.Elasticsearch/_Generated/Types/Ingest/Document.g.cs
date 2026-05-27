@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Document']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.DocumentConverter))]
 public sealed partial class Document
 {
@@ -42,29 +43,17 @@ public sealed partial class Document
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the document.
-	/// This ID must be unique within the <c>_index</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Name of the index containing the document.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// JSON body for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_source']/*"/>
 	public required object Source { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.Document']/*"/>
 public readonly partial struct DocumentDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.Document Instance { get; init; }
@@ -84,34 +73,21 @@ public readonly partial struct DocumentDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(Elastic.Clients.Elasticsearch.Ingest.Document instance) => new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Document(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Unique identifier for the document.
-	/// This ID must be unique within the <c>_index</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the index containing the document.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_index']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// JSON body for the document.
-	/// </para>
-	/// </summary>
+	/// <include file="Document.g.xml" path="doc/member[@key='ingest._types.Document#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor Source(object value)
 	{
 		Instance.Source = value;

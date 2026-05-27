@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.EnrichProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.EnrichProcessorConverter))]
 public sealed partial class EnrichProcessor
 {
@@ -44,99 +45,44 @@ public sealed partial class EnrichProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of matched documents to include under the configured target field.
-	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
-	/// In order to avoid documents getting too large, the maximum allowed value is 128.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#max_matches']/*"/>
 	public int? MaxMatches { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#override']/*"/>
 	public bool? Override { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the enrich policy to use.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#policy_name']/*"/>
 	public required string PolicyName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
-	/// This option is only used for <c>geo_match</c> enrich policy types.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#shape_relation']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoShapeRelation? ShapeRelation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#target_field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.EnrichProcessor']/*"/>
 public readonly partial struct EnrichProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Instance { get; init; }
@@ -156,137 +102,84 @@ public readonly partial struct EnrichProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of matched documents to include under the configured target field.
-	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
-	/// In order to avoid documents getting too large, the maximum allowed value is 128.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#max_matches']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> MaxMatches(int? value)
 	{
 		Instance.MaxMatches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -299,71 +192,42 @@ public readonly partial struct EnrichProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the enrich policy to use.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#policy_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> PolicyName(string value)
 	{
 		Instance.PolicyName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
-	/// This option is only used for <c>geo_match</c> enrich policy types.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#shape_relation']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.ShapeRelation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -379,6 +243,7 @@ public readonly partial struct EnrichProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.EnrichProcessor']/*"/>
 public readonly partial struct EnrichProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor Instance { get; init; }
@@ -398,137 +263,84 @@ public readonly partial struct EnrichProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field in the input document that matches the policies match_field used to retrieve the enrichment data.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of matched documents to include under the configured target field.
-	/// The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
-	/// In order to avoid documents getting too large, the maximum allowed value is 128.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#max_matches']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor MaxMatches(int? value)
 	{
 		Instance.MaxMatches = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -541,11 +353,7 @@ public readonly partial struct EnrichProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -558,71 +366,42 @@ public readonly partial struct EnrichProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If processor will update fields with pre-existing non-null-valued field.
-	/// When set to <c>false</c>, such fields will not be touched.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#override']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Override(bool? value = true)
 	{
 		Instance.Override = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the enrich policy to use.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#policy_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor PolicyName(string value)
 	{
 		Instance.PolicyName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
-	/// This option is only used for <c>geo_match</c> enrich policy types.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#shape_relation']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor ShapeRelation(Elastic.Clients.Elasticsearch.GeoShapeRelation? value)
 	{
 		Instance.ShapeRelation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
-	/// Supports template snippets.
-	/// </para>
-	/// </summary>
+	/// <include file="EnrichProcessor.g.xml" path="doc/member[@key='ingest._types.EnrichProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

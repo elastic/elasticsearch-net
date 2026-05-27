@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
 public sealed partial class PutLlamaRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Llama inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>llama</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutLlamaRequestConverter))]
 public sealed partial class PutLlamaRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestParameters>
 {
@@ -74,59 +66,27 @@ public sealed partial class PutLlamaRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "inference.put_llama";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#llama_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id LlamaInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("llama_inference_id"); set => PR("llama_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.LlamaTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.LlamaTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>llama</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#service']/*"/>
 	public string Service => "llama";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>llama</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Llama inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>llama</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_llama.Request']/*"/>
 public readonly partial struct PutLlamaRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutLlamaRequest Instance { get; init; }
@@ -153,94 +113,56 @@ public readonly partial struct PutLlamaRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutLlamaRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutLlamaRequest(Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#llama_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor LlamaInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.LlamaInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.LlamaTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>llama</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>llama</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutLlamaRequest.g.xml" path="doc/member[@key='inference.put_llama.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor.Build(action);

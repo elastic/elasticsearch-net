@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
 public sealed partial class GetStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get security stats.
-/// </para>
-/// <para>
-/// Gather security usage statistics from all node(s) within the cluster.
-/// </para>
-/// </summary>
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetStatsRequestConverter))]
 public sealed partial class GetStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetStatsRequestParameters>
 {
@@ -57,14 +53,8 @@ public sealed partial class GetStatsRequest : Elastic.Clients.Elasticsearch.Requ
 	internal override string OperationName => "security.get_stats";
 }
 
-/// <summary>
-/// <para>
-/// Get security stats.
-/// </para>
-/// <para>
-/// Gather security usage statistics from all node(s) within the cluster.
-/// </para>
-/// </summary>
+/// <include file="GetStatsRequest.g.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_stats.Request']/*"/>
 public readonly partial struct GetStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetStatsRequest Instance { get; init; }

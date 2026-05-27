@@ -23,53 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.query.Request']/*"/>
 public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#allow_partial_results']/*"/>
 	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row. Only valid for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
-	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run an ES|QL query.
-/// </para>
-/// <para>
-/// Get search results for an ES|QL (Elasticsearch query language) query.
-/// </para>
-/// </summary>
+/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.EsqlQueryRequestConverter))]
 public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestParameters>
 {
@@ -97,136 +69,51 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "esql.query";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#allow_partial_results']/*"/>
 	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row. Only valid for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#delimiter']/*"/>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
-	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#drop_null_columns']/*"/>
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#columnar']/*"/>
 	public bool? Columnar { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_ccs_metadata']/*"/>
 	public bool? IncludeCcsMetadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_execution_metadata']/*"/>
 	public bool? IncludeExecutionMetadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#locale']/*"/>
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#query']/*"/>
 	public required string Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#time_zone']/*"/>
 	public string? TimeZone { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run an ES|QL query.
-/// </para>
-/// <para>
-/// Get search results for an ES|QL (Elasticsearch query language) query.
-/// </para>
-/// </summary>
+/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.query.Request']/*"/>
 public readonly partial struct EsqlQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Instance { get; init; }
@@ -245,199 +132,112 @@ public readonly partial struct EsqlQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#allow_partial_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor AllowPartialResults(bool? value = true)
 	{
 		Instance.AllowPartialResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row. Only valid for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#delimiter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
-	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_ccs_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_execution_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor IncludeExecutionMetadata(bool? value = true)
 	{
 		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor TimeZone(string? value)
 	{
 		Instance.TimeZone = value;
@@ -500,14 +300,8 @@ public readonly partial struct EsqlQueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run an ES|QL query.
-/// </para>
-/// <para>
-/// Get search results for an ES|QL (Elasticsearch query language) query.
-/// </para>
-/// </summary>
+/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.query.Request']/*"/>
 public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest Instance { get; init; }
@@ -526,188 +320,105 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
-	/// If <c>false</c>, the query will fail if there are any failures.
-	/// </para>
-	/// <para>
-	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#allow_partial_results']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
 	{
 		Instance.AllowPartialResults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use between values within a CSV row. Only valid for the CSV format.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#delimiter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should columns that are entirely <c>null</c> be removed from the <c>columns</c> and <c>values</c> portion of the results?
-	/// Defaults to <c>false</c>. If <c>true</c> then the response will include an extra section under the name <c>all_columns</c> which has the name of all columns.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#drop_null_columns']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A short version of the Accept header, e.g. json, yaml.
-	/// </para>
-	/// <para>
-	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#columnar']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Columnar(bool? value = true)
 	{
 		Instance.Columnar = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_ccs_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
-	/// object with information about the clusters that participated in the search along with info such as shards
-	/// count.
-	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#include_execution_metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> IncludeExecutionMetadata(bool? value = true)
 	{
 		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results (especially dates) formatted per the conventions of the locale.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#locale']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Locale(string? value)
 	{
 		Instance.Locale = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Params(Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If provided and <c>true</c> the response will include an extra <c>profile</c> object
-	/// with information on how the query was executed. This information is for human debugging
-	/// and its format can change at any time but it can give some insight into the performance
-	/// of each part of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the default timezone of the query.
-	/// </para>
-	/// </summary>
+	/// <include file="EsqlQueryRequest.g.xml" path="doc/member[@key='esql.query.Request#time_zone']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> TimeZone(string? value)
 	{
 		Instance.TimeZone = value;

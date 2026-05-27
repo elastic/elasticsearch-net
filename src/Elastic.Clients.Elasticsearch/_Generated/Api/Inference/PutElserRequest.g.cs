@@ -23,42 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
 public sealed partial class PutElserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create an ELSER inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
-/// You can also deploy ELSER by using the Elasticsearch inference integration.
-/// </para>
-/// <para>
-/// info
-/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
-/// </para>
-/// <para>
-/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
-/// </para>
-/// <para>
-/// info
-/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
-/// </para>
-/// <para>
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
-/// </summary>
+/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutElserRequestConverter))]
 public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>
 {
@@ -92,76 +66,27 @@ public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "inference.put_elser";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#elser_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ElserInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("elser_inference_id"); set => PR("elser_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ElserTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.ElserTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>elser</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#service']/*"/>
 	public string Service => "elser";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elser</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create an ELSER inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
-/// You can also deploy ELSER by using the Elasticsearch inference integration.
-/// </para>
-/// <para>
-/// info
-/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
-/// </para>
-/// <para>
-/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
-/// </para>
-/// <para>
-/// info
-/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
-/// </para>
-/// <para>
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
-/// </summary>
+/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_elser.Request']/*"/>
 public readonly partial struct PutElserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutElserRequest Instance { get; init; }
@@ -188,91 +113,56 @@ public readonly partial struct PutElserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutElserRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutElserRequest(Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#elser_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ElserInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ElserInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.ElserTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elser</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>elser</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutElserRequest.g.xml" path="doc/member[@key='inference.put_elser.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsDescriptor.Build(action);

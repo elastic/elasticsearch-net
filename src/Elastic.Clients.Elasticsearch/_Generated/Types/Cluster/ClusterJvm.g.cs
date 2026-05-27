@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterJvm']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterJvmConverter))]
 public sealed partial class ClusterJvm
 {
@@ -45,38 +46,18 @@ public sealed partial class ClusterJvm
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Uptime duration since JVM last started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvm.g.xml" path="doc/member[@key='cluster.stats.ClusterJvm#max_uptime']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MaxUptime { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Uptime duration, in milliseconds, since JVM last started.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvm.g.xml" path="doc/member[@key='cluster.stats.ClusterJvm#max_uptime_in_millis']/*"/>
 	public required System.TimeSpan MaxUptimeInMillis { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about memory used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvm.g.xml" path="doc/member[@key='cluster.stats.ClusterJvm#mem']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Mem { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of active threads in use by JVM across all selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvm.g.xml" path="doc/member[@key='cluster.stats.ClusterJvm#threads']/*"/>
 	public required long Threads { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains statistics about the JVM versions used by selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterJvm.g.xml" path="doc/member[@key='cluster.stats.ClusterJvm#versions']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion> Versions { get; set; }
 }

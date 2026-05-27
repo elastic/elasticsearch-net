@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.flush_job.Request"><summary><para>
+Force buffered data to be processed.
+</para>
+<para>
+The flush jobs API is only applicable when sending data for analysis using
+the post data API. Depending on the content of the buffer, then it might
+additionally calculate new results. Both flush and close operations are
+similar, however the flush is more efficient if you are expecting to send
+more data for analysis. When flushing, the job remains open and is available
+to continue analyzing data. A close operation additionally prunes and
+persists the model state to disk and the job must be opened again before
+analyzing further data.
+</para></summary></member>
+  <member key="ml.flush_job.Request#advance_time"><summary><para>
+Refer to the description for the <c>advance_time</c> query parameter.
+</para></summary></member>
+  <member key="ml.flush_job.Request#calc_interim"><summary><para>
+Refer to the description for the <c>calc_interim</c> query parameter.
+</para></summary></member>
+  <member key="ml.flush_job.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.flush_job.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.flush_job.Request#skip_time"><summary><para>
+Refer to the description for the <c>skip_time</c> query parameter.
+</para></summary></member>
+  <member key="ml.flush_job.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+</doc>

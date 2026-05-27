@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.CommonStatsFlag#_all"><summary><para>
+Return all statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#bulk"><summary><para>
+Bulk operations statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#completion"><summary><para>
+Completion suggester statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#dense_vector"><summary><para>
+Total number of dense vectors indexed. Index refreshes can affect this statistic.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#docs"><summary><para>
+Number of documents and deleted docs not yet merged out. Index refreshes can affect this statistic.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#fielddata"><summary><para>
+Fielddata statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#flush"><summary><para>
+Flush statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#get"><summary><para>
+Get statistics, including missing stats.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#indexing"><summary><para>
+Indexing statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#mappings"><summary><para>
+Mapping statistics, including the total count and estimated overhead.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#merge"><summary><para>
+Merge statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#query_cache"><summary><para>
+Query cache statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#recovery"><summary><para>
+Recovery statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#refresh"><summary><para>
+Refresh statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#request_cache"><summary><para>
+Shard request cache statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#search"><summary><para>
+Search statistics including suggest statistics.
+You can include statistics for custom groups by adding an extra <c>groups</c> parameter
+(search operations can be associated with one or more groups).
+The <c>groups</c> parameter accepts a comma-separated list of group names.
+Use <c>_all</c> to return statistics for all groups.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#segments"><summary><para>
+Memory use of all open segments.
+If the <c>include_segment_file_sizes</c> parameter is <c>true</c>, this metric includes the aggregated disk usage of each Lucene index file.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#shard_stats"><summary><para>
+Shard statistics, including the total number of shards.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#sparse_vector"><summary><para>
+Total number of sparse vectors indexed. Index refreshes can affect this statistic.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#store"><summary><para>
+Size of the index in byte units.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#translog"><summary><para>
+Translog statistics.
+</para></summary></member>
+  <member key="_types.CommonStatsFlag#warmer"><summary><para>
+Index warming statistics.
+</para></summary></member>
+</doc>

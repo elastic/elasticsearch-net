@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-/// <summary>
-/// <para>
-/// Coordinator snapshot of the original search request, serialized under <c>profile.request</c> when profiling is enabled.
-/// Introduced in Elasticsearch 9.5; omitted when the cluster contains mixed-version nodes that do not serialize this metadata.
-/// </para>
-/// </summary>
+/// <include file="SearchRequestCoordinatorMetadata.g.xml" path="doc/member[@key='_global.search._types.SearchRequestCoordinatorMetadata']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.SearchRequestCoordinatorMetadata']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SearchRequestCoordinatorMetadataConverter))]
 public sealed partial class SearchRequestCoordinatorMetadata
 {
@@ -42,17 +38,9 @@ public sealed partial class SearchRequestCoordinatorMetadata
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Target index expressions from the request (before index resolution).
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequestCoordinatorMetadata.g.xml" path="doc/member[@key='_global.search._types.SearchRequestCoordinatorMetadata#indices']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<string>? Indices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Original query source from the search request (<c>SearchSourceBuilder</c> as JSON).
-	/// </para>
-	/// </summary>
+	/// <include file="SearchRequestCoordinatorMetadata.g.xml" path="doc/member[@key='_global.search._types.SearchRequestCoordinatorMetadata#source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody? Source { get; set; }
 }

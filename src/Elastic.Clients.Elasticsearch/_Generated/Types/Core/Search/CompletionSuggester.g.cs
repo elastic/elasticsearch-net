@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionSuggester']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.CompletionSuggesterConverter))]
 public sealed partial class CompletionSuggester
 {
@@ -42,58 +43,29 @@ public sealed partial class CompletionSuggester
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether duplicate suggestions should be filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#skip_duplicates']/*"/>
 	public bool? SkipDuplicates { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionSuggester']/*"/>
 public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Instance { get; init; }
@@ -113,45 +85,28 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? value)
 	{
 		Instance.Contexts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts()
 	{
 		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>>? action)
 	{
 		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(action);
@@ -212,112 +167,70 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy()
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor>? action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? value)
 	{
 		Instance.Regex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex()
 	{
 		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor>? action)
 	{
 		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether duplicate suggestions should be filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#skip_duplicates']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> SkipDuplicates(bool? value = true)
 	{
 		Instance.SkipDuplicates = value;
@@ -333,6 +246,7 @@ public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.CompletionSuggester']/*"/>
 public readonly partial struct CompletionSuggesterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Instance { get; init; }
@@ -352,56 +266,35 @@ public readonly partial struct CompletionSuggesterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to analyze the suggest text with.
-	/// Defaults to the search analyzer of the suggest field.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? value)
 	{
 		Instance.Contexts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts()
 	{
 		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext>? action)
 	{
 		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#contexts']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>>? action)
 	{
 		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>.Build(action);
@@ -462,112 +355,70 @@ public readonly partial struct CompletionSuggesterDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? value)
 	{
 		Instance.Fuzzy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy()
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#fuzzy']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor>? action)
 	{
 		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? value)
 	{
 		Instance.Regex = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex()
 	{
 		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A regex query that expresses a prefix as a regular expression.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#regex']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor>? action)
 	{
 		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether duplicate suggestions should be filtered out.
-	/// </para>
-	/// </summary>
+	/// <include file="CompletionSuggester.g.xml" path="doc/member[@key='_global.search._types.CompletionSuggester#skip_duplicates']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor SkipDuplicates(bool? value = true)
 	{
 		Instance.SkipDuplicates = value;

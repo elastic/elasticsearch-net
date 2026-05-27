@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.MatrixStatsAggregationConverter))]
 public sealed partial class MatrixStatsAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class MatrixStatsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of fields for computing the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, double>? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array value the aggregation will use for array or multi-valued fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SortMode? Mode { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation']/*"/>
 public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation Instance { get; init; }
@@ -78,58 +67,35 @@ public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of fields for computing the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of fields for computing the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, double>? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing()
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<TDocument>.Build(action);
@@ -150,11 +116,7 @@ public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array value the aggregation will use for array or multi-valued fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor<TDocument> Mode(Elastic.Clients.Elasticsearch.SortMode? value)
 	{
 		Instance.Mode = value;
@@ -175,6 +137,7 @@ public readonly partial struct MatrixStatsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation']/*"/>
 public readonly partial struct MatrixStatsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation Instance { get; init; }
@@ -194,70 +157,42 @@ public readonly partial struct MatrixStatsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregation(Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of fields for computing the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of fields for computing the statistics.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, double>? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing()
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Missing<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<T>>? action)
 	{
 		Instance.Missing = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldDouble<T>.Build(action);
@@ -278,11 +213,7 @@ public readonly partial struct MatrixStatsAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array value the aggregation will use for array or multi-valued fields.
-	/// </para>
-	/// </summary>
+	/// <include file="MatrixStatsAggregation.g.xml" path="doc/member[@key='_types.aggregations.MatrixStatsAggregation#mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregationDescriptor Mode(Elastic.Clients.Elasticsearch.SortMode? value)
 	{
 		Instance.Mode = value;

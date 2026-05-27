@@ -23,73 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 public sealed partial class DiskUsageRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the API performs a flush before analysis.
-	/// If <c>false</c>, the response may not include uncommitted data.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#flush']/*"/>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzing field disk usage is resource-intensive.
-	/// To use the API, this parameter must be set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#run_expensive_tasks']/*"/>
 	public bool? RunExpensiveTasks { get => Q<bool?>("run_expensive_tasks"); set => Q("run_expensive_tasks", value); }
 }
 
-/// <summary>
-/// <para>
-/// Analyze the index disk usage.
-/// </para>
-/// <para>
-/// Analyze the disk usage of each field of an index or data stream.
-/// This API might not support indices created in previous Elasticsearch versions.
-/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
-/// </para>
-/// <para>
-/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
-/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
-/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
-/// </para>
-/// <para>
-/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
-/// </para>
-/// </summary>
+/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DiskUsageRequestConverter))]
 public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>
 {
@@ -116,79 +71,27 @@ public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "indices.disk_usage";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// It’s recommended to execute this API with a single index (or the latest backing index of a data stream) as the API consumes resources significantly.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the API performs a flush before analysis.
-	/// If <c>false</c>, the response may not include uncommitted data.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#flush']/*"/>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// Analyzing field disk usage is resource-intensive.
-	/// To use the API, this parameter must be set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#run_expensive_tasks']/*"/>
 	public bool? RunExpensiveTasks { get => Q<bool?>("run_expensive_tasks"); set => Q("run_expensive_tasks", value); }
 }
 
-/// <summary>
-/// <para>
-/// Analyze the index disk usage.
-/// </para>
-/// <para>
-/// Analyze the disk usage of each field of an index or data stream.
-/// This API might not support indices created in previous Elasticsearch versions.
-/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
-/// </para>
-/// <para>
-/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
-/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
-/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
-/// </para>
-/// <para>
-/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
-/// </para>
-/// </summary>
+/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 public readonly partial struct DiskUsageRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest Instance { get; init; }
@@ -213,91 +116,49 @@ public readonly partial struct DiskUsageRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// It’s recommended to execute this API with a single index (or the latest backing index of a data stream) as the API consumes resources significantly.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the API performs a flush before analysis.
-	/// If <c>false</c>, the response may not include uncommitted data.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#flush']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor Flush(bool? value = true)
 	{
 		Instance.Flush = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzing field disk usage is resource-intensive.
-	/// To use the API, this parameter must be set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#run_expensive_tasks']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor RunExpensiveTasks(bool? value = true)
 	{
 		Instance.RunExpensiveTasks = value;
@@ -360,24 +221,8 @@ public readonly partial struct DiskUsageRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Analyze the index disk usage.
-/// </para>
-/// <para>
-/// Analyze the disk usage of each field of an index or data stream.
-/// This API might not support indices created in previous Elasticsearch versions.
-/// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
-/// </para>
-/// <para>
-/// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
-/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
-/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
-/// </para>
-/// <para>
-/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
-/// </para>
-/// </summary>
+/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.disk_usage.Request']/*"/>
 public readonly partial struct DiskUsageRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest Instance { get; init; }
@@ -401,91 +246,49 @@ public readonly partial struct DiskUsageRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequest(Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// It’s recommended to execute this API with a single index (or the latest backing index of a data stream) as the API consumes resources significantly.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the API performs a flush before analysis.
-	/// If <c>false</c>, the response may not include uncommitted data.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#flush']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> Flush(bool? value = true)
 	{
 		Instance.Flush = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzing field disk usage is resource-intensive.
-	/// To use the API, this parameter must be set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DiskUsageRequest.g.xml" path="doc/member[@key='indices.disk_usage.Request#run_expensive_tasks']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestDescriptor<TDocument> RunExpensiveTasks(bool? value = true)
 	{
 		Instance.RunExpensiveTasks = value;

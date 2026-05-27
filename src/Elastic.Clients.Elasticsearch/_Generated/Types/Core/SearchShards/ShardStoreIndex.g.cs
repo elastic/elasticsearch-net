@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.SearchShards;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search_shards.ShardStoreIndex']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.SearchShards.Json.ShardStoreIndexConverter))]
 public sealed partial class ShardStoreIndex
 {

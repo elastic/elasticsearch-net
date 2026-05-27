@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.suggest_user_profiles.Hint']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.HintConverter))]
 public sealed partial class Hint
 {
@@ -36,23 +37,14 @@ public sealed partial class Hint
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#labels']/*"/>
 	public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? Labels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#uids']/*"/>
 	public System.Collections.Generic.ICollection<string>? Uids { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.suggest_user_profiles.Hint']/*"/>
 public readonly partial struct HintDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.Hint Instance { get; init; }
@@ -72,39 +64,21 @@ public readonly partial struct HintDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.HintDescriptor(Elastic.Clients.Elasticsearch.Security.Hint instance) => new Elastic.Clients.Elasticsearch.Security.HintDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.Hint(Elastic.Clients.Elasticsearch.Security.HintDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Labels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels()
 	{
 		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A single key-value pair to match against the labels section
-	/// of a profile. A profile is considered matching if it matches
-	/// at least one of the strings.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#labels']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Labels(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString>? action)
 	{
 		Instance.Labels = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCollectionOfString.Build(action);
@@ -125,22 +99,14 @@ public readonly partial struct HintDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#uids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Uids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of profile UIDs to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="Hint.g.xml" path="doc/member[@key='security.suggest_user_profiles.Hint#uids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.HintDescriptor Uids(params string[] values)
 	{
 		Instance.Uids = [.. values];

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.forcemerge.Response#task"><summary><para>
+task contains a task id returned when wait_for_completion=false,
+you can use the task_id to get the status of the task at _tasks/&lt;task_id>
+</para></summary></member>
+</doc>

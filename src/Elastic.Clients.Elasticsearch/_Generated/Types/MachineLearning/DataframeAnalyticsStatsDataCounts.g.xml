@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalyticsStatsDataCounts#skipped_docs_count"><summary><para>
+The number of documents that are skipped during the analysis because they contained values that are not supported by the analysis. For example, outlier detection does not support missing fields so it skips documents with missing fields. Likewise, all types of analysis skip documents that contain arrays with more than one element.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsDataCounts#test_docs_count"><summary><para>
+The number of documents that are not used for training the model and can be used for testing.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalyticsStatsDataCounts#training_docs_count"><summary><para>
+The number of documents that are used for training the model.
+</para></summary></member>
+</doc>

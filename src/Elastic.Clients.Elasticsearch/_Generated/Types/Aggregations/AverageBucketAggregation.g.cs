@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.AverageBucketAggregationConverter))]
 public sealed partial class AverageBucketAggregation
 {
@@ -36,29 +37,17 @@ public sealed partial class AverageBucketAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#format']/*"/>
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation']/*"/>
 public readonly partial struct AverageBucketAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation Instance { get; init; }
@@ -78,34 +67,21 @@ public readonly partial struct AverageBucketAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregation(Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Path to the buckets that contain one set of values to correlate.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#buckets_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>DecimalFormat</c> pattern for the output value.
-	/// If specified, the formatted value is returned in the aggregation’s <c>value_as_string</c> property.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor Format(string? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Policy to apply when gaps are found in the data.
-	/// </para>
-	/// </summary>
+	/// <include file="AverageBucketAggregation.g.xml" path="doc/member[@key='_types.aggregations.AverageBucketAggregation#gap_policy']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.AverageBucketAggregationDescriptor GapPolicy(Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? value)
 	{
 		Instance.GapPolicy = value;

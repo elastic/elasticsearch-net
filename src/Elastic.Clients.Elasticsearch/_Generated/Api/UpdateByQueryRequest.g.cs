@@ -23,418 +23,100 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
-	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// It defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll_size']/*"/>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// An explicit timeout for each search request.
-	/// By default, there is no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
-	/// By default, it is one minute.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version']/*"/>
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should the document increment the version number (internal) on hit or not (reindex)
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version_type']/*"/>
 	public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
-	/// Both work exactly the way they work in the bulk API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
-	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update documents.
-/// </para>
-/// <para>
-/// Updates documents that match the specified query.
-/// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>index</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// </para>
-/// <para>
-/// When you submit an update by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and updates matching documents using internal versioning.
-/// When the versions match, the document is updated and the version number is incremented.
-/// If a document changes between the time that the snapshot is taken and the update operation is processed, it results in a version conflict and the operation fails.
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts, the operation could attempt to update more documents from the source than <c>max_docs</c> until it has successfully updated <c>max_docs</c> documents or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be updated using update by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing an update by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents.
-/// A bulk update request is performed for each batch of matching documents.
-/// Any query or update failures cause the update by query request to fail and the failures are shown in the response.
-/// Any update requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// <strong>Refreshing shards</strong>
-/// </para>
-/// <para>
-/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
-/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
-/// that received the request to be refreshed. Unlike the update API, it does not support
-/// <c>wait_for</c>.
-/// </para>
-/// <para>
-/// <strong>Running update by query asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
-/// performs some preflight checks, launches the request, and returns a
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
-/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-/// </para>
-/// <para>
-/// <strong>Waiting for active shards</strong>
-/// </para>
-/// <para>
-/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
-/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
-/// for details. <c>timeout</c> controls how long each write request waits for unavailable
-/// shards to become available. Both work exactly the way they work in the
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
-/// specify the <c>scroll</c> parameter to control how long it keeps the search context
-/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
-/// </para>
-/// <para>
-/// <strong>Throttling update requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which update by query issues batches of update operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to turn off throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is 1000, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single _bulk request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Update by query supports sliced scroll to parallelize the update process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> chooses a reasonable number for most data streams and indices.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// </para>
-/// <para>
-/// Adding <c>slices</c> to <c>_update_by_query</c> just automates the manual process of creating sub-requests, which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with slices will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of slices each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with slices are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being updated.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many slices hurts performance. Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Update performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
-/// </para>
-/// </summary>
+/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.UpdateByQueryRequestConverter))]
 public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>
 {
@@ -461,460 +143,114 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "update_by_query";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyzer']/*"/>
 	public string? Analyzer { get => Q<string?>("analyzer"); set => Q("analyzer", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyze_wildcard']/*"/>
 	public bool? AnalyzeWildcard { get => Q<bool?>("analyze_wildcard"); set => Q("analyze_wildcard", value); }
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#df']/*"/>
 	public string? Df { get => Q<string?>("df"); set => Q("df", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#from']/*"/>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#lenient']/*"/>
 	public bool? Lenient { get => Q<bool?>("lenient"); set => Q("lenient", value); }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#pipeline']/*"/>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#q']/*"/>
 	public string? QueryLuceneSyntax { get => Q<string?>("q"); set => Q("q", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
-	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#refresh']/*"/>
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// It defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#request_cache']/*"/>
 	public bool? RequestCache { get => Q<bool?>("request_cache"); set => Q("request_cache", value); }
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll_size']/*"/>
 	public long? ScrollSize { get => Q<long?>("scroll_size"); set => Q("scroll_size", value); }
 
-	/// <summary>
-	/// <para>
-	/// An explicit timeout for each search request.
-	/// By default, there is no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? SearchTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("search_timeout"); set => Q("search_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stats { get => Q<System.Collections.Generic.ICollection<string>?>("stats"); set => Q("stats", value); }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#terminate_after']/*"/>
 	public long? TerminateAfter { get => Q<long?>("terminate_after"); set => Q("terminate_after", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
-	/// By default, it is one minute.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version']/*"/>
 	public bool? Version { get => Q<bool?>("version"); set => Q("version", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should the document increment the version number (internal) on hit or not (reindex)
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version_type']/*"/>
 	public bool? VersionType { get => Q<bool?>("version_type"); set => Q("version_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
-	/// Both work exactly the way they work in the bulk API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
-	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
-	/// <summary>
-	/// <para>
-	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#max_docs']/*"/>
 	public long? MaxDocs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update documents.
-/// </para>
-/// <para>
-/// Updates documents that match the specified query.
-/// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>index</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// </para>
-/// <para>
-/// When you submit an update by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and updates matching documents using internal versioning.
-/// When the versions match, the document is updated and the version number is incremented.
-/// If a document changes between the time that the snapshot is taken and the update operation is processed, it results in a version conflict and the operation fails.
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts, the operation could attempt to update more documents from the source than <c>max_docs</c> until it has successfully updated <c>max_docs</c> documents or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be updated using update by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing an update by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents.
-/// A bulk update request is performed for each batch of matching documents.
-/// Any query or update failures cause the update by query request to fail and the failures are shown in the response.
-/// Any update requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// <strong>Refreshing shards</strong>
-/// </para>
-/// <para>
-/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
-/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
-/// that received the request to be refreshed. Unlike the update API, it does not support
-/// <c>wait_for</c>.
-/// </para>
-/// <para>
-/// <strong>Running update by query asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
-/// performs some preflight checks, launches the request, and returns a
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
-/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-/// </para>
-/// <para>
-/// <strong>Waiting for active shards</strong>
-/// </para>
-/// <para>
-/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
-/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
-/// for details. <c>timeout</c> controls how long each write request waits for unavailable
-/// shards to become available. Both work exactly the way they work in the
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
-/// specify the <c>scroll</c> parameter to control how long it keeps the search context
-/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
-/// </para>
-/// <para>
-/// <strong>Throttling update requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which update by query issues batches of update operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to turn off throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is 1000, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single _bulk request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Update by query supports sliced scroll to parallelize the update process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> chooses a reasonable number for most data streams and indices.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// </para>
-/// <para>
-/// Adding <c>slices</c> to <c>_update_by_query</c> just automates the manual process of creating sub-requests, which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with slices will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of slices each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with slices are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being updated.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many slices hurts performance. Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Update performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
-/// </para>
-/// </summary>
+/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 public readonly partial struct UpdateByQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.UpdateByQueryRequest Instance { get; init; }
@@ -939,535 +275,315 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor From(long? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
-	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// It defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor ScrollSize(long? value)
 	{
 		Instance.ScrollSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An explicit timeout for each search request.
-	/// By default, there is no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.SearchTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? value)
 	{
 		Instance.Slices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
 		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Sort(params string[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
-	/// By default, it is one minute.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Version(bool? value = true)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the document increment the version number (internal) on hit or not (reindex)
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor VersionType(bool? value = true)
 	{
 		Instance.VersionType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
-	/// Both work exactly the way they work in the bulk API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
-	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
 		Instance.Conflicts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#max_docs']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor MaxDocs(long? value)
 	{
 		Instance.MaxDocs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
@@ -1530,176 +646,8 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update documents.
-/// </para>
-/// <para>
-/// Updates documents that match the specified query.
-/// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or alias:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// <c>read</c>
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// <c>index</c> or <c>write</c>
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// You can specify the query criteria in the request URI or the request body using the same syntax as the search API.
-/// </para>
-/// <para>
-/// When you submit an update by query request, Elasticsearch gets a snapshot of the data stream or index when it begins processing the request and updates matching documents using internal versioning.
-/// When the versions match, the document is updated and the version number is incremented.
-/// If a document changes between the time that the snapshot is taken and the update operation is processed, it results in a version conflict and the operation fails.
-/// You can opt to count version conflicts instead of halting and returning by setting <c>conflicts</c> to <c>proceed</c>.
-/// Note that if you opt to count version conflicts, the operation could attempt to update more documents from the source than <c>max_docs</c> until it has successfully updated <c>max_docs</c> documents or it has gone through every document in the source query.
-/// </para>
-/// <para>
-/// NOTE: Documents with a version equal to 0 cannot be updated using update by query because internal versioning does not support 0 as a valid version number.
-/// </para>
-/// <para>
-/// While processing an update by query request, Elasticsearch performs multiple search requests sequentially to find all of the matching documents.
-/// A bulk update request is performed for each batch of matching documents.
-/// Any query or update failures cause the update by query request to fail and the failures are shown in the response.
-/// Any update requests that completed successfully still stick, they are not rolled back.
-/// </para>
-/// <para>
-/// <strong>Refreshing shards</strong>
-/// </para>
-/// <para>
-/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
-/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
-/// that received the request to be refreshed. Unlike the update API, it does not support
-/// <c>wait_for</c>.
-/// </para>
-/// <para>
-/// <strong>Running update by query asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
-/// performs some preflight checks, launches the request, and returns a
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
-/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-/// </para>
-/// <para>
-/// <strong>Waiting for active shards</strong>
-/// </para>
-/// <para>
-/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
-/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
-/// for details. <c>timeout</c> controls how long each write request waits for unavailable
-/// shards to become available. Both work exactly the way they work in the
-/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
-/// specify the <c>scroll</c> parameter to control how long it keeps the search context
-/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
-/// </para>
-/// <para>
-/// <strong>Throttling update requests</strong>
-/// </para>
-/// <para>
-/// To control the rate at which update by query issues batches of update operations, you can set <c>requests_per_second</c> to any positive decimal number.
-/// This pads each batch with a wait time to throttle the rate.
-/// Set <c>requests_per_second</c> to <c>-1</c> to turn off throttling.
-/// </para>
-/// <para>
-/// Throttling uses a wait time between batches so that the internal scroll requests can be given a timeout that takes the request padding into account.
-/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
-/// By default the batch size is 1000, so if <c>requests_per_second</c> is set to <c>500</c>:
-/// </para>
-/// <code>
-/// target_time = 1000 / 500 per second = 2 seconds
-/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
-/// </code>
-/// <para>
-/// Since the batch is issued as a single _bulk request, large batch sizes cause Elasticsearch to create many requests and wait before starting the next set.
-/// This is "bursty" instead of "smooth".
-/// </para>
-/// <para>
-/// <strong>Slicing</strong>
-/// </para>
-/// <para>
-/// Update by query supports sliced scroll to parallelize the update process.
-/// This can improve efficiency and provide a convenient way to break the request down into smaller parts.
-/// </para>
-/// <para>
-/// Setting <c>slices</c> to <c>auto</c> chooses a reasonable number for most data streams and indices.
-/// This setting will use one slice per shard, up to a certain limit.
-/// If there are multiple source data streams or indices, it will choose the number of slices based on the index or backing index with the smallest number of shards.
-/// </para>
-/// <para>
-/// Adding <c>slices</c> to <c>_update_by_query</c> just automates the manual process of creating sub-requests, which means it has some quirks:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// You can see these requests in the tasks APIs. These sub-requests are "child" tasks of the task for the request with slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// These sub-requests are individually addressable for things like cancellation and rethrottling.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Canceling the request with slices will cancel each sub-request.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Due to the nature of slices each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with slices are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being updated.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Each sub-request gets a slightly different snapshot of the source data stream or index though these are all taken at approximately the same time.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// If you're slicing manually or otherwise tuning automatic slicing, keep in mind that:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Query performance is most efficient when the number of slices is equal to the number of shards in the index or backing index. If that number is large (for example, 500), choose a lower number as too many slices hurts performance. Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Update performance scales linearly across available resources with the number of slices.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
-/// </para>
-/// </summary>
+/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update_by_query.Request']/*"/>
 public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.UpdateByQueryRequest Instance { get; init; }
@@ -1723,513 +671,301 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.UpdateByQueryRequest instance) => new Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams or indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The analyzer to use for the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, wildcard and prefix queries are analyzed.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#analyze_wildcard']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> AnalyzeWildcard(bool? value = true)
 	{
 		Instance.AnalyzeWildcard = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The default operator for query string query: <c>and</c> or <c>or</c>.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#default_operator']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
 	{
 		Instance.DefaultOperator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to use as default where no field prefix is given in the query string.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#df']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Df(string? value)
 	{
 		Instance.Df = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of documents.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> From(long? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the pipeline to use to preprocess incoming documents.
-	/// If the index has a default ingest pipeline specified, then setting the value to <c>_none</c> disables the default ingest pipeline for this request.
-	/// If a final pipeline is configured it will always run, regardless of the value of this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#pipeline']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Pipeline(string? value)
 	{
 		Instance.Pipeline = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query in the Lucene query string syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#q']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> QueryLuceneSyntax(string? value)
 	{
 		Instance.QueryLuceneSyntax = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
-	/// This is different than the update API's <c>refresh</c> parameter, which causes just the shard that received the request to be refreshed.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Refresh(bool? value = true)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request cache is used for this request.
-	/// It defaults to the index-level setting.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#request_cache']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestCache(bool? value = true)
 	{
 		Instance.RequestCache = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The throttle for this request in sub-requests per second.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to retain the search context for scrolling.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size of the scroll request that powers the operation.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#scroll_size']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> ScrollSize(long? value)
 	{
 		Instance.ScrollSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An explicit timeout for each search request.
-	/// By default, there is no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> SearchTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.SearchTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation. Available options include <c>query_then_fetch</c> and <c>dfs_query_then_fetch</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? value)
 	{
 		Instance.Slices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of slices this task should be divided into.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slices']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
 	{
 		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Sort(params string[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stats = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The specific <c>tag</c> of the request for logging and statistical purposes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#stats']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Stats(params string[] values)
 	{
 		Instance.Stats = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this parameter to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#terminate_after']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> TerminateAfter(long? value)
 	{
 		Instance.TerminateAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
-	/// By default, it is one minute.
-	/// This guarantees Elasticsearch waits for at least the timeout before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Version(bool? value = true)
 	{
 		Instance.Version = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the document increment the version number (internal) on hit or not (reindex)
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#version_type']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> VersionType(bool? value = true)
 	{
 		Instance.VersionType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// The <c>timeout</c> parameter controls how long each write request waits for unavailable shards to become available.
-	/// Both work exactly the way they work in the bulk API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request blocks until the operation is complete.
-	/// If <c>false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
-	/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The preferred behavior when update by query hits version conflicts: <c>abort</c> or <c>proceed</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#conflicts']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
 	{
 		Instance.Conflicts = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#max_docs']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> MaxDocs(long? value)
 	{
 		Instance.MaxDocs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The documents to update using the Query DSL.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when updating.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
 	{
 		Instance.Slice = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Slice the request manually using the provided slice ID and total number of slices.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateByQueryRequest.g.xml" path="doc/member[@key='_global.update_by_query.Request#slice']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateByQueryRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);

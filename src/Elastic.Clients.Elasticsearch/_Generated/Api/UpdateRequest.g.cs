@@ -23,141 +23,49 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 public sealed partial class UpdateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
-	/// <summary>
-	/// <para>
-	/// The script language.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#lang']/*"/>
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#require_alias']/*"/>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of times the operation should be retried when a conflict occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the following operations: dynamic mapping updates and waiting for active shards.
-	/// Elasticsearch waits for at least the timeout period before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of copies of each shard that must be active before proceeding with the operation.
-	/// Set to 'all' or any positive integer up to the total number of shards in the index (<c>number_of_replicas</c>+1).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update a document.
-/// </para>
-/// <para>
-/// Update a document by running a script or passing a partial document.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the <c>index</c> or <c>write</c> index privilege for the target index or index alias.
-/// </para>
-/// <para>
-/// The script can update, delete, or skip modifying the document.
-/// The API also supports passing a partial document, which is merged into the existing document.
-/// To fully replace an existing document, use the index API.
-/// This operation:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Gets the document (collocated with the shard) from the index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Runs the specified script.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Indexes the result.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The document must still be reindexed, but using this API removes some network roundtrips and reduces chances of version conflicts between the GET and the index operation.
-/// </para>
-/// <para>
-/// The <c>_source</c> field must be enabled to use this API.
-/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
-/// For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
-/// </para>
-/// </summary>
+/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.UpdateRequestConverterFactory))]
 public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateRequestParameters>
 {
@@ -184,207 +92,72 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 
 	internal override string OperationName => "update";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document to be updated.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the target index.
-	/// By default, the index is created automatically if it doesn't exist.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_primary_term']/*"/>
 	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_seq_no']/*"/>
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#include_source_on_error']/*"/>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
-	/// <summary>
-	/// <para>
-	/// The script language.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#lang']/*"/>
 	public string? Lang { get => Q<string?>("lang"); set => Q("lang", value); }
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#require_alias']/*"/>
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of times the operation should be retried when a conflict occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public int? RetryOnConflict { get => Q<int?>("retry_on_conflict"); set => Q("retry_on_conflict", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the following operations: dynamic mapping updates and waiting for active shards.
-	/// Elasticsearch waits for at least the timeout period before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of copies of each shard that must be active before proceeding with the operation.
-	/// Set to 'all' or any positive integer up to the total number of shards in the index (<c>number_of_replicas</c>+1).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the <c>result</c> in the response is set to <c>noop</c> (no operation) when there are no changes to the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#detect_noop']/*"/>
 	public bool? DetectNoop { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A partial update to an existing document.
-	/// If both <c>doc</c> and <c>script</c> are specified, <c>doc</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#doc']/*"/>
 	public TPartialDocument? Doc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, use the contents of 'doc' as the value of 'upsert'.
-	/// NOTE: Using ingest pipelines with <c>doc_as_upsert</c> is not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#doc_as_upsert']/*"/>
 	public bool? DocAsUpsert { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, run the script whether or not the document exists.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#scripted_upsert']/*"/>
 	public bool? ScriptedUpsert { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, turn off source retrieval.
-	/// You can also specify a comma-separated list of the fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the document does not already exist, the contents of 'upsert' are inserted as a new document.
-	/// If the document exists, the 'script' is run.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#upsert']/*"/>
 	public TDocument? Upsert { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update a document.
-/// </para>
-/// <para>
-/// Update a document by running a script or passing a partial document.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, you must have the <c>index</c> or <c>write</c> index privilege for the target index or index alias.
-/// </para>
-/// <para>
-/// The script can update, delete, or skip modifying the document.
-/// The API also supports passing a partial document, which is merged into the existing document.
-/// To fully replace an existing document, use the index API.
-/// This operation:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Gets the document (collocated with the shard) from the index.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Runs the specified script.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Indexes the result.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The document must still be reindexed, but using this API removes some network roundtrips and reduces chances of version conflicts between the GET and the index operation.
-/// </para>
-/// <para>
-/// The <c>_source</c> field must be enabled to use this API.
-/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
-/// For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
-/// </para>
-/// </summary>
+/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.update.Request']/*"/>
 public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocument>
 {
 	internal Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> Instance { get; init; }
@@ -409,298 +182,182 @@ public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocume
 	public static explicit operator Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> instance) => new Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the document to be updated.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the target index.
-	/// By default, the index is created automatically if it doesn't exist.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_primary_term']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> IfPrimaryTerm(long? value)
 	{
 		Instance.IfPrimaryTerm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#if_seq_no']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> IfSeqNo(long? value)
 	{
 		Instance.IfSeqNo = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// True or false if to include the document source in the error message in case of parsing errors.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#include_source_on_error']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> IncludeSourceOnError(bool? value = true)
 	{
 		Instance.IncludeSourceOnError = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script language.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#lang']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Lang(string? value)
 	{
 		Instance.Lang = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search.
-	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
-	/// If 'false', it does nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the destination must be an index alias.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#require_alias']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RequireAlias(bool? value = true)
 	{
 		Instance.RequireAlias = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of times the operation should be retried when a conflict occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#retry_on_conflict']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> RetryOnConflict(int? value)
 	{
 		Instance.RetryOnConflict = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> SourceExcludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to exclude.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_excludes']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> SourceIncludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The source fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source_includes']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the following operations: dynamic mapping updates and waiting for active shards.
-	/// Elasticsearch waits for at least the timeout period before failing.
-	/// The actual wait time could be longer, particularly when multiple waits occur.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of copies of each shard that must be active before proceeding with the operation.
-	/// Set to 'all' or any positive integer up to the total number of shards in the index (<c>number_of_replicas</c>+1).
-	/// The default value of <c>1</c> means it waits for each primary shard to be active.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#wait_for_active_shards']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
 	{
 		Instance.WaitForActiveShards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the <c>result</c> in the response is set to <c>noop</c> (no operation) when there are no changes to the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#detect_noop']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> DetectNoop(bool? value = true)
 	{
 		Instance.DetectNoop = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A partial update to an existing document.
-	/// If both <c>doc</c> and <c>script</c> are specified, <c>doc</c> is ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#doc']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Doc(TPartialDocument? value)
 	{
 		Instance.Doc = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, use the contents of 'doc' as the value of 'upsert'.
-	/// NOTE: Using ingest pipelines with <c>doc_as_upsert</c> is not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#doc_as_upsert']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> DocAsUpsert(bool? value = true)
 	{
 		Instance.DocAsUpsert = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#script']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, run the script whether or not the document exists.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#scripted_upsert']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool? value = true)
 	{
 		Instance.ScriptedUpsert = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, turn off source retrieval.
-	/// You can also specify a comma-separated list of the fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
 	{
 		Instance.Source = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, turn off source retrieval.
-	/// You can also specify a comma-separated list of the fields you want to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#_source']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the document does not already exist, the contents of 'upsert' are inserted as a new document.
-	/// If the document exists, the 'script' is run.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateRequest.g.xml" path="doc/member[@key='_global.update.Request#upsert']/*"/>
 	public Elastic.Clients.Elasticsearch.UpdateRequestDescriptor<TDocument,TPartialDocument> Upsert(TDocument? value)
 	{
 		Instance.Upsert = value;

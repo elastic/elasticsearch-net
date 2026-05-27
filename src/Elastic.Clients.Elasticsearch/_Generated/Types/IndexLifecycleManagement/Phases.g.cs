@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Phases']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.PhasesConverter))]
 public sealed partial class Phases
 {
@@ -43,6 +44,7 @@ public sealed partial class Phases
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase? Warm { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.Phases']/*"/>
 public readonly partial struct PhasesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases Instance { get; init; }

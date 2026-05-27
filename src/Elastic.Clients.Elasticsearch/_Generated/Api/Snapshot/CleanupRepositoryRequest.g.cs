@@ -23,35 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 public sealed partial class CleanupRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clean up the snapshot repository.
-/// </para>
-/// <para>
-/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
-/// </para>
-/// </summary>
+/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CleanupRepositoryRequestConverter))]
 public sealed partial class CleanupRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestParameters>
 {
@@ -78,40 +62,18 @@ public sealed partial class CleanupRepositoryRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "snapshot.cleanup_repository";
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to clean up.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#repository']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("repository"); set => PR("repository", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clean up the snapshot repository.
-/// </para>
-/// <para>
-/// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
-/// </para>
-/// </summary>
+/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot.cleanup_repository.Request']/*"/>
 public readonly partial struct CleanupRepositoryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest Instance { get; init; }
@@ -136,37 +98,21 @@ public readonly partial struct CleanupRepositoryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the snapshot repository to clean up.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#repository']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CleanupRepositoryRequest.g.xml" path="doc/member[@key='snapshot.cleanup_repository.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

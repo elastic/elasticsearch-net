@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
-/// to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
-/// </para>
-/// </summary>
+/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.IndicesOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndicesOptionsConverter))]
 public sealed partial class IndicesOptions
 {
@@ -42,50 +38,21 @@ public sealed partial class IndicesOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#ignore_throttled']/*"/>
 	public bool? IgnoreThrottled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Controls how to deal with unavailable concrete indices (closed or missing), how wildcard expressions are expanded
-/// to actual indices (all, closed or open indices) and how to deal with wildcard expressions that resolve to no indices.
-/// </para>
-/// </summary>
+/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.IndicesOptions']/*"/>
 public readonly partial struct IndicesOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndicesOptions Instance { get; init; }
@@ -105,66 +72,35 @@ public readonly partial struct IndicesOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor(Elastic.Clients.Elasticsearch.IndicesOptions instance) => new Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument
-	/// determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
-	/// such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="IndicesOptions.g.xml" path="doc/member[@key='_types.IndicesOptions#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;

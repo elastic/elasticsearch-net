@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsForAzureConverter))]
 public sealed partial class SourceOnlyRepositorySettingsForAzure : Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings
 {
@@ -36,77 +37,31 @@ public sealed partial class SourceOnlyRepositorySettingsForAzure : Elastic.Clien
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the container.
-	/// It defaults to the root directory.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#base_path']/*"/>
 	public string? BasePath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the Azure repository client to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#client']/*"/>
 	public string? Client { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Azure container.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#container']/*"/>
 	public string? Container { get; set; }
 
 	public string DelegateType => "azure";
 
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
-	/// Defaults to 256 which is the maximum number supported by the Azure blob batch API.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size']/*"/>
 	public int? DeleteObjectsMaxSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>primary_only</c> or <c>secondary_only</c>.
-	/// Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#location_mode']/*"/>
 	public string? LocationMode { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
-	/// Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
-	/// Defaults to 10, minimum is 1, maximum is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#max_concurrent_batch_deletes']/*"/>
 	public int? MaxConcurrentBatchDeletes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#readonly']/*"/>
 	public bool? Readonly { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure']/*"/>
 public readonly partial struct SourceOnlyRepositorySettingsForAzureDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure Instance { get; init; }
@@ -126,96 +81,49 @@ public readonly partial struct SourceOnlyRepositorySettingsForAzureDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzure(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the container.
-	/// It defaults to the root directory.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#base_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor BasePath(string? value)
 	{
 		Instance.BasePath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the Azure repository client to use.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#client']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor Client(string? value)
 	{
 		Instance.Client = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Azure container.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#container']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor Container(string? value)
 	{
 		Instance.Container = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
-	/// Defaults to 256 which is the maximum number supported by the Azure blob batch API.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#delete_objects_max_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor DeleteObjectsMaxSize(int? value)
 	{
 		Instance.DeleteObjectsMaxSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>primary_only</c> or <c>secondary_only</c>.
-	/// Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#location_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor LocationMode(string? value)
 	{
 		Instance.LocationMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
-	/// Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
-	/// Defaults to 10, minimum is 1, maximum is 100.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#max_concurrent_batch_deletes']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor MaxConcurrentBatchDeletes(int? value)
 	{
 		Instance.MaxConcurrentBatchDeletes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForAzure.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForAzure#readonly']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForAzureDescriptor Readonly(bool? value = true)
 	{
 		Instance.Readonly = value;

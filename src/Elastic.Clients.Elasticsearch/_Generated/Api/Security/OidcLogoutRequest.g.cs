@@ -23,25 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
 public sealed partial class OidcLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Logout of OpenID Connect.
-/// </para>
-/// <para>
-/// Invalidate an access token and a refresh token that were generated as a response to the <c>/_security/oidc/authenticate</c> API.
-/// </para>
-/// <para>
-/// If the OpenID Connect authentication realm in Elasticsearch is accordingly configured, the response to this call will contain a URI pointing to the end session endpoint of the OpenID Connect Provider in order to perform single logout.
-/// </para>
-/// <para>
-/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
-/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
-/// </para>
-/// </summary>
+/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcLogoutRequestConverter))]
 public sealed partial class OidcLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>
 {
@@ -69,36 +58,15 @@ public sealed partial class OidcLogoutRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "security.oidc_logout";
 
-	/// <summary>
-	/// <para>
-	/// The refresh token to be invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request#refresh_token']/*"/>
 	public string? RefreshToken { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request#token']/*"/>
 	public required string Token { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Logout of OpenID Connect.
-/// </para>
-/// <para>
-/// Invalidate an access token and a refresh token that were generated as a response to the <c>/_security/oidc/authenticate</c> API.
-/// </para>
-/// <para>
-/// If the OpenID Connect authentication realm in Elasticsearch is accordingly configured, the response to this call will contain a URI pointing to the end session endpoint of the OpenID Connect Provider in order to perform single logout.
-/// </para>
-/// <para>
-/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
-/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
-/// </para>
-/// </summary>
+/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_logout.Request']/*"/>
 public readonly partial struct OidcLogoutRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest Instance { get; init; }
@@ -117,22 +85,14 @@ public readonly partial struct OidcLogoutRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The refresh token to be invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request#refresh_token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor RefreshToken(string? value)
 	{
 		Instance.RefreshToken = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcLogoutRequest.g.xml" path="doc/member[@key='security.oidc_logout.Request#token']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor Token(string value)
 	{
 		Instance.Token = value;

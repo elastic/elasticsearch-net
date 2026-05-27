@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.ZeroTermsQuery#all"><summary><para>
+Returns all documents, similar to a <c>match_all</c> query.
+</para></summary></member>
+  <member key="_types.query_dsl.ZeroTermsQuery#none"><summary><para>
+No documents are returned if the <c>analyzer</c> removes all tokens.
+</para></summary></member>
+</doc>

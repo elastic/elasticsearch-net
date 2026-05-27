@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Question answering inference options
-/// </para>
-/// </summary>
+/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.QuestionAnsweringInferenceOptionsConverter))]
 public sealed partial class QuestionAnsweringInferenceOptions
 {
@@ -41,40 +38,21 @@ public sealed partial class QuestionAnsweringInferenceOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum answer length to consider
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#max_answer_length']/*"/>
 	public int? MaxAnswerLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Question answering inference options
-/// </para>
-/// </summary>
+/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions']/*"/>
 public readonly partial struct QuestionAnsweringInferenceOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions Instance { get; init; }
@@ -94,55 +72,35 @@ public readonly partial struct QuestionAnsweringInferenceOptionsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum answer length to consider
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#max_answer_length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor MaxAnswerLength(int? value)
 	{
 		Instance.MaxAnswerLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="QuestionAnsweringInferenceOptions.g.xml" path="doc/member[@key='ml._types.QuestionAnsweringInferenceOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);

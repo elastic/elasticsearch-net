@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanNearQueryConverter))]
 public sealed partial class SpanNearQuery
 {
@@ -42,39 +43,21 @@ public sealed partial class SpanNearQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> Clauses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#in_order']/*"/>
 	public bool? InOrder { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum number of intervening unmatched positions permitted.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#slop']/*"/>
 	public int? Slop { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery']/*"/>
 public readonly partial struct SpanNearQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Instance { get; init; }
@@ -94,47 +77,28 @@ public readonly partial struct SpanNearQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
 		Instance.Clauses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
 		Instance.Clauses = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
@@ -147,11 +111,7 @@ public readonly partial struct SpanNearQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#in_order']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> InOrder(bool? value = true)
 	{
 		Instance.InOrder = value;
@@ -164,11 +124,7 @@ public readonly partial struct SpanNearQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum number of intervening unmatched positions permitted.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor<TDocument> Slop(int? value)
 	{
 		Instance.Slop = value;
@@ -184,6 +140,7 @@ public readonly partial struct SpanNearQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery']/*"/>
 public readonly partial struct SpanNearQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery Instance { get; init; }
@@ -203,47 +160,28 @@ public readonly partial struct SpanNearQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> value)
 	{
 		Instance.Clauses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(params Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery[] values)
 	{
 		Instance.Clauses = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
@@ -256,11 +194,7 @@ public readonly partial struct SpanNearQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of one or more other span type queries.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#clauses']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Clauses<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.SpanQueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>();
@@ -273,11 +207,7 @@ public readonly partial struct SpanNearQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls whether matches are required to be in-order.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#in_order']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor InOrder(bool? value = true)
 	{
 		Instance.InOrder = value;
@@ -290,11 +220,7 @@ public readonly partial struct SpanNearQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the maximum number of intervening unmatched positions permitted.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanNearQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanNearQuery#slop']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQueryDescriptor Slop(int? value)
 	{
 		Instance.Slop = value;

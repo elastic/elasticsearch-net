@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FingerprintAnalyzerConverter))]
 public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
@@ -36,35 +37,16 @@ public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum token size to emit. Tokens larger than this size will be discarded.
-	/// Defaults to <c>255</c>
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#max_output_size']/*"/>
 	public int? MaxOutputSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The character to use to concatenate the terms.
-	/// Defaults to a space.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#separator']/*"/>
 	public string? Separator { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#stopwords_path']/*"/>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "fingerprint";
@@ -73,6 +55,7 @@ public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer']/*"/>
 public readonly partial struct FingerprintAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Instance { get; init; }
@@ -92,47 +75,28 @@ public readonly partial struct FingerprintAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum token size to emit. Tokens larger than this size will be discarded.
-	/// Defaults to <c>255</c>
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#max_output_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor MaxOutputSize(int? value)
 	{
 		Instance.MaxOutputSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use to concatenate the terms.
-	/// Defaults to a space.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#separator']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Separator(string? value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#stopwords']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
+	/// <include file="FingerprintAnalyzer.g.xml" path="doc/member[@key='_types.analysis.FingerprintAnalyzer#stopwords_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

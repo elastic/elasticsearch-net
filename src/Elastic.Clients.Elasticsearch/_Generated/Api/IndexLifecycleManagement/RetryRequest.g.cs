@@ -23,20 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 public sealed partial class RetryRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Retry a policy.
-/// </para>
-/// <para>
-/// Retry running the lifecycle policy for an index that is in the ERROR step.
-/// The API sets the policy back to the step where the error occurred and runs the step.
-/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
-/// </para>
-/// </summary>
+/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.RetryRequestConverter))]
 public sealed partial class RetryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>
 {
@@ -63,24 +57,12 @@ public sealed partial class RetryRequest : Elastic.Clients.Elasticsearch.Request
 
 	internal override string OperationName => "ilm.retry";
 
-	/// <summary>
-	/// <para>
-	/// The name of the indices (comma-separated) whose failed lifecycle step is to be retry
-	/// </para>
-	/// </summary>
+	/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 }
 
-/// <summary>
-/// <para>
-/// Retry a policy.
-/// </para>
-/// <para>
-/// Retry running the lifecycle policy for an index that is in the ERROR step.
-/// The API sets the policy back to the step where the error occurred and runs the step.
-/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
-/// </para>
-/// </summary>
+/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 public readonly partial struct RetryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest Instance { get; init; }
@@ -105,11 +87,7 @@ public readonly partial struct RetryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the indices (comma-separated) whose failed lifecycle step is to be retry
-	/// </para>
-	/// </summary>
+	/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
@@ -172,16 +150,8 @@ public readonly partial struct RetryRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Retry a policy.
-/// </para>
-/// <para>
-/// Retry running the lifecycle policy for an index that is in the ERROR step.
-/// The API sets the policy back to the step where the error occurred and runs the step.
-/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
-/// </para>
-/// </summary>
+/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm.retry.Request']/*"/>
 public readonly partial struct RetryRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest Instance { get; init; }
@@ -205,11 +175,7 @@ public readonly partial struct RetryRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the indices (comma-separated) whose failed lifecycle step is to be retry
-	/// </para>
-	/// </summary>
+	/// <include file="RetryRequest.g.xml" path="doc/member[@key='ilm.retry.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;

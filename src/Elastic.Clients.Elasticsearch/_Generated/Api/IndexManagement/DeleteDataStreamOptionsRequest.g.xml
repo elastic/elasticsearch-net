@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.delete_data_stream_options.Request"><summary><para>
+Delete data stream options.
+</para>
+<para>
+Removes the data stream options from a data stream.
+</para></summary></member>
+  <member key="indices.delete_data_stream_options.Request#expand_wildcards"><summary><para>
+Whether wildcard expressions should get expanded to open or closed indices
+</para></summary></member>
+  <member key="indices.delete_data_stream_options.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node.
+</para></summary></member>
+  <member key="indices.delete_data_stream_options.Request#name"><summary><para>
+A comma-separated list of data streams of which the data stream options will be deleted.
+Use <c>*</c> to get all data streams
+</para></summary></member>
+  <member key="indices.delete_data_stream_options.Request#timeout"><summary><para>
+The period to wait for a response.
+</para></summary></member>
+</doc>

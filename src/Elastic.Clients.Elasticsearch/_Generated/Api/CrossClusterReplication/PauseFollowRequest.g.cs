@@ -23,29 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 public sealed partial class PauseFollowRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Pause a follower.
-/// </para>
-/// <para>
-/// Pause a cross-cluster replication follower index.
-/// The follower index will not fetch any additional operations from the leader index.
-/// You can resume following with the resume follower API.
-/// You can pause and resume a follower index to change the configuration of the following task.
-/// </para>
-/// </summary>
+/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.PauseFollowRequestConverter))]
 public sealed partial class PauseFollowRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestParameters>
 {
@@ -72,34 +59,15 @@ public sealed partial class PauseFollowRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "ccr.pause_follow";
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Pause a follower.
-/// </para>
-/// <para>
-/// Pause a cross-cluster replication follower index.
-/// The follower index will not fetch any additional operations from the leader index.
-/// You can resume following with the resume follower API.
-/// You can pause and resume a follower index to change the configuration of the following task.
-/// </para>
-/// </summary>
+/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 public readonly partial struct PauseFollowRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest Instance { get; init; }
@@ -124,24 +92,14 @@ public readonly partial struct PauseFollowRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -204,17 +162,8 @@ public readonly partial struct PauseFollowRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Pause a follower.
-/// </para>
-/// <para>
-/// Pause a cross-cluster replication follower index.
-/// The follower index will not fetch any additional operations from the leader index.
-/// You can resume following with the resume follower API.
-/// You can pause and resume a follower index to change the configuration of the following task.
-/// </para>
-/// </summary>
+/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.pause_follow.Request']/*"/>
 public readonly partial struct PauseFollowRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest Instance { get; init; }
@@ -238,24 +187,14 @@ public readonly partial struct PauseFollowRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the follower index.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="PauseFollowRequest.g.xml" path="doc/member[@key='ccr.pause_follow.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PauseFollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

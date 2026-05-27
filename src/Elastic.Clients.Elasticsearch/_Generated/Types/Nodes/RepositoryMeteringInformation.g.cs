@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RepositoryMeteringInformationConverter))]
 public sealed partial class RepositoryMeteringInformation
 {
@@ -48,71 +49,30 @@ public sealed partial class RepositoryMeteringInformation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A flag that tells whether or not this object has been archived. When a repository is closed or updated the
-	/// repository metering information is archived and kept for a certain period of time. This allows retrieving the
-	/// repository metering information of previous repository instantiations.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#archived']/*"/>
 	public required bool Archived { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cluster state version when this object was archived, this field can be used as a logical timestamp to delete
-	/// all the archived metrics up to an observed version. This field is only present for archived repository metering
-	/// information objects. The main purpose of this field is to avoid possible race conditions during repository metering
-	/// information deletions, i.e. deleting archived repositories metering information that we haven’t observed yet.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#cluster_version']/*"/>
 	public long? ClusterVersion { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An identifier that changes every time the repository is updated.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_ephemeral_id']/*"/>
 	public required string RepositoryEphemeralId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Represents an unique location within the repository.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_location']/*"/>
 	public required Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation RepositoryLocation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Repository name.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_name']/*"/>
 	public required string RepositoryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time the repository was created or updated. Recorded in milliseconds since the Unix Epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_started_at']/*"/>
 	public required System.DateTimeOffset RepositoryStartedAt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Time the repository was deleted or updated. Recorded in milliseconds since the Unix Epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_stopped_at']/*"/>
 	public System.DateTimeOffset? RepositoryStoppedAt { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Repository type.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#repository_type']/*"/>
 	public required string RepositoryType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An object with the number of request performed against the repository grouped by request type.
-	/// </para>
-	/// </summary>
+	/// <include file="RepositoryMeteringInformation.g.xml" path="doc/member[@key='nodes._types.RepositoryMeteringInformation#request_counts']/*"/>
 	public required Elastic.Clients.Elasticsearch.Nodes.RequestCounts RequestCounts { get; set; }
 }

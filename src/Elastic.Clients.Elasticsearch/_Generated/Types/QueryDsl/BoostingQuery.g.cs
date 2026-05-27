@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.BoostingQueryConverter))]
 public sealed partial class BoostingQuery
 {
@@ -44,39 +45,21 @@ public sealed partial class BoostingQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Negative { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative_boost']/*"/>
 	public required double NegativeBoost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Positive { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery']/*"/>
 public readonly partial struct BoostingQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Instance { get; init; }
@@ -96,69 +79,42 @@ public readonly partial struct BoostingQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Negative = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Negative(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> NegativeBoost(double value)
 	{
 		Instance.NegativeBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Positive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor<TDocument> Positive(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -180,6 +136,7 @@ public readonly partial struct BoostingQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery']/*"/>
 public readonly partial struct BoostingQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery Instance { get; init; }
@@ -199,91 +156,56 @@ public readonly partial struct BoostingQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.BoostingQuery(Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Negative = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to decrease the relevance score of matching documents.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Negative<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Negative = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to decrease the relevance scores of documents matching the <c>negative</c> query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#negative_boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor NegativeBoost(double value)
 	{
 		Instance.NegativeBoost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Positive = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Any returned documents must match this query.
-	/// </para>
-	/// </summary>
+	/// <include file="BoostingQuery.g.xml" path="doc/member[@key='_types.query_dsl.BoostingQuery#positive']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.BoostingQueryDescriptor Positive<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Positive = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);

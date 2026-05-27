@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.ClusterProcessOpenFileDescriptors']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterProcessOpenFileDescriptorsConverter))]
 public sealed partial class ClusterProcessOpenFileDescriptors
 {
@@ -44,27 +45,12 @@ public sealed partial class ClusterProcessOpenFileDescriptors
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Average number of concurrently open file descriptors.
-	/// Returns <c>-1</c> if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcessOpenFileDescriptors.g.xml" path="doc/member[@key='cluster.stats.ClusterProcessOpenFileDescriptors#avg']/*"/>
 	public required long Avg { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of concurrently open file descriptors allowed across all selected nodes.
-	/// Returns <c>-1</c> if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcessOpenFileDescriptors.g.xml" path="doc/member[@key='cluster.stats.ClusterProcessOpenFileDescriptors#max']/*"/>
 	public required long Max { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of concurrently open file descriptors across all selected nodes.
-	/// Returns -1 if not supported.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterProcessOpenFileDescriptors.g.xml" path="doc/member[@key='cluster.stats.ClusterProcessOpenFileDescriptors#min']/*"/>
 	public required long Min { get; set; }
 }

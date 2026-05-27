@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Result of the <c>rare_terms</c> aggregation when the field is some kind of whole number like a integer, long, or a date.
-/// </para>
-/// </summary>
+/// <include file="LongRareTermsAggregate.g.xml" path="doc/member[@key='_types.aggregations.LongRareTermsAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.LongRareTermsAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.LongRareTermsAggregateConverter))]
 public sealed partial class LongRareTermsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {

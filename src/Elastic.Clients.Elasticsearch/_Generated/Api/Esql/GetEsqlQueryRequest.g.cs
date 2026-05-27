@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
 public sealed partial class GetEsqlQueryRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get a specific running ES|QL query information.
-/// </para>
-/// <para>
-/// Returns an object extended information about a running ES|QL query.
-/// </para>
-/// </summary>
+/// <include file="GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.GetEsqlQueryRequestConverter))]
 public sealed partial class GetEsqlQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestParameters>
 {
@@ -61,22 +57,12 @@ public sealed partial class GetEsqlQueryRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "esql.get_query";
 
-	/// <summary>
-	/// <para>
-	/// The query ID
-	/// </para>
-	/// </summary>
+	/// <include file="GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a specific running ES|QL query information.
-/// </para>
-/// <para>
-/// Returns an object extended information about a running ES|QL query.
-/// </para>
-/// </summary>
+/// <include file="GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_query.Request']/*"/>
 public readonly partial struct GetEsqlQueryRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest Instance { get; init; }
@@ -101,11 +87,7 @@ public readonly partial struct GetEsqlQueryRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The query ID
-	/// </para>
-	/// </summary>
+	/// <include file="GetEsqlQueryRequest.g.xml" path="doc/member[@key='esql.get_query.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

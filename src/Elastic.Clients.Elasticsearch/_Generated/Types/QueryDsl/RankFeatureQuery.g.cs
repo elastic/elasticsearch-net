@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureQueryConverter))]
 public sealed partial class RankFeatureQuery
 {
@@ -42,53 +43,27 @@ public sealed partial class RankFeatureQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? Linear { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#log']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? Log { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? Saturation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#sigmoid']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? Sigmoid { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery']/*"/>
 public readonly partial struct RankFeatureQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery Instance { get; init; }
@@ -108,91 +83,56 @@ public readonly partial struct RankFeatureQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Linear()
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Linear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#log']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? value)
 	{
 		Instance.Log = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#log']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Log(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> action)
 	{
 		Instance.Log = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor.Build(action);
@@ -205,55 +145,35 @@ public readonly partial struct RankFeatureQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? value)
 	{
 		Instance.Saturation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Saturation()
 	{
 		Instance.Saturation = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Saturation(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor>? action)
 	{
 		Instance.Saturation = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#sigmoid']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? value)
 	{
 		Instance.Sigmoid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#sigmoid']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor<TDocument> Sigmoid(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> action)
 	{
 		Instance.Sigmoid = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor.Build(action);
@@ -269,6 +189,7 @@ public readonly partial struct RankFeatureQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery']/*"/>
 public readonly partial struct RankFeatureQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery Instance { get; init; }
@@ -288,91 +209,56 @@ public readonly partial struct RankFeatureQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQuery(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// <c>rank_feature</c> or <c>rank_features</c> field used to boost relevance scores.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Linear(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinear? value)
 	{
 		Instance.Linear = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Linear()
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Linear function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#linear']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Linear(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLinearDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#log']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Log(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm? value)
 	{
 		Instance.Log = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Logarithmic function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#log']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Log(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> action)
 	{
 		Instance.Log = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor.Build(action);
@@ -385,55 +271,35 @@ public readonly partial struct RankFeatureQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Saturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation? value)
 	{
 		Instance.Saturation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Saturation()
 	{
 		Instance.Saturation = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Saturation function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#saturation']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Saturation(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor>? action)
 	{
 		Instance.Saturation = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#sigmoid']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Sigmoid(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid? value)
 	{
 		Instance.Sigmoid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sigmoid function used to boost relevance scores based on the value of the rank feature <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureQuery.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureQuery#sigmoid']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureQueryDescriptor Sigmoid(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor> action)
 	{
 		Instance.Sigmoid = Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidDescriptor.Build(action);

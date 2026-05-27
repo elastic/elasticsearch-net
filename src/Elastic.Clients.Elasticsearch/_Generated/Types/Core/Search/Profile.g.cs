@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.Profile']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ProfileConverter))]
 public sealed partial class Profile
 {
@@ -42,11 +43,7 @@ public sealed partial class Profile
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When profiling is enabled, the original query source and target indices from the coordinating request.
-	/// </para>
-	/// </summary>
+	/// <include file="Profile.g.xml" path="doc/member[@key='_global.search._types.Profile#request']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.SearchRequestCoordinatorMetadata? Request { get; set; }
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ShardProfile> Shards { get; set; }
 }

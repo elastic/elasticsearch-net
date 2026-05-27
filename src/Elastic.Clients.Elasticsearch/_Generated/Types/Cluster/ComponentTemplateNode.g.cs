@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ComponentTemplateNodeConverter))]
 public sealed partial class ComponentTemplateNode
 {
@@ -42,39 +43,24 @@ public sealed partial class ComponentTemplateNode
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date']/*"/>
 	public System.DateTimeOffset? CreatedDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date_millis']/*"/>
 	public System.DateTimeOffset? CreatedDateMillis { get; set; }
 	public bool? Deprecated { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date']/*"/>
 	public System.DateTimeOffset? ModifiedDate { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date_millis']/*"/>
 	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 	public required Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; set; }
 	public long? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }
@@ -94,22 +80,14 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> CreatedDate(System.DateTimeOffset? value)
 	{
 		Instance.CreatedDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date_millis']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> CreatedDateMillis(System.DateTimeOffset? value)
 	{
 		Instance.CreatedDateMillis = value;
@@ -147,22 +125,14 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> ModifiedDate(System.DateTimeOffset? value)
 	{
 		Instance.ModifiedDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date_millis']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> ModifiedDateMillis(System.DateTimeOffset? value)
 	{
 		Instance.ModifiedDateMillis = value;
@@ -202,6 +172,7 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode']/*"/>
 public readonly partial struct ComponentTemplateNodeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }
@@ -221,22 +192,14 @@ public readonly partial struct ComponentTemplateNodeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor CreatedDate(System.DateTimeOffset? value)
 	{
 		Instance.CreatedDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was created, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#created_date_millis']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor CreatedDateMillis(System.DateTimeOffset? value)
 	{
 		Instance.CreatedDateMillis = value;
@@ -274,22 +237,14 @@ public readonly partial struct ComponentTemplateNodeDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor ModifiedDate(System.DateTimeOffset? value)
 	{
 		Instance.ModifiedDate = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Date and time when the component template was last modified, in milliseconds since the epoch.
-	/// </para>
-	/// </summary>
+	/// <include file="ComponentTemplateNode.g.xml" path="doc/member[@key='cluster._types.ComponentTemplateNode#modified_date_millis']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor ModifiedDateMillis(System.DateTimeOffset? value)
 	{
 		Instance.ModifiedDateMillis = value;

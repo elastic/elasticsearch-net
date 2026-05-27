@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ApplicationPrivilegesCheckConverter))]
 public sealed partial class ApplicationPrivilegesCheck
 {
@@ -44,29 +45,17 @@ public sealed partial class ApplicationPrivilegesCheck
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#application']/*"/>
 	public required string Application { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified resources.
-	/// It may be either application privilege names or the names of actions that are granted by those privileges
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#privileges']/*"/>
 	public required System.Collections.Generic.ICollection<string> Privileges { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of resource names against which the privileges should be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#resources']/*"/>
 	public required System.Collections.Generic.ICollection<string> Resources { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck']/*"/>
 public readonly partial struct ApplicationPrivilegesCheckDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck Instance { get; init; }
@@ -86,57 +75,35 @@ public readonly partial struct ApplicationPrivilegesCheckDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck instance) => new Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheck(Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the application.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#application']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Application(string value)
 	{
 		Instance.Application = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified resources.
-	/// It may be either application privilege names or the names of actions that are granted by those privileges
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Privileges(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Privileges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of the privileges that you want to check for the specified resources.
-	/// It may be either application privilege names or the names of actions that are granted by those privileges
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#privileges']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Privileges(params string[] values)
 	{
 		Instance.Privileges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of resource names against which the privileges should be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#resources']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Resources(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Resources = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of resource names against which the privileges should be checked.
-	/// </para>
-	/// </summary>
+	/// <include file="ApplicationPrivilegesCheck.g.xml" path="doc/member[@key='security.has_privileges.ApplicationPrivilegesCheck#resources']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesCheckDescriptor Resources(params string[] values)
 	{
 		Instance.Resources = [.. values];

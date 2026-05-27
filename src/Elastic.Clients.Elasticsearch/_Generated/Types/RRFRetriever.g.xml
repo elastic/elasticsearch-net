@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RRFRetriever#_name"><summary><para>
+Retriever name.
+</para></summary></member>
+  <member key="_types.RRFRetriever#filter"><summary><para>
+Query to filter the documents that can match.
+</para></summary></member>
+  <member key="_types.RRFRetriever#min_score"><summary><para>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</para></summary></member>
+  <member key="_types.RRFRetriever#rank_constant"><summary><para>
+This value determines how much influence documents in individual result sets per query have over the final ranked result set.
+</para></summary></member>
+  <member key="_types.RRFRetriever#rank_window_size"><summary><para>
+This value determines the size of the individual result sets per query.
+</para></summary></member>
+  <member key="_types.RRFRetriever#retrievers"><summary><para>
+A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
+</para></summary></member>
+</doc>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.create.Request"><summary><para>
+Create an index.
+</para>
+<para>
+You can use the create index API to add a new index to an Elasticsearch cluster.
+When creating an index, you can specify the following:
+</para>
+<list type="bullet">
+<item>
+<para>
+Settings for the index.
+</para>
+</item>
+<item>
+<para>
+Mappings for fields in the index.
+</para>
+</item>
+<item>
+<para>
+Index aliases
+</para>
+</item>
+</list>
+<para>
+<strong>Wait for active shards</strong>
+</para>
+<para>
+By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+The index creation response will indicate what happened.
+For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+These values simply indicate whether the operation completed before the timeout.
+If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+</para>
+<para>
+You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
+</para></summary></member>
+  <member key="indices.create.Request#aliases"><summary><para>
+Aliases for the index.
+</para></summary></member>
+  <member key="indices.create.Request#index"><summary><para>
+Name of the index you wish to create.
+Index names must meet the following criteria:
+</para>
+<list type="bullet">
+<item>
+<para>
+Lowercase only
+</para>
+</item>
+<item>
+<para>
+Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+</para>
+</item>
+<item>
+<para>
+Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+</para>
+</item>
+<item>
+<para>
+Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+</para>
+</item>
+<item>
+<para>
+Cannot be <c>.</c> or <c>..</c>
+</para>
+</item>
+<item>
+<para>
+Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+</para>
+</item>
+<item>
+<para>
+Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+</para>
+</item>
+</list></summary></member>
+  <member key="indices.create.Request#mappings"><summary><para>
+Mapping for fields in the index. If specified, this mapping can include:
+</para>
+<list type="bullet">
+<item>
+<para>
+Field names
+</para>
+</item>
+<item>
+<para>
+Field data types
+</para>
+</item>
+<item>
+<para>
+Mapping parameters
+</para>
+</item>
+</list></summary></member>
+  <member key="indices.create.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.create.Request#settings"><summary><para>
+Configuration options for the index.
+</para></summary></member>
+  <member key="indices.create.Request#timeout"><summary><para>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.create.Request#wait_for_active_shards"><summary><para>
+The number of shard copies that must be active before proceeding with the operation.
+Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+</para></summary></member>
+</doc>

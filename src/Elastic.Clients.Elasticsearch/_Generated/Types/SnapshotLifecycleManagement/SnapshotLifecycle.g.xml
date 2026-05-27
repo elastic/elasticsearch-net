@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="slm._types.SnapshotLifecycle#modified_date"><summary><para>
+The last time the policy was modified.
+</para></summary></member>
+  <member key="slm._types.SnapshotLifecycle#next_execution"><summary><para>
+The next time the policy will run.
+</para></summary></member>
+  <member key="slm._types.SnapshotLifecycle#version"><summary><para>
+The version of the snapshot policy.
+Only the latest version is stored and incremented when the policy is updated.
+</para></summary></member>
+</doc>

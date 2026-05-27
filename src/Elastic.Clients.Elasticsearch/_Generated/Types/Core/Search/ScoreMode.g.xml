@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.search._types.ScoreMode#avg"><summary><para>
+Average the original score and the rescore query score.
+</para></summary></member>
+  <member key="_global.search._types.ScoreMode#max"><summary><para>
+Take the max of original score and the rescore query score.
+</para></summary></member>
+  <member key="_global.search._types.ScoreMode#min"><summary><para>
+Take the min of the original score and the rescore query score.
+</para></summary></member>
+  <member key="_global.search._types.ScoreMode#multiply"><summary><para>
+Multiply the original score by the rescore query score.
+Useful for <c>function</c> query rescores.
+</para></summary></member>
+  <member key="_global.search._types.ScoreMode#total"><summary><para>
+Add the original score and the rescore query score.
+</para></summary></member>
+</doc>

@@ -23,66 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 public sealed partial class RefreshRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Refresh an index.
-/// </para>
-/// <para>
-/// A refresh makes recent operations performed on one or more indices available for search.
-/// For data streams, the API runs the refresh operation on the stream’s backing indices.
-/// </para>
-/// <para>
-/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
-/// You can change this default interval with the <c>index.refresh_interval</c> setting.
-/// </para>
-/// <para>
-/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
-/// </para>
-/// <para>
-/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
-/// </para>
-/// <para>
-/// Refreshes are resource-intensive.
-/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
-/// </para>
-/// <para>
-/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
-/// This option ensures the indexing operation waits for a periodic refresh before running the search.
-/// </para>
-/// </summary>
+/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RefreshRequestConverter))]
 public sealed partial class RefreshRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestParameters>
 {
@@ -108,73 +64,21 @@ public sealed partial class RefreshRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "indices.refresh";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
-/// <summary>
-/// <para>
-/// Refresh an index.
-/// </para>
-/// <para>
-/// A refresh makes recent operations performed on one or more indices available for search.
-/// For data streams, the API runs the refresh operation on the stream’s backing indices.
-/// </para>
-/// <para>
-/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
-/// You can change this default interval with the <c>index.refresh_interval</c> setting.
-/// </para>
-/// <para>
-/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
-/// </para>
-/// <para>
-/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
-/// </para>
-/// <para>
-/// Refreshes are resource-intensive.
-/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
-/// </para>
-/// <para>
-/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
-/// This option ensures the indexing operation waits for a periodic refresh before running the search.
-/// </para>
-/// </summary>
+/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 public readonly partial struct RefreshRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest Instance { get; init; }
@@ -198,68 +102,35 @@ public readonly partial struct RefreshRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
@@ -327,33 +198,8 @@ public readonly partial struct RefreshRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Refresh an index.
-/// </para>
-/// <para>
-/// A refresh makes recent operations performed on one or more indices available for search.
-/// For data streams, the API runs the refresh operation on the stream’s backing indices.
-/// </para>
-/// <para>
-/// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
-/// You can change this default interval with the <c>index.refresh_interval</c> setting.
-/// </para>
-/// <para>
-/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
-/// </para>
-/// <para>
-/// Refresh requests are synchronous and do not return a response until the refresh operation completes.
-/// </para>
-/// <para>
-/// Refreshes are resource-intensive.
-/// To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
-/// </para>
-/// <para>
-/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
-/// This option ensures the indexing operation waits for a periodic refresh before running the search.
-/// </para>
-/// </summary>
+/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.refresh.Request']/*"/>
 public readonly partial struct RefreshRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest Instance { get; init; }
@@ -377,68 +223,35 @@ public readonly partial struct RefreshRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams, indices, and aliases used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RefreshRequest.g.xml" path="doc/member[@key='indices.refresh.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;

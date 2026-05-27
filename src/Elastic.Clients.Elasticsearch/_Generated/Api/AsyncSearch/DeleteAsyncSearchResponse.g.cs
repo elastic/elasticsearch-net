@@ -37,10 +37,6 @@ public sealed partial class DeleteAsyncSearchResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAsyncSearchResponse.g.xml" path="doc/member[@key='async_search.delete.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

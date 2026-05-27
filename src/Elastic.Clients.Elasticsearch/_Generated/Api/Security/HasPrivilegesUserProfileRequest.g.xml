@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.has_privileges_user_profile.Request"><summary><para>
+Check user profile privileges.
+</para>
+<para>
+Determine whether the users associated with the specified user profile IDs have all the requested privileges.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para></summary></member>
+  <member key="security.has_privileges_user_profile.Request#privileges"><summary><para>
+An object containing all the privileges to be checked.
+</para></summary></member>
+  <member key="security.has_privileges_user_profile.Request#uids"><summary><para>
+A list of profile IDs. The privileges are checked for associated users of the profiles.
+</para></summary></member>
+</doc>

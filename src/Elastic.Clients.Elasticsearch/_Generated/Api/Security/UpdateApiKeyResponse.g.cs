@@ -37,11 +37,6 @@ public sealed partial class UpdateApiKeyResponse : Elastic.Transport.Products.El
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the API key was updated.
-	/// If <c>false</c>, the API key didn't change because no change was detected.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyResponse.g.xml" path="doc/member[@key='security.update_api_key.Response#updated']/*"/>
 	public required bool Updated { get; set; }
 }

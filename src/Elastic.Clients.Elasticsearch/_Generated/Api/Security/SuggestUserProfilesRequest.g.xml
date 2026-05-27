@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security.suggest_user_profiles.Request"><summary><para>
+Suggest a user profile.
+</para>
+<para>
+Get suggestions for user profiles that match specified search criteria.
+</para>
+<para>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</para></summary></member>
+  <member key="security.suggest_user_profiles.Request#data"><summary><para>
+A comma-separated list of filters for the <c>data</c> field of the profile document.
+To return all content use <c>data=*</c>.
+To return a subset of content, use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
+By default, the API returns no <c>data</c> content.
+It is an error to specify <c>data</c> as both the query parameter and the request body field.
+</para></summary></member>
+  <member key="security.suggest_user_profiles.Request#hint"><summary><para>
+Extra search criteria to improve relevance of the suggestion result.
+Profiles matching the spcified hint are ranked higher in the response.
+Profiles not matching the hint aren't excluded from the response as long as the profile matches the <c>name</c> field query.
+</para></summary></member>
+  <member key="security.suggest_user_profiles.Request#name"><summary><para>
+A query string used to match name-related fields in user profile documents.
+Name-related fields are the user's <c>username</c>, <c>full_name</c>, and <c>email</c>.
+</para></summary></member>
+  <member key="security.suggest_user_profiles.Request#size"><summary><para>
+The number of profiles to return.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsMatchConverter))]
 public sealed partial class IntervalsMatch
 {
@@ -42,51 +43,26 @@ public sealed partial class IntervalsMatch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze terms in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#analyzer']/*"/>
 	public string? Analyzer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Terms further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#max_gaps']/*"/>
 	public int? MaxGaps { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, matching terms must appear in their specified order.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#ordered']/*"/>
 	public bool? Ordered { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#query']/*"/>
 	public required string Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? UseField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch']/*"/>
 public readonly partial struct IntervalsMatchDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Instance { get; init; }
@@ -106,91 +82,56 @@ public readonly partial struct IntervalsMatchDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze terms in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Terms further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#max_gaps']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> MaxGaps(int? value)
 	{
 		Instance.MaxGaps = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, matching terms must appear in their specified order.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#ordered']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Ordered(bool? value = true)
 	{
 		Instance.Ordered = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor<TDocument> UseField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.UseField = value;
@@ -206,6 +147,7 @@ public readonly partial struct IntervalsMatchDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch']/*"/>
 public readonly partial struct IntervalsMatchDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch Instance { get; init; }
@@ -225,102 +167,63 @@ public readonly partial struct IntervalsMatchDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch instance) => new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Analyzer used to analyze terms in the query.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#analyzer']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Analyzer(string? value)
 	{
 		Instance.Analyzer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An optional interval filter.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>> action)
 	{
 		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilterDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of positions between the matching terms.
-	/// Terms further apart than this are not considered matches.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#max_gaps']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor MaxGaps(int? value)
 	{
 		Instance.MaxGaps = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, matching terms must appear in their specified order.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#ordered']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Ordered(bool? value = true)
 	{
 		Instance.Ordered = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Text you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor Query(string value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor UseField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.UseField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If specified, match intervals from this field rather than the top-level field.
-	/// The <c>term</c> is normalized using the search analyzer from this field, unless <c>analyzer</c> is specified separately.
-	/// </para>
-	/// </summary>
+	/// <include file="IntervalsMatch.g.xml" path="doc/member[@key='_types.query_dsl.IntervalsMatch#use_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatchDescriptor UseField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.UseField = value;

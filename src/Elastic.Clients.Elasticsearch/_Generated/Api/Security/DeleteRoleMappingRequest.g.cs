@@ -23,26 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
 public sealed partial class DeleteRoleMappingRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete role mappings.
-/// </para>
-/// <para>
-/// Role mappings define which roles are assigned to each user.
-/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DeleteRoleMappingRequestConverter))]
 public sealed partial class DeleteRoleMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>
 {
@@ -69,32 +59,15 @@ public sealed partial class DeleteRoleMappingRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "security.delete_role_mapping";
 
-	/// <summary>
-	/// <para>
-	/// The distinct name that identifies the role mapping.
-	/// The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete role mappings.
-/// </para>
-/// <para>
-/// Role mappings define which roles are assigned to each user.
-/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
-/// </para>
-/// </summary>
+/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.delete_role_mapping.Request']/*"/>
 public readonly partial struct DeleteRoleMappingRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest Instance { get; init; }
@@ -119,23 +92,14 @@ public readonly partial struct DeleteRoleMappingRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest instance) => new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The distinct name that identifies the role mapping.
-	/// The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingRequest.g.xml" path="doc/member[@key='security.delete_role_mapping.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

@@ -23,25 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
 public sealed partial class DeleteExpiredDataRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete expired ML data.
-/// </para>
-/// <para>
-/// Delete all job results, model snapshots and forecast data that have exceeded
-/// their retention days period. Machine learning state documents that are not
-/// associated with any job are also deleted.
-/// You can limit the request to a single or set of anomaly detection jobs by
-/// using a job identifier, a group name, a comma-separated list of jobs, or a
-/// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
-/// <c>&lt;job_id></c>.
-/// </para>
-/// </summary>
+/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteExpiredDataRequestConverter))]
 public sealed partial class DeleteExpiredDataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>
 {
@@ -67,45 +56,18 @@ public sealed partial class DeleteExpiredDataRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.delete_expired_data";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for an anomaly detection job. It can be a job identifier, a
-	/// group name, or a wildcard expression.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? JobId { get => P<Elastic.Clients.Elasticsearch.Id?>("job_id"); set => PO("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The desired requests per second for the deletion processes. The default
-	/// behavior is no throttling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#requests_per_second']/*"/>
 	public float? RequestsPerSecond { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// How long can the underlying delete processes run until they are canceled.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Delete expired ML data.
-/// </para>
-/// <para>
-/// Delete all job results, model snapshots and forecast data that have exceeded
-/// their retention days period. Machine learning state documents that are not
-/// associated with any job are also deleted.
-/// You can limit the request to a single or set of anomaly detection jobs by
-/// using a job identifier, a group name, a comma-separated list of jobs, or a
-/// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
-/// <c>&lt;job_id></c>.
-/// </para>
-/// </summary>
+/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.delete_expired_data.Request']/*"/>
 public readonly partial struct DeleteExpiredDataRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest Instance { get; init; }
@@ -129,35 +91,21 @@ public readonly partial struct DeleteExpiredDataRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for an anomaly detection job. It can be a job identifier, a
-	/// group name, or a wildcard expression.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The desired requests per second for the deletion processes. The default
-	/// behavior is no throttling.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#requests_per_second']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor RequestsPerSecond(float? value)
 	{
 		Instance.RequestsPerSecond = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// How long can the underlying delete processes run until they are canceled.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteExpiredDataRequest.g.xml" path="doc/member[@key='ml.delete_expired_data.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

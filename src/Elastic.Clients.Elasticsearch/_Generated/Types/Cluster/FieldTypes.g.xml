@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.FieldTypes#count"><summary><para>
+The number of occurrences of the field type in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#index_count"><summary><para>
+The number of indices containing the field type in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#indexed_vector_count"><summary><para>
+For dense_vector field types, number of indexed vector types in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#indexed_vector_dim_max"><summary><para>
+For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#indexed_vector_dim_min"><summary><para>
+For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#name"><summary><para>
+The name for the field type in selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#script_count"><summary><para>
+The number of fields that declare a script.
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#vector_element_type_count"><summary><para>
+For dense_vector field types, count of mappings by element type
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#vector_index_type_count"><summary><para>
+For dense_vector field types, count of mappings by index type
+</para></summary></member>
+  <member key="cluster.stats.FieldTypes#vector_similarity_type_count"><summary><para>
+For dense_vector field types, count of mappings by similarity
+</para></summary></member>
+</doc>

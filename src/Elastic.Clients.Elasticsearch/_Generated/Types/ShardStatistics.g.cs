@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ShardStatistics']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ShardStatisticsConverter))]
 public sealed partial class ShardStatistics
 {
@@ -44,26 +45,14 @@ public sealed partial class ShardStatistics
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of shards the operation or search attempted to run on but failed.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStatistics.g.xml" path="doc/member[@key='_types.ShardStatistics#failed']/*"/>
 	public required int Failed { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? Failures { get; set; }
 	public int? Skipped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards the operation or search succeeded on.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStatistics.g.xml" path="doc/member[@key='_types.ShardStatistics#successful']/*"/>
 	public required int Successful { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of shards the operation or search will run on overall.
-	/// </para>
-	/// </summary>
+	/// <include file="ShardStatistics.g.xml" path="doc/member[@key='_types.ShardStatistics#total']/*"/>
 	public required int Total { get; set; }
 }

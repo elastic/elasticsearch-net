@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.get_template.Request"><summary><para>
+Get legacy index templates.
+</para>
+<para>
+Get information about one or more index templates.
+</para>
+<para>
+IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
+</para></summary></member>
+  <member key="indices.get_template.Request#flat_settings"><summary><para>
+If <c>true</c>, returns settings in flat format.
+</para></summary></member>
+  <member key="indices.get_template.Request#local"><summary><para>
+If <c>true</c>, the request retrieves information from the local node only.
+</para></summary></member>
+  <member key="indices.get_template.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</para></summary></member>
+  <member key="indices.get_template.Request#name"><summary><para>
+Comma-separated list of index template names used to limit the request.
+Wildcard (<c>*</c>) expressions are supported.
+To return all index templates, omit this parameter or use a value of <c>_all</c> or <c>*</c>.
+</para></summary></member>
+</doc>

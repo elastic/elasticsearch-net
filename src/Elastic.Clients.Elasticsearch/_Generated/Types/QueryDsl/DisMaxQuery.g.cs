@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.DisMaxQueryConverter))]
 public sealed partial class DisMaxQuery
 {
@@ -42,34 +43,18 @@ public sealed partial class DisMaxQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> Queries { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#tie_breaker']/*"/>
 	public double? TieBreaker { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery']/*"/>
 public readonly partial struct DisMaxQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Instance { get; init; }
@@ -89,53 +74,28 @@ public readonly partial struct DisMaxQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
 		Instance.Queries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Queries = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> Queries(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -154,11 +114,7 @@ public readonly partial struct DisMaxQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor<TDocument> TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;
@@ -174,6 +130,7 @@ public readonly partial struct DisMaxQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery']/*"/>
 public readonly partial struct DisMaxQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery Instance { get; init; }
@@ -193,53 +150,28 @@ public readonly partial struct DisMaxQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQuery(Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query> value)
 	{
 		Instance.Queries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Queries = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -252,13 +184,7 @@ public readonly partial struct DisMaxQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// One or more query clauses.
-	/// Returned documents must match one or more of these queries.
-	/// If a document matches multiple queries, Elasticsearch uses the highest relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#queries']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor Queries<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -277,11 +203,7 @@ public readonly partial struct DisMaxQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number between 0 and 1.0 used to increase the relevance scores of documents matching multiple query clauses.
-	/// </para>
-	/// </summary>
+	/// <include file="DisMaxQuery.g.xml" path="doc/member[@key='_types.query_dsl.DisMaxQuery#tie_breaker']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.DisMaxQueryDescriptor TieBreaker(double? value)
 	{
 		Instance.TieBreaker = value;

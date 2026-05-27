@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.terms_enum.Response#complete"><summary><para>
+If <c>false</c>, the returned terms set may be incomplete and should be treated as approximate.
+This can occur due to a few reasons, such as a request timeout or a node error.
+</para></summary></member>
+</doc>

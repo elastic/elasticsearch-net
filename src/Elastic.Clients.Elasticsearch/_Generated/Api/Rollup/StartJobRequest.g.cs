@@ -23,19 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 public sealed partial class StartJobRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Start rollup jobs.
-/// </para>
-/// <para>
-/// If you try to start a job that does not exist, an exception occurs.
-/// If you try to start a job that is already started, nothing happens.
-/// </para>
-/// </summary>
+/// <include file="StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.StartJobRequestConverter))]
 public sealed partial class StartJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.StartJobRequestParameters>
 {
@@ -62,23 +57,12 @@ public sealed partial class StartJobRequest : Elastic.Clients.Elasticsearch.Requ
 
 	internal override string OperationName => "rollup.start_job";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// </para>
-	/// </summary>
+	/// <include file="StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Start rollup jobs.
-/// </para>
-/// <para>
-/// If you try to start a job that does not exist, an exception occurs.
-/// If you try to start a job that is already started, nothing happens.
-/// </para>
-/// </summary>
+/// <include file="StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.start_job.Request']/*"/>
 public readonly partial struct StartJobRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.StartJobRequest Instance { get; init; }
@@ -103,11 +87,7 @@ public readonly partial struct StartJobRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.StartJobRequest(Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the rollup job.
-	/// </para>
-	/// </summary>
+	/// <include file="StartJobRequest.g.xml" path="doc/member[@key='rollup.start_job.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

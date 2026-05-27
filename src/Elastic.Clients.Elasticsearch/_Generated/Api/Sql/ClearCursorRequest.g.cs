@@ -23,15 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="ClearCursorRequest.g.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
 public sealed partial class ClearCursorRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear an SQL search cursor.
-/// </para>
-/// </summary>
+/// <include file="ClearCursorRequest.g.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.ClearCursorRequestConverter))]
 public sealed partial class ClearCursorRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>
 {
@@ -59,19 +58,12 @@ public sealed partial class ClearCursorRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "sql.clear_cursor";
 
-	/// <summary>
-	/// <para>
-	/// Cursor to clear.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCursorRequest.g.xml" path="doc/member[@key='sql.clear_cursor.Request#cursor']/*"/>
 	public required string Cursor { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Clear an SQL search cursor.
-/// </para>
-/// </summary>
+/// <include file="ClearCursorRequest.g.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.clear_cursor.Request']/*"/>
 public readonly partial struct ClearCursorRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest Instance { get; init; }
@@ -90,11 +82,7 @@ public readonly partial struct ClearCursorRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest instance) => new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Cursor to clear.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCursorRequest.g.xml" path="doc/member[@key='sql.clear_cursor.Request#cursor']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor Cursor(string value)
 	{
 		Instance.Cursor = value;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.DateHistogramAggregation#calendar_interval"><summary><para>
+Calendar-aware interval.
+Can be specified using the unit name, such as <c>month</c>, or as a single unit quantity, such as <c>1M</c>.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#extended_bounds"><summary><para>
+Enables extending the bounds of the histogram beyond the data itself.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#field"><summary><para>
+The date field whose values are use to build a histogram.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#fixed_interval"><summary><para>
+Fixed intervals: a fixed number of SI units and never deviate, regardless of where they fall on the calendar.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#format"><summary><para>
+The date format used to format <c>key_as_string</c> in the response.
+If no <c>format</c> is specified, the first date format specified in the field mapping is used.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#hard_bounds"><summary><para>
+Limits the histogram to specified bounds.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#min_doc_count"><summary><para>
+Only returns buckets that have <c>min_doc_count</c> number of documents.
+By default, all buckets between the first bucket that matches documents and the last one are returned.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#missing"><summary><para>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#offset"><summary><para>
+Changes the start value of each bucket by the specified positive (<c>+</c>) or negative offset (<c>-</c>) duration.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#order"><summary><para>
+The sort order of the returned buckets.
+</para></summary></member>
+  <member key="_types.aggregations.DateHistogramAggregation#time_zone"><summary><para>
+Time zone used for bucketing and rounding.
+Defaults to Coordinated Universal Time (UTC).
+</para></summary></member>
+</doc>

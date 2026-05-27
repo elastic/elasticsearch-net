@@ -23,104 +23,47 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 public sealed partial class SearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
-	/// If <c>false</c>, it is rendered as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long a consistent view of the index
-	/// should be maintained for scrolled search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-/// <summary>
-/// <para>
-/// Run a search with a search template.
-/// </para>
-/// </summary>
+/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SearchTemplateRequestConverter))]
 public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchTemplateRequestParameters>
 {
@@ -146,165 +89,64 @@ public partial class SearchTemplateRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "search_template";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ccs_minimize_roundtrips']/*"/>
 	public bool? CcsMinimizeRoundtrips { get => Q<bool?>("ccs_minimize_roundtrips"); set => Q("ccs_minimize_roundtrips", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_throttled']/*"/>
 	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#preference']/*"/>
 	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
-	/// If <c>false</c>, it is rendered as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#rest_total_hits_as_int']/*"/>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long a consistent view of the index
-	/// should be maintained for scrolled search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#typed_keys']/*"/>
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
-	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#explain']/*"/>
 	public bool? Explain { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to use. If no <c>source</c> is specified,
-	/// this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query execution is profiled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#profile']/*"/>
 	public bool? Profile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
-	/// parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#source']/*"/>
 	public string? Source { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Run a search with a search template.
-/// </para>
-/// </summary>
+/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 public readonly partial struct SearchTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchTemplateRequest Instance { get; init; }
@@ -328,65 +170,35 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -394,156 +206,91 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
-	/// If <c>false</c>, it is rendered as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long a consistent view of the index
-	/// should be maintained for scrolled search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
-	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to use. If no <c>source</c> is specified,
-	/// this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -557,42 +304,21 @@ public readonly partial struct SearchTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query execution is profiled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
-	/// parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor Source(string? value)
 	{
 		Instance.Source = value;
@@ -660,11 +386,8 @@ public readonly partial struct SearchTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Run a search with a search template.
-/// </para>
-/// </summary>
+/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_template.Request']/*"/>
 public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SearchTemplateRequest Instance { get; init; }
@@ -688,65 +411,35 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchTemplateRequest(Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams, indices, and aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ccs_minimize_roundtrips']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> CcsMinimizeRoundtrips(bool? value = true)
 	{
 		Instance.CcsMinimizeRoundtrips = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
@@ -754,156 +447,91 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 	}
 
 	[System.Obsolete("Deprecated in '7.16.0'.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, specified concrete, expanded, or aliased indices are not included in the response when throttled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_throttled']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
 	{
 		Instance.IgnoreThrottled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#preference']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Preference(string? value)
 	{
 		Instance.Preference = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, <c>hits.total</c> is rendered as an integer in the response.
-	/// If <c>false</c>, it is rendered as an object.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#rest_total_hits_as_int']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
 	{
 		Instance.RestTotalHitsAsInt = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A custom value used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
 		Instance.Routing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies how long a consistent view of the index
-	/// should be maintained for scrolled search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#scroll']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Scroll = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the search operation.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#search_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response prefixes aggregation and suggester names with their respective types.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#typed_keys']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> TypedKeys(bool? value = true)
 	{
 		Instance.TypedKeys = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
-	/// If you specify both this and the <c>explain</c> query parameter, the API uses only the query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#explain']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Explain(bool? value = true)
 	{
 		Instance.Explain = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to use. If no <c>source</c> is specified,
-	/// this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -917,42 +545,21 @@ public readonly partial struct SearchTemplateRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the query execution is profiled.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#profile']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
-	/// parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchTemplateRequest.g.xml" path="doc/member[@key='_global.search_template.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchTemplateRequestDescriptor<TDocument> Source(string? value)
 	{
 		Instance.Source = value;

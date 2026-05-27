@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.ThreadCount']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ThreadCountConverter))]
 public sealed partial class ThreadCount
 {
@@ -36,45 +37,21 @@ public sealed partial class ThreadCount
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of active threads in the thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#active']/*"/>
 	public long? Active { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of tasks completed by the thread pool executor.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#completed']/*"/>
 	public long? Completed { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Highest number of active threads in the thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#largest']/*"/>
 	public long? Largest { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of tasks in queue for the thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#queue']/*"/>
 	public long? Queue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of tasks rejected by the thread pool executor.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#rejected']/*"/>
 	public long? Rejected { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of threads in the thread pool.
-	/// </para>
-	/// </summary>
+	/// <include file="ThreadCount.g.xml" path="doc/member[@key='nodes._types.ThreadCount#threads']/*"/>
 	public long? Threads { get; set; }
 }

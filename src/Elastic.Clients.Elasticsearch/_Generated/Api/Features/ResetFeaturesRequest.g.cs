@@ -23,45 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
+/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 public sealed partial class ResetFeaturesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Reset the features.
-/// </para>
-/// <para>
-/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-/// </para>
-/// <para>
-/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-/// </para>
-/// <para>
-/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-/// This deletes all state information stored in system indices.
-/// </para>
-/// <para>
-/// The response code is HTTP 200 if the state is successfully reset for all features.
-/// It is HTTP 500 if the reset operation failed for any feature.
-/// </para>
-/// <para>
-/// Note that select features might provide a way to reset particular system indices.
-/// Using this API resets all features, both those that are built-in and implemented as plugins.
-/// </para>
-/// <para>
-/// To list the features that will be affected, use the get features API.
-/// </para>
-/// <para>
-/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-/// </para>
-/// </summary>
+/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.Json.ResetFeaturesRequestConverter))]
 public sealed partial class ResetFeaturesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>
 {
@@ -83,43 +54,12 @@ public sealed partial class ResetFeaturesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "features.reset_features";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Reset the features.
-/// </para>
-/// <para>
-/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
-/// </para>
-/// <para>
-/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
-/// </para>
-/// <para>
-/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
-/// This deletes all state information stored in system indices.
-/// </para>
-/// <para>
-/// The response code is HTTP 200 if the state is successfully reset for all features.
-/// It is HTTP 500 if the reset operation failed for any feature.
-/// </para>
-/// <para>
-/// Note that select features might provide a way to reset particular system indices.
-/// Using this API resets all features, both those that are built-in and implemented as plugins.
-/// </para>
-/// <para>
-/// To list the features that will be affected, use the get features API.
-/// </para>
-/// <para>
-/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
-/// </para>
-/// </summary>
+/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='features.reset_features.Request']/*"/>
 public readonly partial struct ResetFeaturesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest Instance { get; init; }
@@ -138,11 +78,7 @@ public readonly partial struct ResetFeaturesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest instance) => new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="ResetFeaturesRequest.g.xml" path="doc/member[@key='features.reset_features.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

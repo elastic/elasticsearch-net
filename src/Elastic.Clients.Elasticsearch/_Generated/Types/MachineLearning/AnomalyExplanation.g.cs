@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.AnomalyExplanation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AnomalyExplanationConverter))]
 public sealed partial class AnomalyExplanation
 {
@@ -36,73 +37,33 @@ public sealed partial class AnomalyExplanation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Impact from the duration and magnitude of the detected anomaly relative to the historical average.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#anomaly_characteristics_impact']/*"/>
 	public int? AnomalyCharacteristicsImpact { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Length of the detected anomaly in the number of buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#anomaly_length']/*"/>
 	public int? AnomalyLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Type of the detected anomaly: <c>spike</c> or <c>dip</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#anomaly_type']/*"/>
 	public string? AnomalyType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates reduction of anomaly score for the bucket with large confidence intervals. If a bucket has large confidence intervals, the score is reduced.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#high_variance_penalty']/*"/>
 	public bool? HighVariancePenalty { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If the bucket contains fewer samples than expected, the score is reduced.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#incomplete_bucket_penalty']/*"/>
 	public bool? IncompleteBucketPenalty { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Lower bound of the 95% confidence interval.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#lower_confidence_bound']/*"/>
 	public double? LowerConfidenceBound { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Impact of the deviation between actual and typical values in the past 12 buckets.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#multi_bucket_impact']/*"/>
 	public int? MultiBucketImpact { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Impact of the deviation between actual and typical values in the current bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#single_bucket_impact']/*"/>
 	public int? SingleBucketImpact { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Typical (expected) value for this bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#typical_value']/*"/>
 	public double? TypicalValue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Upper bound of the 95% confidence interval.
-	/// </para>
-	/// </summary>
+	/// <include file="AnomalyExplanation.g.xml" path="doc/member[@key='ml._types.AnomalyExplanation#upper_confidence_bound']/*"/>
 	public double? UpperConfidenceBound { get; set; }
 }

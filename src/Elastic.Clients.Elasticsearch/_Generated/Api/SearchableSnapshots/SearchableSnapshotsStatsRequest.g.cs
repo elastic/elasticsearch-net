@@ -23,21 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
+/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 public sealed partial class SearchableSnapshotsStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Return stats aggregated at cluster, index or shard level
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get searchable snapshot statistics.
-/// </para>
-/// </summary>
+/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.SearchableSnapshotsStatsRequestConverter))]
 public sealed partial class SearchableSnapshotsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>
 {
@@ -63,26 +58,15 @@ public sealed partial class SearchableSnapshotsStatsRequest : Elastic.Clients.El
 
 	internal override string OperationName => "searchable_snapshots.stats";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices to retrieve statistics for.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return stats aggregated at cluster, index or shard level
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get searchable snapshot statistics.
-/// </para>
-/// </summary>
+/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 public readonly partial struct SearchableSnapshotsStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest Instance { get; init; }
@@ -106,22 +90,14 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices to retrieve statistics for.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return stats aggregated at cluster, index or shard level
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? value)
 	{
 		Instance.Level = value;
@@ -189,11 +165,8 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Get searchable snapshot statistics.
-/// </para>
-/// </summary>
+/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='searchable_snapshots.stats.Request']/*"/>
 public readonly partial struct SearchableSnapshotsStatsRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest Instance { get; init; }
@@ -217,22 +190,14 @@ public readonly partial struct SearchableSnapshotsStatsRequestDescriptor<TDocume
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of data streams and indices to retrieve statistics for.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return stats aggregated at cluster, index or shard level
-	/// </para>
-	/// </summary>
+	/// <include file="SearchableSnapshotsStatsRequest.g.xml" path="doc/member[@key='searchable_snapshots.stats.Request#level']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? value)
 	{
 		Instance.Level = value;

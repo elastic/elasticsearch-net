@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.RangeBucket#key"><summary><para>
+The bucket key. Present if the aggregation is <em>not</em> keyed
+</para></summary></member>
+</doc>

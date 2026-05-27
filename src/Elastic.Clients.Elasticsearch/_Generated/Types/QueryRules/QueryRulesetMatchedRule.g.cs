@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='query_rules.test.QueryRulesetMatchedRule']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.QueryRulesetMatchedRuleConverter))]
 public sealed partial class QueryRulesetMatchedRule
 {
@@ -43,17 +44,9 @@ public sealed partial class QueryRulesetMatchedRule
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Rule unique identifier within that ruleset
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetMatchedRule.g.xml" path="doc/member[@key='query_rules.test.QueryRulesetMatchedRule#rule_id']/*"/>
 	public required string RuleId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ruleset unique identifier
-	/// </para>
-	/// </summary>
+	/// <include file="QueryRulesetMatchedRule.g.xml" path="doc/member[@key='query_rules.test.QueryRulesetMatchedRule#ruleset_id']/*"/>
 	public required string RulesetId { get; set; }
 }

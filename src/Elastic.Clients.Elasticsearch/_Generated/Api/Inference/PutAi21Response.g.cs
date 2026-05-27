@@ -37,47 +37,21 @@ public sealed partial class PutAi21Response : Elastic.Transport.Products.Elastic
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>embedding</c>, <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#inference_id']/*"/>
 	public required string InferenceId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#service']/*"/>
 	public required string Service { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#service_settings']/*"/>
 	public required object ServiceSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#task_settings']/*"/>
 	public object? TaskSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+	/// <include file="PutAi21Response.g.xml" path="doc/member[@key='inference.put_ai21.Response#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21 TaskType { get; set; }
 }

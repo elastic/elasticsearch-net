@@ -23,29 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_user.Request']/*"/>
 public sealed partial class QueryUserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
-/// <summary>
-/// <para>
-/// Find users with a query.
-/// </para>
-/// <para>
-/// Get information for users in a paginated manner.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
-/// This API is only for native users.
-/// </para>
-/// </summary>
+/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_user.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.QueryUserRequestConverter))]
 public sealed partial class QueryUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>
 {
@@ -67,74 +54,27 @@ public sealed partial class QueryUserRequest : Elastic.Clients.Elasticsearch.Req
 
 	internal override string OperationName => "security.query_user";
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#with_profile_uid']/*"/>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#from']/*"/>
 	public int? From { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UserQuery? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#search_after']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Find users with a query.
-/// </para>
-/// <para>
-/// Get information for users in a paginated manner.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
-/// This API is only for native users.
-/// </para>
-/// </summary>
+/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_user.Request']/*"/>
 public readonly partial struct QueryUserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryUserRequest Instance { get; init; }
@@ -153,145 +93,77 @@ public readonly partial struct QueryUserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query(Elastic.Clients.Elasticsearch.Security.UserQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -304,13 +176,7 @@ public readonly partial struct QueryUserRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -384,19 +250,8 @@ public readonly partial struct QueryUserRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Find users with a query.
-/// </para>
-/// <para>
-/// Get information for users in a paginated manner.
-/// You can optionally filter the results with a query.
-/// </para>
-/// <para>
-/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
-/// This API is only for native users.
-/// </para>
-/// </summary>
+/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.query_user.Request']/*"/>
 public readonly partial struct QueryUserRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.QueryUserRequest Instance { get; init; }
@@ -415,130 +270,70 @@ public readonly partial struct QueryUserRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.QueryUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.QueryUserRequest(Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#with_profile_uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> WithProfileUid(bool? value = true)
 	{
 		Instance.WithProfileUid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The starting document offset.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.Security.UserQuery? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query to filter which users to return.
-	/// If the query parameter is missing, it is equivalent to a <c>match_all</c> query.
-	/// The query supports a subset of query types, including <c>match_all</c>, <c>bool</c>, <c>term</c>, <c>terms</c>, <c>match</c>,
-	/// <c>ids</c>, <c>prefix</c>, <c>wildcard</c>, <c>exists</c>, <c>range</c>, and <c>simple_query_string</c>.
-	/// You can query the following information associated with user: <c>username</c>, <c>roles</c>, <c>enabled</c>, <c>full_name</c>, and <c>email</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The search after definition
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#search_after']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits to return.
-	/// It must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The sort definition.
-	/// Fields eligible for sorting are: <c>username</c>, <c>roles</c>, <c>enabled</c>.
-	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryUserRequest.g.xml" path="doc/member[@key='security.query_user.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();

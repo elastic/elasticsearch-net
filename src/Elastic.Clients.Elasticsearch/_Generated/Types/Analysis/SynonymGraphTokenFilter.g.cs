@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.SynonymGraphTokenFilterConverter))]
 public sealed partial class SynonymGraphTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,66 +37,35 @@ public sealed partial class SynonymGraphTokenFilter : Elastic.Clients.Elasticsea
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Expands definitions for equivalent synonym rules. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#expand']/*"/>
 	public bool? Expand { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sets the synonym rules format.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> ignores errors while parsing the synonym rules. It is important to note that only those synonym rules which cannot get parsed are ignored. Defaults to the value of the <c>updateable</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#lenient']/*"/>
 	public bool? Lenient { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Used to define inline synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms']/*"/>
 	public System.Collections.Generic.ICollection<string>? Synonyms { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_path']/*"/>
 	public string? SynonymsPath { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Provide a synonym set created via Synonyms Management APIs.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_set']/*"/>
 	public string? SynonymsSet { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls the tokenizers that will be used to tokenize the synonym, this parameter is for backwards compatibility for indices that created before 6.0.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#tokenizer']/*"/>
 	public string? Tokenizer { get; set; }
 
 	public string Type => "synonym_graph";
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> allows reloading search analyzers to pick up changes to synonym files. Only to be used for search analyzers. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#updateable']/*"/>
 	public bool? Updateable { get; set; }
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter']/*"/>
 public readonly partial struct SynonymGraphTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter Instance { get; init; }
@@ -115,99 +85,63 @@ public readonly partial struct SynonymGraphTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter(Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Expands definitions for equivalent synonym rules. Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#expand']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Expand(bool? value = true)
 	{
 		Instance.Expand = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sets the synonym rules format.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#format']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Format(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? value)
 	{
 		Instance.Format = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> ignores errors while parsing the synonym rules. It is important to note that only those synonym rules which cannot get parsed are ignored. Defaults to the value of the <c>updateable</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#lenient']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Lenient(bool? value = true)
 	{
 		Instance.Lenient = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to define inline synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Synonyms(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Synonyms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to define inline synonyms.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Synonyms(params string[] values)
 	{
 		Instance.Synonyms = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_path']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor SynonymsPath(string? value)
 	{
 		Instance.SynonymsPath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provide a synonym set created via Synonyms Management APIs.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#synonyms_set']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor SynonymsSet(string? value)
 	{
 		Instance.SynonymsSet = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls the tokenizers that will be used to tokenize the synonym, this parameter is for backwards compatibility for indices that created before 6.0.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#tokenizer']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Tokenizer(string? value)
 	{
 		Instance.Tokenizer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> allows reloading search analyzers to pick up changes to synonym files. Only to be used for search analyzers. Defaults to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SynonymGraphTokenFilter.g.xml" path="doc/member[@key='_types.analysis.SynonymGraphTokenFilter#updateable']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilterDescriptor Updateable(bool? value = true)
 	{
 		Instance.Updateable = value;

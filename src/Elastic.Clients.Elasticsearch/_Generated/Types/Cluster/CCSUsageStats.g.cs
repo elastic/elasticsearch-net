@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.CCSUsageStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CCSUsageStatsConverter))]
 public sealed partial class CCSUsageStats
 {
@@ -51,87 +52,39 @@ public sealed partial class CCSUsageStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the clients that executed cross-cluster search requests. The keys are the names of the clients, and the values are the number of requests that were executed by that client. Only known clients (such as <c>kibana</c> or <c>elasticsearch</c>) are counted.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#clients']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> Clients { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the clusters that were queried in cross-cluster search requests. The keys are cluster names, and the values are per-cluster telemetry data. This also includes the local cluster itself, which uses the name <c>(local)</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#clusters']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.CCSUsageClusterStats> Clusters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the reasons for cross-cluster search request failures. The keys are the failure reason names and the values are the number of requests that failed for that reason.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#failure_reasons']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> FailureReasons { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The keys are the names of the search feature, and the values are the number of requests that used that feature. Single request can use more than one feature (e.g. both <c>async</c> and <c>wildcard</c>).
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#features']/*"/>
 	public required System.Collections.Generic.IReadOnlyDictionary<string, int> Features { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The average number of remote clusters that were queried in a single cross-cluster search request.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#remotes_per_search_avg']/*"/>
 	public required double RemotesPerSearchAvg { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of remote clusters that were queried in a single cross-cluster search request.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#remotes_per_search_max']/*"/>
 	public required int RemotesPerSearchMax { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of cross-cluster search requests (successful or failed) that had at least one remote cluster skipped.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#skipped']/*"/>
 	public required int Skipped { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of cross-cluster search requests that have been successfully executed by the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#success']/*"/>
 	public required int Success { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the time taken to execute cross-cluster search requests.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#took']/*"/>
 	public required Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue Took { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the time taken to execute cross-cluster search requests for which the <c>ccs_minimize_roundtrips</c> setting was set to <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#took_mrt_false']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue? TookMrtFalse { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Statistics about the time taken to execute cross-cluster search requests for which the <c>ccs_minimize_roundtrips</c> setting was set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#took_mrt_true']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue? TookMrtTrue { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The total number of cross-cluster search requests that have been executed by the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="CCSUsageStats.g.xml" path="doc/member[@key='cluster.stats.CCSUsageStats#total']/*"/>
 	public required int Total { get; set; }
 }

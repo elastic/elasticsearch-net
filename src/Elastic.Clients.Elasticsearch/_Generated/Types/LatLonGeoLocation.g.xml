@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.LatLonGeoLocation#lat"><summary><para>
+Latitude
+</para></summary></member>
+  <member key="_types.LatLonGeoLocation#lon"><summary><para>
+Longitude
+</para></summary></member>
+</doc>

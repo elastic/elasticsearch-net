@@ -23,24 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
 public sealed partial class RevertModelSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Revert to a snapshot.
-/// </para>
-/// <para>
-/// The machine learning features react quickly to anomalous input, learning new
-/// behaviors in data. Highly anomalous input increases the variance in the
-/// models whilst the system learns whether this is a new step-change in behavior
-/// or a one-off event. In the case where this anomalous input is known to be a
-/// one-off, then it might be appropriate to reset the model state to a time
-/// before this event. For example, you might consider reverting to a saved
-/// snapshot after Black Friday or a critical system failure.
-/// </para>
-/// </summary>
+/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RevertModelSnapshotRequestConverter))]
 public sealed partial class RevertModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>
 {
@@ -67,44 +57,18 @@ public sealed partial class RevertModelSnapshotRequest : Elastic.Clients.Elastic
 
 	internal override string OperationName => "ml.revert_model_snapshot";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
-	/// snapshot means the anomaly detection job starts learning a new model from
-	/// scratch when it is started.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#snapshot_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#delete_intervening_results']/*"/>
 	public bool? DeleteInterveningResults { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Revert to a snapshot.
-/// </para>
-/// <para>
-/// The machine learning features react quickly to anomalous input, learning new
-/// behaviors in data. Highly anomalous input increases the variance in the
-/// models whilst the system learns whether this is a new step-change in behavior
-/// or a one-off event. In the case where this anomalous input is known to be a
-/// one-off, then it might be appropriate to reset the model state to a time
-/// before this event. For example, you might consider reverting to a saved
-/// snapshot after Black Friday or a critical system failure.
-/// </para>
-/// </summary>
+/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.revert_model_snapshot.Request']/*"/>
 public readonly partial struct RevertModelSnapshotRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Instance { get; init; }
@@ -129,35 +93,21 @@ public readonly partial struct RevertModelSnapshotRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
-	/// snapshot means the anomaly detection job starts learning a new model from
-	/// scratch when it is started.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#snapshot_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SnapshotId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RevertModelSnapshotRequest.g.xml" path="doc/member[@key='ml.revert_model_snapshot.Request#delete_intervening_results']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor DeleteInterveningResults(bool? value = true)
 	{
 		Instance.DeleteInterveningResults = value;

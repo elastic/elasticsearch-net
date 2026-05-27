@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.OneHotEncodingPreprocessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.OneHotEncodingPreprocessorConverter))]
 public sealed partial class OneHotEncodingPreprocessor
 {
@@ -47,6 +48,7 @@ public sealed partial class OneHotEncodingPreprocessor
 	public required System.Collections.Generic.IDictionary<string, string> HotMap { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.OneHotEncodingPreprocessor']/*"/>
 public readonly partial struct OneHotEncodingPreprocessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.OneHotEncodingPreprocessor Instance { get; init; }

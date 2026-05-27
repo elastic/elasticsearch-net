@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="security._types.Restriction#workflows"><summary><para>
+A list of workflows to which the API key is restricted.
+NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+</para></summary></member>
+</doc>

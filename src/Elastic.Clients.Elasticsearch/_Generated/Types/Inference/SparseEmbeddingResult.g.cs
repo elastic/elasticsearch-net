@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.SparseEmbeddingResult']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingResultConverter))]
 public sealed partial class SparseEmbeddingResult
 {
@@ -45,10 +46,6 @@ public sealed partial class SparseEmbeddingResult
 
 	public required System.Collections.Generic.IReadOnlyDictionary<string, float> Embedding { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Indicates if the text input was truncated in the request sent to the service
-	/// </para>
-	/// </summary>
+	/// <include file="SparseEmbeddingResult.g.xml" path="doc/member[@key='inference._types.SparseEmbeddingResult#is_truncated']/*"/>
 	public required bool IsTruncated { get; set; }
 }

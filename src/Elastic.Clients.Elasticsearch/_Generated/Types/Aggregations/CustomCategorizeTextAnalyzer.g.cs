@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CustomCategorizeTextAnalyzer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CustomCategorizeTextAnalyzerConverter))]
 public sealed partial class CustomCategorizeTextAnalyzer
 {
@@ -41,6 +42,7 @@ public sealed partial class CustomCategorizeTextAnalyzer
 	public string? Tokenizer { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CustomCategorizeTextAnalyzer']/*"/>
 public readonly partial struct CustomCategorizeTextAnalyzerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CustomCategorizeTextAnalyzer Instance { get; init; }

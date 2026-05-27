@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RRFRetriever']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RRFRetrieverConverter))]
 public sealed partial class RRFRetriever
 {
@@ -44,50 +45,27 @@ public sealed partial class RRFRetriever
 
 	public System.Collections.Generic.ICollection<string>? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#_name']/*"/>
 	public string? Name { get; set; }
 	public string? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_constant']/*"/>
 	public int? RankConstant { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result sets per query.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_window_size']/*"/>
 	public int? RankWindowSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#retrievers']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> Retrievers { get; set; }
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RRFRetriever']/*"/>
 public readonly partial struct RrfRetrieverDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.RRFRetriever Instance { get; init; }
@@ -119,33 +97,21 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -158,22 +124,14 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
@@ -186,44 +144,28 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_constant']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> RankConstant(int? value)
 	{
 		Instance.RankConstant = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result sets per query.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> value)
 	{
 		Instance.Retrievers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>[] values)
 	{
 		Instance.Retrievers = [.. values];
@@ -239,6 +181,7 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 	}
 }
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.RRFRetriever']/*"/>
 public readonly partial struct RrfRetrieverDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RRFRetriever Instance { get; init; }
@@ -270,33 +213,21 @@ public readonly partial struct RrfRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -309,11 +240,7 @@ public readonly partial struct RrfRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query to filter the documents that can match.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#filter']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
@@ -326,22 +253,14 @@ public readonly partial struct RrfRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retriever name.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#_name']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
@@ -354,44 +273,28 @@ public readonly partial struct RrfRetrieverDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines how much influence documents in individual result sets per query have over the final ranked result set.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_constant']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor RankConstant(int? value)
 	{
 		Instance.RankConstant = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This value determines the size of the individual result sets per query.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#rank_window_size']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> value)
 	{
 		Instance.Retrievers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="RRFRetriever.g.xml" path="doc/member[@key='_types.RRFRetriever#retrievers']/*"/>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>[] values)
 	{
 		Instance.Retrievers = [.. values];

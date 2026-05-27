@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Streams;
 
+/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
 public sealed partial class LogsDisableRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable a named stream.
-/// </para>
-/// <para>
-/// Turn off the named stream feature for this cluster.
-/// </para>
-/// </summary>
+/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsDisableRequestConverter))]
 public sealed partial class LogsDisableRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestParameters>
 {
@@ -76,38 +62,18 @@ public sealed partial class LogsDisableRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "streams.logs_disable";
 
-	/// <summary>
-	/// <para>
-	/// The stream type to disable.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Streams.StreamType Name { get => P<Elastic.Clients.Elasticsearch.Streams.StreamType>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Disable a named stream.
-/// </para>
-/// <para>
-/// Turn off the named stream feature for this cluster.
-/// </para>
-/// </summary>
+/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.logs_disable.Request']/*"/>
 public readonly partial struct LogsDisableRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest Instance { get; init; }
@@ -132,35 +98,21 @@ public readonly partial struct LogsDisableRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest instance) => new Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Streams.LogsDisableRequest(Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The stream type to disable.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor Name(Elastic.Clients.Elasticsearch.Streams.StreamType value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="LogsDisableRequest.g.xml" path="doc/member[@key='streams.logs_disable.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.LogsDisableRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

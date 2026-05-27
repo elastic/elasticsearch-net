@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
 public sealed partial class PutMistralRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create a Mistral inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>mistral</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutMistralRequestConverter))]
 public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>
 {
@@ -74,59 +66,27 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "inference.put_mistral";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#mistral_inference_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id MistralInferenceId { get => P<Elastic.Clients.Elasticsearch.Id>("mistral_inference_id"); set => PR("mistral_inference_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#task_type']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.MistralTaskType TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>("task_type"); set => PR("task_type", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The type of service supported for the specified task type. In this case, <c>mistral</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#service']/*"/>
 	public string Service => "mistral";
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>mistral</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#service_settings']/*"/>
 	public required Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings ServiceSettings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create a Mistral inference endpoint.
-/// </para>
-/// <para>
-/// Create an inference endpoint to perform an inference task with the <c>mistral</c> service.
-/// </para>
-/// </summary>
+/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference.put_mistral.Request']/*"/>
 public readonly partial struct PutMistralRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.PutMistralRequest Instance { get; init; }
@@ -153,94 +113,56 @@ public readonly partial struct PutMistralRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.PutMistralRequest instance) => new Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.PutMistralRequest(Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the inference endpoint.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#mistral_inference_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor MistralInferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.MistralInferenceId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of the inference task that the model will perform.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#task_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.MistralTaskType value)
 	{
 		Instance.TaskType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the amount of time to wait for the inference endpoint to be created.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
 	{
 		Instance.ChunkingSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ChunkingSettings()
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>text_embedding</c> task type.
-	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#chunking_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>mistral</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings value)
 	{
 		Instance.ServiceSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>mistral</c> service.
-	/// </para>
-	/// </summary>
+	/// <include file="PutMistralRequest.g.xml" path="doc/member[@key='inference.put_mistral.Request#service_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor.Build(action);

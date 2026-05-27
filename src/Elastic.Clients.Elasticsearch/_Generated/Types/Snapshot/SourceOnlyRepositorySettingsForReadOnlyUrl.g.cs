@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SourceOnlyRepositorySettingsForReadOnlyUrlConverter))]
 public sealed partial class SourceOnlyRepositorySettingsForReadOnlyUrl : Elastic.Clients.Elasticsearch.Snapshot.ISourceOnlyRepositorySettings
 {
@@ -44,73 +45,20 @@ public sealed partial class SourceOnlyRepositorySettingsForReadOnlyUrl : Elastic
 
 	public string DelegateType => "url";
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of retries for HTTP and HTTPS URLs.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_max_retries']/*"/>
 	public int? HttpMaxRetries { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum wait time for data transfers over a connection.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_socket_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? HttpSocketTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#max_number_of_snapshots']/*"/>
 	public int? MaxNumberOfSnapshots { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL location of the root of the shared filesystem repository.
-	/// The following protocols are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>file</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ftp</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>http</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>https</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jar</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
-	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
-	/// </para>
-	/// <para>
-	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
-	/// This location must be registered in the <c>path.repo</c> setting.
-	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#url']/*"/>
 	public required string Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl']/*"/>
 public readonly partial struct SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl Instance { get; init; }
@@ -130,82 +78,28 @@ public readonly partial struct SourceOnlyRepositorySettingsForReadOnlyUrlDescrip
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrl(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of retries for HTTP and HTTPS URLs.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_max_retries']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor HttpMaxRetries(int? value)
 	{
 		Instance.HttpMaxRetries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum wait time for data transfers over a connection.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#http_socket_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor HttpSocketTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.HttpSocketTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#max_number_of_snapshots']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor MaxNumberOfSnapshots(int? value)
 	{
 		Instance.MaxNumberOfSnapshots = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL location of the root of the shared filesystem repository.
-	/// The following protocols are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>file</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ftp</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>http</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>https</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jar</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
-	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
-	/// </para>
-	/// <para>
-	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
-	/// This location must be registered in the <c>path.repo</c> setting.
-	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceOnlyRepositorySettingsForReadOnlyUrl.g.xml" path="doc/member[@key='snapshot._types.SourceOnlyRepositorySettingsForReadOnlyUrl#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsForReadOnlyUrlDescriptor Url(string value)
 	{
 		Instance.Url = value;

@@ -23,55 +23,29 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
 public sealed partial class GetComponentTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return all default configurations for the component template
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#settings_filter']/*"/>
 	public System.Collections.Generic.ICollection<string>? SettingsFilter { get => Q<System.Collections.Generic.ICollection<string>?>("settings_filter"); set => Q("settings_filter", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get component templates.
-/// </para>
-/// <para>
-/// Get information about component templates.
-/// </para>
-/// </summary>
+/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.GetComponentTemplateRequestConverter))]
 public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>
 {
@@ -97,60 +71,28 @@ public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "cluster.get_component_template";
 
-	/// <summary>
-	/// <para>
-	/// Name of component template to retrieve. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#flat_settings']/*"/>
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
-	/// <summary>
-	/// <para>
-	/// Return all default configurations for the component template
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#local']/*"/>
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#settings_filter']/*"/>
 	public System.Collections.Generic.ICollection<string>? SettingsFilter { get => Q<System.Collections.Generic.ICollection<string>?>("settings_filter"); set => Q("settings_filter", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get component templates.
-/// </para>
-/// <para>
-/// Get information about component templates.
-/// </para>
-/// </summary>
+/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.get_component_template.Request']/*"/>
 public readonly partial struct GetComponentTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest Instance { get; init; }
@@ -174,33 +116,21 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of component template to retrieve. Wildcard (<c>*</c>) expressions are supported.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns settings in flat format.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#flat_settings']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor FlatSettings(bool? value = true)
 	{
 		Instance.FlatSettings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Return all default configurations for the component template
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
@@ -208,46 +138,28 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 	}
 
 	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// If <c>false</c>, information is retrieved from the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#local']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Local(bool? value = true)
 	{
 		Instance.Local = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#settings_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor SettingsFilter(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.SettingsFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
-	/// </para>
-	/// </summary>
+	/// <include file="GetComponentTemplateRequest.g.xml" path="doc/member[@key='cluster.get_component_template.Request#settings_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor SettingsFilter(params string[] values)
 	{
 		Instance.SettingsFilter = [.. values];

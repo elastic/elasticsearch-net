@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.MasterIsStableIndicatorExceptionFetchingHistory']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.MasterIsStableIndicatorExceptionFetchingHistoryConverter))]
 public sealed partial class MasterIsStableIndicatorExceptionFetchingHistory
 {

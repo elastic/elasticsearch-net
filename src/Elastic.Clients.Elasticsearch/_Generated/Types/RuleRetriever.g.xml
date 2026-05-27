@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RuleRetriever#_name"><summary><para>
+Retriever name.
+</para></summary></member>
+  <member key="_types.RuleRetriever#filter"><summary><para>
+Query to filter the documents that can match.
+</para></summary></member>
+  <member key="_types.RuleRetriever#match_criteria"><summary><para>
+The match criteria that will determine if a rule in the provided rulesets should be applied.
+</para></summary></member>
+  <member key="_types.RuleRetriever#min_score"><summary><para>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</para></summary></member>
+  <member key="_types.RuleRetriever#rank_window_size"><summary><para>
+This value determines the size of the individual result set.
+</para></summary></member>
+  <member key="_types.RuleRetriever#retriever"><summary><para>
+The retriever whose results rules should be applied to.
+</para></summary></member>
+  <member key="_types.RuleRetriever#ruleset_ids"><summary><para>
+The ruleset IDs containing the rules this retriever is evaluating against.
+</para></summary></member>
+</doc>

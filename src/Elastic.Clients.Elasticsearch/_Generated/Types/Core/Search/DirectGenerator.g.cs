@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.DirectGenerator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.DirectGeneratorConverter))]
 public sealed partial class DirectGenerator
 {
@@ -42,95 +43,41 @@ public sealed partial class DirectGenerator
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_edits']/*"/>
 	public int? MaxEdits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_inspections']/*"/>
 	public float? MaxInspections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_term_freq']/*"/>
 	public float? MaxTermFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_doc_freq']/*"/>
 	public float? MinDocFreq { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_word_length']/*"/>
 	public int? MinWordLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#post_filter']/*"/>
 	public string? PostFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.
-	/// This filter is applied to the original token before candidates are generated.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#pre_filter']/*"/>
 	public string? PreFilter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#prefix_length']/*"/>
 	public int? PrefixLength { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included on the suggestions generated on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.SuggestMode? SuggestMode { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.DirectGenerator']/*"/>
 public readonly partial struct DirectGeneratorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Instance { get; init; }
@@ -150,144 +97,84 @@ public readonly partial struct DirectGeneratorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance) => new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_edits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxEdits(int? value)
 	{
 		Instance.MaxEdits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_inspections']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxInspections(float? value)
 	{
 		Instance.MaxInspections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MaxTermFreq(float? value)
 	{
 		Instance.MaxTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MinDocFreq(float? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PostFilter(string? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.
-	/// This filter is applied to the original token before candidates are generated.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#pre_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PreFilter(string? value)
 	{
 		Instance.PreFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included on the suggestions generated on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor<TDocument> SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;
@@ -303,6 +190,7 @@ public readonly partial struct DirectGeneratorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.DirectGenerator']/*"/>
 public readonly partial struct DirectGeneratorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator Instance { get; init; }
@@ -322,144 +210,84 @@ public readonly partial struct DirectGeneratorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator instance) => new Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator(Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
-	/// Can only be <c>1</c> or <c>2</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_edits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxEdits(int? value)
 	{
 		Instance.MaxEdits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
-	/// Can improve accuracy at the cost of performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_inspections']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxInspections(float? value)
 	{
 		Instance.MaxInspections = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
-	/// This can be used to exclude high frequency terms — which are usually spelled correctly — from being spellchecked.
-	/// Can be a relative percentage number (for example <c>0.4</c>) or an absolute number to represent document frequencies.
-	/// If a value higher than 1 is specified, then fractional can not be specified.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#max_term_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MaxTermFreq(float? value)
 	{
 		Instance.MaxTermFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimal threshold in number of documents a suggestion should appear in.
-	/// This can improve quality by only suggesting high frequency terms.
-	/// Can be specified as an absolute number or as a relative percentage of number of documents.
-	/// If a value higher than 1 is specified, the number cannot be fractional.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_doc_freq']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MinDocFreq(float? value)
 	{
 		Instance.MinDocFreq = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The minimum length a suggest text term must have in order to be included.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#min_word_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor MinWordLength(int? value)
 	{
 		Instance.MinWordLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the generated tokens before they are passed to the actual phrase scorer.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#post_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PostFilter(string? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A filter (analyzer) that is applied to each of the tokens passed to this candidate generator.
-	/// This filter is applied to the original token before candidates are generated.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#pre_filter']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PreFilter(string? value)
 	{
 		Instance.PreFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of minimal prefix characters that must match in order be a candidate suggestions.
-	/// Increasing this number improves spellcheck performance.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#prefix_length']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor PrefixLength(int? value)
 	{
 		Instance.PrefixLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum corrections to be returned per suggest text token.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what suggestions are included on the suggestions generated on each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="DirectGenerator.g.xml" path="doc/member[@key='_global.search._types.DirectGenerator#suggest_mode']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.DirectGeneratorDescriptor SuggestMode(Elastic.Clients.Elasticsearch.SuggestMode? value)
 	{
 		Instance.SuggestMode = value;

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-/// <summary>
-/// <para>
-/// GPU vector indexing usage statistics.
-/// </para>
-/// </summary>
+/// <include file="GpuVectorIndexing.g.xml" path="doc/member[@key='xpack.usage.GpuVectorIndexing']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='xpack.usage.GpuVectorIndexing']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.GpuVectorIndexingConverter))]
 public sealed partial class GpuVectorIndexing
 {
@@ -54,24 +51,12 @@ public sealed partial class GpuVectorIndexing
 	public required bool Available { get; set; }
 	public required bool Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total GPU index builds across the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuVectorIndexing.g.xml" path="doc/member[@key='xpack.usage.GpuVectorIndexing#index_build_count']/*"/>
 	public required long IndexBuildCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Per-node GPU details including type, memory, enabled status, and build count.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuVectorIndexing.g.xml" path="doc/member[@key='xpack.usage.GpuVectorIndexing#nodes']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Xpack.GpuNodeStats> Nodes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Count of data nodes with GPU support.
-	/// </para>
-	/// </summary>
+	/// <include file="GpuVectorIndexing.g.xml" path="doc/member[@key='xpack.usage.GpuVectorIndexing#nodes_with_gpu']/*"/>
 	public required int NodesWithGpu { get; set; }
 }

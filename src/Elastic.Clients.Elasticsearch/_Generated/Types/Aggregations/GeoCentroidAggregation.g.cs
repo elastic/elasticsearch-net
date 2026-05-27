@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoCentroidAggregationConverter))]
 public sealed partial class GeoCentroidAggregation
 {
@@ -38,24 +39,16 @@ public sealed partial class GeoCentroidAggregation
 
 	public long? Count { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoLocation? Location { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation']/*"/>
 public readonly partial struct GeoCentroidAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Instance { get; init; }
@@ -81,22 +74,14 @@ public readonly partial struct GeoCentroidAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -115,12 +100,7 @@ public readonly partial struct GeoCentroidAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -159,6 +139,7 @@ public readonly partial struct GeoCentroidAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation']/*"/>
 public readonly partial struct GeoCentroidAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregation Instance { get; init; }
@@ -184,22 +165,14 @@ public readonly partial struct GeoCentroidAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -218,12 +191,7 @@ public readonly partial struct GeoCentroidAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoCentroidAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeoCentroidAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

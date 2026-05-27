@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="transform.get_transform.TransformSummary#authorization"><summary><para>
+The security privileges that the transform uses to run its queries. If Elastic Stack security features were disabled at the time of the most recent update to the transform, this property is omitted.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#create_time"><summary><para>
+The time the transform was created.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#description"><summary><para>
+Free text description of the transform.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#dest"><summary><para>
+The destination for the transform.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#pivot"><summary><para>
+The pivot method transforms the data by aggregating and grouping it.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#settings"><summary><para>
+Defines optional transform settings.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#source"><summary><para>
+The source of the data for the transform.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#sync"><summary><para>
+Defines the properties transforms require to run continuously.
+</para></summary></member>
+  <member key="transform.get_transform.TransformSummary#version"><summary><para>
+The version of Elasticsearch that existed on the node when the transform was created.
+</para></summary></member>
+</doc>

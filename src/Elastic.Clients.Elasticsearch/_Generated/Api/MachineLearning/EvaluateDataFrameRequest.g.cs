@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
 public sealed partial class EvaluateDataFrameRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Evaluate data frame analytics.
-/// </para>
-/// <para>
-/// The API packages together commonly used evaluation metrics for various types
-/// of machine learning features. This has been designed for use on indexes
-/// created by data frame analytics. Evaluation requires both a ground truth
-/// field and an analytics result field to be present.
-/// </para>
-/// </summary>
+/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.EvaluateDataFrameRequestConverter))]
 public sealed partial class EvaluateDataFrameRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>
 {
@@ -66,39 +59,18 @@ public sealed partial class EvaluateDataFrameRequest : Elastic.Clients.Elasticse
 
 	internal override string OperationName => "ml.evaluate_data_frame";
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation Evaluation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines the <c>index</c> in which the evaluation will be performed.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Evaluate data frame analytics.
-/// </para>
-/// <para>
-/// The API packages together commonly used evaluation metrics for various types
-/// of machine learning features. This has been designed for use on indexes
-/// created by data frame analytics. Evaluation requires both a ground truth
-/// field and an analytics result field to be present.
-/// </para>
-/// </summary>
+/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
 public readonly partial struct EvaluateDataFrameRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Instance { get; init; }
@@ -117,77 +89,49 @@ public readonly partial struct EvaluateDataFrameRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation value)
 	{
 		Instance.Evaluation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor> action)
 	{
 		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Evaluation<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<T>> action)
 	{
 		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the <c>index</c> in which the evaluation will be performed.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -250,17 +194,8 @@ public readonly partial struct EvaluateDataFrameRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Evaluate data frame analytics.
-/// </para>
-/// <para>
-/// The API packages together commonly used evaluation metrics for various types
-/// of machine learning features. This has been designed for use on indexes
-/// created by data frame analytics. Evaluation requires both a ground truth
-/// field and an analytics result field to be present.
-/// </para>
-/// </summary>
+/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.Request']/*"/>
 public readonly partial struct EvaluateDataFrameRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Instance { get; init; }
@@ -279,55 +214,35 @@ public readonly partial struct EvaluateDataFrameRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation value)
 	{
 		Instance.Evaluation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the type of evaluation you want to perform.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#evaluation']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Evaluation(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>> action)
 	{
 		Instance.Evaluation = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the <c>index</c> in which the evaluation will be performed.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A query clause that retrieves a subset of data from the source index.
-	/// </para>
-	/// </summary>
+	/// <include file="EvaluateDataFrameRequest.g.xml" path="doc/member[@key='ml.evaluate_data_frame.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);

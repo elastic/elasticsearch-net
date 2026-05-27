@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-/// <summary>
-/// <para>
-/// FILE_SETTINGS
-/// </para>
-/// </summary>
+/// <include file="FileSettingsIndicator.g.xml" path="doc/member[@key='_global.health_report.FileSettingsIndicator']/*"/>
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.health_report.FileSettingsIndicator']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.FileSettingsIndicatorConverter))]
 public sealed partial class FileSettingsIndicator
 {

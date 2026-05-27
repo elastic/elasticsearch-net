@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="snapshot.repository_analyze.DetailsInfo#blob"><summary><para>
+A description of the blob that was written and read.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#overwrite_elapsed"><summary><para>
+The elapsed time spent overwriting the blob.
+If the blob was not overwritten, this information is omitted.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#overwrite_elapsed_nanos"><summary><para>
+The elapsed time spent overwriting the blob, in nanoseconds.
+If the blob was not overwritten, this information is omitted.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#write_elapsed"><summary><para>
+The elapsed time spent writing the blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#write_elapsed_nanos"><summary><para>
+The elapsed time spent writing the blob, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#write_throttled"><summary><para>
+The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#write_throttled_nanos"><summary><para>
+The length of time spent waiting for the <c>max_snapshot_bytes_per_sec</c> (or <c>indices.recovery.max_bytes_per_sec</c> if the recovery settings for managed services are set) throttle while writing the blob, in nanoseconds.
+</para></summary></member>
+  <member key="snapshot.repository_analyze.DetailsInfo#writer_node"><summary><para>
+The node which wrote the blob and coordinated the read operations.
+</para></summary></member>
+</doc>

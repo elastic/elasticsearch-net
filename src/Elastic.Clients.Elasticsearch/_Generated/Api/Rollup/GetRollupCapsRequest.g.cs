@@ -23,35 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+/// <include file="GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 public sealed partial class GetRollupCapsRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get the rollup job capabilities.
-/// </para>
-/// <para>
-/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-/// </para>
-/// <para>
-/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-/// This API enables you to inspect an index and determine:
-/// </para>
-/// <list type="number">
-/// <item>
-/// <para>
-/// Does this index have associated rollup data somewhere in the cluster?
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GetRollupCapsRequestConverter))]
 public sealed partial class GetRollupCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>
 {
@@ -77,40 +56,12 @@ public sealed partial class GetRollupCapsRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "rollup.get_rollup_caps";
 
-	/// <summary>
-	/// <para>
-	/// Index, indices or index-pattern to return rollup capabilities for.
-	/// <c>_all</c> may be used to fetch rollup capabilities from all jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the rollup job capabilities.
-/// </para>
-/// <para>
-/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
-/// </para>
-/// <para>
-/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
-/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
-/// This API enables you to inspect an index and determine:
-/// </para>
-/// <list type="number">
-/// <item>
-/// <para>
-/// Does this index have associated rollup data somewhere in the cluster?
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='rollup.get_rollup_caps.Request']/*"/>
 public readonly partial struct GetRollupCapsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest Instance { get; init; }
@@ -134,12 +85,7 @@ public readonly partial struct GetRollupCapsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Index, indices or index-pattern to return rollup capabilities for.
-	/// <c>_all</c> may be used to fetch rollup capabilities from all jobs.
-	/// </para>
-	/// </summary>
+	/// <include file="GetRollupCapsRequest.g.xml" path="doc/member[@key='rollup.get_rollup_caps.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;

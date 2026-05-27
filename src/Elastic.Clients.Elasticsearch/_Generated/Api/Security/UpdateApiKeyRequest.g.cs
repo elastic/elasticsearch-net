@@ -23,40 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
 public sealed partial class UpdateApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Update an API key.
-/// </para>
-/// <para>
-/// Update attributes of an existing API key.
-/// This API supports updates to an API key's access scope, expiration, and metadata.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
-/// Users can only update API keys that they created or that were granted to them.
-/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
-/// </para>
-/// <para>
-/// Use this API to update API keys created by the create API key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
-/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
-/// The snapshot of the owner's permissions is updated automatically on every call.
-/// </para>
-/// <para>
-/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
-/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
-/// </para>
-/// </summary>
+/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.UpdateApiKeyRequestConverter))]
 public sealed partial class UpdateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>
 {
@@ -83,76 +57,21 @@ public sealed partial class UpdateApiKeyRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "security.update_api_key";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire.
-	/// This property can be omitted to leave the expiration unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update an API key.
-/// </para>
-/// <para>
-/// Update attributes of an existing API key.
-/// This API supports updates to an API key's access scope, expiration, and metadata.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
-/// Users can only update API keys that they created or that were granted to them.
-/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
-/// </para>
-/// <para>
-/// Use this API to update API keys created by the create API key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
-/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
-/// The snapshot of the owner's permissions is updated automatically on every call.
-/// </para>
-/// <para>
-/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
-/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
-/// </para>
-/// </summary>
+/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
 public readonly partial struct UpdateApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest Instance { get; init; }
@@ -177,66 +96,35 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire.
-	/// This property can be omitted to leave the expiration unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -250,68 +138,28 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors()
 	{
 		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>? action)
 	{
 		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>? action)
 	{
 		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action);
@@ -325,34 +173,14 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(string key)
 	{
 		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor RoleDescriptors(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
@@ -442,36 +270,8 @@ public readonly partial struct UpdateApiKeyRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Update an API key.
-/// </para>
-/// <para>
-/// Update attributes of an existing API key.
-/// This API supports updates to an API key's access scope, expiration, and metadata.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_own_api_key</c> cluster privilege.
-/// Users can only update API keys that they created or that were granted to them.
-/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-/// </para>
-/// <para>
-/// IMPORTANT: It's not possible to use an API key as the authentication credential for this API. The owner user’s credentials are required.
-/// </para>
-/// <para>
-/// Use this API to update API keys created by the create API key or grant API Key APIs.
-/// If you need to apply the same update to many API keys, you can use the bulk update API keys API to reduce overhead.
-/// It's not possible to update expired API keys or API keys that have been invalidated by the invalidate API key API.
-/// </para>
-/// <para>
-/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request and a snapshot of the owner user's permissions at the time of the request.
-/// The snapshot of the owner's permissions is updated automatically on every call.
-/// </para>
-/// <para>
-/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
-/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
-/// </para>
-/// </summary>
+/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.update_api_key.Request']/*"/>
 public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest Instance { get; init; }
@@ -496,66 +296,35 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the API key to update.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The expiration time for the API key.
-	/// By default, API keys never expire.
-	/// This property can be omitted to leave the expiration unchanged.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#expiration']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Expiration = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Metadata = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata()
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Arbitrary metadata that you want to associate with the API key.
-	/// It supports a nested data structure.
-	/// Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
-	/// When specified, this value fully replaces the metadata previously associated with the API key.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#metadata']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -569,51 +338,21 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
 	{
 		Instance.RoleDescriptors = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors()
 	{
 		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>? action)
 	{
 		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action);
@@ -627,34 +366,14 @@ public readonly partial struct UpdateApiKeyRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(string key)
 	{
 		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null) } };
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The role descriptors to assign to this API key.
-	/// The API key's effective permissions are an intersection of its assigned privileges and the point in time snapshot of permissions of the owner user.
-	/// You can assign new privileges by specifying them in this parameter.
-	/// To remove assigned privileges, you can supply an empty <c>role_descriptors</c> parameter, that is to say, an empty object <c>{}</c>.
-	/// If an API key has no assigned privileges, it inherits the owner user's full permissions.
-	/// The snapshot of the owner's permissions is always updated, whether you supply the <c>role_descriptors</c> parameter or not.
-	/// The structure of a role descriptor is the same as the request for the create API keys API.
-	/// </para>
-	/// </summary>
+	/// <include file="UpdateApiKeyRequest.g.xml" path="doc/member[@key='security.update_api_key.Request#role_descriptors']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument> RoleDescriptors(params string[] keys)
 	{
 		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();

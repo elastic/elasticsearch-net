@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeOutlierDetectionSummary']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeOutlierDetectionSummaryConverter))]
 public sealed partial class DataframeOutlierDetectionSummary
 {
@@ -36,31 +37,15 @@ public sealed partial class DataframeOutlierDetectionSummary
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The AUC ROC (area under the curve of the receiver operating characteristic) score and optionally the curve.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeOutlierDetectionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeOutlierDetectionSummary#auc_roc']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationSummaryAucRoc? AucRoc { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set the different thresholds of the outlier score at where the metrics (<c>tp</c> - true positive, <c>fp</c> - false positive, <c>tn</c> - true negative, <c>fn</c> - false negative) are calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeOutlierDetectionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeOutlierDetectionSummary#confusion_matrix']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold>? ConfusionMatrix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set the different thresholds of the outlier score at where the metric is calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeOutlierDetectionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeOutlierDetectionSummary#precision']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, double>? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Set the different thresholds of the outlier score at where the metric is calculated.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeOutlierDetectionSummary.g.xml" path="doc/member[@key='ml.evaluate_data_frame.DataframeOutlierDetectionSummary#recall']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, double>? Recall { get; set; }
 }

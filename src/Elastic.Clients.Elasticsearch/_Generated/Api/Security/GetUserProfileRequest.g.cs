@@ -23,32 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
 public sealed partial class GetUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#data']/*"/>
 	public System.Collections.Generic.ICollection<string>? Data { get => Q<System.Collections.Generic.ICollection<string>?>("data"); set => Q("data", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a user profile.
-/// </para>
-/// <para>
-/// Get a user's profile using the unique profile ID.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetUserProfileRequestConverter))]
 public sealed partial class GetUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>
 {
@@ -75,37 +59,15 @@ public sealed partial class GetUserProfileRequest : Elastic.Clients.Elasticsearc
 
 	internal override string OperationName => "security.get_user_profile";
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#uid']/*"/>
 	public required System.Collections.Generic.ICollection<string> Uid { get => P<System.Collections.Generic.ICollection<string>>("uid"); set => PR("uid", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#data']/*"/>
 	public System.Collections.Generic.ICollection<string>? Data { get => Q<System.Collections.Generic.ICollection<string>?>("data"); set => Q("data", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get a user profile.
-/// </para>
-/// <para>
-/// Get a user's profile using the unique profile ID.
-/// </para>
-/// <para>
-/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
-/// Individual users and external applications should not call this API directly.
-/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
-/// </para>
-/// </summary>
+/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.get_user_profile.Request']/*"/>
 public readonly partial struct GetUserProfileRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest Instance { get; init; }
@@ -130,50 +92,28 @@ public readonly partial struct GetUserProfileRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Uid(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Uid = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A unique identifier for the user profile.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#uid']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Uid(params string[] values)
 	{
 		Instance.Uid = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Data(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Data = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of filters for the <c>data</c> field of the profile document.
-	/// To return all content use <c>data=*</c>.
-	/// To return a subset of content use <c>data=&lt;key></c> to retrieve content nested under the specified <c>&lt;key></c>.
-	/// By default returns no <c>data</c> content.
-	/// </para>
-	/// </summary>
+	/// <include file="GetUserProfileRequest.g.xml" path="doc/member[@key='security.get_user_profile.Request#data']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor Data(params string[] values)
 	{
 		Instance.Data = [.. values];

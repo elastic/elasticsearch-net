@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.QueryCacheStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.QueryCacheStatsConverter))]
 public sealed partial class QueryCacheStats
 {
@@ -48,60 +49,27 @@ public sealed partial class QueryCacheStats
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of entries added to the query cache across all shards assigned to selected nodes.
-	/// This number includes current and evicted entries.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#cache_count']/*"/>
 	public required long CacheCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of entries currently in the query cache across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#cache_size']/*"/>
 	public required long CacheSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of query cache evictions across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#evictions']/*"/>
 	public required long Evictions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total count of query cache hits across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#hit_count']/*"/>
 	public required long HitCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for the query cache across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#memory_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total amount, in bytes, of memory used for the query cache across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#memory_size_in_bytes']/*"/>
 	public required long MemorySizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total count of query cache misses across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#miss_count']/*"/>
 	public required long MissCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total count of hits and misses in the query cache across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryCacheStats.g.xml" path="doc/member[@key='_types.QueryCacheStats#total_count']/*"/>
 	public required long TotalCount { get; set; }
 }

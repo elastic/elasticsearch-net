@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.LlamaServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.LlamaServiceSettingsConverter))]
 public sealed partial class LlamaServiceSettings
 {
@@ -43,70 +44,23 @@ public sealed partial class LlamaServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#max_input_tokens']/*"/>
 	public int? MaxInputTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Llama downloading models documentation for different ways of getting a list of available models and downloading them.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>all-MiniLM-L6-v2</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama3.2:3b</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Llama API.
-	/// By default, the <c>llama</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint of the Llama stack endpoint.
-	/// URL must contain:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>/v1/inference/embeddings</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>/v1/openai/v1/chat/completions</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#url']/*"/>
 	public required string Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.LlamaServiceSettings']/*"/>
 public readonly partial struct LlamaServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings Instance { get; init; }
@@ -126,107 +80,49 @@ public readonly partial struct LlamaServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettings(Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the maximum number of tokens per input before chunking occurs.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#max_input_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor MaxInputTokens(int? value)
 	{
 		Instance.MaxInputTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Llama downloading models documentation for different ways of getting a list of available models and downloading them.
-	/// Service has been tested and confirmed to be working with the following models:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>all-MiniLM-L6-v2</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>llama3.2:3b</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Llama API.
-	/// By default, the <c>llama</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Llama API.
-	/// By default, the <c>llama</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Llama API.
-	/// By default, the <c>llama</c> service sets the number of requests allowed per minute to 3000.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint of the Llama stack endpoint.
-	/// URL must contain:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// For <c>text_embedding</c> task - <c>/v1/inference/embeddings</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// For <c>completion</c> and <c>chat_completion</c> tasks - <c>/v1/openai/v1/chat/completions</c>.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="LlamaServiceSettings.g.xml" path="doc/member[@key='inference._types.LlamaServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.LlamaServiceSettingsDescriptor Url(string value)
 	{
 		Instance.Url = value;

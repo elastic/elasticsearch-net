@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AmazonBedrockServiceSettingsConverter))]
 public sealed partial class AmazonBedrockServiceSettings
 {
@@ -45,88 +46,26 @@ public sealed partial class AmazonBedrockServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS access key that has permissions to use Amazon Bedrock and access to models for inference requests.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#access_key']/*"/>
 	public required string AccessKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The base model ID or an ARN to a custom model based on a foundational model.
-	/// The base model IDs can be found in the Amazon Bedrock documentation.
-	/// Note that the model ID must be available for the provider chosen and your IAM user must have access to the model.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#model']/*"/>
 	public required string Model { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The model provider for your deployment.
-	/// Note that some providers may support only certain task types.
-	/// Supported providers include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>amazontitan</c> - available for <c>text_embedding</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>anthropic</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ai21labs</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> - available for <c>chat_completion</c>, <c>completion</c> and <c>text_embedding</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>meta</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#provider']/*"/>
 	public string? Provider { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
-	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The region that your model or ARN is deployed in.
-	/// The list of available regions per model can be found in the Amazon Bedrock documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#region']/*"/>
 	public required string Region { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS secret key that is paired with the <c>access_key</c>.
-	/// For informationg about creating and managing access and secret keys, refer to the AWS documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#secret_key']/*"/>
 	public required string SecretKey { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings']/*"/>
 public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings Instance { get; init; }
@@ -146,129 +85,56 @@ public readonly partial struct AmazonBedrockServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettings(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS access key that has permissions to use Amazon Bedrock and access to models for inference requests.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#access_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor AccessKey(string value)
 	{
 		Instance.AccessKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The base model ID or an ARN to a custom model based on a foundational model.
-	/// The base model IDs can be found in the Amazon Bedrock documentation.
-	/// Note that the model ID must be available for the provider chosen and your IAM user must have access to the model.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#model']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor Model(string value)
 	{
 		Instance.Model = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The model provider for your deployment.
-	/// Note that some providers may support only certain task types.
-	/// Supported providers include:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>amazontitan</c> - available for <c>text_embedding</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>anthropic</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ai21labs</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cohere</c> - available for <c>chat_completion</c>, <c>completion</c> and <c>text_embedding</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>meta</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>mistral</c> - available for <c>chat_completion</c> and <c>completion</c> task types
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#provider']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor Provider(string? value)
 	{
 		Instance.Provider = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
-	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
-	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from Amazon Bedrock.
-	/// By default, the <c>amazonbedrock</c> service sets the number of requests allowed per minute to 240.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The region that your model or ARN is deployed in.
-	/// The list of available regions per model can be found in the Amazon Bedrock documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#region']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor Region(string value)
 	{
 		Instance.Region = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid AWS secret key that is paired with the <c>access_key</c>.
-	/// For informationg about creating and managing access and secret keys, refer to the AWS documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AmazonBedrockServiceSettings.g.xml" path="doc/member[@key='inference._types.AmazonBedrockServiceSettings#secret_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AmazonBedrockServiceSettingsDescriptor SecretKey(string value)
 	{
 		Instance.SecretKey = value;

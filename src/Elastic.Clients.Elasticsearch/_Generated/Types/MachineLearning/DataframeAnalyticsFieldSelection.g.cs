@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsFieldSelectionConverter))]
 public sealed partial class DataframeAnalyticsFieldSelection
 {
@@ -45,45 +46,21 @@ public sealed partial class DataframeAnalyticsFieldSelection
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The feature type of this field for the analysis. May be categorical or numerical.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#feature_type']/*"/>
 	public string? FeatureType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether the field is selected to be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#is_included']/*"/>
 	public required bool IsIncluded { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Whether the field is required.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#is_required']/*"/>
 	public required bool IsRequired { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The mapping types of the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#mapping_types']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<string> MappingTypes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field name.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#name']/*"/>
 	public required string Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The reason a field is not selected to be included in the analysis.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalyticsFieldSelection.g.xml" path="doc/member[@key='ml._types.DataframeAnalyticsFieldSelection#reason']/*"/>
 	public string? Reason { get; set; }
 }

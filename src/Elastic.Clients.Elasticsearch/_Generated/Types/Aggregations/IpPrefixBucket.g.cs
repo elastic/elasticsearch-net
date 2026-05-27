@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.IpPrefixBucket']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.IpPrefixBucketConverter))]
 public sealed partial class IpPrefixBucket
 {
@@ -45,11 +46,6 @@ public sealed partial class IpPrefixBucket
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Nested aggregations
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary? Aggregations { get; set; }
 	public required long DocCount { get; set; }
 	public required bool IsIpv6 { get; set; }

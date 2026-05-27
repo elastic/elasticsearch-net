@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 public sealed partial class RenderSearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Render a search template.
-/// </para>
-/// <para>
-/// Render a search template as a search request body.
-/// </para>
-/// </summary>
+/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RenderSearchTemplateRequestConverter))]
 public sealed partial class RenderSearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>
 {
@@ -58,43 +54,18 @@ public sealed partial class RenderSearchTemplateRequest : Elastic.Clients.Elasti
 
 	public string? File { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to render.
-	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
-	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An inline search template.
-	/// It supports the same parameters as the search API's request body.
-	/// These parameters also support Mustache variables.
-	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#source']/*"/>
 	public string? Source { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Render a search template.
-/// </para>
-/// <para>
-/// Render a search template as a search request body.
-/// </para>
-/// </summary>
+/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.render_search_template.Request']/*"/>
 public readonly partial struct RenderSearchTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest Instance { get; init; }
@@ -119,52 +90,28 @@ public readonly partial struct RenderSearchTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The ID of the search template to render.
-	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
-	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Id = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Key-value pairs used to replace Mustache variables in the template.
-	/// The key is the variable name.
-	/// The value is the variable value.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#params']/*"/>
 	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -178,14 +125,7 @@ public readonly partial struct RenderSearchTemplateRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An inline search template.
-	/// It supports the same parameters as the search API's request body.
-	/// These parameters also support Mustache variables.
-	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
+	/// <include file="RenderSearchTemplateRequest.g.xml" path="doc/member[@key='_global.render_search_template.Request#source']/*"/>
 	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Source(string? value)
 	{
 		Instance.Source = value;

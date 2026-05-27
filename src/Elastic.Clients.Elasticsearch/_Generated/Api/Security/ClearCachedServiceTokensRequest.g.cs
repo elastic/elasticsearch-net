@@ -23,24 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
 public sealed partial class ClearCachedServiceTokensRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear service account token caches.
-/// </para>
-/// <para>
-/// Evict a subset of all entries from the service account token caches.
-/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
-/// This API clears matching entries from both caches.
-/// </para>
-/// <para>
-/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
-/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearCachedServiceTokensRequestConverter))]
 public sealed partial class ClearCachedServiceTokensRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>
 {
@@ -67,44 +57,18 @@ public sealed partial class ClearCachedServiceTokensRequest : Elastic.Clients.El
 
 	internal override string OperationName => "security.clear_cached_service_tokens";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of token names to evict from the service account token caches.
-	/// Use a wildcard (<c>*</c>) to evict all tokens that belong to a service account.
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// The namespace, which is a top-level grouping of service accounts.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#namespace']/*"/>
 	public required string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of the service, which must be unique within its namespace.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#service']/*"/>
 	public required string Service { get => P<string>("service"); set => PR("service", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear service account token caches.
-/// </para>
-/// <para>
-/// Evict a subset of all entries from the service account token caches.
-/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
-/// This API clears matching entries from both caches.
-/// </para>
-/// <para>
-/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
-/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
-/// </para>
-/// </summary>
+/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request']/*"/>
 public readonly partial struct ClearCachedServiceTokensRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest Instance { get; init; }
@@ -129,35 +93,21 @@ public readonly partial struct ClearCachedServiceTokensRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of token names to evict from the service account token caches.
-	/// Use a wildcard (<c>*</c>) to evict all tokens that belong to a service account.
-	/// It does not support other wildcard patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The namespace, which is a top-level grouping of service accounts.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#namespace']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Namespace(string value)
 	{
 		Instance.Namespace = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the service, which must be unique within its namespace.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearCachedServiceTokensRequest.g.xml" path="doc/member[@key='security.clear_cached_service_tokens.Request#service']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Service(string value)
 	{
 		Instance.Service = value;

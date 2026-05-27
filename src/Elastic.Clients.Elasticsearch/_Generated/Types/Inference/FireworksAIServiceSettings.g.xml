@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="inference._types.FireworksAIServiceSettings#api_key"><summary><para>
+A valid API key for your Fireworks AI account.
+You can find or create your API keys in the Fireworks AI dashboard.
+</para>
+<para>
+IMPORTANT: You need to provide the API key only once, during the inference model creation.
+The get inference endpoint API does not retrieve your API key.
+</para></summary></member>
+  <member key="inference._types.FireworksAIServiceSettings#dimensions"><summary><para>
+For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+Variable-length embeddings are supported via this parameter.
+</para></summary></member>
+  <member key="inference._types.FireworksAIServiceSettings#model_id"><summary><para>
+The name of the model to use for the inference task.
+Refer to the Fireworks AI documentation for the list of available models for chat completion, completion, and text embedding.
+For text embedding, supported models include the Qwen3 embedding family (e.g. <c>fireworks/qwen3-embedding-8b</c>) and other models in the Fireworks model library.
+</para></summary></member>
+  <member key="inference._types.FireworksAIServiceSettings#rate_limit"><summary><para>
+This setting helps to minimize the number of rate limit errors returned from the Fireworks AI API.
+Rate limit grouping is per API key only.
+By default, the <c>fireworksai</c> service sets the number of requests allowed per minute to 6000.
+</para></summary></member>
+  <member key="inference._types.FireworksAIServiceSettings#similarity"><summary><para>
+For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
+</para></summary></member>
+  <member key="inference._types.FireworksAIServiceSettings#url"><summary><para>
+The URL endpoint to use for the requests.
+If not provided, the default Fireworks AI API endpoint is used.
+</para></summary></member>
+</doc>

@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-/// <summary>
-/// <para>
-/// The response returned by Elasticsearch when request execution did not succeed.
-/// </para>
-/// </summary>
+/// <include file="ErrorResponseBase.g.xml" path="doc/member[@key='_types.ErrorResponseBase']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_types.ErrorResponseBase']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ErrorResponseBaseConverter))]
 public sealed partial class ErrorResponseBase
 {

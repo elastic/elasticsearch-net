@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.ShingleTokenFilter#filler_token"><summary><para>
+String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
+</para></summary></member>
+  <member key="_types.analysis.ShingleTokenFilter#max_shingle_size"><summary><para>
+Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+</para></summary></member>
+  <member key="_types.analysis.ShingleTokenFilter#min_shingle_size"><summary><para>
+Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+</para></summary></member>
+  <member key="_types.analysis.ShingleTokenFilter#output_unigrams"><summary><para>
+If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
+</para></summary></member>
+  <member key="_types.analysis.ShingleTokenFilter#output_unigrams_if_no_shingles"><summary><para>
+If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
+</para></summary></member>
+  <member key="_types.analysis.ShingleTokenFilter#token_separator"><summary><para>
+Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
+</para></summary></member>
+</doc>

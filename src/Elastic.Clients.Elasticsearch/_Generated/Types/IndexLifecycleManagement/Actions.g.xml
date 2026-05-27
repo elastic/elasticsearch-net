@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ilm._types.Actions#allocate"><summary><para>
+Phases allowed: warm, cold.
+</para></summary></member>
+  <member key="ilm._types.Actions#delete"><summary><para>
+Phases allowed: delete.
+</para></summary></member>
+  <member key="ilm._types.Actions#downsample"><summary><para>
+Phases allowed: hot, warm, cold.
+</para></summary></member>
+  <member key="ilm._types.Actions#forcemerge"><summary><para>
+Phases allowed: hot, warm.
+</para></summary></member>
+  <member key="ilm._types.Actions#freeze"><summary><para>
+The freeze action is a noop in 8.x
+</para></summary></member>
+  <member key="ilm._types.Actions#migrate"><summary><para>
+Phases allowed: warm, cold.
+</para></summary></member>
+  <member key="ilm._types.Actions#readonly"><summary><para>
+Phases allowed: hot, warm, cold.
+</para></summary></member>
+  <member key="ilm._types.Actions#rollover"><summary><para>
+Phases allowed: hot.
+</para></summary></member>
+  <member key="ilm._types.Actions#searchable_snapshot"><summary><para>
+Phases allowed: hot, cold, frozen.
+</para></summary></member>
+  <member key="ilm._types.Actions#set_priority"><summary><para>
+Phases allowed: hot, warm, cold.
+</para></summary></member>
+  <member key="ilm._types.Actions#shrink"><summary><para>
+Phases allowed: hot, warm.
+</para></summary></member>
+  <member key="ilm._types.Actions#unfollow"><summary><para>
+Phases allowed: hot, warm, cold, frozen.
+</para></summary></member>
+  <member key="ilm._types.Actions#wait_for_snapshot"><summary><para>
+Phases allowed: delete.
+</para></summary></member>
+</doc>

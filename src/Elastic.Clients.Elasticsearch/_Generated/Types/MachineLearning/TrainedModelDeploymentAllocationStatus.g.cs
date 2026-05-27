@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentAllocationStatus']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelDeploymentAllocationStatusConverter))]
 public sealed partial class TrainedModelDeploymentAllocationStatus
 {
@@ -44,24 +45,12 @@ public sealed partial class TrainedModelDeploymentAllocationStatus
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The current number of nodes where the model is allocated.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentAllocationStatus.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentAllocationStatus#allocation_count']/*"/>
 	public required int AllocationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The detailed allocation state related to the nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentAllocationStatus.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentAllocationStatus#state']/*"/>
 	public required Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState State { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The desired number of nodes for model allocation.
-	/// </para>
-	/// </summary>
+	/// <include file="TrainedModelDeploymentAllocationStatus.g.xml" path="doc/member[@key='ml._types.TrainedModelDeploymentAllocationStatus#target_allocation_count']/*"/>
 	public required int TargetAllocationCount { get; set; }
 }

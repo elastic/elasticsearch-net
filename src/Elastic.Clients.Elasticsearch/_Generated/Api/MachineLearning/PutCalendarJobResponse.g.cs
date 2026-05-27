@@ -37,24 +37,12 @@ public sealed partial class PutCalendarJobResponse : Elastic.Transport.Products.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A string that uniquely identifies a calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobResponse.g.xml" path="doc/member[@key='ml.put_calendar_job.Response#calendar_id']/*"/>
 	public required string CalendarId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A description of the calendar.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobResponse.g.xml" path="doc/member[@key='ml.put_calendar_job.Response#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of anomaly detection job identifiers or group names.
-	/// </para>
-	/// </summary>
+	/// <include file="PutCalendarJobResponse.g.xml" path="doc/member[@key='ml.put_calendar_job.Response#job_ids']/*"/>
 	public required System.Collections.Generic.ICollection<string> JobIds { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FieldValueFactorScoreFunctionConverter))]
 public sealed partial class FieldValueFactorScoreFunction
 {
@@ -42,36 +43,20 @@ public sealed partial class FieldValueFactorScoreFunction
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Optional factor to multiply the field value with.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#factor']/*"/>
 	public double? Factor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Value used if the document doesn’t have that field.
-	/// The modifier and factor are still applied to it as though it were read from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#missing']/*"/>
 	public double? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Modifier to apply to the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#modifier']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? Modifier { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction']/*"/>
 public readonly partial struct FieldValueFactorScoreFunctionDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Instance { get; init; }
@@ -91,56 +76,35 @@ public readonly partial struct FieldValueFactorScoreFunctionDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Optional factor to multiply the field value with.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#factor']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Factor(double? value)
 	{
 		Instance.Factor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used if the document doesn’t have that field.
-	/// The modifier and factor are still applied to it as though it were read from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Missing(double? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Modifier to apply to the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#modifier']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor<TDocument> Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? value)
 	{
 		Instance.Modifier = value;
@@ -156,6 +120,7 @@ public readonly partial struct FieldValueFactorScoreFunctionDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction']/*"/>
 public readonly partial struct FieldValueFactorScoreFunctionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction Instance { get; init; }
@@ -175,56 +140,35 @@ public readonly partial struct FieldValueFactorScoreFunctionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Optional factor to multiply the field value with.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#factor']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Factor(double? value)
 	{
 		Instance.Factor = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field to be extracted from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Value used if the document doesn’t have that field.
-	/// The modifier and factor are still applied to it as though it were read from the document.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Missing(double? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Modifier to apply to the field value.
-	/// </para>
-	/// </summary>
+	/// <include file="FieldValueFactorScoreFunction.g.xml" path="doc/member[@key='_types.query_dsl.FieldValueFactorScoreFunction#modifier']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor Modifier(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? value)
 	{
 		Instance.Modifier = value;

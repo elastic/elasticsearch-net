@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.GeoDistanceType#arc"><summary><para>
+The <c>arc</c> calculation is the most accurate.
+</para></summary></member>
+  <member key="_types.GeoDistanceType#plane"><summary><para>
+The <c>plane</c> calculation is faster but less accurate.
+</para></summary></member>
+</doc>

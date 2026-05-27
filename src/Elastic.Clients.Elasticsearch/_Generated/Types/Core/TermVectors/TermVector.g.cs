@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.termvectors.TermVector']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.Json.TermVectorConverter))]
 public sealed partial class TermVector
 {

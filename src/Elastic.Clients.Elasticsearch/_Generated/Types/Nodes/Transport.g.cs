@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Transport']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.TransportConverter))]
 public sealed partial class Transport
 {
@@ -36,75 +37,33 @@ public sealed partial class Transport
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The distribution of the time spent handling each inbound message on a transport thread, represented as a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#inbound_handling_time_histogram']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? InboundHandlingTimeHistogram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The distribution of the time spent sending each outbound transport message on a transport thread, represented as a histogram.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#outbound_handling_time_histogram']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? OutboundHandlingTimeHistogram { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of RX (receive) packets received by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#rx_count']/*"/>
 	public long? RxCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size of RX packets received by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#rx_size']/*"/>
 	public string? RxSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size, in bytes, of RX packets received by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#rx_size_in_bytes']/*"/>
 	public long? RxSizeInBytes { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Current number of inbound TCP connections used for internal communication between nodes.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#server_open']/*"/>
 	public int? ServerOpen { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cumulative number of outbound transport connections that this node has opened since it started.
-	/// Each transport connection may comprise multiple TCP connections but is only counted once in this statistic.
-	/// Transport connections are typically long-lived so this statistic should remain constant in a stable cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#total_outbound_connections']/*"/>
 	public long? TotalOutboundConnections { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of TX (transmit) packets sent by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#tx_count']/*"/>
 	public long? TxCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size of TX packets sent by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#tx_size']/*"/>
 	public string? TxSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Size, in bytes, of TX packets sent by the node during internal cluster communication.
-	/// </para>
-	/// </summary>
+	/// <include file="Transport.g.xml" path="doc/member[@key='nodes._types.Transport#tx_size_in_bytes']/*"/>
 	public long? TxSizeInBytes { get; set; }
 }

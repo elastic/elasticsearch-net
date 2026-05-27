@@ -37,10 +37,6 @@ public sealed partial class DeleteSearchApplicationResponse : Elastic.Transport.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a successful response, this value is always true. On failure, an exception is returned instead.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteSearchApplicationResponse.g.xml" path="doc/member[@key='search_application.delete.Response#acknowledged']/*"/>
 	public required bool Acknowledged { get; set; }
 }

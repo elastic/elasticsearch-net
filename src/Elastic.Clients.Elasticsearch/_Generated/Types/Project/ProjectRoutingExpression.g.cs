@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Project;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project._types.ProjectRoutingExpression']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.ProjectRoutingExpressionConverter))]
 public sealed partial class ProjectRoutingExpression
 {
@@ -45,6 +46,7 @@ public sealed partial class ProjectRoutingExpression
 	public required string Expression { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='project._types.ProjectRoutingExpression']/*"/>
 public readonly partial struct ProjectRoutingExpressionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Project.ProjectRoutingExpression Instance { get; init; }

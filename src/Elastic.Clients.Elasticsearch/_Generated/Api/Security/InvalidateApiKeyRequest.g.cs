@@ -23,43 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
 public sealed partial class InvalidateApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Invalidate API keys.
-/// </para>
-/// <para>
-/// This API invalidates API keys created by the create API key or grant API key APIs.
-/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
-/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
-/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
-/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
-/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Set the parameter <c>owner=true</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.InvalidateApiKeyRequestConverter))]
 public sealed partial class InvalidateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>
 {
@@ -83,83 +54,24 @@ public sealed partial class InvalidateApiKeyRequest : Elastic.Clients.Elasticsea
 
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A list of API key ids.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#ids']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An API key name.
-	/// This parameter cannot be used with any of <c>ids</c>, <c>realm_name</c> or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query API keys owned by the currently authenticated user.
-	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
-	/// </para>
-	/// <para>
-	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#owner']/*"/>
 	public bool? Owner { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#realm_name']/*"/>
 	public string? RealmName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Invalidate API keys.
-/// </para>
-/// <para>
-/// This API invalidates API keys created by the create API key or grant API key APIs.
-/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// </para>
-/// <para>
-/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
-/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
-/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
-/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
-/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Set the parameter <c>owner=true</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.invalidate_api_key.Request']/*"/>
 public readonly partial struct InvalidateApiKeyRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest Instance { get; init; }
@@ -184,75 +96,42 @@ public readonly partial struct InvalidateApiKeyRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of API key ids.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.Ids = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of API key ids.
-	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#ids']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
 	{
 		Instance.Ids = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An API key name.
-	/// This parameter cannot be used with any of <c>ids</c>, <c>realm_name</c> or <c>username</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query API keys owned by the currently authenticated user.
-	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
-	/// </para>
-	/// <para>
-	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#owner']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Owner(bool? value = true)
 	{
 		Instance.Owner = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of an authentication realm.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#realm_name']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor RealmName(string? value)
 	{
 		Instance.RealmName = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="InvalidateApiKeyRequest.g.xml" path="doc/member[@key='security.invalidate_api_key.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
 		Instance.Username = value;

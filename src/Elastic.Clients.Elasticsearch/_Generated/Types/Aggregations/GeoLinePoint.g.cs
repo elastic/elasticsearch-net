@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeoLinePointConverter))]
 public sealed partial class GeoLinePoint
 {
@@ -42,14 +43,11 @@ public sealed partial class GeoLinePoint
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLinePoint.g.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint']/*"/>
 public readonly partial struct GeoLinePointDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Instance { get; init; }
@@ -69,22 +67,14 @@ public readonly partial struct GeoLinePointDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLinePoint.g.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLinePoint.g.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -100,6 +90,7 @@ public readonly partial struct GeoLinePointDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint']/*"/>
 public readonly partial struct GeoLinePointDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint Instance { get; init; }
@@ -119,22 +110,14 @@ public readonly partial struct GeoLinePointDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLinePoint.g.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the geo_point field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoLinePoint.g.xml" path="doc/member[@key='_types.aggregations.GeoLinePoint#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeoLinePointDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;

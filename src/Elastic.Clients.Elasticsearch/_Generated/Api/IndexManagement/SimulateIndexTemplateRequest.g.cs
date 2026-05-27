@@ -23,45 +23,25 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 public sealed partial class SimulateIndexTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index.
-/// </para>
-/// <para>
-/// Get the index configuration that would be applied to the specified index from an existing index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SimulateIndexTemplateRequestConverter))]
 public sealed partial class SimulateIndexTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>
 {
@@ -88,51 +68,25 @@ public sealed partial class SimulateIndexTemplateRequest : Elastic.Clients.Elast
 
 	internal override string OperationName => "indices.simulate_index_template";
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to simulate
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#cause']/*"/>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#create']/*"/>
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#include_defaults']/*"/>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? IndexTemplate { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index.
-/// </para>
-/// <para>
-/// Get the index configuration that would be applied to the specified index from an existing index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 public readonly partial struct SimulateIndexTemplateRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Instance { get; init; }
@@ -157,55 +111,35 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to simulate
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
@@ -286,14 +220,8 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Simulate an index.
-/// </para>
-/// <para>
-/// Get the index configuration that would be applied to the specified index from an existing index template.
-/// </para>
-/// </summary>
+/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.simulate_index_template.Request']/*"/>
 public readonly partial struct SimulateIndexTemplateRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Instance { get; init; }
@@ -318,55 +246,35 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Name of the index to simulate
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// User defined reason for dry-run creating the new template for simulation purposes
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#cause']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Cause(string? value)
 	{
 		Instance.Cause = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#create']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? value = true)
 	{
 		Instance.Create = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If true, returns all relevant default configurations for the index template.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#include_defaults']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="SimulateIndexTemplateRequest.g.xml" path="doc/member[@key='indices.simulate_index_template.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

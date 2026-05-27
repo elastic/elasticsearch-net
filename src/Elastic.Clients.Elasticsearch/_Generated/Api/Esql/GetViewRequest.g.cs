@@ -23,18 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
+/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 public sealed partial class GetViewRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Get an ES|QL view.
-/// </para>
-/// <para>
-/// Returns a stored ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.GetViewRequestConverter))]
 public sealed partial class GetViewRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.GetViewRequestParameters>
 {
@@ -60,22 +56,12 @@ public sealed partial class GetViewRequest : Elastic.Clients.Elasticsearch.Reque
 
 	internal override string OperationName => "esql.get_view";
 
-	/// <summary>
-	/// <para>
-	/// The comma-separated view names to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Id? Name { get => P<Elastic.Clients.Elasticsearch.Id?>("name"); set => PO("name", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get an ES|QL view.
-/// </para>
-/// <para>
-/// Returns a stored ES|QL view.
-/// </para>
-/// </summary>
+/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='esql.get_view.Request']/*"/>
 public readonly partial struct GetViewRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Esql.GetViewRequest Instance { get; init; }
@@ -99,11 +85,7 @@ public readonly partial struct GetViewRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.GetViewRequest instance) => new Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.GetViewRequest(Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The comma-separated view names to retrieve.
-	/// </para>
-	/// </summary>
+	/// <include file="GetViewRequest.g.xml" path="doc/member[@key='esql.get_view.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.Esql.GetViewRequestDescriptor Name(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.Name = value;

@@ -26,39 +26,19 @@ namespace Elastic.Clients.Elasticsearch.Core.Search;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.StringDistanceConverter))]
 public enum StringDistance
 {
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on Damerau-Levenshtein algorithm.
-	/// </para>
-	/// </summary>
+	/// <include file="StringDistance.g.xml" path="doc/member[@key='_global.search._types.StringDistance#damerau_levenshtein']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "damerau_levenshtein")]
 	DamerauLevenshtein,
-	/// <summary>
-	/// <para>
-	/// Based on the Damerau-Levenshtein algorithm, but highly optimized for comparing string distance for terms inside the index.
-	/// </para>
-	/// </summary>
+	/// <include file="StringDistance.g.xml" path="doc/member[@key='_global.search._types.StringDistance#internal']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "internal")]
 	Internal,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on Jaro-Winkler algorithm.
-	/// </para>
-	/// </summary>
+	/// <include file="StringDistance.g.xml" path="doc/member[@key='_global.search._types.StringDistance#jaro_winkler']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "jaro_winkler")]
 	JaroWinkler,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on the Levenshtein edit distance algorithm.
-	/// </para>
-	/// </summary>
+	/// <include file="StringDistance.g.xml" path="doc/member[@key='_global.search._types.StringDistance#levenshtein']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "levenshtein")]
 	Levenshtein,
-	/// <summary>
-	/// <para>
-	/// String distance algorithm based on character n-grams.
-	/// </para>
-	/// </summary>
+	/// <include file="StringDistance.g.xml" path="doc/member[@key='_global.search._types.StringDistance#ngram']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "ngram")]
 	Ngram
 }

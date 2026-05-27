@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UaxEmailUrlTokenizer']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.UaxEmailUrlTokenizerConverter))]
 public sealed partial class UaxEmailUrlTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
@@ -43,6 +44,7 @@ public sealed partial class UaxEmailUrlTokenizer : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.UaxEmailUrlTokenizer']/*"/>
 public readonly partial struct UaxEmailUrlTokenizerDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.UaxEmailUrlTokenizer Instance { get; init; }

@@ -23,66 +23,28 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
 public sealed partial class RemoveBlockRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Remove an index block.
-/// </para>
-/// <para>
-/// Remove an index block from an index.
-/// Index blocks limit the operations allowed on an index by blocking specific operation types.
-/// </para>
-/// </summary>
+/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RemoveBlockRequestConverter))]
 public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>
 {
@@ -109,81 +71,30 @@ public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "indices.remove_block";
 
-	/// <summary>
-	/// <para>
-	/// The block type to remove from the index.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#block']/*"/>
 	public required Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions Block { get => P<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>("block"); set => PR("block", value); }
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of index names used to limit the request.
-	/// By default, you must explicitly name the indices you are removing blocks from.
-	/// To allow the removal of blocks from indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Remove an index block.
-/// </para>
-/// <para>
-/// Remove an index block from an index.
-/// Index blocks limit the operations allowed on an index by blocking specific operation types.
-/// </para>
-/// </summary>
+/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
 public readonly partial struct RemoveBlockRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest Instance { get; init; }
@@ -208,106 +119,56 @@ public readonly partial struct RemoveBlockRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The block type to remove from the index.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#block']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor Block(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions value)
 	{
 		Instance.Block = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of index names used to limit the request.
-	/// By default, you must explicitly name the indices you are removing blocks from.
-	/// To allow the removal of blocks from indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
@@ -370,15 +231,8 @@ public readonly partial struct RemoveBlockRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Remove an index block.
-/// </para>
-/// <para>
-/// Remove an index block from an index.
-/// Index blocks limit the operations allowed on an index by blocking specific operation types.
-/// </para>
-/// </summary>
+/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.remove_block.Request']/*"/>
 public readonly partial struct RemoveBlockRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest Instance { get; init; }
@@ -403,106 +257,56 @@ public readonly partial struct RemoveBlockRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The block type to remove from the index.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#block']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> Block(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions value)
 	{
 		Instance.Block = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list or wildcard expression of index names used to limit the request.
-	/// By default, you must explicitly name the indices you are removing blocks from.
-	/// To allow the removal of blocks from indices with <c>_all</c>, <c>*</c>, or other wildcard expressions, change the <c>action.destructive_requires_name</c> setting to <c>false</c>.
-	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The type of index that wildcard patterns can match.
-	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-	/// It supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="RemoveBlockRequest.g.xml" path="doc/member[@key='indices.remove_block.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

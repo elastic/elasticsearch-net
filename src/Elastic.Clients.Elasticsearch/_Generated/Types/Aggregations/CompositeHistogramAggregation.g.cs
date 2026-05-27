@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeHistogramAggregationConverter))]
 public sealed partial class CompositeHistogramAggregation
 {
@@ -42,26 +43,19 @@ public sealed partial class CompositeHistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public required double Interval { get; set; }
 	public bool? MissingBucket { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? MissingOrder { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation']/*"/>
 public readonly partial struct CompositeHistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation Instance { get; init; }
@@ -81,22 +75,14 @@ public readonly partial struct CompositeHistogramAggregationDescriptor<TDocument
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -127,33 +113,21 @@ public readonly partial struct CompositeHistogramAggregationDescriptor<TDocument
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -175,6 +149,7 @@ public readonly partial struct CompositeHistogramAggregationDescriptor<TDocument
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation']/*"/>
 public readonly partial struct CompositeHistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation Instance { get; init; }
@@ -194,22 +169,14 @@ public readonly partial struct CompositeHistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -240,33 +207,21 @@ public readonly partial struct CompositeHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

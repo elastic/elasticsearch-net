@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.segments.ShardSegmentRouting#node"><summary><para>
+The node ID of the node that holds the shard.
+</para></summary></member>
+  <member key="indices.segments.ShardSegmentRouting#primary"><summary><para>
+If <c>true</c>, the shard is a primary shard.
+</para></summary></member>
+  <member key="indices.segments.ShardSegmentRouting#state"><summary><para>
+The state of the shard, such as <c>STARTED</c> or <c>RELOCATING</c>.
+</para></summary></member>
+</doc>

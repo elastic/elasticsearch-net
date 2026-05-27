@@ -23,25 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
 public sealed partial class OidcPrepareAuthenticationRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Prepare OpenID connect authentication.
-/// </para>
-/// <para>
-/// Create an oAuth 2.0 authentication request as a URL string based on the configuration of the OpenID Connect authentication realm in Elasticsearch.
-/// </para>
-/// <para>
-/// The response of this API is a URL pointing to the Authorization Endpoint of the configured OpenID Connect Provider, which can be used to redirect the browser of the user in order to continue the authentication process.
-/// </para>
-/// <para>
-/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
-/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
-/// </para>
-/// </summary>
+/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcPrepareAuthenticationRequestConverter))]
 public sealed partial class OidcPrepareAuthenticationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>
 {
@@ -63,64 +52,24 @@ public sealed partial class OidcPrepareAuthenticationRequest : Elastic.Clients.E
 
 	internal override string OperationName => "security.oidc_prepare_authentication";
 
-	/// <summary>
-	/// <para>
-	/// In the case of a third party initiated single sign on, this is the issuer identifier for the OP that the RP is to send the authentication request to.
-	/// It cannot be specified when <em>realm</em> is specified.
-	/// One of <em>realm</em> or <em>iss</em> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#iss']/*"/>
 	public string? Iss { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// In the case of a third party initiated single sign on, it is a string value that is included in the authentication request as the <em>login_hint</em> parameter.
-	/// This parameter is not valid when <em>realm</em> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#login_hint']/*"/>
 	public string? LoginHint { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value used to associate a client session with an ID token and to mitigate replay attacks.
-	/// If the caller of the API does not provide a value, Elasticsearch will generate one with sufficient entropy and return it in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#nonce']/*"/>
 	public string? Nonce { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the OpenID Connect realm in Elasticsearch the configuration of which should be used in order to generate the authentication request.
-	/// It cannot be specified when <em>iss</em> is specified.
-	/// One of <em>realm</em> or <em>iss</em> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#realm']/*"/>
 	public string? Realm { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value used to maintain state between the authentication request and the response, typically used as a Cross-Site Request Forgery mitigation.
-	/// If the caller of the API does not provide a value, Elasticsearch will generate one with sufficient entropy and return it in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#state']/*"/>
 	public string? State { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Prepare OpenID connect authentication.
-/// </para>
-/// <para>
-/// Create an oAuth 2.0 authentication request as a URL string based on the configuration of the OpenID Connect authentication realm in Elasticsearch.
-/// </para>
-/// <para>
-/// The response of this API is a URL pointing to the Authorization Endpoint of the configured OpenID Connect Provider, which can be used to redirect the browser of the user in order to continue the authentication process.
-/// </para>
-/// <para>
-/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
-/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
-/// </para>
-/// </summary>
+/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request']/*"/>
 public readonly partial struct OidcPrepareAuthenticationRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest Instance { get; init; }
@@ -139,62 +88,35 @@ public readonly partial struct OidcPrepareAuthenticationRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest instance) => new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// In the case of a third party initiated single sign on, this is the issuer identifier for the OP that the RP is to send the authentication request to.
-	/// It cannot be specified when <em>realm</em> is specified.
-	/// One of <em>realm</em> or <em>iss</em> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#iss']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor Iss(string? value)
 	{
 		Instance.Iss = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// In the case of a third party initiated single sign on, it is a string value that is included in the authentication request as the <em>login_hint</em> parameter.
-	/// This parameter is not valid when <em>realm</em> is specified.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#login_hint']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor LoginHint(string? value)
 	{
 		Instance.LoginHint = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value used to associate a client session with an ID token and to mitigate replay attacks.
-	/// If the caller of the API does not provide a value, Elasticsearch will generate one with sufficient entropy and return it in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#nonce']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor Nonce(string? value)
 	{
 		Instance.Nonce = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the OpenID Connect realm in Elasticsearch the configuration of which should be used in order to generate the authentication request.
-	/// It cannot be specified when <em>iss</em> is specified.
-	/// One of <em>realm</em> or <em>iss</em> is required.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#realm']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor Realm(string? value)
 	{
 		Instance.Realm = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value used to maintain state between the authentication request and the response, typically used as a Cross-Site Request Forgery mitigation.
-	/// If the caller of the API does not provide a value, Elasticsearch will generate one with sufficient entropy and return it in the response.
-	/// </para>
-	/// </summary>
+	/// <include file="OidcPrepareAuthenticationRequest.g.xml" path="doc/member[@key='security.oidc_prepare_authentication.Request#state']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor State(string? value)
 	{
 		Instance.State = value;

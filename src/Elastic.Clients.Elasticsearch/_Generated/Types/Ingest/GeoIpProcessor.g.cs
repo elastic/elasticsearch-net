@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoIpProcessor']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GeoIpProcessorConverter))]
 public sealed partial class GeoIpProcessor
 {
@@ -42,94 +43,44 @@ public sealed partial class GeoIpProcessor
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#database_file']/*"/>
 	public string? DatabaseFile { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#description']/*"/>
 	public string? Description { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
-	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#download_database_on_pipeline_creation']/*"/>
 	public bool? DownloadDatabaseOnPipelineCreation { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#first_only']/*"/>
 	public bool? FirstOnly { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_failure']/*"/>
 	public bool? IgnoreFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_missing']/*"/>
 	public bool? IgnoreMissing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#properties']/*"/>
 	public System.Collections.Generic.ICollection<string>? Properties { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#tag']/*"/>
 	public string? Tag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoIpProcessor']/*"/>
 public readonly partial struct GeoIpProcessorDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor Instance { get; init; }
@@ -149,156 +100,98 @@ public readonly partial struct GeoIpProcessorDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#database_file']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> DatabaseFile(string? value)
 	{
 		Instance.DatabaseFile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
-	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#download_database_on_pipeline_creation']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> DownloadDatabaseOnPipelineCreation(bool? value = true)
 	{
 		Instance.DownloadDatabaseOnPipelineCreation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#first_only']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> FirstOnly(bool? value = true)
 	{
 		Instance.FirstOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -311,56 +204,35 @@ public readonly partial struct GeoIpProcessorDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.TargetField = value;
@@ -376,6 +248,7 @@ public readonly partial struct GeoIpProcessorDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ingest._types.GeoIpProcessor']/*"/>
 public readonly partial struct GeoIpProcessorDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor Instance { get; init; }
@@ -395,156 +268,98 @@ public readonly partial struct GeoIpProcessorDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The database filename referring to a database the module ships with (GeoLite2-City.mmdb, GeoLite2-Country.mmdb, or GeoLite2-ASN.mmdb) or a custom database in the ingest-geoip config directory.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#database_file']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor DatabaseFile(string? value)
 	{
 		Instance.DatabaseFile = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#description']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Description(string? value)
 	{
 		Instance.Description = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (and if <c>ingest.geoip.downloader.eager.download</c> is <c>false</c>), the missing database is downloaded when the pipeline is created.
-	/// Else, the download is triggered by when the pipeline is used as the <c>default_pipeline</c> or <c>final_pipeline</c> in an index.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#download_database_on_pipeline_creation']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor DownloadDatabaseOnPipelineCreation(bool? value = true)
 	{
 		Instance.DownloadDatabaseOnPipelineCreation = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field to get the ip address from for the geographical lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, only the first found geoip data will be returned, even if the field contains an array.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#first_only']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor FirstOnly(bool? value = true)
 	{
 		Instance.FirstOnly = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.If = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor If()
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#if']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
 		Instance.IgnoreFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#ignore_missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
 		Instance.IgnoreMissing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
 		Instance.OnFailure = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
 		Instance.OnFailure = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -557,11 +372,7 @@ public readonly partial struct GeoIpProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#on_failure']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
@@ -574,56 +385,35 @@ public readonly partial struct GeoIpProcessorDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Properties(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Properties = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Controls what properties are added to the <c>target_field</c> based on the geoip lookup.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#properties']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Properties(params string[] values)
 	{
 		Instance.Properties = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor Tag(string? value)
 	{
 		Instance.Tag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.TargetField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that will hold the geographical information looked up from the MaxMind database.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoIpProcessor.g.xml" path="doc/member[@key='ingest._types.GeoIpProcessor#target_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.TargetField = value;

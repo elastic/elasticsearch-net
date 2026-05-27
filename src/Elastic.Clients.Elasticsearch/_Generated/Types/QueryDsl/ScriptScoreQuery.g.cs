@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.ScriptScoreQueryConverter))]
 public sealed partial class ScriptScoreQuery
 {
@@ -43,40 +44,21 @@ public sealed partial class ScriptScoreQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Documents with a score lower than this floating point number are excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#min_score']/*"/>
 	public float? MinScore { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public required Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public required Elastic.Clients.Elasticsearch.Script Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery']/*"/>
 public readonly partial struct ScriptScoreQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery Instance { get; init; }
@@ -96,47 +78,28 @@ public readonly partial struct ScriptScoreQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents with a score lower than this floating point number are excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
@@ -149,36 +112,21 @@ public readonly partial struct ScriptScoreQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -194,6 +142,7 @@ public readonly partial struct ScriptScoreQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery']/*"/>
 public readonly partial struct ScriptScoreQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery Instance { get; init; }
@@ -213,58 +162,35 @@ public readonly partial struct ScriptScoreQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQuery(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Documents with a score lower than this floating point number are excluded from the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#min_score']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Query used to return documents.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
@@ -277,36 +203,21 @@ public readonly partial struct ScriptScoreQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Script used to compute the score of documents returned by the query.
-	/// Important: final relevance scores from the <c>script_score</c> query cannot be negative.
-	/// </para>
-	/// </summary>
+	/// <include file="ScriptScoreQuery.g.xml" path="doc/member[@key='_types.query_dsl.ScriptScoreQuery#script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreQueryDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

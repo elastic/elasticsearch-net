@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.LearningToRankConfig']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.LearningToRankConfigConverter))]
 public sealed partial class LearningToRankConfig
 {
@@ -47,6 +48,7 @@ public sealed partial class LearningToRankConfig
 	public required int NumTopFeatureImportanceValues { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.LearningToRankConfig']/*"/>
 public readonly partial struct LearningToRankConfigDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig Instance { get; init; }
@@ -130,6 +132,7 @@ public readonly partial struct LearningToRankConfigDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.LearningToRankConfig']/*"/>
 public readonly partial struct LearningToRankConfigDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig Instance { get; init; }

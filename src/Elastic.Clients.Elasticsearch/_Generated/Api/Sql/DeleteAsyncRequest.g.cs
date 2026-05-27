@@ -23,34 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
+/// <include file="DeleteAsyncRequest.g.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
 public sealed partial class DeleteAsyncRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Delete an async SQL search.
-/// </para>
-/// <para>
-/// Delete an async SQL search or a stored synchronous SQL search.
-/// If the search is still running, the API cancels it.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Users with the <c>cancel_task</c> cluster privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The user who first submitted the search.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="DeleteAsyncRequest.g.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.DeleteAsyncRequestConverter))]
 public sealed partial class DeleteAsyncRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestParameters>
 {
@@ -77,38 +57,12 @@ public sealed partial class DeleteAsyncRequest : Elastic.Clients.Elasticsearch.R
 
 	internal override string OperationName => "sql.delete_async";
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAsyncRequest.g.xml" path="doc/member[@key='sql.delete_async.Request#id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Delete an async SQL search.
-/// </para>
-/// <para>
-/// Delete an async SQL search or a stored synchronous SQL search.
-/// If the search is still running, the API cancels it.
-/// </para>
-/// <para>
-/// If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// Users with the <c>cancel_task</c> cluster privilege.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// The user who first submitted the search.
-/// </para>
-/// </item>
-/// </list>
-/// </summary>
+/// <include file="DeleteAsyncRequest.g.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='sql.delete_async.Request']/*"/>
 public readonly partial struct DeleteAsyncRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest Instance { get; init; }
@@ -133,11 +87,7 @@ public readonly partial struct DeleteAsyncRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest instance) => new Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteAsyncRequest.g.xml" path="doc/member[@key='sql.delete_async.Request#id']/*"/>
 	public Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;

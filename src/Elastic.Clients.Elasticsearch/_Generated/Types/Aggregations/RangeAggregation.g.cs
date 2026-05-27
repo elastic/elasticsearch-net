@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RangeAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RangeAggregationConverter))]
 public sealed partial class RangeAggregation
 {
@@ -36,31 +37,19 @@ public sealed partial class RangeAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 	public string? Format { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#missing']/*"/>
 	public int? Missing { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? Ranges { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RangeAggregation']/*"/>
 public readonly partial struct RangeAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation Instance { get; init; }
@@ -80,22 +69,14 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
@@ -108,45 +89,28 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Missing(int? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor<TDocument> Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();
@@ -191,6 +155,7 @@ public readonly partial struct RangeAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.RangeAggregation']/*"/>
 public readonly partial struct RangeAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation Instance { get; init; }
@@ -210,22 +175,14 @@ public readonly partial struct RangeAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.RangeAggregation(Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The date field whose values are use to build ranges.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
@@ -238,45 +195,28 @@ public readonly partial struct RangeAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Missing(int? value)
 	{
 		Instance.Missing = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? value)
 	{
 		Instance.Ranges = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params Elastic.Clients.Elasticsearch.Aggregations.AggregationRange[] values)
 	{
 		Instance.Ranges = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of ranges used to bucket documents.
-	/// </para>
-	/// </summary>
+	/// <include file="RangeAggregation.g.xml" path="doc/member[@key='_types.aggregations.RangeAggregation#ranges']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.RangeAggregationDescriptor Ranges(params System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationRangeDescriptor>?[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>();

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.analysis.FingerprintAnalyzer#max_output_size"><summary><para>
+The maximum token size to emit. Tokens larger than this size will be discarded.
+Defaults to <c>255</c>
+</para></summary></member>
+  <member key="_types.analysis.FingerprintAnalyzer#separator"><summary><para>
+The character to use to concatenate the terms.
+Defaults to a space.
+</para></summary></member>
+  <member key="_types.analysis.FingerprintAnalyzer#stopwords"><summary><para>
+A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+Defaults to <c>_none_</c>.
+</para></summary></member>
+  <member key="_types.analysis.FingerprintAnalyzer#stopwords_path"><summary><para>
+The path to a file containing stop words.
+</para></summary></member>
+</doc>

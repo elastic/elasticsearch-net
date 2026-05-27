@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.DatePropertyConverter))]
 public sealed partial class DateProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -48,11 +49,7 @@ public sealed partial class DateProperty : Elastic.Clients.Elasticsearch.Mapping
 	public bool? Index { get; set; }
 	public string? Locale { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public System.DateTimeOffset? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -65,6 +62,7 @@ public sealed partial class DateProperty : Elastic.Clients.Elasticsearch.Mapping
 	public string Type => "date";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateProperty']/*"/>
 public readonly partial struct DatePropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DateProperty Instance { get; init; }
@@ -168,33 +166,21 @@ public readonly partial struct DatePropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -282,6 +268,7 @@ public readonly partial struct DatePropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.DateProperty']/*"/>
 public readonly partial struct DatePropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.DateProperty Instance { get; init; }
@@ -391,33 +378,21 @@ public readonly partial struct DatePropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="DateProperty.g.xml" path="doc/member[@key='_types.mapping.DateProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.DatePropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

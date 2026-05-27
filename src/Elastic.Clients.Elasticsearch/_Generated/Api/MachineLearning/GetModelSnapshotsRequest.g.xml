@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_model_snapshots.Request"><summary><para>
+Get model snapshots info.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#desc"><summary><para>
+Refer to the description for the <c>desc</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#end"><summary><para>
+Refer to the description for the <c>end</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#from"><summary><para>
+Skips the specified number of snapshots.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#job_id"><summary><para>
+Identifier for the anomaly detection job.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#size"><summary><para>
+Specifies the maximum number of snapshots to obtain.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#snapshot_id"><summary><para>
+A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#sort"><summary><para>
+Refer to the description for the <c>sort</c> query parameter.
+</para></summary></member>
+  <member key="ml.get_model_snapshots.Request#start"><summary><para>
+Refer to the description for the <c>start</c> query parameter.
+</para></summary></member>
+</doc>

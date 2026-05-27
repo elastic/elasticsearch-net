@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.DataStreamTimestampField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamTimestampFieldConverter))]
 public sealed partial class DataStreamTimestampField
 {
@@ -42,10 +43,6 @@ public sealed partial class DataStreamTimestampField
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Name of the timestamp field for the data stream, which must be <c>@timestamp</c>. The <c>@timestamp</c> field must be included in every document indexed to the data stream.
-	/// </para>
-	/// </summary>
+	/// <include file="DataStreamTimestampField.g.xml" path="doc/member[@key='indices._types.DataStreamTimestampField#name']/*"/>
 	public required string Name { get; set; }
 }

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoPointProperty']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.GeoPointPropertyConverter))]
 public sealed partial class GeoPointProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
 {
@@ -45,11 +46,7 @@ public sealed partial class GeoPointProperty : Elastic.Clients.Elasticsearch.Map
 	public bool? IgnoreZValue { get; set; }
 	public bool? Index { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public Elastic.Clients.Elasticsearch.GeoLocation? NullValue { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
@@ -62,6 +59,7 @@ public sealed partial class GeoPointProperty : Elastic.Clients.Elasticsearch.Map
 	public string Type => "geo_point";
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoPointProperty']/*"/>
 public readonly partial struct GeoPointPropertyDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty Instance { get; init; }
@@ -141,33 +139,21 @@ public readonly partial struct GeoPointPropertyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument> Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -261,6 +247,7 @@ public readonly partial struct GeoPointPropertyDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.GeoPointProperty']/*"/>
 public readonly partial struct GeoPointPropertyDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty Instance { get; init; }
@@ -346,33 +333,21 @@ public readonly partial struct GeoPointPropertyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Meta = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor Meta()
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Metadata about the field.
-	/// </para>
-	/// </summary>
+	/// <include file="GeoPointProperty.g.xml" path="doc/member[@key='_types.mapping.GeoPointProperty#meta']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);

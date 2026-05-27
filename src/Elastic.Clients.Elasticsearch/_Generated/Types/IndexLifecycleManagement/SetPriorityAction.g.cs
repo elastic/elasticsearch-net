@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.SetPriorityAction']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.SetPriorityActionConverter))]
 public sealed partial class SetPriorityAction
 {
@@ -39,6 +40,7 @@ public sealed partial class SetPriorityAction
 	public int? Priority { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ilm._types.SetPriorityAction']/*"/>
 public readonly partial struct SetPriorityActionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction Instance { get; init; }

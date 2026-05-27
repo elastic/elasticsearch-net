@@ -23,35 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
 public sealed partial class GetCategoriesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of categories.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only return categories for the specified partition.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#partition_field_value']/*"/>
 	public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of categories to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for categories.
-/// </para>
-/// </summary>
+/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetCategoriesRequestConverter))]
 public sealed partial class GetCategoriesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>
 {
@@ -83,59 +70,27 @@ public sealed partial class GetCategoriesRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "ml.get_categories";
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the category, which is unique in the job. If you specify
-	/// neither the category ID nor the partition_field_value, the API returns
-	/// information about all categories. If you specify only the
-	/// partition_field_value, it returns information about all categories for
-	/// the specified partition.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#category_id']/*"/>
 	public long? CategoryId { get => P<long?>("category_id"); set => PO("category_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#job_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of categories.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#from']/*"/>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
-	/// <summary>
-	/// <para>
-	/// Only return categories for the specified partition.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#partition_field_value']/*"/>
 	public string? PartitionFieldValue { get => Q<string?>("partition_field_value"); set => Q("partition_field_value", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of categories to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#size']/*"/>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.Page? Page { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Get anomaly detection job results for categories.
-/// </para>
-/// </summary>
+/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.get_categories.Request']/*"/>
 public readonly partial struct GetCategoriesRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest Instance { get; init; }
@@ -165,95 +120,56 @@ public readonly partial struct GetCategoriesRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the category, which is unique in the job. If you specify
-	/// neither the category ID nor the partition_field_value, the API returns
-	/// information about all categories. If you specify only the
-	/// partition_field_value, it returns information about all categories for
-	/// the specified partition.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#category_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor CategoryId(long? value)
 	{
 		Instance.CategoryId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Identifier for the anomaly detection job.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#job_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.JobId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Skips the specified number of categories.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#from']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor From(int? value)
 	{
 		Instance.From = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only return categories for the specified partition.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#partition_field_value']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor PartitionFieldValue(string? value)
 	{
 		Instance.PartitionFieldValue = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the maximum number of categories to obtain.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page(Elastic.Clients.Elasticsearch.MachineLearning.Page? value)
 	{
 		Instance.Page = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page()
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configures pagination.
-	/// This parameter has the <c>from</c> and <c>size</c> properties.
-	/// </para>
-	/// </summary>
+	/// <include file="GetCategoriesRequest.g.xml" path="doc/member[@key='ml.get_categories.Request#page']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor Page(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor>? action)
 	{
 		Instance.Page = Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.Build(action);

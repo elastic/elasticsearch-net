@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestHighlightConverter))]
 public sealed partial class PhraseSuggestHighlight
 {
@@ -43,21 +44,14 @@ public sealed partial class PhraseSuggestHighlight
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestHighlight.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight#post_tag']/*"/>
 	public required string PostTag { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestHighlight.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight#pre_tag']/*"/>
 	public required string PreTag { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight']/*"/>
 public readonly partial struct PhraseSuggestHighlightDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Instance { get; init; }
@@ -77,22 +71,14 @@ public readonly partial struct PhraseSuggestHighlightDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>pre_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestHighlight.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight#post_tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor PostTag(string value)
 	{
 		Instance.PostTag = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use in conjunction with <c>post_tag</c> to define the HTML tags to use for the highlighted text.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestHighlight.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestHighlight#pre_tag']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightDescriptor PreTag(string value)
 	{
 		Instance.PreTag = value;

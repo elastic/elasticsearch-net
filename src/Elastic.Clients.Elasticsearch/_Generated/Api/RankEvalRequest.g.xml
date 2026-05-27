@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.rank_eval.Request"><summary><para>
+Evaluate ranked search results.
+</para>
+<para>
+Evaluate the quality of ranked search results over a set of typical search queries.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#allow_no_indices"><summary><para>
+A setting that does two separate checks on the index expression.
+If <c>false</c>, the request returns an error (1) if any wildcard expression
+(including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
+complete set of resolved indices, aliases or data streams is empty after all
+expressions are evaluated. If <c>true</c>, index expressions that resolve to no
+indices are allowed and the request returns an empty result.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#expand_wildcards"><summary><para>
+Whether to expand wildcard expression to concrete indices that are open, closed or both.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#ignore_unavailable"><summary><para>
+If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
+index, alias, or data stream that is missing, closed, or otherwise unavailable.
+If <c>true</c>, unavailable concrete targets are silently ignored.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#index"><summary><para>
+A  comma-separated list of data streams, indices, and index aliases used to limit the request.
+Wildcard (<c>*</c>) expressions are supported.
+To target all data streams and indices in a cluster, omit this parameter or use <c>_all</c> or <c>*</c>.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#metric"><summary><para>
+Definition of the evaluation metric to calculate.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#requests"><summary><para>
+A set of typical search requests, together with their provided ratings.
+</para></summary></member>
+  <member key="_global.rank_eval.Request#search_type"><summary><para>
+Search operation type
+</para></summary></member>
+</doc>

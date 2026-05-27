@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeDateHistogramAggregationConverter))]
 public sealed partial class CompositeDateHistogramAggregation
 {
@@ -36,25 +37,13 @@ public sealed partial class CompositeDateHistogramAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#calendar_interval']/*"/>
 	public string? CalendarInterval { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#fixed_interval']/*"/>
 	public string? FixedInterval { get; set; }
 	public string? Format { get; set; }
 	public bool? MissingBucket { get; set; }
@@ -62,16 +51,13 @@ public sealed partial class CompositeDateHistogramAggregation
 	public Elastic.Clients.Elasticsearch.Duration? Offset { get; set; }
 	public Elastic.Clients.Elasticsearch.SortOrder? Order { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public string? TimeZone { get; set; }
 	public Elastic.Clients.Elasticsearch.Aggregations.ValueType? ValueType { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation']/*"/>
 public readonly partial struct CompositeDateHistogramAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Instance { get; init; }
@@ -91,44 +77,28 @@ public readonly partial struct CompositeDateHistogramAggregationDescriptor<TDocu
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> CalendarInterval(string? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> FixedInterval(string? value)
 	{
 		Instance.FixedInterval = value;
@@ -165,33 +135,21 @@ public readonly partial struct CompositeDateHistogramAggregationDescriptor<TDocu
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -224,6 +182,7 @@ public readonly partial struct CompositeDateHistogramAggregationDescriptor<TDocu
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation']/*"/>
 public readonly partial struct CompositeDateHistogramAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation Instance { get; init; }
@@ -243,44 +202,28 @@ public readonly partial struct CompositeDateHistogramAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#calendar_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor CalendarInterval(string? value)
 	{
 		Instance.CalendarInterval = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>calendar_interval</c> or <c>fixed_interval</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#fixed_interval']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor FixedInterval(string? value)
 	{
 		Instance.FixedInterval = value;
@@ -317,33 +260,21 @@ public readonly partial struct CompositeDateHistogramAggregationDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Either <c>field</c> or <c>script</c> must be present
-	/// </para>
-	/// </summary>
+	/// <include file="CompositeDateHistogramAggregation.g.xml" path="doc/member[@key='_types.aggregations.CompositeDateHistogramAggregation#script']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregationDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

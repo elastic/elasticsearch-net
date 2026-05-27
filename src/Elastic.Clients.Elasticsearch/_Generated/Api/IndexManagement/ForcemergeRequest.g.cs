@@ -23,152 +23,34 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 public sealed partial class ForcemergeRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the index should be flushed after performing the operation
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#flush']/*"/>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#max_num_segments']/*"/>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the operation should only expunge deleted documents
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#only_expunge_deletes']/*"/>
 	public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should the request wait until the force merge is completed
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Force a merge.
-/// </para>
-/// <para>
-/// Perform the force merge operation on the shards of one or more indices.
-/// For data streams, the API forces a merge on the shards of the stream's backing indices.
-/// </para>
-/// <para>
-/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
-/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
-/// </para>
-/// <para>
-/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
-/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
-/// These soft-deleted documents are automatically cleaned up during regular segment merges.
-/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
-/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
-/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
-/// </para>
-/// <para>
-/// <strong>Blocks during a force merge</strong>
-/// </para>
-/// <para>
-/// Calls to this API block until the merge is complete (unless request contains <c>wait_for_completion=false</c>).
-/// If the client connection is lost before completion then the force merge process will continue in the background.
-/// Any new requests to force merge the same indices will also block until the ongoing force merge is complete.
-/// </para>
-/// <para>
-/// <strong>Running force merge asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to get the status of the task.
-/// However, you can not cancel this task as the force merge task is not cancelable.
-/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
-/// When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-/// </para>
-/// <para>
-/// <strong>Force merging multiple indices</strong>
-/// </para>
-/// <para>
-/// You can force merge multiple indices with a single request by targeting:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// One or more data streams that contain multiple backing indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Multiple indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// One or more aliases
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// All data streams and indices in a cluster
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Each targeted shard is force-merged separately using the force_merge threadpool.
-/// By default each node only has a single <c>force_merge</c> thread which means that the shards on that node are force-merged one at a time.
-/// If you expand the <c>force_merge</c> threadpool on a node then it will force merge its shards in parallel
-/// </para>
-/// <para>
-/// Force merge makes the storage for the shard being merged temporarily increase, as it may require free space up to triple its size in case <c>max_num_segments parameter</c> is set to <c>1</c>, to rewrite all segments into a new one.
-/// </para>
-/// <para>
-/// <strong>Data streams and time-based indices</strong>
-/// </para>
-/// <para>
-/// Force-merging is useful for managing a data stream's older backing indices and other time-based indices, particularly after a rollover.
-/// In these cases, each index only receives indexing traffic for a certain period of time.
-/// Once an index receive no more writes, its shards can be force-merged to a single segment.
-/// This can be a good idea because single-segment shards can sometimes use simpler and more efficient data structures to perform searches.
-/// For example:
-/// </para>
-/// <code>
-/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
-/// </code>
-/// </summary>
+/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ForcemergeRequestConverter))]
 public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestParameters>
 {
@@ -194,157 +76,33 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "indices.forcemerge";
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#allow_no_indices']/*"/>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the index should be flushed after performing the operation
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#flush']/*"/>
 	public bool? Flush { get => Q<bool?>("flush"); set => Q("flush", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#ignore_unavailable']/*"/>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
-	/// <summary>
-	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#max_num_segments']/*"/>
 	public long? MaxNumSegments { get => Q<long?>("max_num_segments"); set => Q("max_num_segments", value); }
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the operation should only expunge deleted documents
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#only_expunge_deletes']/*"/>
 	public bool? OnlyExpungeDeletes { get => Q<bool?>("only_expunge_deletes"); set => Q("only_expunge_deletes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Should the request wait until the force merge is completed
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Force a merge.
-/// </para>
-/// <para>
-/// Perform the force merge operation on the shards of one or more indices.
-/// For data streams, the API forces a merge on the shards of the stream's backing indices.
-/// </para>
-/// <para>
-/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
-/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
-/// </para>
-/// <para>
-/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
-/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
-/// These soft-deleted documents are automatically cleaned up during regular segment merges.
-/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
-/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
-/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
-/// </para>
-/// <para>
-/// <strong>Blocks during a force merge</strong>
-/// </para>
-/// <para>
-/// Calls to this API block until the merge is complete (unless request contains <c>wait_for_completion=false</c>).
-/// If the client connection is lost before completion then the force merge process will continue in the background.
-/// Any new requests to force merge the same indices will also block until the ongoing force merge is complete.
-/// </para>
-/// <para>
-/// <strong>Running force merge asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to get the status of the task.
-/// However, you can not cancel this task as the force merge task is not cancelable.
-/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
-/// When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-/// </para>
-/// <para>
-/// <strong>Force merging multiple indices</strong>
-/// </para>
-/// <para>
-/// You can force merge multiple indices with a single request by targeting:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// One or more data streams that contain multiple backing indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Multiple indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// One or more aliases
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// All data streams and indices in a cluster
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Each targeted shard is force-merged separately using the force_merge threadpool.
-/// By default each node only has a single <c>force_merge</c> thread which means that the shards on that node are force-merged one at a time.
-/// If you expand the <c>force_merge</c> threadpool on a node then it will force merge its shards in parallel
-/// </para>
-/// <para>
-/// Force merge makes the storage for the shard being merged temporarily increase, as it may require free space up to triple its size in case <c>max_num_segments parameter</c> is set to <c>1</c>, to rewrite all segments into a new one.
-/// </para>
-/// <para>
-/// <strong>Data streams and time-based indices</strong>
-/// </para>
-/// <para>
-/// Force-merging is useful for managing a data stream's older backing indices and other time-based indices, particularly after a rollover.
-/// In these cases, each index only receives indexing traffic for a certain period of time.
-/// Once an index receive no more writes, its shards can be force-merged to a single segment.
-/// This can be a good idea because single-segment shards can sometimes use simpler and more efficient data structures to perform searches.
-/// For example:
-/// </para>
-/// <code>
-/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
-/// </code>
-/// </summary>
+/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 public readonly partial struct ForcemergeRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest Instance { get; init; }
@@ -368,106 +126,63 @@ public readonly partial struct ForcemergeRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the index should be flushed after performing the operation
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#flush']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor Flush(bool? value = true)
 	{
 		Instance.Flush = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#max_num_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor MaxNumSegments(long? value)
 	{
 		Instance.MaxNumSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the operation should only expunge deleted documents
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#only_expunge_deletes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor OnlyExpungeDeletes(bool? value = true)
 	{
 		Instance.OnlyExpungeDeletes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the request wait until the force merge is completed
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;
@@ -535,93 +250,8 @@ public readonly partial struct ForcemergeRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Force a merge.
-/// </para>
-/// <para>
-/// Perform the force merge operation on the shards of one or more indices.
-/// For data streams, the API forces a merge on the shards of the stream's backing indices.
-/// </para>
-/// <para>
-/// Merging reduces the number of segments in each shard by merging some of them together and also frees up the space used by deleted documents.
-/// Merging normally happens automatically, but sometimes it is useful to trigger a merge manually.
-/// </para>
-/// <para>
-/// WARNING: We recommend force merging only a read-only index (meaning the index is no longer receiving writes).
-/// When documents are updated or deleted, the old version is not immediately removed but instead soft-deleted and marked with a "tombstone".
-/// These soft-deleted documents are automatically cleaned up during regular segment merges.
-/// But force merge can cause very large (greater than 5 GB) segments to be produced, which are not eligible for regular merges.
-/// So the number of soft-deleted documents can then grow rapidly, resulting in higher disk usage and worse search performance.
-/// If you regularly force merge an index receiving writes, this can also make snapshots more expensive, since the new documents can't be backed up incrementally.
-/// </para>
-/// <para>
-/// <strong>Blocks during a force merge</strong>
-/// </para>
-/// <para>
-/// Calls to this API block until the merge is complete (unless request contains <c>wait_for_completion=false</c>).
-/// If the client connection is lost before completion then the force merge process will continue in the background.
-/// Any new requests to force merge the same indices will also block until the ongoing force merge is complete.
-/// </para>
-/// <para>
-/// <strong>Running force merge asynchronously</strong>
-/// </para>
-/// <para>
-/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to get the status of the task.
-/// However, you can not cancel this task as the force merge task is not cancelable.
-/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
-/// When you are done with a task, you should delete the task document so Elasticsearch can reclaim the space.
-/// </para>
-/// <para>
-/// <strong>Force merging multiple indices</strong>
-/// </para>
-/// <para>
-/// You can force merge multiple indices with a single request by targeting:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// One or more data streams that contain multiple backing indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Multiple indices
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// One or more aliases
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// All data streams and indices in a cluster
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// Each targeted shard is force-merged separately using the force_merge threadpool.
-/// By default each node only has a single <c>force_merge</c> thread which means that the shards on that node are force-merged one at a time.
-/// If you expand the <c>force_merge</c> threadpool on a node then it will force merge its shards in parallel
-/// </para>
-/// <para>
-/// Force merge makes the storage for the shard being merged temporarily increase, as it may require free space up to triple its size in case <c>max_num_segments parameter</c> is set to <c>1</c>, to rewrite all segments into a new one.
-/// </para>
-/// <para>
-/// <strong>Data streams and time-based indices</strong>
-/// </para>
-/// <para>
-/// Force-merging is useful for managing a data stream's older backing indices and other time-based indices, particularly after a rollover.
-/// In these cases, each index only receives indexing traffic for a certain period of time.
-/// Once an index receive no more writes, its shards can be force-merged to a single segment.
-/// This can be a good idea because single-segment shards can sometimes use simpler and more efficient data structures to perform searches.
-/// For example:
-/// </para>
-/// <code>
-/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
-/// </code>
-/// </summary>
+/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.forcemerge.Request']/*"/>
 public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest Instance { get; init; }
@@ -645,106 +275,63 @@ public readonly partial struct ForcemergeRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequest(Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of index names; use <c>_all</c> or empty string to perform the operation on all indices
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A setting that does two separate checks on the index expression.
-	/// If <c>false</c>, the request returns an error (1) if any wildcard expression
-	/// (including <c>_all</c> and <c>*</c>) resolves to zero matching indices or (2) if the
-	/// complete set of resolved indices, aliases or data streams is empty after all
-	/// expressions are evaluated. If <c>true</c>, index expressions that resolve to no
-	/// indices are allowed and the request returns an empty result.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#allow_no_indices']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
 		Instance.AllowNoIndices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the index should be flushed after performing the operation
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#flush']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> Flush(bool? value = true)
 	{
 		Instance.Flush = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the request returns an error if it targets a concrete (non-wildcarded)
-	/// index, alias, or data stream that is missing, closed, or otherwise unavailable.
-	/// If <c>true</c>, unavailable concrete targets are silently ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#ignore_unavailable']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of segments the index should be merged into (default: dynamic)
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#max_num_segments']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> MaxNumSegments(long? value)
 	{
 		Instance.MaxNumSegments = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specify whether the operation should only expunge deleted documents
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#only_expunge_deletes']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> OnlyExpungeDeletes(bool? value = true)
 	{
 		Instance.OnlyExpungeDeletes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should the request wait until the force merge is completed
-	/// </para>
-	/// </summary>
+	/// <include file="ForcemergeRequest.g.xml" path="doc/member[@key='indices.forcemerge.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ForcemergeRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

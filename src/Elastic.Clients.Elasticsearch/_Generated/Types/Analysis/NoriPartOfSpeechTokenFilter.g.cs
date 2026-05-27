@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.NoriPartOfSpeechTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.NoriPartOfSpeechTokenFilterConverter))]
 public sealed partial class NoriPartOfSpeechTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class NoriPartOfSpeechTokenFilter : Elastic.Clients.Elasti
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of part-of-speech tags that should be removed.
-	/// </para>
-	/// </summary>
+	/// <include file="NoriPartOfSpeechTokenFilter.g.xml" path="doc/member[@key='_types.analysis.NoriPartOfSpeechTokenFilter#stoptags']/*"/>
 	public System.Collections.Generic.ICollection<string>? Stoptags { get; set; }
 
 	public string Type => "nori_part_of_speech";
@@ -48,6 +45,7 @@ public sealed partial class NoriPartOfSpeechTokenFilter : Elastic.Clients.Elasti
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.NoriPartOfSpeechTokenFilter']/*"/>
 public readonly partial struct NoriPartOfSpeechTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter Instance { get; init; }
@@ -67,22 +65,14 @@ public readonly partial struct NoriPartOfSpeechTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilter(Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An array of part-of-speech tags that should be removed.
-	/// </para>
-	/// </summary>
+	/// <include file="NoriPartOfSpeechTokenFilter.g.xml" path="doc/member[@key='_types.analysis.NoriPartOfSpeechTokenFilter#stoptags']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor Stoptags(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Stoptags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of part-of-speech tags that should be removed.
-	/// </para>
-	/// </summary>
+	/// <include file="NoriPartOfSpeechTokenFilter.g.xml" path="doc/member[@key='_types.analysis.NoriPartOfSpeechTokenFilter#stoptags']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.NoriPartOfSpeechTokenFilterDescriptor Stoptags(params string[] values)
 	{
 		Instance.Stoptags = [.. values];

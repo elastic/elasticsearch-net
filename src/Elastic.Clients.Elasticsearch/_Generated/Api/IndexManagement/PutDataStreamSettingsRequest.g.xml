@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.put_data_stream_settings.Request"><summary><para>
+Update data stream settings.
+</para>
+<para>
+NOTE: Available in 8.19. Not available in earlier versions.
+</para>
+<para>
+This API can be used to override settings on specific data streams. These overrides will take precedence over what
+is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
+only certain settings are allowed. If possible, the setting change is applied to all
+backing indices. Otherwise, it will be applied when the data stream is next rolled over.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.Request#dry_run"><summary><para>
+If <c>true</c>, the request does not actually change the settings on any data streams or indices. Instead, it
+simulates changing the settings and reports back to the user what would have happened had these settings
+actually been applied.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.Request#master_timeout"><summary><para>
+The period to wait for a connection to the master node. If no response is
+received before the timeout expires, the request fails and returns an
+error.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.Request#name"><summary><para>
+A comma-separated list of data streams or data stream patterns.
+</para></summary></member>
+  <member key="indices.put_data_stream_settings.Request#timeout"><summary><para>
+The period to wait for a response. If no response is received before the
+timeout expires, the request fails and returns an error.
+</para></summary></member>
+</doc>

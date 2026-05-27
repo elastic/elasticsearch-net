@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.TermsSetQueryConverter))]
 public sealed partial class TermsSetQuery
 {
@@ -49,47 +50,25 @@ public sealed partial class TermsSetQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specification describing number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.MinimumShouldMatch? MinimumShouldMatch { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Numeric field containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? MinimumShouldMatchField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.Script? MinimumShouldMatchScript { get; set; }
 	public string? QueryName { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#terms']/*"/>
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> Terms { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery']/*"/>
 public readonly partial struct TermsSetQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery Instance { get; init; }
@@ -109,14 +88,7 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -135,66 +107,42 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specification describing number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Numeric field containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.MinimumShouldMatchField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Numeric field containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatchField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.MinimumShouldMatchField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.MinimumShouldMatchScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript()
 	{
 		Instance.MinimumShouldMatchScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> MinimumShouldMatchScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.MinimumShouldMatchScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -207,22 +155,14 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.Terms = [.. values];
@@ -238,6 +178,7 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery']/*"/>
 public readonly partial struct TermsSetQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery Instance { get; init; }
@@ -257,14 +198,7 @@ public readonly partial struct TermsSetQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQuery(Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -283,66 +217,42 @@ public readonly partial struct TermsSetQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specification describing number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch? value)
 	{
 		Instance.MinimumShouldMatch = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Numeric field containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatchField(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.MinimumShouldMatchField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Numeric field containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_field']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatchField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.MinimumShouldMatchField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatchScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
 		Instance.MinimumShouldMatchScript = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatchScript()
 	{
 		Instance.MinimumShouldMatchScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Custom script containing the number of matching terms required to return a document.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#minimum_should_match_script']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor MinimumShouldMatchScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.MinimumShouldMatchScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
@@ -355,22 +265,14 @@ public readonly partial struct TermsSetQueryDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
 	{
 		Instance.Terms = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Array of terms you wish to find in the provided field.
-	/// </para>
-	/// </summary>
+	/// <include file="TermsSetQuery.g.xml" path="doc/member[@key='_types.query_dsl.TermsSetQuery#terms']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.Terms = [.. values];

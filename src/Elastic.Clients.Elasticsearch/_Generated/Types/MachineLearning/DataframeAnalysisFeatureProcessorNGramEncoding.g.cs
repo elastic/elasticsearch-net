@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalysisFeatureProcessorNGramEncodingConverter))]
 public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 {
@@ -45,42 +46,23 @@ public sealed partial class DataframeAnalysisFeatureProcessorNGramEncoding
 
 	public bool? Custom { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#feature_prefix']/*"/>
 	public string? FeaturePrefix { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#length']/*"/>
 	public int? Length { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#n_grams']/*"/>
 	public required System.Collections.Generic.ICollection<int> NGrams { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#start']/*"/>
 	public int? Start { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Instance { get; init; }
@@ -106,77 +88,49 @@ public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDes
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#feature_prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> FeaturePrefix(string? value)
 	{
 		Instance.FeaturePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Length(int? value)
 	{
 		Instance.Length = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#n_grams']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(System.Collections.Generic.ICollection<int> value)
 	{
 		Instance.NGrams = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#n_grams']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> NGrams(params int[] values)
 	{
 		Instance.NGrams = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor<TDocument> Start(int? value)
 	{
 		Instance.Start = value;
@@ -192,6 +146,7 @@ public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDes
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding']/*"/>
 public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding Instance { get; init; }
@@ -217,77 +172,49 @@ public readonly partial struct DataframeAnalysisFeatureProcessorNGramEncodingDes
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The feature name prefix. Defaults to ngram_&lt;start>_&lt;length>.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#feature_prefix']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor FeaturePrefix(string? value)
 	{
 		Instance.FeaturePrefix = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the text field to encode.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the length of the n-gram substring. Defaults to 50. Must be greater than 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#length']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Length(int? value)
 	{
 		Instance.Length = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#n_grams']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(System.Collections.Generic.ICollection<int> value)
 	{
 		Instance.NGrams = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies which n-grams to gather. It’s an array of integer values where the minimum value is 1, and a maximum value is 5.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#n_grams']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor NGrams(params int[] values)
 	{
 		Instance.NGrams = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the zero-indexed start of the n-gram substring. Negative values are allowed for encoding n-grams of string suffixes. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="DataframeAnalysisFeatureProcessorNGramEncoding.g.xml" path="doc/member[@key='ml._types.DataframeAnalysisFeatureProcessorNGramEncoding#start']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncodingDescriptor Start(int? value)
 	{
 		Instance.Start = value;

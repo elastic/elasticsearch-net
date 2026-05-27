@@ -23,33 +23,19 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
 public sealed partial class ClusterStatsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Include remote cluster data into the response
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#include_remotes']/*"/>
 	public bool? IncludeRemotes { get => Q<bool?>("include_remotes"); set => Q("include_remotes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its stats.
-	/// However, timed out nodes are included in the response’s <c>_nodes.failed</c> property. Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster statistics.
-/// </para>
-/// <para>
-/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-/// </para>
-/// </summary>
+/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterStatsRequestConverter))]
 public sealed partial class ClusterStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters>
 {
@@ -75,38 +61,18 @@ public sealed partial class ClusterStatsRequest : Elastic.Clients.Elasticsearch.
 
 	internal override string OperationName => "cluster.stats";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// Include remote cluster data into the response
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#include_remotes']/*"/>
 	public bool? IncludeRemotes { get => Q<bool?>("include_remotes"); set => Q("include_remotes", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its stats.
-	/// However, timed out nodes are included in the response’s <c>_nodes.failed</c> property. Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get cluster statistics.
-/// </para>
-/// <para>
-/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
-/// </para>
-/// </summary>
+/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='cluster.stats.Request']/*"/>
 public readonly partial struct ClusterStatsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest Instance { get; init; }
@@ -130,35 +96,21 @@ public readonly partial struct ClusterStatsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#node_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
 		Instance.NodeId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Include remote cluster data into the response
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#include_remotes']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor IncludeRemotes(bool? value = true)
 	{
 		Instance.IncludeRemotes = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for each node to respond.
-	/// If a node does not respond before its timeout expires, the response does not include its stats.
-	/// However, timed out nodes are included in the response’s <c>_nodes.failed</c> property. Defaults to no timeout.
-	/// </para>
-	/// </summary>
+	/// <include file="ClusterStatsRequest.g.xml" path="doc/member[@key='cluster.stats.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;

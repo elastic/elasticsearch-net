@@ -23,25 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
 public sealed partial class EnableUserRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable users.
-/// </para>
-/// <para>
-/// Enable users in the native realm.
-/// By default, when you create users, they are enabled.
-/// </para>
-/// </summary>
+/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.EnableUserRequestConverter))]
 public sealed partial class EnableUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>
 {
@@ -68,30 +59,15 @@ public sealed partial class EnableUserRequest : Elastic.Clients.Elasticsearch.Re
 
 	internal override string OperationName => "security.enable_user";
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request#username']/*"/>
 	public required Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-/// <summary>
-/// <para>
-/// Enable users.
-/// </para>
-/// <para>
-/// Enable users in the native realm.
-/// By default, when you create users, they are enabled.
-/// </para>
-/// </summary>
+/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.enable_user.Request']/*"/>
 public readonly partial struct EnableUserRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Security.EnableUserRequest Instance { get; init; }
@@ -116,22 +92,14 @@ public readonly partial struct EnableUserRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnableUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.EnableUserRequest(Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// An identifier for the user.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request#username']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username value)
 	{
 		Instance.Username = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
-	/// </para>
-	/// </summary>
+	/// <include file="EnableUserRequest.g.xml" path="doc/member[@key='security.enable_user.Request#refresh']/*"/>
 	public Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
 		Instance.Refresh = value;

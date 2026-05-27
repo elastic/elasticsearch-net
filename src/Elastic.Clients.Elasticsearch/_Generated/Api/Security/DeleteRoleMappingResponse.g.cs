@@ -37,11 +37,6 @@ public sealed partial class DeleteRoleMappingResponse : Elastic.Transport.Produc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If the mapping is successfully deleted, <c>found</c> is <c>true</c>.
-	/// Otherwise, <c>found</c> is <c>false</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="DeleteRoleMappingResponse.g.xml" path="doc/member[@key='security.delete_role_mapping.Response#found']/*"/>
 	public required bool Found { get; set; }
 }

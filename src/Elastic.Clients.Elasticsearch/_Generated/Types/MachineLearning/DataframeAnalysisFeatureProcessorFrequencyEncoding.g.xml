@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#feature_name"><summary><para>
+The resulting feature name.
+</para></summary></member>
+  <member key="ml._types.DataframeAnalysisFeatureProcessorFrequencyEncoding#frequency_map"><summary><para>
+The resulting frequency map for the field value. If the field value is missing from the frequency_map, the resulting value is 0.
+</para></summary></member>
+</doc>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.query_dsl.FieldValueFactorModifier#ln"><summary><para>
+Take the natural logarithm of the field value.
+Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use <c>ln1p</c> instead.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#ln1p"><summary><para>
+Add 1 to the field value and take the natural logarithm.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#ln2p"><summary><para>
+Add 2 to the field value and take the natural logarithm.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#log"><summary><para>
+Take the common logarithm of the field value.
+Because this function will return a negative value and cause an error if used on values between 0 and 1, it is recommended to use <c>log1p</c> instead.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#log1p"><summary><para>
+Add 1 to the field value and take the common logarithm.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#log2p"><summary><para>
+Add 2 to the field value and take the common logarithm.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#none"><summary><para>
+Do not apply any multiplier to the field value.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#reciprocal"><summary><para>
+Reciprocate the field value, same as <c>1/x</c> where <c>x</c> is the field’s value.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#sqrt"><summary><para>
+Take the square root of the field value.
+</para></summary></member>
+  <member key="_types.query_dsl.FieldValueFactorModifier#square"><summary><para>
+Square the field value (multiply it by itself).
+</para></summary></member>
+</doc>

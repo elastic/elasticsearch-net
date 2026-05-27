@@ -23,42 +23,22 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 public sealed partial class PutDataStreamOptionsRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream options.
-/// </para>
-/// <para>
-/// Update the data stream options of the specified data streams.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataStreamOptionsRequestConverter))]
 public sealed partial class PutDataStreamOptionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestParameters>
 {
@@ -85,56 +65,24 @@ public sealed partial class PutDataStreamOptionsRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "indices.put_data_stream_options";
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#expand_wildcards']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// If defined, it will update the failure store configuration of every data stream resolved by the name expression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStore? FailureStore { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Update data stream options.
-/// </para>
-/// <para>
-/// Update the data stream options of the specified data streams.
-/// </para>
-/// </summary>
+/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices.put_data_stream_options.Request']/*"/>
 public readonly partial struct PutDataStreamOptionsRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest Instance { get; init; }
@@ -159,95 +107,56 @@ public readonly partial struct PutDataStreamOptionsRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Comma-separated list of data streams used to limit the request.
-	/// Supports wildcards (<c>*</c>).
-	/// To target all data streams use <c>*</c> or <c>_all</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
 		Instance.ExpandWildcards = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Type of data stream that wildcard patterns can match.
-	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#expand_wildcards']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
 		Instance.ExpandWildcards = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is
-	/// received before the timeout expires, the request fails and returns an
-	/// error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it will update the failure store configuration of every data stream resolved by the name expression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor FailureStore(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStore? value)
 	{
 		Instance.FailureStore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it will update the failure store configuration of every data stream resolved by the name expression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor FailureStore()
 	{
 		Instance.FailureStore = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If defined, it will update the failure store configuration of every data stream resolved by the name expression.
-	/// </para>
-	/// </summary>
+	/// <include file="PutDataStreamOptionsRequest.g.xml" path="doc/member[@key='indices.put_data_stream_options.Request#failure_store']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequestDescriptor FailureStore(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor>? action)
 	{
 		Instance.FailureStore = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamFailureStoreDescriptor.Build(action);

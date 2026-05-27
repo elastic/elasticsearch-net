@@ -23,160 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
 public sealed partial class SearchMvtRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Search a vector tile.
-/// </para>
-/// <para>
-/// Search a vector tile for geospatial values.
-/// Before using this API, you should be familiar with the Mapbox vector tile specification.
-/// The API returns results as a binary mapbox vector tile.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The API returns results as a binary Mapbox vector tile.
-/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A meta layer containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A feature containing a bounding box. By default, this is the bounding box of the tile.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Metadata for the search.
-/// </para>
-/// </item>
-/// </list>
-/// </item>
-/// </list>
-/// <para>
-/// The API only returns features that can display at its zoom level.
-/// For example, if a polygon feature has no area at its zoom level, the API omits it.
-/// The API returns errors as UTF-8 encoded JSON.
-/// </para>
-/// <para>
-/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
-/// If you specify both parameters, the query parameter takes precedence.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geotile</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
-/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
-/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
-/// The maximum final precision is 29.
-/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
-/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
-/// The <c>aggs</c> layer only contains features for cells with matching data.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geohex</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
-/// </para>
-/// <para>
-/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
-/// The following table maps the H3 resolution for each precision.
-/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
-/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
-/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
-/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
-/// </para>
-/// <para>
-/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
-/// | --------- | ---------------- | ------------- | ----------------| ----- |
-/// | 1  | 4                  | 0  | 122             | 30.5           |
-/// | 2  | 16                 | 0  | 122             | 7.625          |
-/// | 3  | 64                 | 1  | 842             | 13.15625       |
-/// | 4  | 256                | 1  | 842             | 3.2890625      |
-/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
-/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
-/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
-/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
-/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
-/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
-/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
-/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
-/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
-/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
-/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
-/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
-/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
-/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
-/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
-/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
-/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
-/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
-/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
-/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
-/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
-/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
-/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
-/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
-/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
-/// </para>
-/// <para>
-/// Hexagonal cells don't align perfectly on a vector tile.
-/// Some cells may intersect more than one vector tile.
-/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
-/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
-/// </para>
-/// <para>
-/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
-/// </para>
-/// </summary>
+/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SearchMvtRequestConverter))]
 public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>
 {
@@ -207,427 +61,69 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 
 	public override Elastic.Transport.IRequestConfiguration? RequestConfiguration { get => base.RequestConfiguration ?? DefaultRequestConfiguration; set => base.RequestConfiguration = value; }
 
-	/// <summary>
-	/// <para>
-	/// A field that contains the geospatial data to return.
-	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
-	/// The field must have doc values enabled. It cannot be a nested field.
-	/// </para>
-	/// <para>
-	/// NOTE: Vector tiles do not natively support geometry collections.
-	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
-	/// This behavior may change in a future release.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get => P<Elastic.Clients.Elasticsearch.Field>("field"); set => PR("field", value); }
 
-	/// <summary>
-	/// <para>
-	/// A list of indices, data streams, or aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#index']/*"/>
 	public required Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
-	/// <summary>
-	/// <para>
-	/// The X coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#x']/*"/>
 	public required int X { get => P<int>("x"); set => PR("x", value); }
 
-	/// <summary>
-	/// <para>
-	/// The Y coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#y']/*"/>
 	public required int Y { get => P<int>("y"); set => PR("y", value); }
 
-	/// <summary>
-	/// <para>
-	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#zoom']/*"/>
 	public required int Zoom { get => P<int>("zoom"); set => PR("zoom", value); }
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
-	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#buffer']/*"/>
 	public int? Buffer { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
-	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
-	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
-	/// bounding box may be larger than the vector tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#exact_bounds']/*"/>
 	public bool? ExactBounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#extent']/*"/>
 	public int? Extent { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The fields to return in the <c>hits</c> layer.
-	/// It supports wildcards (<c>*</c>).
-	/// This parameter does not support fields with array values. Fields with array
-	/// values may return inconsistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The aggregation used to create a grid for the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_agg']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAgg { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
-	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don't include the aggs layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_precision']/*"/>
 	public int? GridPrecision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
-	/// of the cell.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_type']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridType { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#project_routing']/*"/>
 	public string? ProjectRouting { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don't include the hits layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#size']/*"/>
 	public int? Size { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
-	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
-	/// not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
-	/// suggested label positions for the original features.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The aggregation results will provide one central point for each aggregation bucket.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// All attributes from the original features will also be copied to the new label features.
-	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#with_labels']/*"/>
 	public bool? WithLabels { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Search a vector tile.
-/// </para>
-/// <para>
-/// Search a vector tile for geospatial values.
-/// Before using this API, you should be familiar with the Mapbox vector tile specification.
-/// The API returns results as a binary mapbox vector tile.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The API returns results as a binary Mapbox vector tile.
-/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A meta layer containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A feature containing a bounding box. By default, this is the bounding box of the tile.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Metadata for the search.
-/// </para>
-/// </item>
-/// </list>
-/// </item>
-/// </list>
-/// <para>
-/// The API only returns features that can display at its zoom level.
-/// For example, if a polygon feature has no area at its zoom level, the API omits it.
-/// The API returns errors as UTF-8 encoded JSON.
-/// </para>
-/// <para>
-/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
-/// If you specify both parameters, the query parameter takes precedence.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geotile</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
-/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
-/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
-/// The maximum final precision is 29.
-/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
-/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
-/// The <c>aggs</c> layer only contains features for cells with matching data.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geohex</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
-/// </para>
-/// <para>
-/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
-/// The following table maps the H3 resolution for each precision.
-/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
-/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
-/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
-/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
-/// </para>
-/// <para>
-/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
-/// | --------- | ---------------- | ------------- | ----------------| ----- |
-/// | 1  | 4                  | 0  | 122             | 30.5           |
-/// | 2  | 16                 | 0  | 122             | 7.625          |
-/// | 3  | 64                 | 1  | 842             | 13.15625       |
-/// | 4  | 256                | 1  | 842             | 3.2890625      |
-/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
-/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
-/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
-/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
-/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
-/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
-/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
-/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
-/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
-/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
-/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
-/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
-/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
-/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
-/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
-/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
-/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
-/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
-/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
-/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
-/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
-/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
-/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
-/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
-/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
-/// </para>
-/// <para>
-/// Hexagonal cells don't align perfectly on a vector tile.
-/// Some cells may intersect more than one vector tile.
-/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
-/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
-/// </para>
-/// <para>
-/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
-/// </para>
-/// </summary>
+/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
 public readonly partial struct SearchMvtRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SearchMvtRequest Instance { get; init; }
@@ -652,399 +148,70 @@ public readonly partial struct SearchMvtRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.SearchMvtRequest instance) => new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field that contains the geospatial data to return.
-	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
-	/// The field must have doc values enabled. It cannot be a nested field.
-	/// </para>
-	/// <para>
-	/// NOTE: Vector tiles do not natively support geometry collections.
-	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
-	/// This behavior may change in a future release.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field that contains the geospatial data to return.
-	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
-	/// The field must have doc values enabled. It cannot be a nested field.
-	/// </para>
-	/// <para>
-	/// NOTE: Vector tiles do not natively support geometry collections.
-	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
-	/// This behavior may change in a future release.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices, data streams, or aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The X coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#x']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor X(int value)
 	{
 		Instance.X = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Y coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#y']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Y(int value)
 	{
 		Instance.Y = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#zoom']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Zoom(int value)
 	{
 		Instance.Zoom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs()
 	{
 		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -1072,202 +239,112 @@ public readonly partial struct SearchMvtRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
-	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#buffer']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Buffer(int? value)
 	{
 		Instance.Buffer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
-	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
-	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
-	/// bounding box may be larger than the vector tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#exact_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ExactBounds(bool? value = true)
 	{
 		Instance.ExactBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#extent']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Extent(int? value)
 	{
 		Instance.Extent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to return in the <c>hits</c> layer.
-	/// It supports wildcards (<c>*</c>).
-	/// This parameter does not support fields with array values. Fields with array
-	/// values may return inconsistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to return in the <c>hits</c> layer.
-	/// It supports wildcards (<c>*</c>).
-	/// This parameter does not support fields with array values. Fields with array
-	/// values may return inconsistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The aggregation used to create a grid for the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_agg']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? value)
 	{
 		Instance.GridAgg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
-	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don't include the aggs layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_precision']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridPrecision(int? value)
 	{
 		Instance.GridPrecision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
-	/// of the cell.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
 		Instance.GridType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
@@ -1316,51 +393,28 @@ public readonly partial struct SearchMvtRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don't include the hits layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1373,13 +427,7 @@ public readonly partial struct SearchMvtRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1392,64 +440,21 @@ public readonly partial struct SearchMvtRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
-	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
-	/// not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
-	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
-	/// not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
-	/// suggested label positions for the original features.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The aggregation results will provide one central point for each aggregation bucket.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// All attributes from the original features will also be copied to the new label features.
-	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#with_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor WithLabels(bool? value = true)
 	{
 		Instance.WithLabels = value;
@@ -1512,156 +517,8 @@ public readonly partial struct SearchMvtRequestDescriptor
 	}
 }
 
-/// <summary>
-/// <para>
-/// Search a vector tile.
-/// </para>
-/// <para>
-/// Search a vector tile for geospatial values.
-/// Before using this API, you should be familiar with the Mapbox vector tile specification.
-/// The API returns results as a binary mapbox vector tile.
-/// </para>
-/// <para>
-/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// The API returns results as a binary Mapbox vector tile.
-/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A meta layer containing:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// A feature containing a bounding box. By default, this is the bounding box of the tile.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// Metadata for the search.
-/// </para>
-/// </item>
-/// </list>
-/// </item>
-/// </list>
-/// <para>
-/// The API only returns features that can display at its zoom level.
-/// For example, if a polygon feature has no area at its zoom level, the API omits it.
-/// The API returns errors as UTF-8 encoded JSON.
-/// </para>
-/// <para>
-/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
-/// If you specify both parameters, the query parameter takes precedence.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geotile</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
-/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
-/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
-/// The maximum final precision is 29.
-/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
-/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
-/// The <c>aggs</c> layer only contains features for cells with matching data.
-/// </para>
-/// <para>
-/// <strong>Grid precision for geohex</strong>
-/// </para>
-/// <para>
-/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
-/// </para>
-/// <para>
-/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
-/// The following table maps the H3 resolution for each precision.
-/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
-/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
-/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
-/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
-/// </para>
-/// <para>
-/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
-/// | --------- | ---------------- | ------------- | ----------------| ----- |
-/// | 1  | 4                  | 0  | 122             | 30.5           |
-/// | 2  | 16                 | 0  | 122             | 7.625          |
-/// | 3  | 64                 | 1  | 842             | 13.15625       |
-/// | 4  | 256                | 1  | 842             | 3.2890625      |
-/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
-/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
-/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
-/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
-/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
-/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
-/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
-/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
-/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
-/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
-/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
-/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
-/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
-/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
-/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
-/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
-/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
-/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
-/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
-/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
-/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
-/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
-/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
-/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
-/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
-/// </para>
-/// <para>
-/// Hexagonal cells don't align perfectly on a vector tile.
-/// Some cells may intersect more than one vector tile.
-/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
-/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
-/// </para>
-/// <para>
-/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
-/// </para>
-/// </summary>
+/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.search_mvt.Request']/*"/>
 public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.SearchMvtRequest Instance { get; init; }
@@ -1686,320 +543,63 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchMvtRequest instance) => new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A field that contains the geospatial data to return.
-	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
-	/// The field must have doc values enabled. It cannot be a nested field.
-	/// </para>
-	/// <para>
-	/// NOTE: Vector tiles do not natively support geometry collections.
-	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
-	/// This behavior may change in a future release.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A field that contains the geospatial data to return.
-	/// It must be a <c>geo_point</c> or <c>geo_shape</c> field.
-	/// The field must have doc values enabled. It cannot be a nested field.
-	/// </para>
-	/// <para>
-	/// NOTE: Vector tiles do not natively support geometry collections.
-	/// For <c>geometrycollection</c> values in a <c>geo_shape</c> field, the API returns a hits layer feature for each element of the collection.
-	/// This behavior may change in a future release.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#field']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A list of indices, data streams, or aliases to search.
-	/// It supports wildcards (<c>*</c>).
-	/// To search all data streams and indices, omit this parameter or use <c>*</c> or <c>_all</c>.
-	/// To search a remote cluster, use the <c>&lt;cluster>:&lt;target></c> syntax.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#index']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
 		Instance.Indices = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The X coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#x']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> X(int value)
 	{
 		Instance.X = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Y coordinate for the vector tile to search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#y']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Y(int value)
 	{
 		Instance.Y = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The zoom level of the vector tile to search. It accepts <c>0</c> to <c>29</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#zoom']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Zoom(int value)
 	{
 		Instance.Zoom = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggs = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs()
 	{
 		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sub-aggregations for the geotile_grid.
-	/// </para>
-	/// <para>
-	/// It supports the following aggregation types:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>avg</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>boxplot</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>cardinality</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>extended stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>max</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>median absolute deviation</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>min</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>percentile-rank</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>stats</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>sum</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>value count</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#aggs']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -2020,179 +620,98 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
-	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#buffer']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Buffer(int? value)
 	{
 		Instance.Buffer = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
-	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
-	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
-	/// bounding box may be larger than the vector tile.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#exact_bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ExactBounds(bool? value = true)
 	{
 		Instance.ExactBounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#extent']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Extent(int? value)
 	{
 		Instance.Extent = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to return in the <c>hits</c> layer.
-	/// It supports wildcards (<c>*</c>).
-	/// This parameter does not support fields with array values. Fields with array
-	/// values may return inconsistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The fields to return in the <c>hits</c> layer.
-	/// It supports wildcards (<c>*</c>).
-	/// This parameter does not support fields with array values. Fields with array
-	/// values may return inconsistent results.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#fields']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Fields = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The aggregation used to create a grid for the <c>field</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_agg']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? value)
 	{
 		Instance.GridAgg = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
-	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don't include the aggs layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_precision']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridPrecision(int? value)
 	{
 		Instance.GridPrecision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
-	/// of the cell.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#grid_type']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
 		Instance.GridType = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies a subset of projects to target for the search using project
-	/// metadata tags in a subset of Lucene query syntax.
-	/// Allowed Lucene queries: the _alias tag and a single value (possibly wildcarded).
-	/// Examples:
-	/// _alias:my-project
-	/// _alias:_origin
-	/// _alias:<em>pr</em>
-	/// Supported in serverless only.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#project_routing']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ProjectRouting(string? value)
 	{
 		Instance.ProjectRouting = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The query DSL used to filter documents for the search.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#query']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
 		Instance.RuntimeMappings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings()
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#runtime_mappings']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
 		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
@@ -2227,51 +746,28 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don't include the hits layer.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#size']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Sort the features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box's diagonal length,
-	/// from longest to shortest.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#sort']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2284,64 +780,21 @@ public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
-	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
-	/// not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
 		Instance.TrackTotalHits = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
-	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
-	/// not include the total number of hits matching the query.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#track_total_hits']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
 	{
 		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
-	/// suggested label positions for the original features.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The aggregation results will provide one central point for each aggregation bucket.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// All attributes from the original features will also be copied to the new label features.
-	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="SearchMvtRequest.g.xml" path="doc/member[@key='_global.search_mvt.Request#with_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> WithLabels(bool? value = true)
 	{
 		Instance.WithLabels = value;

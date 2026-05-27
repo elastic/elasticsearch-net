@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.SpanFieldMaskingQueryConverter))]
 public sealed partial class SpanFieldMaskingQuery
 {
@@ -43,20 +44,14 @@ public sealed partial class SpanFieldMaskingQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFieldMaskingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery#boost']/*"/>
 	public float? Boost { get; set; }
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 	public required Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery Query { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery']/*"/>
 public readonly partial struct SpanFieldMaskingQueryDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery Instance { get; init; }
@@ -76,14 +71,7 @@ public readonly partial struct SpanFieldMaskingQueryDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFieldMaskingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor<TDocument> Boost(float? value)
 	{
 		Instance.Boost = value;
@@ -129,6 +117,7 @@ public readonly partial struct SpanFieldMaskingQueryDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery']/*"/>
 public readonly partial struct SpanFieldMaskingQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery Instance { get; init; }
@@ -148,14 +137,7 @@ public readonly partial struct SpanFieldMaskingQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQuery(Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="SpanFieldMaskingQuery.g.xml" path="doc/member[@key='_types.query_dsl.SpanFieldMaskingQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.SpanFieldMaskingQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;

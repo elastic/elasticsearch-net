@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_trained_models.Request"><summary><para>
+Get trained model configuration info.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#allow_no_match"><summary><para>
+Specifies what to do when the request:
+</para>
+<list type="bullet">
+<item>
+<para>
+Contains wildcard expressions and there are no models that match.
+</para>
+</item>
+<item>
+<para>
+Contains the _all string or no identifiers and there are no matches.
+</para>
+</item>
+<item>
+<para>
+Contains wildcard expressions and there are only partial matches.
+</para>
+</item>
+</list>
+<para>
+If true, it returns an empty array when there are no matches and the
+subset of results when there are partial matches.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#decompress_definition"><summary><para>
+Specifies whether the included model definition should be returned as a
+JSON map (true) or in a custom compressed format (false).
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#exclude_generated"><summary><para>
+Indicates if certain fields should be removed from the configuration on
+retrieval. This allows the configuration to be in an acceptable format to
+be retrieved and then added to another cluster.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#from"><summary><para>
+Skips the specified number of models.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#include"><summary><para>
+A comma delimited string of optional fields to include in the response
+body.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#model_id"><summary><para>
+The unique identifier of the trained model or a model alias.
+</para>
+<para>
+You can get information for multiple trained models in a single API
+request by using a comma-separated list of model IDs or a wildcard
+expression.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#size"><summary><para>
+Specifies the maximum number of models to obtain.
+</para></summary></member>
+  <member key="ml.get_trained_models.Request#tags"><summary><para>
+A comma delimited string of tags. A trained model can have many tags, or
+none. When supplied, only trained models that contain all the supplied
+tags are returned.
+</para></summary></member>
+</doc>

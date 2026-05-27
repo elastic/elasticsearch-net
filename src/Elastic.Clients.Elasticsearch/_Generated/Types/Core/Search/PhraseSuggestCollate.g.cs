@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestCollateConverter))]
 public sealed partial class PhraseSuggestCollate
 {
@@ -42,28 +43,17 @@ public sealed partial class PhraseSuggestCollate
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parameters to use if the query is templated.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#params']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#prune']/*"/>
 	public bool? Prune { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A collate query that is run once for every suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#query']/*"/>
 	public required Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery Query { get; set; }
 }
 
+/// <include file="../../../SpecReferences.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate']/*"/>
 public readonly partial struct PhraseSuggestCollateDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate Instance { get; init; }
@@ -83,33 +73,21 @@ public readonly partial struct PhraseSuggestCollateDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate instance) => new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Parameters to use if the query is templated.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Params = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parameters to use if the query is templated.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params()
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Parameters to use if the query is templated.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#params']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
@@ -123,44 +101,28 @@ public readonly partial struct PhraseSuggestCollateDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns all suggestions with an extra <c>collate_match</c> option indicating whether the generated phrase matched any document.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#prune']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Prune(bool? value = true)
 	{
 		Instance.Prune = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A collate query that is run once for every suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQuery value)
 	{
 		Instance.Query = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A collate query that is run once for every suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query()
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A collate query that is run once for every suggestion.
-	/// </para>
-	/// </summary>
+	/// <include file="PhraseSuggestCollate.g.xml" path="doc/member[@key='_global.search._types.PhraseSuggestCollate#query']/*"/>
 	public Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor>? action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollateQueryDescriptor.Build(action);

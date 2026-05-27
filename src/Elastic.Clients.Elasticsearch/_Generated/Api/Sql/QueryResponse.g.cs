@@ -37,55 +37,21 @@ public sealed partial class QueryResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Column headings for the search results. Each object is a column.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#columns']/*"/>
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The cursor for the next set of paginated results.
-	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#cursor']/*"/>
 	public string? Cursor { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The identifier for the search.
-	/// This value is returned only for async and saved synchronous searches.
-	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-ID</c> HTTP header.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#id']/*"/>
 	public string? Id { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response does not contain complete search results.
-	/// If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
-	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
-	/// This value is returned only for async and saved synchronous searches.
-	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#is_partial']/*"/>
 	public bool? IsPartial { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the search is still running.
-	/// If <c>false</c>, the search has finished.
-	/// This value is returned only for async and saved synchronous searches.
-	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#is_running']/*"/>
 	public bool? IsRunning { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The values for the search results.
-	/// </para>
-	/// </summary>
+	/// <include file="QueryResponse.g.xml" path="doc/member[@key='sql.query.Response#rows']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
 }

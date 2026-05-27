@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ingest._types.EnrichProcessor#description"><summary><para>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#field"><summary><para>
+The field in the input document that matches the policies match_field used to retrieve the enrichment data.
+Supports template snippets.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#if"><summary><para>
+Conditionally execute the processor.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#ignore_failure"><summary><para>
+Ignore failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#ignore_missing"><summary><para>
+If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#max_matches"><summary><para>
+The maximum number of matched documents to include under the configured target field.
+The <c>target_field</c> will be turned into a json array if <c>max_matches</c> is higher than 1, otherwise <c>target_field</c> will become a json object.
+In order to avoid documents getting too large, the maximum allowed value is 128.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#on_failure"><summary><para>
+Handle failures for the processor.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#override"><summary><para>
+If processor will update fields with pre-existing non-null-valued field.
+When set to <c>false</c>, such fields will not be touched.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#policy_name"><summary><para>
+The name of the enrich policy to use.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#shape_relation"><summary><para>
+A spatial relation operator used to match the geoshape of incoming documents to documents in the enrich index.
+This option is only used for <c>geo_match</c> enrich policy types.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#tag"><summary><para>
+Identifier for the processor.
+Useful for debugging and metrics.
+</para></summary></member>
+  <member key="ingest._types.EnrichProcessor#target_field"><summary><para>
+Field added to incoming documents to contain enrich data. This field contains both the <c>match_field</c> and <c>enrich_fields</c> specified in the enrich policy.
+Supports template snippets.
+</para></summary></member>
+</doc>

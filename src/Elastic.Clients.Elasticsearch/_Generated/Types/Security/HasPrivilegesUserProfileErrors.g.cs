@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='security.has_privileges_user_profile.HasPrivilegesUserProfileErrors']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.HasPrivilegesUserProfileErrorsConverter))]
 public sealed partial class HasPrivilegesUserProfileErrors
 {

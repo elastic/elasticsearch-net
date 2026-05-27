@@ -23,30 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 public sealed partial class PutAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Create or update auto-follow patterns.
-/// </para>
-/// <para>
-/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
-/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
-/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
-/// </para>
-/// <para>
-/// This API can also be used to update auto-follow patterns.
-/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
-/// </para>
-/// </summary>
+/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.PutAutoFollowPatternRequestConverter))]
 public sealed partial class PutAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>
 {
@@ -80,140 +66,60 @@ public sealed partial class PutAutoFollowPatternRequest : Elastic.Clients.Elasti
 
 	internal override string OperationName => "ccr.put_auto_follow_pattern";
 
-	/// <summary>
-	/// <para>
-	/// The name of the collection of auto-follow patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#name']/*"/>
 	public required Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
-	/// <summary>
-	/// <para>
-	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#follow_index_pattern']/*"/>
 	public string? FollowIndexPattern { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_exclusion_patterns']/*"/>
 	public System.Collections.Generic.ICollection<string>? LeaderIndexExclusionPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_patterns']/*"/>
 	public System.Collections.Generic.ICollection<string>? LeaderIndexPatterns { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_outstanding_read_requests']/*"/>
 	public int? MaxOutstandingReadRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_outstanding_write_requests']/*"/>
 	public int? MaxOutstandingWriteRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_read_request_operation_count']/*"/>
 	public int? MaxReadRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_buffer_count']/*"/>
 	public int? MaxWriteBufferCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_request_operation_count']/*"/>
 	public int? MaxWriteRequestOperationCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader indices to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#remote_cluster']/*"/>
 	public required string RemoteCluster { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#settings']/*"/>
 	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
-/// <summary>
-/// <para>
-/// Create or update auto-follow patterns.
-/// </para>
-/// <para>
-/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
-/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
-/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
-/// </para>
-/// <para>
-/// This API can also be used to update auto-follow patterns.
-/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
-/// </para>
-/// </summary>
+/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request']/*"/>
 public readonly partial struct PutAutoFollowPatternRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest Instance { get; init; }
@@ -240,264 +146,168 @@ public readonly partial struct PutAutoFollowPatternRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The name of the collection of auto-follow patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#name']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#follow_index_pattern']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor FollowIndexPattern(string? value)
 	{
 		Instance.FollowIndexPattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_exclusion_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.LeaderIndexExclusionPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_exclusion_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(params string[] values)
 	{
 		Instance.LeaderIndexExclusionPatterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.LeaderIndexPatterns = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#leader_index_patterns']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(params string[] values)
 	{
 		Instance.LeaderIndexPatterns = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_outstanding_read_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxOutstandingReadRequests(int? value)
 	{
 		Instance.MaxOutstandingReadRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of outstanding reads requests from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_outstanding_write_requests']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxOutstandingWriteRequests(int? value)
 	{
 		Instance.MaxOutstandingWriteRequests = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations to pull per read from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_read_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestOperationCount(int? value)
 	{
 		Instance.MaxReadRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxReadRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_read_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_retry_delay']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MaxRetryDelay = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_buffer_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferCount(int? value)
 	{
 		Instance.MaxWriteBufferCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteBufferSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_buffer_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_request_operation_count']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestOperationCount(int? value)
 	{
 		Instance.MaxWriteRequestOperationCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxWriteRequestSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum total bytes of operations per bulk write request executed on the follower.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#max_write_request_size']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#read_poll_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.ReadPollTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The remote cluster containing the leader indices to match against.
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#remote_cluster']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor RemoteCluster(string value)
 	{
 		Instance.RemoteCluster = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
-	/// </para>
-	/// </summary>
+	/// <include file="PutAutoFollowPatternRequest.g.xml" path="doc/member[@key='ccr.put_auto_follow_pattern.Request#settings']/*"/>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);

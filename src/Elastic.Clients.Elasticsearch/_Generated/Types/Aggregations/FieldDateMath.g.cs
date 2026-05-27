@@ -23,12 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// A date range limit, represented either as a DateMath expression or a number expressed
-/// according to the target field's precision.
-/// </para>
-/// </summary>
+/// <include file="FieldDateMath.g.xml" path="doc/member[@key='_types.aggregations.FieldDateMath']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.FieldDateMath']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FieldDateMathConverter))]
 public sealed partial class FieldDateMath : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.DateMath, long>
 {

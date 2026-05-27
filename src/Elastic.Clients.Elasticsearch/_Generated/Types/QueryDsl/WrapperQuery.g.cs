@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.WrapperQueryConverter))]
 public sealed partial class WrapperQuery
 {
@@ -42,26 +43,15 @@ public sealed partial class WrapperQuery
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WrapperQuery.g.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery#boost']/*"/>
 	public float? Boost { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A base64 encoded query.
-	/// The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
-	/// </para>
-	/// </summary>
+	/// <include file="WrapperQuery.g.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery#query']/*"/>
 	public required string Query { get; set; }
 	public string? QueryName { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery']/*"/>
 public readonly partial struct WrapperQueryDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery Instance { get; init; }
@@ -81,26 +71,14 @@ public readonly partial struct WrapperQueryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.WrapperQuery(Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Floating point number used to decrease or increase the relevance scores of the query.
-	/// Boost values are relative to the default value of 1.0.
-	/// A boost value between 0 and 1.0 decreases the relevance score.
-	/// A value greater than 1.0 increases the relevance score.
-	/// </para>
-	/// </summary>
+	/// <include file="WrapperQuery.g.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery#boost']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor Boost(float? value)
 	{
 		Instance.Boost = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A base64 encoded query.
-	/// The binary data format can be any of JSON, YAML, CBOR or SMILE encodings
-	/// </para>
-	/// </summary>
+	/// <include file="WrapperQuery.g.xml" path="doc/member[@key='_types.query_dsl.WrapperQuery#query']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WrapperQueryDescriptor Query(string value)
 	{
 		Instance.Query = value;

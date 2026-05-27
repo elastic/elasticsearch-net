@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SoftDeletes']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SoftDeletesConverter))]
 public sealed partial class SoftDeletes
 {
@@ -36,24 +37,14 @@ public sealed partial class SoftDeletes
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether soft deletes are enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SoftDeletes.g.xml" path="doc/member[@key='indices._types.SoftDeletes#enabled']/*"/>
 	public bool? Enabled { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The maximum period to retain a shard history retention lease before it is considered expired.
-	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
-	/// index. If a soft delete is merged away before it can be replicated to a follower the following
-	/// process will fail due to incomplete history on the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="SoftDeletes.g.xml" path="doc/member[@key='indices._types.SoftDeletes#retention_lease']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? RetentionLease { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='indices._types.SoftDeletes']/*"/>
 public readonly partial struct SoftDeletesDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes Instance { get; init; }
@@ -73,39 +64,21 @@ public readonly partial struct SoftDeletesDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletes(Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Indicates whether soft deletes are enabled on the index.
-	/// </para>
-	/// </summary>
+	/// <include file="SoftDeletes.g.xml" path="doc/member[@key='indices._types.SoftDeletes#enabled']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor Enabled(bool? value = true)
 	{
 		Instance.Enabled = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum period to retain a shard history retention lease before it is considered expired.
-	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
-	/// index. If a soft delete is merged away before it can be replicated to a follower the following
-	/// process will fail due to incomplete history on the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="SoftDeletes.g.xml" path="doc/member[@key='indices._types.SoftDeletes#retention_lease']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor RetentionLease(Elastic.Clients.Elasticsearch.IndexManagement.RetentionLease? value)
 	{
 		Instance.RetentionLease = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum period to retain a shard history retention lease before it is considered expired.
-	/// Shard history retention leases ensure that soft deletes are retained during merges on the Lucene
-	/// index. If a soft delete is merged away before it can be replicated to a follower the following
-	/// process will fail due to incomplete history on the leader.
-	/// </para>
-	/// </summary>
+	/// <include file="SoftDeletes.g.xml" path="doc/member[@key='indices._types.SoftDeletes#retention_lease']/*"/>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SoftDeletesDescriptor RetentionLease(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor> action)
 	{
 		Instance.RetentionLease = Elastic.Clients.Elasticsearch.IndexManagement.RetentionLeaseDescriptor.Build(action);

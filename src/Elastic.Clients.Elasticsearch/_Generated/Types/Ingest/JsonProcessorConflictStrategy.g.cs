@@ -26,18 +26,10 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.JsonProcessorConflictStrategyConverter))]
 public enum JsonProcessorConflictStrategy
 {
-	/// <summary>
-	/// <para>
-	/// Conflicting fields will be merged.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessorConflictStrategy.g.xml" path="doc/member[@key='ingest._types.JsonProcessorConflictStrategy#merge']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "merge")]
 	Merge,
-	/// <summary>
-	/// <para>
-	/// Root fields that conflict with fields from the parsed JSON will be overridden.
-	/// </para>
-	/// </summary>
+	/// <include file="JsonProcessorConflictStrategy.g.xml" path="doc/member[@key='ingest._types.JsonProcessorConflictStrategy#replace']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "replace")]
 	Replace
 }

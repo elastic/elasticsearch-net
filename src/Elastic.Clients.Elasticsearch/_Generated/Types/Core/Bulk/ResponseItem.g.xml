@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_global.bulk.ResponseItem#_id"><summary><para>
+The document ID associated with the operation.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#_index"><summary><para>
+The name of the index associated with the operation.
+If the operation targeted a data stream, this is the backing index into which the document was written.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#_primary_term"><summary><para>
+The primary term assigned to the document for the operation.
+This property is returned only for successful operations.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#_seq_no"><summary><para>
+The sequence number assigned to the document for the operation.
+Sequence numbers are used to ensure an older version of a document doesn't overwrite a newer version.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#_shards"><summary><para>
+Shard information for the operation.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#_version"><summary><para>
+The document version associated with the operation.
+The document version is incremented each time the document is updated.
+This property is returned only for successful actions.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#error"><summary><para>
+Additional information about the failed operation.
+The property is returned only for failed operations.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#result"><summary><para>
+The result of the operation.
+Possible values are <c>created</c>, <c>updated</c>, <c>deleted</c>, <c>noop</c>, and <c>not_found</c>.
+</para></summary></member>
+  <member key="_global.bulk.ResponseItem#status"><summary><para>
+The HTTP status code returned for the operation.
+</para></summary></member>
+</doc>

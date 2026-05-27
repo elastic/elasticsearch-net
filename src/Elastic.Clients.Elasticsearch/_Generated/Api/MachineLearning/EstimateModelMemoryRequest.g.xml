@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.estimate_model_memory.Request"><summary><para>
+Estimate job model memory usage.
+</para>
+<para>
+Make an estimation of the memory usage for an anomaly detection job model.
+The estimate is based on analysis configuration details for the job and cardinality
+estimates for the fields it references.
+</para></summary></member>
+  <member key="ml.estimate_model_memory.Request#analysis_config"><summary><para>
+For a list of the properties that you can specify in the
+<c>analysis_config</c> component of the body of this API.
+</para></summary></member>
+  <member key="ml.estimate_model_memory.Request#max_bucket_cardinality"><summary><para>
+Estimates of the highest cardinality in a single bucket that is observed
+for influencer fields over the time period that the job analyzes data.
+To produce a good answer, values must be provided for all influencer
+fields. Providing values for fields that are not listed as <c>influencers</c>
+has no effect on the estimation.
+</para></summary></member>
+  <member key="ml.estimate_model_memory.Request#overall_cardinality"><summary><para>
+Estimates of the cardinality that is observed for fields over the whole
+time period that the job analyzes data. To produce a good answer, values
+must be provided for fields referenced in the <c>by_field_name</c>,
+<c>over_field_name</c> and <c>partition_field_name</c> of any detectors. Providing
+values for other fields has no effect on the estimation. It can be
+omitted from the request if no detectors have a <c>by_field_name</c>,
+<c>over_field_name</c> or <c>partition_field_name</c>.
+</para></summary></member>
+</doc>

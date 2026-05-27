@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ChunkingSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ChunkingSettingsConverter))]
 public sealed partial class ChunkingSettings
 {
@@ -43,95 +44,26 @@ public sealed partial class ChunkingSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// This value should not exceed the window size for the associated model.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#max_chunk_size']/*"/>
 	public required int MaxChunkSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#overlap']/*"/>
 	public int? Overlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#sentence_overlap']/*"/>
 	public int? SentenceOverlap { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
-	/// Values can be <c>markdown</c> or <c>plaintext</c>.
-	/// </para>
-	/// <para>
-	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#separator_group']/*"/>
 	public string? SeparatorGroup { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#separators']/*"/>
 	public System.Collections.Generic.ICollection<string>? Separators { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>max_chunk_size</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// either <c>separators</c> or<c>separator_group</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Learn more about different chunking strategies in the linked documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#strategy']/*"/>
 	public required string Strategy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.ChunkingSettings']/*"/>
 public readonly partial struct ChunkingSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings Instance { get; init; }
@@ -151,134 +83,49 @@ public readonly partial struct ChunkingSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings instance) => new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum size of a chunk in words.
-	/// This value cannot be lower than <c>20</c> (for <c>sentence</c> strategy) or <c>10</c> (for <c>word</c> strategy).
-	/// This value should not exceed the window size for the associated model.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#max_chunk_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor MaxChunkSize(int value)
 	{
 		Instance.MaxChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping words for chunks.
-	/// It is applicable only to a <c>word</c> chunking strategy.
-	/// This value cannot be higher than half the <c>max_chunk_size</c> value.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Overlap(int? value)
 	{
 		Instance.Overlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The number of overlapping sentences for chunks.
-	/// It is applicable only for a <c>sentence</c> chunking strategy.
-	/// It can be either <c>1</c> or <c>0</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#sentence_overlap']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor SentenceOverlap(int? value)
 	{
 		Instance.SentenceOverlap = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
-	/// Values can be <c>markdown</c> or <c>plaintext</c>.
-	/// </para>
-	/// <para>
-	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#separator_group']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor SeparatorGroup(string? value)
 	{
 		Instance.SeparatorGroup = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#separators']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Separators = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Only applicable to the <c>recursive</c> strategy and required when using it.
-	/// </para>
-	/// <para>
-	/// A list of strings used as possible split points when chunking text.
-	/// </para>
-	/// <para>
-	/// Each string can be a plain string or a regular expression (regex) pattern.
-	/// The system tries each separator in order to split the text, starting from the first item in the list.
-	/// </para>
-	/// <para>
-	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
-	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#separators']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Separators(params string[] values)
 	{
 		Instance.Separators = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>max_chunk_size</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// either <c>separators</c> or<c>separator_group</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// Learn more about different chunking strategies in the linked documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="ChunkingSettings.g.xml" path="doc/member[@key='_types.mapping.ChunkingSettings#strategy']/*"/>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Strategy(string value)
 	{
 		Instance.Strategy = value;

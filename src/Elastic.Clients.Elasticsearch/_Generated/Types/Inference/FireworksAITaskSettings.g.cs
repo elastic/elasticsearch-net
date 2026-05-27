@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.FireworksAITaskSettingsConverter))]
 public sealed partial class FireworksAITaskSettings
 {
@@ -36,29 +37,14 @@ public sealed partial class FireworksAITaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#headers']/*"/>
 	public System.Collections.Generic.IDictionary<string, string>? Headers { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#user']/*"/>
 	public string? User { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings']/*"/>
 public readonly partial struct FireworksAiTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.FireworksAITaskSettings Instance { get; init; }
@@ -78,54 +64,21 @@ public readonly partial struct FireworksAiTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.FireworksAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.FireworksAITaskSettings(Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers(System.Collections.Generic.IDictionary<string, string>? value)
 	{
 		Instance.Headers = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers()
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task. Specifies custom HTTP header parameters.
-	/// For example:
-	/// </para>
-	/// <code>
-	/// "headers": {
-	///   "Custom-Header": "Some-Value",
-	///   "Another-Custom-Header": "Another-Value"
-	/// }
-	/// </code>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#headers']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor Headers(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
 		Instance.Headers = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
@@ -139,12 +92,7 @@ public readonly partial struct FireworksAiTaskSettingsDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> or<c>chat_completion</c> task, specify the user issuing the request.
-	/// This information can be used for abuse detection.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAITaskSettings.g.xml" path="doc/member[@key='inference._types.FireworksAITaskSettings#user']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiTaskSettingsDescriptor User(string? value)
 	{
 		Instance.User = value;

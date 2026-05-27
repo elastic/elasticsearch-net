@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSaturation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionSaturationConverter))]
 public sealed partial class RankFeatureFunctionSaturation
 {
@@ -36,14 +37,11 @@ public sealed partial class RankFeatureFunctionSaturation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSaturation.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSaturation#pivot']/*"/>
 	public float? Pivot { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSaturation']/*"/>
 public readonly partial struct RankFeatureFunctionSaturationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation Instance { get; init; }
@@ -63,11 +61,7 @@ public readonly partial struct RankFeatureFunctionSaturationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Configurable pivot value so that the result will be less than 0.5.
-	/// </para>
-	/// </summary>
+	/// <include file="RankFeatureFunctionSaturation.g.xml" path="doc/member[@key='_types.query_dsl.RankFeatureFunctionSaturation#pivot']/*"/>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor Pivot(float? value)
 	{
 		Instance.Pivot = value;

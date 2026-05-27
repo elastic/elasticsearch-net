@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SizeField']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SizeFieldConverter))]
 public sealed partial class SizeField
 {
@@ -45,6 +46,7 @@ public sealed partial class SizeField
 	public required bool Enabled { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.mapping.SizeField']/*"/>
 public readonly partial struct SizeFieldDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Mapping.SizeField Instance { get; init; }

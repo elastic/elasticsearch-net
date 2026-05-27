@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LowercaseTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.LowercaseTokenFilterConverter))]
 public sealed partial class LowercaseTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -36,11 +37,7 @@ public sealed partial class LowercaseTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Language-specific lowercase token filter to use.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseTokenFilter.g.xml" path="doc/member[@key='_types.analysis.LowercaseTokenFilter#language']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? Language { get; set; }
 
 	public string Type => "lowercase";
@@ -48,6 +45,7 @@ public sealed partial class LowercaseTokenFilter : Elastic.Clients.Elasticsearch
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.LowercaseTokenFilter']/*"/>
 public readonly partial struct LowercaseTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter Instance { get; init; }
@@ -67,11 +65,7 @@ public readonly partial struct LowercaseTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Language-specific lowercase token filter to use.
-	/// </para>
-	/// </summary>
+	/// <include file="LowercaseTokenFilter.g.xml" path="doc/member[@key='_types.analysis.LowercaseTokenFilter#language']/*"/>
 	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? value)
 	{
 		Instance.Language = value;

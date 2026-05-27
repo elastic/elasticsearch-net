@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml._types.DataframeEvaluationRegression#actual_field"><summary><para>
+The field of the index which contains the ground truth. The data type of this field must be numerical.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationRegression#metrics"><summary><para>
+Specifies the metrics that are used for the evaluation. For more information on mse, msle, and huber, consult the Jupyter notebook on regression loss functions.
+</para></summary></member>
+  <member key="ml._types.DataframeEvaluationRegression#predicted_field"><summary><para>
+The field in the index that contains the predicted value, in other words the results of the regression analysis.
+</para></summary></member>
+</doc>

@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AnthropicTaskSettingsConverter))]
 public sealed partial class AnthropicTaskSettings
 {
@@ -42,42 +43,20 @@ public sealed partial class AnthropicTaskSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is the maximum number of tokens to generate before stopping.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#max_tokens']/*"/>
 	public required int MaxTokens { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is the amount of randomness injected into the response.
-	/// For more details about the supported range, refer to Anthropic documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#temperature']/*"/>
 	public float? Temperature { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it specifies to only sample from the top K options for each subsequent token.
-	/// It is recommended for advanced use cases only.
-	/// You usually only need to use <c>temperature</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#top_k']/*"/>
 	public int? TopK { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it specifies to use Anthropic's nucleus sampling.
-	/// In nucleus sampling, Anthropic computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches the specified probability.
-	/// You should either alter <c>temperature</c> or <c>top_p</c>, but not both.
-	/// It is recommended for advanced use cases only.
-	/// You usually only need to use <c>temperature</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#top_p']/*"/>
 	public float? TopP { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings']/*"/>
 public readonly partial struct AnthropicTaskSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings Instance { get; init; }
@@ -97,51 +76,28 @@ public readonly partial struct AnthropicTaskSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is the maximum number of tokens to generate before stopping.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#max_tokens']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor MaxTokens(int value)
 	{
 		Instance.MaxTokens = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it is the amount of randomness injected into the response.
-	/// For more details about the supported range, refer to Anthropic documentation.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#temperature']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor Temperature(float? value)
 	{
 		Instance.Temperature = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it specifies to only sample from the top K options for each subsequent token.
-	/// It is recommended for advanced use cases only.
-	/// You usually only need to use <c>temperature</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#top_k']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor TopK(int? value)
 	{
 		Instance.TopK = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>completion</c> task, it specifies to use Anthropic's nucleus sampling.
-	/// In nucleus sampling, Anthropic computes the cumulative distribution over all the options for each subsequent token in decreasing probability order and cuts it off once it reaches the specified probability.
-	/// You should either alter <c>temperature</c> or <c>top_p</c>, but not both.
-	/// It is recommended for advanced use cases only.
-	/// You usually only need to use <c>temperature</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="AnthropicTaskSettings.g.xml" path="doc/member[@key='inference._types.AnthropicTaskSettings#top_p']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsDescriptor TopP(float? value)
 	{
 		Instance.TopP = value;

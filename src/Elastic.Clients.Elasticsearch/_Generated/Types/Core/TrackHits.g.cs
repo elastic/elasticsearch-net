@@ -23,14 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-/// <summary>
-/// <para>
-/// Number of hits matching the query to count accurately. If true, the exact
-/// number of hits is returned at the cost of some performance. If false, the
-/// response does not include the total number of hits matching the query.
-/// Defaults to 10,000 hits.
-/// </para>
-/// </summary>
+/// <include file="TrackHits.g.xml" path="doc/member[@key='_global.search._types.TrackHits']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_global.search._types.TrackHits']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.TrackHitsConverter))]
 public sealed partial class TrackHits : Elastic.Clients.Elasticsearch.Union<bool, int>
 {

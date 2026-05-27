@@ -23,24 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Streams;
 
+/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 public sealed partial class StreamsStatusRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the status of streams.
-/// </para>
-/// <para>
-/// Get the current status for all types of streams.
-/// </para>
-/// </summary>
+/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.StreamsStatusRequestConverter))]
 public sealed partial class StreamsStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestParameters>
 {
@@ -62,22 +54,12 @@ public sealed partial class StreamsStatusRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "streams.status";
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Get the status of streams.
-/// </para>
-/// <para>
-/// Get the current status for all types of streams.
-/// </para>
-/// </summary>
+/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='streams.status.Request']/*"/>
 public readonly partial struct StreamsStatusRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest Instance { get; init; }
@@ -96,11 +78,7 @@ public readonly partial struct StreamsStatusRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor(Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest instance) => new Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequest(Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
+	/// <include file="StreamsStatusRequest.g.xml" path="doc/member[@key='streams.status.Request#master_timeout']/*"/>
 	public Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.RRFRetrieverComponent"><summary><para>
+Wraps a retriever with an optional weight for RRF scoring.
+</para></summary></member>
+  <member key="_types.RRFRetrieverComponent#retriever"><summary><para>
+The nested retriever configuration.
+</para></summary></member>
+  <member key="_types.RRFRetrieverComponent#weight"><summary><para>
+Weight multiplier for this retriever's contribution to the RRF score. Higher values increase influence. Defaults to 1.0 if not specified. Must be non-negative.
+</para></summary></member>
+</doc>

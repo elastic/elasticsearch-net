@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ccr.stats.AutoFollowStats']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.AutoFollowStatsConverter))]
 public sealed partial class AutoFollowStats
 {
@@ -48,32 +49,15 @@ public sealed partial class AutoFollowStats
 
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster> AutoFollowedClusters { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of indices that the auto-follow coordinator failed to automatically follow.
-	/// The causes of recent failures are captured in the logs of the elected master node and in the <c>auto_follow_stats.recent_auto_follow_errors</c> field.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowStats.g.xml" path="doc/member[@key='ccr.stats.AutoFollowStats#number_of_failed_follow_indices']/*"/>
 	public required long NumberOfFailedFollowIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of times that the auto-follow coordinator failed to retrieve the cluster state from a remote cluster registered in a collection of auto-follow patterns.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowStats.g.xml" path="doc/member[@key='ccr.stats.AutoFollowStats#number_of_failed_remote_cluster_state_requests']/*"/>
 	public required long NumberOfFailedRemoteClusterStateRequests { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The number of indices that the auto-follow coordinator successfully followed.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowStats.g.xml" path="doc/member[@key='ccr.stats.AutoFollowStats#number_of_successful_follow_indices']/*"/>
 	public required long NumberOfSuccessfulFollowIndices { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// An array of objects representing failures by the auto-follow coordinator.
-	/// </para>
-	/// </summary>
+	/// <include file="AutoFollowStats.g.xml" path="doc/member[@key='ccr.stats.AutoFollowStats#recent_auto_follow_errors']/*"/>
 	public required System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause> RecentAutoFollowErrors { get; set; }
 }

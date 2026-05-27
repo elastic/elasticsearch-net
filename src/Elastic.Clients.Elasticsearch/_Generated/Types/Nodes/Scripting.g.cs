@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='nodes._types.Scripting']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ScriptingConverter))]
 public sealed partial class Scripting
 {
@@ -36,32 +37,16 @@ public sealed partial class Scripting
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Total number of times the script cache has evicted old data.
-	/// </para>
-	/// </summary>
+	/// <include file="Scripting.g.xml" path="doc/member[@key='nodes._types.Scripting#cache_evictions']/*"/>
 	public long? CacheEvictions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of times the script compilation circuit breaker has limited inline script compilations.
-	/// </para>
-	/// </summary>
+	/// <include file="Scripting.g.xml" path="doc/member[@key='nodes._types.Scripting#compilation_limit_triggered']/*"/>
 	public long? CompilationLimitTriggered { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Total number of inline script compilations performed by the node.
-	/// </para>
-	/// </summary>
+	/// <include file="Scripting.g.xml" path="doc/member[@key='nodes._types.Scripting#compilations']/*"/>
 	public long? Compilations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Contains this recent history of script compilations.
-	/// </para>
-	/// </summary>
+	/// <include file="Scripting.g.xml" path="doc/member[@key='nodes._types.Scripting#compilations_history']/*"/>
 	public System.Collections.Generic.IReadOnlyDictionary<string, long>? CompilationsHistory { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Context>? Contexts { get; set; }
 }

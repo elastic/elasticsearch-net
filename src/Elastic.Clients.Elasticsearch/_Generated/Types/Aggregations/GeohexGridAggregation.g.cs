@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.GeohexGridAggregationConverter))]
 public sealed partial class GeohexGridAggregation
 {
@@ -42,44 +43,23 @@ public sealed partial class GeohexGridAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Bounding box used to filter the geo-points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.GeoBounds? Bounds { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#field']/*"/>
 	public required Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to defined cells or buckets
-	/// in the results. Value should be between 0-15.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#precision']/*"/>
 	public int? Precision { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Number of buckets returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#shard_size']/*"/>
 	public int? ShardSize { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#size']/*"/>
 	public int? Size { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation']/*"/>
 public readonly partial struct GeohexGridAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Instance { get; init; }
@@ -99,80 +79,49 @@ public readonly partial struct GeohexGridAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Bounding box used to filter the geo-points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Bounding box used to filter the geo-points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to defined cells or buckets
-	/// in the results. Value should be between 0-15.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Precision(int? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of buckets returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor<TDocument> Size(int? value)
 	{
 		Instance.Size = value;
@@ -188,6 +137,7 @@ public readonly partial struct GeohexGridAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation']/*"/>
 public readonly partial struct GeohexGridAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation Instance { get; init; }
@@ -207,80 +157,49 @@ public readonly partial struct GeohexGridAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Bounding box used to filter the geo-points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(Elastic.Clients.Elasticsearch.GeoBounds? value)
 	{
 		Instance.Bounds = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Bounding box used to filter the geo-points in each bucket.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#bounds']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Bounds(System.Func<Elastic.Clients.Elasticsearch.GeoBoundsFactory, Elastic.Clients.Elasticsearch.GeoBounds> action)
 	{
 		Instance.Bounds = Elastic.Clients.Elasticsearch.GeoBoundsFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing indexed <c>geo_point</c> or <c>geo_shape</c> values.
-	/// If the field contains an array, <c>geohex_grid</c> aggregates all array values.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Integer zoom of the key used to defined cells or buckets
-	/// in the results. Value should be between 0-15.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#precision']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Precision(int? value)
 	{
 		Instance.Precision = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Number of buckets returned from each shard.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#shard_size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor ShardSize(int? value)
 	{
 		Instance.ShardSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of buckets to return.
-	/// </para>
-	/// </summary>
+	/// <include file="GeohexGridAggregation.g.xml" path="doc/member[@key='_types.aggregations.GeohexGridAggregation#size']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregationDescriptor Size(int? value)
 	{
 		Instance.Size = value;

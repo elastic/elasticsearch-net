@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#adjusted_total"><summary><para>
+Total amount of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#adjusted_total_in_bytes"><summary><para>
+Total amount, in bytes, of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#free"><summary><para>
+Amount of free physical memory across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#free_in_bytes"><summary><para>
+Amount, in bytes, of free physical memory across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#free_percent"><summary><para>
+Percentage of free physical memory across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#total"><summary><para>
+Total amount of physical memory across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#total_in_bytes"><summary><para>
+Total amount, in bytes, of physical memory across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#used"><summary><para>
+Amount of physical memory in use across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#used_in_bytes"><summary><para>
+Amount, in bytes, of physical memory in use across all selected nodes.
+</para></summary></member>
+  <member key="cluster.stats.OperatingSystemMemoryInfo#used_percent"><summary><para>
+Percentage of physical memory in use across all selected nodes.
+</para></summary></member>
+</doc>

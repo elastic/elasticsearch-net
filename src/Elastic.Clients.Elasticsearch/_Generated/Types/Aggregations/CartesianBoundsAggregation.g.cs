@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CartesianBoundsAggregationConverter))]
 public sealed partial class CartesianBoundsAggregation
 {
@@ -36,23 +37,15 @@ public sealed partial class CartesianBoundsAggregation
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#missing']/*"/>
 	public object? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation']/*"/>
 public readonly partial struct CartesianBoundsAggregationDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation Instance { get; init; }
@@ -72,34 +65,21 @@ public readonly partial struct CartesianBoundsAggregationDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument> Missing(object? value)
 	{
 		Instance.Missing = value;
@@ -138,6 +118,7 @@ public readonly partial struct CartesianBoundsAggregationDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation']/*"/>
 public readonly partial struct CartesianBoundsAggregationDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation Instance { get; init; }
@@ -157,34 +138,21 @@ public readonly partial struct CartesianBoundsAggregationDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field on which to run the aggregation.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The value to apply to documents that do not have a value.
-	/// By default, documents without a value are ignored.
-	/// </para>
-	/// </summary>
+	/// <include file="CartesianBoundsAggregation.g.xml" path="doc/member[@key='_types.aggregations.CartesianBoundsAggregation#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor Missing(object? value)
 	{
 		Instance.Missing = value;

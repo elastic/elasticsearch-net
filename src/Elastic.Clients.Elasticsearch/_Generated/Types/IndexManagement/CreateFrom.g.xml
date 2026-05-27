@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="indices.create_from.CreateFrom#mappings_override"><summary><para>
+Mappings overrides to be applied to the destination index (optional)
+</para></summary></member>
+  <member key="indices.create_from.CreateFrom#remove_index_blocks"><summary><para>
+If index blocks should be removed when creating destination index (optional)
+</para></summary></member>
+  <member key="indices.create_from.CreateFrom#settings_override"><summary><para>
+Settings overrides to be applied to the destination index (optional)
+</para></summary></member>
+</doc>

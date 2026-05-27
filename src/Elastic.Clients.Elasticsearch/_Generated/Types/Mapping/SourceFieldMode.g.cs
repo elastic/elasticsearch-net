@@ -30,12 +30,7 @@ public enum SourceFieldMode
 	Disabled,
 	[System.Runtime.Serialization.EnumMember(Value = "stored")]
 	Stored,
-	/// <summary>
-	/// <para>
-	/// Instead of storing source documents on disk exactly as you send them,
-	/// Elasticsearch can reconstruct source content on the fly upon retrieval.
-	/// </para>
-	/// </summary>
+	/// <include file="SourceFieldMode.g.xml" path="doc/member[@key='_types.mapping.SourceFieldMode#synthetic']/*"/>
 	[System.Runtime.Serialization.EnumMember(Value = "synthetic")]
 	Synthetic
 }

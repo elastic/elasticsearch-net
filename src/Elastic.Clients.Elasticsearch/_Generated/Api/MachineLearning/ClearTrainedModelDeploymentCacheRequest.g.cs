@@ -23,21 +23,14 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="ClearTrainedModelDeploymentCacheRequest.g.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
 public sealed partial class ClearTrainedModelDeploymentCacheRequestParameters : Elastic.Transport.RequestParameters
 {
 }
 
-/// <summary>
-/// <para>
-/// Clear trained model deployment cache.
-/// </para>
-/// <para>
-/// Cache will be cleared on all nodes where the trained model is assigned.
-/// A trained model deployment may have an inference cache enabled.
-/// As requests are handled by each allocated node, their responses may be cached on that individual node.
-/// Calling this API clears the caches without restarting the deployment.
-/// </para>
-/// </summary>
+/// <include file="ClearTrainedModelDeploymentCacheRequest.g.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ClearTrainedModelDeploymentCacheRequestConverter))]
 public sealed partial class ClearTrainedModelDeploymentCacheRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestParameters>
 {
@@ -64,25 +57,12 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequest : Elastic.Cl
 
 	internal override string OperationName => "ml.clear_trained_model_deployment_cache";
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearTrainedModelDeploymentCacheRequest.g.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request#model_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.Id ModelId { get => P<Elastic.Clients.Elasticsearch.Id>("model_id"); set => PR("model_id", value); }
 }
 
-/// <summary>
-/// <para>
-/// Clear trained model deployment cache.
-/// </para>
-/// <para>
-/// Cache will be cleared on all nodes where the trained model is assigned.
-/// A trained model deployment may have an inference cache enabled.
-/// As requests are handled by each allocated node, their responses may be cached on that individual node.
-/// Calling this API clears the caches without restarting the deployment.
-/// </para>
-/// </summary>
+/// <include file="ClearTrainedModelDeploymentCacheRequest.g.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request']/*"/>
 public readonly partial struct ClearTrainedModelDeploymentCacheRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest Instance { get; init; }
@@ -107,11 +87,7 @@ public readonly partial struct ClearTrainedModelDeploymentCacheRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequest(Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier of the trained model.
-	/// </para>
-	/// </summary>
+	/// <include file="ClearTrainedModelDeploymentCacheRequest.g.xml" path="doc/member[@key='ml.clear_trained_model_deployment_cache.Request#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.ClearTrainedModelDeploymentCacheRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.ModelId = value;

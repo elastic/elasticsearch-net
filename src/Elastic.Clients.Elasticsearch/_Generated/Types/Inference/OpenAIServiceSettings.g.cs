@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.OpenAIServiceSettingsConverter))]
 public sealed partial class OpenAIServiceSettings
 {
@@ -43,71 +44,29 @@ public sealed partial class OpenAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your OpenAI account.
-	/// You can find your OpenAI API keys in your OpenAI account under the API keys section.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// It is supported only in <c>text-embedding-3</c> and later models.
-	/// If it is not set, the OpenAI defined default for the model is used.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the OpenAI documentation for the list of available text embedding models.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for your organization.
-	/// You can find the Organization ID in your OpenAI account under <em>Settings > Organizations</em>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#organization_id']/*"/>
 	public string? OrganizationId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
-	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// It can be changed for testing purposes.
-	/// Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
-	/// <c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings']/*"/>
 public readonly partial struct OpenAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings Instance { get; init; }
@@ -127,120 +86,63 @@ public readonly partial struct OpenAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key of your OpenAI account.
-	/// You can find your OpenAI API keys in your OpenAI account under the API keys section.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> or <c>embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// It is supported only in <c>text-embedding-3</c> and later models.
-	/// If it is not set, the OpenAI defined default for the model is used.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the OpenAI documentation for the list of available text embedding models.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The unique identifier for your organization.
-	/// You can find the Organization ID in your OpenAI account under <em>Settings > Organizations</em>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#organization_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor OrganizationId(string? value)
 	{
 		Instance.OrganizationId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
-	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
-	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from OpenAI.
-	/// The <c>openai</c> service sets a default number of requests allowed per minute depending on the task type.
-	/// For <c>text_embedding</c> and <c>embedding</c>, it is set to <c>3000</c>.
-	/// For <c>completion</c> and <c>chat_completion</c>, it is set to <c>500</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> or <c>embedding</c> task, the similarity measure. One of <c>cosine</c>, <c>dot_product</c>, <c>l2_norm</c>. Defaults to <c>dot_product</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.OpenAISimilarityType? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// It can be changed for testing purposes.
-	/// Default value is <c>https://api.openai.com/v1/embeddings</c> for a <c>text_embedding</c> or <c>embedding</c> task,
-	/// <c>https://api.openai.com/v1/chat/completions</c> for a <c>completion</c> or <c>chat_completion</c> task.
-	/// </para>
-	/// </summary>
+	/// <include file="OpenAIServiceSettings.g.xml" path="doc/member[@key='inference._types.OpenAIServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.OpenAiServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

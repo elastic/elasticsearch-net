@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.Retention']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.RetentionConverter))]
 public sealed partial class Retention
 {
@@ -44,28 +45,17 @@ public sealed partial class Retention
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#expire_after']/*"/>
 	public required Elastic.Clients.Elasticsearch.Duration ExpireAfter { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#max_count']/*"/>
 	public required int MaxCount { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of snapshots to retain, even if the snapshots have expired.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#min_count']/*"/>
 	public required int MinCount { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='slm._types.Retention']/*"/>
 public readonly partial struct RetentionDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Instance { get; init; }
@@ -85,33 +75,21 @@ public readonly partial struct RetentionDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention instance) => new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Time period after which a snapshot is considered expired and eligible for deletion. SLM deletes expired snapshots based on the slm.retention_schedule.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#expire_after']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor ExpireAfter(Elastic.Clients.Elasticsearch.Duration value)
 	{
 		Instance.ExpireAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Maximum number of snapshots to retain, even if the snapshots have not yet expired. If the number of snapshots in the repository exceeds this limit, the policy retains the most recent snapshots and deletes older snapshots.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#max_count']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor MaxCount(int value)
 	{
 		Instance.MaxCount = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Minimum number of snapshots to retain, even if the snapshots have expired.
-	/// </para>
-	/// </summary>
+	/// <include file="Retention.g.xml" path="doc/member[@key='slm._types.Retention#min_count']/*"/>
 	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor MinCount(int value)
 	{
 		Instance.MinCount = value;

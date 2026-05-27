@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.DateRangeAggregate"><summary><para>
+Result of a <c>date_range</c> aggregation. Same format as a for a <c>range</c> aggregation: <c>from</c> and <c>to</c>
+in <c>buckets</c> are milliseconds since the Epoch, represented as a floating point number.
+</para></summary></member>
+</doc>

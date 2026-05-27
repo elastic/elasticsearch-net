@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.aggregations.SignificantTextAggregation#background_filter"><summary><para>
+A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#chi_square"><summary><para>
+Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#exclude"><summary><para>
+Values to exclude.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#execution_hint"><summary><para>
+Determines whether the aggregation will use field values directly or global ordinals.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#field"><summary><para>
+The field from which to return significant text.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#filter_duplicate_text"><summary><para>
+Whether to out duplicate text to deal with noisy data.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#gnd"><summary><para>
+Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#include"><summary><para>
+Values to include.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#jlh"><summary><para>
+Use JLH score as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#min_doc_count"><summary><para>
+Only return values that are found in more than <c>min_doc_count</c> hits.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#mutual_information"><summary><para>
+Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#percentage"><summary><para>
+A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#script_heuristic"><summary><para>
+Customized score, implemented via a script.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#shard_min_doc_count"><summary><para>
+Regulates the certainty a shard has if the values should actually be added to the candidate list or not with respect to the min_doc_count.
+Values will only be considered if their local shard frequency within the set is higher than the <c>shard_min_doc_count</c>.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#shard_size"><summary><para>
+The number of candidate terms produced by each shard.
+By default, <c>shard_size</c> will be automatically estimated based on the number of shards and the <c>size</c> parameter.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#size"><summary><para>
+The number of buckets returned out of the overall terms list.
+</para></summary></member>
+  <member key="_types.aggregations.SignificantTextAggregation#source_fields"><summary><para>
+Overrides the JSON <c>_source</c> fields from which text will be analyzed.
+</para></summary></member>
+</doc>

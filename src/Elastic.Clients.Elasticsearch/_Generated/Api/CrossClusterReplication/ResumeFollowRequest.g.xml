@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ccr.resume_follow.Request"><summary><para>
+Resume a follower.
+</para>
+<para>
+Resume a cross-cluster replication follower index that was paused.
+The follower index could have been paused with the pause follower API.
+Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
+When this API returns, the follower index will resume fetching operations from the leader index.
+</para></summary></member>
+  <member key="ccr.resume_follow.Request#index"><summary><para>
+Name of the follow index to resume following
+</para></summary></member>
+  <member key="ccr.resume_follow.Request#master_timeout"><summary><para>
+Period to wait for a connection to the master node.
+</para></summary></member>
+</doc>

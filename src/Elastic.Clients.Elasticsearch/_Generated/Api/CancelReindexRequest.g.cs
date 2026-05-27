@@ -23,27 +23,16 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
 public sealed partial class CancelReindexRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default), the request blocks until the cancellation is complete and returns the final task state.
-	/// If <c>false</c>, the request returns immediately with <c>acknowledged: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Cancel a reindex task.
-/// </para>
-/// <para>
-/// Cancel an ongoing reindex task. If <c>wait_for_completion</c> is <c>true</c> (the default),
-/// the response contains the final task state after cancellation.
-/// If <c>wait_for_completion</c> is <c>false</c>, the response contains only <c>acknowledged: true</c>.
-/// </para>
-/// </summary>
+/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CancelReindexRequestConverter))]
 public sealed partial class CancelReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CancelReindexRequestParameters>
 {
@@ -70,32 +59,15 @@ public sealed partial class CancelReindexRequest : Elastic.Clients.Elasticsearch
 
 	internal override string OperationName => "cancel_reindex";
 
-	/// <summary>
-	/// <para>
-	/// The ID of the reindex task to cancel.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request#task_id']/*"/>
 	public required Elastic.Clients.Elasticsearch.TaskId TaskId { get => P<Elastic.Clients.Elasticsearch.TaskId>("task_id"); set => PR("task_id", value); }
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default), the request blocks until the cancellation is complete and returns the final task state.
-	/// If <c>false</c>, the request returns immediately with <c>acknowledged: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request#wait_for_completion']/*"/>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-/// <summary>
-/// <para>
-/// Cancel a reindex task.
-/// </para>
-/// <para>
-/// Cancel an ongoing reindex task. If <c>wait_for_completion</c> is <c>true</c> (the default),
-/// the response contains the final task state after cancellation.
-/// If <c>wait_for_completion</c> is <c>false</c>, the response contains only <c>acknowledged: true</c>.
-/// </para>
-/// </summary>
+/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
+/// <include file="../SpecReferences.xml" path="doc/member[@key='_global.cancel_reindex.Request']/*"/>
 public readonly partial struct CancelReindexRequestDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.CancelReindexRequest Instance { get; init; }
@@ -120,23 +92,14 @@ public readonly partial struct CancelReindexRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(Elastic.Clients.Elasticsearch.CancelReindexRequest instance) => new Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.CancelReindexRequest(Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The ID of the reindex task to cancel.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request#task_id']/*"/>
 	public Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.TaskId value)
 	{
 		Instance.TaskId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c> (the default), the request blocks until the cancellation is complete and returns the final task state.
-	/// If <c>false</c>, the request returns immediately with <c>acknowledged: true</c>.
-	/// </para>
-	/// </summary>
+	/// <include file="CancelReindexRequest.g.xml" path="doc/member[@key='_global.cancel_reindex.Request#wait_for_completion']/*"/>
 	public Elastic.Clients.Elasticsearch.CancelReindexRequestDescriptor WaitForCompletion(bool? value = true)
 	{
 		Instance.WaitForCompletion = value;

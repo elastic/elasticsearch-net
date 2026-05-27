@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.FireworksAIServiceSettingsConverter))]
 public sealed partial class FireworksAIServiceSettings
 {
@@ -43,60 +44,26 @@ public sealed partial class FireworksAIServiceSettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Fireworks AI account.
-	/// You can find or create your API keys in the Fireworks AI dashboard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#api_key']/*"/>
 	public required string ApiKey { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// Variable-length embeddings are supported via this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#dimensions']/*"/>
 	public int? Dimensions { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Fireworks AI documentation for the list of available models for chat completion, completion, and text embedding.
-	/// For text embedding, supported models include the Qwen3 embedding family (e.g. <c>fireworks/qwen3-embedding-8b</c>) and other models in the Fireworks model library.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#model_id']/*"/>
 	public required string ModelId { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Fireworks AI API.
-	/// Rate limit grouping is per API key only.
-	/// By default, the <c>fireworksai</c> service sets the number of requests allowed per minute to 6000.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? RateLimit { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAISimilarityType? Similarity { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// If not provided, the default Fireworks AI API endpoint is used.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#url']/*"/>
 	public string? Url { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings']/*"/>
 public readonly partial struct FireworksAiServiceSettingsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.FireworksAIServiceSettings Instance { get; init; }
@@ -116,103 +83,56 @@ public readonly partial struct FireworksAiServiceSettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.FireworksAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.FireworksAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A valid API key for your Fireworks AI account.
-	/// You can find or create your API keys in the Fireworks AI dashboard.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: You need to provide the API key only once, during the inference model creation.
-	/// The get inference endpoint API does not retrieve your API key.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#api_key']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor ApiKey(string value)
 	{
 		Instance.ApiKey = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
-	/// Variable-length embeddings are supported via this parameter.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#dimensions']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor Dimensions(int? value)
 	{
 		Instance.Dimensions = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the model to use for the inference task.
-	/// Refer to the Fireworks AI documentation for the list of available models for chat completion, completion, and text embedding.
-	/// For text embedding, supported models include the Qwen3 embedding family (e.g. <c>fireworks/qwen3-embedding-8b</c>) and other models in the Fireworks model library.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#model_id']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Fireworks AI API.
-	/// Rate limit grouping is per API key only.
-	/// By default, the <c>fireworksai</c> service sets the number of requests allowed per minute to 6000.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor RateLimit(Elastic.Clients.Elasticsearch.Inference.RateLimitSetting? value)
 	{
 		Instance.RateLimit = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Fireworks AI API.
-	/// Rate limit grouping is per API key only.
-	/// By default, the <c>fireworksai</c> service sets the number of requests allowed per minute to 6000.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor RateLimit()
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// This setting helps to minimize the number of rate limit errors returned from the Fireworks AI API.
-	/// Rate limit grouping is per API key only.
-	/// By default, the <c>fireworksai</c> service sets the number of requests allowed per minute to 6000.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#rate_limit']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor RateLimit(System.Action<Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor>? action)
 	{
 		Instance.RateLimit = Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// For a <c>text_embedding</c> task, the similarity measure. One of cosine, dot_product, l2_norm.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#similarity']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor Similarity(Elastic.Clients.Elasticsearch.Inference.FireworksAISimilarityType? value)
 	{
 		Instance.Similarity = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL endpoint to use for the requests.
-	/// If not provided, the default Fireworks AI API endpoint is used.
-	/// </para>
-	/// </summary>
+	/// <include file="FireworksAIServiceSettings.g.xml" path="doc/member[@key='inference._types.FireworksAIServiceSettings#url']/*"/>
 	public Elastic.Clients.Elasticsearch.Inference.FireworksAiServiceSettingsDescriptor Url(string? value)
 	{
 		Instance.Url = value;

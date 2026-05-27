@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="_types.ErrorCause"><summary><para>
+Cause and details about a request failure. This class defines the properties common to all error types.
+Additional details are also provided, that depend on the error type.
+</para></summary></member>
+  <member key="_types.ErrorCause#reason"><summary><para>
+A human-readable explanation of the error, in English.
+</para></summary></member>
+  <member key="_types.ErrorCause#stack_trace"><summary><para>
+The server stack trace. Present only if the <c>error_trace=true</c> parameter was sent with the request.
+</para></summary></member>
+  <member key="_types.ErrorCause#type"><summary><para>
+The type of error
+</para></summary></member>
+</doc>

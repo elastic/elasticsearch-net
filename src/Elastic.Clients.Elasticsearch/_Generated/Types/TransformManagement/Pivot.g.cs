@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Pivot']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.PivotConverter))]
 public sealed partial class Pivot
 {
@@ -36,25 +37,14 @@ public sealed partial class Pivot
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? GroupBy { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Pivot']/*"/>
 public readonly partial struct PivotDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Pivot Instance { get; init; }
@@ -74,42 +64,21 @@ public readonly partial struct PivotDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -130,36 +99,21 @@ public readonly partial struct PivotDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? value)
 	{
 		Instance.GroupBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy()
 	{
 		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>>? action)
 	{
 		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(action);
@@ -194,6 +148,7 @@ public readonly partial struct PivotDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='transform._types.Pivot']/*"/>
 public readonly partial struct PivotDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.TransformManagement.Pivot Instance { get; init; }
@@ -213,56 +168,28 @@ public readonly partial struct PivotDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
-	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
-	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
-	/// average.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#aggregations']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -290,48 +217,28 @@ public readonly partial struct PivotDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? value)
 	{
 		Instance.GroupBy = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy()
 	{
 		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy>? action)
 	{
 		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
-	/// currently supported: date histogram, geotile grid, histogram, terms.
-	/// </para>
-	/// </summary>
+	/// <include file="Pivot.g.xml" path="doc/member[@key='transform._types.Pivot#group_by']/*"/>
 	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>>? action)
 	{
 		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>.Build(action);

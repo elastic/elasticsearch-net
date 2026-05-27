@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FlattenGraphTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.FlattenGraphTokenFilterConverter))]
 public sealed partial class FlattenGraphTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -41,6 +42,7 @@ public sealed partial class FlattenGraphTokenFilter : Elastic.Clients.Elasticsea
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.FlattenGraphTokenFilter']/*"/>
 public readonly partial struct FlattenGraphTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter Instance { get; init; }

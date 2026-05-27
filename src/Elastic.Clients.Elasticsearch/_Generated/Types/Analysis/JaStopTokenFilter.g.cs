@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.JaStopTokenFilter']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.JaStopTokenFilterConverter))]
 public sealed partial class JaStopTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
@@ -43,6 +44,7 @@ public sealed partial class JaStopTokenFilter : Elastic.Clients.Elasticsearch.An
 	public string? Version { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.analysis.JaStopTokenFilter']/*"/>
 public readonly partial struct JaStopTokenFilterDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter Instance { get; init; }

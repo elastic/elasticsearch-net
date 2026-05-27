@@ -23,11 +23,8 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-/// <summary>
-/// <para>
-/// Sum aggregation result. <c>value</c> is always present and is zero if there were no values to process.
-/// </para>
-/// </summary>
+/// <include file="SumAggregate.g.xml" path="doc/member[@key='_types.aggregations.SumAggregate']/*"/>
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.SumAggregate']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.SumAggregateConverter))]
 public sealed partial class SumAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
@@ -51,12 +48,7 @@ public sealed partial class SumAggregate : Elastic.Clients.Elasticsearch.Aggrega
 
 	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "sum";
 
-	/// <summary>
-	/// <para>
-	/// The metric value. A missing value generally means that there was no data to aggregate,
-	/// unless specified otherwise.
-	/// </para>
-	/// </summary>
+	/// <include file="SumAggregate.g.xml" path="doc/member[@key='_types.aggregations.SumAggregate#value']/*"/>
 	public required double? Value { get; set; }
 	public string? ValueAsString { get; set; }
 }

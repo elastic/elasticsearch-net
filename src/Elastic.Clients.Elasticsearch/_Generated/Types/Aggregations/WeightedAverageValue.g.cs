@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.WeightedAverageValueConverter))]
 public sealed partial class WeightedAverageValue
 {
@@ -36,22 +37,15 @@ public sealed partial class WeightedAverageValue
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to extract the values or weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// A value or weight to use if the field is missing.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#missing']/*"/>
 	public double? Missing { get; set; }
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue']/*"/>
 public readonly partial struct WeightedAverageValueDescriptor<TDocument>
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue Instance { get; init; }
@@ -71,33 +65,21 @@ public readonly partial struct WeightedAverageValueDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue instance) => new Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field from which to extract the values or weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to extract the values or weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value or weight to use if the field is missing.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor<TDocument> Missing(double? value)
 	{
 		Instance.Missing = value;
@@ -136,6 +118,7 @@ public readonly partial struct WeightedAverageValueDescriptor<TDocument>
 	}
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue']/*"/>
 public readonly partial struct WeightedAverageValueDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue Instance { get; init; }
@@ -155,33 +138,21 @@ public readonly partial struct WeightedAverageValueDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue instance) => new Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The field from which to extract the values or weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field from which to extract the values or weights.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#field']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A value or weight to use if the field is missing.
-	/// </para>
-	/// </summary>
+	/// <include file="WeightedAverageValue.g.xml" path="doc/member[@key='_types.aggregations.WeightedAverageValue#missing']/*"/>
 	public Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValueDescriptor Missing(double? value)
 	{
 		Instance.Missing = value;

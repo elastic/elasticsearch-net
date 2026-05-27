@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <member key="ml.get_overall_buckets.Response#overall_buckets"><summary><para>
+Array of overall bucket objects
+</para></summary></member>
+</doc>

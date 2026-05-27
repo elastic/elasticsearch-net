@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModelTree']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelTreeConverter))]
 public sealed partial class TrainedModelTree
 {
@@ -49,6 +50,7 @@ public sealed partial class TrainedModelTree
 	public required System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode> TreeStructure { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml.put_trained_model.TrainedModelTree']/*"/>
 public readonly partial struct TrainedModelTreeDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree Instance { get; init; }

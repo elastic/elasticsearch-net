@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions']/*"/>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextClassificationInferenceUpdateOptionsConverter))]
 public sealed partial class TextClassificationInferenceUpdateOptions
 {
@@ -36,35 +37,20 @@ public sealed partial class TextClassificationInferenceUpdateOptions
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#classification_labels']/*"/>
 	public System.Collections.Generic.ICollection<string>? ClassificationLabels { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#num_top_classes']/*"/>
 	public int? NumTopClasses { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#results_field']/*"/>
 	public string? ResultsField { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
 }
 
+/// <include file="../../SpecReferences.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions']/*"/>
 public readonly partial struct TextClassificationInferenceUpdateOptionsDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions Instance { get; init; }
@@ -84,77 +70,49 @@ public readonly partial struct TextClassificationInferenceUpdateOptionsDescripto
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ClassificationLabels = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Classification labels to apply other than the stored labels. Must have the same deminsions as the default configured labels
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#classification_labels']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ClassificationLabels(params string[] values)
 	{
 		Instance.ClassificationLabels = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the number of top class predictions to return. Defaults to 0.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#num_top_classes']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor NumTopClasses(int? value)
 	{
 		Instance.NumTopClasses = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#results_field']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor ResultsField(string? value)
 	{
 		Instance.ResultsField = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? value)
 	{
 		Instance.Tokenization = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor Tokenization()
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options to update when inferring
-	/// </para>
-	/// </summary>
+	/// <include file="TextClassificationInferenceUpdateOptions.g.xml" path="doc/member[@key='ml._types.TextClassificationInferenceUpdateOptions#tokenization']/*"/>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TextClassificationInferenceUpdateOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor>? action)
 	{
 		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(action);
